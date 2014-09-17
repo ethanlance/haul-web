@@ -1,0 +1,89 @@
+<link rel="import" href="/static/bower_components/polymer/polymer.html">
+<link rel="import" href="/static/bower_components/core-elements/core-elements.html">
+<link rel="import" href="/static/bower_components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="/static/bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="/static/bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="/static/bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="/static/bower_components/core-animation/core-animation.html">
+<link rel="import" href="/static/bower_components/flatiron-director/flatiron-director.html">
+<link rel="import" href="/static/bower_components/pushstate-anchor/src/pushstate-anchor.html">
+<link rel="import" href="/static/bower_components/paper-icon-button/paper-icon-button.html">
+
+<polymer-element name="anon-layout" attributes="selected label sublabel navOpen">
+<template>
+
+
+<link href="/static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/anon-layout.css">
+
+<core-drawer-panel id="drawerPanel" >
+
+    <core-header-panel drawer navigation>
+
+
+        <div vertical layout center flex>
+            <div>
+                <logo end class="logo-outer">
+                  <div class="logo-inner"><a is="pushstate-anchor" href="/">Haul</a></div>
+                </logo>
+            </div>
+        </div>
+
+        <div vertical layout>
+            <div flex>
+                <section class="dark">
+                <!-- MENU -->
+                <core-menu>
+                    <a is="pushstate-anchor" active?="{{selected == 'register'}}" href="/signup"><core-item label="Sign Up" icon="shop"></core-item></a>
+                    <a is="pushstate-anchor" active?="{{selected == 'about'}}" href="/about"><core-item label="How it works" icon="mail"></core-item></a>
+                    <a is="pushstate-anchor" active?="{{selected == 'login'}}" href="/login"><core-item label="Login In" icon="settings"></core-item></a>
+                </core-menu>
+            </section>
+            </div>
+        </div>
+
+    </core-header-panel>
+
+    <core-header-panel main>
+        <div>
+            <core-icon-button id="openDrawerButton" icon="menu"></core-icon-button>
+        </div>
+
+        <div class="container-fluid jumbotron {{fullBg}}">
+            <content></content>
+        </div>
+    </core-header-panel>
+
+</core-drawer-panel>
+
+</template>
+<script>
+Polymer('anon-layout',{
+
+    fullBg: "full-bg",
+    navOpen: false,
+    navWidth: "200px",
+
+    ready: function(){
+
+        //Add Listener to openDrawerButton
+        var openDrawerButton = this.$.openDrawerButton;
+        var drawerPanel = this.$.drawerPanel;
+        openDrawerButton.addEventListener('click', function() {
+            drawerPanel.togglePanel();
+        });
+
+        if(!this.navOpen){console.log("BOOM");
+            drawerPanel.addEventListener('core-responsive-change', function(){
+                if( drawerPanel.narrow ){
+                    drawerPanel.drawerWidth = this.navWidth;
+                }else{
+                    drawerPanel.drawerWidth = "0px";
+                }
+            }.bind(this));
+        }
+    }
+
+});
+</script>
+</polymer-elemenet>

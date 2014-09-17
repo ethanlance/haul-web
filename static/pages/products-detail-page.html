@@ -1,0 +1,56 @@
+<link rel="import" href="/static/bower_components/polymer/polymer.html">
+<link rel="import" href="/static/layouts/base-layout.html">
+<link rel="import" href="/static/bower_components/paper-tabs/paper-tabs.html">
+<polymer-element name="products-detail-page">
+  <template selected="products">
+
+      <link href="/static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+      <base-layout label="{{label}}" sublabel="{{sublabel}}">
+
+
+
+
+
+
+
+<form role="form">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" id="exampleInputFile">
+    <p class="help-block">Example block-level help text here.</p>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Check me out
+    </label>
+  </div>
+
+    <textarea>
+    <p>The smaller iPhone 6 breaks away from the 4-inch screen of models past and into larger territory, though at 4.7 inches, the iPhone 6 is still smallish by today's standards.<p>
+
+    <p>A refreshed Retina display -- Apple's calling it Retina HD -- retains its 326ppi density with a 1,334x750-pixel resolution. (It's the iPhone 6 Plus that has the higher pixel density on its 1080p HD display.) The iPhone 6's better-than-720p display on a 4.7-inch phone is about right. It's when you get to 5 inches and higher that we generally start seeing 1080p HD and above.</p>
+    </textarea>
+
+<button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+
+  </base-layout>
+  </template>
+<script>
+Polymer('products-detail-page',{
+    label: "Products",
+    sublabel: "Apple iPhone 6s Black Edition"
+});
+</script>
+</polymer-element>

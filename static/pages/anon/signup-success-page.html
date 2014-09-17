@@ -1,0 +1,44 @@
+<link rel="import" href="/static/bower_components/polymer/polymer.html">
+<link rel="import" href="/static/layouts/anon-layout.html">
+<polymer-element name="signup-success-page">
+  <template>
+    <anon-layout>
+
+        <link rel="stylesheet" href="/static/css/base-layout.css">
+        <!-- Bootstrap Styles -->
+        <link href="/static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/css/anon-layout.css" rel="stylesheet">
+
+
+    <div class="row text-center">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 login">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <logo end class="logo-outer">
+                      <div class="logo-inner"><a is="pushstate-anchor" href="/">Haul</a></div>
+                    </logo>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h1>Woot!</h1>
+                    <p>Awesome, we just sent you an email.  Please click the link in the email
+                        to confirm your email address.</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+
+  </anon-layout>
+  </template>
+<script>
+ Polymer("signup-success-page", {});
+</script>
+</polymer-element>

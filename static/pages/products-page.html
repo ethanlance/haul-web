@@ -1,0 +1,47 @@
+<link rel="import" href="/static/bower_components/polymer/polymer.html">
+<link rel="import" href="/static/layouts/base-layout.html">
+<link rel="import" href="/static/bower_components/paper-tabs/paper-tabs.html">
+<polymer-element name="products-page">
+  <template selected="products">
+    <link href="/static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <base-layout label="{{label}}" sublabel="{{sublabel}}">
+
+
+        <paper-tabs id="tabs" selected="all" self-end>
+          <paper-tab name="all">All</paper-tab>
+          <paper-tab name="favorites">My Sales</paper-tab>
+          <paper-tab name="favorites">My Purchases</paper-tab>
+        </paper-tabs>
+
+
+
+        <ul>
+            <li><a href="/products/1">product 1</a></li>
+            <li><a href="/products/2">product 2</a></li>
+            <li><a href="/products/3">product 3</a></li>
+            <li><a href="/products/4">product 4</a></li>
+            <li><a href="/products/5">product 5</a></li>
+        </ul>
+
+        <div class="pagination">
+          <ul>
+            <li><a href="#">Prev</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+        </div>
+
+
+  </base-layout>
+  </template>
+<script>
+Polymer('products-page',{
+    label: "Products",
+    sublabel: "Add, Update, Manage All Your Products"
+});
+</script>
+</polymer-element>
