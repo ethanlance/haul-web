@@ -1,0 +1,39 @@
+.logo-inner {
+  padding-left: 22px;
+  width: 100px;
+  height: 128px;
+  font-size: 30px;
+  font-family: Arvo, serif;
+  font-weight: bold;
+  display: table-cell;
+  vertical-align: bottom;
+  background-color:#3a4457;
+}
+
+.logo-outer {
+    display:block;
+    top:0px;
+    left:0px
+    margin-left: 10px;
+    width: 125px;
+    height: 135px;
+    background-color: #3a4457;
+    margin-bottom: 40px;
+    box-shadow: 0px 2px 2px #000;
+}
+
+.logo-inner a {
+  color: #fff;
+}
+ 
+.nav-sidebar a.active {
+  font-weight: bold;
+  color: #fff;
+  background-color: #428bca;
+}
+
+.nav-sidebar a.active .badge{
+  color: #000;
+  background-color: #fff;
+  text-decoration: none;
+}
