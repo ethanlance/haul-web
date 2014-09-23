@@ -1,0 +1,26 @@
+{
+  "name": "Haul Web",
+  "version": "0.0.0",
+  "homepage": "https://github.com/haulio/haul-web",
+  "description": "web client",
+  "main": "index.html",
+  "authors": [
+    "ethan and tim"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "ember-addons.bs_for_ember": "~0.7.0",
+    "ember-data": "1.0.0-beta.7",
+    "ember": "~1.7.0",
+    "holderjs": "~2.4.0",
+    "moment": "~2.8.3"
+  }
+}
