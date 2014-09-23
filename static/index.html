@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -111,4 +112,52 @@
     <script src="/static/controllers/products_controller.js"></script> 
     
   </body>
+=======
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+      <script src="/static/bower_components/platform/platform.js"></script>
+      <script src="/static/bower_components/jquery/dist/jquery.js"></script>
+      <script src="/static/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <link rel="import" href="/static/bower_components/app-router/app-router.html">
+      <link rel="import" href="/static/bower_components/core-item/core-item.html">
+      <link href="/static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    </head>
+    <body>
+        <app-router trailingSlash="ignore">
+              <!-- matches an exact path -->
+              <app-route path="/" import="/static/pages/anon/authenticate-page.html"></app-route>
+
+              <app-route path="/signup" import="/static/pages/anon/signup-page.html"></app-route>
+              <app-route path="/signup/success" import="/static/pages/anon/signup-success-page.html"></app-route>
+
+              <app-route path="/request-password" import="/static/pages/anon/request-password-reset-page.html"></app-route>
+
+              <app-route path="/login" import="/static/pages/anon/login-page.html"></app-route>
+              <app-route path="/toc" import="/static/pages/anon/toc-page.html"></app-route>
+
+
+              <app-route path="/dashboard" import="/static/pages/dashboard-page.html"></app-route>
+              <app-route path="/products/:id" import="/static/pages/products-detail-page.html"></app-route>
+              <app-route path="/products" import="/static/pages/products-page.html"></app-route>
+
+              <app-route path="/messages" import="/static/pages/messages-page.html"></app-route>
+              <app-route path="/settings" import="/static/pages/settings-page.html"></app-route>
+
+              <!-- matches using a wildcard -->
+              <!-- <app-route path="/customer/*" import="/static/pages/customer-page.html"></app-route> -->
+
+              <!-- matches using a path variable -->
+              <!-- <app-route path="/order/:id" import="/static/pages/order-page.html"></app-route> -->
+
+              <!-- matches a pattern like '/word/number' -->
+              <!-- <app-route path="/^\/\w+\/\d+$/i" regex import="/static/pages/regex-page.html"></app-route> -->
+
+              <!-- matches everything else -->
+              <!-- <app-route path="*" import="/static/pages/not-found-page.html"></app-route> -->
+        </app-router>
+    </body>
+    <script src="http://localhost:35729/livereload.js"></script>
+>>>>>>> 7931a28c4ea5c9ef0aad06e653f5bbe9b0c61268
 </html>

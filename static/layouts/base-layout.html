@@ -1,0 +1,88 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-elements/core-elements.html">
+<link rel="import" href="../bower_components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../bower_components/core-animation/core-animation.html">
+<link rel="import" href="../bower_components/flatiron-director/flatiron-director.html">
+<link rel="import" href="../bower_components/pushstate-anchor/src/pushstate-anchor.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<polymer-element name="base-layout" attributes="selected label sublabel">
+<template>
+
+<link rel="stylesheet" href="../css/base-layout.css">
+
+<core-drawer-panel id="drawerPanel" drawerWidth="250px">
+
+    <core-header-panel drawer navigation>
+
+
+        <div vertical layout center>
+            <div>
+                <logo end class="logo-outer">
+                  <div class="logo-inner"><a is="pushstate-anchor" href="/">Haul</a></div>
+                </logo>
+            </div>
+
+            <div class="shim"></div>
+
+            <div center>
+                <!-- MENU -->
+                <core-menu>
+                    <a is="pushstate-anchor" active?="{{selected == 'prodcuts'}}" href="/products"><core-item label="Products" icon="shop"></core-item></a>
+                    <a is="pushstate-anchor" active?="{{selected == 'messages'}}" href="/messages"><core-item label="Messages" icon="mail"></core-item></a>
+                    <a is="pushstate-anchor" active?="{{selected == 'settings'}}" href="/settings"><core-item label="Settings" icon="settings"></core-item></a>
+                </core-menu>
+
+            </div>
+        </div>
+
+    </core-header-panel>
+
+
+    <core-scroll-header-panel id="coreScroller" main condenses>
+        <!-- HEADLINE -->
+        <core-toolbar id="headline" class="medium-tall">
+            <div horizontal justified layout flex>
+                <div>
+                    <core-icon-button id="openDrawerButton" icon="menu"></core-icon-button>
+                </div>
+                <div flex>
+                    <div id="title" class="top title">{{label}}</div>
+                    <div id="subtitle" class="middle">{{sublabel}}</div>
+                </div>
+                <div self-center>
+                    <paper-icon-button icon="search"></paper-icon-button>
+                </div>
+            </div>
+        </core-toolbar>
+
+        <!-- PAGE -->
+        <div class="content">
+            <content></content>
+        </div>
+
+    </core-scroll-header-panel>
+
+</core-drawer-panel>
+
+</template>
+<script>
+Polymer('base-layout',{
+    label: "Label",
+    sublabel: "Sublabel",
+    ready: function(){
+        console.log("HERE WE GO")
+
+
+        //Add Listener to openDrawerButton
+        var openDrawerButton = this.$.openDrawerButton;
+        var drawerPanel = this.$.drawerPanel;
+        openDrawerButton.addEventListener('click', function() {
+          drawerPanel.togglePanel();
+        });
+    }
+});
+</script>
+</polymer-element>
