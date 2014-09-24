@@ -41,19 +41,35 @@ Haul.Router.reopen({
 //Router
 Haul.Router.map(function(){
 
+	//Home
 	this.resource('home', {path: "/"});
 
+	//Auth
 	this.resource('auth', function() {
 		this.route('signup');
 		this.route('confirmation');	
-		this.route('login');	
+		this.route('login');
+		this.route('logout');	
+		this.route('forgotpassword');	
+	});
+
+	//Account
+	this.resource('account', function() {
+		this.route('settings');
+		this.route('profile');
+		this.route('help');
 	});
 	
-
+	//Products
 	this.resource('products');
 	this.resource('productcreate')
 	this.resource('product', {path: "product/:product_id"});
-	 
+
+	//Messages
+	this.resource('messages');
+
+	//Search
+	this.resource('search');	 
 });
 
 
@@ -76,8 +92,6 @@ Haul.ProductcreateRoute = Ember.Route.extend({
         return this.store.find('products');
     }
 });
-
-
 
 
 

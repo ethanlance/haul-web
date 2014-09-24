@@ -1,47 +1,51 @@
-
-
-
-<div class="row center-block">
-	<div class="col-md-4"></div>
-	<div class="col-md-4 ">
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+        	<div class="col-md-4 "></div>
+			<div class="col-md-4 form">
 
  
-		<form class="form-horizontal" {{action "submit" on="submit"}}>
-		  	
-		  	<div class="form-group">
-				<h2 class="form-signin-heading">Please sign in</h2>
+
+        		<form class="form-horizontal" {{action "submit" on="submit"}}>
+	  	
+			  		<div class="form-group">
+						<h2 class="form-signin-heading">Please sign in</h2>
+					</div>
+				  
+
+
+
+				  {{#if loginFailed}}
+				    <div class="alert">Invalid username or password.</div>
+				  {{/if}}
+				  
+				  {{#if isSlowConnection}}
+				    <div class="alert alert-info">The request seems to be taking more time than usual, please wait.</div>
+				  {{/if}}
+
+
+				  	<div class="form-group">
+			      		{{input value=email type="text" class="form-control" placeholder="Your Email Address"}}
+			      	</div>
+
+			 		<div class="form-group">	
+			      		{{input value=password type="password" class="form-control" placeholder="Password"}}
+					</div> 
+
+					<div class="form-group">
+				  		<button type="submit" class="btn btn-primary btn-block" {{bindAttr disabled="isProcessing"}}>Sign In</button>
+				  	</div>
+
+				  	<div class="text-right">
+				  		<span class="muted">{{#link-to "auth.forgotpassword"}}Forgot Password?{{/link-to}}</span>
+				  	</div>
+
+				</form> 
+ 
+
 			</div>
-		  
-
-
-
-		  {{#if loginFailed}}
-		    <div class="alert">Invalid username or password.</div>
-		  {{/if}}
-		  
-		  {{#if isSlowConnection}}
-		    <div class="alert alert-info">The request seems to be taking more time than usual, please wait.</div>
-		  {{/if}}
-
-
-		  	<div class="form-group">
-	      		{{input value=email type="text" class="form-control" placeholder="Your Email Address"}}
-	      	</div>
-
-	 		<div class="form-group">	
-	      		{{input value=password type="password" class="form-control" placeholder="Password"}}
-			</div> 
-
-			<div class="form-group">
-		  		<button type="submit" class="btn btn-primary btn-block" {{bindAttr disabled="isProcessing"}}>Sign In</button>
-		  	</div>
-
-		  	<div class="text-right">
-		  		<span class="muted">{{#link-to "auth.signup"}}Forgot Password?{{/link-to}}</span>
-		  	</div>
-
-		</form> 
-
-	</div>
-	<div class="col-md-4"></div>
-</div>
+			<div class="col-md-4"></div>
+        </div>
+    </div>
+</header>
