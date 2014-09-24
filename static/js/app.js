@@ -1,23 +1,63 @@
 
 //Haul App
-window.Haul = Ember.Application.create();
+window.Haul = Ember.Application.create(); //WithMixins(Ember.Facebook);
+
+//Facebook
+//Haul.set('appId', '443672575768207'); 
 
 //Adapter
 Haul.ApplicationAdapter = DS.FixtureAdapter.extend();
+
+//Layout
+Haul.ApplicationView = Ember.View.extend({
+	//layoutName: "layout_base" 
+	//init: function() { console.log("Application View Init")}
+});
+
+Haul.ApplicationController = Ember.Controller.extend({
+	init: function() { 
+		console.log("Application Controller Init")
+
+		//AUTH CHECK:
+		var loggedIn = true;
+		if(!loggedIn)
+			this.transitionToRoute('auth.login')
+
+	}, 
+});
+
+
 
 //Store
 Haul.Store = DS.Store.extend({
   adapter: Haul.ApplicationAdapter
 })
 
+//Turn off hash bang in URLs.
+Haul.Router.reopen({
+  location: 'history'
+});
+
 //Router
 Haul.Router.map(function(){
+
+	this.resource('home', {path: "/"});
+
+	this.resource('auth', function() {
+		this.route('signup');
+		this.route('confirmation');	
+		this.route('login');	
+	});
+	
+
 	this.resource('products');
 	this.resource('productcreate')
 	this.resource('product', {path: "product/:product_id"});
+	 
 });
 
-//Routes
+
+
 Haul.ProductsRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.find('products');

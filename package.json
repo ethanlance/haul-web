@@ -1,22 +1,28 @@
 {
-  "name": "haul-ember",
+  "name": "haul-web",
   "version": "1.0.0",
   "description": "",
   "main": "Gruntfile.js",
   "dependencies": {
     "ember-template-compiler": "^1.6.1",
     "grunt": "^0.4.5",
-    "handlebars": "^2.0.0",
-    "grunt-ember-templates": "^0.4.21"
-  },
-  "devDependencies": {
     "grunt-contrib-watch": "^0.6.1",
     "grunt-ember-template-compiler": "^1.5.0",
-    "grunt-ember-templates": "^0.4.21"
+    "grunt-ember-templates": "^0.4.21",
+    "handlebars": "^2.0.0"
   },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haulio/haul-web"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haulio/haul-web/issues"
+  },
+  "homepage": "https://github.com/haulio/haul-web"
 }

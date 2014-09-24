@@ -1,39 +1,60 @@
-.logo-inner {
-  padding-left: 22px;
-  width: 100px;
-  height: 128px;
-  font-size: 30px;
-  font-family: Arvo, serif;
-  font-weight: bold;
-  display: table-cell;
-  vertical-align: bottom;
-  background-color:#3a4457;
-}
 
 .logo-outer {
-    display:block;
-    top:0px;
-    left:0px
-    margin-left: 10px;
-    width: 125px;
-    height: 135px;
+    -webkit-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+
+    z-index:2000;
+    position:absolute;
+    margin-left: 55px;
+    padding-left: 10px;    
+    padding-top:20px;
+
+    width: 100px;
+    height: 60px;
     background-color: #3a4457;
-    margin-bottom: 40px;
     box-shadow: 0px 2px 2px #000;
+    font-size: 30px;
+    font-family: Arvo, serif;
+    font-weight: bold;
+
 }
 
-.logo-inner a {
+@media (min-width: 768px){
+  .logo-outer {
+    position:absolute;
+    margin-left:20px;
+    padding-left: 10px;    
+    padding-top:40px;
+    width: 100px;
+    height: 80px;
+    background-color: #3a4457;
+    box-shadow: 0px 2px 2px #000;
+    font-size: 30px;
+    font-family: Arvo, serif;
+    font-weight: bold;
+  }
+}
+
+.logo-outer a {
   color: #fff;
 }
  
-.nav-sidebar a.active {
-  font-weight: bold;
-  color: #fff;
-  background-color: #428bca;
+.navbar-toggle {
+  float: left;
+}
+ 
+@media (min-width: 768px){
+  .navbar-search {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      text-align: center;
+      margin: auto;
+  }
 }
 
-.nav-sidebar a.active .badge{
-  color: #000;
-  background-color: #fff;
-  text-decoration: none;
+.navbar-form {
+  border-top: none;
+  border-bottom: none;
 }

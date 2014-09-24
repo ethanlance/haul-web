@@ -1,8 +1,12 @@
 /*global Products, Ember */
 (function () {
     'use strict';
+
+
+    Haul.BaseView = Ember.View.extend({layoutName:'layouts/layout_base'})
+
     //Views
-    Haul.ProductsView = Ember.View.extend({
+    Haul.ProductsView = Haul.BaseView.extend({ 
         didInsertElement: function() {
             Ember.run.next(function() {
                 Holder.run(); //For DEV. Images
@@ -10,12 +14,11 @@
          }
     });
 
-    Haul.ProductView = Ember.View.extend({
+    Haul.ProductView = Haul.BaseView.extend({
         didInsertElement: function() {
             Ember.run.next(function() {
                 Holder.run(); //For DEV. Images
             })
          }
-    });
-
+    }); 
 })();

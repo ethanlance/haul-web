@@ -19,7 +19,7 @@
             	this.transitionToRoute('products');
             }
     	}
-    })
+    });
 
 
     Haul.ProductcreateController = Ember.ObjectController.extend({
