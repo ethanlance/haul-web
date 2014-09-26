@@ -261,51 +261,51 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  data.buffer.push("\n		    <div class=\"alert\">Invalid username or password.</div>\n		  ");
+  data.buffer.push("\n				    <div class=\"alert\">Invalid username or password.</div>\n				  ");
   }
 
 function program3(depth0,data) {
   
   
-  data.buffer.push("\n		    <div class=\"alert alert-info\">The request seems to be taking more time than usual, please wait.</div>\n		  ");
+  data.buffer.push("\n				    <div class=\"alert alert-info\">The request seems to be taking more time than usual, please wait.</div>\n				  ");
   }
 
-  data.buffer.push("\n<!-- Header -->\n    <header>\n        <div class=\"container\">\n            <div class=\"form row\">\n            	<div class=\"col-md-4\"></div>\n				<div class=\"col-md-4\">\n            	<form class=\"form-horizontal\" ");
+  data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n			\n            	<form class=\"form-horizontal\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "submit", {hash:{
     'on': ("submit")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">\n		  	\n			<div class=\"form-group\">\n				<h2 class=\"form-signin-heading\">Welcome Back</h2>\n				<p>We just need a couple more things!</p>\n			</div>\n		  \n\n\n\n		  ");
+  data.buffer.push(">\n		  	\n					<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Welcome Back</h2>\n						<p>We just need a couple more things!</p>\n					</div>\n				  \n\n\n\n				  ");
   stack1 = helpers['if'].call(depth0, "loginFailed", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		  \n		  ");
+  data.buffer.push("\n				  \n				  ");
   stack1 = helpers['if'].call(depth0, "isSlowConnection", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n \n	 		<div class=\"form-group\">	\n	      		");
+  data.buffer.push("\n\n		 \n			 		<div class=\"form-group\">	\n			      		");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'value': ("password"),
     'type': ("password"),
     'class': ("form-control"),
     'placeholder': ("Password")
   },hashTypes:{'value': "ID",'type': "STRING",'class': "STRING",'placeholder': "STRING"},hashContexts:{'value': depth0,'type': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\n			</div> \n\n\n \n	 		<div class=\"form-group\">	\n	      		");
+  data.buffer.push("\n					</div> \n\n\n		 \n			 		<div class=\"form-group\">	\n			      		");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'value': ("password"),
     'type': ("text"),
     'class': ("form-control"),
     'placeholder': ("First name")
   },hashTypes:{'value': "ID",'type': "STRING",'class': "STRING",'placeholder': "STRING"},hashContexts:{'value': depth0,'type': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\n			</div> \n\n\n \n	 		<div class=\"form-group\">	\n	      		");
+  data.buffer.push("\n					</div> \n\n\n		 \n			 		<div class=\"form-group\">	\n			      		");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'value': ("password"),
     'type': ("text"),
     'class': ("form-control"),
     'placeholder': ("Last name")
   },hashTypes:{'value': "ID",'type': "STRING",'class': "STRING",'placeholder': "STRING"},hashContexts:{'value': depth0,'type': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\n			</div> \n\n\n			<div class=\"form-group\">\n		  		<button type=\"submit\" class=\"btn btn-primary btn-block\" ");
+  data.buffer.push("\n					</div> \n\n\n					<div class=\"form-group\">\n				  		<button type=\"submit\" class=\"btn btn-primary btn-block\" ");
   data.buffer.push(escapeExpression((helper = helpers.bindAttr || (depth0 && depth0.bindAttr),options={hash:{
     'disabled': ("isProcessing")
   },hashTypes:{'disabled': "STRING"},hashContexts:{'disabled': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bindAttr", options))));
-  data.buffer.push(">Complete</button>\n		  	</div>\n \n\n				</form> \n				</div>\n				<div class=\"col-md-4\"></div>\n            </div>\n        </div>\n    </header>");
+  data.buffer.push(">Complete</button>\n				  	</div>\n		 \n\n				</form> \n			</div>\n			<div class=\"col-md-4\"></div>\n        </div>\n    </div>\n</header>");
   return buffer;
   
 });Ember.TEMPLATES['auth/forgotpassword'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -314,22 +314,22 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  data.buffer.push("<!-- Header -->\n    <header>\n        <div class=\"container\">\n            <div class=\"form roww\">\n            	<div class=\"col-md-4\"></div>\n				<div class=\"col-md-4\">\n            	<form class=\"form-horizontal\" ");
+  data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n\n			\n            	<form class=\"form-horizontal\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "submit", {hash:{
     'on': ("submit")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">\n\n			<div class=\"form-group\">\n				<h2 class=\"form-signin-heading\">Forgot Your Password?</h2>\n			</div>\n\n\n\n		  	<div class=\"form-group\"> \n	      		");
+  data.buffer.push(">\n\n					<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Forgot Your Password?</h2>\n					</div>\n\n\n\n				  	<div class=\"form-group\"> \n			      		");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'value': ("email"),
     'type': ("text"),
     'class': ("form-control"),
     'placeholder': ("Type your email address")
   },hashTypes:{'value': "ID",'type': "STRING",'class': "STRING",'placeholder': "STRING"},hashContexts:{'value': depth0,'type': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\n	      	</div> \n\n			<div class=\"form-group\">\n		  		<buttontype=\"submit\" class=\"btn btn-primary btn-block\" ");
+  data.buffer.push("\n			      	</div> \n\n					<div class=\"form-group\">\n				  		<buttontype=\"submit\" class=\"btn btn-primary btn-block\" ");
   data.buffer.push(escapeExpression((helper = helpers.bindAttr || (depth0 && depth0.bindAttr),options={hash:{
     'disabled': ("isProcessing")
   },hashTypes:{'disabled': "STRING"},hashContexts:{'disabled': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bindAttr", options))));
-  data.buffer.push(">request password reset</button>\n		  	</div>\n\n				</form> \n				</div>\n				<div class=\"col-md-4\"></div>\n            </div>\n        </div>\n    </header>");
+  data.buffer.push(">request password reset</button>\n				  	</div>\n\n				</form> \n\n\n			</div>\n			<div class=\"col-md-4\"></div>\n        </div>\n    </div>\n</header>");
   return buffer;
   
 });Ember.TEMPLATES['auth/login'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -356,10 +356,10 @@ function program5(depth0,data) {
   }
 
   data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n\n \n\n        		<form class=\"form-horizontal\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "submit", {hash:{
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "loginUser", {hash:{
     'on': ("submit")
   },hashTypes:{'on': "STRING"},hashContexts:{'on': depth0},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">\n	  	\n			  		<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Please sign in</h2>\n					</div>\n				  \n\n\n\n				  ");
+  data.buffer.push(">\n	  	\n			  		<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Please sign in</h2>\n					</div>\n				  \n\n\n				  ");
   stack1 = helpers['if'].call(depth0, "loginFailed", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n				  \n				  ");
@@ -386,7 +386,7 @@ function program5(depth0,data) {
   data.buffer.push(">Sign In</button>\n				  	</div>\n\n				  	<div class=\"text-right\">\n				  		<span class=\"muted\">");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "auth.forgotpassword", options) : helperMissing.call(depth0, "link-to", "auth.forgotpassword", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</span>\n				  	</div>\n\n				</form> \n \n\n			</div>\n			<div class=\"col-md-4\"></div>\n        </div>\n    </div>\n</header>");
+  data.buffer.push("</span>\n				  	</div>\n\n				</form> \n \n			</div>\n			<div class=\"col-md-4\"></div>\n        </div>\n    </div>\n</header>");
   return buffer;
   
 });Ember.TEMPLATES['auth/logout'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -556,7 +556,7 @@ function program15(depth0,data) {
   data.buffer.push("</li>\n          <li>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "messages", options) : helperMissing.call(depth0, "link-to", "messages", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\n\n          <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">User Name<span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>");
+  data.buffer.push("</li>\n\n          <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">user name<span class=\"caret\"></span></a>\n            <ul class=\"dropdown-menu\" role=\"menu\">\n              <li>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "account.profile", options) : helperMissing.call(depth0, "link-to", "account.profile", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</li> \n              <li>");
@@ -568,7 +568,10 @@ function program15(depth0,data) {
   data.buffer.push("</li> \n              <li class=\"divider\"></li> \n              <li>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "auth.logout", options) : helperMissing.call(depth0, "link-to", "auth.logout", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\n            </ul>\n          </li>\n        </ul>\n      </div> \n  </div>  \n\n  <div class=\"container\">\n    ");
+  data.buffer.push("</li>\n            </ul>\n          </li>\n        </ul>\n      </div> \n  </div>  \n\n  <div class=\"container\">\n\n  HERE >> ");
+  stack1 = helpers._triageMustache.call(depth0, "curentUser.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" << THERE\n\n    ");
   stack1 = helpers._triageMustache.call(depth0, "yield", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  </div>\n");

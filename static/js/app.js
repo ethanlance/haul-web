@@ -1,12 +1,14 @@
 
 //Haul App
-window.Haul = Ember.Application.create(); //WithMixins(Ember.Facebook);
+window.Haul = Ember.Application.create({
+    LOG_TRANSITIONS: true,
+    LOG_TRANSITIONS_INTERNAL: true
+  });//WithMixins(Ember.Facebook);
 
 //Facebook
 //Haul.set('appId', '443672575768207'); 
 
-//Adapter
-Haul.ApplicationAdapter = DS.FixtureAdapter.extend();
+$.cookie.json = true;
 
 //Layout
 Haul.ApplicationView = Ember.View.extend({
@@ -17,13 +19,16 @@ Haul.ApplicationView = Ember.View.extend({
 Haul.ApplicationController = Ember.Controller.extend({
 	init: function() { 
 		console.log("Application Controller Init")
-
-		//AUTH CHECK:
-		var loggedIn = true;
-		if(!loggedIn)
-			this.transitionToRoute('auth.login')
-
 	}, 
+
+	needs: ['auth'],
+	currentUser: (function() {
+	  return this.get('controllers.auth.currentUser');
+	}).property('controllers.auth.currentUser'),
+	isAuthenticated: (function() {
+	  return !Ember.isEmpty(this.get('controllers.auth.currentUser'));
+	}).property('controllers.auth.currentUser')
+
 });
 
 
@@ -73,20 +78,46 @@ Haul.Router.map(function(){
 });
 
 
+//AUTH - Routes that require authentication should extend this object.
+Haul.AuthenticatedRoute = Ember.Route.extend({
 
-Haul.ProductsRoute = Ember.Route.extend({
+    beforeModel: function(transition) {
+		if (Ember.isEmpty(this.controllerFor('auth').get('token'))) {
+			return this.redirectToLogin(transition);
+		}
+	},
+	redirectToLogin: function(transition) {
+		this.controllerFor('auth').set('attemptedTransition', transition);
+		return this.transitionTo('auth.login');
+	},
+	// actions: {
+	//   error: function(reason, transition) {
+	//     if (reason.status === 401) {
+	//       this.redirectToLogin(transition);
+	//     } else {
+	//       console.log('unknown problem');
+	//     }
+	//   }
+	// }
+});
+
+
+
+
+//Private Routes
+Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 	model: function() {
 		return this.store.find('products');
 	}
 });
 
-Haul.ProductRoute = Ember.Route.extend({
+Haul.ProductRoute = Haul.AuthenticatedRoute.extend({
 	model: function(params) {
 		return this.store.find('products', params.product_id);
 	}
 });
 
-Haul.ProductcreateRoute = Ember.Route.extend({
+Haul.ProductcreateRoute = Haul.AuthenticatedRoute.extend({
     model: function() {
     	console.log(this.store);
         return this.store.find('products');
@@ -95,18 +126,31 @@ Haul.ProductcreateRoute = Ember.Route.extend({
 
 
 
-	
+//Public Route
+Haul.AuthLoginRoute = Ember.Route.extend({
+	controllerName: "auth"
+}); 
 
+Haul.AuthSignupRoute = Ember.Route.extend({
+	controllerName: "auth"
+}); 
 
+Haul.AuthConfirmationRoute = Ember.Route.extend({
+	controllerName: "auth"
+}); 
 
+Haul.AuthForgotpasswordRoute = Ember.Route.extend({
+	controllerName: "auth"
+}); 
 
+Haul.AuthLogoutRoute = Ember.Route.extend({
+	controllerName: "auth",
+	beforeModel: function(){
+		this.controllerFor('auth').reset();
+		this.transitionTo('auth.login');
+	}
 
-
-
-
-
-
-
+}); 
 
 
 
