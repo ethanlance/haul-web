@@ -1,8 +1,18 @@
 /*global Products, Ember */
 (function () {
-    'use strict';
+    'use strict'; 
 
-    Haul.ProductController = Ember.ObjectController.extend({
+    Haul.ProductsController = Ember.ArrayController.extend({
+        needs: ["auth"],
+    }); 
+    
+    Haul.ProductsIndexController = Ember.ArrayController.extend({
+        needs: ["auth"],
+    }); 
+
+
+    Haul.ProductsProductController = Ember.ObjectController.extend({ 
+        needs: ["auth"],
     	actions: {
     		saveProduct: function() {
     			console.log("SAVE THIS PRODUCT");
@@ -22,7 +32,8 @@
     });
 
 
-    Haul.ProductcreateController = Ember.ObjectController.extend({
+    Haul.ProductsNewController = Ember.ObjectController.extend({
+        needs: ["auth"],
         actions: {
             createProduct: function(){
             	

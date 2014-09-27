@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         files: [
           'static/templates/*.hbs','static/templates/**/*.hbs'
         ],
-        dest: 'static/templates.js'
+        dest: 'static/js/templates.js'
       }
     },
       

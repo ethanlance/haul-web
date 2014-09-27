@@ -5,6 +5,7 @@
 
 	//Apply the layout 'layout_anon' to all routes under the this.resource('auth').
     Haul.AuthView = Ember.View.extend({
-        layoutName: "layouts/layout_anon"
+        layoutName: "layouts/layout_anon",
+        templateName: "auth/auth"
     }); 
 })();

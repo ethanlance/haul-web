@@ -8,9 +8,7 @@
     	<h1>Products</h1>
     </div>
     <div class="col-md-4 text-right ">
-    
-
-	    {{#link-to 'productcreate'}}
+	    {{#link-to 'products.new'}}
 	    <button class="btn btn-default">Create New</button>
 	    {{/link-to}}
 	</div>
@@ -23,10 +21,10 @@
     {{#each}}
 	
 	  <div class="col-xs-6 col-md-3">
-	    {{#link-to 'product' this class="thumbnail"}}
+	    {{#link-to 'products.product' this class="thumbnail"}}
 	      <img data-src="holder.js/100%x180" alt="...">
 	    {{/link-to}}
-	    <p> {{#link-to 'product' this}}{{title}}{{/link-to}}</p>
+	    <p> {{#link-to 'products.product' this}}{{title}}{{/link-to}}</p>
 	  </div>
 		  
       
