@@ -97,7 +97,7 @@ Haul.MessagesRoute = Haul.AuthenticatedRoute.extend({
 });
 
 
-//AUTH
+// //AUTH
 Haul.AuthRoute = Ember.Route.extend({
 	renderTemplate: function(){
 		this.render('layouts/header_anon', {
@@ -107,7 +107,7 @@ Haul.AuthRoute = Ember.Route.extend({
 	}
 })
 
-Haul.AuthLoginRoute = Haul.AuthRoute.extend( {
+Haul.AuthLoginRoute = Ember.Route.extend({
 	controllerName: "auth"
 }); 
 
