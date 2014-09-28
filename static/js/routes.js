@@ -3,7 +3,7 @@ Haul.Router.reopen({
   location: 'history'
 });
 
-//Router
+//Router Map
 Haul.Router.map(function(){
 
 	//Home
@@ -42,10 +42,14 @@ Haul.Router.map(function(){
 //AUTH - Routes that require authentication should extend this object.
 Haul.AuthenticatedRoute = Ember.Route.extend({
 
-    beforeModel: function(transition) {
-    	console.log("TOKEN?");
-    	console.log(this.controllerFor('auth').get('token'))
+	renderTemplate: function(){
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+	},
 
+    beforeModel: function(transition) {
 		if (Ember.isEmpty(this.controllerFor('auth').get('token'))) {
 			return this.redirectToLogin(transition);
 		}
@@ -67,11 +71,11 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 });
 
 
-//Private Routes
+//Products
 Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 	model: function() {
 		return this.store.find('products');
-	}
+	},
 });
 
 Haul.ProductsProductRoute = Ember.Route.extend({
@@ -81,14 +85,29 @@ Haul.ProductsProductRoute = Ember.Route.extend({
 });
 
 
-
+//MESSAGES
 Haul.MessagesRoute = Haul.AuthenticatedRoute.extend({
+	renderTemplate: function() {
+		this._super();
+		this.render('messages', {
+			into: 'application',
+			outlet: 'main'
+		});
+	}
+});
 
+
+//AUTH
+Haul.AuthRoute = Ember.Route.extend({
+	renderTemplate: function(){
+		this.render('layouts/header_anon', {
+			into: 'application',
+			outlet: 'header'
+		});	
+	}
 })
 
-
-//Public Route
-Haul.AuthLoginRoute = Ember.Route.extend({
+Haul.AuthLoginRoute = Haul.AuthRoute.extend( {
 	controllerName: "auth"
 }); 
 
@@ -113,234 +132,15 @@ Haul.AuthLogoutRoute = Ember.Route.extend({
 
 }); 
 
+//HOME
+Haul.HomeRoute = Ember.Route.extend({
+	renderTemplate: function() {
+		this.render('layouts/header_home', {
+			into: 'application',
+			outlet: 'header'
+		});			
+		this.render('home');
+	}
+});
 
-
-
-
-
-
-
-
-
-// Haul.Router.map(function() {
-// 	this.resource('products');
-// 	this.resource('product', { path: 'product/:product_id'});
-
-
-// 	this.resource('messages');
-// 	this.resource('messagethread', { path: 'message/:thread_id'});
-
-
-// 	this.resource('settings');
-// });
-
-
-// Haul.ProductsRoute = Ember.Route.extend({
-// 	model: function() {
-// 		return products;
-// 	}
-// });
-
-// Haul.ProductRoute = Ember.Route.extend({
-// 	model: function(params) {
-// 		return this.store.find('product', params.post_id);
-// 		//return products.findBy('id', params.post_id);
-// 	}
-// });
-
-
-
-// Haul.MessagesRoute = Ember.Route.extend({
-// 	model: function() {
-// 		return messages;
-// 	},
-
-// });
-
-
-// Haul.MessagesController = Ember.ArrayController.extend({
-// 	isShowingBody: false,
-
-// 	actions: {
-// 	    toggleBody: function() {
-// 	    	console.log("POOOOONG")
-// 	      this.toggleProperty('isShowingBody');
-// 	    }
-// 	  }
-// });
-
-
-// Haul.MessagethreadRoute = Ember.Route.extend({
-// 	model: function(params) {
-// 		console.log(params);
-// 		return message_threads.findBy('id', params.thread_id);
-// 	},
-
-// 	setupController: function(controller, model) {
-// 		model = message_threads.findBy('id', model.id);
-// 		console.log("MODEL");
-// 		console.log(model);
-// 		// model = Ember.get(this.modelFor('measagethread'),)
-// 		// this._super(controller, model);
-// 		controller.set('model', model);
-// 		//controller.set('model', model);
-
-// 	}
-// });
-
-
-
-
-
-// Ember.Handlebars.helper('format-date', function(date) {
-// 	return moment.unix(date).fromNow();
-// });
-
-
-// var products = [
-// 	{
-// 		title: "Purse 1",
-// 		id: "78978789"
-// 	},
-// 	{
-// 		title: "Purse 4",
-// 		id: "321324342343"
-// 	},
-// 	{
-// 		title: "Purse 3",
-// 		id: "098031231"
-// 	}	
-// ];
-
-
-
-
-// var messages = [
-// 	{
-
-// 		topic_id: "1",
-// 		title: "You have a new sale.",
-// 		body:'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..',
-// 		id: "100",
-// 		from: "John",
-// 		to: "Sally",
-// 		timestamp: '1411167711'
-// 	},
-// 	{
-// 		topic_id: "2",
-// 		title: "RE: You have a new sale.",
-// 		body:'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..',
-// 		id: "200",
-// 		to: "John",
-// 		from: "Sally",
-// 		timestamp: '1411167323'
-// 	},
-// 	{
-// 		topic_id: "3",
-// 		title: "Thanks for getting back to me.",
-// 		body:'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..',
-// 		id: "300",
-// 		from: "John",
-// 		to: "Sally",
-// 		timestamp: '1410821716'
-// 	}
-// ];
-
-
-
-
-
-// var message_threads = [
-// 	{ "id": "100",
-// 	"posts":[
-// 		{
-// 			id: "43243242",
-// 			topic_id: "1",
-// 			title: "Hello can you tell is this product in good condition?",
-// 			id: "78978789",
-// 			from: "John",
-// 			to: "Sally",
-// 			timestamp: '1411167711'
-// 		},
-// 		{
-// 			id: "5454343",
-// 			topic_id: "1",
-// 			title: "Oh yes this is in great condition!",
-// 			id: "78978789",
-// 			to: "John",
-// 			from: "Sally",
-// 			timestamp: '1411167323'
-// 		},
-// 		{
-// 			id: "808090-",
-// 			topic_id: "1",
-// 			title: "Thanks for getting back to me.",
-// 			id: "78978789",
-// 			from: "John",
-// 			to: "Sally",
-// 			timestamp: '1410821716'
-// 		}
-// 	]},
-// 	{ "id": "200",
-// 		"posts":[
-// 		{
-// 			id: "43243242",
-// 			topic_id: "1",
-// 			title: "You have a new sale!  $125.  Respond now.",
-// 			id: "78978789",
-// 			from: "John",
-// 			to: "Sally",
-// 			timestamp: '1411167711'
-// 		},
-// 		{
-// 			id: "5454343",
-// 			topic_id: "1",
-// 			title: "RE: You have a new sale.",
-// 			id: "78978789",
-// 			to: "John",
-// 			from: "Sally",
-// 			timestamp: '1411167323'
-// 		},
-// 		{
-// 			id: "808090-",
-// 			topic_id: "1",
-// 			title: "Thanks for getting back to me.",
-// 			id: "78978789",
-// 			from: "John",
-// 			to: "Sally",
-// 			timestamp: '1410821716'
-// 		}]
-// 	},
-// 	{ "id": "300",
-// 		"posts":[
-// 		{
-// 			id: "43243242",
-// 			topic_id: "1",
-// 			title: "You have a new sale.",
-// 			id: "78978789",
-// 			from: "John",
-// 			to: "Sally",
-// 			timestamp: '1411167711'
-// 		},
-// 		{
-// 			id: "5454343",
-// 			topic_id: "1",
-// 			title: "RE: You have a new sale.",
-// 			id: "78978789",
-// 			to: "John",
-// 			from: "Sally",
-// 			timestamp: '1411167323'
-// 		},
-// 		{
-// 			id: "808090-",
-// 			topic_id: "1",
-// 			title: "Thanks for getting back to me.",
-// 			id: "78978789",
-// 			from: "John",
-// 			to: "Sally",
-// 			timestamp: '1410821716'
-// 		}]
-// 	}
-
-// ];
 

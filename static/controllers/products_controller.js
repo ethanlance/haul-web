@@ -2,6 +2,10 @@
 (function () {
     'use strict'; 
 
+    Haul.ApplicationController = Ember.ArrayController.extend({
+        needs: ["auth"],
+    }); 
+
     Haul.ProductsController = Ember.ArrayController.extend({
         needs: ["auth"],
     }); 
