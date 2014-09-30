@@ -18,6 +18,8 @@ Haul.Router.map(function(){
 		this.route('forgotpassword');	
 	});
 
+	this.resource('register');
+
 	//Account
 	this.resource('account', function() {
 		this.route('settings');
@@ -75,7 +77,7 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 	model: function() {
 		return this.store.find('products');
-	},
+	}
 });
 
 Haul.ProductsProductRoute = Ember.Route.extend({
@@ -97,7 +99,7 @@ Haul.MessagesRoute = Haul.AuthenticatedRoute.extend({
 });
 
 
-// //AUTH
+// AUTH
 Haul.AuthRoute = Ember.Route.extend({
 	renderTemplate: function(){
 		this.render('layouts/header_anon', {
@@ -108,16 +110,33 @@ Haul.AuthRoute = Ember.Route.extend({
 })
 
 Haul.AuthLoginRoute = Ember.Route.extend({
-	controllerName: "auth"
+	controllerName: "authlogin",
+	model: function() {
+		return this.store.createRecord('authlogin');
+	}
 }); 
 
 Haul.AuthSignupRoute = Ember.Route.extend({
-	controllerName: "auth"
+	controllerName: "authsignup",
+	model: function() {
+		return this.store.createRecord('authsignup');
+	}
 }); 
 
-Haul.AuthConfirmationRoute = Ember.Route.extend({
-	controllerName: "auth"
-}); 
+Haul.RegisterRoute = Ember.Route.extend({
+	controllerName: "authconfirmation",
+	model: function() {
+		return this.store.createRecord('authconfirmation');
+	}, 
+	renderTemplate: function() {
+		this.render('layouts/header_anon', {
+			into: 'application',
+			outlet: 'header'
+		});			
+		this.render('auth/confirmation');
+	}
+});
+ 
 
 Haul.AuthForgotpasswordRoute = Ember.Route.extend({
 	controllerName: "auth"
@@ -131,6 +150,7 @@ Haul.AuthLogoutRoute = Ember.Route.extend({
 	}
 
 }); 
+ 
 
 //HOME
 Haul.HomeRoute = Ember.Route.extend({
