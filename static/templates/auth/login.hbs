@@ -14,6 +14,11 @@
 				  {{#if error}}
 				    <div class="alert">Invalid username or password.</div>
 				  {{/if}} 
+				  
+				  {{#if error409}}
+				    <div class="alert">Your email needs to be validated before you can login.</div>
+				  {{/if}} 
+
 
 				  	<div class="form-group" >
 			      		{{input email placeholder="email address"}}

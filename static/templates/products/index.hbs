@@ -1,34 +1,63 @@
 <div class="container">
 
-
-
 	<div class="row">
-	 	<div class="col-md-8">
-	    	<h1>Products</h1>
-	    </div>
-	    <div class="col-md-4 text-right ">
-		    {{#link-to 'products.new'}}
-		    <button class="btn btn-default">Create New</button>
-		    {{/link-to}}
+		<div class="col-md-10">
+	    	<div class="row">
+		    	<div class="col-md-12">
+		    		<div class="profile-circular-mask">
+		    			<img {{bind-attr src=picture}}> 
+		    		</div>
+		    	
+		    		<div class="row">
+		    			<div class="col-md-12 haul-font">
+		    				<h1>{{name}}</h1>
+		    			</div>
+		    		</div>	
+		    		<div class="row haul-font">
+		    			<div class="col-md-12">
+		    				<div class="row">
+		    					<div class="col-md-2">
+		    						<button class="btn btn-primary">follow</button>
+		    					</div>
+		    					<div class="col-md-10">
+		    						<strong>175 Followers - </strong><br/>
+		    						<strong>Following 15</strong>
+		    					</div>
+		    				</div>
+		    			</div>
+		    			
+		    		</div>
+		    	</div>
+		    </div>
 		</div>
+		<div class="col-md-2 text-right">
+		    {{#link-to 'products.new'}}
+		    	<button class="btn btn-default">Create New</button>
+		    {{/link-to}}
+    	</div>
 	</div>
 
-
+	
+	<div class="row"><br/></div>
 
 	<div class="row">
-	    
-	    {{#each}}
+
+	    {{#each products}}
+			
+		  	<div class="col-xs-6 col-md-3">
+
+
+
+			    {{#link-to 'product' this class="thumbnail"}}
+			      <img {{bind-attr src=firstImage.content}}>
+			    {{/link-to}}
+		    	<p> {{title}}</p>
+		 	</div>
+		{{/each}}
+
+		    
 		
-		  <div class="col-xs-6 col-md-3">
-		    {{#link-to 'products.product' this class="thumbnail"}}
-		      <img data-src="holder.js/100%x180" alt="...">
-		    {{/link-to}}
-		    <p> {{#link-to 'products.product' this}}{{title}}{{/link-to}}</p>
-		  </div>
-			  
-	      
-	    {{/each}}
+		    	
+
 	</div>
-
-
 </div>

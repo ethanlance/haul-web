@@ -6,18 +6,41 @@
         needs: ["auth"],
     }); 
 
-    Haul.ProductsController = Ember.ArrayController.extend({
+    Haul.ProductsController = Ember.ObjectController.extend({
         needs: ["auth"],
+           
     }); 
     
-    Haul.ProductsIndexController = Ember.ArrayController.extend({
+
+    Haul.ProductsIndexController = Ember.ObjectController.extend({
         needs: ["auth"],
-    }); 
+
+        productCount: function() {
+            return this.get('model.products').get('length');            
+        }.property('products'),        
+
+        
+    });     
 
 
-    Haul.ProductsProductController = Ember.ObjectController.extend({ 
-        needs: ["auth"],
+    Haul.ProductController = Ember.ObjectController.extend({ 
+        needs: ["auth"], 
+
+        commentCount: function() {
+            return this.get('model.comments').get('length');
+        }.property('comments'),
+        
     	actions: {
+
+            likeProduct: function () {
+                console.log("LIKE PRODUCT")
+            },
+
+            shareProduct: function () {
+                console.log("SHARE PRODUCT")
+            },
+
+
     		saveProduct: function() {
     			console.log("SAVE THIS PRODUCT");
     		},
@@ -33,6 +56,10 @@
             	this.transitionToRoute('products');
             }
     	}
+    });
+
+    Haul.ProductCommentsController = Ember.ArrayController.extend({
+        needs: ["product"]
     });
 
 

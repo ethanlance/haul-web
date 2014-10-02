@@ -1,6 +1,112 @@
 /*global Products, Ember */
 (function () {
 
+	//AUTHENTICATE
+	Haul.AuthController = Ember.ObjectController.extend({
+
+		//Turn this off:
+		email: null, //'ethan@haul.io',
+		password: null, //'Bailey007!',
+		client_token: "5eed07b8d71cf26f6df6566cf705adaa",
+		host: "http://localhost:8080",
+		 
+		isProcessing: false, 
+		attemptedTransition: null,
+		token: "",
+		currentUser: {},
+		name:"",
+
+		init: function() {
+		  
+			this._super();
+ 
+			if (Ember.$.cookie('access_token')) { 
+				this.token = Ember.$.cookie('access_token');
+				this.currentUser = Ember.$.cookie('auth_user');
+			}
+		},
+
+		//Did the access_token change?
+		tokenChanged: (function() {
+			if (Ember.isEmpty(this.get('token'))) { 
+				Ember.$.removeCookie('access_token', {path: '/'});
+				Ember.$.removeCookie('auth_user', {path: '/'});
+			} else {
+				Ember.$.cookie('access_token', this.get('token'), {path: '/'});
+				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
+
+				//UPDATE HEADERS W/ ACCESS_TOKEN
+				adapter = this.get('container').lookup('adapter:application');   
+				adapter.set('headers', { 'Authorization': 'Bearer ' +  this.get('token') });
+			}
+		}).observes('token'),
+
+
+		//Did the access_token change?
+		currentUserChanged: (function() {
+			if (Ember.isEmpty(this.get('currentUser'))) {  
+				Ember.$.removeCookie('auth_user');
+			} else { 
+				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
+			}
+		}).observes('currentUser'),	
+
+
+		reset: function() {
+		  this.setProperties({
+			name: null,
+			token: null,
+			currentUser: null
+		  });
+		  Ember.$.ajaxSetup({
+			headers: {
+			  'Authorization': 'Bearer none'
+			}
+		  });
+		},
+
+		actions: { 
+ 			
+			authResponse: function(response) {
+						
+				this.set('isProcessing', false);
+
+				attemptedTrans = this.get('attemptedTransition');
+
+				//Create an apiKey
+			 	key = this.get('store').createRecord('apiKey', {
+					accessToken: response.data[0].id
+				});
+
+			 	//Save Our User Token.
+				this.set('token', response.data[0].token_id); 
+				
+				var user_id = response.data[0].user_id; 
+				
+					//Now get the user:
+				this.store.find('user', user_id).then(
+					(function(_this) {
+						return function(user) {
+
+							_this.set("currentUser", user.getProperties('id', 'name', 'email'))
+
+							user.get('apiKeys').content.push(key);
+
+							//TRANSITION:
+							if(Ember.isEmpty(attemptedTrans)){
+								console.log(user);
+								_this.transitionToRoute("go.profile", user);
+							}else{
+								_this.transitionToRoute(attemptedTrans);
+							}
+						}	;
+					})(this)
+				);
+			}
+		}
+	});
+
+
 	// SIGNUP
 	Haul.AuthsignupController = Ember.ObjectController.extend({
 		
@@ -121,6 +227,7 @@
 		needs: ['auth'],
 
 		error: false,
+		error409: false,
 
 		actions: {
 			submit: function() {
@@ -152,115 +259,17 @@
 						return function(error) {
 							
 							_this.set('isProcessing', false);
-							_this.set('error', true);
+
+							if( error.status == 409 ){
+								_this.set('error409', true);
+							}else{
+								_this.set('error', true);
+							}
 						};
 					})(this)
 				);
 		 	}
 		}
 	});
-	
-	//AUTHENTICATE
-	Haul.AuthController = Ember.ObjectController.extend({
 
-		//Turn this off:
-		email: null, //'ethan@haul.io',
-		password: null, //'Bailey007!',
-		client_token: "5eed07b8d71cf26f6df6566cf705adaa",
-		host: "http://localhost:8080",
-		 
-		isProcessing: false, 
-		attemptedTransition: null,
-		token: "",
-		currentUser: {},
-		name:"",
-
-		init: function() {
-		  
-			this._super();
- 
-			if (Ember.$.cookie('access_token')) { 
-				this.token = Ember.$.cookie('access_token');
-				this.currentUser = Ember.$.cookie('auth_user');
-			}
-		},
-
-		//Did the access_token change?
-		tokenChanged: (function() {
-			if (Ember.isEmpty(this.get('token'))) { 
-				Ember.$.removeCookie('access_token', {path: '/'});
-				Ember.$.removeCookie('auth_user', {path: '/'});
-			} else {
-				Ember.$.cookie('access_token', this.get('token'), {path: '/'});
-				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
-
-				//UPDATE HEADERS W/ ACCESS_TOKEN
-				adapter = this.get('container').lookup('adapter:application');   
-				adapter.set('headers', { 'Authorization': 'Bearer ' +  this.get('token') });
-			}
-		}).observes('token'),
-
-
-		//Did the access_token change?
-		currentUserChanged: (function() {
-			if (Ember.isEmpty(this.get('currentUser'))) {  
-				Ember.$.removeCookie('auth_user');
-			} else { 
-				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
-			}
-		}).observes('currentUser'),	
-
-
-		reset: function() {
-		  this.setProperties({
-			name: null,
-			token: null,
-			currentUser: null
-		  });
-		  Ember.$.ajaxSetup({
-			headers: {
-			  'Authorization': 'Bearer none'
-			}
-		  });
-		},
-
-		actions: { 
- 			
-			authResponse: function(response) {
-						
-				this.set('isProcessing', false);
-
-				attemptedTrans = this.get('attemptedTransition');
-
-				//Create an apiKey
-			 	key = this.get('store').createRecord('apiKey', {
-					accessToken: response.data[0].id
-				});
-
-			 	//Save Our User Token.
-				this.set('token', response.data[0].id); 
-				
-				var user_id = response.data[0].user_id; 
-				
-					//Now get the user:
-				this.store.find('user', user_id).then(
-					(function(_this) {
-						return function(user) {
-
-							_this.set("currentUser", user.getProperties('id', 'name', 'email'))
-
-							user.get('apiKeys').content.push(key);
-
-							//TRANSITION:
-							if(Ember.isEmpty(attemptedTrans)){
-								_this.transitionTo("products.index");
-							}else{
-								_this.transitionToRoute(attemptedTrans);
-							}
-						}	;
-					})(this)
-				);
-			}
-		}
-	});
 }).call(this);

@@ -1,4 +1,7 @@
-
+.haul-font {
+  font-family: Arvo, serif;
+  font-weight: bold;
+}
 
 .logo-center{ 
     position: absolute;
@@ -96,6 +99,88 @@
 .navbar-anon {
   margin-bottom: 80px;
 }
+
+
+.profile-circular-mask {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile-small-circular-mask { 
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-circular-mask img {
+  max-width: 100%;
+}
+
+.profile-small-circular-mask img {
+  max-width: 100%;
+}
+
+.haul-buy-card{
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  /*background-color: #f5f5f5;*/
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+
+}
+
+.haul-buy-card .profile-circular-mask {
+  width: 50px;
+  height: 50px;
+}
+
+.haul-buy-card .media:first-child{
+  margin-top: 15px;
+}
+
+.haul-buy-card .haul-price {
+  font-family: Arvo, serif;
+  font-weight: bold;
+  font-size: 200%;
+  padding-right: 10px;
+}
+
+
+.haul-buy-card .button-bar {
+  margin-bottom: 15px; 
+  vertical-align: middle;
+}
+.haul-buy-card .haul-counts {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.haul-icon-support .profile-small-circular-mask {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+.haul-icon-support .profile-small-circular-mask{
+  margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

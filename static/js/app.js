@@ -2,7 +2,7 @@
 //Haul App
 window.Haul = Ember.Application.create({
 	LOG_TRANSITIONS: true,
-	LOG_TRANSITIONS_INTERNAL: true
+	LOG_TRANSITIONS_INTERNAL: true, 
 });//WithMixins(Ember.Facebook);
 
 //Facebook
@@ -20,3 +20,6 @@ Haul.ApplicationView = Ember.View.extend({
 Haul.Store = DS.Store.extend({
   adapter: Haul.ApplicationAdapter
 });
+
+
+Haul.TooltipBoxController = Bootstrap.TooltipBoxController

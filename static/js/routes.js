@@ -3,11 +3,22 @@ Haul.Router.reopen({
   location: 'history'
 });
 
+
+
 //Router Map
 Haul.Router.map(function(){
 
 	//Home
 	this.resource('home', {path: "/"});
+
+	//Profiles	
+	this.resource('products', {path: "/go/:user_slug"}, function() {
+		this.resource('product', {path: "/:slug"}, function() {
+			this.route('comments')
+		});
+		this.route('new');			
+	});
+	
 
 	//Auth
 	this.resource('auth', function() {
@@ -26,12 +37,6 @@ Haul.Router.map(function(){
 		this.route('profile');
 		this.route('help');
 	});
-	
-	//Products
-	this.resource('products', function(){
-		this.route('product', {path: "product/:product_id"})
-		this.route('new')
-	});
 
 	//Messages
 	this.resource('messages');
@@ -39,6 +44,22 @@ Haul.Router.map(function(){
 	//Search
 	this.resource('search');	 
 });
+
+//PROFILE ROUTE:
+Haul.ApplicationRoute = Ember.Route.extend({
+    renderTemplate: function() {
+        // Render default outlet
+        this.render();
+        // render extra outlets
+        var controller = this.controllerFor('tooltip-box');
+        this.render("bs-tooltip-box", {
+            outlet: "bs-tooltip-box",
+            controller: controller,
+            into: "application" // important when using at root level
+        });
+    }
+});
+
 
 
 //AUTH - Routes that require authentication should extend this object.
@@ -57,7 +78,6 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 		}
 	},
 	redirectToLogin: function(transition) {
-		console.log("SAVE TRANS");console.log(transition)
 		this.controllerFor('auth').set('attemptedTransition', transition.targetName);
 		return this.transitionTo('auth.login');
 	},
@@ -72,19 +92,92 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 	// }
 });
 
-
-//Products
 Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
-	model: function() {
-		return this.store.find('products');
+	model: function(params) { 
+		
+		var user = this.store.findQuery('user', {slug: params.user_slug}).then(function(results) {
+			return Ember.get(results, 'firstObject');
+		});
+
+		return user;
+	}
+//	renderTemplate: function(controller, model) {
+
+		// this.render('layouts/header_base', {
+		// 	into: 'products',
+		// 	outlet: 'header'
+		// });
+		// this.render('products/index', {
+		// 	into: 'products',
+		// 	outlet: 'main', 
+		// 	model: model,
+		// 	controller: controller
+		// });
+//	}
+});
+
+Haul.ProductRoute = Ember.Route.extend({
+	model: function(params) { 
+		
+		var product = this.store.findQuery('product', {slug: params.slug}).then(function(results) {
+			record = Ember.get(results, 'firstObject');
+			console.log(record)
+			return record;
+		});
+ 
+		return product;
+	},
+	// model: function(params) {
+		
+	// 	var products = this.store.find('products', params.product_id).then(function(result) {
+	// 		return result
+	// 	});
+
+	// 	return products;
+	// },
+	renderTemplate: function(controller, model) {
+	// 	this.render('layouts/header_base', {
+	// 		into: 'application',
+	// 		outlet: 'header'
+	// 	});
+
+		this.render('products/product', {
+			into: 'application',
+			outlet: 'main', 
+			model: model,
+			controller: controller
+		});
 	}
 });
 
-Haul.ProductsProductRoute = Ember.Route.extend({
-	model: function(params) {
-		return this.store.find('products', params.product_id);
-	}
+
+Haul.ProductCommentsRoute = Ember.Route.extend({
+	model: function() {
+		return this.modelFor('product').get('comments');
+    },
+
+	renderTemplate: function(controller, model) {
+		this.render('comments/comments', {
+			into: 'products/product',
+			outlet: 'main', 
+			model: model,
+			controller: controller
+		});
+	}	
 });
+
+// //Products
+// Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
+// 	model: function() {
+// 		return this.store.find('products');
+// 	}
+// });
+
+// Haul.ProductsProductRoute = Ember.Route.extend({
+// 	model: function(params) {
+// 		return this.store.find('products', params.product_id);
+// 	}
+// });
 
 
 //MESSAGES

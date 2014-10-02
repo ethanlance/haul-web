@@ -1,106 +1,88 @@
 /*global Products, Ember */
 (function () {
-    'use strict';
+  'use strict';
+
+  Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
+	inputTemplate: 'form-fields/input',
+
+	labelClass: 'control-label',
+	inputClass: 'form-group',
+	buttonClass: 'btn btn-primary',
+	fieldErrorClass: 'has-error',
+	errorClass: 'help-block'
+  });
+
+
+  Ember.View.reopen({
+	didInsertElement : function(){
+	  this._super();
+	  Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
+	},
+	afterRenderEvent : function(){
+	  Holder.run(); 
+
+	}
+  });
 
 
 
-// Haul.initializer({
-//   name: 'easyForm',
-//   initialize: function() {
 
-//     Ember.EasyForm.Input.reopen({
-//       errorsChanged: function() {
-//         this.set('hasFocusedOut', true);
-//         this.showValidationError();
-//       },
-//       classNameBindings: ['wrapperConfig.inputClass', 'wrapperErrorClass'],
-//       didInsertElement: function() {
-//         this.addObserver('context.errors.' + this.property + '.@each', this, 'errorsChanged');
-//       }
-//     });
+Haul.CarouselView = Ember.View.extend({	
+	templateName: 'modules/carousel',
+	classNames: ['carousel', 'slide'],
+	init: function() { 
+		this._super.apply(this, arguments);
+		// disable the data api from boostrap
+		$(document).off('.data-api');	  
+		// at least one item must have the active class, so we set the first here, and the class will be added by class binding
+		var promise = this.get('content').then(function(results) { 
 
-//     Ember.EasyForm.Error.reopen({
-//       errorText: function() {
-//         return this.get('errors.firstObject');
-//       }.property('errors.firstObject').cacheable(),
-//       updateParentView: function() {
-//         var parentView = this.get('parentView');
-//         if(this.get('errors.length') > 0) {
-//           parentView.set('wrapperErrorClass', 'has-error');
-//         }else{
-//           parentView.set('wrapperErrorClass', false);
-//         }
-//       }.observes('errors.firstObject')
-//     });
+			var obj = Ember.get(results, 'firstObject');
+			Ember.set(obj, 'isActive', true);
 
-//     Ember.EasyForm.Submit.reopen({
-//       disabled: function() {
-//         return this.get('formForModel.disableSubmit');
-//       }.property('formForModel.disableSubmit')
-//     });
+			return results;
+		}); 
+	},
+	actions: {
+		previousSlide: function() {
+			this.$().carousel('prev');
+		},
+		nextSlide: function() {
+			this.$().carousel('next');
+		},
+		didInsertElement: function() {
+			this.$().carousel();
+		}	
+	},
 
-//     //-- Bootstrap 3 Class Names --------------------------------------------
-//     //-- https://github.com/dockyard/ember-easyForm/issues/47
-//     Ember.TextSupport.reopen({
-//       classNames: ['form-control']
-//     });
-//     // And add the same classes to Select inputs
-//     Ember.Select.reopen({
-//       classNames: ['form-control']
-//     });
-
-//     Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
-//       inputTemplate: 'form-fields/input',
-
-//       labelClass: 'control-label',
-//       inputClass: 'form-group',
-//       buttonClass: 'btn btn-primary',
-//       fieldErrorClass: 'has-error',
-//       errorClass: 'help-block'
-//     });
-
-//   }
-// });
-
-    Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
-      inputTemplate: 'form-fields/input',
-
-      labelClass: 'control-label',
-      inputClass: 'form-group',
-      buttonClass: 'btn btn-primary',
-      fieldErrorClass: 'has-error',
-      errorClass: 'help-block'
-    });
-
-
-    
-    Haul.BaseView = Ember.View.extend();
-
-    Haul.ProductsView = Haul.BaseView.extend({
-        
-        didInsertElement: function() {
-            Ember.run.next(function() {
-                Holder.run(); //For DEV. Images
-            })
-         }
-    });
-
-    //Views
-    Haul.ProductsIndexView = Ember.View.extend({
-        didInsertElement: function() {
-            Ember.run.next(function() {
-                Holder.run(); //For DEV. Images
-            })
-         }
-    });
-
-    Haul.ProductsProductView = Ember.View.extend({
-        didInsertElement: function() {
-            Ember.run.next(function() {
-                Holder.run(); //For DEV. Images
-            })
-         }
-    }); 
-
-    
+	indicatorsView: Ember.CollectionView.extend({
+		tagName: 'ol',
+		classNames: ['carousel-indicators'],		
+		contentBinding: 'parentView.content',
+		itemViewClass: Ember.View.extend({
+			click: function() {
+				var $elem = this.get("parentView.parentView").$();
+				$elem.carousel(this.get("contentIndex"));
+			},
+			template: Ember.Handlebars.compile(''),
+			classNameBindings: ['content.isActive:active']			
+		})
+	}),
+	itemsView: Ember.CollectionView.extend({		
+		classNames: ['carousel-inner'],
+		contentBinding: 'parentView.content',
+		itemViewClass: Ember.View.extend({
+			classNames: ['item'],
+			classNameBindings: ['content.isActive:active'],
+			template: Ember.Handlebars.compile('\
+				<img {{bindAttr src="view.content.src"}} alt=""/>\
+				<div class="carousel-caption">\
+					<h4>{{view.content.title}}</h4>\
+					<p>{{view.content.content}}</p>\
+				</div>')
+		})
+	})
+});
+  
+  
 })();
