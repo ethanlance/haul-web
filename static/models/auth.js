@@ -17,13 +17,13 @@
 	    name: 'Jon Snow',
 	    slug: 'jonsnow',
 	    picture: 'http://www.top-ten.tv/wp-content/uploads/2013/01/image4.jpeg',
-	    products: [1,2,3,4]
+	    products: [1,2,3,4,5,6]
 	  }, {
 	    id: 2,
 	    name: 'Jaime Lannister',
 	    slug: 'thekingslayer',
 	    picture: 'http://www.cosplayisland.co.uk/files/costumes/358/53464/jaime-lannister-1024.jpg',
-	    products: [5,6]
+	    products: []
 	  }, {
 	    id: 3,
 	    name: 'Tyrion Lannister',

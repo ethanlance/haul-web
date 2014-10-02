@@ -19,6 +19,7 @@
 		user: DS.belongsTo('user'),
 		images: DS.hasMany('image',{async:true}),
 		comments: DS.hasMany('comment',{async:true}),
+		sold: DS.attr('boolean', {defaultValue: false}),
 
         firstImage: function() {
         	var promise = this.get('images').then(function(results) {
@@ -73,6 +74,7 @@
 			comments:[1,2,3,4,5],
 			images:[2,3,4,5],
 			price: "100",
+			sold: false,
 			description: "Hello ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris libero, viverra vitae ornare non, malesuada a diam. Cras convallis turpis id enim iaculis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec venenatis nisl justo. In dolor arcu, malesuada ac arcu laoreet, auctor vestibulum enim. Nulla facilisi.\n\n Nullam vitae erat elementum, rutrum neque ut, fermentum lacus."
 		},
 		{	
@@ -82,6 +84,7 @@
 			id: 2,
 			images:[15],
 			price: "200",
+			sold: false,
 			description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris libero, viverra vitae ornare non, malesuada a diam. Cras convallis turpis id enim iaculis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec venenatis nisl justo. In dolor arcu, malesuada ac arcu laoreet, auctor vestibulum enim. Nulla facilisi. Nullam vitae erat elementum, rutrum neque ut, fermentum lacus."
 		},
 		{	
@@ -91,6 +94,7 @@
 			id: 3,
 			images:[13,14],
 			price: "150",
+			sold: false,
 			description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris libero, viverra vitae ornare non, malesuada a diam. Cras convallis turpis id enim iaculis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec venenatis nisl justo. In dolor arcu, malesuada ac arcu laoreet, auctor vestibulum enim. Nulla facilisi. Nullam vitae erat elementum, rutrum neque ut, fermentum lacus."
 		},
 		{
@@ -100,24 +104,27 @@
 			id: 4,
 			images:[6,7],
 			price: "100",
+			sold: false,
 			description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris libero, viverra vitae ornare non, malesuada a diam. Cras convallis turpis id enim iaculis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec venenatis nisl justo. In dolor arcu, malesuada ac arcu laoreet, auctor vestibulum enim. Nulla facilisi. Nullam vitae erat elementum, rutrum neque ut, fermentum lacus."
 		},
 		{
-			user: 2,
+			user: 1,
 			title: "Nike Pro Jump Circuit",
 			slug: "nikeprojumpcirc",
 			id: 5,
 			images:[8,9,10],
 			price: "200",
+			sold: false,
 			description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris libero, viverra vitae ornare non, malesuada a diam. Cras convallis turpis id enim iaculis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec venenatis nisl justo. In dolor arcu, malesuada ac arcu laoreet, auctor vestibulum enim. Nulla facilisi. Nullam vitae erat elementum, rutrum neque ut, fermentum lacus."
 		},
 		{
-			user: 2,
+			user: 1,
 			title: "Asics Tiger Autumn",
 			slug: "asicstigerautum",
 			id: 6,
 			images:[11,12],
 			price: "150",
+			sold: true,
 			description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris libero, viverra vitae ornare non, malesuada a diam. Cras convallis turpis id enim iaculis mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec venenatis nisl justo. In dolor arcu, malesuada ac arcu laoreet, auctor vestibulum enim. Nulla facilisi. Nullam vitae erat elementum, rutrum neque ut, fermentum lacus."
 		}
 	];

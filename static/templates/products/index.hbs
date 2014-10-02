@@ -1,63 +1,61 @@
 <div class="container">
-
 	<div class="row">
-		<div class="col-md-10">
+		<div class="col-md-12">
 	    	<div class="row">
-		    	<div class="col-md-12">
-		    		<div class="profile-circular-mask">
-		    			<img {{bind-attr src=picture}}> 
-		    		</div>
-		    	
-		    		<div class="row">
-		    			<div class="col-md-12 haul-font">
-		    				<h1>{{name}}</h1>
-		    			</div>
-		    		</div>	
-		    		<div class="row haul-font">
-		    			<div class="col-md-12">
-		    				<div class="row">
-		    					<div class="col-md-2">
-		    						<button class="btn btn-primary">follow</button>
-		    					</div>
-		    					<div class="col-md-10">
-		    						<strong>175 Followers - </strong><br/>
-		    						<strong>Following 15</strong>
-		    					</div>
-		    				</div>
-		    			</div>
-		    			
-		    		</div>
+		    	<div class="col-md-12 haul-profile-header haul-font">
+
+
+					<div class="media">
+					  <a class="pull-left" href="#"> 
+					  	<div class="profile-circular-mask">
+					    	<img {{bind-attr src=picture}}> 
+					    </div>
+					  </a>
+					  <div class="media-body">
+					     	<h1 class="media-heading">{{name}}</h1>
+	    					<h3>
+	    						<button class="btn btn-primary">follow</button>
+	    						<span class="label">175 Followers - Following 15</span>
+	    					</h3>
+	    					
+					  </div>
+					</div> 
+
+
 		    	</div>
 		    </div>
 		</div>
-		<div class="col-md-2 text-right">
-		    {{#link-to 'products.new'}}
-		    	<button class="btn btn-default">Create New</button>
-		    {{/link-to}}
-    	</div>
 	</div>
 
-	
-	<div class="row"><br/></div>
+</div>	
 
-	<div class="row">
 
+	<div class="haul-grid">
+		<ul>      
 	    {{#each products}}
-			
-		  	<div class="col-xs-6 col-md-3">
+	    	{{#link-to 'product' this class=""}}
+	    	<li> 
+				<div class="product-wrapper">
+			   
+				    <div class="photo-wrapper">
+						
+						<img {{bind-attr src=firstImage.content}}>
 
+						{{#if sold}}
+							<div class="sold">Sold</div>
+						{{/if}}
+						
+						<div class="info">		
+					 	 	<div class="title"> {{title}}
+					 	 		<div class="price"> ${{price}}</div>  
+					 	 	</div>
+						</div>
 
-
-			    {{#link-to 'product' this class="thumbnail"}}
-			      <img {{bind-attr src=firstImage.content}}>
-			    {{/link-to}}
-		    	<p> {{title}}</p>
-		 	</div>
+					</div>
+				</div>
+		 	</li>
+		 	{{/link-to}}	
 		{{/each}}
+		</ul>
+	</div> 
 
-		    
-		
-		    	
-
-	</div>
-</div>
