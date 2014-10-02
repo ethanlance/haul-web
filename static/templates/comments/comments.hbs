@@ -1,0 +1,115 @@
+
+
+
+
+<div class="row">
+	<div class="col-md-12">
+		<h3>{{controllers.product.commentCount}} Comments</h3>
+		<h6>{{#link-to 'product' controllers.product}}hide comments{{/link-to}}</h6>
+	</div>
+</div>		
+<div class="row">
+	<div class="col-md-12">
+
+	{{#each}}
+		<div class="media">
+		  <a class="pull-left" href="#"> 
+		    <div class="profile-small-circular-mask">
+		    	<img {{bind-attr src=user.picture}}> 
+			</div>
+		  </a>
+		  <div class="media-body">
+		    <h4 class="media-heading">
+		    	{{#link-to 'products' user.slug}}{{user.name}}{{/link-to}}
+		    </h4>
+		    {{body}}
+		  </div>
+		</div>
+	{{/each}}
+
+
+
+		{{!-- <div class="media">
+		  <a class="pull-left" href="#"> 
+		    <div class="profile-small-circular-mask">
+		    	<img src="http://4.bp.blogspot.com/-XuFyPnIQKnA/UBKlhJi1-KI/AAAAAAAAAQo/SrtvhFElX0A/s1600/Game-of-Thrones-Tyrion-Lannister.png">
+			</div>
+		  </a>
+		  <div class="media-body">
+		    <h4 class="media-heading">Tyrion L.</h4>
+		    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+		  </div>
+		</div>
+
+
+
+
+		<div class="media">
+		  <a class="pull-left" href="#"> 
+		  	<div class="profile-small-circular-mask">
+		  		<img src="http://www.cosplayisland.co.uk/files/costumes/358/53464/jaime-lannister-1024.jpg"> 
+		    </div>
+		  </a>
+		  <div class="media-body">
+		    <h4 class="media-heading">Jaime L.</h4>
+		    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+		  </div>
+		</div>
+
+
+
+
+		<div class="media">
+		  <a class="pull-left" href="#"> 
+		  	<div class="profile-small-circular-mask">
+		    	<img src="http://4.bp.blogspot.com/-XuFyPnIQKnA/UBKlhJi1-KI/AAAAAAAAAQo/SrtvhFElX0A/s1600/Game-of-Thrones-Tyrion-Lannister.png">
+		    </div>
+		  </a>
+		  <div class="media-body">
+		    <h4 class="media-heading">Tyrion L.</h4>
+		    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+		  </div>
+		</div>
+
+
+		<div class="media">
+		  <a class="pull-left" href="#"> 
+		  	<div class="profile-small-circular-mask">
+		    	<img src="https://lh5.googleusercontent.com/-R_3u3oMiJZ0/AAAAAAAAAAI/AAAAAAAAAAA/-jl9VTR28bc/photo.jpg">
+		    </div>
+		  </a>
+		  <div class="media-body">
+		    <h4 class="media-heading">Cersei L.</h4>
+		    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+		  </div>
+		</div> --}}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<br/>
+		<h4>Say Something</h4>
+
+		<div class="row">
+			<div class="col-md-12">
+				<textarea class="form-control" rows="3"></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-right"><br/>
+				<button class="btn btn-default">comment</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
