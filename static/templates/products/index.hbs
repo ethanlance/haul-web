@@ -26,36 +26,32 @@
 		    </div>
 		</div>
 	</div>
-
 </div>	
 
 
-	<div class="haul-grid">
-		<ul>      
-	    {{#each products}}
-	    	{{#link-to 'product' this class=""}}
-	    	<li> 
-				<div class="product-wrapper">
-			   
-				    <div class="photo-wrapper">
-						
-						<img {{bind-attr src=firstImage.content}}>
+<div class="haul-grid">
+	
+    {{#each products}}
+    	{{#link-to 'product' this class=""}}
+    	<div class="haul-grid-li"> 
+	   		<div class="dummy"></div>
+		    <div class="photo-wrapper">
+				
+				<img class="thumbnail" {{bind-attr src=firstImage.content}}>
 
-						{{#if sold}}
-							<div class="sold">Sold</div>
-						{{/if}}
-						
-						<div class="info">		
-					 	 	<div class="title"> {{title}}
-					 	 		<div class="price"> ${{price}}</div>  
-					 	 	</div>
-						</div>
-
-					</div>
+				{{#if sold}}
+					<div class="sold">Sold</div>
+				{{/if}}
+				
+				<div class="info">		
+			 	 	<div class="title"> {{title}}
+			 	 		<div class="price"> ${{price}}</div>  
+			 	 	</div>
 				</div>
-		 	</li>
-		 	{{/link-to}}	
-		{{/each}}
-		</ul>
-	</div> 
+			</div>
+	 	</div>
+	 	{{/link-to}}	
+	{{/each}}
+	
+</div> 
 

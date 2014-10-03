@@ -10,34 +10,7 @@
 		//apiKeys: DS.hasMany('apiKey')
 	});
 
-	//FIXTURE TEST DATA:
-	Haul.User.FIXTURES = [
-	  {
-	    id: 1,
-	    name: 'Jon Snow',
-	    slug: 'jonsnow',
-	    picture: 'http://www.top-ten.tv/wp-content/uploads/2013/01/image4.jpeg',
-	    products: [1,2,3,4,5,6]
-	  }, {
-	    id: 2,
-	    name: 'Jaime Lannister',
-	    slug: 'thekingslayer',
-	    picture: 'http://www.cosplayisland.co.uk/files/costumes/358/53464/jaime-lannister-1024.jpg',
-	    products: []
-	  }, {
-	    id: 3,
-	    name: 'Tyrion Lannister',
-	    slug: 'tyrionl',
-	    picture: 'http://4.bp.blogspot.com/-XuFyPnIQKnA/UBKlhJi1-KI/AAAAAAAAAQo/SrtvhFElX0A/s1600/Game-of-Thrones-Tyrion-Lannister.png',
-	    products: []
-	  }, {
-	    id: 4,
-	    name: 'Cersei Lannister',
-	    slug: 'cerseil',
-	    picture: 'https://lh5.googleusercontent.com/-R_3u3oMiJZ0/AAAAAAAAAAI/AAAAAAAAAAA/-jl9VTR28bc/photo.jpg',
-	    products: []
-	  }
-	];
+	
 
 
 	Haul.ApiKey = DS.Model.extend({
