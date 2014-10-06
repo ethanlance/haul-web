@@ -28,7 +28,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-ember-template-compiler');
 
     grunt.registerTask('default', ['Start development server...'], function() {
-		grunt.task.run(['emberhandlebars', 'watch']);
-		require('./dev-server').start();
-	});
+        grunt.task.run(['emberhandlebars', 'watch']);
+        require('./dev-server').start();
+    });
 };
