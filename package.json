@@ -8,6 +8,7 @@
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-ember-template-compiler": "^1.5.0",
+    "grunt-shell": "^1.1.1",
     "hapi": "^6.11.1"
   },
   "devDependencies": {},
