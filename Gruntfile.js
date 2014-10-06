@@ -27,5 +27,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-ember-template-compiler');
 
-    grunt.registerTask('default', ['emberhandlebars', 'watch']);
+    grunt.registerTask('default', ['Start development server...'], function() {
+		grunt.task.run(['emberhandlebars', 'watch']);
+		require('./dev-server').start();
+	});
 };

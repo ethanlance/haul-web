@@ -34,12 +34,16 @@ server.route({
     }
 });
 
-server.pack.register(Good, function (err) {
-    if (err) {
-        throw err; // something bad happened loading the plugin
-    }
+module.exports = {
+    start: function start() {
+        server.pack.register(Good, function (err) {
+            if (err) {
+                throw err; // something bad happened loading the plugin
+            }
 
-    server.start(function () {
-        server.log('info', 'Web development server running at: ' + server.info.uri);
-    });
-});
+            server.start(function () {
+                server.log('info', 'Web development server running at: ' + server.info.uri);
+            });
+        });
+    }
+};
