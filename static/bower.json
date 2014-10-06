@@ -22,7 +22,10 @@
     "ember": "~1.7.0",
     "holderjs": "~2.4.0",
     "moment": "~2.8.3",
-    "ember-validations": "http://builds.dockyard.com.s3.amazonaws.com/ember-validations/ember-validations-latest.js",
-    "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/latest/ember-easyForm.js"
+    "ember-validations": "~1.0.0",
+    "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/latest/ember-easyForm.js",
+    "jquery": "~2.1.1",
+    "dropzone": "~3.10.2",
+    "handlebars": "~2.0.0"
   }
 }

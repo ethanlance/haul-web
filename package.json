@@ -1,15 +1,14 @@
 {
   "name": "haul-web",
   "version": "1.0.0",
-  "description": "",
+  "description": "Haul Web App + Development Server",
   "main": "Gruntfile.js",
   "dependencies": {
-    
+    "good": "^2.3.0",
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-ember-template-compiler": "^1.5.0"
-    
-    
+    "grunt-ember-template-compiler": "^1.5.0",
+    "hapi": "^6.11.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -19,8 +18,8 @@
     "type": "git",
     "url": "https://github.com/haulio/haul-web"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ethan Lance",
+  "license": "Copyright 2014, Haul.io",
   "bugs": {
     "url": "https://github.com/haulio/haul-web/issues"
   },
