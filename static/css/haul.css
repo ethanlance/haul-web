@@ -335,3 +335,9 @@
 .selected {
   border: 1px solid pink;
 }
+
+.btn-facebook {
+  color: #fff;
+  background-color: #3B5998;
+  border: none;
+}
