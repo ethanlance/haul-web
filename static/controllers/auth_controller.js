@@ -183,6 +183,9 @@
 			  // they are logged into this app or not.
 			  this.FB.login(function(response){
 				  if (response.authResponse) {
+				  		console.log("FB LOGIN RESPONSE")
+				  		console.log(response)
+				  		this.getFBAccessToken();
 						this.getFBUserData();
 				  } else {
 						console.log('User cancelled login or did not fully authorize.');
@@ -194,6 +197,8 @@
 
 		getFBAccessToken: function() {
 		  this.fbAccessToken = this.FB.getAccessToken();
+		  console.log("FB ACCESS TOKEN")
+		  console.log(this.fbAccessToken);
 		},
 
 		getFBUserData: function() {
