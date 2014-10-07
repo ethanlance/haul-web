@@ -340,4 +340,12 @@
   color: #fff;
   background-color: #3B5998;
   border: none;
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+}
+
+.btn-facebook:hover{
+  background-color: #879ac0;
+  border: none;
 }

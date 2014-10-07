@@ -234,7 +234,9 @@ function program6(depth0,data) {
   data.buffer.push("Forgot Password?");
   }
 
-  data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n\n\n\n\n				<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Login</h2>\n				</div>\n\n				<div class=\"form-group\"> \n			      	<button class=\"btn btn-primary btn-block btn-facebook\">Facebook</button>\n			    </div> \n\n\n\n\n 				<div class=\"form-group padding-top\">\n					<h4 class=\"form-signin-heading\">or with your email & password</h4>\n				</div>\n\n				");
+  data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n\n\n\n\n				<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Login</h2>\n				</div>\n\n				<div class=\"form-group\"> \n			      	<button class=\"btn btn-block btn-facebook\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookLogin", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">Facebook</button>\n			    </div> \n\n\n\n\n 				<div class=\"form-group padding-top\">\n					<h4 class=\"form-signin-heading\">or with your email & password</h4>\n				</div>\n\n				");
   stack1 = (helper = helpers['form-for'] || (depth0 && depth0['form-for']),options={hash:{
     'wrapper': ("bs3-wrapper")
   },hashTypes:{'wrapper': "STRING"},hashContexts:{'wrapper': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "model", options) : helperMissing.call(depth0, "form-for", "model", options));
@@ -264,7 +266,9 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = '', stack1, helper, options;
-  data.buffer.push("	\n\n\n					<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Signup With</h2>\n					</div>\n\n					<div class=\"form-group\"> \n				      	<button class=\"btn btn-primary btn-block btn-facebook\">Facebook</button>\n				    </div> \n\n\n\n					<div class=\"form-group padding-top\">\n						<h4 class=\"\">or with email</h4>\n					</div>\n\n\n					");
+  data.buffer.push("	\n\n\n					<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Signup With</h2>\n					</div>\n\n					<div class=\"form-group\"> \n				      	<button class=\"btn btn-block btn-facebook\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookSignup", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">Facebook</button>\n				    </div> \n\n\n\n					<div class=\"form-group padding-top\">\n						<h4 class=\"\">or with email</h4>\n					</div>\n\n\n					");
   stack1 = helpers['if'].call(depth0, "error409", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \n					");
