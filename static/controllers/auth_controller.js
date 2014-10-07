@@ -305,6 +305,8 @@
 
 				data = this.getProperties('firstname', 'lastname', 'password');
 
+				data['action'] = 'email-register';
+
 				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
 				return Ember.$.ajax({
@@ -352,6 +354,8 @@
 				this.set('isProcessing', true);
 
 				data = this.getProperties('password');
+
+				data['action'] = 'password-reset';
 
 				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
