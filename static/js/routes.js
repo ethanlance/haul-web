@@ -11,22 +11,22 @@ Haul.Router.map(function(){
 	//Home
 	this.resource('home', {path: "/"});
 
-	//Profiles	
+	//Profiles
 	this.resource('products', {path: "/go/:user_slug"}, function() {
 		this.resource('product', {path: "/:slug"}, function() {
 			this.route('comments')
 		});
-		this.route('new');			
+		this.route('new');
 	});
-	
+
 
 	//Auth
 	this.resource('auth', function() {
 		this.route('signup');
-		this.route('confirmation');	
+		this.route('confirmation');
 		this.route('login');
-		this.route('logout');	
-		this.route('forgotpassword');	
+		this.route('logout');
+		this.route('forgotpassword');
 	});
 
 	this.resource('register');
@@ -42,7 +42,7 @@ Haul.Router.map(function(){
 	this.resource('messages');
 
 	//Search
-	this.resource('search');	 
+	this.resource('search');
 });
 
 //PROFILE ROUTE:
@@ -93,8 +93,8 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 });
 
 Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
-	model: function(params) { 
-		
+	model: function(params) {
+
 		var user = this.store.findQuery('user', {slug: params.user_slug}).then(function(results) {
 			return Ember.get(results, 'firstObject');
 		});
@@ -109,7 +109,7 @@ Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 		// });
 		// this.render('products/index', {
 		// 	into: 'products',
-		// 	outlet: 'main', 
+		// 	outlet: 'main',
 		// 	model: model,
 		// 	controller: controller
 		// });
@@ -117,18 +117,18 @@ Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 });
 
 Haul.ProductRoute = Ember.Route.extend({
-	model: function(params) { 
-		
+	model: function(params) {
+
 		var product = this.store.findQuery('product', {slug: params.slug}).then(function(results) {
 			record = Ember.get(results, 'firstObject');
 			console.log(record)
 			return record;
 		});
- 
+
 		return product;
 	},
 	// model: function(params) {
-		
+
 	// 	var products = this.store.find('products', params.product_id).then(function(result) {
 	// 		return result
 	// 	});
@@ -143,7 +143,7 @@ Haul.ProductRoute = Ember.Route.extend({
 
 		this.render('products/product', {
 			into: 'application',
-			outlet: 'main', 
+			outlet: 'main',
 			model: model,
 			controller: controller
 		});
@@ -159,11 +159,11 @@ Haul.ProductCommentsRoute = Ember.Route.extend({
 	renderTemplate: function(controller, model) {
 		this.render('comments/comments', {
 			into: 'products/product',
-			outlet: 'main', 
+			outlet: 'main',
 			model: model,
 			controller: controller
 		});
-	}	
+	}
 });
 
 // //Products
@@ -198,7 +198,7 @@ Haul.AuthRoute = Ember.Route.extend({
 		this.render('layouts/header_anon', {
 			into: 'application',
 			outlet: 'header'
-		});	
+		});
 	}
 })
 
@@ -207,33 +207,33 @@ Haul.AuthLoginRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.createRecord('authlogin');
 	}
-}); 
+});
 
 Haul.AuthSignupRoute = Ember.Route.extend({
 	controllerName: "authsignup",
 	model: function() {
 		return this.store.createRecord('authsignup');
 	}
-}); 
+});
 
 Haul.RegisterRoute = Ember.Route.extend({
 	controllerName: "authconfirmation",
 	model: function() {
 		return this.store.createRecord('authconfirmation');
-	}, 
+	},
 	renderTemplate: function() {
 		this.render('layouts/header_anon', {
 			into: 'application',
 			outlet: 'header'
-		});			
+		});
 		this.render('auth/confirmation');
 	}
 });
- 
+
 
 Haul.AuthForgotpasswordRoute = Ember.Route.extend({
 	controllerName: "auth"
-}); 
+});
 
 Haul.AuthLogoutRoute = Ember.Route.extend({
 	controllerName: "auth",
@@ -242,8 +242,8 @@ Haul.AuthLogoutRoute = Ember.Route.extend({
 		this.transitionTo('auth.login');
 	}
 
-}); 
- 
+});
+
 
 //HOME
 Haul.HomeRoute = Ember.Route.extend({
@@ -251,9 +251,7 @@ Haul.HomeRoute = Ember.Route.extend({
 		this.render('layouts/header_home', {
 			into: 'application',
 			outlet: 'header'
-		});			
+		});
 		this.render('home');
 	}
 });
-
-
