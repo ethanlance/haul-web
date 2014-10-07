@@ -4,7 +4,6 @@ Haul.Router.reopen({
 });
 
 
-
 //Router Map
 Haul.Router.map(function(){
 
@@ -80,16 +79,7 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 	redirectToLogin: function(transition) {
 		this.controllerFor('auth').set('attemptedTransition', transition.targetName);
 		return this.transitionTo('auth.login');
-	},
-	// actions: {
-	//   error: function(reason, transition) {
-	//     if (reason.status === 401) {
-	//       this.redirectToLogin(transition);
-	//     } else {
-	//       console.log('unknown problem');
-	//     }
-	//   }
-	// }
+	}
 });
 
 Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
@@ -101,19 +91,6 @@ Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 
 		return user;
 	}
-//	renderTemplate: function(controller, model) {
-
-		// this.render('layouts/header_base', {
-		// 	into: 'products',
-		// 	outlet: 'header'
-		// });
-		// this.render('products/index', {
-		// 	into: 'products',
-		// 	outlet: 'main',
-		// 	model: model,
-		// 	controller: controller
-		// });
-//	}
 });
 
 Haul.ProductRoute = Ember.Route.extend({
@@ -127,20 +104,7 @@ Haul.ProductRoute = Ember.Route.extend({
 
 		return product;
 	},
-	// model: function(params) {
-
-	// 	var products = this.store.find('products', params.product_id).then(function(result) {
-	// 		return result
-	// 	});
-
-	// 	return products;
-	// },
 	renderTemplate: function(controller, model) {
-	// 	this.render('layouts/header_base', {
-	// 		into: 'application',
-	// 		outlet: 'header'
-	// 	});
-
 		this.render('products/product', {
 			into: 'application',
 			outlet: 'main',
@@ -165,19 +129,6 @@ Haul.ProductCommentsRoute = Ember.Route.extend({
 		});
 	}
 });
-
-// //Products
-// Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
-// 	model: function() {
-// 		return this.store.find('products');
-// 	}
-// });
-
-// Haul.ProductsProductRoute = Ember.Route.extend({
-// 	model: function(params) {
-// 		return this.store.find('products', params.product_id);
-// 	}
-// });
 
 
 //MESSAGES
@@ -241,7 +192,6 @@ Haul.AuthLogoutRoute = Ember.Route.extend({
 		this.controllerFor('auth').reset();
 		this.transitionTo('auth.login');
 	}
-
 });
 
 

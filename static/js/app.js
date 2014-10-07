@@ -10,12 +10,6 @@ window.Haul = Ember.Application.create({
 
 $.cookie.json = true;
 
-//Layout
-// Haul.ApplicationView = Ember.View.extend({
-// 	layoutName: "layout_base"
-// 	init: function() { console.log("Application View Init")}
-// });
-
 //Store
 Haul.Store = DS.Store.extend({
   adapter: Haul.ApplicationAdapter
@@ -23,3 +17,7 @@ Haul.Store = DS.Store.extend({
 
 
 Haul.TooltipBoxController = Bootstrap.TooltipBoxController
+
+
+//GLOABL SETTINGS.  HOW, WHERE SHOULD WE HANDLE THIS STUFF?
+Haul.IMAGE_SERVER_HOST = "http://localhost:8081";
