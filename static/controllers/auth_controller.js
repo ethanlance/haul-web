@@ -23,9 +23,9 @@
 		 
 		isProcessing: false, 
 		attemptedTransition: null,
-		token: "",
-		currentUser: {},
-		name:"",
+		token: null,
+		currentUser: null,
+		name:null,
 
 		init: function() { 
 			this._super();

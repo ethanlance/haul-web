@@ -8,7 +8,8 @@ Haul.Router.reopen({
 Haul.Router.map(function(){
 
 	//Home
-	this.resource('home', {path: "/"});
+	this.resource('base', {path: "/"});
+	this.resource('about');
 
 	//Profiles
 	this.resource('products', {path: "/go/:user_slug"}, function() {
@@ -59,6 +60,33 @@ Haul.ApplicationRoute = Ember.Route.extend({
     }
 });
 
+//ROOT
+//Redirect logged in user to their profile.  
+//Redirect anon users to the /about page.
+Haul.BaseRoute = Ember.Route.extend({
+	beforeModel: function() {
+		
+		var user = this.controllerFor('auth').get('currentUser');
+		
+		if( !Ember.isEmpty(user) ) { 
+			return this.transitionTo('products', user.slug);
+		}else{
+			return this.transitionTo('about');
+		}
+	} 
+});
+
+//About route is the default landing page for anon users.  This route 
+//will explain to anon users how signup/login and how to browse the service.
+Haul.AboutRoute = Ember.Route.extend({
+	renderTemplate: function() {
+		this.render('layouts/header_home', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('home');
+	},
+})
 
 
 //AUTH - Routes that require authentication should extend this object.
@@ -247,13 +275,4 @@ Haul.LogoutRoute = Ember.Route.extend({
 });
 
 
-//HOME
-Haul.HomeRoute = Ember.Route.extend({
-	renderTemplate: function() {
-		this.render('layouts/header_home', {
-			into: 'application',
-			outlet: 'header'
-		});
-		this.render('home');
-	}
-});
+
