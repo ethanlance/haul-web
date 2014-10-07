@@ -111,7 +111,7 @@
 							user.get('apiKeys').content.push(key);
 
 							//TRANSITION:
-							if(Ember.isEmpty(attemptedTrans)){
+							if(Ember.isEmpty(attemptedTrans)){ 
 								_this.transitionToRoute("products", user);
 							}else{
 								_this.transitionToRoute(attemptedTrans);
@@ -208,8 +208,8 @@
 
 
 
-	// SIGNUP
-	Haul.AuthsignupController = Ember.ObjectController.extend({
+	// Sign Up form
+	Haul.SignupController = Ember.ObjectController.extend({
 		
 		//Controller
 		needs: ['auth', 'facebook'],
@@ -243,12 +243,16 @@
 				var authController = this.get('controllers.auth');
 
 				this.set('isProcessing', true);
+
+				var data = this.getProperties('email');
+				data['action'] = 'email-register';
+
 				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
 				return Ember.$.ajax({
 						url: authController.host + '/users/email',
 						type: 'post',
-						data: this.getProperties('email'),
+						data: data,
 						headers: {
 							Authorization: 'Bearer client_' + authController.client_token
 						},
@@ -282,8 +286,8 @@
 		}
 	});
 	
-	// CONFIRM EMAIL 
-	Haul.AuthconfirmationController = Ember.ObjectController.extend({
+	// Sign Up Confirm Form
+	Haul.SignupconfirmController = Ember.ObjectController.extend({
 		
 		//Controllers
 		needs: ['auth'],
@@ -305,7 +309,7 @@
 
 				data = this.getProperties('firstname', 'lastname', 'password');
 
-				data['action'] = 'email-register';
+				//data['action'] = 'email-register';
 
 				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
@@ -335,58 +339,9 @@
 		}
 	});
 
-	//Reset Password
-	Haul.AuthresetpasswordController = Ember.ObjectController.extend({
-		needs: ['auth'],
 
-		queryParams: ['ticket_id', 'user_id'],
-
-		//Template Keys
-		ticket_id: null,
-		user_id: null,
-		isProcessing: false, 
-		error: false,
-		
-		actions: {
-			submit: function() {
-				var authController = this.get('controllers.auth');
-
-				this.set('isProcessing', true);
-
-				data = this.getProperties('password');
-
-				data['action'] = 'password-reset';
-
-				//AJAX CALL - for getting the User Token back.  
-				//Pass params email/password to it.
-				return Ember.$.ajax({
-						url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
-						type: 'put',
-						data: data,
-						headers: {
-							Authorization: 'Bearer client_' + authController.client_token
-						},
-						dataType: 'json'
-				}).then(
-					(function(_this) {
-						return function(response) {
-							authController.send('authResponse', response);
-						}
-					})(this), 
-
-					(function(_this){
-						return function(error) {
-							_this.set('isProcessing', false);
-							_this.set('error', true);
-						};
-					})(this)
-				);
-			}
-		}
-	});
-
-	//Forgot Password
-	Haul.AuthforgotpasswordController = Ember.ObjectController.extend({
+	//Forgot Password Form:  Enter email address to request a password reset token
+	Haul.ForgotpasswordController = Ember.ObjectController.extend({
 		
 		//Controllers
 		needs: ['auth'],
@@ -395,6 +350,7 @@
 		email: null,
 		isProcessing: false, 
 		error: false,
+		emailRegistrationRequested:false,
 
 
 		actions: {
@@ -403,13 +359,16 @@
 
 				this.set('emailSent', true);
 
+				var data = this.getProperties('email');
+				data['action'] = 'password-reset';
+
 
 //AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
 				return Ember.$.ajax({
 						url: authController.host + '/users/email',
 						type: 'post',
-						data: this.getProperties('email'),
+						data: data,
 						headers: {
 							Authorization: 'Bearer client_' + authController.client_token
 						},
@@ -442,6 +401,58 @@
 			}
 		}
 	});
+
+	//Forgot Password Confirm: Form to change a user password w/ ticket_id (token)
+	Haul.ForgotpasswordconfirmController = Ember.ObjectController.extend({
+		needs: ['auth'],
+
+		queryParams: ['ticket_id', 'user_id'],
+
+		//Template Keys
+		ticket_id: null,
+		user_id: null,
+		isProcessing: false, 
+		error: false,
+		
+		actions: {
+			submit: function() {
+				var authController = this.get('controllers.auth');
+
+				this.set('isProcessing', true);
+
+				data = this.getProperties('password');
+
+				//data['action'] = 'password-reset';
+
+				//AJAX CALL - for getting the User Token back.  
+				//Pass params email/password to it.
+				return Ember.$.ajax({
+						url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
+						type: 'put',
+						data: data,
+						headers: {
+							Authorization: 'Bearer client_' + authController.client_token
+						},
+						dataType: 'json'
+				}).then(
+					(function(_this) {
+						return function(response) {
+							authController.send('authResponse', response);
+						}
+					})(this), 
+
+					(function(_this){
+						return function(error) {
+							_this.set('isProcessing', false);
+							_this.set('error', true);
+						};
+					})(this)
+				);
+			}
+		}
+	});
+
+
 
 
 	// LOGIN

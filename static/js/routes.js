@@ -20,16 +20,15 @@ Haul.Router.map(function(){
 
 
 	//Auth
-	this.resource('auth', function() {
-		this.route('signup');
-		this.route('confirmation');
-		this.route('login');
-		this.route('logout');
-		this.route('forgotpassword');
-	});
+	
+	this.resource('login');
+	this.resource('logout');
 
-	this.resource('resetpassword', {path: "reset-password"});
-	this.resource('register');
+	this.resource('forgotpassword', {path: "forgot-password"});
+	this.resource('forgotpasswordconfirm', {path: "reset-password"});
+	
+	this.resource('signup');
+	this.resource('signupconfirm', {path: "register"});
 
 	//Account
 	this.resource('account', function() {
@@ -81,7 +80,7 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 	},
 	redirectToLogin: function(transition) {
 		this.controllerFor('auth').set('attemptedTransition', transition.targetName);
-		return this.transitionTo('auth.login');
+		return this.transitionTo('login');
 	}
 });
 
@@ -90,7 +89,7 @@ Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 		return this.store.find('user', params.user_slug);
 	},	
 	serialize: function(model) {
- 	   return { user_slug: model.get('id') };
+ 	   return { user_slug: model.get('slug') };
  	}
 });
 
@@ -153,31 +152,39 @@ Haul.MessagesRoute = Haul.AuthenticatedRoute.extend({
 
 
 // AUTH
-Haul.AuthRoute = Ember.Route.extend({
-	renderTemplate: function(){
-		this.render('layouts/header_anon', {
-			into: 'application',
-			outlet: 'header'
-		});
-	}
-})
-
-Haul.AuthLoginRoute = Ember.Route.extend({
+//Login Form
+Haul.LoginRoute = Ember.Route.extend({
 	controllerName: "authlogin",
 	model: function() {
 		return this.store.createRecord('authlogin');
-	}
+	},
+	renderTemplate: function(controller, model) {
+		this.render('layouts/header_anon', {
+			into: 'application',
+			outlet: 'header'
+		}),
+		this.render('auth/login');
+	},
 });
 
-Haul.AuthSignupRoute = Ember.Route.extend({
-	controllerName: "authsignup",
+
+//Sign Up Form
+Haul.SignupRoute = Ember.Route.extend({
+	controllerName: "signup",
 	model: function() {
 		return this.store.createRecord('authsignup');
-	}
+	},
+	renderTemplate: function(controller, model) {
+		this.render('layouts/header_anon', {
+			into: 'application',
+			outlet: 'header'
+		}),
+		this.render('auth/signup');
+	},
 });
 
-Haul.RegisterRoute = Ember.Route.extend({
-	controllerName: "authconfirmation",
+Haul.SignupconfirmRoute = Ember.Route.extend({
+	controllerName: "signupconfirm",
 	model: function() {
 		return this.store.createRecord('authconfirmation');
 	},
@@ -186,12 +193,25 @@ Haul.RegisterRoute = Ember.Route.extend({
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('auth/confirmation');
+		this.render('auth/signup_confirm');
 	}
 });
 
-Haul.ResetpasswordRoute = Ember.Route.extend({
-	controllerName: "authresetpassword",
+
+//FORGOT PASSWORD:
+Haul.ForgotpasswordRoute = Ember.Route.extend({
+	controllerName: "forgotpassword",
+	renderTemplate: function() {
+		this.render('layouts/header_anon', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('auth/forgot_password');
+	}
+});
+
+Haul.ForgotpasswordconfirmRoute = Ember.Route.extend({
+	controllerName: "forgotpasswordconfirm",
 	model: function() {
 		return this.store.createRecord('authresetpassword');
 	},
@@ -200,19 +220,17 @@ Haul.ResetpasswordRoute = Ember.Route.extend({
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('auth/resetpassword');
+		this.render('auth/forgot_password_confirm');
 	}
 });
 
-Haul.AuthForgotpasswordRoute = Ember.Route.extend({
-	controllerName: "authforgotpassword"
-});
 
-Haul.AuthLogoutRoute = Ember.Route.extend({
+
+Haul.LogoutRoute = Ember.Route.extend({
 	controllerName: "auth",
 	beforeModel: function(){
 		this.controllerFor('auth').reset();
-		this.transitionTo('auth.login');
+		this.transitionTo('login');
 	}
 });
 
