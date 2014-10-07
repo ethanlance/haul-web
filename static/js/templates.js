@@ -472,7 +472,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  data.buffer.push("Sign Up!");
+  data.buffer.push("Sign Up");
   }
 
 function program5(depth0,data) {
@@ -587,7 +587,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  data.buffer.push("Sign Up!");
+  data.buffer.push("Sign Up");
   }
 
 function program5(depth0,data) {
