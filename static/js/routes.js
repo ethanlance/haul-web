@@ -28,6 +28,7 @@ Haul.Router.map(function(){
 		this.route('forgotpassword');
 	});
 
+	this.resource('resetpassword', {path: "reset-password"});
 	this.resource('register');
 
 	//Account
@@ -189,9 +190,22 @@ Haul.RegisterRoute = Ember.Route.extend({
 	}
 });
 
+Haul.ResetpasswordRoute = Ember.Route.extend({
+	controllerName: "authresetpassword",
+	model: function() {
+		return this.store.createRecord('authresetpassword');
+	},
+	renderTemplate: function() {
+		this.render('layouts/header_anon', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('auth/resetpassword');
+	}
+});
 
 Haul.AuthForgotpasswordRoute = Ember.Route.extend({
-	controllerName: "auth"
+	controllerName: "authforgotpassword"
 });
 
 Haul.AuthLogoutRoute = Ember.Route.extend({

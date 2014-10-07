@@ -18,8 +18,8 @@
 		//Turn this off:
 		email: null, //'ethan@haul.io',
 		password: null, //'Bailey007!',
-		client_token: "5eed07b8d71cf26f6df6566cf705adaa",
-		host: "http://localhost:8080",
+		client_token: Haul.CLIENT_TOKEN,
+		host: Haul.USER_SERVER_HOST,
 		 
 		isProcessing: false, 
 		attemptedTransition: null,
@@ -53,12 +53,7 @@
 				Ember.$.cookie('access_token', this.get('token'), {path: '/'});
 				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
 
-				//UPDATE HEADERS W/ ACCESS_TOKEN
-				//adapter = this.get('container').lookup('adapter:application');   
-				//adapter.set('headers', { 'Authorization': 'Bearer ' +  this.get('token') });
-
 				this.resetHeader();
-
 			}
 		}).observes('token'),
 
@@ -337,6 +332,113 @@
 			}
 		}
 	});
+
+	//Reset Password
+	Haul.AuthresetpasswordController = Ember.ObjectController.extend({
+		needs: ['auth'],
+
+		queryParams: ['ticket_id', 'user_id'],
+
+		//Template Keys
+		ticket_id: null,
+		user_id: null,
+		isProcessing: false, 
+		error: false,
+		
+		actions: {
+			submit: function() {
+				var authController = this.get('controllers.auth');
+
+				this.set('isProcessing', true);
+
+				data = this.getProperties('password');
+
+				//AJAX CALL - for getting the User Token back.  
+				//Pass params email/password to it.
+				return Ember.$.ajax({
+						url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
+						type: 'put',
+						data: data,
+						headers: {
+							Authorization: 'Bearer client_' + authController.client_token
+						},
+						dataType: 'json'
+				}).then(
+					(function(_this) {
+						return function(response) {
+							authController.send('authResponse', response);
+						}
+					})(this), 
+
+					(function(_this){
+						return function(error) {
+							_this.set('isProcessing', false);
+							_this.set('error', true);
+						};
+					})(this)
+				);
+			}
+		}
+	});
+
+	//Forgot Password
+	Haul.AuthforgotpasswordController = Ember.ObjectController.extend({
+		
+		//Controllers
+		needs: ['auth'],
+		
+		emailSent: false,
+		email: null,
+		isProcessing: false, 
+		error: false,
+
+
+		actions: {
+			submit: function() { 
+				var authController = this.get('controllers.auth');
+
+				this.set('emailSent', true);
+
+
+//AJAX CALL - for getting the User Token back.  
+				//Pass params email/password to it.
+				return Ember.$.ajax({
+						url: authController.host + '/users/email',
+						type: 'post',
+						data: this.getProperties('email'),
+						headers: {
+							Authorization: 'Bearer client_' + authController.client_token
+						},
+						dataType: 'json'
+				}).then(
+					(function(_this) {
+					return function(response) {
+						
+						_this.set('isProcessing', false); 
+
+						//TRANSITION:
+						_this.set('emailRegistrationRequested', true);
+						
+					};
+					})(this), 
+
+					(function(_this){
+						return function(error) {
+							
+							_this.set('isProcessing', false);
+
+							if( error.status == 409 ){
+								_this.set('error409', true);
+							}else {
+								_this.set('error', true);
+							}
+						};
+					})(this)
+				);
+			}
+		}
+	});
+
 
 	// LOGIN
 	Haul.AuthloginController = Ember.ObjectController.extend({
