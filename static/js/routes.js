@@ -181,6 +181,9 @@ Haul.SignupRoute = Ember.Route.extend({
 		}),
 		this.render('auth/signup');
 	},
+	beforeModel: function() {
+		this.controllerFor('signup').reset();
+	}
 });
 
 Haul.SignupconfirmRoute = Ember.Route.extend({
@@ -194,6 +197,9 @@ Haul.SignupconfirmRoute = Ember.Route.extend({
 			outlet: 'header'
 		});
 		this.render('auth/signup_confirm');
+	},
+	beforeModel: function() {
+		this.controllerFor('signupconfirm').reset();
 	}
 });
 
@@ -207,6 +213,9 @@ Haul.ForgotpasswordRoute = Ember.Route.extend({
 			outlet: 'header'
 		});
 		this.render('auth/forgot_password');
+	},
+	beforeModel: function() {
+		this.controllerFor('forgotpassword').reset();
 	}
 });
 
@@ -221,6 +230,9 @@ Haul.ForgotpasswordconfirmRoute = Ember.Route.extend({
 			outlet: 'header'
 		});
 		this.render('auth/forgot_password_confirm');
+	},
+	beforeModel: function() {
+		this.controllerFor('forgotpasswordconfirm').reset();
 	}
 });
 

@@ -110,7 +110,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 });Ember.TEMPLATES['auth/forgot_password'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 function program1(depth0,data) {
   
@@ -120,18 +120,36 @@ function program1(depth0,data) {
 
 function program3(depth0,data) {
   
-  var buffer = '', helper, options;
-  data.buffer.push("\n            	<form class=\"form-horizontal\" >\n\n					<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">\n							Forgot Your Password?<br/>\n							<small>Enter your email below</small>\n						</h2>\n					</div> \n\n				  	<div class=\"form-group\"> \n			      		");
+  var buffer = '', stack1, helper, options;
+  data.buffer.push("\n          	\n\n				<form class=\"form-horizontal\" >\n\n					<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">\n							Forgot Your Password?<br/>\n							<small>Enter your email below</small>\n						</h2>\n					</div> \n\n\n				");
+  stack1 = helpers['if'].call(depth0, "error409", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" \n\n				");
+  stack1 = helpers['if'].call(depth0, "error", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("   \n\n\n				  	<div class=\"form-group\"> \n			      		");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'focus-in': ("focus"),
     'type': ("text"),
     'value': ("email"),
     'class': ("form-control"),
     'placeholder': ("Type your email address")
-  },hashTypes:{'type': "STRING",'value': "ID",'class': "STRING",'placeholder': "STRING"},hashContexts:{'type': depth0,'value': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
+  },hashTypes:{'focus-in': "STRING",'type': "STRING",'value': "ID",'class': "STRING",'placeholder': "STRING"},hashContexts:{'focus-in': depth0,'type': depth0,'value': depth0,'class': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n			      	</div> \n\n					<div class=\"form-group\">\n				  		<button class=\"btn btn-primary btn-block\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "submit", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(">Request</button>\n				  	</div>\n\n				</form> \n			");
   return buffer;
+  }
+function program4(depth0,data) {
+  
+  
+  data.buffer.push("\n			    	<div class=\"alert\">Oops, that email address was not found.</div>\n			  	");
+  }
+
+function program6(depth0,data) {
+  
+  
+  data.buffer.push("\n			    	<div class=\"alert\">Oh no! Something went wrong.</div>\n			  	");
   }
 
   data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n\n			");
@@ -288,33 +306,51 @@ function program3(depth0,data) {
   stack1 = helpers['if'].call(depth0, "error409", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \n					");
-  stack1 = helpers['if'].call(depth0, "error", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "error", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \n\n\n            		");
   stack1 = (helper = helpers['form-for'] || (depth0 && depth0['form-for']),options={hash:{
     'wrapper': ("bs3-wrapper")
-  },hashTypes:{'wrapper': "STRING"},hashContexts:{'wrapper': depth0},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "model", options) : helperMissing.call(depth0, "form-for", "model", options));
+  },hashTypes:{'wrapper': "STRING"},hashContexts:{'wrapper': depth0},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "model", options) : helperMissing.call(depth0, "form-for", "model", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n				");
   return buffer;
   }
 function program4(depth0,data) {
   
+  var buffer = '', stack1, helper, options;
+  data.buffer.push("\n				    	<div class=\"alert\">\n				    	This email is alread registered.  Want to ");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "login", options) : helperMissing.call(depth0, "link-to", "login", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" or ");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "forgotpassword", options) : helperMissing.call(depth0, "link-to", "forgotpassword", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("?\n\n				    	</div>\n				  	");
+  return buffer;
+  }
+function program5(depth0,data) {
   
-  data.buffer.push("\n				    	<div class=\"alert\">Uhoh, that email is already in use.</div>\n				  	");
+  
+  data.buffer.push("login");
   }
 
-function program6(depth0,data) {
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("recover your password");
+  }
+
+function program9(depth0,data) {
   
   
   data.buffer.push("\n				    	<div class=\"alert\">Oh no! Something went wrong.</div>\n				  	");
   }
 
-function program8(depth0,data) {
+function program11(depth0,data) {
   
   var buffer = '', stack1, helper, options;
   data.buffer.push("\n\n					  ");
-  stack1 = helpers['if'].call(depth0, "submitFailed", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "submitFailed", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \n\n					  	<div class=\"form-group\"> \n				      		");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
@@ -327,7 +363,7 @@ function program8(depth0,data) {
   data.buffer.push("\n					  	</div>\n					");
   return buffer;
   }
-function program9(depth0,data) {
+function program12(depth0,data) {
   
   
   data.buffer.push("\n					    <div class=\"alert\">Oh no, something went wrong.</div>\n					  ");

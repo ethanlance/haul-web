@@ -27,7 +27,10 @@
 
 
 					{{#if error409}}
-				    	<div class="alert">Uhoh, that email is already in use.</div>
+				    	<div class="alert">
+				    	This email is alread registered.  Want to {{#link-to 'login'}}login{{/link-to}} or {{#link-to 'forgotpassword' {query-params email=email} }}recover your password{{/link-to}}?
+
+				    	</div>
 				  	{{/if}} 
 					{{#if error}}
 				    	<div class="alert">Oh no! Something went wrong.</div>
@@ -41,7 +44,7 @@
 					  {{/if}} 
 
 					  	<div class="form-group"> 
-				      		{{input email placeholder="email address"}}
+				      		{{input focus-in="focus" type="text" value=email class="form-control" placeholder="Type your email address"}}
 				      	</div> 
 
 						<div class="form-group">

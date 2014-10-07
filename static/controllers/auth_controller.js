@@ -212,7 +212,7 @@
 	Haul.SignupController = Ember.ObjectController.extend({
 		
 		//Controller
-		needs: ['auth', 'facebook'],
+		needs: ['auth', 'facebook'], 
 
 		//Template Keys
 		emailRegistrationRequested: false,
@@ -230,12 +230,20 @@
 			var facebookController = this.get('controllers.facebook');
 		}.on('init'),
 
+		reset: function() {
+			this.set('error', false);
+			this.set('error409', false);
+		},
 
 		actions: {
 
 			facebookSignup: function() { 
 				var facebookController = this.get('controllers.facebook'); 
 				facebookController.checkLoginState();
+			},
+
+			focus: function() {
+				this.reset();
 			},
 
 			submit: function() {
@@ -246,6 +254,10 @@
 
 				var data = this.getProperties('email');
 				data['action'] = 'email-register';
+
+
+				console.log("RIGHT HERE")
+				console.log(data)
 
 				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
@@ -299,9 +311,17 @@
 		user_id: null,
 		isProcessing: false, 
 		error: false,
-		
+
+		reset: function() {
+			this.set('error', false); 
+		},
+
 
 		actions: {
+			focus: function() {
+				this.reset();
+			},
+
 			submit: function() {
 				var authController = this.get('controllers.auth');
 
@@ -345,25 +365,34 @@
 		
 		//Controllers
 		needs: ['auth'],
+
+		queryParams: ['email'],
+		email: null,
 		
 		emailSent: false,
-		email: null,
 		isProcessing: false, 
 		error: false,
+		error409: false,
 		emailRegistrationRequested:false,
 
+		reset: function() {
+			this.set('error', false);
+			this.set('error409', false);
+		},
 
 		actions: {
+			focus: function() {
+				this.reset();
+			},
+
 			submit: function() { 
 				var authController = this.get('controllers.auth');
-
-				this.set('emailSent', true);
 
 				var data = this.getProperties('email');
 				data['action'] = 'password-reset';
 
 
-//AJAX CALL - for getting the User Token back.  
+				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
 				return Ember.$.ajax({
 						url: authController.host + '/users/email',
@@ -378,6 +407,7 @@
 					return function(response) {
 						
 						_this.set('isProcessing', false); 
+						_this.set('emailSent', true);
 
 						//TRANSITION:
 						_this.set('emailRegistrationRequested', true);
@@ -413,8 +443,18 @@
 		user_id: null,
 		isProcessing: false, 
 		error: false,
+
+		reset: function() {
+			this.set('error', false); 
+		},
+
 		
 		actions: {
+
+			focus: function() {
+				this.reset();
+			},
+
 			submit: function() {
 				var authController = this.get('controllers.auth');
 
