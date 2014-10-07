@@ -26,6 +26,14 @@
 			}
 		},
 
+		resetHeader: function() {
+			Haul.ApplicationAdapter.reopen({
+				headers: {
+    				'Authorization': 'Bearer ' + this.get('token'), 
+  				}
+			});
+		},
+
 		//Did the access_token change?
 		tokenChanged: (function() {
 			if (Ember.isEmpty(this.get('token'))) { 
@@ -36,8 +44,11 @@
 				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
 
 				//UPDATE HEADERS W/ ACCESS_TOKEN
-				adapter = this.get('container').lookup('adapter:application');   
-				adapter.set('headers', { 'Authorization': 'Bearer ' +  this.get('token') });
+				//adapter = this.get('container').lookup('adapter:application');   
+				//adapter.set('headers', { 'Authorization': 'Bearer ' +  this.get('token') });
+
+				this.resetHeader();
+
 			}
 		}).observes('token'),
 
@@ -68,7 +79,9 @@
 		actions: { 
  			
 			authResponse: function(response) {
-						
+
+				console.log(response);
+									
 				this.set('isProcessing', false);
 
 				attemptedTrans = this.get('attemptedTransition');
@@ -82,20 +95,19 @@
 				this.set('token', response.data[0].token_id); 
 				
 				var user_id = response.data[0].user_id; 
-				
+
 					//Now get the user:
 				this.store.find('user', user_id).then(
 					(function(_this) {
 						return function(user) {
 
-							_this.set("currentUser", user.getProperties('id', 'name', 'email'))
+							_this.set("currentUser", user.getProperties('id', 'slug', 'name', 'email'))
 
 							user.get('apiKeys').content.push(key);
 
 							//TRANSITION:
 							if(Ember.isEmpty(attemptedTrans)){
-								console.log(user);
-								_this.transitionToRoute("go.profile", user);
+								_this.transitionToRoute("products", user);
 							}else{
 								_this.transitionToRoute(attemptedTrans);
 							}
@@ -196,7 +208,7 @@
 				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
 				return Ember.$.ajax({
-						url: authController.host + '/users/' + this.get('user_id') + "/ticket/" + this.get('ticket_id'),
+						url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
 						type: 'put',
 						data: data,
 						headers: {

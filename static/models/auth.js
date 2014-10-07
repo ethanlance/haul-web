@@ -1,39 +1,12 @@
 /*global Products, Ember */
-
-
-	Haul.User = DS.Model.extend({
-		name: DS.attr('string'),
-		slug: DS.attr('string'),
-		email: DS.attr('string'),
-		picture: DS.attr('string'),
-		products: DS.hasMany('product',{async:true}),
-		//apiKeys: DS.hasMany('apiKey')
-	});
-
-	
-
-
+ 
 	Haul.ApiKey = DS.Model.extend({
 		accessToken: DS.attr('string'),
 		user: DS.belongsTo('user', {
 			async: true
 		})
 	});
-
-	// Haul.UserSerializer =  DS.RESTSerializer.extend({
-	// 	normalizePayload: function(store, payload) {
-
-	// 		var data = {"user":[{
-	// 				name: payload.data.name,
-	// 				email: payload.data.email,
-	// 				id: payload.data.user_id
-	// 			}]
-	// 		}; 
-
-	// 	    return this._super(store, data);
-	// 	}
-	// });
-
+ 
 	Haul.Authlogin = DS.Model.extend(Ember.Validations.Mixin, {
 
 		email: DS.attr('string'),

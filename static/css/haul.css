@@ -1,3 +1,8 @@
+.haul-container {
+  margin-top: 50px;
+  margin-right: 100px;
+}
+
 .haul-font {
   font-family: Arvo, serif;
   font-weight: bold;
@@ -107,6 +112,7 @@
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
+  background-color: #ddd;
 }
 .profile-small-circular-mask { 
   display: inline-block;
@@ -114,6 +120,7 @@
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
+  background-color: #ddd;
 }
 
 .profile-circular-mask img {
@@ -286,6 +293,11 @@
   padding-left: 20px;
 }
 
+.haul-grid .control {
+  float:right; 
+  padding-left: 20px;
+}
+
 .haul-grid .sold {
   position:absolute;
   right: 0px;
@@ -304,4 +316,22 @@
   border-bottom-left-radius: 4px;
 }
 
+.padding-top {
+  padding-top: 20px;
+}
 
+.vcenter {
+  float:none;
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:-4px;
+}
+
+#haul-dropzone {
+  text-align: center;
+  font-weight: bold;
+}
+
+.selected {
+  border: 1px solid pink;
+}

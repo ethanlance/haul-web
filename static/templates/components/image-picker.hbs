@@ -1,0 +1,18 @@
+<div class="row well">
+	<div class="col-md-12">
+		<div class="row">
+
+			<div class="col-md-4"> 
+
+				{{file-upload}}
+
+			</div>
+
+			<div class="col-md-8"> 
+
+			    {{#each images}} 
+			    	{{image-card image=this}}
+				{{/each}}
+		</div>
+	</div>
+</div>

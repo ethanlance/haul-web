@@ -65,7 +65,16 @@
 
     Haul.ProductsNewController = Ember.ObjectController.extend({
         needs: ["auth"],
+        
         actions: {
+
+            clickImage: function() {
+                console.log("SMILE");
+
+                console.log(this);
+                
+            },
+
             createProduct: function(){
             	
             	var title, product;

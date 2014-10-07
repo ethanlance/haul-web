@@ -12,7 +12,7 @@ Haul.Router.map(function(){
 
 	//Profiles
 	this.resource('products', {path: "/go/:user_slug"}, function() {
-		this.resource('product', {path: "/:slug"}, function() {
+		this.resource('product', {path: "/:product_slug"}, function() {
 			this.route('comments')
 		});
 		this.route('new');
@@ -74,6 +74,8 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
     beforeModel: function(transition) {
 		if (Ember.isEmpty(this.controllerFor('auth').get('token'))) {
 			return this.redirectToLogin(transition);
+		}else{
+			this.controllerFor('auth').resetHeader();
 		}
 	},
 	redirectToLogin: function(transition) {
@@ -84,16 +86,20 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 
 Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 	model: function(params) {
-
-		var user = this.store.findQuery('user', {slug: params.user_slug}).then(function(results) {
-			return Ember.get(results, 'firstObject');
-		});
-
-		return user;
-	}
+		return this.store.find('user', params.user_slug);
+	},	
+	serialize: function(model) {
+ 	   return { user_slug: model.get('id') };
+ 	}
 });
 
+// Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
+
+// });
+
+
 Haul.ProductRoute = Ember.Route.extend({
+
 	model: function(params) {
 
 		var product = this.store.findQuery('product', {slug: params.slug}).then(function(results) {
@@ -104,6 +110,9 @@ Haul.ProductRoute = Ember.Route.extend({
 
 		return product;
 	},
+	serialize: function(model) {
+    	return { product_slug: model.get('slug') };
+  	},
 	renderTemplate: function(controller, model) {
 		this.render('products/product', {
 			into: 'application',
@@ -129,7 +138,6 @@ Haul.ProductCommentsRoute = Ember.Route.extend({
 		});
 	}
 });
-
 
 //MESSAGES
 Haul.MessagesRoute = Haul.AuthenticatedRoute.extend({

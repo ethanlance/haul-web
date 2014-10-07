@@ -5,30 +5,41 @@
 	    name: 'Jon Snow',
 	    slug: 'jonsnow',
 	    picture: 'http://www.top-ten.tv/wp-content/uploads/2013/01/image4.jpeg',
-	    products: [1,2,3,4,5,6]
+	    products: [1,2,3,4,5,],
+	    images: [1,2,3,4,5,6,7,8,9,10]
 	  }, {
 	    id: 2,
 	    name: 'Jaime Lannister',
 	    slug: 'thekingslayer',
 	    picture: 'http://www.cosplayisland.co.uk/files/costumes/358/53464/jaime-lannister-1024.jpg',
-	    products: []
+	    products: [6],
+	    images: [11,12]
 	  }, {
 	    id: 3,
 	    name: 'Tyrion Lannister',
 	    slug: 'tyrionl',
 	    picture: 'http://4.bp.blogspot.com/-XuFyPnIQKnA/UBKlhJi1-KI/AAAAAAAAAQo/SrtvhFElX0A/s1600/Game-of-Thrones-Tyrion-Lannister.png',
-	    products: []
+	    products: [],
+	    images: []
 	  }, {
 	    id: 4,
 	    name: 'Cersei Lannister',
 	    slug: 'cerseil',
 	    picture: 'https://lh5.googleusercontent.com/-R_3u3oMiJZ0/AAAAAAAAAAI/AAAAAAAAAAA/-jl9VTR28bc/photo.jpg',
-	    products: []
+	    products: [],
+	    images: []
+	  }, {
+	    id: 1617320006909952,
+	    name: 'Iron Man',
+	    slug: 'ironman',
+	    picture: '',
+	    products: [],
+	    images: [16,17,18]
 	  }
 	];
 
 
-		Haul.Comment.FIXTURES = [
+	Haul.Comment.FIXTURES = [
 		{id:1, product:1, user:3, body:"Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
 		{id:2, product:1, user:4, body:"Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
 		{id:3, product:1, user:3, body:"Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus."},
@@ -57,6 +68,10 @@
 		
 
 		{id:15, src: "http://nk_wp_media.s3.amazonaws.com/files/2014/09/starcow-new-balance-1500-pack-1-700x357.jpg"},
+
+		{id:16, src: "http://www.journeys.com/images/products/1_325584_FS.JPG"},
+		{id:17, src: "http://www.journeys.com/images/products/1_325584_FS_ALT2.JPG"},
+		{id:18, src: "http://www.journeys.com/images/products/1_325584_FS_ALT3.JPG"},
 
 	];
 
