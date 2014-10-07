@@ -27,8 +27,7 @@
 		currentUser: {},
 		name:"",
 
-		init: function() {
-		  
+		init: function() { 
 			this._super();
  
 			if (Ember.$.cookie('access_token')) { 
@@ -40,7 +39,7 @@
 		resetHeader: function() {
 			Haul.ApplicationAdapter.reopen({
 				headers: {
-    				'Authorization': 'Bearer ' + this.get('token'), 
+					'Authorization': 'Bearer ' + this.get('token'), 
   				}
 			});
 		},
@@ -128,13 +127,97 @@
 			}
 		}
 	});
+	
+
+	//AUTHENTICATE
+	Haul.FacebookController = Ember.ObjectController.extend({
+
+		FB: {},
+
+		redirect: false,
+
+		facebookSetup: function() {
+
+		  window.fbAsyncInit = (function() {
+			  FB.init({
+				appId	  : Haul.FACEBOOK_APP_ID,
+				cookie	 : true,  // enable cookies to allow the server to access
+									// the session
+				xfbml	  : true,  // parse social plugins on this page
+				version	: 'v2.1' // use version 2.1
+			  });
+			  this.FB = FB;
+			}).bind(this);
+
+
+		}.on('init'),
+
+		// Now that we've initialized the JavaScript SDK, we call
+		// FB.getLoginStatus().  This function gets the state of the
+		// person visiting this page and can return one of three states to
+		// the callback you provide.  They can be:
+		//
+		// 1. Logged into your app ('connected')
+		// 2. Logged into Facebook, but not your app ('not_authorized')
+		// 3. Not logged into Facebook and can't tell if they are logged into
+		//	your app or not.
+		//
+		// These three cases are handled in the callback function.
+		checkLoginState: function() {
+			console.log(this.FB);
+			this.FB.getLoginStatus(function(response) {
+				this.statusChangeCallback(response);
+			}.bind(this));
+		},
+
+		statusChangeCallback: function(response) {
+			// The response object is returned with a status field that lets the
+			// app know the current login status of the person.
+			// Full docs on the response object can be found in the documentation
+			// for FB.getLoginStatus().
+			if (response.status === 'connected') {
+				// Logged into your app and Facebook.
+				this.getFBAccessToken();
+				this.getFBUserData();
+			} else if (response.status === 'not_authorized') {
+				console.log("not authorized");
+				this.FB.login();
+			} else {
+				console.log("not loggeg in");
+			  // The person is not logged into Facebook, so we're not sure if
+			  // they are logged into this app or not.
+			  this.FB.login(function(response){
+				  if (response.authResponse) {
+						this.getFBUserData();
+				  } else {
+						console.log('User cancelled login or did not fully authorize.');
+				  }
+
+			  }.bind(this));
+			}
+		},
+
+		getFBAccessToken: function() {
+		  this.fbAccessToken = this.FB.getAccessToken();
+		},
+
+		getFBUserData: function() {
+		  
+			this.FB.api('/me', function(response) { 
+				alert("FB complete. Check console log. Need to hook up to Haul API and then transition to a route")
+				console.log(response); 
+			}.bind(this));
+		}
+
+	});
+
 
 
 	// SIGNUP
 	Haul.AuthsignupController = Ember.ObjectController.extend({
 		
 		//Controller
-		needs: ['auth'],
+		needs: ['auth', 'facebook'],
 
 		//Template Keys
 		emailRegistrationRequested: false,
@@ -148,103 +231,16 @@
 			this.set('error409', false);
 		}).observes('email'),
 
+		startFacebook: function(){
+			var facebookController = this.get('controllers.facebook');
+		}.on('init'),
 
-
-	    FB: {},
-
-	    redirect: false,
-
-	    init: function() {
-
-	      window.fbAsyncInit = (function() {
-	          FB.init({
-	            appId      : '443672575768207',
-	            cookie     : true,  // enable cookies to allow the server to access
-	                                // the session
-	            xfbml      : true,  // parse social plugins on this page
-	            version    : 'v2.1' // use version 2.1
-	          });
-
-	          this.FB = FB;
-
-	          //this.fire('fbinitiated',{})
-
-	        }).bind(this);
-
-
-	    },
-
-	    // Now that we've initialized the JavaScript SDK, we call
-	    // FB.getLoginStatus().  This function gets the state of the
-	    // person visiting this page and can return one of three states to
-	    // the callback you provide.  They can be:
-	    //
-	    // 1. Logged into your app ('connected')
-	    // 2. Logged into Facebook, but not your app ('not_authorized')
-	    // 3. Not logged into Facebook and can't tell if they are logged into
-	    //    your app or not.
-	    //
-	    // These three cases are handled in the callback function.
-	    checkLoginState: function() {
-	        console.log(this.FB);
-	        this.FB.getLoginStatus(function(response) {
-	            this.statusChangeCallback(response);
-	        }.bind(this));
-	    },
-
-	    statusChangeCallback: function(response) {
-	        // The response object is returned with a status field that lets the
-	        // app know the current login status of the person.
-	        // Full docs on the response object can be found in the documentation
-	        // for FB.getLoginStatus().
-	        if (response.status === 'connected') {
-	            console.log("connected");
-	          // Logged into your app and Facebook.
-	          this.getFBAccessToken();
-	          this.getFBUserData();
-	        } else if (response.status === 'not_authorized') {
-	            console.log("not authorized");
-	          // The person is logged into Facebook, but not your app.
-	          this.FB.login();
-	        } else {
-	            console.log("not loggeg in");
-	          // The person is not logged into Facebook, so we're not sure if
-	          // they are logged into this app or not.
-	          this.FB.login(function(response){
-	              if (response.authResponse) {
-	                  this.getFBUserData();
-	              } else {
-	                  console.log('User cancelled login or did not fully authorize.');
-	              }
-
-	          }.bind(this));
-	        }
-	    },
-
-	    getFBAccessToken: function() {
-	      this.fbAccessToken = this.FB.getAccessToken();
-	    },
-
-	    getFBUserData: function() {
-	      console.log('Welcome!  Fetching your information.... ');
-	      this.FB.api('/me', function(response) {
-	          console.log(response);
-	          this.user = response;
-
-	          if(this.redirect){
-	            window.location.href="/dashboard";
-	          }
-	      }.bind(this));
-	    },
 
 		actions: {
 
-			facebookSignup: function() {
-				console.log("FACEBOOK CLICK")
-
-
-				this.checkLoginState();
-
+			facebookSignup: function() { 
+				var facebookController = this.get('controllers.facebook'); 
+				facebookController.checkLoginState();
 			},
 
 			submit: function() {
@@ -345,15 +341,21 @@
 	// LOGIN
 	Haul.AuthloginController = Ember.ObjectController.extend({
 		
-		needs: ['auth'],
+		needs: ['auth', 'facebook'],
 
 		error: false,
 		error409: false,
+
+		startFacebook: function(){
+			var facebookController = this.get('controllers.facebook');
+		}.on('init'),
 
 		actions: {
 
 			facebookLogin: function() {
 				console.log("FACEBOOK CLICK")
+				var facebookController = this.get('controllers.facebook'); 
+				facebookController.checkLoginState();
 			},
 
 			submit: function() {

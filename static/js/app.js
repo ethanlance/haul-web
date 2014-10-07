@@ -21,3 +21,4 @@ Haul.TooltipBoxController = Bootstrap.TooltipBoxController
 
 //GLOABL SETTINGS.  HOW, WHERE SHOULD WE HANDLE THIS STUFF?
 Haul.IMAGE_SERVER_HOST = "http://localhost:8081";
+Haul.FACEBOOK_APP_ID = "443672575768207";
