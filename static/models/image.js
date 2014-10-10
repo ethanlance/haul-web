@@ -1,19 +1,28 @@
 Haul.Image = DS.Model.extend({
-	src: DS.attr('string'),
-	caption: DS.attr('string')
+	orignal: DS.attr('string'),
+	small: DS.attr('string'),
+	thumb: DS.attr('string'),
+	caption: DS.attr('string'),
+	user_id: DS.attr('string'),
+	created_at: DS.attr('number')
 });
 
 Haul.ImageSerializer =  DS.RESTSerializer.extend({
 	
-	normalizePayload: function(store, payload) {
+	normalizePayload: function(store, payload) { 
+
+		//TODO: Get user's id from localstorage.
+		var user_id = Ember.$.cookie('auth_user').id;
 		
 		var data = payload.data.map(function(image) {
 			return {
-				src: image.locations.original,
+				original: image.locations.original,
+				small: image.locations.small,
+				thumb: image.locations.thumb,
 				caption: image.caption,
-				locations: image.locations,
-				user_id: image.user_id,
-				id: image.image_id
+				user_id: user_id,
+				id: image.image_id,
+				created_at: image.created_at
 			};
 		});
 		

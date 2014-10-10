@@ -1,18 +1,19 @@
-<div class="row well">
-	<div class="col-md-12">
-		<div class="row">
-
-			<div class="col-md-4"> 
-
-				{{file-upload}}
-
-			</div>
-
-			<div class="col-md-8"> 
-
+<div class="row haul-image-picker-well">
+	<div class="col-md-12"> 
+		<div id='haul-dropzone'>
+			<div><button id="haul-dropzone-browse" class="btn btn-primary">Browse Files</button> or drop images anywhere in this box.</div>
+				
+				<div class="haul-grid">
+					<div class="dropzone-preview"></div>
+				
 			    {{#each images}} 
-			    	{{image-card image=this}}
+			    	{{image-card 
+			    		image=this
+			    		imageClick='imageClick'
+			    	}}
 				{{/each}}
+			</div>
+			<div style="clear: both;"></div>
 		</div>
 	</div>
 </div>

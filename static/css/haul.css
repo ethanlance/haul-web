@@ -190,13 +190,12 @@
 .haul-grid {
   margin:0;
   margin-top: 30px;
-  padding:20px;  
+  /*padding:20px;  */
 }
 
 .haul-grid-li{
   list-style: none; 
   float:left;
-  
   position:relative;
   display: inline-block;
   width: 100%;   
@@ -254,7 +253,14 @@
 
 
 
-
+.haul-image-picker-well {
+  padding-top: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
 
 
 .haul-grid .info { 
@@ -327,14 +333,9 @@
   margin-right:-4px;
 }
 
-#haul-dropzone {
-  text-align: center;
-  font-weight: bold;
-}
 
-.selected {
-  border: 1px solid pink;
-}
+
+
 
 .btn-facebook {
   color: #fff;
@@ -349,3 +350,179 @@
   background-color: #879ac0;
   border: none;
 }
+
+.haul-grid-thumbs {
+  list-style: none; 
+  float:left;
+  position:relative;
+  display: inline-block;
+    width:50%; 
+    padding-left: 10px;
+}
+
+ .dz-progress {
+  position:absolute;
+  bottom:25px;
+  left:15px;
+  width:145px;
+}
+
+.dz-no-progress {
+  position:absolute;
+  bottom:25px;
+  left:15px;
+  width:145px;
+  height:10px;
+  background-color:red;
+}
+
+.dz-upload {
+  position:relative;
+  display:block;
+  height:10px;
+  width:20%;
+  background-color:green;
+}
+
+ @media (min-width: 768px) {
+  .haul-grid-thumbs{
+    width:33%; 
+    padding-left: 45px;
+  }
+
+   .dz-progress { 
+    left:50px; 
+  }
+
+  .dz-no-progress { 
+    left:50px; 
+  }
+}
+
+
+@media (min-width: 992px) {
+  .haul-grid-thumbs{
+    width:25%; 
+    padding-left: 40px;
+  } 
+  .dz-progress { 
+    left:45px; 
+  }
+
+  .dz-no-progress { 
+    left:45px; 
+  }
+}
+@media (min-width: 1200px) {
+  .haul-grid-thumbs{ 
+    width:25%; 
+    padding-left: 60px;
+  -webkit-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+   
+  }
+  .dz-progress { 
+    left:65px; 
+  }
+
+  .dz-no-progress { 
+    left:65px; 
+  }
+}
+
+.haul-thumb {
+  cursor: pointer;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+.alert-wrapper {
+  position: absolute;
+  display: block;
+  top: 5px;
+  width: 145px;
+  left: 65px;
+}
+.alert-wrapper .alert {
+  border-radius: 0px;
+  background-color: rgba(242, 222, 222, .90);
+  padding: 5px 0px 5px 0px;
+  text-align:center;
+}
+
+.progress-wrapper {
+  position: absolute;
+  display: block;
+  bottom: 5px;
+  width: 145px;
+  left: 65px;
+}
+
+.progress-wrapper .progress {
+  border-radius: 0px;
+}
+
+
+#haul-dropzone{
+  /*border: 1px solid blue;*/
+}
+
+.dropzone-preview{
+ /* border: 1px solid pink;*/
+}
+
+.ember-view .selected img{
+  border: 8px solid #428bca;
+}
+
+/*.pulse {
+  -webkit-animation-name: 'pulse_animation';
+  -webkit-animation-duration: 5000ms;
+  -webkit-transform-origin:70% 70%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+@-webkit-keyframes pulse_animation {
+  0% { -webkit-transform: scale(1); }
+  30% { -webkit-transform: scale(1); }
+  40% { -webkit-transform: scale(1.08); }
+  50% { -webkit-transform: scale(1); }
+  60% { -webkit-transform: scale(1); }
+  70% { -webkit-transform: scale(1.05); }
+  80% { -webkit-transform: scale(1); }
+  100% { -webkit-transform: scale(1); }
+}*/

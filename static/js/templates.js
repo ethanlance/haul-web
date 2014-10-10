@@ -491,13 +491,13 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<div class=\"haul-grid-li\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "clickImage", "image", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push("> \n	<div class=\"dummy\"></div>\n	<div class=\"photo-wrapper\">\n		<img class=\" thumbnail\" ");
+  data.buffer.push("<div class=\"haul-grid-thumbs\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "imageClick", "image", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push("> \n	<img class=\"thumbnail haul-thumb\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
-    'src': ("image.src")
+    'src': ("image.thumb")
   },hashTypes:{'src': "ID"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push(">\n	</div> \n</div> ");
+  data.buffer.push(" width=\"155px\" height=\"155px\">\n</div> \n\n\n");
   return buffer;
   
 });Ember.TEMPLATES['components/image-picker'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -510,19 +510,17 @@ function program1(depth0,data) {
   var buffer = '', helper, options;
   data.buffer.push(" \n			    	");
   data.buffer.push(escapeExpression((helper = helpers['image-card'] || (depth0 && depth0['image-card']),options={hash:{
-    'image': ("")
-  },hashTypes:{'image': "ID"},hashContexts:{'image': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "image-card", options))));
+    'image': (""),
+    'imageClick': ("imageClick")
+  },hashTypes:{'image': "ID",'imageClick': "STRING"},hashContexts:{'image': depth0,'imageClick': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "image-card", options))));
   data.buffer.push("\n				");
   return buffer;
   }
 
-  data.buffer.push("<div class=\"row well\">\n	<div class=\"col-md-12\">\n		<div class=\"row\">\n\n			<div class=\"col-md-4\"> \n\n				");
-  stack1 = helpers._triageMustache.call(depth0, "file-upload", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n			</div>\n\n			<div class=\"col-md-8\"> \n\n			    ");
+  data.buffer.push("<div class=\"row haul-image-picker-well\">\n	<div class=\"col-md-12\"> \n		<div id='haul-dropzone'>\n			<div><button id=\"haul-dropzone-browse\" class=\"btn btn-primary\">Browse Files</button> or drop images anywhere in this box.</div>\n				\n				<div class=\"haul-grid\">\n					<div class=\"dropzone-preview\"></div>\n				\n			    ");
   stack1 = helpers.each.call(depth0, "images", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n		</div>\n	</div>\n</div>");
+  data.buffer.push("\n			</div>\n			<div style=\"clear: both;\"></div>\n		</div>\n	</div>\n</div>");
   return buffer;
   
 });Ember.TEMPLATES['form-fields/input'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -929,14 +927,24 @@ function program12(depth0,data) {
 });Ember.TEMPLATES['products/new'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = '', helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  data.buffer.push("\n\n<div class=\"container\">\n	<div class=\"haul-container\"> \n\n		<div class=\"row\">\n			<div class=\"col-md-8 col-sm-6 col-xs-6\">\n				<h2>Ready To Sell?</br>\n				<small>Select up to 5 images.</small>\n				</h2>\n			</div>\n			<div class=\"col-md-4  col-sm-6 col-xs-6 verical-align text-right padding-top\">\n				<button class=\"btn btn-primary disabled\">\n					Next Step<span class=\"glyphicon glyphicon-chevron-right\"></span>\n				</button> \n			</div>\n		</div>\n\n		");
+  data.buffer.push("\n\n<div class=\"container\">\n	\n\n		<div class=\"row\">\n			<div class=\"col-md-8 col-sm-6 col-xs-6\">\n				<h2>\n				<small>Select up to 5 images.</small>\n				</h2>\n			</div>\n			<div class=\"col-md-4  col-sm-6 col-xs-6 verical-align text-right padding-top\">\n\n			\n\n				<button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "nextStep", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push("  ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'class': (":btn :btn-primary imagesSelected:enabled:disabled")
+  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push(">Next Step<span class=\"glyphicon glyphicon-chevron-right\"></span></button> \n			</div>\n		</div>\n\n		");
   data.buffer.push(escapeExpression((helper = helpers['image-picker'] || (depth0 && depth0['image-picker']),options={hash:{
-    'images': ("images")
-  },hashTypes:{'images': "ID"},hashContexts:{'images': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "image-picker", options))));
-  data.buffer.push("\n	</div>\n</div>");
+    'images': ("model"),
+    'user_id': ("controllers.auth.currentUser.id"),
+    'user_token': ("controllers.auth.token"),
+    'refresh': ("refresh"),
+    'imageClick': ("imageClick")
+  },hashTypes:{'images': "ID",'user_id': "ID",'user_token': "ID",'refresh': "STRING",'imageClick': "STRING"},hashContexts:{'images': depth0,'user_id': depth0,'user_token': depth0,'refresh': depth0,'imageClick': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "image-picker", options))));
+  data.buffer.push("\n\n\n\n	\n</div>");
   return buffer;
   
 });Ember.TEMPLATES['products/product'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {

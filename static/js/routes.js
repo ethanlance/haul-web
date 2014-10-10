@@ -118,12 +118,27 @@ Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 	},	
 	serialize: function(model) {
  	   return { user_slug: model.get('slug') };
- 	}
+ 	}, 
 });
 
-// Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
-
-// });
+Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({ 
+	//Get the users images from api.
+	beforeModel: function() {
+		var user = this.controllerFor('auth').get('currentUser');
+		this.store.findQuery('image', user.id );
+	},
+	model: function(params) {
+		return this.get('store').all('image');
+	},
+	renderTemplate: function(controller, model) {
+		this.render('products/new', {
+			into: 'application',
+			outlet: 'main',
+			model: model,
+			controller: controller
+		});
+	}
+});
 
 
 Haul.ProductRoute = Ember.Route.extend({

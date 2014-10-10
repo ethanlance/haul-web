@@ -1,6 +1,5 @@
-<div class="haul-grid-li" {{action "clickImage" image}}> 
-	<div class="dummy"></div>
-	<div class="photo-wrapper">
-		<img class=" thumbnail" {{bind-attr src=image.src}}>
-	</div> 
+<div class="haul-grid-thumbs" {{action "imageClick" image}}> 
+	<img class="thumbnail haul-thumb" {{bind-attr src=image.thumb}} width="155px" height="155px">
 </div> 
+
+

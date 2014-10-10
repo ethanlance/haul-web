@@ -5,16 +5,7 @@ Haul.User = DS.Model.extend({
 	picture: DS.attr('string'),
 	products: DS.hasMany('product',{async:true}),
 	
-	apiKeys: DS.hasMany('apiKey'),
-
-	images: function() {
-		var promise = this.store.findQuery('image', this.id).then(function(results){
-			return results;
-		});
-		return DS.PromiseArray.create({
-  			promise: promise
-		});
-	}.property('images'), 
+	apiKeys: DS.hasMany('apiKey')
 });
 
 Haul.UserSerializer =  DS.RESTSerializer.extend({
