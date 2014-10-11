@@ -13,8 +13,9 @@
 (function () {
 
 	//AUTHENTICATE
+	//AuthController makes API Calls to Haul
 	Haul.AuthController = Ember.ObjectController.extend({
-
+		needs: ['facebook'],
 		//Turn this off:
 		email: null, //'ethan@haul.io',
 		password: null, //'Bailey007!',
@@ -81,9 +82,37 @@
 		  });
 		},
 
+		authenticateByFB: function(response) {
+			var _this = this;
+			var facebookController =this.get('controllers.facebook');
+			var data = {fb_user_id: facebookController.get('userID'), fb_token: facebookController.get('accessToken')}
+			return Ember.$.ajax({
+					url: _this.get('host') + '/auth/facebook',
+					type: 'post',
+					data: data,
+					headers: {
+						Authorization: 'Bearer client_' + _this.get('client_token')
+					},
+					dataType: 'json'
+			}).then(
+
+				function(response) {
+					console.log("LOGGED IN", response); 
+
+					//Auth Controller:  
+					_this.send('setupUser', response);
+				}, 
+
+				//ERROR HANDLE
+				function(error) {
+					return new Error(error);
+				}
+			);
+		},
+
 		actions: { 
  			
-			authResponse: function(response) {
+			setupUser: function(response) {
 
 				console.log(response);
 									
@@ -124,12 +153,17 @@
 	});
 	
 
-	//AUTHENTICATE
+	//FacebookController makes API Calls to Facebook
 	Haul.FacebookController = Ember.ObjectController.extend({
+		needs: ['signup'],
 
 		FB: {},
 
 		redirect: false,
+
+		accessToken: null,
+		userID: null,
+
 
 		facebookSetup: function() {
 
@@ -147,71 +181,72 @@
 
 		}.on('init'),
 
-		// Now that we've initialized the JavaScript SDK, we call
-		// FB.getLoginStatus().  This function gets the state of the
-		// person visiting this page and can return one of three states to
-		// the callback you provide.  They can be:
-		//
-		// 1. Logged into your app ('connected')
-		// 2. Logged into Facebook, but not your app ('not_authorized')
-		// 3. Not logged into Facebook and can't tell if they are logged into
-		//	your app or not.
-		//
-		// These three cases are handled in the callback function.
-		checkLoginState: function() {
-			console.log(this.FB);
-			this.FB.getLoginStatus(function(response) {
-				this.statusChangeCallback(response);
-			}.bind(this));
-		},
 
-		statusChangeCallback: function(response) {
-			// The response object is returned with a status field that lets the
-			// app know the current login status of the person.
-			// Full docs on the response object can be found in the documentation
-			// for FB.getLoginStatus().
-			if (response.status === 'connected') {
-				// Logged into your app and Facebook.
-				this.getFBAccessToken();
-				this.getFBUserData();
-			} else if (response.status === 'not_authorized') {
-				console.log("not authorized");
-				this.FB.login();
-			} else {
-				console.log("not loggeg in");
-			  // The person is not logged into Facebook, so we're not sure if
-			  // they are logged into this app or not.
-			  this.FB.login(function(response){
-				  if (response.authResponse) {
-				  		console.log("FB LOGIN RESPONSE")
-				  		console.log(response)
-				  		this.getFBAccessToken();
-						this.getFBUserData();
-				  } else {
-						console.log('User cancelled login or did not fully authorize.');
-				  }
 
-			  }.bind(this));
-			}
-		},
+		//triggerFacebook
+		// Starts the process of getting a users FB Data.
+		// Then passes the data to Haul API to create a user.
+		triggerFacebook: function() {
 
-		getFBAccessToken: function() {
-		  this.fbAccessToken = this.FB.getAccessToken();
-		  console.log("FB ACCESS TOKEN")
-		  console.log(this.fbAccessToken);
-		},
+			var _this = this;
 
-		getFBUserData: function() {
-		  
-			this.FB.api('/me', function(response) { 
-				alert("FB complete. Check console log. Need to hook up to Haul API and then transition to a route")
-				console.log(response); 
-			}.bind(this));
-		}
+			return new Promise(function(resolve, reject) {
 
+				_this.FB.getLoginStatus(function(response) {
+					if (response.status !== 'connected' || response.status === 'not_authorized') {
+						return _this.FB.login(function(response){
+						  	if (response.authResponse) {
+						  		//Set the userId & accessToken
+						  		_this.set('userID', response.authResponse.userID);
+						  		_this.set('accessToken', response.authResponse.accessToken);
+	
+						  		//ME
+								_this.FB.api('/me', function(response) { 
+									console.log("me/", response);
+									var data =  {
+										email: response.email,
+										firstname: response.first_name,
+										lastname: response.last_name,
+										fb_user_id: _this.get('userID'),
+										fb_token: _this.get('accessToken')
+									}
+									resolve(data);
+								});
+
+
+						  	} else {
+								console.log('User cancelled login or did not fully authorize.');
+								reject();
+						  	}
+					  	});
+					}else{
+						//Set the userId & accessToken
+				  		_this.set('userID', response.authResponse.userID);
+				  		_this.set('accessToken', response.authResponse.accessToken);
+				  		//ME
+						_this.FB.api('/me', function(response) { 
+							console.log("me/", response);
+							var data =  {
+								email: response.email,
+								firstname: response.first_name,
+								lastname: response.last_name,
+								fb_user_id: _this.get('userID'),
+								fb_token: _this.get('accessToken')
+							}
+							resolve(data);
+						});
+					}
+				});
+			});
+		} 
 	});
 
-
+	/**
+	* UI CONTROLLERS BELOW
+	*	All the controllers bellow handle the UI.  
+	*	They rely on AuthController and FacebookController to talk to APIs
+	*
+	*/
 
 	// Sign Up form
 	Haul.SignupController = Ember.ObjectController.extend({
@@ -224,6 +259,13 @@
 		isProcessing: false,
 		error409: false,
 		error: false,
+		facebookController: null, 
+		authController: null,
+
+		setUp: function(){
+			this.facebookController = this.get('controllers.facebook');
+			this.authController = this.get('controllers.auth');
+		}.on('init'),
 
 		//Hide API Errors when changes are made to email field.
 		emailChanged: (function() {	
@@ -231,74 +273,112 @@
 			this.set('error409', false);
 		}).observes('email'),
 
-		startFacebook: function(){
-			var facebookController = this.get('controllers.facebook');
-		}.on('init'),
-
 		reset: function() {
 			this.set('error', false);
 			this.set('error409', false);
 		},
 
-		actions: {
+		//createUser
+		// Send this data to /users api and create the user.
+		// This bypasses email confirmation step.
+		createUserByFB: function(data) {
+			var _this = this;
 
-			facebookSignup: function() { 
-				var facebookController = this.get('controllers.facebook'); 
-				facebookController.checkLoginState();
-			},
+			//CREATE HAUL USER FOR FB USER:
+			return Ember.$.ajax({
+					url: _this.authController.host + '/users',
+					type: 'post',
+					data: data,
+					headers: {
+						Authorization: 'Bearer client_' + _this.authController.client_token
+					},
+					dataType: 'json'
+			}).then(
+				function(response) {
+					_this.set('isProcessing', false); 
+					console.log("CREATED", response);
+
+					//NOW LOG FB USER INTO HAUL
+					return _this.authController.authenticateByFB();
+
+				},
+				function(error) {
+					_this.set('isProcessing', false);
+					error.status == 409 ? _this.set('error409', true) : _this.set('error', true);
+				}
+			);
+		},
+
+		//createUser
+		// Send this data to /users api and create the user.
+		// This bypasses email confirmation step.
+		createUserByEmail: function(data) {
+			var _this = this;
+			//Flag:
+			data['action'] = 'email-register';
+
+			//Pass params email/password to it.
+			return Ember.$.ajax({
+					url: this.authController.host + '/users/email',
+					type: 'post',
+					data: data,
+					headers: {
+						Authorization: 'Bearer client_' + this.authController.client_token
+					},
+					dataType: 'json'
+			}).then(
+				function(response) {
+					_this.set('isProcessing', false); 
+					_this.set('emailRegistrationRequested', true);
+				}, 
+
+				function(error) {
+					_this.set('isProcessing', false);
+					error.status == 409 ? _this.set('error409', true) : _this.set('error', true);
+				}
+			);
+		}, 
+
+		actions: {
 
 			focus: function() {
 				this.reset();
 			},
 
-			submit: function() {
-				
-				var authController = this.get('controllers.auth');
-
+			//Action: Clicked "facebook signup"
+			facebookSignup: function() { 
 				this.set('isProcessing', true);
 
-				var data = this.getProperties('email');
-				data['action'] = 'email-register';
+				var _this = this;
 
+				this.facebookController.triggerFacebook().then(
+			 		function onFulfill(response) {
+						console.log("Success!", response);
+						return _this.createUserByFB(response);
 
-				console.log("RIGHT HERE")
-				console.log(data)
+					}, 
+					function onReject(error) {
+						console.error("Failed!", error);
+					}
+				).then(
+			 		function onFulfill(response) {
+						console.log("Success!", response); 
 
-				//AJAX CALL - for getting the User Token back.  
-				//Pass params email/password to it.
-				return Ember.$.ajax({
-						url: authController.host + '/users/email',
-						type: 'post',
-						data: data,
-						headers: {
-							Authorization: 'Bearer client_' + authController.client_token
-						},
-						dataType: 'json'
-				}).then(
-					(function(_this) {
-					return function(response) {
-						
-						_this.set('isProcessing', false); 
-
-						//TRANSITION:
-						_this.set('emailRegistrationRequested', true);
-						
-					};
-					})(this), 
-
-					(function(_this){
-						return function(error) {
-							
-							_this.set('isProcessing', false);
-
-							if( error.status == 409 ){
-								_this.set('error409', true);
-							}else {
-								_this.set('error', true);
-							}
-						};
-					})(this)
+					}, 
+					function onReject(error) {
+						console.error("Failed!", error);
+					}
 				);
+			},
+
+			//Action: Clicked "email sign up"
+			submit: function() { 
+				this.set('isProcessing', true);
+
+				//Get the following from user submitted form.
+				// email 
+				var data = this.getProperties('email');
+				this.createUserByEmail(data);
 			}
 		}
 	});
@@ -329,7 +409,7 @@
 
 			submit: function() {
 				var authController = this.get('controllers.auth');
-
+				var _this = this;
 				this.set('isProcessing', true);
 
 				data = this.getProperties('firstname', 'lastname', 'password');
@@ -347,18 +427,14 @@
 						},
 						dataType: 'json'
 				}).then(
-					(function(_this) {
-						return function(response) {
-							authController.send('authResponse', response);
-						}
-					})(this), 
+					function(response) {
+						authController.send('authResponse', response);
+					}, 
 
-					(function(_this){
-						return function(error) {
-							_this.set('isProcessing', false);
-							_this.set('error', true);
-						};
-					})(this)
+					function(error) {
+						_this.set('isProcessing', false);
+						_this.set('error', true);
+					}
 				);
 			}
 		}
@@ -392,7 +468,7 @@
 
 			submit: function() { 
 				var authController = this.get('controllers.auth');
-
+				var _this = this;
 				var data = this.getProperties('email');
 				data['action'] = 'password-reset';
 
@@ -408,8 +484,7 @@
 						},
 						dataType: 'json'
 				}).then(
-					(function(_this) {
-					return function(response) {
+					function(response) {
 						
 						_this.set('isProcessing', false); 
 						_this.set('emailSent', true);
@@ -417,21 +492,18 @@
 						//TRANSITION:
 						_this.set('emailRegistrationRequested', true);
 						
-					};
-					})(this), 
+					}, 
 
-					(function(_this){
-						return function(error) {
+					function(error) {
 							
-							_this.set('isProcessing', false);
+						_this.set('isProcessing', false);
 
-							if( error.status == 409 ){
-								_this.set('error409', true);
-							}else {
-								_this.set('error', true);
-							}
-						};
-					})(this)
+						if( error.status == 409 ){
+							_this.set('error409', true);
+						}else {
+							_this.set('error', true);
+						} 
+					}
 				);
 			}
 		}
@@ -462,6 +534,7 @@
 
 			submit: function() {
 				var authController = this.get('controllers.auth');
+				var _this = this;
 
 				this.set('isProcessing', true);
 
@@ -480,18 +553,14 @@
 						},
 						dataType: 'json'
 				}).then(
-					(function(_this) {
-						return function(response) {
-							authController.send('authResponse', response);
-						}
-					})(this), 
+					function(response) {
+						authController.send('authResponse', response);
+					}, 
 
-					(function(_this){
-						return function(error) {
-							_this.set('isProcessing', false);
-							_this.set('error', true);
-						};
-					})(this)
+					function(error) {
+						_this.set('isProcessing', false);
+						_this.set('error', true);
+					}
 				);
 			}
 		}
@@ -507,56 +576,79 @@
 
 		error: false,
 		error409: false,
+		isProcessing: false, 
+		facebookController: null, 
+		authController: null,
 
-		startFacebook: function(){
-			var facebookController = this.get('controllers.facebook');
+		setUp: function(){
+			this.facebookController = this.get('controllers.facebook');
+			this.authController = this.get('controllers.auth');
 		}.on('init'),
+
+		loginUserByFB: function() {
+
+			//LOG FB USER INTO HAUL
+			return this.authController.authenticateByFB();
+		},
 
 		actions: {
 
+			//LOGIN via FB token
 			facebookLogin: function() {
-				console.log("FACEBOOK CLICK")
-				var facebookController = this.get('controllers.facebook'); 
-				facebookController.checkLoginState();
+				this.set('isProcessing', true);
+				var _this = this;
+			
+				this.facebookController.triggerFacebook().then(
+			 		function onFulfill(response) {
+						console.log("Success!", response);
+						return _this.loginUserByFB(response);
+
+					}, 
+					function onReject(error) {
+						console.error("Failed!", error);
+					}
+				).then(
+			 		function onFulfill(response) {
+						console.log("Success!", response); 
+
+					}, 
+					function onReject(error) {
+						console.error("Failed!", error);
+					}
+				);
 			},
 
+			//LOGIN via email, password
 			submit: function() {
 				var data, token, key;
 				this.set('isProcessing', true);
+				var _this = this;
  
 				data = this.getProperties('email', 'password');
-
-				var authController = this.get('controllers.auth');
 
 				//AJAX CALL - for getting the User Token back.  
 				//Pass params email/password to it.
 				return Ember.$.ajax({
-						url: authController.host + '/auth/user',
+						url: _this.authController.host + '/auth/user',
 						type: 'post',
 						data: data,
 						headers: {
-							Authorization: 'Bearer client_' + authController.client_token
+							Authorization: 'Bearer client_' + _this.authController.client_token
 						},
 						dataType: 'json'
 				}).then(
-					(function(_this) {
-						return function(response) {
-							authController.send('authResponse', response);
+					function(response) {
+						_this.authController.send('authResponse', response);
+					},
+					function(error) {	
+						_this.set('isProcessing', false);
+
+						if( error.status == 409 ){
+							_this.set('error409', true);
+						}else{
+							_this.set('error', true);
 						}
-					})(this), 
-
-					(function(_this){
-						return function(error) {
-							
-							_this.set('isProcessing', false);
-
-							if( error.status == 409 ){
-								_this.set('error409', true);
-							}else{
-								_this.set('error', true);
-							}
-						};
-					})(this)
+					}
 				);
 		 	}
 		}
