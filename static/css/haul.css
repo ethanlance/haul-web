@@ -254,6 +254,7 @@
 
 
 .haul-image-picker-well {
+  margin-top:10px;
   padding-top: 20px;
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3;
@@ -360,28 +361,30 @@
     padding-left: 10px;
 }
 
- .dz-progress {
-  position:absolute;
-  bottom:25px;
-  left:15px;
-  width:145px;
+.alert-wrapper {
+  position: absolute;
+  display: block;
+  top: 5px;
+  width: 145px;
+  left: 15px;
+}
+.alert-wrapper .alert {
+  border-radius: 0px;
+  background-color: rgba(242, 222, 222, .90);
+  padding: 5px 0px 5px 0px;
+  text-align:center;
 }
 
-.dz-no-progress {
-  position:absolute;
-  bottom:25px;
-  left:15px;
-  width:145px;
-  height:10px;
-  background-color:red;
+.progress-wrapper {
+  position: absolute;
+  display: block;
+  bottom: 5px;
+  width: 145px;
+  left: 15px;
 }
 
-.dz-upload {
-  position:relative;
-  display:block;
-  height:10px;
-  width:20%;
-  background-color:green;
+.progress-wrapper .progress {
+  border-radius: 0px;
 }
 
  @media (min-width: 768px) {
@@ -390,11 +393,11 @@
     padding-left: 45px;
   }
 
-   .dz-progress { 
+   .alert-wrapper { 
     left:50px; 
   }
 
-  .dz-no-progress { 
+  .progress-wrapper { 
     left:50px; 
   }
 }
@@ -405,11 +408,11 @@
     width:25%; 
     padding-left: 40px;
   } 
-  .dz-progress { 
+  .alert-wrapper { 
     left:45px; 
   }
 
-  .dz-no-progress { 
+  .progress-wrapper { 
     left:45px; 
   }
 }
@@ -422,11 +425,11 @@
           transition: all .2s ease-in-out;
    
   }
-  .dz-progress { 
+  .alert-wrapper { 
     left:65px; 
   }
 
-  .dz-no-progress { 
+  .progress-wrapper { 
     left:65px; 
   }
 }
@@ -470,31 +473,7 @@
 }
 
 
-.alert-wrapper {
-  position: absolute;
-  display: block;
-  top: 5px;
-  width: 145px;
-  left: 65px;
-}
-.alert-wrapper .alert {
-  border-radius: 0px;
-  background-color: rgba(242, 222, 222, .90);
-  padding: 5px 0px 5px 0px;
-  text-align:center;
-}
 
-.progress-wrapper {
-  position: absolute;
-  display: block;
-  bottom: 5px;
-  width: 145px;
-  left: 65px;
-}
-
-.progress-wrapper .progress {
-  border-radius: 0px;
-}
 
 
 #haul-dropzone{

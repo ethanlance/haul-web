@@ -930,7 +930,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  data.buffer.push("\n\n<div class=\"container\">\n	\n\n		<div class=\"row\">\n			<div class=\"col-md-8 col-sm-6 col-xs-6\">\n				<h2>\n				<small>Select up to 5 images.</small>\n				</h2>\n			</div>\n			<div class=\"col-md-4  col-sm-6 col-xs-6 verical-align text-right padding-top\">\n\n			\n\n				<button ");
+  data.buffer.push("\n\n<div class=\"container\">\n	\n\n		<div class=\"row\">\n			<div class=\"col-md-8 col-sm-6 col-xs-6\">\n				<h2>\n				<small>Select up to 5 images.</small>\n				</h2>\n			</div>\n			<div class=\"col-md-4  col-sm-6 col-xs-6 verical-align text-right padding-top\">\n				<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "nextStep", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push("  ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
