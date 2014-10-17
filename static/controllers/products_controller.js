@@ -300,6 +300,13 @@
 				});				
 			},
 
+			//Click "imageDelete" in UI.  Destructive
+			imageDelete: function(event) {
+				var image = event.get('image');
+				image.deleteRecord();
+				image.save();
+				console.log("DELETE", image);
+			},
 		
 			//Click "imageClick" in UI
 			imageClick: function(event) {

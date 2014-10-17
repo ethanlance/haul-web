@@ -21,6 +21,10 @@ Haul.ImageSerializer =  DS.RESTSerializer.extend({
 
 	extractArray: function(store, primaryType, payload) {
 
+		if( payload.data == "ok" ){
+			return;
+		}
+
 		var datas = payload.data.map(function(image){
 			var data =  {
 				original: image.locations.original,
@@ -40,6 +44,11 @@ Haul.ImageSerializer =  DS.RESTSerializer.extend({
 	},
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		}
+				
 		var image = payload.data;
 		var data = {
 			original: image.locations.original,
@@ -62,7 +71,13 @@ Haul.ImageSerializer =  DS.RESTSerializer.extend({
 Haul.ImageAdapter = Haul.ApplicationAdapter.extend({
 	
 	host: Haul.IMAGE_SERVER_HOST,
-
+    
+	deleteRecord: function(store, type, record) {
+		var id = record.get('id');
+		var user_id = Ember.$.cookie('auth_user').id;
+		var url = this.host + '/users/' + user_id + '/images/' + id;
+		return this.ajax(url, "DELETE");
+	},
   
 	findMany: function(store, type, ids) { 
 		if( ids.length < 2 ){

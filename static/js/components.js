@@ -38,6 +38,8 @@ Haul.ImageCardComponent = Ember.Component.extend({
 	//is appendend to the parent div wrapping the image.
 	classNameBindings: ['isSelected:selected'],
 	isSelected: false,
+
+	modalStyle: "display:none",
 	
 	didInsertElement: function() {
 		console.log("IMAGE Component")
@@ -52,6 +54,18 @@ Haul.ImageCardComponent = Ember.Component.extend({
 	actions: {
 		imageClick: function() {
 			this.sendAction('imageClick', this);	
+		},
+		imageDelete: function() {
+			this.set('modalStyle', 'display:block'); 
+		},
+
+		imageDeleteCancel: function() {
+			this.set('modalStyle', 'display:none');
+		},
+
+		imageDeleteProceed: function() {
+			this.set('modalStyle', 'display:none');
+			this.sendAction('imageDelete', this);	
 		}
 	}
 });
@@ -206,9 +220,9 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 			this.sendAction('imageClick', arg);
 		},
 
-		imageCardReady: function(arg) {
-			this.sendAction('imageCardReady', arg);
-		}
+		imageDelete: function(arg) {
+			this.sendAction('imageDelete', arg);
+		},
 	}
 
 });

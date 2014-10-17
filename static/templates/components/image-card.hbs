@@ -1,5 +1,29 @@
-<div class="haul-grid-thumbs" {{action "imageClick" image}}> 
-	<img class="thumbnail haul-thumb" {{bind-attr src=image.thumb}} width="155px" height="155px">
+<div class="haul-grid-thumbs" > 
+	<div class="alert-wrapper">
+		<div class="alert">
+		<button {{action "imageDelete" image}} type="button" class="btn btn-default btn-lg">
+			<span class="glyphicon glyphicon-trash"></span>
+		</button>
+		</div>
+	</div>
+	<img {{action "imageClick" image}} class="thumbnail haul-thumb" {{bind-attr src=image.thumb}} width="155px" height="155px">
 </div> 
 
 
+<div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" {{bind-attr style="modalStyle"}}>
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="mySmallModalLabel">Delete Image?  This cannot be undone</h4>
+		</div>
+		<div class="modal-body"> 
+			<p class="text-center">
+				<button {{action 'imageDeleteCancel' image}} class="btn btn-default">Cancel</button>
+				<button {{action 'imageDeleteProceed' image}} class="btn btn-danger">Yes, Delete</button>
+			</p>
+		</div>
+		</div>
+	</div>
+</div>
