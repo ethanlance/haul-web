@@ -180,6 +180,21 @@
 		}.on('init'),
 
 
+		getFBUser: function(cb) {
+			var _this = this;
+	  		//ME
+			this.FB.api('/me', {fields: 'first_name,last_name,email'}, function(response) { 
+				console.log("me/", response);
+				var data =  {
+					email: response.email,
+					firstname: response.first_name,
+					lastname: response.last_name,
+					fb_user_id: _this.get('userID'),
+					fb_token: _this.get('accessToken')
+				}
+				return cb(data);
+			});
+		},
 
 		//triggerFacebook
 		// Starts the process of getting a users FB Data.
@@ -191,46 +206,32 @@
 			return new Promise(function(resolve, reject) {
 
 				_this.FB.getLoginStatus(function(response) {
+
 					if (response.status !== 'connected' || response.status === 'not_authorized') {
 						return _this.FB.login(function(response){
 						  	if (response.authResponse) {
-						  		//Set the userId & accessToken
+
+
+								//Set the userId & accessToken
 						  		_this.set('userID', response.authResponse.userID);
 						  		_this.set('accessToken', response.authResponse.accessToken);
-	
-						  		//ME
-								_this.FB.api('/me', function(response) { 
-									console.log("me/", response);
-									var data =  {
-										email: response.email,
-										firstname: response.first_name,
-										lastname: response.last_name,
-										fb_user_id: _this.get('userID'),
-										fb_token: _this.get('accessToken')
-									}
-									resolve(data);
-								});
+						  		
+						  		return _this.getFBUser(function(data){
+						  			resolve(data);
+						  		});
 
 
 						  	} else {
 								console.log('User cancelled login or did not fully authorize.');
 								reject();
 						  	}
-					  	});
+					  	}, {scope: 'email'});
 					}else{
 						//Set the userId & accessToken
 				  		_this.set('userID', response.authResponse.userID);
 				  		_this.set('accessToken', response.authResponse.accessToken);
-				  		//ME
-						_this.FB.api('/me', {fields: 'first_name,last_name,email'}, function(response) { 
-							console.log("me/", response);
-							var data =  {
-								email: response.email,
-								firstname: response.first_name,
-								lastname: response.last_name,
-								fb_user_id: _this.get('userID'),
-								fb_token: _this.get('accessToken')
-							}
+
+						return _this.getFBUser(function(data){
 							resolve(data);
 						});
 					}
