@@ -139,11 +139,10 @@ Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
 		this.controllerFor('product-edit').reset();
 	},
 	model: function() {
-		return null;		
+		return this.get('store').all('image');
 	},
-	setupController: function(controller, model) {
-        controller.set('product', null);
-        controller.set('all_images', this.get('store').all('image'));
+ 	setupController: function(controller, model) {
+ 		controller.reset();	
     },
 	renderTemplate: function(controller, model) {
 		this.render('product/edit', {
@@ -164,11 +163,11 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 		this.controllerFor('product-edit').reset();
 	},
 	model: function() { 
-		return this.get('store').all('image')
+		return this.get('store').all('image');
 	},
  	setupController: function(controller, model) {
-        controller.set('productPromise', this.store.find('product', this.modelFor('product').get('id'))); 
-        //controller.set('all_images', this.get('store').all('image'));
+ 		controller.reset();	
+        controller.set('productPromise', this.store.find('product', this.modelFor('product').get('id')));
     },
 	renderTemplate: function(controller, model) {
 		this.render('product/edit', {

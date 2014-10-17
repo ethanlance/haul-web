@@ -69,7 +69,7 @@
 		needs: ["auth"],
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
-		//This array controller sorts it's images -broken
+		//This array controller sorts it's images
 		sortProperties: ['created_at'],
 		sortAscending: false,
 
@@ -78,9 +78,6 @@
 		imagesAreSelected: false,
 		productExists: false,
 		dataComplete: false, //True when images, title, and description are filled out.
-
-		//Image Component - gives us a handle back to each individual image comp
-		eventList: [],
 
 		//Product
 		product: null,
@@ -98,9 +95,13 @@
 		quantity: null,
 		price: null,
 
-		all_imagez:null,
 
+		//Blow away all property values
 		reset: function(){ 
+			this.set('showImagePicker',true);
+			this.set('imagesAreSelected',false);
+			this.set('productExists',false);
+			this.set('dataComplete',false);
 			this.set('product',null);
 			this.set('id',null);
 			this.set('name',null);
@@ -109,11 +110,7 @@
 			this.set('price',null);
 			this.set('selectedImages',[]);
 			this.set('productPromise', null);
-			//this.set('eventList', []);
 		},
-
-
-
 
 		// Observer: When editing a product we start with a productPromise.
 		// When creating a new product there is no productPromise.
@@ -124,7 +121,7 @@
 				this.productPromise.then(function(product) {
 
 					_this.set('productExists', true);
-
+					_this.set('showImagePicker', false);
 
 					_this.product = product;
 					_this.id = product.get('id');
@@ -133,35 +130,31 @@
 					_this.quantity = product.get('quantity');
 					_this.price = product.get('price');
 
+					//What images does this product have?
 					var images = product.get('images').then(function(images){
 						images.map(function(image){ 
 							_this.selectedImages.pushObject(image); 
 							return image
 						});
 					}).then(function(){
-						_this.get('model').forEach(function(img) {
-
+						//Now let's tell the all user images array which images
+						//the product has.
+						_this.forEach(function(img) {
 							_this.selectedImages.forEach(function(simg){
-
+								//Set this image isSelected.
 								if(simg.get('id') === img.get('id')) {
+									console.log("BOOOOM", _this.selectedImages)
 									img.set('isSelected', true);
-									_this.get('content').pushObject(img)
-									console.log(img)
 								}
-
-							})
-
-
-						})
+							});
+						});
 					});
-
-
-
 				});
 			}else{
 				_this.set('productExists', false);
 			}
 		}.observes('productPromise'),
+
 
 		//Observer: anytime our array of selected images changes, update
 		// our list of image_ids.
@@ -171,6 +164,7 @@
 			});
 			this.set('image_ids', ids);
 		}.observes('selectedImages.@each'),
+
 
 		//Observes: When selectedImages changes, do things.
 		selectedImagesChange: function() {
@@ -186,6 +180,17 @@
 		}.observes('selectedImages.@each'),
 
 
+		//Observes: Did the form data change?  
+		//Final validation happens here.
+		formChanged: function(){
+			if( this.name !== null ){
+				this.set('dataComplete', true);
+			}else{
+				this.set('dataComplete', false);
+			}
+		}.observes('name', 'description', 'price', 'quantity'),
+
+
 		//Preserves the drag sort order of the images.
 		updateSortOrder: function(indexes) { 
 			var selectedImages = this.get('selectedImages');
@@ -199,16 +204,6 @@
 		    this.set('selectedImages', selectedImages);
 		    this.formChanged();
 		},
-
-		//Did the form data change?  
-		//Final validation happens here.
-		formChanged: function(){
-			if( this.name !== null ){
-				this.set('dataComplete', true);
-			}else{
-				this.set('dataComplete', false);
-			}
-		}.observes('name', 'description', 'price', 'quantity'),
 
 		//UI ACTIONS
 		actions: { 
@@ -257,6 +252,15 @@
 
 			//Click "delete" in UI
 			delete: function() {
+				$('#deleteModal').modal('show');
+			},
+
+			deleteCancel: function() {
+				$('#deleteModal').modal('hide');
+			},
+
+			deleteProceed: function() {
+				$('#deleteModal').modal('hide');
 				var _this = this;
 				var user = this.get('controllers.auth').get('currentUser');
 				var product = this.get('product');
@@ -301,25 +305,34 @@
 			imageClick: function(event) {
 				var image = event.get('image');
 				var selectedImages = this.get('selectedImages'); 
+				var found = false;
+
+				selectedImages.forEach(function(result){
+					if(result.get('id') === image.get('id')){
+						found = true;
+						return;
+					}
+				});
 
 				//Only allow 5 images.
-				if( selectedImages.length == 5 && !selectedImages.contains(image) ) {
+				if( selectedImages.length == 5 && !found ) {
 
 					//Show our modal.
 					$('#imagePickerModal').modal('show');
 					return;
 				
-				//Add
-				}else if( !selectedImages.contains(image) ) {
-					selectedImages.pushObject(image);
-
 				//Remove
+				}else if( found ) { 
+					selectedImages.splice($.inArray(image, selectedImages),1); // remove image
+					selectedImages.splice(0,0,image); // add image to top of array
+					selectedImages.shiftObject(); // use ember's KVO shiftObject to remove image from top.
+					event.set('isSelected',false); 
+				//Add
 				}else{
-					selectedImages.shiftObject(image);
+					selectedImages.pushObject(image);
+					event.set('isSelected',true);
+					console.log("add",image, selectedImages);
 				}
-
-				//Toggle UI
-				event.toggleProperty('isSelected',true);
 
 				this.formChanged();
 				

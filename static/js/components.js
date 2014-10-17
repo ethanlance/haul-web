@@ -25,20 +25,32 @@ Haul.JQuerySortableView = Ember.CollectionView.extend({
 			}
 		}).disableSelection();
 	}
-
 });
 
 
-
-
+/**
+	ImageCardComponent is one image.  
+	THe image in the ImageCardComponent sends an onclick event 'imageClick'
+**/
 Haul.ImageCardComponent = Ember.Component.extend({
+
+	//Bound property.  When isSelected is true, then class="selected" 
+	//is appendend to the parent div wrapping the image.
 	classNameBindings: ['isSelected:selected'],
 	isSelected: false,
-	 
+	
+	didInsertElement: function() {
+		console.log("IMAGE Component")
+		this.image.get('isSelected') ? this.set('isSelected', true) : this.set('isSelected', false);
+	},
+
+	observe: function() { 
+		console.log("BOOM")
+		this.image.get('isSelected') ? this.set('isSelected', true) : this.set('isSelected', false);
+	}.observes('image.isSelected'),
+
 	actions: {
 		imageClick: function() {
-
-			//TOGGLE UI.	Image visually selected/deselected.
 			this.sendAction('imageClick', this);	
 		}
 	}
@@ -160,22 +172,6 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 			$(progessWrapper).addClass('hide');
 
 			window.clearInterval(file.progressInterval);
-
-			return;
-
-			// //Fade out then remove from dropzone.
-			// var self = this;
-			// $(file.previewElement).fadeOut('slow', function() { 
-			// 	self.removeFile(file) 
-			// });
-			
-
-			// var response = {data:[{image_id:1234, locations:{}}]}
-			// response.data[0].locations.thumb = "http://www.escollectionusa.com/online_shop/1790-11435-home/snh11-hi-top-sneakers-.jpg";
-
- 		// 	//Send our new file to the controllers action.
-			// _this.refreshImages(file, response);
-
 		});
 
 		//SUCCESS, reset Dropzone and hand the image file off to Ember.
