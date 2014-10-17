@@ -40,15 +40,18 @@
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<h3>{{name}} has nothing to sell yet.</h3>
+				{{#if isProfileOwner }}
+				<h2>
+					{{#link-to 'products.new' currentUser.slug }}<button class="btn btn-primary">Sell Something</button>{{/link-to}}
+				</h2>
+				{{/if}}
 			</div>
 		</div>
 	</div>
 </div>
 {{/if}}
-
-
+ 
 <div class="haul-grid">
-
 	
     {{#each products}}
     	{{#link-to 'product' this }}
@@ -56,7 +59,7 @@
 	   		<div class="dummy"></div>
 		    <div class="photo-wrapper">
 				
-				<img class="thumbnail" {{bind-attr src=firstImage.content}}>
+				<img class="thumbnail" {{bind-attr src=image.medium}}>
 
 				{{#if sold}}
 					<div class="sold">Sold</div>
@@ -73,4 +76,6 @@
 	{{/each}}
 	
 </div> 
+
+
 

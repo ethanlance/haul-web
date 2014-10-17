@@ -15,12 +15,12 @@
 
   Ember.View.reopen({
 	didInsertElement : function(){
-	  this._super();
-	  Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
+		this._super();
+		Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
 	},
 	afterRenderEvent : function(){
-	  Holder.run(); 
-
+		Holder.run(); 
+		
 	}
   });
 
@@ -36,11 +36,13 @@ Haul.CarouselView = Ember.View.extend({
 		$(document).off('.data-api');	  
 		// at least one item must have the active class, so we set the first here, and the class will be added by class binding
 		var promise = this.get('content').then(function(results) { 
-
 			var obj = Ember.get(results, 'firstObject');
-			Ember.set(obj, 'isActive', true);
-
+			if( obj ) {
+				Ember.set(obj, 'isActive', true);	
+			}
 			return results;
+		}, function(error){
+			console.log("ERROR " , error);
 		}); 
 	},
 	actions: {
@@ -75,7 +77,7 @@ Haul.CarouselView = Ember.View.extend({
 			classNames: ['item'],
 			classNameBindings: ['content.isActive:active'],
 			template: Ember.Handlebars.compile('\
-				<img {{bindAttr src="view.content.src"}} alt=""/>\
+				<img {{bind-attr src="view.content.large"}} alt=""/>\
 				<div class="carousel-caption">\
 					<h4>{{view.content.title}}</h4>\
 					<p>{{view.content.content}}</p>\

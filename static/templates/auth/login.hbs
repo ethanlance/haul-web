@@ -9,6 +9,10 @@
 						<h2 class="form-signin-heading">Login</h2>
 				</div>
 
+				  {{#if error404}}
+				  	<div class="alert">Sorry, you need to signup first. Go to {{#link-to 'signup'}}Sign Up{{/link-to}}</div>
+				  {{/if}}
+
 				<div class="form-group"> 
 			      	<button class="btn btn-block btn-facebook" {{action "facebookLogin"}}>Facebook</button>
 			    </div> 

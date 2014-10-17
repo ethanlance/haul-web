@@ -26,6 +26,7 @@
     "ember-easyForm": "http://builds.dockyard.com/ember-easyForm/latest/ember-easyForm.js",
     "jquery": "~2.1.1",
     "dropzone": "~3.10.2",
-    "handlebars": "~2.0.0"
+    "handlebars": "~2.0.0",
+    "jquery-ui": "~1.11.1"
   }
 }

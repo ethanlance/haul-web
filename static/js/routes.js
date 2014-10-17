@@ -12,8 +12,9 @@ Haul.Router.map(function(){
 	this.resource('about');
 
 	//Profiles
-	this.resource('products', {path: "/go/:user_slug"}, function() {
+	this.resource('products', {path: "/seller/:user_slug"}, function() {
 		this.resource('product', {path: "/:product_slug"}, function() {
+			this.route('edit'),
 			this.route('comments')
 		});
 		this.route('new');
@@ -21,7 +22,6 @@ Haul.Router.map(function(){
 
 
 	//Auth
-	
 	this.resource('login');
 	this.resource('logout');
 
@@ -68,7 +68,7 @@ Haul.BaseRoute = Ember.Route.extend({
 		
 		var user = this.controllerFor('auth').get('currentUser');
 		
-		if( !Ember.isEmpty(user) ) { 
+		if( !Ember.isEmpty(user) ) {
 			return this.transitionTo('products', user.slug);
 		}else{
 			return this.transitionTo('about');
@@ -98,7 +98,6 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 			outlet: 'header'
 		});
 	},
-
     beforeModel: function(transition) {
 		if (Ember.isEmpty(this.controllerFor('auth').get('token'))) {
 			return this.redirectToLogin(transition);
@@ -117,47 +116,37 @@ Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 		return this.store.find('user', params.user_slug);
 	},	
 	serialize: function(model) {
- 	   return { user_slug: model.get('slug') };
- 	}, 
-});
-
-Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({ 
-	//Get the users images from api.
-	beforeModel: function() {
-		var user = this.controllerFor('auth').get('currentUser');
-		this.store.findQuery('image', user.id );
-	},
-	model: function(params) {
-		return this.get('store').all('image');
-	},
-	renderTemplate: function(controller, model) {
-		this.render('products/new', {
-			into: 'application',
-			outlet: 'main',
-			model: model,
-			controller: controller
-		});
-	}
+ 	   return { user_slug: model.get('id') };
+ 	}
 });
 
 
 Haul.ProductRoute = Ember.Route.extend({
-
 	model: function(params) {
-
-		var product = this.store.findQuery('product', {slug: params.slug}).then(function(results) {
-			record = Ember.get(results, 'firstObject');
-			console.log(record)
-			return record;
-		});
-
-		return product;
+		return this.store.find('product', params.product_slug);
 	},
 	serialize: function(model) {
-    	return { product_slug: model.get('slug') };
+    	return { product_slug: model.get('id') };
   	},
+});
+
+Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({ 
+	controllerName: "product-edit",
+	//Get the users images from api.
+	beforeModel: function() {
+		var user = this.controllerFor('auth').get('currentUser');
+		this.store.findQuery('image', user.id );
+		this.controllerFor('product-edit').reset();
+	},
+	model: function() {
+		return null;		
+	},
+	setupController: function(controller, model) {
+        controller.set('product', null);
+        controller.set('all_images', this.get('store').all('image'));
+    },
 	renderTemplate: function(controller, model) {
-		this.render('products/product', {
+		this.render('product/edit', {
 			into: 'application',
 			outlet: 'main',
 			model: model,
@@ -166,12 +155,35 @@ Haul.ProductRoute = Ember.Route.extend({
 	}
 });
 
+Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({ 
+	controllerName: "product-edit",
+	//Get the users images from api.
+	beforeModel: function() {
+		var user = this.controllerFor('auth').get('currentUser');
+		this.store.findQuery('image', user.id );
+		this.controllerFor('product-edit').reset();
+	},
+	model: function() { 
+		return this.get('store').all('image')
+	},
+ 	setupController: function(controller, model) {
+        controller.set('productPromise', this.store.find('product', this.modelFor('product').get('id'))); 
+        //controller.set('all_images', this.get('store').all('image'));
+    },
+	renderTemplate: function(controller, model) {
+		this.render('product/edit', {
+			into: 'application',
+			outlet: 'main',
+			controller: controller,
+			model: model
+		});
+	}
+});
 
 Haul.ProductCommentsRoute = Ember.Route.extend({
 	model: function() {
 		return this.modelFor('product').get('comments');
     },
-
 	renderTemplate: function(controller, model) {
 		this.render('comments/comments', {
 			into: 'products/product',

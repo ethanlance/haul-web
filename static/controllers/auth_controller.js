@@ -1,13 +1,11 @@
 // Load the SDK asynchronously
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
 /*global Products, Ember */
 (function () {
@@ -224,7 +222,7 @@
 				  		_this.set('userID', response.authResponse.userID);
 				  		_this.set('accessToken', response.authResponse.accessToken);
 				  		//ME
-						_this.FB.api('/me', function(response) { 
+						_this.FB.api('/me', {fields: 'first_name,last_name,email'}, function(response) { 
 							console.log("me/", response);
 							var data =  {
 								email: response.email,
@@ -283,7 +281,6 @@
 		// This bypasses email confirmation step.
 		createUserByFB: function(data) {
 			var _this = this;
-
 			//CREATE HAUL USER FOR FB USER:
 			return Ember.$.ajax({
 					url: _this.authController.host + '/users',
@@ -575,10 +572,17 @@
 		needs: ['auth', 'facebook'],
 
 		error: false,
+		error404: false,
 		error409: false,
 		isProcessing: false, 
 		facebookController: null, 
 		authController: null,
+
+		reset: function() {
+			this.set('error', false);
+			this.set('error404', false);
+			this.set('error409', false);
+		},
 
 		setUp: function(){
 			this.facebookController = this.get('controllers.facebook');
@@ -613,6 +617,7 @@
 
 					}, 
 					function onReject(error) {
+						_this.set('error404', true);
 						console.error("Failed!", error);
 					}
 				);

@@ -1,14 +1,44 @@
+Haul.JQuerySortableItemView = Ember.View.extend({
+	templateName: 'components/image-order',		
+}); 
+
+Haul.JQuerySortableView = Ember.CollectionView.extend({
+	
+	contentBinding: 'controller',
+	tagName: 'ul',
+	classNames: ["sortable"],
+	itemViewClass: Haul.JQuerySortableItemView, 
+ 
+	didInsertElement: function(){
+		this._super();
+		var controller = this.get('controller');
+		this.$().sortable({
+			update: function(event, ui) {
+				var indexes = {};
+
+				$(this).find('.item').each(function(index) {
+					indexes[$(this).data('id')] = index;
+				});
+
+				//$(this).sortable('cancel');
+				controller.updateSortOrder(indexes);
+			}
+		}).disableSelection();
+	}
+
+});
+
+
+
 
 Haul.ImageCardComponent = Ember.Component.extend({
 	classNameBindings: ['isSelected:selected'],
-		isSelected: false,
- 
+	isSelected: false,
+	 
 	actions: {
 		imageClick: function() {
 
 			//TOGGLE UI.	Image visually selected/deselected.
- 			//this.toggleProperty("isSelected");
-		
 			this.sendAction('imageClick', this);	
 		}
 	}
@@ -52,8 +82,8 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 				if(progress > 80){
 					progress = 80;
 					$(el).css('width', progress+'%').attr("aria-valuenow", progress); 
-					file.progressInterval = setInterval(function () {  waitingForResponse(el) }, 200);
-				}else{   
+					file.progressInterval = setInterval(function () {	waitingForResponse(el) }, 200);
+				}else{	 
 					$(el).css('width', progress+'%').attr("aria-valuenow", progress);
 				}
 			},
@@ -178,6 +208,10 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 		//This passed the image click from Haul.ImageCardComponent up to our controller. 
 		imageClick: function(arg) {
 			this.sendAction('imageClick', arg);
+		},
+
+		imageCardReady: function(arg) {
+			this.sendAction('imageCardReady', arg);
 		}
 	}
 

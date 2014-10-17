@@ -1,19 +1,30 @@
 /*global Products, Ember */
 (function () {
 	'use strict'; 
-
-	Haul.ApplicationController = Ember.ArrayController.extend({
-		needs: ["auth"],
+	Haul.ApplicationController = Ember.ObjectController.extend({
+		needs: ["auth"],  
+		currentUser: Ember.computed.alias('controllers.auth.currentUser')
 	}); 
 
 	Haul.ProductsController = Ember.ObjectController.extend({
 		needs: ["auth"],  
+		currentUser: Ember.computed.alias('controllers.auth.currentUser')
 	}); 
 	
 
+	//SHOW all user's products
 	Haul.ProductsIndexController = Ember.ObjectController.extend({
 		needs: ["auth"], 
-		
+		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+
+		//Is currentUser viewing his own page?
+		isProfileOwner: false,
+		isProfileOwnerChanged: function() {
+			if( this.get('id') === this.get('currentUser').id) {
+				this.set('isProfileOwner', true);
+			}
+		}.observes('model'),
+
 		productCount: function() {
 			return this.get('model.products').get('length');            
 		}.property('products'),  
@@ -21,57 +32,244 @@
 	});  
 
 
-	Haul.ProductController = Ember.ObjectController.extend({ 
+	//SHOW one product
+	Haul.ProductIndexController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
+		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
+		//Is currentUser viewing his own page?
+		imagez: false,
+		isProfileOwner: false,
+		
+		setup: function() {
+			
+			if( this.get('user').id === this.get('currentUser').id) {
+				this.set('isProfileOwner', true);
+			}
+			
+			//Reload the model 
+			var model = this.get('model');
+			var _this = this;
+			model.reload().then(function(product){
+				_this.set('imagez', product.get('images'))
+			});
+			
+		}.observes('model'),
 
 		commentCount: function() {
 			return this.get('model.comments').get('length');
-		}.property('comments'),
-		
-		actions: {
-
-			likeProduct: function () {
-				console.log("LIKE PRODUCT")
-			},
-
-			shareProduct: function () {
-				console.log("SHARE PRODUCT")
-			},
-
-
-			saveProduct: function() {
-				console.log("SAVE THIS PRODUCT");
-			},
-
-			deleteProduct: function(){
-				console.log("DELETE THIS");	
-				var product = this.get('model');
-
-				product.deleteRecord();
-				product.save();
-
-				//Goto
-				this.transitionToRoute('products');
-			}
-		}
+		}.property('comments')
 	});
 
 
-	Haul.ProductsNewController = Ember.ArrayController.extend({
+	//EDIT or CREATE product.
+	Haul.ProductEditController = Ember.ArrayController.extend({
+		
+		//Auth Controller
 		needs: ["auth"],
+		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
+		//This array controller sorts it's images -broken
 		sortProperties: ['created_at'],
 		sortAscending: false,
 
-		imagesSelected: false,
-		imagesSelectedCount: 0,
-		imagesList: [],
+		//Properties for UI display state
+		showImagePicker: false,
+		imagesAreSelected: false,
+		productExists: false,
+		dataComplete: false, //True when images, title, and description are filled out.
 
+		//Image Component - gives us a handle back to each individual image comp
+		eventList: [],
+
+		//Product
+		product: null,
+
+		//This product's image objects.
+		selectedImages: [],
+
+		//This product's image_ids 
+		image_ids:[],
+
+		//This product's meta properties.
+		id: null,
+		name: null,
+		description: null,
+		quantity: null,
+		price: null,
+
+		all_imagez:null,
+
+		reset: function(){ 
+			this.set('product',null);
+			this.set('id',null);
+			this.set('name',null);
+			this.set('description',null);
+			this.set('quantity',null);
+			this.set('price',null);
+			this.set('selectedImages',[]);
+			this.set('productPromise', null);
+			//this.set('eventList', []);
+		},
+
+
+
+
+		// Observer: When editing a product we start with a productPromise.
+		// When creating a new product there is no productPromise.
+		productChanged: function() {
+
+			var _this =this;
+			if( this.productPromise ){
+				this.productPromise.then(function(product) {
+
+					_this.set('productExists', true);
+
+
+					_this.product = product;
+					_this.id = product.get('id');
+					_this.name = product.get('name');
+					_this.description = product.get('description');
+					_this.quantity = product.get('quantity');
+					_this.price = product.get('price');
+
+					var images = product.get('images').then(function(images){
+						images.map(function(image){ 
+							_this.selectedImages.pushObject(image); 
+							return image
+						});
+					}).then(function(){
+						_this.get('model').forEach(function(img) {
+
+							_this.selectedImages.forEach(function(simg){
+
+								if(simg.get('id') === img.get('id')) {
+									img.set('isSelected', true);
+									_this.get('content').pushObject(img)
+									console.log(img)
+								}
+
+							})
+
+
+						})
+					});
+
+
+
+				});
+			}else{
+				_this.set('productExists', false);
+			}
+		}.observes('productPromise'),
+
+		//Observer: anytime our array of selected images changes, update
+		// our list of image_ids.
+		imagesIdsChanged: function() {
+			var ids = this.get('selectedImages').map(function(image) {
+				return image.get('id');
+			});
+			this.set('image_ids', ids);
+		}.observes('selectedImages.@each'),
+
+		//Observes: When selectedImages changes, do things.
+		selectedImagesChange: function() {
+			
+			var selectedImages = this.get('selectedImages');
+			//Highlight the image:
+			if( selectedImages.length == 0 ) {
+				this.set('imagesAreSelected', false);
+			}else{
+				this.set('imagesAreSelected', true);
+			}
+
+		}.observes('selectedImages.@each'),
+
+
+		//Preserves the drag sort order of the images.
+		updateSortOrder: function(indexes) { 
+			var selectedImages = this.get('selectedImages');
+		    selectedImages.beginPropertyChanges();
+		    selectedImages.forEach(function(item) {
+		      var index = indexes[item.get('id')];
+		      item.set('idx', index);
+		    }, selectedImages);
+		    selectedImages = selectedImages.sortBy('idx')
+		    selectedImages.endPropertyChanges();
+		    this.set('selectedImages', selectedImages);
+		    this.formChanged();
+		},
+
+		//Did the form data change?  
+		//Final validation happens here.
+		formChanged: function(){
+			if( this.name !== null ){
+				this.set('dataComplete', true);
+			}else{
+				this.set('dataComplete', false);
+			}
+		}.observes('name', 'description', 'price', 'quantity'),
+
+		//UI ACTIONS
 		actions: { 
 
-			nextStep: function() {
-				console.log("next step ", this);
+			//Click "create" in UI
+			create: function() {
+				var _this = this;
+				var data = {
+					name: this.get('name'),
+                    description: this.get('description'),
+                    currency: "usd",
+                    price: this.get('price'),
+                    image_ids: this.get('image_ids'),
+                    quantity: this.get('quantity')
+				}
+
+				//create & save
+				var product = this.store.createRecord('product', data);
+				
+				product.save().then(
+					function(result) { 
+						_this.transitionToRoute('product', result.get('id'));
+					},
+					function(error){
+						console.log("Error" , error);
+					}
+				);
+			},
+
+			//Click "save" in UI
+			save: function() {
+				var _this = this;
+				var data = this.getProperties('id', 'name', 'description', 'quantity', 'price', 'image_ids');
+				var product = this.store.update('product', data);
+
+				product.save().then(
+					function(result) { 
+						console.log(product)
+						_this.transitionToRoute('product', product);
+					},
+					function(error){
+						console.log("Error" , error);
+					}
+				);
+			},
+
+			//Click "delete" in UI
+			delete: function() {
+				var _this = this;
+				var user = this.get('controllers.auth').get('currentUser');
+				var product = this.get('product');
+				product.deleteRecord();
+				
+				product.save().then(
+					function(result) { 
+						_this.transitionToRoute('products', user.slug);
+					},
+					function(error){
+						console.log("Error" , error);
+					}
+				);
 			},
  			
  			//Image has been uploaded.
@@ -97,57 +295,42 @@
 					_this.unshiftObject(record);
 				});				
 			},
-		
 
+		
+			//Click "imageClick" in UI
 			imageClick: function(event) {
 				var image = event.get('image');
-				var imagesList = this.get('imagesList');
-				
-				//If image is in imagesList, then remove it.
-				var id = image.get('id');
-				var result = $.grep(imagesList, function(e){ return e.id == id; });
-				
+				var selectedImages = this.get('selectedImages'); 
+
 				//Only allow 5 images.
-				if( imagesList.length == 5 && result.length == 0 ) {
+				if( selectedImages.length == 5 && !selectedImages.contains(image) ) {
+
+					//Show our modal.
+					$('#imagePickerModal').modal('show');
 					return;
 				
 				//Add
-				}else if( result.length == 0 ) {
-					imagesList.push(image);
+				}else if( !selectedImages.contains(image) ) {
+					selectedImages.pushObject(image);
 
 				//Remove
 				}else{
-					imagesList.splice($.inArray(image, imagesList),1);
+					selectedImages.shiftObject(image);
 				}
 
 				//Toggle UI
 				event.toggleProperty('isSelected',true);
 
-				//Update imageList count.
-				this.set('imagesSelectedCount', imagesList.length);
+				this.formChanged();
 				
-				//Highlight the image:
-				if( imagesList.length == 0 ) {
-					this.set('imagesSelected', false);
-				}else{
-					this.set('imagesSelected', true);
-				}
-
-				console.log('images, ' , imagesList);
 			},
 
-			createProduct: function(){
-				
-				var title, product;
-				title = this.get('newProduct').trim();
-				if(!title) return;	
+			clickNext: function() {
+				this.set('showImagePicker', false);
+			},
 
-				//create & save
-				var product = this.store.createRecord('products', {title:title});
-				product.save();
-
-				//Goto
-				this.transitionToRoute('product', product);
+			clickPrev: function() {
+				this.set('showImagePicker', true);
 			}
 		}
 	});
