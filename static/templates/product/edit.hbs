@@ -1,0 +1,89 @@
+
+<div class="container">
+
+	<div id="stepOne" {{bind-attr class=":collapse showImagePicker:in:out"}}>
+		<div class="row  padding-top">
+			<div class="col-md-8 col-sm-6 col-xs-6">
+				<h2>
+				<small>Select up to 5 images.</small>
+				</h2>
+			</div>
+			<div class="col-md-4  col-sm-6 col-xs-6 verical-align text-right">
+				<button {{bind-attr class=":btn :btn-primary imagesAreSelected:enabled:disabled"}}  {{action "clickNext"}}>Next Step<span class="glyphicon glyphicon-chevron-right"></span></button> 
+			</div>
+		</div>
+
+
+		{{image-picker 
+			images=content
+			user_id=controllers.auth.currentUser.id
+			user_token=controllers.auth.token
+			refresh='refresh'
+			imageClick='imageClick'
+			imageCardReady='imageCardReady'
+		}}
+
+	</div>
+
+
+	<div id="stepTwo" {{bind-attr class=":collapse showImagePicker:out:in"}}>
+		<div class="row padding-top">
+			<div class="col-md-4 col-sm-4 col-xs-4 verical-align text-left">
+				
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-4 ">
+				
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-4 verical-align text-right">
+
+			{{#if productExists }}
+				<button {{action "delete" this}}  {{bind-attr class=":btn :btn-danger"}}>Delete</button> 
+
+				<button {{action "save" this}}  {{bind-attr class=":btn :btn-primary dataComplete:enabled:disabled"}}>Save<span class="glyphicon glyphicon-chevron-right"></span></button> 
+			{{ else }}
+				<button {{action "create" this}}  {{bind-attr class=":btn :btn-primary dataComplete:enabled:disabled"}}>Create<span class="glyphicon glyphicon-chevron-right"></span></button> 
+			{{/if}}
+
+
+			</div>
+		</div> 
+
+
+		<div class="row">
+			<div class="col-md-5"> 
+				<div class="row">
+ 
+					{{view Haul.JQuerySortableView contentBinding="selectedImages"}}
+
+
+					<div class="col-md-12">
+						<button {{action "clickPrev"}} class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span>Change Images</button> 
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-md-7">
+
+				<div class="form-group">
+					<label>Name:</label>
+					{{input type="text" name="name" value=name class="form-control"}}
+
+
+					<label>Description:</label>
+					{{textarea value=description name="description" cols="80" rows="6" class="form-control"}}
+
+
+					<label>Price:</label>
+					{{input type="text" name="price" value=price class="form-control"}}
+
+
+					<label>Quantity:</label>
+					{{input type="text" name="quantity" value=quantity class="form-control"}}
+	 
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
