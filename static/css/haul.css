@@ -518,6 +518,10 @@
   border: 8px solid #428bca;
 }
 
+.ember-view .selected .delete {
+  opacity: 0;
+}
+
 .sortable {
   list-style: none;
 }

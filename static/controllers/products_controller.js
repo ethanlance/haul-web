@@ -343,7 +343,6 @@
 				
 				//Remove
 				}else if( found ) { 
-					this.removeImage(image);
 					selectedImages.splice($.inArray(image, selectedImages),1); // remove image
 					selectedImages.splice(0,0,image); // add image to top of array
 					selectedImages.shiftObject(); // use ember's KVO shiftObject to remove image from top.
