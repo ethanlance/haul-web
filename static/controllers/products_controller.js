@@ -300,12 +300,25 @@
 				});				
 			},
 
-			//Click "imageDelete" in UI.  Destructive
-			imageDelete: function(event) {
-				var image = event.get('image');
-				image.deleteRecord();
-				image.save();
-				console.log("DELETE", image);
+			//Image Picker Component has deleted/destroyed this image.
+			//Update our selectedImages.
+			//Should an observer do this?
+			imageDeleted: function(image) {
+				var image = false;
+				var image_id = image.get('id');
+				var selectedImages = this.get('selectedImages'); 
+
+				selectedImages.forEach(function(result){
+					if(result.get('id') === image_id){
+						image = result;
+					}
+				});	
+				
+				if( image ) {
+					selectedImages.splice($.inArray(image, selectedImages),1); // remove image
+					selectedImages.splice(0,0,image); // add image to top of array
+					selectedImages.shiftObject(); // use ember's KVO shiftObject to remove image from top.
+				}
 			},
 		
 			//Click "imageClick" in UI
@@ -330,6 +343,7 @@
 				
 				//Remove
 				}else if( found ) { 
+					this.removeImage(image);
 					selectedImages.splice($.inArray(image, selectedImages),1); // remove image
 					selectedImages.splice(0,0,image); // add image to top of array
 					selectedImages.shiftObject(); // use ember's KVO shiftObject to remove image from top.

@@ -39,7 +39,7 @@ Haul.ImageCardComponent = Ember.Component.extend({
 	classNameBindings: ['isSelected:selected'],
 	isSelected: false,
 
-	modalStyle: "display:none",
+	deleteModalStyle: "display:none",
 	
 	didInsertElement: function() {
 		console.log("IMAGE Component")
@@ -56,16 +56,15 @@ Haul.ImageCardComponent = Ember.Component.extend({
 			this.sendAction('imageClick', this);	
 		},
 		imageDelete: function() {
-			this.set('modalStyle', 'display:block'); 
+			this.set('deleteModalStyle', 'display:block'); 
 		},
 
 		imageDeleteCancel: function() {
-			this.set('modalStyle', 'display:none');
+			this.set('deleteModalStyle', 'display:none');
 		},
 
-		imageDeleteProceed: function() {
-			this.set('modalStyle', 'display:none');
-			this.sendAction('imageDelete', this);	
+		imageDeleteProceed: function() {			
+			this.sendAction('imageDeleteProceed', this);	
 		}
 	}
 });
@@ -75,6 +74,9 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 
 	dropzone: null, 
  
+	errorDeleteModalStyle: "display:none",
+
+
 	didInsertElement: function(){
 		var _this = this; 
 
@@ -216,12 +218,30 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 	actions: {
 
 		//This passed the image click from Haul.ImageCardComponent up to our controller. 
-		imageClick: function(arg) {
-			this.sendAction('imageClick', arg);
+		imageClick: function(event) {
+			this.sendAction('imageClick', event);
 		},
 
-		imageDelete: function(arg) {
-			this.sendAction('imageDelete', arg);
+		closeModal: function(event) {
+			this.set('errorDeleteModalStyle', 'display:none');
+		},
+
+		imageDeleteProceed: function(event) {
+
+			var image = event.get('image');
+			var image_id = image.get('image_id')
+			var _this = this;
+
+			image.deleteRecord();
+			
+			image.save().then(function(success){
+				_this.sendAction('imageDeleted', image);	
+			},
+			function(error){
+				//Rollback.
+				image.rollback();
+				_this.set('errorDeleteModalStyle', 'display:block');
+			});
 		},
 	}
 

@@ -25,18 +25,22 @@ Haul.ImageSerializer =  DS.RESTSerializer.extend({
 			return;
 		}
 
-		var datas = payload.data.map(function(image){
-			var data =  {
-				original: image.locations.original,
-				small: image.locations.small,
-				thumb: image.locations.thumb,
-				caption: image.caption,
-				id: image.image_id,
-				created_at: image.created_at
-			}
-			image.locations.large ? data.large = image.locations.large : data.large = image.locations.small;
-			image.locations.medium ? data.medium = image.locations.medium : data.medium = image.locations.small;
-			return data;
+		var datas = [];
+		payload.data.forEach(function(image){
+			if( image.hasOwnProperty("image_id") ){
+				var data =  {
+					original: image.locations.original,
+					small: image.locations.small,
+					thumb: image.locations.thumb,
+					caption: image.caption,
+					id: image.image_id,
+					created_at: image.created_at
+				}
+				image.locations.large ? data.large = image.locations.large : data.large = image.locations.small;
+				image.locations.large ? data.large = image.locations.large : data.large = image.locations.small;
+				image.locations.medium ? data.medium = image.locations.medium : data.medium = image.locations.small;
+				datas.push(data);
+			} 
 		}); 
 
 		var payload = {'images': datas}; 
@@ -48,7 +52,7 @@ Haul.ImageSerializer =  DS.RESTSerializer.extend({
 		if( payload.data == "ok" ){
 			return;
 		}
-				
+
 		var image = payload.data;
 		var data = {
 			original: image.locations.original,
