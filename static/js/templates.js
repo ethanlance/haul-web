@@ -511,9 +511,9 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<div class=\"haul-grid-thumbs\" > \n	<div class=\"alert-wrapper\">\n		<div class=\"alert\">\n		<button ");
+  data.buffer.push("<div class=\"haul-grid-thumbs\" > \n	\n	<div class=\"delete text-right\">\n		<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "imageDelete", "image", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
-  data.buffer.push(" type=\"button\" class=\"btn btn-default btn-lg\">\n			<span class=\"glyphicon glyphicon-trash\"></span>\n		</button>\n		</div>\n	</div>\n	<img ");
+  data.buffer.push(" type=\"button\" class=\"btn btn-default btn-sm btn-no-radius\">\n			<span class=\"glyphicon glyphicon-trash\"></span>\n		</button>\n	</div>\n\n	<img ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "imageClick", "image", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push(" class=\"thumbnail haul-thumb\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{

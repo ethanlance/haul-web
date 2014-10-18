@@ -1,11 +1,11 @@
 <div class="haul-grid-thumbs" > 
-	<div class="alert-wrapper">
-		<div class="alert">
-		<button {{action "imageDelete" image}} type="button" class="btn btn-default btn-lg">
+	
+	<div class="delete text-right">
+		<button {{action "imageDelete" image}} type="button" class="btn btn-default btn-sm btn-no-radius">
 			<span class="glyphicon glyphicon-trash"></span>
 		</button>
-		</div>
 	</div>
+
 	<img {{action "imageClick" image}} class="thumbnail haul-thumb" {{bind-attr src=image.thumb}} width="155px" height="155px">
 </div> 
 
