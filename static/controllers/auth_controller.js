@@ -426,7 +426,7 @@
 						dataType: 'json'
 				}).then(
 					function(response) {
-						authController.send('authResponse', response);
+						authController.send('setupUser', response);
 					}, 
 
 					function(error) {
@@ -552,7 +552,7 @@
 						dataType: 'json'
 				}).then(
 					function(response) {
-						authController.send('authResponse', response);
+						authController.send('setupUser', response);
 					}, 
 
 					function(error) {
@@ -644,7 +644,7 @@
 						dataType: 'json'
 				}).then(
 					function(response) {
-						_this.authController.send('authResponse', response);
+						_this.authController.send('setupUser', response);
 					},
 					function(error) {	
 						_this.set('isProcessing', false);
