@@ -14,8 +14,7 @@ Haul.Router.map(function(){
 	//Profiles
 	this.resource('products', {path: "/seller/:user_slug"}, function() {
 		this.resource('product', {path: "/:product_slug"}, function() {
-			this.route('edit'),
-			this.route('comments')
+			this.route('edit')
 		});
 		this.route('new');
 	});
@@ -142,9 +141,9 @@ Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
 		return this.get('store').all('image');
 	},
  	setupController: function(controller, model) {
- 		controller.reset();	
+ 		controller.reset();	 
     },
-	renderTemplate: function(controller, model) {
+	renderTemplate: function(controller, model) {  
 		this.render('product/edit', {
 			into: 'application',
 			outlet: 'main',

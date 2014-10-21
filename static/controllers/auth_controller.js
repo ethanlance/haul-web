@@ -133,7 +133,7 @@
 					(function(_this) {
 						return function(user) {
 
-							_this.set("currentUser", user.getProperties('id', 'slug', 'name', 'email'))
+							_this.set("currentUser", user.getProperties('id', 'slug', 'name', 'email', 'picture'))
 
 							user.get('apiKeys').content.push(key);
 

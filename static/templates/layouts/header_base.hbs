@@ -13,32 +13,40 @@
 		</div>
 	</div>
 
- 	<div class="navbar-search collapse navbar-collapse">
+ 	<div class="navbar-center navbar-collapse collapse">
 		<form class="navbar-form" role="search">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="search for a product">
-				<span class="input-group-addon">{{#link-to "search"}}search{{/link-to}}</span>
+				<input type="text" class="form-control" placeholder="Search">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
 			</div>
 		</form>
 	</div>
 
-	<div class="navbar-collapse collapse navbar-right">
-		<ul class="nav navbar-nav">
-			
-			<li>{{#link-to "products"  controllers.auth.currentUser.slug }}My Products{{/link-to}}</li>
-			<li>{{#link-to "products.new"  controllers.auth.currentUser.slug }}Sell Something{{/link-to}}</li>
+	<div class="navbar-right navbar-collapse collapse">
+		  
+		<div class="btn-group navbar-profile">
+			<button type="button" class="btn btn-default">
+			{{#link-to 'products' controllers.auth.currentUser.slug}}
+				<img {{bind-attr src=controllers.auth.currentUser.picture}}> 
+				<span class="profile-name">{{ controllers.auth.currentUser.name }}</span>
+		  	{{/link-to}}
+			</button>
+		  <div class="btn-group">
+		    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		      <span class="glyphicon glyphicon-cog"></span>
+		    </button>
+		    <ul class="dropdown-menu" role="menu">
+				<li>{{#link-to 'account.settings'}}Settings{{/link-to}}</li> 
+				<li>{{#link-to 'account.help'}}Help{{/link-to}}</li> 
+				<li class="divider"></li> 
+				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+		    </ul>
+		  </div>
+		</div> 
 
-
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ controllers.auth.currentUser.name }}<span class="caret"></span></a>
-				<ul class="dropdown-menu" role="menu">
-					<li>{{#link-to 'products' controllers.auth.currentUser.slug }}Profile{{/link-to}}</li> 
-					<li>{{#link-to 'account.settings'}}Settings{{/link-to}}</li> 
-					<li>{{#link-to 'account.help'}}Help{{/link-to}}</li> 
-					<li class="divider"></li> 
-					<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
-				</ul>
-			</li>
-		</ul>
 	</div> 
 </div>

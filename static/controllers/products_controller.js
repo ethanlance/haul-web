@@ -58,7 +58,35 @@
 
 		commentCount: function() {
 			return this.get('model.comments').get('length');
-		}.property('comments')
+		}.property('comments'),
+
+		actions: {
+			//Click "delete" in UI
+			delete: function() {
+				$('#deleteModal').modal('show');
+			},
+
+			deleteCancel: function() {
+				$('#deleteModal').modal('hide');
+			},
+
+			deleteProceed: function() {
+				$('#deleteModal').modal('hide');
+				var _this = this;
+				var user = this.get('controllers.auth').get('currentUser');
+				var product = this.get('product');
+				product.deleteRecord();
+				
+				product.save().then(
+					function(result) { 
+						_this.transitionToRoute('products', user.slug);
+					},
+					function(error){
+						console.log("Error" , error);
+					}
+				);
+			}
+		}
 	});
 
 
@@ -110,6 +138,9 @@
 			this.set('price',null);
 			this.set('selectedImages',[]);
 			this.set('productPromise', null);
+			this.forEach(function(img) {
+				img.set('isSelected', false);
+			});
 		},
 
 		// Observer: When editing a product we start with a productPromise.
@@ -143,7 +174,6 @@
 							_this.selectedImages.forEach(function(simg){
 								//Set this image isSelected.
 								if(simg.get('id') === img.get('id')) {
-									console.log("BOOOOM", _this.selectedImages)
 									img.set('isSelected', true);
 								}
 							});
@@ -243,32 +273,6 @@
 					function(result) { 
 						console.log(product)
 						_this.transitionToRoute('product', product);
-					},
-					function(error){
-						console.log("Error" , error);
-					}
-				);
-			},
-
-			//Click "delete" in UI
-			delete: function() {
-				$('#deleteModal').modal('show');
-			},
-
-			deleteCancel: function() {
-				$('#deleteModal').modal('hide');
-			},
-
-			deleteProceed: function() {
-				$('#deleteModal').modal('hide');
-				var _this = this;
-				var user = this.get('controllers.auth').get('currentUser');
-				var product = this.get('product');
-				product.deleteRecord();
-				
-				product.save().then(
-					function(result) { 
-						_this.transitionToRoute('products', user.slug);
 					},
 					function(error){
 						console.log("Error" , error);

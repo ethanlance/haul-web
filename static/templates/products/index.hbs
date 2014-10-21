@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 	    	<div class="row">
-		    	<div class="col-md-12 haul-profile-header haul-font">
+		    	<div class="col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font">
 
 					<div class="media">
 					{{#link-to "products" this class="pull-left"}}
@@ -17,14 +17,24 @@
 					 {{/link-to}}
 					  <div class="media-body">
 					     	<h1 class="media-heading">{{name}}</h1>
-	    					<h3>
+	    					<div>
 	    						<button class="btn btn-primary">follow</button>
-	    						<span class="label">175 Followers - Following 15</span>
-	    					</h3>
+	    						<button class="btn btn-default">
+	    							<span class="glyphicon glyphicon-envelope"></span>
+	    						</button>
+	    						<div><span class="medium">175 Followers - Following 15</span></div>
+	    					</div>
 					  </div>
 					</div> 
 
 		    	</div>
+
+		    	{{#if isProfileOwner }}
+		    	<div class="col-md-3 col-sm-3 col-xs-12 haul-profile-header haul-font text-center padding-top">
+		    		{{#link-to 'products.new' currentUser.slug }}<button class="btn btn-success">Sell Something</button>{{/link-to}}
+		    	</div>
+		    	{{/if}}
+
 		    </div>
 		</div>
 	</div>

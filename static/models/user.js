@@ -38,7 +38,8 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 				name: payload.data.name,
 				email: payload.data.email,
 				id: payload.data.user_id,
-				slug: payload.data.user_id //slug
+				slug: payload.data.user_id, //slug
+				picture: 'http://www.top-ten.tv/wp-content/uploads/2013/01/image4.jpeg'
 			}]
 		}; 
 
