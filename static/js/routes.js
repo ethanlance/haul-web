@@ -87,30 +87,25 @@ Haul.AboutRoute = Ember.Route.extend({
 	},
 })
 
-
-//AUTH - Routes that require authentication should extend this object.
-Haul.AuthenticatedRoute = Ember.Route.extend({
-
+//Anon - Routes that require authentication should extend this object.
+Haul.AnonRoute = Ember.Route.extend({
+	beforeModel: function(transition) {
+		if (Ember.isEmpty(this.controllerFor('auth').get('token'))) {
+		}else{
+			this.controllerFor('auth').resetHeader();
+		}
+	},
 	renderTemplate: function(){
 		this.render('layouts/header_base', {
 			into: 'application',
 			outlet: 'header'
 		});
-	},
-    beforeModel: function(transition) {
-		if (Ember.isEmpty(this.controllerFor('auth').get('token'))) {
-			return this.redirectToLogin(transition);
-		}else{
-			this.controllerFor('auth').resetHeader();
-		}
-	},
-	redirectToLogin: function(transition) {
-		this.controllerFor('auth').set('attemptedTransition', transition.targetName);
-		return this.transitionTo('login');
-	}
+	} 
 });
 
-Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
+
+
+Haul.ProductsRoute = Haul.AnonRoute.extend({
 	model: function(params) {
 		return this.store.find('user', params.user_slug);
 	},	
@@ -120,13 +115,47 @@ Haul.ProductsRoute = Haul.AuthenticatedRoute.extend({
 });
 
 
-Haul.ProductRoute = Ember.Route.extend({
+Haul.ProductRoute = Haul.AnonRoute.extend({
 	model: function(params) {
 		return this.store.find('product', params.product_slug);
 	},
 	serialize: function(model) {
     	return { product_slug: model.get('id') };
   	},
+});
+
+
+
+
+
+
+
+
+
+/* 
+	AUTH - Routes that require authentication should extend this object.
+*/
+Haul.AuthenticatedRoute = Ember.Route.extend({
+	controllerName: "auth",
+	renderTemplate: function(){ 
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+	},
+    beforeModel: function(transition) {
+		if (Ember.isEmpty(this.controllerFor('auth')) || Ember.isEmpty(this.controllerFor('auth').get('token'))) {
+			return this.redirectToLogin(transition);
+		}else{
+			this.controllerFor('auth').resetHeader();
+		}
+	},
+	redirectToLogin: function(transition) {
+		if(!Ember.isEmpty(transition)) {
+			this.controllerFor('auth').set('attemptedTransition', transition.targetName);	
+		}
+		return this.transitionTo('login');
+	}
 });
 
 Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({ 
@@ -153,10 +182,12 @@ Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
 	}
 });
 
+//NEEDS AUTH
 Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({ 
 	controllerName: "product-edit",
 	//Get the users images from api.
 	beforeModel: function() {
+		this._super();
 		var user = this.controllerFor('auth').get('currentUser');
 		this.store.findQuery('image', user.id );
 		this.controllerFor('product-edit').reset();
@@ -178,19 +209,6 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 	}
 });
 
-Haul.ProductCommentsRoute = Ember.Route.extend({
-	model: function() {
-		return this.modelFor('product').get('comments');
-    },
-	renderTemplate: function(controller, model) {
-		this.render('comments/comments', {
-			into: 'products/product',
-			outlet: 'main',
-			model: model,
-			controller: controller
-		});
-	}
-});
 
 //MESSAGES
 Haul.MessagesRoute = Haul.AuthenticatedRoute.extend({

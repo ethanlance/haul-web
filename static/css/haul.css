@@ -115,7 +115,6 @@
  
 
 .navbar-center {
-	border:1px solid red;
 	position: absolute;
 	width: 800px;
 	left: 0;
@@ -128,6 +127,11 @@
 }
 .navbar-right.in{
 	overflow-y:visible;
+}
+
+.navbar-right .signup{
+	border: 1px solid #0192B5;
+	color: #0192B5;
 }
 
 .navbar-form {

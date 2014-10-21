@@ -27,7 +27,8 @@
 	</div>
 
 	<div class="navbar-right navbar-collapse collapse">
-		  
+		
+		{{#if  controllers.auth.currentUser }}
 		<div class="btn-group navbar-profile">
 			<button type="button" class="btn btn-default">
 			{{#link-to 'products' controllers.auth.currentUser.slug}}
@@ -47,6 +48,16 @@
 		    </ul>
 		  </div>
 		</div> 
+
+		{{else}}
+
+
+		<div class="navbar-profile">
+			{{#link-to 'signup'}}<button type="button" class="btn btn-default signup">SIGNUP</button>{{/link-to}}
+			{{#link-to 'login'}}<button type="button" class="btn btn-default">LOGIN</button>{{/link-to}}
+		</div>
+
+		{{/if}}
 
 	</div> 
 </div>

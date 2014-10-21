@@ -20,7 +20,8 @@
 		//Is currentUser viewing his own page?
 		isProfileOwner: false,
 		isProfileOwnerChanged: function() {
-			if( this.get('id') === this.get('currentUser').id) {
+
+			if(!Ember.isEmpty(this.get('currentUser')) && this.get('id') === this.get('currentUser').id) {
 				this.set('isProfileOwner', true);
 			}
 		}.observes('model'),
@@ -31,6 +32,10 @@
 		
 	});  
 
+	Haul.ProductController = Ember.ObjectController.extend({ 
+		needs: ["auth"], 
+		currentUser: Ember.computed.alias('controllers.auth.currentUser')
+	});
 
 	//SHOW one product
 	Haul.ProductIndexController = Ember.ObjectController.extend({ 
@@ -41,9 +46,8 @@
 		imagez: false,
 		isProfileOwner: false,
 		
-		setup: function() {
-			
-			if( this.get('user').id === this.get('currentUser').id) {
+		setup: function() { 
+			if( !Ember.isEmpty(this.get('currentUser')) && this.get('user').id === this.get('currentUser').id) {
 				this.set('isProfileOwner', true);
 			}
 			
