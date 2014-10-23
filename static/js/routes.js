@@ -123,13 +123,7 @@ Haul.ProductsRoute = Haul.AnonRoute.extend({
 	},	
 	serialize: function(model) {
  	   return { user_slug: model.get('id') };
- 	},
-	renderTemplate: function(){
-		this.render('layouts/header_base', {
-			into: 'application',
-			outlet: 'header'
-		});
-	}
+ 	}
 });
 
 Haul.ProductsIndexRoute = Haul.AnonRoute.extend({
@@ -213,8 +207,8 @@ Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
 		this.render('product/edit', {
 			into: 'application',
 			outlet: 'main',
-			model: model,
-			controller: controller
+			controller: controller,
+			model: model
 		});
 	}
 });
