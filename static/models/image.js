@@ -36,10 +36,9 @@ Haul.ImageSerializer =  DS.RESTSerializer.extend({
 					id: image.image_id,
 					created_at: image.created_at
 				}
-
-				//Note: Probably don't want to do this for production.
-				image.locations.large ? data.large = image.locations.large : data.large = image.locations.original;
-				image.locations.medium ? data.medium = image.locations.medium : data.medium = image.locations.original;
+ 
+				image.locations.large ? data.large = image.locations.large : data.large = null;
+				image.locations.medium ? data.medium = image.locations.medium : data.medium = null;
 				
 				datas.push(data);
 			} 
@@ -64,10 +63,9 @@ Haul.ImageSerializer =  DS.RESTSerializer.extend({
 			id: image.image_id,
 			created_at: image.created_at
 		};
-
-		//Note: Probably don't want to do this for production.
-		image.locations.large ? data.large = image.locations.large : data.large = image.locations.small;
-		image.locations.medium ? data.medium = image.locations.medium : data.medium = image.locations.small;
+ 
+		image.locations.large ? data.large = image.locations.large : data.large = null;
+		image.locations.medium ? data.medium = image.locations.medium : data.medium = null;
 
 		var payload ={'image': data}; 
 		return this._super(store, primaryType, payload);

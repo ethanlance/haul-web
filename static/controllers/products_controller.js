@@ -13,23 +13,24 @@
 	
 
 	//SHOW all user's products
-	Haul.ProductsIndexController = Ember.ObjectController.extend({
+	Haul.ProductsIndexController = Ember.ArrayController.extend({
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
-		//Is currentUser viewing his own page?
+		//This array controller sorts it's images
+		sortProperties: ['id'],
+		sortAscending: false,
+
+		// //Is currentUser viewing his own page?
 		isProfileOwner: false,
 		isProfileOwnerChanged: function() {
+			console.log("MODEL", this.model);
 
-			if(!Ember.isEmpty(this.get('currentUser')) && this.get('id') === this.get('currentUser').id) {
+			if(!Ember.isEmpty(this.get('currentUser')) && this.user.get('id') === this.get('currentUser').id) {
 				this.set('isProfileOwner', true);
 			}
 		}.observes('model'),
 
-		productCount: function() {
-			return this.get('model.products').get('length');            
-		}.property('products'),  
-		
 	});  
 
 	Haul.ProductController = Ember.ObjectController.extend({ 
@@ -43,7 +44,6 @@
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
 		//Is currentUser viewing his own page?
-		imagez: false,
 		isProfileOwner: false,
 		
 		setup: function() { 
@@ -52,11 +52,7 @@
 			}
 			
 			//Reload the model 
-			var model = this.get('model');
-			var _this = this;
-			model.reload().then(function(product){
-				_this.set('imagez', product.get('images'))
-			});
+			this.get('model').reload();
 			
 		}.observes('model'),
 
@@ -78,7 +74,7 @@
 				$('#deleteModal').modal('hide');
 				var _this = this;
 				var user = this.get('controllers.auth').get('currentUser');
-				var product = this.get('product');
+				var product = this.model;
 				product.deleteRecord();
 				
 				product.save().then(
@@ -109,23 +105,15 @@
 		showImagePicker: false,
 		imagesAreSelected: false,
 		productExists: false,
-		dataComplete: false, //True when images, title, and description are filled out.
 
 		//Product
-		product: null,
+		product: false,
 
 		//This product's image objects.
 		selectedImages: [],
 
 		//This product's image_ids 
 		image_ids:[],
-
-		//This product's meta properties.
-		id: null,
-		name: null,
-		description: null,
-		quantity: null,
-		price: null,
 
 
 		//Blow away all property values
@@ -135,11 +123,6 @@
 			this.set('productExists',false);
 			this.set('dataComplete',false);
 			this.set('product',null);
-			this.set('id',null);
-			this.set('name',null);
-			this.set('description',null);
-			this.set('quantity',null);
-			this.set('price',null);
 			this.set('selectedImages',[]);
 			this.set('productPromise', null);
 			this.forEach(function(img) {
@@ -158,12 +141,8 @@
 					_this.set('productExists', true);
 					_this.set('showImagePicker', false);
 
-					_this.product = product;
-					_this.id = product.get('id');
-					_this.name = product.get('name');
-					_this.description = product.get('description');
-					_this.quantity = product.get('quantity');
-					_this.price = product.get('price');
+					_this.product = product; 
+
 
 					//What images does this product have?
 					var images = product.get('images').then(function(images){
@@ -214,17 +193,6 @@
 		}.observes('selectedImages.@each'),
 
 
-		//Observes: Did the form data change?  
-		//Final validation happens here.
-		formChanged: function(){
-			if( this.name !== null ){
-				this.set('dataComplete', true);
-			}else{
-				this.set('dataComplete', false);
-			}
-		}.observes('name', 'description', 'price', 'quantity'),
-
-
 		//Preserves the drag sort order of the images.
 		updateSortOrder: function(indexes) { 
 			var selectedImages = this.get('selectedImages');
@@ -238,44 +206,28 @@
 		    this.set('selectedImages', selectedImages);
 		    this.formChanged();
 		},
-
+ 
 		//UI ACTIONS
 		actions: { 
 
-			//Click "create" in UI
-			create: function() {
-				var _this = this;
-				var data = {
-					name: this.get('name'),
-                    description: this.get('description'),
-                    currency: "usd",
-                    price: this.get('price'),
-                    image_ids: this.get('image_ids'),
-                    quantity: this.get('quantity')
-				}
+			submit: function() {
+				var product = this.get('product');
 
-				//create & save
-				var product = this.store.createRecord('product', data);
+				product.set('image_ids', this.get('image_ids'));
+
+				//Refresh the image models. Get data from api.
+				var _this = this;
+				this.get('image_ids').forEach(function(id){
+					var img = _this.store.find('image', id )
+					img.then(function(i) {
+						i.reload();
+					});
+				});
 				
-				product.save().then(
-					function(result) { 
-						_this.transitionToRoute('product', result.get('id'));
-					},
-					function(error){
-						console.log("Error" , error);
-					}
-				);
-			},
 
-			//Click "save" in UI
-			save: function() {
 				var _this = this;
-				var data = this.getProperties('id', 'name', 'description', 'quantity', 'price', 'image_ids');
-				var product = this.store.update('product', data);
-
 				product.save().then(
 					function(result) { 
-						console.log(product)
 						_this.transitionToRoute('product', product);
 					},
 					function(error){
@@ -283,6 +235,8 @@
 					}
 				);
 			},
+
+			
  			
  			//Image has been uploaded.
  			//Push it into the store.
@@ -311,9 +265,8 @@
 			//Image Picker Component has deleted/destroyed this image.
 			//Update our selectedImages.
 			//Should an observer do this?
-			imageDeleted: function(image) {
+			imageDeleted: function(image_id) {
 				var image = false;
-				var image_id = image.get('id');
 				var selectedImages = this.get('selectedImages'); 
 
 				selectedImages.forEach(function(result){
@@ -359,11 +312,7 @@
 				}else{
 					selectedImages.pushObject(image);
 					event.set('isSelected',true);
-					console.log("add",image, selectedImages);
 				}
-
-				this.formChanged();
-				
 			},
 
 			clickNext: function() {

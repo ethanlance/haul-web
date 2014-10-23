@@ -16,9 +16,11 @@
 		{{!-- Images  --}}
 		<div class="col-md-6 col-sm-12 col-xs-12">
 
-		{{#if imagez }}
-			{{view Haul.CarouselView contentBinding="imagez"}}
- 		{{/if}}
+		{{#if images}}
+			{{view Haul.CarouselView contentBinding="images"}}
+		{{/if}}
+		
+ 		
  		
 		</div>
 
@@ -57,7 +59,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							
-							<span class="haul-font"><strong>From The Seller:</strong></span>
+							<span class="haul-font"><strong>Seller:</strong></span>
 							
 							<div class="media">
 								<div class="pull-left">
@@ -67,7 +69,10 @@
 		    						<br/>
 		    						{{#link-to 'products' user}}{{ user.name }}{{/link-to}}
 	    						</div>
-		    					<div class="media-body">{{ description }}</div>
+		    					<div class="media-body">
+		    						<h4>{{name}}</h4>
+		    						{{ description }}
+		    					</div>
 		    				</div>
 						</div>
 					</div> 

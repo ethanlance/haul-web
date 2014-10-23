@@ -56,6 +56,17 @@ Haul.ApplicationRoute = Ember.Route.extend({
             controller: controller,
             into: "application" // important when using at root level
         });
+    },
+
+    //This is the end of the road for actions.
+    actions: {
+    	
+    	//Components & Views emit a call to this action.
+    	//Allows components to tell the application to transistion to a new route.
+    	//Note, components do not have access to call "transitionTo" method.
+    	clickTransition: function(route, arg) {  
+    		this.transitionTo(route, arg);
+    	}
     }
 });
 
@@ -72,7 +83,7 @@ Haul.BaseRoute = Ember.Route.extend({
 		}else{
 			return this.transitionTo('about');
 		}
-	} 
+	}
 });
 
 //About route is the default landing page for anon users.  This route 
@@ -84,8 +95,8 @@ Haul.AboutRoute = Ember.Route.extend({
 			outlet: 'header'
 		});
 		this.render('home');
-	},
-})
+	}
+});
 
 //Anon - Routes that require authentication should extend this object.
 Haul.AnonRoute = Ember.Route.extend({
@@ -100,18 +111,43 @@ Haul.AnonRoute = Ember.Route.extend({
 			into: 'application',
 			outlet: 'header'
 		});
-	} 
+	}
 });
 
 
 
 Haul.ProductsRoute = Haul.AnonRoute.extend({
 	model: function(params) {
+		console.log("THERE?", params)
 		return this.store.find('user', params.user_slug);
 	},	
 	serialize: function(model) {
  	   return { user_slug: model.get('id') };
- 	}
+ 	},
+	renderTemplate: function(){
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+	}
+});
+
+Haul.ProductsIndexRoute = Haul.AnonRoute.extend({
+	model: function(params) {
+		console.log("HEREsh ", this.modelFor('products').get('products'))
+		return this.modelFor('products').get('products');
+	},
+ 	setupController: function(controller, model) {
+ 		controller.set('user', this.modelFor('products'));
+ 		controller.set('content', model);
+ 	},
+	renderTemplate: function(){
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('products/index')
+	}
 });
 
 
@@ -121,7 +157,7 @@ Haul.ProductRoute = Haul.AnonRoute.extend({
 	},
 	serialize: function(model) {
     	return { product_slug: model.get('id') };
-  	},
+  	}
 });
 
 
@@ -171,6 +207,7 @@ Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
 	},
  	setupController: function(controller, model) {
  		controller.reset();	 
+ 		controller.set('product', this.store.createRecord('product'))
     },
 	renderTemplate: function(controller, model) {  
 		this.render('product/edit', {

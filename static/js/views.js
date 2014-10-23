@@ -117,7 +117,7 @@ Haul.CarouselView = Ember.View.extend({
 			classNames: ['item'],
 			classNameBindings: ['content.isActive:active'],
 			template: Ember.Handlebars.compile('\
-				<img {{bind-attr src="view.content.large"}} alt=""/>\
+				<img {{bind-attr src="view.content.medium"}} alt=""/>\
 				<div class="carousel-caption">\
 					<h4>{{view.content.title}}</h4>\
 					<p>{{view.content.content}}</p>\

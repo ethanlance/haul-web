@@ -8,23 +8,28 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 	quantity: DS.attr( 'string' ),
 	image_ids: DS.attr( 'string' ),
 
+	image: DS.belongsTo('image',{async:true}),
 	images: DS.hasMany('image',{async:true}),
 	user: DS.belongsTo('user'),
 	
 	comments: DS.hasMany('comment',{async:true}),
 
-	image: function() {
-		var promise = this.get('images').then(function(images){
-			var image = images.shiftObject();
-			return image;
-		});
-		return DS.PromiseObject.create({
-			promise: promise
-		})
-	}.property(),
-
 	validations: { 
 		name: {
+		 	presence: true,
+		 	length: { minimum: 2 }
+		},
+		description: {
+		 	presence: true,
+		 	length: { maximum: 500 }
+		},
+		quantity: {
+			numericality: true,
+		 	presence: true,
+		 	length: { maximum: 100 }
+		},
+		price: {
+			numericality: true,
 		 	presence: true
 		}
 	}
@@ -104,7 +109,7 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 				description: product.description,
 				price: product.price,
 				quantity: product.quantity,
-				images: [product.image_id],
+				image: product.image_id,
 				user: product.user_id,
 			}
 		}); 
@@ -125,6 +130,7 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 			price: payload.data.price,
 			quantity: payload.data.quantity,
 			images: payload.data.image_ids,
+			image: payload.data.image_ids[0],
 			user: payload.data.user_id
 		};
 

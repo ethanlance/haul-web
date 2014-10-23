@@ -1,3 +1,12 @@
+Haul.ProfileUserComponent = Ember.Component.extend({
+	actions: {
+		clickProfile: function() {  
+			this.sendAction("clickTransition", "products", this.user.id);
+		}
+	}
+});
+
+
 /**
 	ImageCardComponent is one image.  
 	THe image in the ImageCardComponent sends an onclick event 'imageClick'
@@ -12,12 +21,10 @@ Haul.ImageCardComponent = Ember.Component.extend({
 	deleteModalStyle: "display:none",
 	
 	didInsertElement: function() {
-		console.log("IMAGE Component")
 		this.image.get('isSelected') ? this.set('isSelected', true) : this.set('isSelected', false);
 	},
 
 	observe: function() { 
-		console.log("BOOM")
 		this.image.get('isSelected') ? this.set('isSelected', true) : this.set('isSelected', false);
 	}.observes('image.isSelected'),
 
@@ -149,8 +156,7 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 
 		//ERROR, figure error handling here.
 		this.dropzone.on('error', function(file, response) { 
-			console.log("ERROR", response);
-			return;
+			
 			var alertWrapper = file.previewElement.querySelector('.alert-wrapper');
 			$(alertWrapper).removeClass('hide');
 			
@@ -175,7 +181,7 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 
 		//SUCCESS, reset Dropzone and hand the image file off to Ember.
 		this.dropzone.on('success', function(file, response) {	 		
-			console.log("SUCCESS", response);			
+			
 			window.clearInterval(file.progressInterval);
 
 			//Get the base 64 thumb.
@@ -212,13 +218,13 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 		imageDeleteProceed: function(event) {
 
 			var image = event.get('image');
-			var image_id = image.get('image_id')
+			var image_id = image.get('id')
 			var _this = this;
 
 			image.deleteRecord();
 			
 			image.save().then(function(success){
-				_this.sendAction('imageDeleted', image);	
+				_this.sendAction('imageDeleted', image_id);	
 			},
 			function(error){
 				//Rollback.

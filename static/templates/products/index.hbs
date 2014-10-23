@@ -1,22 +1,21 @@
-<div class="container-fluid">
+<div class="container-fluid padding-bottom padding-top">
 	<div class="row">
 		<div class="col-md-12">
 	    	<div class="row">
 		    	<div class="col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font">
 
 					<div class="media">
-					{{#link-to "products" this class="pull-left"}}
-					  
-					  	<div class="profile-circular-mask">
-					  	{{#if picture}}
-					    	<img {{bind-attr src=picture}}> 
-					    {{else}}
 
+					{{#link-to "products" user class="pull-left"}}
+					  	<div class="profile-circular-mask">
+					  	{{#if user.picture}}
+					    	<img {{bind-attr src=user.picture}}> 
 					    {{/if}}
 					    </div>
 					 {{/link-to}}
+
 					  <div class="media-body">
-					     	<h1 class="media-heading">{{name}}</h1>
+					     	<h1 class="media-heading">{{user.name}}</h1>
 	    					<div>
 	    						<button class="btn btn-primary">follow</button>
 	    						<button class="btn btn-default">
@@ -43,39 +42,35 @@
 
 
 
-{{#if content.products}}
+{{#if content}}
 {{else}}
 <div class="container">
 	<div class="haul-container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h3>{{name}} has nothing to sell yet.</h3>
+				<h3>{{user.name}} has nothing to sell yet.</h3>
 			</div>
 		</div>
 	</div>
 </div>
 {{/if}}
  
-<div class="haul-grid">
+<div class="container">
 	
-    {{#each products}}
+    {{#each this}}
     	{{#link-to 'product' this }}
     	<div class="haul-grid-li"> 
-	   		<div class="dummy"></div>
-		    <div class="photo-wrapper">
-				
-				<img class="thumbnail" {{bind-attr src=image.medium}}>
+    	
+				<img class="thumbnail" {{bind-attr src=image.small}}>
 
 				{{#if sold}}
 					<div class="sold">Sold</div>
 				{{/if}}
 				
 				<div class="info">		
-			 	 	<div class="title"> {{title}}
-			 	 		<div class="price"> ${{price}}</div>  
-			 	 	</div>
+			 	  	<div class="price"> ${{price}}</div>   
 				</div>
-			</div>
+			
 	 	</div>
 	 	{{/link-to}}	
 	{{/each}}
