@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid padding-bottom padding-top">
 	<div class="row">
 		<div class="col-md-12">
@@ -25,15 +27,7 @@
 	    					</div>
 					  </div>
 					</div> 
-
-		    	</div>
-
-		    	{{#if isProfileOwner }}
-		    	<div class="col-md-3 col-sm-3 col-xs-12 haul-profile-header haul-font text-center padding-top">
-		    		{{#link-to 'products.new' currentUser.slug }}<button class="btn btn-success">Sell Something</button>{{/link-to}}
-		    	</div>
-		    	{{/if}}
-
+		    	</div> 
 		    </div>
 		</div>
 	</div>
@@ -43,7 +37,12 @@
 
 
 {{#if content}}
+
 {{else}}
+
+	{{#if isProfileOwner }}
+
+	{{else}}
 <div class="container">
 	<div class="haul-container">
 		<div class="row">
@@ -53,10 +52,28 @@
 		</div>
 	</div>
 </div>
+	{{/if}}
 {{/if}}
  
 <div class="container">
 	
+
+	{{#if isProfileOwner }}
+	<div class="haul-grid-li ">	
+		<div class="sell">
+			{{#link-to 'products.new' currentUser.slug }}
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					<div class="glyphicon glyphicon-plus-sign"></div><br/>	
+					Sell Something
+				</div>
+			</div>
+			{{/link-to}}
+		</div>
+	</div>
+	{{/if}}
+
+
     {{#each this}}
     	{{#link-to 'product' this }}
     	<div class="haul-grid-li"> 

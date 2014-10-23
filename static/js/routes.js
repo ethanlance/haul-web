@@ -204,6 +204,7 @@ Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
  		controller.set('product', this.store.createRecord('product'))
     },
 	renderTemplate: function(controller, model) {  
+		this._super();
 		this.render('product/edit', {
 			into: 'application',
 			outlet: 'main',
