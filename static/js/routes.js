@@ -1,3 +1,40 @@
+
+/**
+	ROUTES:
+
+	/
+	/about
+	/help
+
+	AUTH
+	/login
+	/logout
+	/signup
+	/register
+	/forgot-password
+	/reset-password
+
+	SELLER
+	/seller/:seller_slug
+	/seller/:seller_slug/:product_slug
+	/seller/:seller_slug/:product_slug/edit
+	/seller/:seller_slug/product/new
+	/seller/:seller_slug/store/new
+
+	STORE
+	/store/:store_slug/
+	/store/:store_slug/edit
+	/store/:store_slug/:store_product_slug
+	/store/:store_slug/:store_product_slug/edit
+	
+	PROFILE
+	/account/messages
+	/account/settings
+
+**/
+
+
+
 //Turn off hash bang in URLs.
 Haul.Router.reopen({
   location: 'history'
@@ -12,13 +49,13 @@ Haul.Router.map(function(){
 	this.resource('about');
 
 	//Profiles
-	this.resource('products', {path: "/seller/:user_slug"}, function() {
+	this.resource('seller', {path: "/seller/:user_slug"}, function() {
 		this.resource('product', {path: "/:product_slug"}, function() {
 			this.route('edit')
 		});
-		this.route('new');
+		this.route('new-product');
+		this.route('new-store');
 	});
-
 
 	//Auth
 	this.resource('login');
@@ -30,15 +67,6 @@ Haul.Router.map(function(){
 	this.resource('signup');
 	this.resource('signupconfirm', {path: "register"});
 
-	//Account
-	this.resource('account', function() {
-		this.route('settings');
-		this.route('profile');
-		this.route('help');
-	});
-
-	//Messages
-	this.resource('messages');
 
 	//Search
 	this.resource('search');
@@ -79,7 +107,7 @@ Haul.BaseRoute = Ember.Route.extend({
 		var user = this.controllerFor('auth').get('currentUser');
 		
 		if( !Ember.isEmpty(user) ) {
-			return this.transitionTo('products', user.slug);
+			return this.transitionTo('seller', user.slug);
 		}else{
 			return this.transitionTo('about');
 		}
@@ -115,10 +143,12 @@ Haul.AnonRoute = Ember.Route.extend({
 });
 
 
-
-Haul.ProductsRoute = Haul.AnonRoute.extend({
+/**
+	Single seller view 
+		- Display seller's products
+**/	
+Haul.SellerRoute = Haul.AnonRoute.extend({
 	model: function(params) {
-		console.log("THERE?", params)
 		return this.store.find('user', params.user_slug);
 	},	
 	serialize: function(model) {
@@ -126,13 +156,12 @@ Haul.ProductsRoute = Haul.AnonRoute.extend({
  	}
 });
 
-Haul.ProductsIndexRoute = Haul.AnonRoute.extend({
+Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 	model: function(params) {
-		console.log("HEREsh ", this.modelFor('products').get('products'))
-		return this.modelFor('products').get('products');
+		return this.modelFor('seller').get('products');
 	},
  	setupController: function(controller, model) {
- 		controller.set('user', this.modelFor('products'));
+ 		controller.set('user', this.modelFor('seller'));
  		controller.set('content', model);
  	},
 	renderTemplate: function(){
@@ -140,17 +169,31 @@ Haul.ProductsIndexRoute = Haul.AnonRoute.extend({
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('products/index')
+		this.render('products/index');
 	}
 });
 
 
+
+/**
+	Single Product View
+**/
 Haul.ProductRoute = Haul.AnonRoute.extend({
+	alreadyReloaded: false,
 	model: function(params) {
+		this.set('alreadyReloaded', true)
 		return this.store.find('product', params.product_slug);
 	},
 	serialize: function(model) {
     	return { product_slug: model.get('id') };
+  	},
+  	setupController: function(controller, model) {
+  		if(this.get('alreadyReloaded')){
+  			controller.set('model', model );
+  			this.set('alreadyReloaded', false)
+  		}else{
+			controller.set('model', model.reload());
+  		}
   	}
 });
 
@@ -188,7 +231,23 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 	}
 });
 
-Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({ 
+
+Haul.SellerNewStoreRoute = Haul.AuthenticatedRoute.extend({ 
+	controllerName: "store-edit",
+	//Get the users images from api.
+	renderTemplate: function(controller, model) {  
+		this._super();
+		this.render('store/edit', {
+			into: 'application',
+			outlet: 'main',
+			controller: controller,
+			model: model
+		});
+	}
+});
+
+
+Haul.SellerNewProductRoute = Haul.AuthenticatedRoute.extend({ 
 	controllerName: "product-edit",
 	//Get the users images from api.
 	beforeModel: function() {
@@ -201,7 +260,7 @@ Haul.ProductsNewRoute = Haul.AuthenticatedRoute.extend({
 	},
  	setupController: function(controller, model) {
  		controller.reset();	 
- 		controller.set('product', this.store.createRecord('product'))
+ 		controller.set('product', this.store.createRecord('product'));
     },
 	renderTemplate: function(controller, model) {  
 		this._super();
@@ -242,16 +301,6 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 });
 
 
-//MESSAGES
-Haul.MessagesRoute = Haul.AuthenticatedRoute.extend({
-	renderTemplate: function() {
-		this._super();
-		this.render('messages', {
-			into: 'application',
-			outlet: 'main'
-		});
-	}
-});
 
 
 // AUTH

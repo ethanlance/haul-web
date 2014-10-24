@@ -139,7 +139,7 @@
 
 							//TRANSITION:
 							if(Ember.isEmpty(attemptedTrans)){ 
-								_this.transitionToRoute("products", user);
+								_this.transitionToRoute("seller", user);
 							}else{
 								_this.transitionToRoute(attemptedTrans);
 							}

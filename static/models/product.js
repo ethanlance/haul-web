@@ -120,6 +120,7 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
 		if( payload.data == "ok" ){
+			console.log(store, primaryType, payload, recordId, requestType);
 			return;
 		}
 
@@ -136,7 +137,7 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 
 
 		var payload ={'product': data}; 
-		return this._super(store, primaryType, payload);
+		return this._super(store, primaryType, payload, recordId, requestType);
 	},
 });
 

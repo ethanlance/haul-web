@@ -8,7 +8,7 @@
 
 					<div class="media">
 
-					{{#link-to "products" user class="pull-left"}}
+					{{#link-to "seller" user class="pull-left"}}
 					  	<div class="profile-circular-mask">
 					  	{{#if user.picture}}
 					    	<img {{bind-attr src=user.picture}}> 
@@ -61,7 +61,7 @@
 	{{#if isProfileOwner }}
 	<div class="haul-grid-li ">	
 		<div class="sell">
-			{{#link-to 'products.new' currentUser.slug }}
+			{{#link-to 'seller.new-product' currentUser.slug }}
 			<div class="sell-button text-center">
 				<div class="sell-text text-center haul-font">
 					<div class="glyphicon glyphicon-plus-sign"></div><br/>	

@@ -16,8 +16,8 @@
 		{{!-- Images  --}}
 		<div class="col-md-6 col-sm-12 col-xs-12">
 
-		{{#if images}}
-			{{view Haul.CarouselView contentBinding="images"}}
+		{{#if model.images}}
+			{{view Haul.CarouselView contentBinding="model.images"}}
 		{{/if}}
 		
  		
@@ -67,7 +67,7 @@
 		    							<img {{bind-attr src=user.picture}}> 
 		    						</div>
 		    						<br/>
-		    						{{#link-to 'products' user}}{{ user.name }}{{/link-to}}
+		    						{{#link-to 'seller' user}}{{ user.name }}{{/link-to}}
 	    						</div>
 		    					<div class="media-body">
 		    						<h4>{{name}}</h4>

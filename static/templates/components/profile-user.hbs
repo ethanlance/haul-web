@@ -5,7 +5,7 @@
 			<button {{action "clickProfile" user.id}} type="button" class="btn btn-default">
 				
 				<img {{bind-attr src=user.picture}}> 
-				<span class="profile-name">{{#link-to "products" user.id }}{{ user.name }}{{/link-to}}</span>
+				<span class="profile-name">{{#link-to "seller" user.id }}{{ user.name }}{{/link-to}}</span>
 		  		
 			</button>
 
@@ -14,8 +14,8 @@
 		      <span class="glyphicon glyphicon-cog"></span>
 		    </button>
 		    <ul class="dropdown-menu" role="menu">
-				<li>{{#link-to 'products.new' user.slug }}Sell Something{{/link-to}}</li> 
-				<li>{{#link-to 'store.help'}}Create Store{{/link-to}}</li> 
+				<li>{{#link-to 'seller.new-product' user.slug }}Sell Something{{/link-to}}</li> 
+				
 				<li class="divider"></li> 
 				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
 		    </ul>

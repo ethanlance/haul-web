@@ -6,14 +6,14 @@
 		currentUser: Ember.computed.alias('controllers.auth.currentUser')
 	}); 
 
-	Haul.ProductsController = Ember.ObjectController.extend({
+	Haul.SellerController = Ember.ObjectController.extend({
 		needs: ["auth"],  
 		currentUser: Ember.computed.alias('controllers.auth.currentUser')
 	}); 
 	
 
 	//SHOW all user's products
-	Haul.ProductsIndexController = Ember.ArrayController.extend({
+	Haul.SellerIndexController = Ember.ArrayController.extend({
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
@@ -33,6 +33,11 @@
 
 	});  
 
+	Haul.StoreEditController = Ember.ObjectController.extend({
+		needs: ["auth"]
+	});
+
+
 	Haul.ProductController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser')
@@ -50,10 +55,6 @@
 			if( !Ember.isEmpty(this.get('currentUser')) && this.get('user').id === this.get('currentUser').id) {
 				this.set('isProfileOwner', true);
 			}
-			
-			//Reload the model 
-			this.get('model').reload();
-			
 		}.observes('model'),
 
 		commentCount: function() {
@@ -79,7 +80,7 @@
 				
 				product.save().then(
 					function(result) { 
-						_this.transitionToRoute('products', user.slug);
+						_this.transitionToRoute('seller', user.slug);
 					},
 					function(error){
 						console.log("Error" , error);
@@ -204,7 +205,6 @@
 		    selectedImages = selectedImages.sortBy('idx')
 		    selectedImages.endPropertyChanges();
 		    this.set('selectedImages', selectedImages);
-		    this.formChanged();
 		},
  
 		//UI ACTIONS
@@ -228,7 +228,7 @@
 				var _this = this;
 				product.save().then(
 					function(result) { 
-						_this.transitionToRoute('product', product);
+						_this.transitionToRoute('product', product.reload());
 					},
 					function(error){
 						console.log("Error" , error);
