@@ -2,14 +2,22 @@
 
 <div class="container">
 
-{{#if isProfileOwner}}
+
 	<div class="row">
 		<div class="col-md-12 text-right">
+		
+		{{#if currentUser }}
+			{{product-to-store class="display-inline" user=currentUser product=model}}
+		{{/if}}
+
+		{{#if isProfileOwner}}
 			{{#link-to 'product.edit' this}}<button class="btn btn-default">Edit</button>{{/link-to}}
 			<button {{action 'delete'}} class="btn btn-danger">Delete</button>
+		{{/if}}
+
 		</div>
 	</div>
-{{/if}}
+
 	
 	<div class="row padding-top">
 
@@ -118,6 +126,9 @@
 		</div>
 	</div>
 </div>
+
+
+
 
 
 

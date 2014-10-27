@@ -1,4 +1,6 @@
 
+{{!-- STORE TEMPLATE --}}
+
 
 <div class="container-fluid padding-bottom padding-top">
 	<div class="row">
@@ -17,7 +19,8 @@
 					 {{/link-to}}
 
 					  <div class="media-body">
-					     	<h1 class="media-heading">{{user.name}}</h1>
+					     	<h1 class="media-heading">{{market.name}}</h1>
+					     	<h5>{{#link-to "seller" market.user}}by {{market.user.name}}{{/link-to}}</h5>
 	    					<div>
 	    						<button class="btn btn-primary">follow</button>
 	    						<button class="btn btn-default">
@@ -36,48 +39,16 @@
 
 
 
-{{#if content}}
+{{!-- STORE PRODUCTS --}}
 
-{{else}}
-
-	{{#if isProfileOwner }}
-
-	{{else}}
-<div class="container">
-	<div class="haul-container">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<h3>{{user.name}} has nothing to sell yet.</h3>
-			</div>
-		</div>
-	</div>
-</div>
-	{{/if}}
-{{/if}}
  
 <div class="container">
-	
 
-	{{#if isProfileOwner }}
-	<div class="haul-grid-li ">	
-		<div class="sell">
-			{{#link-to 'seller.new-product' currentUser.slug }}
-			<div class="sell-button text-center">
-				<div class="sell-text text-center haul-font">
-					<div class="glyphicon glyphicon-plus-sign"></div><br/>	
-					Sell Something
-				</div>
-			</div>
-			{{/link-to}}
-		</div>
-	</div>
-	{{/if}}
-
-
-    {{#each this}}
+    {{#each market.products}}
+    
     	{{#link-to 'product' this }}
     	<div class="haul-grid-li"> 
-    	
+
 				<img class="thumbnail" {{bind-attr src=image.small}}>
 
 				{{#if sold}}
@@ -87,6 +58,8 @@
 				<div class="info">		
 			 	  	<div class="price"> ${{price}}</div>   
 				</div>
+
+				{{editorial}}
 			
 	 	</div>
 	 	{{/link-to}}	

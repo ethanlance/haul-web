@@ -1,0 +1,31 @@
+<button {{action 'curate'}} class="btn btn-default">Add To Store</button>
+
+
+<div id="curateModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="mySmallModalLabel">Add To You Store</h4>
+		</div>
+		<div class="modal-body"> 
+			<p class="text-center">
+
+				{{#form-for model wrapper="bs3-wrapper"}}
+				<div class="row">
+					<div class="col-md-8 col-sm-8 col-xs-12"> 
+						<label>Editorial: (max 500)</label>
+						{{input editorial as="text" }}
+					</div> 
+				</div>
+				
+				<button {{action 'curateCancel'}} class="btn btn-default">Cancel</button>
+				<button {{action 'curateSubmit'}} class="btn btn-danger">Add To My Store</button>
+
+				{{/form-for}}
+			</p>
+		</div>
+		</div>
+	</div>
+</div>

@@ -1,10 +1,7 @@
 /*global Products, Ember */
 (function () {
 	'use strict'; 
-	Haul.ApplicationController = Ember.ObjectController.extend({
-		needs: ["auth"],  
-		currentUser: Ember.computed.alias('controllers.auth.currentUser')
-	}); 
+
 
 	Haul.SellerController = Ember.ObjectController.extend({
 		needs: ["auth"],  
@@ -24,19 +21,17 @@
 		// //Is currentUser viewing his own page?
 		isProfileOwner: false,
 		isProfileOwnerChanged: function() {
-			console.log("MODEL", this.model);
-
-			if(!Ember.isEmpty(this.get('currentUser')) && this.user.get('id') === this.get('currentUser').id) {
-				this.set('isProfileOwner', true);
-			}
+			var currentUser = this.get('currentUser');
+			if( currentUser ){
+				if(!Ember.isEmpty(currentUser) && this.user.get('id') === currentUser.get('id') ) {
+					this.set('isProfileOwner', true);
+				}
+			} 
 		}.observes('model'),
 
 	});  
 
-	Haul.StoreEditController = Ember.ObjectController.extend({
-		needs: ["auth"]
-	});
-
+	
 
 	Haul.ProductController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
@@ -52,8 +47,11 @@
 		isProfileOwner: false,
 		
 		setup: function() { 
-			if( !Ember.isEmpty(this.get('currentUser')) && this.get('user').id === this.get('currentUser').id) {
-				this.set('isProfileOwner', true);
+			var currentUser = this.get('currentUser');
+			if( currentUser ){
+				if( !Ember.isEmpty(currentUser) && this.get('user').id === currentUser.get('id')) {
+					this.set('isProfileOwner', true);
+				}
 			}
 		}.observes('model'),
 
@@ -87,6 +85,7 @@
 					}
 				);
 			}
+
 		}
 	});
 
@@ -115,6 +114,16 @@
 
 		//This product's image_ids 
 		image_ids:[],
+
+		//Is currentUser authorized to view page?
+		authorized: function(transition) {
+			//AUTHORIZED?
+			var authController = this.get('controllers.auth');
+			var user = authController.get('currentUser');
+			if( !user || user.get('id') !== transition.params.seller.user_slug ) { 
+				return this.transitionToRoute("not-authorized");
+			} 
+		},
 
 
 		//Blow away all property values

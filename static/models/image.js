@@ -79,7 +79,7 @@ Haul.ImageAdapter = Haul.ApplicationAdapter.extend({
     
 	deleteRecord: function(store, type, record) {
 		var id = record.get('id');
-		var user_id = Ember.$.cookie('auth_user').id;
+		var user_id = this.get('currentUserId');
 		var url = this.host + '/users/' + user_id + '/images/' + id;
 		return this.ajax(url, "DELETE");
 	},
@@ -95,12 +95,7 @@ Haul.ImageAdapter = Haul.ApplicationAdapter.extend({
 	},
 
     //FIND IMAGES FOR A USERID
-	findQuery: function(store, type, query) {
-		$.ajaxSetup({
-			headers: {
-			  'Authorization': 'Bearer ' + Ember.$.cookie('access_token')
-			}
-		});
+	findQuery: function(store, type, query) { 
 		var url = this.host + '/users/' + query + '/images';
 		return this.ajax(url, 'GET');
 		

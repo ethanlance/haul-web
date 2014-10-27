@@ -1,0 +1,100 @@
+{{!-- SELLER PROFILE  --}}
+
+<div class="container-fluid padding-bottom padding-top">
+	<div class="row">
+		<div class="col-md-12">
+	    	<div class="row">
+		    	<div class="col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font">
+
+					<div class="media">
+
+					{{#link-to "seller" user class="pull-left"}}
+					  	<div class="profile-circular-mask">
+					  	{{#if user.picture}}
+					    	<img {{bind-attr src=user.picture}}> 
+					    {{/if}}
+					    </div>
+					 {{/link-to}}
+
+					  <div class="media-body">
+					     	<h1 class="media-heading">{{user.name}}</h1>
+	    					<div>
+	    					{{#if isProfileOwner }}
+	    					{{else}}
+	    						<button class="btn btn-primary">follow</button>
+	    						<button class="btn btn-default">
+	    							<span class="glyphicon glyphicon-envelope"></span>
+	    						</button>
+	    					{{/if}}
+	    						<div><span class="medium">175 Followers - Following 15</span></div>
+	    					</div>
+					  </div>
+					</div> 
+		    	</div> 
+		    </div>
+		</div>
+	</div>
+</div>	
+
+{{!-- SELLER PRODUCTS --}}
+
+{{#if content}}
+
+{{else}}
+
+	{{#if isProfileOwner }}
+
+	{{else}}
+<div class="container">
+	<div class="haul-container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h3>{{user.name}} has nothing to sell yet.</h3>
+			</div>
+		</div>
+	</div>
+</div>
+	{{/if}}
+{{/if}}
+ 
+<div class="container">
+	
+
+	{{#if isProfileOwner }}
+	<div class="haul-grid-li ">	
+		<div class="sell"> 
+			{{#link-to 'seller.new-product' currentUser.slug }}
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					<div class="glyphicon glyphicon-plus-sign"></div><br/>	
+					Sell Something
+				</div>
+			</div>
+			{{/link-to}}
+		</div>
+	</div>
+	{{/if}}
+
+
+    {{#each this}}
+    	{{#link-to 'product' this }}
+    	<div class="haul-grid-li"> 
+    	
+				<img class="thumbnail" {{bind-attr src=image.small}}>
+
+				{{#if sold}}
+					<div class="sold">Sold</div>
+				{{/if}}
+				
+				<div class="info">		
+			 	  	<div class="price"> ${{price}}</div>   
+				</div>
+			
+	 	</div>
+	 	{{/link-to}}	
+	{{/each}}
+	
+</div> 
+
+
+

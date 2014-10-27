@@ -1,10 +1,68 @@
+Haul.LocalUser = DS.Model.extend({
+	name: DS.attr('string'),
+	slug: DS.attr('string'),
+	email: DS.attr('string'),
+	picture: DS.attr('string'),
+
+	access_token: DS.attr('string'),
+	refresh_token: DS.attr('string'),	
+	current: DS.attr('boolean')
+});
+
+Haul.LocalUserAdapter = Haul.LSAdapter.extend({
+
+});
+
+Haul.LocalUserSerializer = Haul.LSSerializer.extend({
+	
+});
+
+
+
+Haul.LocalToken = DS.Model.extend({
+	token: DS.attr('string'), 
+});
+
+Haul.LocalTokenAdapter = Haul.LSAdapter.extend({
+
+});
+
+Haul.LocalTokenSerializer = Haul.LSSerializer.extend({
+	
+});
+
+
+
+
+
+
+
 Haul.User = DS.Model.extend({
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
 	email: DS.attr('string'),
 	picture: DS.attr('string'),
-	
-	products: function( ) {
+
+
+	markets: function() {
+		var store = this.store;
+		var user_id = this.get('id');		
+		var promise = store.find('user-market', {user_id: user_id});
+		return DS.PromiseObject.create({
+		 	promise: promise
+		});
+	}.property(),
+
+	market: function() {
+		var promise = this.get('markets');
+
+		return promise.then(function(markets){ 
+			return markets.get('firstObject');
+		});
+		
+	}.property(),
+
+	products: function() {
 		var store = this.store;
 		var user_id = this.get('id');
 
@@ -21,6 +79,8 @@ Haul.User = DS.Model.extend({
 	
 	apiKeys: DS.hasMany('apiKey')
 });
+
+
 
 Haul.UserSerializer =  DS.RESTSerializer.extend({
 
@@ -43,6 +103,44 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 
 
 
+/** Users' Markets **/
+
+Haul.UserMarket = DS.Model.extend({
+	user: DS.belongsTo('user'),
+	market: DS.belongsTo('market'),
+	market_id: DS.attr('string')
+});
+
+Haul.UserMarketAdapter = Haul.ApplicationAdapter.extend({
+	
+	host: Haul.STORE_SERVER_HOST,
+
+	findQuery: function(store, type, query) {
+        var url = this.host + "/users/" + query.user_id + "/stores";
+        return this.ajax(url, 'GET');
+    },
+
+});
 
 
+Haul.UserMarketSerializer =  DS.RESTSerializer.extend({
+extractArray: function(store, primaryType, payload, recordId, requestType) {
 
+		if( payload.data == "ok" ){
+			return;
+		}
+		var data = payload.data.map(function(result){
+			var id = result.store_id + result.user_id;
+			return {
+				id: id,
+				market_id: result.store_id,	
+				market: result.store_id,	
+				user: result.user_id
+			}
+		});
+
+		var payload = {'user-market': data}; 
+
+		return this._super(store, primaryType, payload, recordId, requestType);
+	},
+});

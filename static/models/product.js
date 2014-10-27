@@ -38,8 +38,7 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 	
 	host: Haul.PRODUCT_SERVER_HOST,
-
-	
+ 
 	findQuery: function(store, type, query) {
         var url = this.host + "/users/" + query.user_id + "/products";
         return this.ajax(url, 'GET');
@@ -47,7 +46,8 @@ Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 
 	deleteRecord: function(store, type, record) {	
       	var id = record.get('id');
-		var user_id = Ember.$.cookie('auth_user').id;
+
+		var user_id = this.get('currentUserId');
       	var url = this.host + "/users/" + user_id + '/products/' + id; 
 		return this.ajax(url, "DELETE");
 	},
@@ -61,7 +61,7 @@ Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 			image_ids: record.get('image_ids').map(function(image){ return image})
 		}
 
-        var user_id = Ember.$.cookie('auth_user').id;
+        var user_id = this.get('currentUserId');
         var product_id = record.get('id');
 		var url = this.host + "/users/" + user_id + "/products/" + product_id;
 
@@ -69,12 +69,6 @@ Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 	},
 
 	createRecord: function(store, type, record) {
- 
-		$.ajaxSetup({
-			headers: {
-			  'Authorization': 'Bearer ' + Ember.$.cookie('access_token')
-			}
-		});
 
 		var data = {
 			name: record.get('name'),
@@ -84,7 +78,7 @@ Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 			image_ids: record.get('image_ids').map(function(image){ return image})
 		}
 		
-		var user_id = Ember.$.cookie('auth_user').id;
+		var user_id = this.get('currentUserId');
 		var url = this.host + "/users/" + user_id + "/products";
 		
 		return this.ajax(url, "POST", { data: data }); 
@@ -120,7 +114,6 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
 		if( payload.data == "ok" ){
-			console.log(store, primaryType, payload, recordId, requestType);
 			return;
 		}
 

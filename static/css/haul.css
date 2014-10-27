@@ -1,3 +1,7 @@
+.display-inline {
+	display: inline;
+}
+
 .haul-container {
 	margin-top: 50px;
 	margin-right: 100px;
@@ -7,34 +11,6 @@
 	font-family: Arvo, serif;
 	font-weight: bold;
 }
-
-.logo-center{ 
-	position: absolute;
-	width: 100%;
-	left: 0;
-	text-align: center;
-	margin: auto; 
-}
-
-.logo-center-outer{ 
-	position: block;
-	margin:auto;
-	padding-left: 10px;
-	padding-right: 10px;  
-	padding-top:60px;
-	width: 160px;
-	height: 120px;
-	background-color: #3a4457;
-	box-shadow: 0px 2px 2px #000;
-	font-size: 50px;
-	font-family: Arvo, serif;
-	font-weight: bold;
-}
-
-.logo-center-outer a {
-	color: #fff;
-}
- 
 
 
 .logo-outer {
@@ -46,7 +22,7 @@
 	position:absolute;
 	margin-left: 55px;
 	padding-left: 10px; 
-	padding-top:20px;a
+	padding-top:20px; 
 
 	width: 100px;
 	height: 60px;
@@ -55,22 +31,15 @@
 	font-size: 30px;
 	font-family: Arvo, serif;
 	font-weight: bold;
-
 }
 
 @media (min-width: 768px){
 	.logo-outer {
-	position:absolute;
-	margin-left:20px;
-	padding-left: 10px; 
-	padding-top:40px;
-	width: 100px;
-	height: 80px;
-	background-color: #3a4457;
-	box-shadow: 0px 2px 2px #000;
-	font-size: 30px;
-	font-family: Arvo, serif;
-	font-weight: bold;
+		position:absolute;
+		margin-left:20px; 
+		padding-top:40px;
+		width: 100px;
+		height: 80px;    
 	}
 }
 
@@ -82,7 +51,6 @@
 	float: left;
 }
  
-
 .navbar-profile { 
 	width: 100%;
 	left: 0;

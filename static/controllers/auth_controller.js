@@ -21,64 +21,117 @@
 		host: Haul.USER_SERVER_HOST,
 		 
 		isProcessing: false, 
-		attemptedTransition: null,
-		token: null,
-		currentUser: null,
-		name:null,
+		attemptedTransition: null, 
+		currentUser: false, 
 
 		init: function() { 
 			this._super();
- 
-			if (Ember.$.cookie('access_token')) { 
-				this.token = Ember.$.cookie('access_token');
-				this.currentUser = Ember.$.cookie('auth_user');
-			}
-		},
 
-		resetHeader: function() {
-			Haul.ApplicationAdapter.reopen({
-				headers: {
-					'Authorization': 'Bearer ' + this.get('token'), 
-  				}
+			var promise = this.store.find('local-user');
+			var _this = this;
+			promise.then(function(result) {
+				if(Ember.isEmpty(result)) { 
+					_this.set('currentUser', false); 
+				}else{ 
+					_this.set('currentUser', result.get('firstObject')); 
+				}
+			}, function(error) {
+				console.log("ERROR", errror);
 			});
 		},
 
-		//Did the access_token change?
-		tokenChanged: (function() {
-			if (Ember.isEmpty(this.get('token'))) { 
-				Ember.$.removeCookie('access_token', {path: '/'});
-				Ember.$.removeCookie('auth_user', {path: '/'});
-			} else {
-				Ember.$.cookie('access_token', this.get('token'), {path: '/'});
-				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
+		resetHeader: function() { 
 
-				this.resetHeader();
-			}
-		}).observes('token'),
+			if( !this.currentUser )
+				return;
 
+			var accessToken = this.currentUser.get('access_token');
 
-		//Did the access_token change?
-		currentUserChanged: (function() {
-			if (Ember.isEmpty(this.get('currentUser'))) {  
-				Ember.$.removeCookie('auth_user');
-			} else { 
-				Ember.$.cookie('auth_user', this.get('currentUser'), {path: '/'});
-			}
-		}).observes('currentUser'),	
+			Haul.ApplicationAdapter.reopen({
+				headers: {
+					'Authorization': 'Bearer ' + accessToken, 
+  				},
+  				currentUser: this.currentUser
+			});
+		}.observes('currentUser'),
 
 
-		reset: function() {
-		  this.setProperties({
-			name: null,
-			token: null,
-			currentUser: null
-		  });
-		  Ember.$.ajaxSetup({
-			headers: {
-			  'Authorization': 'Bearer none'
-			}
-		  });
+		deAuthenticateLocalUser: function(cb) {
+
+			this.set('currentUser', false);
+			Ember.$.ajaxSetup({
+				headers: {
+					'Authorization': 'Bearer none'
+				}
+			});			
+
+			//Remove user from localstorage
+			var promise = this.store.find('local-user'); 
+			promise.then(function( results ){ 
+
+				if(Ember.isEmpty(results)) {
+					if(cb) {
+						return cb();	
+					}
+				}
+
+				results.forEach(function(localUser) {
+					localUser.deleteRecord();
+				
+					localUser.save().then(
+						function(result) {  
+							if(cb) {
+								return cb();
+							}
+						},
+						function(error){
+							console.log("Error" , error);
+						}
+					);
+				});
+
+
+			}, function(error) {
+				console.log("ERROR", error);
+			});
 		},
+
+		authenticateLocalUser: function(user, accessToken, refreshToken, attemptedTrans) {
+ 
+			//Local login is a callback.
+			var _this = this;
+			function cb(){
+				//LOCAL STORAGE USER
+				var localUser = _this.store.createRecord("local-user", 
+					{
+						id: user.get('id'), 
+						name: user.get('name'),
+						slug: user.get('slug'),
+						picture: user.get('picture'),	
+						access_token: accessToken,
+						refresh_token: refreshToken,
+						current: true
+					}
+				);
+				localUser.save().then(function(lu) { 
+					_this.set('currentUser', lu);	
+				}, function(error) {
+					console.log("ERROR", error);
+				});
+
+				//TRANSITION:
+				if(Ember.isEmpty(attemptedTrans)){ 
+					_this.transitionToRoute("seller", user);
+				}else{
+					_this.transitionToRoute(attemptedTrans);
+				}
+			}
+
+			//First LOGOUT any previous User
+			this.deAuthenticateLocalUser(cb);
+
+		},
+
 
 		authenticateByFB: function(response) {
 			var _this = this;
@@ -108,6 +161,9 @@
 			);
 		},
 
+
+
+
 		actions: { 
  			
 			setupUser: function(response) {
@@ -116,35 +172,24 @@
 									
 				this.set('isProcessing', false);
 
-				attemptedTrans = this.get('attemptedTransition');
-
-				//Create an apiKey
-			 	key = this.get('store').createRecord('apiKey', {
-					accessToken: response.data[0].id
-				});
+				attemptedTrans = this.get('attemptedTransition'); 
+				
+				var accessToken = response.data[0].token_id;
+				var refreshToken =response.data[1].token_id; 
 
 			 	//Save Our User Token.
 				this.set('token', response.data[0].token_id); 
 				
 				var user_id = response.data[0].user_id; 
 
-					//Now get the user:
-				this.store.find('user', user_id).then(
-					(function(_this) {
-						return function(user) {
-
-							_this.set("currentUser", user.getProperties('id', 'slug', 'name', 'email', 'picture'))
-
-							user.get('apiKeys').content.push(key);
-
-							//TRANSITION:
-							if(Ember.isEmpty(attemptedTrans)){ 
-								_this.transitionToRoute("seller", user);
-							}else{
-								_this.transitionToRoute(attemptedTrans);
-							}
-						}	;
-					})(this)
+				//Now get the user:
+				var _this = this;
+				this.store.find('user', user_id).then( 
+					function(user) {
+						_this.authenticateLocalUser(user, accessToken, refreshToken, attemptedTrans);
+					}, function(error) {
+						console.log("ERROR", error);
+					} 
 				);
 			}
 		}
@@ -184,7 +229,6 @@
 			var _this = this;
 	  		//ME
 			this.FB.api('/me', {fields: 'first_name,last_name,email'}, function(response) { 
-				console.log("me/", response);
 				var data =  {
 					email: response.email,
 					firstname: response.first_name,
@@ -293,8 +337,7 @@
 					dataType: 'json'
 			}).then(
 				function(response) {
-					_this.set('isProcessing', false); 
-					console.log("CREATED", response);
+					_this.set('isProcessing', false);
 
 					//NOW LOG FB USER INTO HAUL
 					return _this.authController.authenticateByFB();
@@ -351,7 +394,6 @@
 
 				this.facebookController.triggerFacebook().then(
 			 		function onFulfill(response) {
-						console.log("Success!", response);
 						return _this.createUserByFB(response);
 
 					}, 

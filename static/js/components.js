@@ -1,7 +1,71 @@
+Haul.ProductToStoreComponent = Ember.Component.extend({
+	model: null,
+	store: null,
+	start: function() {
+		var store = this.get('targetObject.store');
+		this.set('store', store);
+		this.set('model', store.createRecord('market-product'));
+	}.on('init'),
+
+	editorial: null,
+	actions: {
+		//Add Product to Market
+		curate: function() {
+			$('#curateModal').modal('show');
+		},
+
+		curateCancel: function() {
+			$('#curateModal').modal('hide');
+		},
+
+		curateSubmit: function() {
+
+			var editorial = this.get('model').get('editorial');
+				
+			//Get to the store.
+			var store = this.get('store');
+
+			var promise = this.user.get('market');
+
+			var _this = this;
+			promise.then(function(market) {
+				console.log("market", market);
+				
+				//Create an empty object
+				var marketProduct = store.createRecord('market-product');
+
+				marketProduct.set('product', _this.product);
+				marketProduct.set('editorial', editorial);
+				marketProduct.set('user', _this.user.content);
+				marketProduct.set('market', market);
+
+				marketProduct.save().then(
+					function(result) { 
+						//Save and close.
+						$('#curateModal').modal('hide');
+					},
+					function(error){
+						console.log("Error" , error);
+					}
+				);
+
+
+			}, function(error) {
+				console.log("ERROR", error);
+			});
+
+
+
+			
+		},
+	}
+});
+
+
 Haul.ProfileUserComponent = Ember.Component.extend({
 	actions: {
 		clickProfile: function() {  
-			this.sendAction("clickTransition", "products", this.user.id);
+			this.sendAction("clickTransition", "seller", this.user.get('id'));
 		}
 	}
 });
