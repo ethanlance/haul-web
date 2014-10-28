@@ -296,7 +296,10 @@
 
 		//Template Keys
 		emailRegistrationRequested: false,
-		isProcessing: false,
+		
+		isProcessingFacebook: false,
+		isProcessingSubmit: false,
+
 		error409: false,
 		error: false,
 		facebookController: null, 
@@ -334,14 +337,14 @@
 					dataType: 'json'
 			}).then(
 				function(response) {
-					_this.set('isProcessing', false);
+					_this.set('isProcessingFacebook', false);
 
 					//NOW LOG FB USER INTO HAUL
 					return _this.authController.authenticateByFB();
 
 				},
 				function(error) {
-					_this.set('isProcessing', false);
+					_this.set('isProcessingFacebook', false);
 					error.status == 409 ? _this.set('error409', true) : _this.set('error', true);
 				}
 			);
@@ -366,18 +369,16 @@
 					dataType: 'json'
 			}).then(
 				function(response) {
-					_this.set('isProcessing', false); 
+					_this.set('isProcessingSubmit', false); 
 					_this.set('emailRegistrationRequested', true);
 				}, 
 
 				function(error) {
-					_this.set('isProcessing', false);
+					_this.set('isProcessingSubmit', false);
 					error.status == 409 ? _this.set('error409', true) : _this.set('error', true);
 				}
 			);
 		}, 
-
-		ladaStop: false,
 
 		actions: {
 
@@ -387,7 +388,7 @@
 
 			//Action: Clicked "facebook signup"
 			facebookSignup: function() { 
-				this.set('isProcessing', true);
+				this.set('isProcessingFacebook', true);
 
 				var _this = this;
 
@@ -398,7 +399,7 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
-						this.set('isProcessing', false);
+						this.set('isProcessingFacebook', false);
 					}
 				).then(
 			 		function onFulfill(response) {
@@ -407,19 +408,27 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
-						this.set('isProcessing', false);
+						this.set('isProcessingFacebook', false);
 					}
 				);
 			},
 
 			//Action: Clicked "email sign up"
 			submit: function() { 
-				this.set('isProcessing', true);
+				this.set('isProcessingSubmit', true);
 
 				//Get the following from user submitted form.
-				// email 
-				var data = this.getProperties('email');
-				this.createUserByEmail(data);
+				var data = this.getProperties('email');	
+				var _this = this;
+				var model = this.get('model');
+
+		 		//Model Validations:
+				model.validate().then(function(result){
+					_this.createUserByEmail(data);	
+				}, function(error) {
+					_this.set('isProcessingSignup', false);
+					_this.set('showErrors', true);
+				});
 			}
 		}
 	});
@@ -618,7 +627,8 @@
 		error: false,
 		error404: false,
 		error409: false,
-		isProcessing: false, 
+		isProcessingFacebook: false, 
+		isProcessingLogin: false, 
 		facebookController: null, 
 		authController: null,
 
@@ -634,9 +644,37 @@
 		}.on('init'),
 
 		loginUserByFB: function() {
-
 			//LOG FB USER INTO HAUL
 			return this.authController.authenticateByFB();
+		},
+
+		loginByEmail: function(data) {
+				var _this = this;
+
+				//AJAX CALL - for getting the User Token back.  
+				//Pass params email/password to it.
+				return Ember.$.ajax({
+						url: _this.authController.host + '/auth/user',
+						type: 'post',
+						data: data,
+						headers: {
+							Authorization: 'Bearer client_' + _this.authController.client_token
+						},
+						dataType: 'json'
+				}).then(
+					function(response) {
+						_this.authController.send('setupUser', response);
+					},
+					function(error) {	
+						_this.set('isProcessingLogin', false);
+
+						if( error.status == 409 ){
+							_this.set('error409', true);
+						}else{
+							_this.set('error', true);
+						}
+					}
+				);
 		},
 
 		actions: {
@@ -654,7 +692,7 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
-						this.set('isProcessing', false);
+						this.set('isProcessingLogin', false);
 					}
 				).then(
 			 		function onFulfill(response) {
@@ -664,43 +702,27 @@
 					function onReject(error) {
 						_this.set('error404', true);
 						console.error("Failed!", error);
-						this.set('isProcessing', false);
+						this.set('isProcessingLogin', false);
 					}
 				);
 			},
 
 			//LOGIN via email, password
 			submit: function() {
-				var data, token, key;
-				this.set('isProcessing', true);
+				this.set('isProcessingSubmit', true);
+
+				//Get the following from user submitted form.
+				var data = this.getProperties('email', 'password');	
 				var _this = this;
- 
-				data = this.getProperties('email', 'password');
+				var model = this.get('model');
 
-				//AJAX CALL - for getting the User Token back.  
-				//Pass params email/password to it.
-				return Ember.$.ajax({
-						url: _this.authController.host + '/auth/user',
-						type: 'post',
-						data: data,
-						headers: {
-							Authorization: 'Bearer client_' + _this.authController.client_token
-						},
-						dataType: 'json'
-				}).then(
-					function(response) {
-						_this.authController.send('setupUser', response);
-					},
-					function(error) {	
-						_this.set('isProcessing', false);
-
-						if( error.status == 409 ){
-							_this.set('error409', true);
-						}else{
-							_this.set('error', true);
-						}
-					}
-				);
+		 		//Model Validations:
+				model.validate().then(function(result){
+					_this.loginByEmail(data);	
+				}, function(error) {
+					_this.set('isProcessingLogin', false);
+					_this.set('showErrors', true);
+				});
 		 	}
 		}
 	});

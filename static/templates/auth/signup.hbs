@@ -37,8 +37,8 @@
 							{{ladda-btn 
 								name='FACEBOOK'
 								btnClasses='btn btn-block btn-facebook ladda-button'
-								laddaClick='facebookSignup'
-								spin=isProcessing
+								btnClick='facebookSignup'
+								spin=isProcessingFacebook
 							}}
  
 					    </div> 
@@ -62,11 +62,18 @@
 						  {{/if}} 
 
 						  	<div class="form-group"> 
-					      		{{input focus-in="focus" type="text" value=email class="form-control" placeholder="Type your email address"}}
+					      		{{input email canShowValidationError=showErrors placeholder="Type your email address"}}
 					      	</div> 
 
 							<div class="form-group">
-						  		{{submit signup class="btn btn-primary btn-block"}}
+
+								{{ladda-btn 
+									name='SIGNUP'
+									btnClasses='btn btn-block btn-primary ladda-button'
+									btnClick='submit'
+									spin=isProcessingSignup
+								}}
+
 						  	</div>
 						{{/form-for}}
 					{{/if}}

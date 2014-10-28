@@ -18,8 +18,8 @@
 					{{ladda-btn 
 						name='FACEBOOK'
 						btnClasses='btn btn-block btn-facebook ladda-button'
-						laddaClick='facebookLogin'
-						spin=isProcessing
+						btnClick='facebookLogin'
+						spin=isProcessingFacebook
 					}}
 
 			    </div> 
@@ -41,15 +41,20 @@
 
 
 				  	<div class="form-group" >
-			      		{{input email placeholder="email address"}}
+			      		{{input email canShowValidationError=showErrors placeholder="email address"}}
 			      	</div>
 
 			 		<div class="form-group">	
-			      		{{input password placeholder="password"}}
+			      		{{input password canShowValidationError=showErrors placeholder="password"}}
 					</div> 
 
 					<div class="form-group">
-						{{submit login class="btn btn-primary btn-block"}}
+						{{ladda-btn 
+							name='LOGIN'
+							btnClasses='btn btn-primary btn-block ladda-button'
+							btnClick='submit'
+							spin=isProcessingLogin
+						}}
 				  	</div>
 
 				  	<div class="text-right">

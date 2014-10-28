@@ -21,9 +21,9 @@ Haul.LaddaBtnComponent = Ember.Component.extend({
 	}.on('didInsertElement'),
 
 	actions: {
-		buttonClick: function(event) { 
+		btnClick: function(event) { 
 			this.set('spin', true);
-			this.sendAction('laddaClick', event);
+			this.sendAction('btnClick', event);
 		}
 	}
 });
