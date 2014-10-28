@@ -98,7 +98,6 @@ Haul.ImageAdapter = Haul.ApplicationAdapter.extend({
 	findQuery: function(store, type, query) { 
 		var url = this.host + '/users/' + query + '/images';
 		return this.ajax(url, 'GET');
-		
 	}
 });
 

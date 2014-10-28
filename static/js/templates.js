@@ -320,9 +320,9 @@ function program9(depth0,data) {
   data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n\n				<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Login</h2>\n				</div>\n\n				  ");
   stack1 = helpers['if'].call(depth0, "error404", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n				<div class=\"form-group\"> \n			      	<button class=\"btn btn-block btn-facebook\" ");
+  data.buffer.push("\n\n				<div class=\"form-group\"> \n\n					<button id=\"fbLoginBtn\"  ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookLogin", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">Facebook</button>\n			    </div> \n\n\n 				<div class=\"form-group padding-top\">\n					<h4 class=\"form-signin-heading\">or with your <br/>email & password</h4>\n				</div>\n\n				");
+  data.buffer.push(" class=\"btn btn-block btn-facebook ladda-button\" data-style=\"expand-right\"><span class=\"ladda-label\">Facebook</span></button>\n			    </div> \n\n\n 				<div class=\"form-group padding-top\">\n					<h4 class=\"form-signin-heading\">or with your <br/>email & password</h4>\n				</div>\n\n				");
   stack1 = (helper = helpers['form-for'] || (depth0 && depth0['form-for']),options={hash:{
     'wrapper': ("bs3-wrapper")
   },hashTypes:{'wrapper': "STRING"},hashContexts:{'wrapper': depth0},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "model", options) : helperMissing.call(depth0, "form-for", "model", options));
@@ -1074,8 +1074,8 @@ function program7(depth0,data) {
   data.buffer.push(">Next Step<span class=\"glyphicon glyphicon-chevron-right\"></span></button> \n			</div>\n		</div>\n\n		");
   data.buffer.push(escapeExpression((helper = helpers['image-picker'] || (depth0 && depth0['image-picker']),options={hash:{
     'images': ("controller.content"),
-    'user_id': ("controllers.auth.currentUser.id"),
-    'user_token': ("controllers.auth.currentUser.access_token"),
+    'user_id': ("currentUser.id"),
+    'user_token': ("currentUser.access_token"),
     'refresh': ("refresh"),
     'imageClick': ("imageClick"),
     'imageDeleted': ("imageDeleted")

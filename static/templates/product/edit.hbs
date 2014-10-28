@@ -16,8 +16,8 @@
 
 		{{image-picker 
 			images=controller.content
-			user_id=controllers.auth.currentUser.id
-			user_token=controllers.auth.currentUser.access_token
+			user_id=currentUser.id
+			user_token=currentUser.access_token
 			refresh='refresh'
 			imageClick='imageClick' 
 			imageDeleted='imageDeleted'

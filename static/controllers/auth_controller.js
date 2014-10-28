@@ -176,9 +176,6 @@
 				
 				var accessToken = response.data[0].token_id;
 				var refreshToken =response.data[1].token_id; 
-
-			 	//Save Our User Token.
-				this.set('token', response.data[0].token_id); 
 				
 				var user_id = response.data[0].user_id; 
 
@@ -642,6 +639,12 @@
 
 			//LOGIN via FB token
 			facebookLogin: function() {
+
+
+				var laddaBtn = Ladda.create( document.querySelector( '#fbLoginBtn' ) );
+				laddaBtn.start();
+
+
 				this.set('isProcessing', true);
 				var _this = this;
 			
@@ -653,6 +656,7 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
+						laddaBtn.stop();
 					}
 				).then(
 			 		function onFulfill(response) {
@@ -662,6 +666,7 @@
 					function onReject(error) {
 						_this.set('error404', true);
 						console.error("Failed!", error);
+						laddaBtn.stop();
 					}
 				);
 			},
