@@ -33,7 +33,14 @@
 						</div>
 
 						<div class="form-group"> 
-					      	<button class="btn btn-block btn-facebook" {{action "facebookSignup"}}>Facebook</button>
+
+							{{ladda-btn 
+								name='FACEBOOK'
+								btnClasses='btn btn-block btn-facebook ladda-button'
+								laddaClick='facebookSignup'
+								spin=isProcessing
+							}}
+ 
 					    </div> 
 
 

@@ -377,6 +377,8 @@
 			);
 		}, 
 
+		ladaStop: false,
+
 		actions: {
 
 			focus: function() {
@@ -396,6 +398,7 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
+						this.set('isProcessing', false);
 					}
 				).then(
 			 		function onFulfill(response) {
@@ -404,6 +407,7 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
+						this.set('isProcessing', false);
 					}
 				);
 			},
@@ -639,12 +643,6 @@
 
 			//LOGIN via FB token
 			facebookLogin: function() {
-
-
-				var laddaBtn = Ladda.create( document.querySelector( '#fbLoginBtn' ) );
-				laddaBtn.start();
-
-
 				this.set('isProcessing', true);
 				var _this = this;
 			
@@ -656,7 +654,7 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
-						laddaBtn.stop();
+						this.set('isProcessing', false);
 					}
 				).then(
 			 		function onFulfill(response) {
@@ -666,7 +664,7 @@
 					function onReject(error) {
 						_this.set('error404', true);
 						console.error("Failed!", error);
-						laddaBtn.stop();
+						this.set('isProcessing', false);
 					}
 				);
 			},

@@ -33,7 +33,7 @@ Haul.BaseRoute = Ember.Route.extend({
 		
 		var user = this.controllerFor('auth').get('currentUser');
 		
-		if( !Ember.isEmpty(user) ) {
+		if( !Ember.isEmpty(user) && user ) {
 			return this.transitionTo('seller', user.get('slug'));
 		}else{
 			return this.transitionTo('about');
@@ -46,7 +46,6 @@ Haul.BaseRoute = Ember.Route.extend({
 //Anon - Routes that require authentication should extend this object.
 Haul.AnonRoute = Ember.Route.extend({
 	beforeModel: function(transition) { 
-		
 		if (Ember.isEmpty(this.controllerFor('auth').get('token'))) {
 
 		}else{
@@ -76,10 +75,6 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 		});
 	},
     beforeModel: function(transition) { 
-
-	console.log("POOOPz", this.controllerFor('auth').get('currentUser'));
-
-
 		if (Ember.isEmpty(this.controllerFor('auth')) || Ember.isEmpty(this.controllerFor('auth').get('token'))) {
 			return this.redirectToLogin(transition);
 		}else{

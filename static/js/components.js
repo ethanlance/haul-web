@@ -1,3 +1,34 @@
+Haul.LaddaBtnComponent = Ember.Component.extend({
+
+	laddaBtn: null,
+
+	spin: false,
+
+	elementId: null,
+
+	btnClasses: null,
+
+	spinChanged: function() {
+		if( this.spin ){
+			this.laddaBtn.start();
+		}else{
+			this.laddaBtn.stop();
+		}
+	}.observes('spin'),
+
+	enable: function(){
+		this.laddaBtn = Ladda.create( this.get('element').firstChild );
+	}.on('didInsertElement'),
+
+	actions: {
+		buttonClick: function(event) { 
+			this.set('spin', true);
+			this.sendAction('laddaClick', event);
+		}
+	}
+});
+
+
 Haul.ProductToStoreComponent = Ember.Component.extend({
 	model: null,
 	store: null,
@@ -53,11 +84,7 @@ Haul.ProductToStoreComponent = Ember.Component.extend({
 			}, function(error) {
 				console.log("ERROR", error);
 			});
-
-
-
-			
-		},
+		}
 	}
 });
 
@@ -73,7 +100,7 @@ Haul.ProfileUserComponent = Ember.Component.extend({
 
 /**
 	ImageCardComponent is one image.  
-	THe image in the ImageCardComponent sends an onclick event 'imageClick'
+	The image in the ImageCardComponent sends an onclick event 'imageClick'
 **/
 Haul.ImageCardComponent = Ember.Component.extend({
 

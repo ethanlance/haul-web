@@ -260,7 +260,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1, helper, options;
-  data.buffer.push("\n				  	<div class=\"alert\">Sorry, you need to signup first. Go to ");
+  data.buffer.push("\n				  	<div class=\"alert\">Sorry, you need to signup first.<br/>Go to ");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "signup", options) : helperMissing.call(depth0, "link-to", "signup", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</div>\n				  ");
@@ -320,9 +320,14 @@ function program9(depth0,data) {
   data.buffer.push("<!-- Header -->\n<header>\n    <div class=\"container\">\n        <div class=\"row\">\n        	<div class=\"col-md-4 \"></div>\n			<div class=\"col-md-4 form\">\n\n				<div class=\"form-group\">\n						<h2 class=\"form-signin-heading\">Login</h2>\n				</div>\n\n				  ");
   stack1 = helpers['if'].call(depth0, "error404", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n				<div class=\"form-group\"> \n\n					<button id=\"fbLoginBtn\"  ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookLogin", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class=\"btn btn-block btn-facebook ladda-button\" data-style=\"expand-right\"><span class=\"ladda-label\">Facebook</span></button>\n			    </div> \n\n\n 				<div class=\"form-group padding-top\">\n					<h4 class=\"form-signin-heading\">or with your <br/>email & password</h4>\n				</div>\n\n				");
+  data.buffer.push("\n\n				<div class=\"form-group\"> \n\n					");
+  data.buffer.push(escapeExpression((helper = helpers['ladda-btn'] || (depth0 && depth0['ladda-btn']),options={hash:{
+    'name': ("FACEBOOK"),
+    'btnClasses': ("btn btn-block btn-facebook ladda-button"),
+    'laddaClick': ("facebookLogin"),
+    'spin': ("isProcessing")
+  },hashTypes:{'name': "STRING",'btnClasses': "STRING",'laddaClick': "STRING",'spin': "ID"},hashContexts:{'name': depth0,'btnClasses': depth0,'laddaClick': depth0,'spin': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "ladda-btn", options))));
+  data.buffer.push("\n\n			    </div> \n\n\n 				<div class=\"form-group padding-top\">\n					<h4 class=\"form-signin-heading\">or with your <br/>email & password</h4>\n				</div>\n\n				");
   stack1 = (helper = helpers['form-for'] || (depth0 && depth0['form-for']),options={hash:{
     'wrapper': ("bs3-wrapper")
   },hashTypes:{'wrapper': "STRING"},hashContexts:{'wrapper': depth0},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "model", options) : helperMissing.call(depth0, "form-for", "model", options));
@@ -385,9 +390,14 @@ function program7(depth0,data) {
 function program9(depth0,data) {
   
   var buffer = '', stack1, helper, options;
-  data.buffer.push("	\n\n\n						<div class=\"form-group\">\n							<h2 class=\"form-signin-heading\">Signup With</h2>\n						</div>\n\n						<div class=\"form-group\"> \n					      	<button class=\"btn btn-block btn-facebook\" ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "facebookSignup", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">Facebook</button>\n					    </div> \n\n\n\n						<div class=\"form-group padding-top\">\n							<h4 class=\"\">or with email</h4>\n						</div>\n\n\n						");
+  data.buffer.push("	\n\n\n						<div class=\"form-group\">\n							<h2 class=\"form-signin-heading\">Signup With</h2>\n						</div>\n\n						<div class=\"form-group\"> \n\n							");
+  data.buffer.push(escapeExpression((helper = helpers['ladda-btn'] || (depth0 && depth0['ladda-btn']),options={hash:{
+    'name': ("FACEBOOK"),
+    'btnClasses': ("btn btn-block btn-facebook ladda-button"),
+    'laddaClick': ("facebookSignup"),
+    'spin': ("isProcessing")
+  },hashTypes:{'name': "STRING",'btnClasses': "STRING",'laddaClick': "STRING",'spin': "ID"},hashContexts:{'name': depth0,'btnClasses': depth0,'laddaClick': depth0,'spin': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "ladda-btn", options))));
+  data.buffer.push("\n \n					    </div> \n\n\n\n						<div class=\"form-group padding-top\">\n							<h4 class=\"\">or with email</h4>\n						</div>\n\n\n						");
   stack1 = helpers['if'].call(depth0, "error", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \n\n\n	            		");
@@ -605,6 +615,24 @@ function program1(depth0,data) {
   data.buffer.push(">\n	<div class=\"modal-dialog modal-sm\">\n		<div class=\"modal-content danger\">\n\n		<div class=\"modal-header\">\n			<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "closeModal", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(" type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>\n			<h4 class=\"modal-title\" id=\"mySmallModalLabel\">Oh no, an error!</h4>\n		</div>\n		<div class=\"modal-body\"> \n			<p class=\"text-center\">\n				Something went wrong with delete.  \n			</p>\n		</div>\n		</div>\n	</div>\n</div>");
+  return buffer;
+  
+});Ember.TEMPLATES['components/ladda-btn'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("<button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "buttonClick", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'class': ("btnClasses")
+  },hashTypes:{'class': "ID"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push(" data-style=\"expand-right\"><span class=\"ladda-label\">");
+  stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span></button>\n");
   return buffer;
   
 });Ember.TEMPLATES['components/product-to-store'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {

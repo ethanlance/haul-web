@@ -10,12 +10,18 @@
 				</div>
 
 				  {{#if error404}}
-				  	<div class="alert">Sorry, you need to signup first. Go to {{#link-to 'signup'}}Sign Up{{/link-to}}</div>
+				  	<div class="alert">Sorry, you need to signup first.<br/>Go to {{#link-to 'signup'}}Sign Up{{/link-to}}</div>
 				  {{/if}}
 
 				<div class="form-group"> 
 
-					<button id="fbLoginBtn"  {{action "facebookLogin"}} class="btn btn-block btn-facebook ladda-button" data-style="expand-right"><span class="ladda-label">Facebook</span></button>
+					{{ladda-btn 
+						name='FACEBOOK'
+						btnClasses='btn btn-block btn-facebook ladda-button'
+						laddaClick='facebookLogin'
+						spin=isProcessing
+					}}
+
 			    </div> 
 
 
