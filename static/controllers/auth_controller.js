@@ -686,23 +686,24 @@
 			
 				this.facebookController.triggerFacebook().then(
 			 		function onFulfill(response) {
+						_this.set('isProcessingFacebook', false);
 						console.log("Success!", response);
 						return _this.loginUserByFB(response);
 
 					}, 
 					function onReject(error) {
+						_this.set('isProcessingFacebook', false);
 						console.error("Failed!", error);
-						this.set('isProcessingFacebook', false);
 					}
 				).then(
 			 		function onFulfill(response) {
+						_this.set('isProcessingFacebook', false);
 						console.log("Success!", response); 
-
 					}, 
 					function onReject(error) {
 						_this.set('error404', true);
+						_this.set('isProcessingFacebook', false);
 						console.error("Failed!", error);
-						this.set('isProcessingFacebook', false);
 					}
 				);
 			},

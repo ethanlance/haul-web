@@ -27,6 +27,11 @@
 	    						</button>
 	    					{{/if}}
 	    						<div><span class="medium">175 Followers - Following 15</span></div>
+
+								{{#if user.market.name}}{{else}}
+								{{#link-to 'seller.new-market' user.slug }}<button class="btn btn-default">Create A Store</button>{{/link-to}}
+								{{/if}}
+
 	    					</div>
 					  </div>
 					</div> 

@@ -1,3 +1,6 @@
+
+//LOCAL STORAGE:
+//This is where we store the current user.
 Haul.LocalUser = DS.Model.extend({
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
@@ -8,35 +11,12 @@ Haul.LocalUser = DS.Model.extend({
 	refresh_token: DS.attr('string'),	
 	current: DS.attr('boolean')
 });
-
-Haul.LocalUserAdapter = Haul.LSAdapter.extend({
-
-});
-
-Haul.LocalUserSerializer = Haul.LSSerializer.extend({
-	
-});
+Haul.LocalUserAdapter = Haul.LSAdapter.extend({});
+Haul.LocalUserSerializer = Haul.LSSerializer.extend({});
 
 
 
-Haul.LocalToken = DS.Model.extend({
-	token: DS.attr('string'), 
-});
-
-Haul.LocalTokenAdapter = Haul.LSAdapter.extend({
-
-});
-
-Haul.LocalTokenSerializer = Haul.LSSerializer.extend({
-	
-});
-
-
-
-
-
-
-
+//User Model.
 Haul.User = DS.Model.extend({
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
