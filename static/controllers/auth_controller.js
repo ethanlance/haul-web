@@ -33,7 +33,18 @@
 				if(Ember.isEmpty(result)) { 
 					_this.set('currentUser', false); 
 				}else{ 
-					_this.set('currentUser', result.get('firstObject')); 
+					var localUser = result.get('content').get('firstObject');
+					_this.set('currentUser', localUser);
+
+					// var promise = localUser.get('user').then(function(result){
+					// 	var user = result;
+					// 	console.log("USER", user);
+					// 	return user.get('market')
+					// })
+					// promise.then(function(market){
+					// 	console.log("MARKET", market)
+					// })
+					
 				}
 			}, function(error) {
 				console.log("ERROR", errror);
@@ -104,7 +115,7 @@
 				//LOCAL STORAGE USER
 				var localUser = _this.store.createRecord("local-user", 
 					{
-						id: user.get('id'), 
+						id: user.get('id'),  
 						name: user.get('name'),
 						slug: user.get('slug'),
 						picture: user.get('picture'),	

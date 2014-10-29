@@ -9,7 +9,20 @@ Haul.LocalUser = DS.Model.extend({
 
 	access_token: DS.attr('string'),
 	refresh_token: DS.attr('string'),	
-	current: DS.attr('boolean')
+	current: DS.attr('boolean'),
+
+	//Get's the user model.
+	user: function(){
+		var store = this.store;
+		var user_id = this.get('id');		
+		var promise = store.find('user', {id: user_id}); 
+		var promise = promise.then(function(results){
+			return results.get('firstObject')
+		});
+		return DS.PromiseObject.create({
+			promise: promise
+		});
+	}.property(),
 });
 Haul.LocalUserAdapter = Haul.LSAdapter.extend({});
 Haul.LocalUserSerializer = Haul.LSSerializer.extend({});
@@ -24,22 +37,16 @@ Haul.User = DS.Model.extend({
 	picture: DS.attr('string'),
 
 
-	markets: function() {
+	market: function() {
 		var store = this.store;
 		var user_id = this.get('id');		
 		var promise = store.find('user-market', {user_id: user_id});
+		var promise = promise.then(function(userMarkets){
+			return userMarkets.get('firstObject')
+		});
 		return DS.PromiseObject.create({
-		 	promise: promise
+			promise: promise
 		});
-	}.property(),
-
-	market: function() {
-		var promise = this.get('markets');
-
-		return promise.then(function(markets){ 
-			return markets.get('firstObject');
-		});
-		
 	}.property(),
 
 	products: function() {
@@ -54,13 +61,23 @@ Haul.User = DS.Model.extend({
 				return product;
 			}
 		});
-	}.property(),
-
-	
-	apiKeys: DS.hasMany('apiKey')
+	}.property()
 });
 
+Haul.UserAdapter = Haul.ApplicationAdapter.extend({
+	
+	host: Haul.USER_SERVER_HOST,
 
+	find: function(store, type, id) {
+		var url = this.host + "/users/" + id; 
+        return this.ajax(url, 'GET');
+    },
+
+	findQuery: function(store, type, query) {
+        var url = this.host + "/users/" + query.id;
+        return this.ajax(url, 'GET');
+    },    
+});
 
 Haul.UserSerializer =  DS.RESTSerializer.extend({
 
@@ -84,10 +101,9 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 
 
 /** Users' Markets **/
-
 Haul.UserMarket = DS.Model.extend({
 	user: DS.belongsTo('user'),
-	market: DS.belongsTo('market'),
+	market_name: DS.attr('string'),
 	market_id: DS.attr('string')
 });
 
@@ -114,7 +130,7 @@ extractArray: function(store, primaryType, payload, recordId, requestType) {
 			return {
 				id: id,
 				market_id: result.store_id,	
-				market: result.store_id,	
+				market_name: result.store_name,	
 				user: result.user_id
 			}
 		});

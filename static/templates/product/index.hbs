@@ -2,12 +2,17 @@
 
 <div class="container">
 
+	{{!-- Buttons --}}
 
 	<div class="row">
 		<div class="col-md-12 text-right">
 		
 		{{#if currentUser }}
-			{{product-to-store class="display-inline" user=currentUser product=model}}
+			{{product-to-store 
+				class="display-inline" 
+				currentUser=currentUser 
+				product=model
+			}}
 		{{/if}}
 
 		{{#if isProfileOwner}}
@@ -22,17 +27,15 @@
 	<div class="row padding-top">
 
 		{{!-- Images  --}}
-		<div class="col-md-6 col-sm-12 col-xs-12">
 
-		{{#if model.images}}
-			{{view Haul.CarouselView contentBinding="model.images"}}
-		{{/if}}
-		
- 		
- 		
+		<div class="col-md-6 col-sm-12 col-xs-12">
+			{{#if model.images}}
+				{{view Haul.CarouselView contentBinding="model.images"}}
+			{{/if}} 
 		</div>
 
 		{{!-- Product Info --}}
+
 		<div class="col-md-6 col-sm-12 col-xs-12">
 			<div class="row">
 				<div class="col-md-12 haul-buy-card">

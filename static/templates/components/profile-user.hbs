@@ -1,11 +1,11 @@
-		{{#if  user }}
+		{{#if  currentUser }}
  
 		<div class="btn-group navbar-profile">
 		
-			<button {{action "clickProfile" user.id}} type="button" class="btn btn-default">
+			<button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
 				
-				<img {{bind-attr src=user.picture}}> 
-				<span class="profile-name">{{#link-to "seller" user.id }}{{ user.name }}{{/link-to}}</span>
+				<img {{bind-attr src=currentUser.picture}}> 
+				<span class="profile-name">{{#link-to "seller" currentUser.id }}{{ currentUser.name }}{{/link-to}}</span>
 		  		
 			</button>
 
@@ -14,8 +14,20 @@
 		      <span class="glyphicon glyphicon-cog"></span>
 		    </button>
 		    <ul class="dropdown-menu" role="menu">
-				<li>{{#link-to 'seller.new-product' user.slug }}Sell Something{{/link-to}}</li> 
+
+		    	<li>{{#link-to 'seller' currentUser.slug }}My Stuff{{/link-to}}</li>
 				
+
+				
+				{{#if currentUser.user.market}}
+				<li>{{#link-to 'market' currentUser.user.market.market_id }}My Store: {{currentUser.user.market.market_name}}{{/link-to}}</li> 
+				{{else}}
+				<li>{{#link-to 'seller.new-market' currentUser.slug }}Create A Store{{/link-to}}</li> 
+				{{/if}}
+				
+				<li>{{#link-to 'seller.new-product' currentUser.slug }}Sell Something{{/link-to}}</li> 
+
+
 				<li class="divider"></li> 
 				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
 		    </ul>

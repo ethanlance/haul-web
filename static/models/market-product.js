@@ -6,7 +6,14 @@ Haul.MarketProduct = DS.Model.extend(Ember.Validations.Mixin, {
 	user: DS.belongsTo('user'),
 	featured: DS.attr('boolean'),
 	product: DS.belongsTo('product'),
-	image: DS.belongsTo('image')
+	image: DS.belongsTo('image'),
+
+	validations: { 
+		editorial: {
+		 	presence: true,
+		 	length: { maximum: 2000, minimum: 0 }
+		}
+	}
 });	
  
 

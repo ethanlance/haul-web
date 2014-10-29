@@ -1,31 +1,97 @@
-<button {{action 'curate'}} class="btn btn-default">Add To Store</button>
+{{!-- BUTTON --}}
+
+<button {{action 'curate'}} class="btn btn-default">Add To: {{currentUser.user.market.market_name}}</button>
 
 
-<div id="curateModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
+{{!-- MODAL --}}
+
+<div id="curateModal" class="modal modal fade in danger text-left" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			<h4 class="modal-title" id="mySmallModalLabel">Add To You Store</h4>
-		</div>
-		<div class="modal-body"> 
-			<p class="text-center">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="mySmallModalLabel">
+					Add To: {{currentUser.user.market.market_name}}
+				</h4>
+			</div>
 
-				{{#form-for model wrapper="bs3-wrapper"}}
-				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12"> 
-						<label>Editorial: (max 500)</label>
-						{{input editorial as="text" }}
+			<div class="modal-body"> 
+
+				{{!-- EDIT FORM --}}
+
+				<div {{bind-attr class="showForm:show:hide"}}>
+					<div class="row">
+						<div class="col-md-6 col-sm-12 col-xs-12">
+						 	<img class="thumbnail" {{bind-attr src=product.image.small}}>
+						</div>
+
+						<div class="col-md-6 col-sm-12 col-xs-12">
+
+							{{#form-for model wrapper="bs3-wrapper"}}
+							
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12"> 
+									<h3>{{ product.name }}</h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12"> 
+									<label>Tell everyone what's so awesome about this.</label>
+									{{input editorial as="text" canShowValidationError=showErrors }}
+								</div> 
+							</div>
+							{{/form-for}}	
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+
+						{{#if errorShow }}
+							{{bs-alert message=errorMessage type="danger"}}
+						{{/if}}
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-right">
+							<button {{action 'curateCancel'}} class="btn btn-default">Cancel</button>
+
+							{{ladda-btn
+								name='Save'
+								class="display-inline"
+								btnClasses='btn btn-primary ladda-button'
+								btnClick='submit'
+								spin=isProcessing
+							}} 
+						</div>
 					</div> 
 				</div>
-				
-				<button {{action 'curateCancel'}} class="btn btn-default">Cancel</button>
-				<button {{action 'curateSubmit'}} class="btn btn-danger">Add To My Store</button>
 
-				{{/form-for}}
-			</p>
-		</div>
+
+				{{!-- SUCCESS MESSAGE --}}
+
+				<div {{bind-attr class="showSuccessMessage:show:hide"}}>
+					<div class="row" {{bind-attr style="styleSuccessMessage:off"}}>
+						<div class="col-md-6 col-sm-12 col-xs-12">
+						 	<img class="thumbnail" {{bind-attr src=product.image.small}}>
+						</div>
+
+						<div class="col-md-6 col-sm-12 col-xs-12">
+
+							<h3>Added</h3>
+
+							<p>You added {{product.name}} to your store, {{currentUser.user.market.market_name}}<p>
+
+							<p>Go to {{#link-to 'market' currentUser.user.market.market_id }}{{currentUser.user.market.market_name}}{{/link-to}} or <a {{action 'close' }}>close window</a></p>
+
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

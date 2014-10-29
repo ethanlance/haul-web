@@ -90,6 +90,7 @@ Haul.MarketSerializer =  DS.RESTSerializer.extend({
 		}
 
 		var payload ={'market': data}; 
+		
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},
 });
