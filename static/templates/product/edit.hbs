@@ -94,19 +94,36 @@
 
 
 
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+
+			{{#if errorShow }}
+				{{bs-alert message=errorMessage type="danger"}}
+			{{/if}}
+
+			</div>
+		</div>
 		<div class="row padding-bottom">
 			<div class="col-md-12 col-sm-12 col-xs-12 verical-align text-right">
 
-			
-
 			{{#if productExists }}
-				{{#link-to 'product' this.id}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+				{{#link-to 'product' product.id}}<button class="btn btn-default">Cancel</button>{{/link-to}}
 
-				{{submit "Save" class="btn btn-primary"}}
-				{{!-- <button {{action "save" this}}  {{bind-attr class=":btn :btn-primary"}}>Save<span class="glyphicon glyphicon-chevron-right"></span></button>  --}}
+				{{ladda-btn
+					name='Save'
+					class="display-inline"
+					btnClasses='btn btn-primary ladda-button'
+					btnClick='submit'
+					spin=isProcessing
+				}}
 			{{ else }}
-				{{submit "Create" class="btn btn-primary"}}
-				{{!-- <button {{action "create" this}}  {{bind-attr class=":btn :btn-primary"}}>Create<span class="glyphicon glyphicon-chevron-right"></span></button>  --}}
+				{{ladda-btn
+					name='Create'
+					class="display-inline"
+					btnClasses='btn btn-primary ladda-button'
+					btnClick='submit'
+					spin=isProcessing
+				}}
 			{{/if}}
 
 

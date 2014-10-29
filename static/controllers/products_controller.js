@@ -106,6 +106,10 @@
 		imagesAreSelected: false,
 		productExists: false,
 
+		//Error
+		errorShow: false,
+		errorMessage: null,
+
 		//Product
 		product: false,
 
@@ -215,34 +219,52 @@
 		    selectedImages.endPropertyChanges();
 		    this.set('selectedImages', selectedImages);
 		},
+
+		saveProduct: function() {
+			var product = this.get('product');
+			
+			product.set('image_ids', this.get('image_ids'));
+
+			//Refresh the image models. Get data from api.
+			var _this = this;
+			this.get('image_ids').forEach(function(id){
+				var img = _this.store.find('image', id )
+				img.then(function(i) {
+					i.reload();
+				});
+			});
+
+			var _this = this;
+			product.save().then(
+				function(result) { 
+					_this.set('isProcessing', false);
+					_this.transitionToRoute('product', product.reload());
+				},
+				function(error){
+					_this.set('isProcessing', false);	
+					_this.set('errorShow', true);
+					_this.set('errorMessage', Haul.errorMessages.get(error.status));
+					console.log("Error" , error);
+				}
+			);
+		},
  
 		//UI ACTIONS
 		actions: { 
 
 			submit: function() {
-				var product = this.get('product');
+				this.set('isProcessing', true);
 
-				product.set('image_ids', this.get('image_ids'));
-
-				//Refresh the image models. Get data from api.
 				var _this = this;
-				this.get('image_ids').forEach(function(id){
-					var img = _this.store.find('image', id )
-					img.then(function(i) {
-						i.reload();
-					});
+				var model = this.get('product');
+
+		 		//Model Validations:
+				model.validate().then(function(result){
+					_this.saveProduct();	
+				}, function(error) {
+					_this.set('isProcessing', false);
+					_this.set('showErrors', true);
 				});
-				
-
-				var _this = this;
-				product.save().then(
-					function(result) { 
-						_this.transitionToRoute('product', product.reload());
-					},
-					function(error){
-						console.log("Error" , error);
-					}
-				);
 			},
 
 			
