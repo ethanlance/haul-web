@@ -692,7 +692,7 @@
 					}, 
 					function onReject(error) {
 						console.error("Failed!", error);
-						this.set('isProcessingLogin', false);
+						this.set('isProcessingFacebook', false);
 					}
 				).then(
 			 		function onFulfill(response) {
@@ -702,7 +702,7 @@
 					function onReject(error) {
 						_this.set('error404', true);
 						console.error("Failed!", error);
-						this.set('isProcessingLogin', false);
+						this.set('isProcessingFacebook', false);
 					}
 				);
 			},
