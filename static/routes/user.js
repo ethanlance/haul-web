@@ -48,6 +48,9 @@ Haul.SellerNewMarketRoute = Haul.AuthenticatedRoute.extend({
 			controller: controller,
 			model: model
 		});
+	},
+	setupController: function(controller, model) {
+		controller.set('model', model);
 	}
 });
 

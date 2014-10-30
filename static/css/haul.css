@@ -478,6 +478,7 @@
 
 #haul-dropzone{
 	/*border: 1px solid blue;*/
+	min-height: 300px;
 }
 
 .dropzone-preview{

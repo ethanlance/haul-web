@@ -3,11 +3,12 @@
 Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
 
 	name: DS.attr( 'string' ),
-	slug: DS.attr( 'string' ),
 	description: DS.attr( 'string' ),
+	user_id: DS.attr( 'string' ),
 
 	products: DS.hasMany('market-product',{async:true}),
 	user: DS.belongsTo('user'),
+	slug: DS.attr( 'string' ),
 
 	validations: { 
 		name: {

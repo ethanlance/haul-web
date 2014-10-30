@@ -48,13 +48,8 @@
 
 {{!-- SELLER PRODUCTS --}}
 
-{{#if content}}
-
-{{else}}
-
-	{{#if isProfileOwner }}
-
-	{{else}}
+{{#if content}}{{else}}
+	{{#if isProfileOwner }}{{else}}
 <div class="container">
 	<div class="haul-container">
 		<div class="row">
@@ -69,7 +64,7 @@
  
 <div class="container">
 
-	{{!-- SELL SOMETHING  --}}
+	{{!-- CREATE STORE  --}}
 	{{#if isProfileOwner }}
 	{{#if user.market.market_id}}{{else}}
 	<div class="haul-grid-li ">	
@@ -105,7 +100,7 @@
 	{{/if}}
 
 
-	{{!-- PRODUCTS --}}
+	{{!-- SELLER PRODUCTS --}}
     {{#each this}}
     	{{#link-to 'product' this }}
     	<div class="haul-grid-li"> 

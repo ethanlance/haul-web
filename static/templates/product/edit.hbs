@@ -7,7 +7,8 @@
 	<div id="stepOne" {{bind-attr class=":collapse showImagePicker:in:out"}}>
 		<div class="row padding-top">
 			<div class="col-md-6 col-sm-6 col-xs-6 vcenter">
-				<h4>Select up to 5 images.</h4>
+				<h4>Start With Pictures</h4>
+				<small>5 max</small>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6 text-right vcenter">
 				<button {{bind-attr class=":btn :btn-sm :btn-primary imagesAreSelected:enabled:disabled"}} {{action "clickNext"}}>Next Step<span class="glyphicon glyphicon-chevron-right"></span></button> 
@@ -60,13 +61,13 @@
 				<div class="row">
 					<div class="col-md-8 col-sm-8 col-xs-12"> 
 						<label>Name:</label>
-						{{input name}} 
+						{{input name canShowValidationError=showErrors}} 
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-8 col-sm-8 col-xs-12"> 
 						<label>Description: (max 500)</label>
-						{{input description as="text" }}
+						{{input description as="text" canShowValidationError=showErrors }}
 					</div> 
 				</div>
 				<div class="row">
@@ -75,7 +76,7 @@
 						{{label-field price}}
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
-						  	{{input-field price class="form-control input-sm"}}
+						  	{{input-field price class="form-control input-sm" canShowValidationError=showErrors}}
 						  	<br/>
 						</div>
 						{{error-field price}}
@@ -85,12 +86,12 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12"> 
 						<label>Quantity:</label>
-						{{input quantity class="input-xs"}}
+						{{input quantity class="input-xs" canShowValidationError=showErrors}}
 	 				</div>
 				</div>
 			</div>
 		</div>
-		
+		{{/form-for}}
 
 
 
@@ -131,7 +132,5 @@
 			</div>
 		</div> 
 
-
-		{{/form-for}}
 	</div>
 </div>

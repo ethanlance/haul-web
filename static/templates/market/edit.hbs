@@ -13,18 +13,38 @@
 				<div class="row">
 					<div class="col-md-8 col-sm-8 col-xs-12"> 
 						<label>Name:</label>
-						{{input name}} 
+						{{input name canShowValidationError=showErrors placeholder="Pick a cool name!"}} 
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-8 col-sm-8 col-xs-12"> 
 						<label>Description: (max 500)</label>
-						{{input description as="text" }}
+						{{input description as="text" canShowValidationError=showErrors placeholder="What makes your store special?"}}
 					</div> 
 				</div>
+
 				<div class="row">
 					<div class="col-md-8 col-sm-8 col-xs-12">
-					{{submit "Save" class="btn btn-primary"}}
+
+					{{#if errorShow }}
+						{{bs-alert message=errorMessage type="danger"}}
+					{{/if}}
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-8 col-sm-8 col-xs-12 text-right">
+					
+					{{#link-to 'base'}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+
+					{{ladda-btn
+						name='Save'
+						class="display-inline"
+						btnClasses='btn btn-primary ladda-button'
+						btnClick='submit'
+						spin=isProcessing
+					}}
 					</div>
 				</div>
 			</div>
