@@ -85,7 +85,7 @@
 
 	{{!-- SELL SOMETHING  --}}
 	{{#if isProfileOwner }}
-	<div class="haul-grid-li ">	
+	<div class="haul-grid-li">	
 		<div class="sell"> 
 			{{#link-to 'seller.new-product' currentUser.slug }}
 			<div class="sell-button text-center">
@@ -104,17 +104,15 @@
     {{#each this}}
     	{{#link-to 'product' this }}
     	<div class="haul-grid-li"> 
-    	
-				<img class="thumbnail" {{bind-attr src=image.small}}>
+			<img class="thumbnail" {{bind-attr src=image.small}}>
 
-				{{#if sold}}
-					<div class="sold">Sold</div>
-				{{/if}}
-				
-				<div class="info">		
-			 	  	<div class="price"> ${{price}}</div>   
-				</div>
+			{{#if sold}}
+				<div class="sold">Sold</div>
+			{{/if}}
 			
+			<div class="info">		
+		 	  	<div class="price"> ${{price}}</div>   
+			</div>			
 	 	</div>
 	 	{{/link-to}}	
 	{{/each}}

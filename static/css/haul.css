@@ -1,3 +1,11 @@
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
 .display-inline {
 	display: inline;
 }
@@ -270,6 +278,8 @@
 	}
 } 
 
+
+
 .haul-grid-li img {
 	width: 100%;
 	max-width: 320px;
@@ -302,7 +312,7 @@
 
 .haul-grid-li .sell-text {
 	position:absolute;
-	top: 40%;
+	top: 30%;
 	width:100%;
 }
 
@@ -312,6 +322,47 @@
 
 
 
+
+.box {
+	float: left;
+	width:50%;
+	height: 25%;
+
+	margin:0px;
+	padding:10px;
+	/*border: 1px dashed grey;*/
+	position:relative;
+}
+
+.box-inside {
+	width: 100%;
+	/*border: 1px dashed grey; */
+	border-radius: 4px; 
+	padding:10px;
+	position:absolute;
+}
+
+@media (min-width: 768px) {
+	.box{
+	width:66%; 
+	}
+}
+
+@media (min-width: 992px) {
+	.box{
+	width:75%; 
+	}
+}
+@media (min-width: 1200px) {
+	.box{ 
+	width:75%; 
+	-webkit-transition: all .2s ease-in-out;
+		 -o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
+	 
+	}
+} 
+ 
 
 .haul-image-picker-well {
 	margin-top:10px;
@@ -383,6 +434,8 @@
 	border-top-left-radius: 4px;
 	border-bottom-left-radius: 4px;
 }
+
+
 
 .padding-top {
 	padding-top: 20px;

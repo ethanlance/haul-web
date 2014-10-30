@@ -30,6 +30,69 @@
 </div>	
 
 
+{{!-- Empty Store --}}
+
+{{#if isProfileOwner }}
+{{#if market.product }}{{else}}
+<div class="container">
+	<div class="jumbotron"> 
+			
+							
+		<h2>Your store is empty.</h2>
+
+		<p>You can place any items in your store. Even things from other sellers.  If the product sells from your store, you earn a commission. <small>Psst... learn more from our <a>FAQ</a></small></p>
+
+		<p>Pick great products!</p>
+
+					 
+	</div>
+</div>
+
+
+<div class="container">
+
+	{{!-- CREATE ITEM --}}
+
+	<div class="haul-grid-li">	
+		<div class="sell"> 
+			{{#link-to 'seller.new-product' currentUser.slug }}
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					<div class="glyphicon glyphicon-plus-sign"></div><br/>
+					Create an Item
+				</div>
+			</div>
+			{{/link-to}}
+		</div>
+	</div>
+ 	
+	<div class="box">
+	<div class="box-inside">
+		<h3>Or Browse Below For Items.</h3>
+		<h4>Make Your Store Stand Out.</h4>
+	</div> 
+	</div> 
+
+	<div class="clearfix"></div>
+
+	{{!-- BROWSE POPULAR STORES & ITEMS --}}
+
+
+	{{#each fakeProducts}}
+	<div class="haul-grid-li"> 
+		<img class="thumbnail" {{bind-attr src=image}}>
+		
+		<div class="info">		
+	 	  	<div class="price"> $200</div>   
+		</div>		
+ 	</div>
+ 	{{/each}}
+
+</div>
+
+{{/if}}
+{{/if}}
+
 
 
 {{!-- STORE PRODUCTS --}}

@@ -7,10 +7,21 @@
 	});
 
 	Haul.MarketIndexController = Ember.ArrayController.extend({
+		needs: ["auth"], 
+		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
-		market: {}, 
+		//Is currentUser viewing his own page?
+		isProfileOwner: false,
+		
+		setup: function() { 
+			var currentUser = this.get('currentUser');
 
-		needs: ["auth"],
+			if( currentUser ){
+				if( !Ember.isEmpty(currentUser) && this.get('market').get('user').get('id') === currentUser.get('id')) {
+					this.set('isProfileOwner', true);
+				}
+			}
+		}.observes('market'),
 	});
 
 	Haul.MarketEditController = Ember.ObjectController.extend({

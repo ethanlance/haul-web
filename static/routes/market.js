@@ -18,6 +18,9 @@ Haul.MarketIndexRoute = Haul.AnonRoute.extend({
 	},
  	setupController: function(controller, model) {
  		controller.set('market', this.modelFor('market'));
+
+ 		controller.set('fakeProducts', this.store.find('product-fixture'));
+
  	},
 	renderTemplate: function(){
 		this.render('layouts/header_base', {
