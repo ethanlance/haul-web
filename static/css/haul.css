@@ -83,6 +83,9 @@
  
 
 .navbar-center {
+	-webkit-transition: all .2s ease-in-out;
+	 -o-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
 	position: absolute;
 	width: 800px;
 	left: 0;
@@ -90,8 +93,28 @@
 	margin: auto; 
 } 
 
+.navbar-center.in {
+	width: 100%;
+}
+
 .navbar-center.in{
 	position: relative;
+}
+
+
+@media (max-width: 768px) {
+	.dropdown-menu{
+		right:0;
+		left: auto;
+	}
+}
+
+
+.navbar-right{
+	float: right;
+	width:200px;
+	position:absolute;
+	right: 10px;
 }
 
 .navbar-right.in{

@@ -69,11 +69,11 @@ Haul.UserAdapter = Haul.ApplicationAdapter.extend({
 	host: Haul.USER_SERVER_HOST,
 
 	find: function(store, type, id) {
-		var url = this.host + "/users/" + id; 
+		var url = this.host + "/users/" + id;  
         return this.ajax(url, 'GET');
     },
 
-	findQuery: function(store, type, query) {
+	findQuery: function(store, type, query) { 
         var url = this.host + "/users/" + query.id;
         return this.ajax(url, 'GET');
     },    

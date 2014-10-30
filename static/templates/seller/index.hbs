@@ -34,8 +34,6 @@
 	    					{{#if isProfileOwner }}		
 								{{#if user.market.market_id}}
 									{{#link-to 'market' user.market.market_id }}<button class="btn btn-default">My Store: {{user.market.market_name}}</button>{{/link-to}}
-								{{else}}
-									{{#link-to 'seller.new-market' user.slug }}<button class="btn btn-default">Create A Store</button>{{/link-to}}
 								{{/if}}
 							{{/if}}	
 
@@ -70,15 +68,34 @@
 {{/if}}
  
 <div class="container">
+
+	{{!-- SELL SOMETHING  --}}
+	{{#if isProfileOwner }}
+	{{#if user.market.market_id}}{{else}}
+	<div class="haul-grid-li ">	
+		<div class="sell"> 
+			{{#link-to 'seller.new-market' currentUser.slug }}
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					<div class="glyphicon glyphicon-plus-sign"></div><br/>	
+					Start Your Store
+				</div>
+			</div>
+			{{/link-to}}
+		</div>
+	</div>
+	{{/if}}
+	{{/if}}
 	
 
+	{{!-- SELL SOMETHING  --}}
 	{{#if isProfileOwner }}
 	<div class="haul-grid-li ">	
 		<div class="sell"> 
 			{{#link-to 'seller.new-product' currentUser.slug }}
 			<div class="sell-button text-center">
 				<div class="sell-text text-center haul-font">
-					<div class="glyphicon glyphicon-plus-sign"></div><br/>	
+					<div class="glyphicon glyphicon-plus-sign"></div><br/>
 					Sell Something
 				</div>
 			</div>
@@ -88,6 +105,7 @@
 	{{/if}}
 
 
+	{{!-- PRODUCTS --}}
     {{#each this}}
     	{{#link-to 'product' this }}
     	<div class="haul-grid-li"> 

@@ -15,7 +15,7 @@
 			return this.get('currentUser').get('id');
 		}.property(),
 
-	}); 
+	});
 
 	Haul.LSSerializer = DS.LSSerializer.extend();
 	Haul.LSAdapter = DS.LSAdapter.extend({});

@@ -35,15 +35,6 @@
 				}else{ 
 					var localUser = result.get('content').get('firstObject');
 					_this.set('currentUser', localUser);
-
-					// var promise = localUser.get('user').then(function(result){
-					// 	var user = result;
-					// 	console.log("USER", user);
-					// 	return user.get('market')
-					// })
-					// promise.then(function(market){
-					// 	console.log("MARKET", market)
-					// })
 					
 				}
 			}, function(error) {
