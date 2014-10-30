@@ -324,41 +324,38 @@
 
 
 .box {
+	/*border: 1px dashed grey;*/
 	float: left;
 	width:50%;
-	height: 25%;
-
 	margin:0px;
-	padding:10px;
-	/*border: 1px dashed grey;*/
-	position:relative;
+	padding-left:10px;
+	max-height: 320px;
 }
 
 .box-inside {
-	width: 100%;
-	/*border: 1px dashed grey; */
-	border-radius: 4px; 
-	padding:10px;
-	position:absolute;
+	max-height: 320px;
 }
 
 @media (min-width: 768px) {
 	.box{
-	width:66%; 
+		width:66%; 
+		padding-top:20px;
 	}
 }
 
 @media (min-width: 992px) {
 	.box{
-	width:75%; 
+		width:75%; 
+		padding-top:20px;
 	}
 }
 @media (min-width: 1200px) {
 	.box{ 
-	width:75%; 
-	-webkit-transition: all .2s ease-in-out;
-		 -o-transition: all .2s ease-in-out;
-			transition: all .2s ease-in-out;
+		width:75%; 
+		padding-top:20%;
+		-webkit-transition: all .2s ease-in-out;
+			 -o-transition: all .2s ease-in-out;
+				transition: all .2s ease-in-out;
 	 
 	}
 } 

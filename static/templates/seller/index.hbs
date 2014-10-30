@@ -27,15 +27,6 @@
 	    						</button>
 	    					{{/if}}
 	    						<div><span class="medium">175 Followers - Following 15</span></div>
-	    					
-
-	    				
-
-	    					{{#if isProfileOwner }}		
-								{{#if user.market.market_id}}
-									{{#link-to 'market' user.market.market_id }}<button class="btn btn-default">My Store: {{user.market.market_name}}</button>{{/link-to}}
-								{{/if}}
-							{{/if}}	
 
 	    					</div>
 					  </div>
@@ -66,7 +57,24 @@
 
 	{{!-- CREATE STORE  --}}
 	{{#if isProfileOwner }}
-	{{#if user.market.market_id}}{{else}}
+	{{#if user.market.market_id}}
+
+	<div class="haul-grid-li ">	
+		<div class="sell"> 
+			{{#link-to 'market' user.market.market_id }}
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					My Store:<br/>	
+					{{user.market.market_name}}
+				</div>
+			</div>
+			{{/link-to}}
+		</div>
+	</div>
+
+
+
+	{{else}}
 	<div class="haul-grid-li ">	
 		<div class="sell"> 
 			{{#link-to 'seller.new-market' currentUser.slug }}
