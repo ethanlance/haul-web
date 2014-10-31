@@ -75,6 +75,8 @@ Haul.Router.map(function(){
 	this.resource('signup');
 	this.resource('signupconfirm', {path: "register"});
 
+	//Settings
+	this.resource('settings');
 
 	//Search
 	this.resource('search');

@@ -1,8 +1,12 @@
-<div class="container">
+<div class="haul-container">
 
 	<div class="row padding-top">
 		<div class="col-md-6 col-sm-6 col-xs-6 vcenter">
+		{{#if model.name }}
+			<h4>Edit Your Store</h4>
+		{{else}}
 			<h4>Create Your Store</h4>
+		{{/if}}
 		</div>
 	</div>
 

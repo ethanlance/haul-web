@@ -32,10 +32,11 @@ Haul.MarketIndexRoute = Haul.AnonRoute.extend({
 });
 
 
-Haul.MarketNewRoute = Haul.AuthenticatedRoute.extend({ 
+Haul.MarketEditRoute = Haul.AuthenticatedRoute.extend({ 
 	controllerName: "market-edit",
 	model: function() {
-		return this.store.createRecord('market');
+		console.log("YOU ARE HERE?")
+		return this.modelFor('market');
 	},
 	renderTemplate: function(controller, model) {  
 		this._super();

@@ -1,9 +1,18 @@
+body {
+	position: relative;
+	padding-top:31px;
+}
+
 .clearfix:after {
    content: " "; /* Older browser do not support empty content */
    visibility: hidden;
    display: block;
    height: 0;
    clear: both;
+}
+
+.haul-wrapper {
+	margin-top:75px;
 }
 
 .display-inline {
@@ -59,6 +68,7 @@
 	float: left;
 }
  
+
 .navbar-profile { 
 	width: 100%;
 	left: 0;
@@ -88,7 +98,7 @@
 .navbar-profile .profile-name {
 	padding-left: 4px;
 }
- 
+
 
 .navbar-center {
 	-webkit-transition: all .2s ease-in-out;
@@ -433,6 +443,9 @@
 }
 
 
+.margin-top {
+	margin-top: 20px;
+}
 
 .padding-top {
 	padding-top: 20px;
@@ -643,3 +656,62 @@ label {
 textarea.form-control {
  	height:200px;
 };
+
+
+
+
+.affix {
+
+}
+
+.affix-top {
+
+}
+
+.affix-bottom {
+
+}
+
+.toc {
+	float:left;
+	width:200px;
+	display:inline;
+}
+@media (max-width: 992px) {
+	.toc{
+		display:none;
+	}
+}
+
+.relative {
+	position: relative;
+}
+
+.content-toc {
+	padding-top:60px;	
+}
+
+.content-scroll {
+	overflow:scroll;
+	height: 120%;
+	padding-top:60px;
+	padding-bottom:0%;
+}
+
+	
+
+.haul-container {
+	margin-top: 100px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.haul-container-fluid {
+	margin-top: 100px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
