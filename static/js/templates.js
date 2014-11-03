@@ -1075,7 +1075,7 @@ function program8(depth0,data) {
   data.buffer.push("<button class=\"btn btn-default\">Cancel</button>");
   }
 
-  data.buffer.push("<div class=\"haul-container\">\n\n	<div class=\"row padding-top\">\n		<div class=\"col-md-6 col-sm-6 col-xs-6 vcenter\">\n		");
+  data.buffer.push("<div class=\"container content-fixed-nav\">\n\n	<div class=\"row padding-top\">\n		<div class=\"col-md-6 col-sm-6 col-xs-6 vcenter\">\n		");
   stack1 = helpers['if'].call(depth0, "model.name", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		</div>\n	</div>\n\n\n	");
