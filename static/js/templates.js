@@ -1452,17 +1452,17 @@ function program8(depth0,data) {
   data.buffer.push(" \n		</div>\n\n		\n\n		<div class=\"col-md-6 col-sm-12 col-xs-12\">\n			<div class=\"row\">\n				<div class=\"col-md-12 haul-buy-card\">\n					\n					\n\n					<div class=\"row button-bar\"> \n							<div class=\"col-md-6 col-sm-6 col-xs-6\">\n								<span class=\"lead haul-price\">$");
   stack1 = helpers._triageMustache.call(depth0, "price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</span>\n								<button type=\"button\" class=\"btn btn-primary btn-lg\">BUY</button>\n							</div>\n\n							<div class=\"col-md-6 col-sm-6 col-xs-6 text-right\">\n							<span class=\"btn-group \">\n								<button type=\"button\" class=\"btn btn-default btn-md\" ");
+  data.buffer.push("</span>\n								<button type=\"button\" class=\"btn btn-primary btn-lg\">BUY</button>\n							</div>\n\n							<div class=\"col-md-6 col-sm-6 col-xs-6 text-right\">\n							<span class=\"btn-group \">\n								<button type=\"button\" class=\"btn btn-default btn-sm\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "likeProduct", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(" ");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Like This!")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
-  data.buffer.push(">\n								  13 <span class=\"glyphicon glyphicon-heart\"></span>\n								</button>	\n\n								<button type=\"button\" class=\"btn btn-default btn-md\" ");
+  data.buffer.push(">\n								  13 <span class=\"glyphicon glyphicon-heart\"></span>\n								</button>	\n\n								<button type=\"button\" class=\"btn btn-default btn-sm\" ");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Comment on This!")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
-  data.buffer.push(">\n									4 <span class=\"glyphicon glyphicon-comment\"></span>\n								</button>\n\n								<button type=\"button\" class=\"btn btn-default btn-md\" { action 'shareProduct'}} ");
+  data.buffer.push(">\n									4 <span class=\"glyphicon glyphicon-comment\"></span>\n								</button>\n\n								<button type=\"button\" class=\"btn btn-default btn-sm\" { action 'shareProduct'}} ");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Share This!")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
