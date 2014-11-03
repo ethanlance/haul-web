@@ -676,6 +676,7 @@ textarea.form-control {
 	float:left;
 	width:200px;
 	display:inline;
+	position:absolute;
 }
 @media (max-width: 992px) {
 	.toc{
