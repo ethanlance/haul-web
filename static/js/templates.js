@@ -1343,7 +1343,7 @@ function program9(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("\n<div class=\"haul-container\">\n\n\n	\n\n	<div id=\"stepOne\" ");
+  data.buffer.push("\n<div class=\"container content-fixed-nav\">\n\n\n	\n\n	<div id=\"stepOne\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'class': (":collapse showImagePicker:in:out")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
