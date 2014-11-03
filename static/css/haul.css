@@ -128,18 +128,18 @@ body {
 }
 
 
-.navbar-right{
+.haul-navbar .navbar-right{
 	float: right;
 	width:200px;
 	position:absolute;
 	right: 10px;
 }
 
-.navbar-right.in{
+.haul-navbar .navbar-right.in{
 	overflow-y:visible;
 }
 
-.navbar-right .signup{
+.haul-navbar .signup{
 	border: 1px solid #0192B5;
 	color: #0192B5;
 }
