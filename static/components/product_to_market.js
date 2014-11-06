@@ -61,24 +61,37 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		_this.set('showForm', true);
 		_this.set('showSuccessMessage', false);
 
-		//Model is "market-product" model.  If it exists then stop here.
+		//Model "market-product" was supplied to component.
 		if( this.get('model') ) {
 			this.set('addMode', false);
 			this.set('editMode', true);
 			this.set('productModel', this.get('model').get('product'));
 			return;
+
+		//Model "market-product" was not supplied to component.
+		//Product must then be supplied.
 		} else {
+			//Create placeholder model.
 			var model = store.createRecord('market-product');
+
+			//Product was supplied to component, set it on the model.
 			model.set('product', this.get('product'));
+
+			//Set productModel, to kick off observer that get's product image.
+			this.set('productModel', this.get('product'));
+
+			//Persist our model.
 			this.set('model', model);
+
+			//Now go find out if this user has a market.
 			this.findMarket();
 		}
+
 	}.on('init'),
 
 	findMarket: function() { 
 		var _this = this;
 		var store = this.get('targetObject.store');
-		var product_id = this.get('product').get('id');
 		var model = this.get('model');
 
 		//Does this user have this product in their store?
@@ -91,23 +104,50 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		})
 		.then(function(market) {
 
+			//IF user does not have a market, then we need to abort and display a message
+			//about how to create a market first.
+			if(Ember.isEmpty(market)) {
+				console.log("USER DOES NOT HAVE MARKET");
+				return;
+			}
+
 			//SET MARKET ON MODEL
 			model.set('market', market); 
-			return store.find('market-product-list', {market_id: market.get('id')});
-		})
-		.then(function(products) { 
+			
+			//Now get all the products in this market.
+			var product_list = store.find('market-product-list', {market_id: market.get('id')});
+
+			//Pass this promise on to next method.
+			_this.findProducts( product_list );
+
+		}, function(error) {
+			console.log("ERROR", error);
+		});
+	},
+
+	findProducts: function(promise) {
+		var _this = this;
+		var product_id = this.get('product').get('id');
+
+		//IF we find our product in the list of products
+		//then we know this user already has this product in 
+		//her market.  If that is the case then we get that product-market model
+		//and this becomes an EDIT not an ADD.
+		promise.then(function(products) { 
 			if(Ember.isEmpty(products)) {
 				return;
-			}else{
-				var found = false;
+			}else{ 
 				products.forEach(function(product){
 					if( product.get('product').id === product_id ){ 
+
+						//Product has a match in product list.  This is an "EDIT"
 						_this.set('productModel', product.get('product'));
-						_this.findModel();
-						found = true;
+						_this.findModel(); 
 						return;
 					}
 				});
+
+				//Product has no match in product list.  This is an "ADD"
 				return; 
 			} 
 		}, function(error) {
@@ -125,6 +165,9 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		var product_id = model.get('product').id;
 		var data = {'market_id':market_id, 'product_id':product_id};
 		
+		//Get the market-product record.  
+		//We will assign it to model.
+		//This model will be edited by user.
 		store.find('market-product', data)
 		.then(function(results){
 			return results.get('content');
@@ -233,7 +276,6 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 				_this.set('showErrors', true);
 			}); 
 		},
-
 
 		//remove this product from Market
 		delete: function() {
