@@ -51,9 +51,13 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		
 	}.observes('productModel'),
 
+	/**
+		start: is the init function.
+	**/
 	start: function() {
 		var _this = this;
 		var store = this.get('targetObject.store');
+
 		_this.set('showForm', true);
 		_this.set('showSuccessMessage', false);
 
@@ -63,55 +67,62 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 			this.set('editMode', true);
 			this.set('productModel', this.get('model').get('product'));
 			return;
+		} else {
+			var model = store.createRecord('market-product');
+			model.set('product', this.get('product'));
+			this.set('model', model);
+			this.findMarket();
 		}
+	}.on('init'),
+
+	findMarket: function() { 
+		var _this = this;
+		var store = this.get('targetObject.store');
+		var product_id = this.get('product').get('id');
+		var model = this.get('model');
 
 		//Does this user have this product in their store?
-		var product_id = this.get('product').get('id');
-		this.get('currentUser').get('user')
+		this.get('currentUser')
+		.get('user')
 		.then(function(user){
 			return user.get('market')})
 		.then(function(user_market){
 			return user_market.get('market'); 
 		})
 		.then(function(market) {
-			_this.set('market', market); 
+
+			//SET MARKET ON MODEL
+			model.set('market', market); 
 			return store.find('market-product-list', {market_id: market.get('id')});
 		})
 		.then(function(products) { 
 			if(Ember.isEmpty(products)) {
-				_this.createEmptyModel();
 				return;
 			}else{
 				var found = false;
 				products.forEach(function(product){
 					if( product.get('product').id === product_id ){ 
-						console.log("fUCK")
 						_this.set('productModel', product.get('product'));
 						_this.findModel();
 						found = true;
 						return;
 					}
 				});
-
-				if( !found ) {
-					_this.createEmptyModel();	
-				}
-				
 				return; 
 			} 
 		}, function(error) {
 			console.log("ERROR", error);
-			_this.createEmptyModel();
 		});
 
-	}.on('init'),
+	},
 
 	findModel: function() {
 		var _this = this;
 		var store = this.get('targetObject.store');
+		var model = this.get('model');
 
-		var market_id = this.get('market').id;
-		var product_id = this.get('product').id;
+		var market_id = model.get('market').id;
+		var product_id = model.get('product').id;
 		var data = {'market_id':market_id, 'product_id':product_id};
 		
 		store.find('market-product', data)
@@ -125,35 +136,6 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		}, function(error){
 			console.log("ERROR", error);
 		});
-	},
-
-	createEmptyModel: function() { 
-		var _this = this;
-		var store = this.get('targetObject.store');
-
-		//Create an empty model.
-		var model = store.createRecord('market-product');
-		var product = this.get('product');
-
-		this.set('model', model);
-
-		//Set the product, user and market on this model.
-		model.set('product', product);
-		
-		this.set('productModel', product);
-		
-		//TODO: Clean this chunk up.  It Nasty.
-		var promise = this.get('currentUser').get('user');
-		var promise = promise.then(function(user){ 	
-			model.set('user', user);
-			return user.get('market');
-		});
-		var market = promise.then(function(market){ 
-			return store.find('market', market.get('market_id'));
-		});
-		market.then(function(market){
-			model.set('market', market);
-		})
 	},
 
 
@@ -232,7 +214,6 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		},
 
 		close: function() {
-			console.log("CLOSE")
 			$('#curateModal').modal('hide');	
 		},
 
