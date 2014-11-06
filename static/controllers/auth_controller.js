@@ -151,7 +151,7 @@
 			}).then(
 
 				function(response) {
-					console.log("LOGGED IN", response); 
+					console.log("FB/HAUL LOGGED IN", response); 
 
 					//Auth Controller:  
 					_this.send('setupUser', response);
@@ -184,6 +184,7 @@
 				var _this = this;
 				return this.store.find('user', user_id).then( 
 					function(user) {
+						console.log("USER", user);
 						return _this.authenticateLocalUser(user, accessToken, refreshToken, attemptedTrans);
 					}, function(error) {
 						return error;
