@@ -71,7 +71,6 @@ Haul.ProductListSerializer =  DS.RESTSerializer.extend({
 			}
 		}); 
 		var payload = {'product-list': data}; 
-		console.log("PAYLOAD PRODUCTS", payload);
 		return this._super(store, primaryType, payload);
 	}
 });

@@ -14,6 +14,9 @@ Haul.LoginRoute = Ember.Route.extend({
 		}),
 		this.render('auth/login');
 	},
+	beforeModel: function() {
+		this.controllerFor('login').reset();
+	}
 });
 
 
