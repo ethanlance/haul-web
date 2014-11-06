@@ -42,13 +42,23 @@
 			deleteProceed: function() {
 				$('#deleteModal').modal('hide');
 				var _this = this;
-				var user = this.get('controllers.auth').get('currentUser');
+				var user = this.get('currentUser');
 				var product = this.model;
+				var product_id = product.get('id');
 				product.deleteRecord();
 				
 				product.save().then(
 					function(result) { 
-						_this.transitionToRoute('seller', user.slug);
+
+						//Delete from product-list model also;
+						var store = _this.store;
+						var pl = store.getById('product_list', product_id);
+						if(pl){
+							 store.deleteRecord(pl);
+							 store.unloadRecord(pl);
+						}
+
+						_this.transitionToRoute('seller', user.get('slug'));
 					},
 					function(error){
 						console.log("Error" , error);
@@ -208,6 +218,11 @@
 			product.save().then(
 				function(result) { 
 					_this.set('isProcessing', false);
+
+					//reload product_list model too.
+					_this.store.find('product-list', {user_id: _this.get('currentUser').id});
+
+
 					_this.transitionToRoute('product', product.reload());
 				},
 				function(error){

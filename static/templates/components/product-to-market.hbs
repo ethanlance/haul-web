@@ -1,7 +1,12 @@
 {{!-- BUTTON --}}
 
+{{#if addMode}}
 <button {{action 'curate'}} class="btn btn-default">Add To: {{currentUser.user.market.market_name}}</button>
+{{/if}}
 
+{{#if editMode}}
+<button {{action 'curate'}} class="btn btn-default">Edit Item: {{currentUser.user.market.market_name}}</button>
+{{/if}}
 
 {{!-- MODAL --}}
 
@@ -12,7 +17,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 				<h4 class="modal-title" id="mySmallModalLabel">
-					Add To: {{currentUser.user.market.market_name}}
+					Add To {{currentUser.user.market.market_name}}
 				</h4>
 			</div>
 
@@ -23,7 +28,7 @@
 				<div {{bind-attr class="showForm:show:hide"}}>
 					<div class="row">
 						<div class="col-md-6 col-sm-12 col-xs-12">
-						 	<img class="thumbnail" {{bind-attr src=product.image.small}}>
+						 	<img class="thumbnail" {{bind-attr src=productImage}}> 
 						</div>
 
 						<div class="col-md-6 col-sm-12 col-xs-12">
@@ -32,7 +37,7 @@
 							
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12"> 
-									<h3>{{ product.name }}</h3>
+									<h3>{{ model.product.name }}</h3>
 								</div>
 							</div>
 							<div class="row">
@@ -58,6 +63,17 @@
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12 text-right">
+
+							{{#if editMode}}
+								{{ladda-btn
+									name='Remove From Store'
+									class="display-inline"
+									btnClasses='btn btn-danger ladda-button'
+									btnClick='delete'
+									spin=isProcessingDelete
+								}} 
+							{{/if}}
+
 							<button {{action 'curateCancel'}} class="btn btn-default">Cancel</button>
 
 							{{ladda-btn
@@ -77,16 +93,39 @@
 				<div {{bind-attr class="showSuccessMessage:show:hide"}}>
 					<div class="row" {{bind-attr style="styleSuccessMessage:off"}}>
 						<div class="col-md-6 col-sm-12 col-xs-12">
-						 	<img class="thumbnail" {{bind-attr src=product.image.small}}>
+						 	<img class="thumbnail" {{bind-attr src=productImage}}> 
 						</div>
 
 						<div class="col-md-6 col-sm-12 col-xs-12">
 
-							<h3>Added</h3>
+							<h3>Success</h3>
 
-							<p>You added {{product.name}} to your store, {{currentUser.user.market.market_name}}<p>
+							<p>You added {{ model.product.name}} to your store, {{currentUser.user.market.market_name}}<p>
 
-							<p>Go to {{#link-to 'market' currentUser.user.market.market_id }}{{currentUser.user.market.market_name}}{{/link-to}} or <a {{action 'close' }}>close window</a></p>
+							<p>Go to {{#link-to 'market' currentUser.user.market.market_id }}<button {{ action "close"}} class="btn btn-default">{{currentUser.user.market.market_name}}</button>{{/link-to}} or <button class="btn btn-default" {{action 'close' }}>close window</button></p>
+
+						</div>
+					</div>
+				</div>
+
+
+				{{!-- DELETED MESSAGE --}}
+
+				<div {{bind-attr class="showDeletedMessage:show:hide"}}>
+					<div class="row" {{bind-attr style="styleSuccessMessage:off"}}>
+						<div class="col-md-6 col-sm-12 col-xs-12">
+						 	<img class="thumbnail" {{bind-attr src=productImage}}> 
+						</div>
+
+						<div class="col-md-6 col-sm-12 col-xs-12">
+
+							<h3>Removed</h3>
+
+							<p>You  removed {{ model.product.name}} from your store, {{currentUser.user.market.market_name}}<p>
+
+							{{#link-to 'market' currentUser.user.market.market_id }}
+							<button {{ action "close"}} class="btn btn-defaul">Close</button>
+							{{/link-to}}
 
 						</div>
 					</div>

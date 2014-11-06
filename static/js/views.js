@@ -68,14 +68,24 @@
 Haul.CarouselView = Ember.View.extend({	
 	templateName: 'modules/carousel',
 	classNames: ['carousel', 'slide'],
+	
+	imagesFound: false,
+
 	init: function() { 
 		this._super.apply(this, arguments);
 		// disable the data api from boostrap
 
 		//$(document).off('.data-api');	 
-
+		var _this = this;
 		// at least one item must have the active class, so we set the first here, and the class will be added by class binding
 		var promise = this.get('content').then(function(results) { 
+
+			results.forEach(function(image){
+				if( image.get('medium') ) {
+					_this.set('imagesFound', true);
+				}
+			});
+
 			var obj = Ember.get(results, 'firstObject');
 			if( obj ) {
 				Ember.set(obj, 'isActive', true);	

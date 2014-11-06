@@ -6,13 +6,21 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 	description: DS.attr( 'string' ),
 	price: DS.attr( 'string' ),
 	quantity: DS.attr( 'string' ),
-	image_ids: DS.attr( 'string' ),
+	user_id: DS.attr( 'string' ),
 
-	image: DS.belongsTo('image',{async:true}),
-	images: DS.hasMany('image',{async:true}),
-	user: DS.belongsTo('user'),
-	
-	comments: DS.hasMany('comment',{async:true}),
+	user: DS.belongsTo('user'), 
+	images: DS.hasMany('image', {async:true}),
+	comments: DS.hasMany('comment', {async:true}),
+
+	//GET ONE IMAGE:
+	first_image: function() {
+		console.log("WTF")
+		return this.get('images').then(function(images){
+			console.log('images', images, this.id)
+			console.log("IMAGE", images.get('firstObject'));
+			return images.get('firstObject');
+		});
+	}.property(),
 
 	validations: { 
 		name: {
@@ -89,27 +97,6 @@ Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 
 
 Haul.ProductSerializer =  DS.RESTSerializer.extend({
-	
-	extractArray: function(store, primaryType, payload) {
-
-		if( payload.data == "ok" ){
-			return;
-		}
-		
-		var data = payload.data.map(function(product){
-			return {
-				id: product.product_id,	
-				name: product.name,
-				description: product.description,
-				price: product.price,
-				quantity: product.quantity,
-				image: product.image_id,
-				user: product.user_id,
-			}
-		}); 
-		var payload = {'products': data}; 
-		return this._super(store, primaryType, payload);
-	},
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
@@ -124,8 +111,8 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 			price: payload.data.price,
 			quantity: payload.data.quantity,
 			images: payload.data.image_ids,
-			image: payload.data.image_ids[0],
-			user: payload.data.user_id
+			user: payload.data.user_id,
+			user_id: payload.data.user_id
 		};
 
 

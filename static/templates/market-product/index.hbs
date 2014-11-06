@@ -1,0 +1,159 @@
+<div class="container content-fixed-nav padding-bottom">
+	<div class="row">
+
+		{{!-- STORE LOGO --}}
+		<div class="col-md-6">
+	    	{{ profile-market market=model.market}}
+		</div>
+
+		{{!-- BUTTONS --}}
+		<div class="col-md-6 text-right">
+
+
+			{{#if isMarketOwner }}
+			{{#if model }}
+				{{product-to-market 
+					class="display-inline" 
+					currentUser=currentUser 
+					model=model
+				}}
+			{{/if}}
+			{{/if}}
+
+		</div>
+	</div>
+</div>	
+
+
+<div class="container">
+
+	
+	<div class="row padding-top">
+
+		{{!-- Images  --}}
+
+		<div class="col-md-6 col-sm-12 col-xs-12 padding-bottom">
+			{{#if model.product }}
+			{{#if model.product.images }}
+				{{view Haul.CarouselView contentBinding="model.product.images"}}
+			{{/if}}
+			{{/if}}
+		</div>
+
+		{{!-- Product Info --}}
+
+		<div class="col-md-6 col-sm-12 col-xs-12">
+			<div class="row">
+				<div class="col-md-12 haul-buy-card">
+					
+					{{!-- BUTTONS  --}}
+
+					<div class="row button-bar"> 
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<span class="lead haul-price">${{ model.product.price }}</span>
+							<button type="button" class="btn btn-primary btn-lg">BUY</button>
+						</div>
+
+						<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+						<span class="btn-group ">
+							<button type="button" class="btn btn-default btn-sm" {{ action 'likeProduct'}} {{bs-bind-tooltip content="Like This!"}}>
+							  13 <span class="glyphicon glyphicon-heart"></span>
+							</button>	
+
+							<button type="button" class="btn btn-default btn-sm" {{bs-bind-tooltip content="Comment on This!"}}>
+								4 <span class="glyphicon glyphicon-comment"></span>
+							</button>
+
+							<button type="button" class="btn btn-default btn-sm" { action 'shareProduct'}} {{bs-bind-tooltip content="Share This!"}}>
+							  &nbsp;<span class="glyphicon glyphicon-share"></span>
+							</button>
+							</span>
+						</div>
+					</div>
+
+					{{ seller-info seller=model.product.user product=model.product }}
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="col-md-6 col-sm-12 col-xs-12">
+
+		
+			<div class="row">
+				<div class="col-md-12 haul-buy-card">				
+
+
+					<div class="row">
+						<div class="col-md-6">
+							<span class="haul-font"><strong>{{ model.market.name }} says:</strong></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12">	
+							{{!-- MARKET INFO --}}
+							{{ model.editorial }}
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+ 	
+
+		{{!-- COMMENTS --}}
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12 haul-buy-card">
+					<div class="row">
+						<div class="col-md-12">
+						<h4>Comments</h4>
+
+						{{textarea value=message name="message" cols="80" rows="3" class="form-control"}}
+							<div class="text-right padding-top">
+								<button class="btn btn-default">post</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+</div>
+
+<div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="mySmallModalLabel">Delete?<br/>This cannot be undone</h4>
+		</div>
+		<div class="modal-body"> 
+			<p class="text-center">
+				<button {{action 'deleteCancel'}} class="btn btn-default">Cancel</button>
+				<button {{action 'deleteProceed'}} class="btn btn-danger">Yes, Delete</button>
+			</p>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

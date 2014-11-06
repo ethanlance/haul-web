@@ -1,5 +1,17 @@
+/**
+ProductToMarketComponent 
+	This component  allows a user to manage wether a specific product is 
+	associated to the user's marketplace.  The component adds a button to the page.
 
-Haul.ProductToStoreComponent = Ember.Component.extend({
+	You must pass this component:
+	currentUser - this is the authenticated Local Storage user.
+
+	And one of the following:
+	a. model: this is one record of market_product model, that is to be edited.  
+	b. product: this is one record of the product model, which will be added to a market.
+
+**/
+Haul.ProductToMarketComponent = Ember.Component.extend({
 	
 	model: null,
 	product: null,
@@ -12,46 +24,157 @@ Haul.ProductToStoreComponent = Ember.Component.extend({
 
 	showForm: true,
 	showSuccessMessage: false, 
+	showDeletedMessage: false, 
 
+	editMode: false, 
+	addMode: true, 
+
+	productImage: null,
+	productModel: null,
+	productImageGet: function() {
+
+		if(Ember.isEmpty(this.get('productModel'))) {
+			return;
+		}
+
+		var _this = this;
+		var store = this.get('targetObject.store');
+		var product = this.get('productModel');
+
+		store.find('product', product.get('id'))
+		.then(function(product){
+			return product.get('images');
+		})
+		.then(function(images){
+			_this.set('productImage', images.get('firstObject').get('small'));
+		});
+		
+	}.observes('productModel'),
 
 	start: function() {
 		var _this = this;
 		var store = this.get('targetObject.store');
-
 		_this.set('showForm', true);
 		_this.set('showSuccessMessage', false);
 
-		//Create an empty model.
-		this.set('model', store.createRecord('market-product'));
+		//Model is "market-product" model.  If it exists then stop here.
+		if( this.get('model') ) {
+			this.set('addMode', false);
+			this.set('editMode', true);
+			this.set('productModel', this.get('model').get('product'));
+			return;
+		}
 
-		var model = this.get('model');
+		//Does this user have this product in their store?
+		var product_id = this.get('product').get('id');
+		this.get('currentUser').get('user')
+		.then(function(user){
+			return user.get('market')})
+		.then(function(user_market){
+			return user_market.get('market'); 
+		})
+		.then(function(market) {
+			_this.set('market', market); 
+			return store.find('market-product-list', {market_id: market.get('id')});
+		})
+		.then(function(products) { 
+			if(Ember.isEmpty(products)) {
+				_this.createEmptyModel();
+				return;
+			}else{
+				var found = false;
+				products.forEach(function(product){
+					if( product.get('product').id === product_id ){ 
+						console.log("fUCK")
+						_this.set('productModel', product.get('product'));
+						_this.findModel();
+						found = true;
+						return;
+					}
+				});
 
-		//Set the product, user and market on thes model.
-		model.set('product', this.get('product'));
+				if( !found ) {
+					_this.createEmptyModel();	
+				}
+				
+				return; 
+			} 
+		}, function(error) {
+			console.log("ERROR", error);
+			_this.createEmptyModel();
+		});
+
+	}.on('init'),
+
+	findModel: function() {
+		var _this = this;
+		var store = this.get('targetObject.store');
+
+		var market_id = this.get('market').id;
+		var product_id = this.get('product').id;
+		var data = {'market_id':market_id, 'product_id':product_id};
 		
+		store.find('market-product', data)
+		.then(function(results){
+			return results.get('content');
+		})
+		.then(function(content){
+			_this.set('model', content.get('firstObject'));
+			_this.set('addMode', false);
+			_this.set('editMode', true);
+		}, function(error){
+			console.log("ERROR", error);
+		});
+	},
 
+	createEmptyModel: function() { 
+		var _this = this;
+		var store = this.get('targetObject.store');
+
+		//Create an empty model.
+		var model = store.createRecord('market-product');
+		var product = this.get('product');
+
+		this.set('model', model);
+
+		//Set the product, user and market on this model.
+		model.set('product', product);
+		
+		this.set('productModel', product);
+		
+		//TODO: Clean this chunk up.  It Nasty.
 		var promise = this.get('currentUser').get('user');
 		var promise = promise.then(function(user){ 	
 			model.set('user', user);
 			return user.get('market');
 		});
-		promise.then(function(market){ 
-			model.set('market', market);
+		var market = promise.then(function(market){ 
+			return store.find('market', market.get('market_id'));
 		});
+		market.then(function(market){
+			model.set('market', market);
+		})
+	},
 
-	}.on('init'),
 
 	//Client Validation is complete.  Now persist to api.
 	saveModel: function() {
 		var model = this.get('model');
 		var _this = this;
 
+		var product_id = model.get('product').get('id');
+		var market_id = model.get('market').get('id');
+
+		model.set('id', product_id);
 		model.save().then(
 			function(result) { 
 				_this.set('isProcessing', false);
 				_this.set('showForm', false);
 				_this.set('showSuccessMessage', true);
-				$('#curateModal').modal('hide');
+
+				//Also reload model "market_product_list"
+				var store = _this.get('targetObject.store'); 
+				store.find('market-product-list', {market_id: market_id});
 			},
 			function(error){
 				_this.set('isProcessing', false);
@@ -62,7 +185,43 @@ Haul.ProductToStoreComponent = Ember.Component.extend({
 		); 
 	},
 
+
+	deleteModel: function() {
+		var model = this.get('model');
+		var _this = this;
+
+		var product_id = model.get('product').get('id');
+		var market_id = model.get('market').get('id');
+		var id = product_id	+ market_id;
+		 
+		model.deleteRecord();
+		model.save().then(
+			function(result) { 
+				_this.set('isProcessingDelete', false);
+				_this.set('showForm', false);
+				_this.set('showDeletedMessage', true);
+
+				//Also delete this product from the model "market_product_list".  Do not hit api
+				var store = _this.get('targetObject.store');
+				var mpl = store.getById('market_product_list', id);
+				if(mpl){
+					 store.deleteRecord(mpl);
+					 store.unloadRecord(mpl);
+				}
+
+			},
+			function(error){
+				_this.set('isProcessingDelete', false);
+				_this.set('errorShow', true);
+				_this.set('errorMessage', Haul.errorMessages.get(error.status));
+				console.log("Error" , error);
+			}
+		); 
+	},
+
+
 	actions: {
+
 		//Add Product to Market
 		curate: function() {
 			$('#curateModal').modal('show');
@@ -73,6 +232,7 @@ Haul.ProductToStoreComponent = Ember.Component.extend({
 		},
 
 		close: function() {
+			console.log("CLOSE")
 			$('#curateModal').modal('hide');	
 		},
 
@@ -91,6 +251,16 @@ Haul.ProductToStoreComponent = Ember.Component.extend({
 				_this.set('isProcessing', false);
 				_this.set('showErrors', true);
 			}); 
-		}
+		},
+
+
+		//remove this product from Market
+		delete: function() {
+			this.set('isProcessingDelete', true);
+			var _this = this;
+			
+			this.deleteModel();
+		
+		},
 	}
 });

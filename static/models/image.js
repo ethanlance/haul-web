@@ -1,5 +1,5 @@
 Haul.Image = DS.Model.extend({
-	orignal: DS.attr('string'),
+	original: DS.attr('string'),
 	medium: DS.attr('string'),
 	large: DS.attr('string'),
 	small: DS.attr('string'),

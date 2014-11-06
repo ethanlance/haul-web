@@ -5,29 +5,7 @@
 <div class="container-fluid content-fixed-nav padding-bottom">
 	<div class="row">
 		<div class="col-md-12">
-	    	<div class="row">
-		    	<div class="col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font">
-
-					<div class="media">
-
-					{{#link-to "seller" user class="pull-left"}}
-					  	<div class="profile-circular-mask">
-					  	{{#if user.picture}}
-					    	<img {{bind-attr src=user.picture}}> 
-					    {{/if}}
-					    </div>
-					{{/link-to}}
-
-					  	<div class="media-body">
-					     	<h1 class="media-heading">{{market.name}}</h1>
-
-					     	<p>{{market.description}}</p>
-
-					     	<h5>{{#link-to "seller" market.user}}by {{market.user.name}}{{/link-to}}</h5>
-					  	</div>
-					</div> 
-		    	</div> 
-		    </div>
+	    	{{ profile-market market=market }}
 		</div>
 	</div>
 </div>	
@@ -36,7 +14,7 @@
 {{!-- Empty Store --}}
 
 {{#if isProfileOwner }}
-{{#if market.product }}{{else}}
+{{#if model }}{{else}}
 <div class="container">
 	<div class="jumbotron"> 
 			
@@ -105,7 +83,7 @@
 
     {{#each market.products}}
     
-    	{{#link-to 'product' this }}
+    	{{#link-to 'market-product' this.product_id }}
     	<div class="haul-grid-li"> 
 
 				<img class="thumbnail" {{bind-attr src=image.small}}>
@@ -118,10 +96,11 @@
 			 	  	<div class="price"> ${{price}}</div>   
 				</div>
 
-				{{editorial}}
+				{{!-- {{editorial}} --}}
 			
 	 	</div>
 	 	{{/link-to}}	
+    
 	{{/each}}
 	
 </div> 

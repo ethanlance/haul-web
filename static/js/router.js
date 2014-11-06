@@ -63,6 +63,9 @@ Haul.Router.map(function(){
 	//Store
 	this.resource('market', {path: "/store/:market_slug"}, function() {
 		this.route('edit')
+		this.resource('market-product', {path: "/:product_slug"}, function() {
+			this.route('edit')
+		});
 	});
 
 	//Auth

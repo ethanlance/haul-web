@@ -36,12 +36,11 @@ Haul.User = DS.Model.extend({
 	email: DS.attr('string'),
 	picture: DS.attr('string'),
 
-
 	market: function() {
 		var store = this.store;
 		var user_id = this.get('id');		
-		var promise = store.find('user-market', {user_id: user_id});
-		var promise = promise.then(function(userMarkets){
+		var promise = store.find('user-market', {user_id: user_id})
+		.then(function(userMarkets){
 			return userMarkets.get('firstObject')
 		});
 		return DS.PromiseObject.create({
@@ -53,9 +52,9 @@ Haul.User = DS.Model.extend({
 		var store = this.store;
 		var user_id = this.get('id');
 
-		var promise = store.find('product', {user_id: user_id});
+		store.find('product-list', {user_id: user_id});
 
-		return store.filter('product', function(product){
+		return store.filter('product-list', function(product){
 			var user = product.get('user');
 			if( user && user.get('id') == user_id ) {
 				return product;
@@ -103,16 +102,17 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 /** Users' Markets **/
 Haul.UserMarket = DS.Model.extend({
 	user: DS.belongsTo('user'),
+	market: DS.belongsTo('market'),
 	market_name: DS.attr('string'),
-	market_id: DS.attr('string')
+	market_id: DS.attr('string'),
 });
 
 Haul.UserMarketAdapter = Haul.ApplicationAdapter.extend({
 	
 	host: Haul.STORE_SERVER_HOST,
 
-	findQuery: function(store, type, query) {
-        var url = this.host + "/users/" + query.user_id + "/stores";
+	findQuery: function(store, type, query) { 
+        var url = this.host + "/users/" + query.user_id + "/stores"; 
         return this.ajax(url, 'GET');
     },
 
@@ -131,7 +131,8 @@ extractArray: function(store, primaryType, payload, recordId, requestType) {
 				id: id,
 				market_id: result.store_id,	
 				market_name: result.store_name,	
-				user: result.user_id
+				user: result.user_id,
+				market: result.store_id
 			}
 		});
 

@@ -1,4 +1,12 @@
-<div class="container content-fixed-nav content-fixed-nav">
+<div class="container content-fixed-nav">
+	<div class="row">
+		<div class="col-md-12">
+	    	{{ profile-seller user=user }}
+		</div>
+	</div>
+</div>	
+
+<div class="container">
 
 	{{!-- Buttons --}}
 
@@ -6,7 +14,7 @@
 		<div class="col-md-12 text-right">
 		
 		{{#if currentUser }}
-			{{product-to-store 
+			{{product-to-market 
 				class="display-inline" 
 				currentUser=currentUser 
 				product=model
@@ -66,23 +74,12 @@
 					{{!-- PRODUCT INFO --}}
 
 					<div class="row">
-						<div class="col-md-12">
-							
-							<span class="haul-font"><strong>Seller:</strong></span>
-							
-							<div class="media">
-								<div class="pull-left">
-									<div class="profile-small-circular-mask">
-		    							<img {{bind-attr src=user.picture}}> 
-		    						</div>
-		    						<br/>
-		    						{{#link-to 'seller' user}}{{ user.name }}{{/link-to}}
-	    						</div>
-		    					<div class="media-body">
-		    						<h4>{{name}}</h4>
-		    						{{ description }}
-		    					</div>
-		    				</div>
+						<div class="col-md-4">
+							{{ seller-info seller=user}}
+	    				</div>
+		    			<div class="col-md-8">
+    						<h4>{{name}}</h4>
+    						{{ description }}
 						</div>
 					</div> 
 				</div>

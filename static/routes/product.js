@@ -39,20 +39,13 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 	Single Product View
 **/
 Haul.ProductRoute = Haul.AnonRoute.extend({
-	alreadyReloaded: false,
 	model: function(params) {
-		this.set('alreadyReloaded', true)
 		return this.store.find('product', params.product_slug);
 	},
 	serialize: function(model) {
     	return { product_slug: model.get('id') };
   	},
   	setupController: function(controller, model) {
-  		if(this.get('alreadyReloaded')){
-  			controller.set('model', model );
-  			this.set('alreadyReloaded', false)
-  		}else{
-			controller.set('model', model.reload());
-  		}
+  		controller.set('model', model );
   	}
 });

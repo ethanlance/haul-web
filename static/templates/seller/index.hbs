@@ -3,36 +3,7 @@
 <div class="container content-fixed-nav">
 	<div class="row">
 		<div class="col-md-12">
-	    	<div class="row">
-		    	<div class="col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font">
-
-					<div class="media">
-
-					{{#link-to "seller" user class="pull-left"}}
-					  	<div class="profile-circular-mask">
-					  	{{#if user.picture}}
-					    	<img {{bind-attr src=user.picture}}> 
-					    {{/if}}
-					    </div>
-					 {{/link-to}}
-
-					  <div class="media-body">
-					     	<h1 class="media-heading">{{user.name}}</h1>
-	    					<div>
-	    					{{#if isProfileOwner }}
-	    					{{else}}
-	    						<button class="btn btn-primary">follow</button>
-	    						<button class="btn btn-default">
-	    							<span class="glyphicon glyphicon-envelope"></span>
-	    						</button>
-	    					{{/if}}
-	    						<div><span class="medium">175 Followers - Following 15</span></div>
-
-	    					</div>
-					  </div>
-					</div> 
-		    	</div> 
-		    </div>
+	    	{{ profile-seller user=user }}
 		</div>
 	</div>
 </div>	
@@ -110,7 +81,7 @@
 
 	{{!-- SELLER PRODUCTS --}}
     {{#each this}}
-    	{{#link-to 'product' this }}
+    	{{#link-to 'product' this.id }}
     	<div class="haul-grid-li"> 
 			<img class="thumbnail" {{bind-attr src=image.small}}>
 

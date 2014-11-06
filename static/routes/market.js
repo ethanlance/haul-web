@@ -14,9 +14,13 @@ Haul.MarketRoute = Haul.AnonRoute.extend({
 
 Haul.MarketIndexRoute = Haul.AnonRoute.extend({
 	model: function(params) {
-		return this.modelFor('market').get('products');
+		return this.modelFor('market').get('products').then(function(products){
+			return products;
+		});
 	},
- 	setupController: function(controller, model) {
+ 	setupController: function(controller, model) {	
+ 		controller.set('model', model);
+
  		controller.set('market', this.modelFor('market'));
 
  		controller.set('fakeProducts', this.store.find('product-fixture'));
@@ -35,7 +39,6 @@ Haul.MarketIndexRoute = Haul.AnonRoute.extend({
 Haul.MarketEditRoute = Haul.AuthenticatedRoute.extend({ 
 	controllerName: "market-edit",
 	model: function() {
-		console.log("YOU ARE HERE?")
 		return this.modelFor('market');
 	},
 	renderTemplate: function(controller, model) {  

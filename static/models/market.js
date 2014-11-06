@@ -6,9 +6,20 @@ Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
 	description: DS.attr( 'string' ),
 	user_id: DS.attr( 'string' ),
 
-	products: DS.hasMany('market-product',{async:true}),
+	//products: DS.hasMany('market-product-list',{async:true}),
 	user: DS.belongsTo('user'),
 	slug: DS.attr( 'string' ),
+
+	// //Get's the user model.
+	products: function(){
+		var store = this.store;
+		var id = this.get('id');		
+		store.find('market-product-list', {market_id: id}); 
+		return store.filter('market-product-list', function(mp){ 
+			if( mp.get('market_id')  == id ) return mp;
+		});
+
+	}.property(),
 
 	validations: { 
 		name: {
@@ -35,8 +46,7 @@ Haul.MarketAdapter = Haul.ApplicationAdapter.extend({
     },
 
 	
-	findQuery: function(store, type, query) {
-		console.log("HERE?")
+	findQuery: function(store, type, query) { 
         var url = this.host + "/users/" + query.user_id + "/products";
         return this.ajax(url, 'GET');
     },    
@@ -86,11 +96,12 @@ Haul.MarketSerializer =  DS.RESTSerializer.extend({
 			user: payload.data.user_id
 		};
 
-		if( payload.data.product_ids){
-			data['products'] = payload.data.product_ids
-		}
 
-		var payload ={'market': data}; 
+		// if( payload.data.product_ids){
+		// 	data['products'] = payload.data.product_ids
+		// }
+
+		var payload = {'market': data}; 
 		
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},
