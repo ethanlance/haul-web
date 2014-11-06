@@ -68,8 +68,8 @@
 			});			
 
 			//Remove user from localstorage
-			var promise = this.store.find('local-user'); 
-			promise.then(function( results ){ 
+			return this.store.find('local-user') 
+			.then(function( results ){ 
 
 				if(Ember.isEmpty(results)) {
 					if(cb) {
@@ -91,10 +91,9 @@
 						}
 					);
 				});
-
-
+ 
 			}, function(error) {
-				console.log("ERROR", error);
+				return error;
 			});
 		},
 
@@ -104,7 +103,7 @@
 			var _this = this;
 			function cb(){
 				//LOCAL STORAGE USER
-				var localUser = _this.store.createRecord("local-user", 
+				return _this.store.createRecord("local-user", 
 					{
 						id: user.get('id'),  
 						name: user.get('name'),
@@ -114,23 +113,25 @@
 						refresh_token: refreshToken,
 						current: true
 					}
-				);
-				localUser.save().then(function(lu) { 
+				)
+				.save()
+				.then(function(lu) { 
 					_this.set('currentUser', lu);	
-				}, function(error) {
-					console.log("ERROR", error);
-				});
 
-				//TRANSITION:
-				if(Ember.isEmpty(attemptedTrans)){ 
-					_this.transitionToRoute("seller", user);
-				}else{
-					_this.transitionToRoute(attemptedTrans);
-				}
+					//TRANSITION:
+					if(Ember.isEmpty(attemptedTrans)){ 
+						_this.transitionToRoute("seller", user);
+					}else{
+						_this.transitionToRoute(attemptedTrans);
+					}
+
+				}, function(error) {
+					return error;
+				}); 
 			}
 
 			//First LOGOUT any previous User
-			this.deAuthenticateLocalUser(cb);
+			return this.deAuthenticateLocalUser(cb);
 
 		},
 
@@ -164,9 +165,6 @@
 			);
 		},
 
-
-
-
 		actions: { 
  			
 			setupUser: function(response) {
@@ -184,11 +182,11 @@
 
 				//Now get the user:
 				var _this = this;
-				this.store.find('user', user_id).then( 
+				return this.store.find('user', user_id).then( 
 					function(user) {
-						_this.authenticateLocalUser(user, accessToken, refreshToken, attemptedTrans);
+						return _this.authenticateLocalUser(user, accessToken, refreshToken, attemptedTrans);
 					}, function(error) {
-						console.log("ERROR", error);
+						return error;
 					} 
 				);
 			}
@@ -448,10 +446,37 @@
 		ticket_id: null,
 		user_id: null,
 		isProcessing: false, 
+		showErrors: false,
 		error: false,
 
 		reset: function() {
 			this.set('error', false); 
+		},
+
+		confirmSignup: function(data) {
+			var authController = this.get('controllers.auth');
+			var _this = this;
+			this.set('isProcessing', true);
+
+			//AJAX CALL - for getting the User Token back.  
+			//Pass params email/password to it.
+			return Ember.$.ajax({
+					url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
+					type: 'put',
+					data: data,
+					headers: {
+						Authorization: 'Bearer client_' + authController.client_token
+					},
+					dataType: 'json'
+			}).then(
+				function(response) {
+					return authController.send('setupUser', response);
+				}
+			).then(null, function(error) {
+				console.log("Error submit confirm", error);
+				_this.set('isProcessing', false);
+				_this.set('error', true); 
+			});
 		},
 
 
@@ -460,36 +485,22 @@
 				this.reset();
 			},
 
+			//LOGIN via email, password
 			submit: function() {
-				var authController = this.get('controllers.auth');
-				var _this = this;
 				this.set('isProcessing', true);
 
-				data = this.getProperties('firstname', 'lastname', 'password');
+				var _this = this;
+				var model = this.get('model');
+				var data = this.getProperties('firstname', 'lastname', 'password');
 
-				//data['action'] = 'email-register';
-
-				//AJAX CALL - for getting the User Token back.  
-				//Pass params email/password to it.
-				return Ember.$.ajax({
-						url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
-						type: 'put',
-						data: data,
-						headers: {
-							Authorization: 'Bearer client_' + authController.client_token
-						},
-						dataType: 'json'
-				}).then(
-					function(response) {
-						authController.send('setupUser', response);
-					}, 
-
-					function(error) {
-						_this.set('isProcessing', false);
-						_this.set('error', true);
-					}
-				);
-			}
+		 		//Model Validations:
+				model.validate().then(function(result){
+					_this.confirmSignup(data);	
+				}, function(error) {
+					_this.set('isProcessing', false);
+					_this.set('showErrors', true);
+				});
+		 	}
 		}
 	});
 

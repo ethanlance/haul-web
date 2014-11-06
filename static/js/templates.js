@@ -476,20 +476,26 @@ function program3(depth0,data) {
   },hashTypes:{'as': "STRING"},hashContexts:{'as': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "user_id", options) : helperMissing.call(depth0, "input", "user_id", options))));
   data.buffer.push("\n					</div> \n		 \n			 		<div class=\"form-group\">	\n			 			");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'canShowValidationError': ("showErrors"),
     'placeholder': ("Password")
-  },hashTypes:{'placeholder': "STRING"},hashContexts:{'placeholder': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "password", options) : helperMissing.call(depth0, "input", "password", options))));
+  },hashTypes:{'canShowValidationError': "ID",'placeholder': "STRING"},hashContexts:{'canShowValidationError': depth0,'placeholder': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "password", options) : helperMissing.call(depth0, "input", "password", options))));
   data.buffer.push(" \n					</div> \n\n\n		 \n			 		<div class=\"form-group\">	\n			 			");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'canShowValidationError': ("showErrors"),
     'placeholder': ("First Name")
-  },hashTypes:{'placeholder': "STRING"},hashContexts:{'placeholder': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "firstname", options) : helperMissing.call(depth0, "input", "firstname", options))));
+  },hashTypes:{'canShowValidationError': "ID",'placeholder': "STRING"},hashContexts:{'canShowValidationError': depth0,'placeholder': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "firstname", options) : helperMissing.call(depth0, "input", "firstname", options))));
   data.buffer.push(" \n					</div> \n\n\n		 \n			 		<div class=\"form-group\">	\n			 			");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
+    'canShowValidationError': ("showErrors"),
     'placeholder': ("Last Name")
-  },hashTypes:{'placeholder': "STRING"},hashContexts:{'placeholder': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "lastname", options) : helperMissing.call(depth0, "input", "lastname", options))));
+  },hashTypes:{'canShowValidationError': "ID",'placeholder': "STRING"},hashContexts:{'canShowValidationError': depth0,'placeholder': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "lastname", options) : helperMissing.call(depth0, "input", "lastname", options))));
   data.buffer.push(" \n					</div> \n\n\n					<div class=\"form-group\">\n				  		");
-  data.buffer.push(escapeExpression((helper = helpers.submit || (depth0 && depth0.submit),options={hash:{
-    'class': ("btn btn-primary btn-block")
-  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "submit", options))));
+  data.buffer.push(escapeExpression((helper = helpers['ladda-btn'] || (depth0 && depth0['ladda-btn']),options={hash:{
+    'name': ("Complete Registration"),
+    'btnClasses': ("btn btn-primary btn-block ladda-button"),
+    'btnClick': ("submit"),
+    'spin': ("isProcessing")
+  },hashTypes:{'name': "STRING",'btnClasses': "STRING",'btnClick': "STRING",'spin': "ID"},hashContexts:{'name': depth0,'btnClasses': depth0,'btnClick': depth0,'spin': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "ladda-btn", options))));
   data.buffer.push("\n				  	</div>\n\n				");
   return buffer;
   }

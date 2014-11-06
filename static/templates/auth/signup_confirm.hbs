@@ -22,24 +22,29 @@
 					</div> 
 		 
 			 		<div class="form-group">	
-			 			{{input password placeholder="Password"}} 
+			 			{{input password canShowValidationError=showErrors placeholder="Password"}} 
 					</div> 
 
 
 		 
 			 		<div class="form-group">	
-			 			{{input firstname placeholder="First Name"}} 
+			 			{{input firstname canShowValidationError=showErrors placeholder="First Name"}} 
 					</div> 
 
 
 		 
 			 		<div class="form-group">	
-			 			{{input lastname placeholder="Last Name"}} 
+			 			{{input lastname canShowValidationError=showErrors placeholder="Last Name"}} 
 					</div> 
 
 
 					<div class="form-group">
-				  		{{submit class="btn btn-primary btn-block"}}
+				  		{{ladda-btn 
+							name='Complete Registration'
+							btnClasses='btn btn-primary btn-block ladda-button'
+							btnClick='submit'
+							spin=isProcessing
+						}}
 				  	</div>
 
 				{{/form-for}} 
