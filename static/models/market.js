@@ -93,7 +93,8 @@ Haul.MarketSerializer =  DS.RESTSerializer.extend({
 			name: payload.data.name,
 			slug: payload.data.name,
 			description: payload.data.description,
-			user: payload.data.user_id
+			user: payload.data.user_id,
+			user_id: payload.data.user_id
 		};
 
 

@@ -133,12 +133,14 @@ Haul.ImagePickerComponent = Ember.Component.extend({
 		//SUCCESS, reset Dropzone and hand the image file off to Ember.
 		this.dropzone.on('success', function(file, response) {	 		
 			
+			console.log("UPLOAD", response);
+
 			window.clearInterval(file.progressInterval);
 
 			//Get the base 64 thumb.
 			var img = $(file.previewElement).find('img');
  			var src = img.prop('src');
- 			response.data[0].locations.thumb = src;
+ 			response.data[0].locations.small = src;
 
  			//Send our new file to the controllers action.
 			_this.refreshImages(file, response); 

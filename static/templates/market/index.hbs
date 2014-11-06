@@ -13,8 +13,8 @@
 
 {{!-- Empty Store --}}
 
-{{#if isProfileOwner }}
-{{#if model }}{{else}}
+{{#if isMarketOwner }}
+{{#unless marketHasProducts}} 
 <div class="container">
 	<div class="jumbotron"> 
 			
@@ -46,14 +46,24 @@
 			{{/link-to}}
 		</div>
 	</div>
+
+	{{!-- If Market Owner Already Has Items --}}
+	{{#if marketOwnerHasProducts}}
+	<div class="haul-grid-li">	
+		<div class="sell"> 
+			{{#link-to 'seller' currentUser.slug }}
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					You Have Items,<br/>
+					Add Them To Your Store?
+				</div>
+			</div>
+			{{/link-to}}
+		</div>
+	</div>
+	{{/if}}
  	
-	<div class="box">
-		<div class="box-inside">
-			<h3>Or Browse Below For Ideas.</h3>
-			<h4>Add Items To Your Store.</h4>
-			<h5>Be A Tasetmaker.</h5>
-		</div> 
-	</div> 
+
 	<div class="clearfix"></div>
 
 	{{!-- BROWSE POPULAR STORES & ITEMS --}}
@@ -71,7 +81,7 @@
 
 </div>
 
-{{/if}}
+{{/unless}}
 {{/if}}
 
 

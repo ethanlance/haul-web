@@ -13,11 +13,8 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 	comments: DS.hasMany('comment', {async:true}),
 
 	//GET ONE IMAGE:
-	first_image: function() {
-		console.log("WTF")
-		return this.get('images').then(function(images){
-			console.log('images', images, this.id)
-			console.log("IMAGE", images.get('firstObject'));
+	first_image: function() { 
+		return this.get('images').then(function(images){ 
 			return images.get('firstObject');
 		});
 	}.property(),

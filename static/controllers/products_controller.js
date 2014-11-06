@@ -264,7 +264,7 @@
 				var _this = this;
 
 				response.data.forEach( function(image){ 
-					var record = store.push('image', {
+					var record = store.push('user-image', {
 						original: image.locations.original,
 						small: image.locations.small,
 						thumb: image.locations.thumb,
@@ -273,7 +273,7 @@
 						user_id: user_id,
 						id: image.image_id,
 						created_at: image.created_at
-					});
+					});  
 					_this.unshiftObject(record);
 				});				
 			},

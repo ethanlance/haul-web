@@ -40,7 +40,7 @@ Haul.User = DS.Model.extend({
 		if( this.get('facebook_user_id') ) { 
 			return "https://graph.facebook.com/" + this.get('facebook_user_id') + "/picture?width=200";
 		}else{
-			return 'https://scontent-b-sea.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10341537_10152440039729993_433672478264276159_n.jpg?oh=ae0a64b3b3bb714b2f9a79e34f0fb8b9&oe=54B9FD9B';
+			return null;
 		}
 	}.property(),
 
@@ -63,8 +63,7 @@ Haul.User = DS.Model.extend({
 		store.find('product-list', {user_id: user_id});
 
 		return store.filter('product-list', function(product){
-			var user = product.get('user');
-			if( user && user.get('id') == user_id ) {
+			if( product.get('user_id') == user_id ) {
 				return product;
 			}
 		});

@@ -11,14 +11,47 @@
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
 		//Is currentUser viewing his own page?
-		isProfileOwner: false,
+		isMarketOwner: false,
+		marketHasProducts: false,
+		marketOwnerHasProducts: false,
+
+		//Does this market have any products yet?
+		doesMarketHaveProducts: function() {
+			var _this = this;
+			this.get('market').get('products').then(function(products){
+				if(!Ember.isEmpty(products)){
+					_this.set('marketHasProducts', true);
+				}else{
+					_this.set('marketHasProducts', false);
+				}
+			});
+
+		}.observes('market'),
+
+
+		//Does the market owner have their own products they can add to the store?
+		doesMarketOwnerHaveProducts: function() {
+			if(this.get('isMarketOwner')){
+				var _this = this;
+				var user_id = this.get('market').get('user_id');
+
+				this.store.find('product-list', {user_id: user_id}).then(function(products){
+					if(!Ember.isEmpty(products)){
+						_this.set('marketOwnerHasProducts', true);
+					}else{
+						_this.set('marketOwnerHasProducts', false);
+					}
+				});
+			}
+		}.observes('isMarketOwner'),
 		
 		setup: function() { 
+			var _this = this;
 			var currentUser = this.get('currentUser');
 
 			if( currentUser ){
 				if( !Ember.isEmpty(currentUser) && this.get('market').get('user').get('id') === currentUser.get('id')) {
-					this.set('isProfileOwner', true);
+					this.set('isMarketOwner', true);
 				}
 			}
 		}.observes('market'),

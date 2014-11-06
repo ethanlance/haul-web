@@ -64,11 +64,11 @@ Haul.SellerNewProductRoute = Haul.AuthenticatedRoute.extend({
 		this.controllerFor('product-edit').authorized(transition);
 
 		var user = this.controllerFor('auth').get('currentUser');
-		this.store.findQuery('image', user.get('id') );
+		this.store.findQuery('user-image', user.get('id') );
 		this.controllerFor('product-edit').reset();
 	},
-	model: function() {
-		return this.get('store').all('image');
+	model: function() { 
+		return this.get('store').all('user-image');
 	},
  	setupController: function(controller, model) {
  		controller.reset();	 

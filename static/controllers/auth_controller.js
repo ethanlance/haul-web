@@ -55,6 +55,10 @@
   				},
   				currentUser: this.currentUser
 			});
+
+			Haul.RESTSerializer.reopen({
+				currentUser: this.currentUser
+			});			
 		}.observes('currentUser'),
 
 
