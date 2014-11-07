@@ -210,20 +210,26 @@
 		accessToken: null,
 		userID: null,
 
-
 		facebookSetup: function() {
+			
+			var _this = this;
 
-		  window.fbAsyncInit = (function() {
-			  FB.init({
-				appId	  : Haul.FACEBOOK_APP_ID,
-				cookie	 : true,  // enable cookies to allow the server to access
-									// the session
-				xfbml	  : true,  // parse social plugins on this page
-				version	: 'v2.1' // use version 2.1
-			  });
-			  this.FB = FB;
-			}).bind(this);
+			function init() { 
+				FB.init({
+					appId	  : Haul.FACEBOOK_APP_ID,
+					cookie	 : true,  // enable cookies to allow the server to access
+					xfbml	  : true,  // parse social plugins on this page
+					version	: 'v2.1' // use version 2.1
+			  	});
+			  
+			  _this.FB = FB; 
+			};
 
+			if(window.FB) {
+				init();
+			} else {
+				window.fbAsyncInit = init;
+			}
 
 		}.on('init'),
 
