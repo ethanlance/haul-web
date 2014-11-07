@@ -29,6 +29,12 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 	editMode: false, 
 	addMode: false, 
 	createStoreMode: false,
+
+	reset: function() {
+		this.set('showForm', true);
+		this.set('showSuccessMessage', false);
+		this.set('showDeletedMessage', false);
+	},
  
 	setMode: function(mode) {
 		this.set('editMode', false);
@@ -254,14 +260,17 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 
 		//Add Product to Market
 		curate: function() {
+			this.reset();
 			$('#curateModal').modal('show');
 		},
 
 		curateCancel: function() {
+			this.reset();
 			$('#curateModal').modal('hide');
 		},
 
 		close: function() {
+			this.reset();
 			$('#curateModal').modal('hide');	
 		},
 

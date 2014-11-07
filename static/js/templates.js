@@ -1116,9 +1116,8 @@ function program3(depth0,data) {
   stack1 = helpers['if'].call(depth0, "product", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	</div>\n</div>\n\n\n\n\n<div class=\"row collapse\" id=\"productDescription\">\n	<div class=\"col-md-12\">\n		");
-  stack1 = helpers._triageMustache.call(depth0, "product.description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	</div>\n</div>");
+  data.buffer.push(escapeExpression((helper = helpers.breaklines || (depth0 && depth0.breaklines),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product.description", options) : helperMissing.call(depth0, "breaklines", "product.description", options))));
+  data.buffer.push("\n\n	</div>\n</div>");
   return buffer;
   
 });Ember.TEMPLATES['form-fields/input'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -1338,8 +1337,7 @@ function program5(depth0,data) {
   stack1 = helpers._triageMustache.call(depth0, "model.market.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" says:</strong></span>\n						</div>\n					</div>\n					\n					<div class=\"row\">\n						<div class=\"col-md-12\">	\n							\n							");
-  stack1 = helpers._triageMustache.call(depth0, "model.editorial", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers.breaklines || (depth0 && depth0.breaklines),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "model.editorial", options) : helperMissing.call(depth0, "breaklines", "model.editorial", options))));
   data.buffer.push("\n		    			</div>\n		    		</div>\n		    	</div>\n		    </div>\n		</div>\n 	\n\n		\n		<div class=\"col-md-12\">\n			<div class=\"row\">\n				<div class=\"col-md-12 haul-buy-card\">\n					<div class=\"row\">\n						<div class=\"col-md-12\">\n						<h4>Comments</h4>\n\n						");
   data.buffer.push(escapeExpression((helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
     'value': ("message"),
@@ -1793,9 +1791,8 @@ function program6(depth0,data) {
   data.buffer.push("\n	    				</div>\n		    			<div class=\"col-md-8\">\n    						<h4>");
   stack1 = helpers._triageMustache.call(depth0, "name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</h4>\n    						");
-  stack1 = helpers._triageMustache.call(depth0, "description", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</h4> \n    						");
+  data.buffer.push(escapeExpression((helper = helpers.breaklines || (depth0 && depth0.breaklines),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "description", options) : helperMissing.call(depth0, "breaklines", "description", options))));
   data.buffer.push("\n						</div>\n					</div> \n				</div>\n\n \n\n				\n				<div class=\"col-md-12 haul-buy-card\">\n					<div class=\"row\">\n						<div class=\"col-md-12\">\n						<h4>Comments</h4>\n\n						");
   data.buffer.push(escapeExpression((helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
     'value': ("message"),
