@@ -149,17 +149,21 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 				_this.setMode('addMode');
 				return;
 			}else{ 
+				var found = false;
 				products.forEach(function(product){
 					if( product.get('product').id === product_id ){ 
 
 						//Product has a match in product list.  This is an "EDIT"
 						_this.set('productModel', product.get('product'));
 						_this.findModel(); 
+						found = true;
 						return;
 					}
 				});
 
 				//Product has no match in product list.  This is an "ADD"
+				if(!found)
+					_this.setMode('addMode');
 				return; 
 			} 
 		}, function(error) {

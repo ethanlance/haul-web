@@ -10,6 +10,10 @@
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
+		//This array controller sorts it's images
+		sortProperties: ['id'],
+		sortAscending: true,	
+
 		//Is currentUser viewing his own page?
 		isMarketOwner: false,
 		marketHasProducts: false,
@@ -27,7 +31,7 @@
 				}
 			});
 
-		}.observes('market'),
+		}.observes('model'),
 
 
 		//Does the market owner have their own products they can add to the store?

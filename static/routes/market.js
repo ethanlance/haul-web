@@ -19,9 +19,20 @@ Haul.MarketIndexRoute = Haul.AnonRoute.extend({
 		});
 	},
  	setupController: function(controller, model) {	
- 		controller.set('model', model);
 
  		controller.set('market', this.modelFor('market'));
+
+ 		//Filter this market's market-product-list records.
+ 		//This way when products are added/removed the filter is
+ 		//bound to the view.
+ 		var market_id = this.modelFor('market').id;
+ 		this.store.find('market-product-list', {market_id: market_id})
+ 		var filter = this.store.filter('market-product-list', function(mpl) {
+ 			if( mpl.get('market_id') === market_id )
+ 				return  mpl;
+ 		});
+
+ 		controller.set('model', filter);
 
  		controller.set('fakeProducts', this.store.find('product-fixture'));
 
