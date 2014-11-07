@@ -140,7 +140,7 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		//and this becomes an EDIT not an ADD.
 		promise.then(function(products) { 
 			if(Ember.isEmpty(products)) {
-				this.setMode('addMode');
+				_this.setMode('addMode');
 				return;
 			}else{ 
 				products.forEach(function(product){
