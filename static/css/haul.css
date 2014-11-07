@@ -69,6 +69,10 @@ body {
 .navbar-toggle {
 	float: left;
 }
+
+.thumbnail.center {
+	display:inline;
+}
  
 
 .navbar-profile { 
