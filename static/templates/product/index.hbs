@@ -1,17 +1,7 @@
-<div class="container content-fixed-nav">
-	<div class="row">
-		<div class="col-md-12">
-	    	{{ profile-seller user=user }}
-		</div>
-	</div>
-</div>	
 
-<div class="container">
-
-	{{!-- Buttons --}}
-
-	<div class="row">
-		<div class="col-md-12 text-right">
+{{!-- HAUL TOOLBAR --}}
+<div class="toolbar">
+	<div class="text-right">
 		
 		{{#if currentUser }}
 			{{product-to-market 
@@ -26,11 +16,20 @@
 			<button {{action 'delete'}} class="btn btn-danger">Delete</button>
 		{{/if}}
 
+	</div>
+</div>
+
+
+
+<div class="container content-fixed-nav">
+	<div class="row">
+		<div class="col-md-6 padding-bottom">
+	    	{{ profile-seller user=user }}
 		</div>
 	</div>
 
 	
-	<div class="row padding-top">
+	<div class="row">
 
 		{{!-- Images  --}}
 

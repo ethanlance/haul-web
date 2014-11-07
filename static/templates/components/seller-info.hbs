@@ -2,27 +2,32 @@
 {{!-- SELLER INFO --}}
 							
 <div class="row">
-	<div class="pull-left">
-		<div class="profile-small-circular-mask profile-xs">
-			<img {{bind-attr src=seller.picture}}> 
+	<div class="col-md-12">
+		<div class="media">
+			<div class="media-left">
+				<div class="profile-small-circular-mask profile-xs pull-left">
+					<img {{bind-attr src=seller.picture}}> 
+				</div>
+			</div>
+			<div class="media-body">
+			
+				<span class="haul-font">Seller:</span><br/>
+				{{#link-to 'seller' seller}}{{ seller.name }}{{/link-to}}
+
+				{{#if product }}
+				<a class="collapsed" data-toggle="collapse" href="#productDescription" aria-expanded="false" aria-controls="productDescription">[more]</a>
+				{{/if}}
+
+				{{!-- SELLER PRODUCT DESCRIPTION --}}
+				<div class="row collapse" id="productDescription">
+					<div class="col-md-12">
+						{{ breaklines product.description}}
+					</div>
+				</div>	
+
+			</div>
 		</div>
 	</div>
-	<div class="col-md-9">	
-		<span class="haul-font">Seller:</span><br/>
-		{{#link-to 'seller' seller}}{{ seller.name }}{{/link-to}}
-
-		{{#if product }}
-		<a class="collapsed" data-toggle="collapse" href="#productDescription" aria-expanded="false" aria-controls="productDescription">[more]</a>
-		{{/if}}
-	</div>
 </div>
 
 
-{{!-- SELLER PRODUCT DESCRIPTION --}}
-
-<div class="row collapse" id="productDescription">
-	<div class="col-md-12">
-		{{ breaklines product.description}}
-
-	</div>
-</div>

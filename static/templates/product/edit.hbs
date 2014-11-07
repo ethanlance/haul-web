@@ -1,4 +1,40 @@
 
+{{!-- HAUL TOOLBAR --}}
+<div class="toolbar">
+	<div class="text-right">
+
+		<span {{bind-attr class=":collapse showImagePicker:in:out"}}>
+			<button {{bind-attr class=":btn :btn-primary imagesAreSelected:enabled:disabled"}} {{action "clickNext"}}>Next Step<span class="glyphicon glyphicon-chevron-right"></span></button> 
+		</span>
+
+		<span {{bind-attr class=":collapse showImagePicker:out:in"}}>
+			<button {{action "clickPrev"}} class="btn btn-primary"><span class="glyphicon 	glyphicon-picture"></span> Change Images</button>
+				
+			{{#if productExists }}
+				{{#link-to 'product' product.id}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+
+				{{ladda-btn
+					name='Save'
+					class="display-inline"
+					btnClasses='btn btn-primary ladda-button'
+					btnClick='submit'
+					spin=isProcessing
+				}}
+			{{ else }}
+				{{ladda-btn
+					name='Create'
+					class="display-inline"
+					btnClasses='btn btn-primary ladda-button'
+					btnClick='submit'
+					spin=isProcessing
+				}}
+			{{/if}}
+		</span>
+	</div>
+</div>
+
+
+
 <div class="container content-fixed-nav">
 
 
@@ -11,7 +47,7 @@
 				<small>Each item can have up to 5 photos</small>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6 text-right vcenter">
-				<button {{bind-attr class=":btn :btn-sm :btn-primary imagesAreSelected:enabled:disabled"}} {{action "clickNext"}}>Next Step<span class="glyphicon glyphicon-chevron-right"></span></button> 
+				
 			</div>
 		</div>
 
@@ -42,7 +78,7 @@
 						<h4>Drag images to sort</h4>
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-6 text-right vcenter">
-						<button {{action "clickPrev"}} class="btn btn-sm btn-primary"><span class="glyphicon 	glyphicon-picture"></span> Change Images</button>
+						
 					</div>
 				</div>
 
@@ -107,25 +143,7 @@
 		<div class="row padding-bottom">
 			<div class="col-md-12 col-sm-12 col-xs-12 verical-align text-right">
 
-			{{#if productExists }}
-				{{#link-to 'product' product.id}}<button class="btn btn-default">Cancel</button>{{/link-to}}
-
-				{{ladda-btn
-					name='Save'
-					class="display-inline"
-					btnClasses='btn btn-primary ladda-button'
-					btnClick='submit'
-					spin=isProcessing
-				}}
-			{{ else }}
-				{{ladda-btn
-					name='Create'
-					class="display-inline"
-					btnClasses='btn btn-primary ladda-button'
-					btnClick='submit'
-					spin=isProcessing
-				}}
-			{{/if}}
+			
 
 
 				

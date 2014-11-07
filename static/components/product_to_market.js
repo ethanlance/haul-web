@@ -65,10 +65,18 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		
 	}.observes('productModel'),
 
+
+	fixToolBar: function() {
+		$('#curateModal').on('hidden.bs.modal', function () {
+	  		$('.toolbar').removeClass('toolbar-hide')
+		});
+	}.on('didInsertElement'),
+
 	/**
 		start: is the init function.
 	**/
 	start: function() {
+
 		var _this = this;
 		var store = this.get('targetObject.store');
 
@@ -266,16 +274,19 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		curate: function() {
 			this.reset();
 			$('#curateModal').modal('show');
+			$('.toolbar').addClass('toolbar-hide');
 		},
 
 		curateCancel: function() {
 			this.reset();
 			$('#curateModal').modal('hide');
+			$('.toolbar').removeClass('toolbar-hide');
 		},
 
 		close: function() {
 			this.reset();
 			$('#curateModal').modal('hide');	
+			$('.toolbar').removeClass('toolbar-hide');
 		},
 
 		//Submit action.  Initiate Validation.

@@ -187,6 +187,7 @@ body {
 	border-radius: 50%;
 	overflow: hidden;
 	background-color: #ddd;
+	margin-right: 10px;
 }
 
 .profile-small-circular-mask.profile-xs {
@@ -200,6 +201,26 @@ body {
 
 .profile-small-circular-mask img {
 	max-width: 100%;
+}
+
+
+.toolbar {
+	position: fixed;
+	display:inline;
+	top:50px;
+	width: 100%;
+	padding-top:15px;
+	padding-bottom:10px;
+	padding-right: 40px;
+	/*background-color: #F8F8F8;*/
+	background: rgba(248, 248, 248, .90);
+	z-index: 1029;
+	box-shadow: 2px 1px 3px #ccc;
+}
+
+.toolbar-hide {
+	position: relative;
+	top: -100px;
 }
 
 .navbar-profile .profile-circular-mask {

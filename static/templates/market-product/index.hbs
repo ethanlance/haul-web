@@ -1,16 +1,8 @@
-<div class="container content-fixed-nav padding-bottom">
-	<div class="row">
 
-		{{!-- STORE LOGO --}}
-		<div class="col-md-6">
-	    	{{ profile-market market=model.market}}
-		</div>
-
-		{{!-- BUTTONS --}}
-		<div class="col-md-6 text-right">
-
-
-			{{#if isMarketOwner }}
+{{!-- HAUL TOOLBAR --}}
+<div class="toolbar">
+	<div class="text-right">
+		{{#if isMarketOwner }}
 			{{#if model }}
 				{{product-to-market 
 					class="display-inline" 
@@ -18,9 +10,19 @@
 					model=model
 				}}
 			{{/if}}
-			{{/if}}
+		{{/if}}
+	</div>
+</div>
 
+
+<div class="container content-fixed-nav">
+	<div class="row">
+
+		{{!-- STORE LOGO --}}
+		<div class="col-md-6  padding-bottom">
+	    	{{ profile-market market=model.market}}
 		</div>
+		
 	</div>
 </div>	
 
@@ -55,18 +57,18 @@
 						</div>
 
 						<div class="col-md-6 col-sm-6 col-xs-6 text-right">
-						<span class="btn-group ">
-							<button type="button" class="btn btn-default btn-sm" {{ action 'likeProduct'}} {{bs-bind-tooltip content="Like This!"}}>
-							  13 <span class="glyphicon glyphicon-heart"></span>
-							</button>	
+							<span class="btn-group">
+								<button type="button" class="btn btn-default btn-sm" {{ action 'likeProduct'}} {{bs-bind-tooltip content="Like This!"}}>
+								  13 <span class="glyphicon glyphicon-heart"></span>
+								</button>	
 
-							<button type="button" class="btn btn-default btn-sm" {{bs-bind-tooltip content="Comment on This!"}}>
-								4 <span class="glyphicon glyphicon-comment"></span>
-							</button>
+								<button type="button" class="btn btn-default btn-sm" {{bs-bind-tooltip content="Comment on This!"}}>
+									4 <span class="glyphicon glyphicon-comment"></span>
+								</button>
 
-							<button type="button" class="btn btn-default btn-sm" { action 'shareProduct'}} {{bs-bind-tooltip content="Share This!"}}>
-							  &nbsp;<span class="glyphicon glyphicon-share"></span>
-							</button>
+								<button type="button" class="btn btn-default btn-sm" { action 'shareProduct'}} {{bs-bind-tooltip content="Share This!"}}>
+								  &nbsp;<span class="glyphicon glyphicon-share"></span>
+								</button>
 							</span>
 						</div>
 					</div>
@@ -80,11 +82,8 @@
 
 
 		<div class="col-md-6 col-sm-12 col-xs-12">
-
-		
 			<div class="row">
-				<div class="col-md-12 haul-buy-card">				
-
+				<div class="col-md-12 haul-buy-card">
 
 					<div class="row">
 						<div class="col-md-6">
@@ -101,9 +100,10 @@
 		    	</div>
 		    </div>
 		</div>
- 	
+ 	</div>
 
 		{{!-- COMMENTS --}}
+	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12 haul-buy-card">
@@ -111,7 +111,7 @@
 						<div class="col-md-12">
 						<h4>Comments</h4>
 
-						{{textarea value=message name="message" cols="80" rows="3" class="form-control"}}
+						{{textarea value=message name="message" class="form-control"}}
 							<div class="text-right padding-top">
 								<button class="btn btn-default">post</button>
 							</div>
