@@ -18,11 +18,12 @@
 		//Does this market have any products yet?
 		doesMarketHaveProducts: function() {
 			var _this = this;
-			this.get('market').get('products').then(function(products){
-				if(!Ember.isEmpty(products)){
-					_this.set('marketHasProducts', true);
-				}else{
+			var market_id = this.get('market').id;
+			this.store.find('market-product-list', {market_id: market_id}).then(function(products){
+				if(Ember.isEmpty(products)){ 
 					_this.set('marketHasProducts', false);
+				}else{
+					_this.set('marketHasProducts', true);
 				}
 			});
 
