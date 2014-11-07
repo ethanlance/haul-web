@@ -8,6 +8,12 @@
 <button {{action 'curate'}} class="btn btn-default">Edit Item: {{currentUser.user.market.market_name}}</button>
 {{/if}}
 
+
+{{#if createStoreMode}}
+{{#link-to 'seller.new-market' currentUser.user.slug}}<button class="btn btn-default">Add This To Your Own Store</button>{{/link-to}}
+{{/if}}
+
+
 {{!-- MODAL --}}
 
 <div id="curateModal" class="modal modal fade in danger text-left" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

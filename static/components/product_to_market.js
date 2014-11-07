@@ -27,7 +27,15 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 	showDeletedMessage: false, 
 
 	editMode: false, 
-	addMode: true, 
+	addMode: false, 
+	createStoreMode: false,
+ 
+	setMode: function(mode) {
+		this.set('editMode', false);
+		this.set('addMode', false);
+		this.set('createStoreMode', false);
+		this.set(mode, true);
+	},
 
 	productImage: null,
 	productModel: null,
@@ -63,8 +71,7 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 
 		//Model "market-product" was supplied to component.
 		if( this.get('model') ) {
-			this.set('addMode', false);
-			this.set('editMode', true);
+			this.setMode('editMode');
 			this.set('productModel', this.get('model').get('product'));
 			return;
 
@@ -104,13 +111,6 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		})
 		.then(function(market) {
 
-			//IF user does not have a market, then we need to abort and display a message
-			//about how to create a market first.
-			if(Ember.isEmpty(market)) {
-				console.log("USER DOES NOT HAVE MARKET");
-				return;
-			}
-
 			//SET MARKET ON MODEL
 			model.set('market', market); 
 			
@@ -121,7 +121,12 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 			_this.findProducts( product_list );
 
 		}, function(error) {
+
+			//IF user does not have a market, then we need to abort and display a message
+			//about how to create a market first.
+			console.log("USER DOES NOT HAVE MARKET");
 			console.log("ERROR", error);
+			_this.setMode('createStoreMode');
 		});
 	},
 
@@ -135,6 +140,7 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		//and this becomes an EDIT not an ADD.
 		promise.then(function(products) { 
 			if(Ember.isEmpty(products)) {
+				this.setMode('addMode');
 				return;
 			}else{ 
 				products.forEach(function(product){
@@ -174,8 +180,7 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		})
 		.then(function(content){
 			_this.set('model', content.get('firstObject'));
-			_this.set('addMode', false);
-			_this.set('editMode', true);
+			_this.setMode('editMode');
 		}, function(error){
 			console.log("ERROR", error);
 		});
