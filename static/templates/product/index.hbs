@@ -1,22 +1,20 @@
 
 {{!-- HAUL TOOLBAR --}}
-<div class="toolbar">
-	<div class="text-right">
-		
-		{{#if currentUser }}
-			{{product-to-market 
-				class="display-inline" 
-				currentUser=currentUser 
-				product=model
-			}}
-		{{/if}}
+<div class="toolbar text-right">
+	
+	{{#if currentUser }}
+		{{product-to-market 
+			class="display-inline" 
+			currentUser=currentUser 
+			product=model
+		}}
+	{{/if}}
 
-		{{#if isProfileOwner}}
-			{{#link-to 'product.edit' this}}<button class="btn btn-default">Edit</button>{{/link-to}}
-			<button {{action 'delete'}} class="btn btn-danger">Delete</button>
-		{{/if}}
+	{{#if isProfileOwner}}
+		{{#link-to 'product.edit' this}}<button class="btn btn-default">Edit</button>{{/link-to}}
+		<button {{action 'delete'}} class="btn btn-danger">Delete</button>
+	{{/if}}
 
-	</div>
 </div>
 
 

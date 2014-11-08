@@ -1301,13 +1301,13 @@ function program2(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("\n\n<div class=\"toolbar\">\n	<div class=\"text-right\">\n\n		");
+  data.buffer.push("\n\n<div class=\"toolbar text-right\"> \n	");
   data.buffer.push(escapeExpression((helper = helpers['product-to-market'] || (depth0 && depth0['product-to-market']),options={hash:{
     'class': ("display-inline"),
     'currentUser': ("currentUser"),
     'product': ("model.product")
   },hashTypes:{'class': "STRING",'currentUser': "ID",'product': "ID"},hashContexts:{'class': depth0,'currentUser': depth0,'product': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "product-to-market", options))));
-  data.buffer.push("\n		\n	</div>\n</div>\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n\n		\n		<div class=\"col-md-6  padding-bottom\">\n	    	");
+  data.buffer.push("\n</div>\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n\n		\n		<div class=\"col-md-6  padding-bottom\">\n	    	");
   data.buffer.push(escapeExpression((helper = helpers['profile-market'] || (depth0 && depth0['profile-market']),options={hash:{
     'market': ("model.market")
   },hashTypes:{'market': "ID"},hashContexts:{'market': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "profile-market", options))));
@@ -1725,25 +1725,25 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', helper, options;
-  data.buffer.push("\n			");
+  data.buffer.push("\n		");
   data.buffer.push(escapeExpression((helper = helpers['product-to-market'] || (depth0 && depth0['product-to-market']),options={hash:{
     'class': ("display-inline"),
     'currentUser': ("currentUser"),
     'product': ("model")
   },hashTypes:{'class': "STRING",'currentUser': "ID",'product': "ID"},hashContexts:{'class': depth0,'currentUser': depth0,'product': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "product-to-market", options))));
-  data.buffer.push("\n		");
+  data.buffer.push("\n	");
   return buffer;
   }
 
 function program3(depth0,data) {
   
   var buffer = '', stack1, helper, options;
-  data.buffer.push("\n			");
+  data.buffer.push("\n		");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product.edit", "", options) : helperMissing.call(depth0, "link-to", "product.edit", "", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			<button ");
+  data.buffer.push("\n		<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "delete", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class=\"btn btn-danger\">Delete</button>\n		");
+  data.buffer.push(" class=\"btn btn-danger\">Delete</button>\n	");
   return buffer;
   }
 function program4(depth0,data) {
@@ -1763,13 +1763,13 @@ function program6(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("\n\n<div class=\"toolbar\">\n	<div class=\"text-right\">\n		\n		");
+  data.buffer.push("\n\n<div class=\"toolbar text-right\">\n	\n	");
   stack1 = helpers['if'].call(depth0, "currentUser", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n		");
+  data.buffer.push("\n\n	");
   stack1 = helpers['if'].call(depth0, "isProfileOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n	</div>\n</div>\n\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-6 padding-bottom\">\n	    	");
+  data.buffer.push("\n\n</div>\n\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-6 padding-bottom\">\n	    	");
   data.buffer.push(escapeExpression((helper = helpers['profile-seller'] || (depth0 && depth0['profile-seller']),options={hash:{
     'user': ("user")
   },hashTypes:{'user': "ID"},hashContexts:{'user': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "profile-seller", options))));

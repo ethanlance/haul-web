@@ -223,8 +223,12 @@ body {
 	box-shadow: 2px 1px 3px #ccc;
 }
 
+.toolbar:empty {
+	display:none;
+}
+
 .toolbar-hide {
-	position: relative;
+	position: inherit;
 	top: -100px;
 }
 
