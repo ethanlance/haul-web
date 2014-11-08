@@ -2,15 +2,13 @@
 {{!-- HAUL TOOLBAR --}}
 <div class="toolbar">
 	<div class="text-right">
-		{{#if isMarketOwner }}
-			{{#if model }}
-				{{product-to-market 
-					class="display-inline" 
-					currentUser=currentUser 
-					model=model
-				}}
-			{{/if}}
-		{{/if}}
+
+		{{product-to-market 
+			class="display-inline" 
+			currentUser=currentUser 
+			product=model.product
+		}}
+		
 	</div>
 </div>
 

@@ -5,10 +5,7 @@ ProductToMarketComponent
 
 	You must pass this component:
 	currentUser - this is the authenticated Local Storage user.
-
-	And one of the following:
-	a. model: this is one record of market_product model, that is to be edited.  
-	b. product: this is one record of the product model, which will be added to a market.
+	product: this is one record of the product model, which will be added to a market.
 
 **/
 Haul.ProductToMarketComponent = Ember.Component.extend({
@@ -83,30 +80,21 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 		_this.set('showForm', true);
 		_this.set('showSuccessMessage', false);
 
-		//Model "market-product" was supplied to component.
-		if( this.get('model') ) {
-			this.setMode('editMode');
-			this.set('productModel', this.get('model').get('product'));
-			return;
+		//Create placeholder model.
+		var model = store.createRecord('market-product');
 
-		//Model "market-product" was not supplied to component.
-		//Product must then be supplied.
-		} else {
-			//Create placeholder model.
-			var model = store.createRecord('market-product');
+		//Product was supplied to component, set it on the model.
+		model.set('product', this.get('product'));
 
-			//Product was supplied to component, set it on the model.
-			model.set('product', this.get('product'));
+		//Set productModel, to kick off observer that get's product image.
+		this.set('productModel', this.get('product'));
 
-			//Set productModel, to kick off observer that get's product image.
-			this.set('productModel', this.get('product'));
+		//Persist our model.
+		this.set('model', model);
 
-			//Persist our model.
-			this.set('model', model);
-
-			//Now go find out if this user has a market.
-			this.findMarket();
-		}
+		//Now go find out if this user has a market.
+		this.findMarket();
+		
 
 	}.on('init'),
 
