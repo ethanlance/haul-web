@@ -55,9 +55,14 @@
 
 							<div class="col-md-6 col-sm-6 col-xs-6 text-right">
 							<span class="btn-group ">
-								<button type="button" class="btn btn-default btn-sm" {{ action 'likeProduct'}} {{bs-bind-tooltip content="Like This!"}}>
-								  13 <span class="glyphicon glyphicon-heart"></span>
-								</button>	
+
+
+								{{like-btn
+									class="display-inline btn-group " 
+									item=content
+									currentUser=currentUser 									
+								}}
+								
 
 								<button type="button" class="btn btn-default btn-sm" {{bs-bind-tooltip content="Comment on This!"}}>
 									4 <span class="glyphicon glyphicon-comment"></span>

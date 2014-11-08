@@ -8,6 +8,8 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 	quantity: DS.attr( 'string' ),
 	user_id: DS.attr( 'string' ),
 
+	likeCount: DS.belongsTo('like-count'),
+
 	user: DS.belongsTo('user'), 
 	images: DS.hasMany('image', {async:true}),
 	comments: DS.hasMany('comment', {async:true}),
@@ -109,7 +111,9 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 			quantity: payload.data.quantity,
 			images: payload.data.image_ids,
 			user: payload.data.user_id,
-			user_id: payload.data.user_id
+			user_id: payload.data.user_id,
+			
+			likeCount: payload.data.product_id
 		};
 
 

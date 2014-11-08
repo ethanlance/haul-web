@@ -3,6 +3,11 @@ body {
 	padding-top:31px;
 }
 
+.glyphicon.red {
+	color: red;
+}
+
+
 .clearfix:after {
    content: " "; /* Older browser do not support empty content */
    visibility: hidden;
