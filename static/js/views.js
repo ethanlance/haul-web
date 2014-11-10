@@ -2,6 +2,23 @@
 (function () {
   'use strict';
 
+	function init() {
+		window.addEventListener('scroll', function(e){
+	        
+	        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+	            shrinkOn = 100,
+	            header = document.querySelector(".toolbar");
+
+	        console.log("distanceY", distanceY , " > shrinkOn" , shrinkOn )    
+	        if (distanceY > shrinkOn) {
+	            $('.toolbar').addClass('shrink');
+	        } else {
+	            $('.toolbar').removeClass('shrink');
+	        }
+	    });
+	}
+	window.onload = init();
+
 
   	/**
 	SORTABLE: 
@@ -57,8 +74,8 @@
 		Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
 	},
 	afterRenderEvent : function(){
-		Holder.run(); 
-		
+		// Holder.run(); 
+		// console.log("ADD THIS HERE")
 	}
   });
 

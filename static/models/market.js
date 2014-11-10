@@ -5,6 +5,8 @@ Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
 	name: DS.attr( 'string' ),
 	description: DS.attr( 'string' ),
 	user_id: DS.attr( 'string' ),
+ 
+	isFollowedByCount: DS.belongsTo('market-is-followed-by-count'),
 
 	//products: DS.hasMany('market-product-list',{async:true}),
 	user: DS.belongsTo('user'),
@@ -94,7 +96,8 @@ Haul.MarketSerializer =  DS.RESTSerializer.extend({
 			slug: payload.data.name,
 			description: payload.data.description,
 			user: payload.data.user_id,
-			user_id: payload.data.user_id
+			user_id: payload.data.user_id,
+			isFollowedByCount: payload.data.store_id
 		};
 
 

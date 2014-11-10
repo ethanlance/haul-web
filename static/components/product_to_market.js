@@ -267,14 +267,14 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 
 		curateCancel: function() {
 			this.reset();
-			$('#curateModal').modal('hide');
 			$('.toolbar').removeClass('toolbar-hide');
+			$('#curateModal').modal('hide');
 		},
 
 		close: function() {
 			this.reset();
-			$('#curateModal').modal('hide');	
 			$('.toolbar').removeClass('toolbar-hide');
+			$('#curateModal').modal('hide');	
 		},
 
 		//Submit action.  Initiate Validation.

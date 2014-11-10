@@ -558,6 +558,33 @@ function program4(depth0,data) {
   data.buffer.push("\n\n\n	</div>\n</div>\n<div class=\"row\">\n	<div class=\"col-md-12\">\n		<br/>\n		<h4>Say Something</h4>\n\n		<div class=\"row\">\n			<div class=\"col-md-12\">\n				<textarea class=\"form-control\" rows=\"3\"></textarea>\n			</div>\n		</div>\n		<div class=\"row\">\n			<div class=\"col-md-12 text-right\"><br/>\n				<button class=\"btn btn-default\">comment</button>\n			</div>\n		</div>\n\n	</div>\n</div>\n\n\n\n\n\n\n\n\n\n\n");
   return buffer;
   
+});Ember.TEMPLATES['components/follow-btn'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var stack1, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n<button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "btnClick", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" class=\"btn btn-primary\">");
+  stack1 = helpers._triageMustache.call(depth0, "btnName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</button>\n<br/>\n<span class=\"small\">");
+  stack1 = helpers._triageMustache.call(depth0, "isFollowedByText", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\n<br/>\n<span class=\"small\">");
+  stack1 = helpers._triageMustache.call(depth0, "isFollowingText", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\n");
+  return buffer;
+  }
+
+  stack1 = helpers['if'].call(depth0, "show", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  else { data.buffer.push(''); }
+  
 });Ember.TEMPLATES['components/image-card'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -1090,8 +1117,15 @@ function program4(depth0,data) {
 
 function program6(depth0,data) {
   
-  
-  data.buffer.push("\n					<button class=\"btn btn-primary\">follow</button>\n					<button class=\"btn btn-default\">\n						<span class=\"glyphicon glyphicon-envelope\"></span>\n					</button>\n				");
+  var buffer = '', helper, options;
+  data.buffer.push("\n					\n					");
+  data.buffer.push(escapeExpression((helper = helpers['follow-btn'] || (depth0 && depth0['follow-btn']),options={hash:{
+    'item': ("user"),
+    'currentUser': ("targetObject.currentUser"),
+    'targetObject': ("targetObject")
+  },hashTypes:{'item': "ID",'currentUser': "ID",'targetObject': "ID"},hashContexts:{'item': depth0,'currentUser': depth0,'targetObject': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "follow-btn", options))));
+  data.buffer.push(" \n\n				");
+  return buffer;
   }
 
   data.buffer.push("<div class=\"row\">\n	<div class=\"col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font\">\n\n		<div class=\"media\">\n\n		");
@@ -1105,7 +1139,7 @@ function program6(depth0,data) {
   data.buffer.push("</h1>\n				<div>\n				");
   stack1 = helpers['if'].call(depth0, "isProfileOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(6, program6, data),fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n					<div><span class=\"medium\">175 Followers - Following 15</span></div>\n\n				</div>\n		  </div>\n		</div> \n	</div> \n</div>");
+  data.buffer.push("\n					 \n				</div>\n		  </div>\n		</div> \n	</div> \n</div>");
   return buffer;
   
 });Ember.TEMPLATES['components/seller-info'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {

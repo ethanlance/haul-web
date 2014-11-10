@@ -19,6 +19,7 @@ Haul.Store = DS.Store.extend({
 Haul.TooltipBoxController = Bootstrap.TooltipBoxController
 
 //GLOABL SETTINGS.  HOW, WHERE SHOULD WE HANDLE THIS STUFF?
+Haul.FOLLOW_SERVER_HOST = "http://localhost:8085";
 Haul.WANT_SERVER_HOST = "http://localhost:8084";
 Haul.STORE_SERVER_HOST = "http://localhost:8083";
 Haul.PRODUCT_SERVER_HOST = "http://localhost:8082";

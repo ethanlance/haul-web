@@ -63,15 +63,6 @@ Haul.LikeSerializer =  DS.RESTSerializer.extend({
 
 
 
-
-
-
-
-
-
-
-
-
 Haul.LikeCount = DS.Model.extend({
 	total: DS.attr('string'),
 	product: DS.belongsTo('product')

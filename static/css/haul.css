@@ -216,8 +216,8 @@ body {
 	width: 100%;
 	padding-top:15px;
 	padding-bottom:10px;
-	padding-right: 40px;
-	/*background-color: #F8F8F8;*/
+	padding-right: 65px;
+	/*background-color: ##F9F9F9;*/
 	background: rgba(248, 248, 248, .90);
 	z-index: 1029;
 	box-shadow: 2px 1px 3px #ccc;
@@ -229,7 +229,15 @@ body {
 
 .toolbar-hide {
 	position: inherit;
-	top: -100px;
+	top: -100px; 
+}
+
+.toolbar.shrink {
+	padding-top:5px;
+	padding-bottom:5px;
+	-webkit-transition: all .2s ease-in-out;
+		 -o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
 }
 
 .navbar-profile .profile-circular-mask {

@@ -16,13 +16,15 @@
 				<div>
 				{{#if isProfileOwner }}
 				{{else}}
-					<button class="btn btn-primary">follow</button>
-					<button class="btn btn-default">
-						<span class="glyphicon glyphicon-envelope"></span>
-					</button>
-				{{/if}}
-					<div><span class="medium">175 Followers - Following 15</span></div>
+					
+					{{ follow-btn 
+						item=user 
+						currentUser = targetObject.currentUser
+						targetObject = targetObject
+					}} 
 
+				{{/if}}
+					 
 				</div>
 		  </div>
 		</div> 

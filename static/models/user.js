@@ -34,7 +34,10 @@ Haul.User = DS.Model.extend({
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
 	email: DS.attr('string'),
-	facebook_user_id: DS.attr('string'),
+	facebook_user_id: DS.attr('string'),  
+
+	isFollowedByCount: DS.belongsTo('user-is-followed-by-count'),
+	isFollowingCount: DS.belongsTo('user-is-following-count'),
 
 	picture: function() { 
 		if( this.get('facebook_user_id') ) { 
@@ -95,7 +98,9 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 			name: payload.data.name,
 			email: payload.data.email,
 			id: payload.data.user_id,
-			slug: payload.data.user_id
+			slug: payload.data.user_id,
+			isFollowedByCount: payload.data.user_id,
+			isFollowingCount: payload.data.user_id
 		}  
 
 		if( payload.data.facebook_user_id ){
