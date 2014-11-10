@@ -151,7 +151,7 @@ Haul.MarketIsFollowedByCount = DS.Model.extend({
 
 Haul.MarketIsFollowedByCountAdapter = Haul.ApplicationAdapter.extend({
 
-	host: Haul.WANT_SERVER_HOST,
+	host: Haul.FOLLOW_SERVER_HOST,
 
 	find: function(store, type, id) { 
 		var url = this.host + "/follows/stores/" + id + "/total";  
@@ -172,7 +172,7 @@ Haul.MarketIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 			total: payload.data.total,	
 		};
 
-		var payload ={'market-is-followed-by': data}; 
+		var payload ={'market-is-followed-by-count': data}; 
 		return this._super(store, type, payload);
 	}
 });

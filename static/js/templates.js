@@ -1067,7 +1067,7 @@ function program6(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("\n<div class=\"row\">\n	<div class=\"col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font\">\n		<div class=\"media\">\n\n		");
+  data.buffer.push("\n<div class=\"row\">\n	<div class=\"col-md-9 col-sm-6 col-xs-6 haul-profile-header haul-font\">\n		<div class=\"media\">\n\n		");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
     'class': ("pull-left")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "market", "market", options) : helperMissing.call(depth0, "link-to", "market", "market", options));
@@ -1081,7 +1081,13 @@ function program6(depth0,data) {
   data.buffer.push("</p>\n\n		     	<h5>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller", "market.user", options) : helperMissing.call(depth0, "link-to", "seller", "market.user", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</h5>\n		  	</div>\n		</div> \n	</div> \n</div>\n");
+  data.buffer.push("</h5>\n		  	</div>\n		</div> \n	</div> \n	<div class=\"col-md-3 col-sm-6 col-xs-6\">\n		");
+  data.buffer.push(escapeExpression((helper = helpers['follow-btn'] || (depth0 && depth0['follow-btn']),options={hash:{
+    'item': ("market"),
+    'currentUser': ("targetObject.currentUser"),
+    'targetObject': ("targetObject")
+  },hashTypes:{'item': "ID",'currentUser': "ID",'targetObject': "ID"},hashContexts:{'item': depth0,'currentUser': depth0,'targetObject': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "follow-btn", options))));
+  data.buffer.push(" \n	</div>\n</div>\n");
   return buffer;
   
 });Ember.TEMPLATES['components/profile-seller'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
