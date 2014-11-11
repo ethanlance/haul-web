@@ -1,0 +1,19 @@
+<p class="truncate-text">
+
+	<div {{bind-attr class="isOpen:hide:show"}}>
+		{{ textTruncated }}
+		<a {{ action "open"}}>[about]</a>
+	</div>
+
+	{{!-- SELLER PRODUCT DESCRIPTION --}}
+	<div {{bind-attr class="isOpen:show:hide"}}>
+		<div class="row not-truncated" id="description">
+			<div class="col-md-12">
+				{{ breaklines text}}
+
+				<a {{action 'close'}}>[less]</a>
+			</div>	
+		</div>	
+	</div> 
+
+</p> 

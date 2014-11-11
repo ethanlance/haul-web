@@ -3,6 +3,14 @@ body {
 	padding-top:31px;
 }
 
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .glyphicon.red {
 	color: red;
 }
@@ -66,6 +74,9 @@ body {
 		height: 80px;    
 	}
 }
+
+
+
 
 .logo-outer a {
 	color: #fff;
@@ -184,29 +195,44 @@ body {
 	border-radius: 50%;
 	overflow: hidden;
 	background-color: #ddd;
-}
-.profile-small-circular-mask { 
-	display: inline-block;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	overflow: hidden;
-	background-color: #ddd;
-	margin-right: 10px;
-}
-
-.profile-small-circular-mask.profile-xs {
-	width: 40px;
-	height: 40px;
+		-webkit-transition: all .2s ease-in-out;
+		 -o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
 }
 
 .profile-circular-mask img {
 	max-width: 100%;
 }
 
-.profile-small-circular-mask img {
-	max-width: 100%;
+.profile-circular-mask span {
+	position:absolute;
+	top: 40px;
+	left: 50px;
+	-webkit-transition: all .2s ease-in-out;
+	 -o-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;
 }
+
+@media (max-width: 450px) {
+	.profile-circular-mask {
+		width:35px;
+		height:35px;
+		-webkit-transition: all .2s ease-in-out;
+		 -o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
+	}
+
+	.profile-circular-mask span {
+		position:absolute;
+		top: 10px;
+		left: 22px;
+		font-size: 10px;
+		-webkit-transition: all .2s ease-in-out;
+		 -o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
+	}
+}
+
 
 
 .toolbar {
@@ -249,7 +275,7 @@ body {
 	min-height: 20px;
 	margin-right:15px;
 	margin-left:15px;
-	padding: 19px;
+	padding: 10px;
 	margin-bottom: 20px;
 	/*background-color: #f5f5f5;*/
 	border: 1px solid #e3e3e3;
@@ -259,10 +285,21 @@ body {
 
 }
 
+.haul-buy-card .title {
+	font-family: inherit;
+	font-weight: 500;
+	
+	color: inherit;
+	font-size:24px;
+	padding-bottom: 10px;
+}
+
 .haul-buy-card .profile-circular-mask {
 	width: 50px;
 	height: 50px;
 }
+
+
 
 .haul-buy-card .media:first-child{
 	margin-top: 15px;
@@ -297,11 +334,20 @@ body {
 
 
 
-.haul-profile-header span{
+.haul-profile-header{
 	color: #000;
 }
 
+.haul-media-left {
+	float: left;
+	max-width: 40%;
+}
 
+.haul-media-left-end {
+	float: left;
+	padding: 20px 10px 10px 40px;
+	text-align: center;
+}
 
 .haul-grid {
 	margin:0;
@@ -336,6 +382,7 @@ body {
 	 
 	}
 } 
+
 
 
 
@@ -749,5 +796,18 @@ textarea.form-control {
 }
  
 .content-fixed-nav {
-	margin-top: 100px; 
+	margin-top: 85px; 
 } 
+
+
+.trucate-text .hide {
+	-webkit-transition: opacity .15s linear;
+	 -o-transition: opacity .15s linear;
+		transition: opacity .15s linear;
+}
+
+.trucate-text .show {
+	-webkit-transition: opacity .15s linear;
+	 -o-transition: opacity .15s linear;
+		transition: opacity .15s linear;
+}

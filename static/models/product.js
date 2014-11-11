@@ -28,7 +28,7 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 		},
 		description: {
 		 	presence: true,
-		 	length: { maximum: 500 }
+		 	length: { maximum: 2000 }
 		},
 		quantity: {
 			numericality: true,

@@ -26,7 +26,7 @@ Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
 	validations: { 
 		name: {
 		 	presence: true,
-		 	length: { minimum: 2 }
+		 	length: { minimum: 3, maximum: 50 }
 		},
 		description: {
 		 	presence: true,
