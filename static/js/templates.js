@@ -621,7 +621,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push(escapeExpression(helpers.unbound.call(depth0, "view.content.data.id", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push("\" class=\"thumbnail haul-thumb item\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
-    'src': ("view.content.data.thumb")
+    'src': ("view.content.data.small")
   },hashTypes:{'src': "ID"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
   data.buffer.push("  draggable=\"true\">\n	<span class=\"glyphicon glyphicon-move\"></span>\n</div>");
   return buffer;
