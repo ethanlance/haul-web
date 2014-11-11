@@ -126,20 +126,26 @@ body {
 	-webkit-transition: all .2s ease-in-out;
 	 -o-transition: all .2s ease-in-out;
 		transition: all .2s ease-in-out;
-	position: absolute;
-	width: 800px;
-	left: 0;
-	text-align: center;
-	margin: auto; 
-} 
-
-.navbar-center.in {
-	width: 100%;
-}
-
-.navbar-center.in{
 	position: relative;
+	width: 100%;
+	padding-top:9px;
+	margin: auto; 
+	text-align: center; 
+}  
+ 
+.navbar-center .navbar-form > .input-group {
+	display: inline;
+	width: 80%;
 }
+
+
+@media (min-width: 768px) {
+	.navbar-center {
+		width: 55%;
+	}	
+}
+
+
 
 
 @media (max-width: 768px) {
@@ -166,10 +172,6 @@ body {
 	color: #0192B5;
 }
 
-.navbar-form {
-	border-top: none;
-	border-bottom: none;
-}
 
 .input-group-btn .btn{
 	height: 34px;
