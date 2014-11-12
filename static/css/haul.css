@@ -130,21 +130,22 @@ body {
 	 -o-transition: all .2s ease-in-out;
 		transition: all .2s ease-in-out;
 	position: relative;
-	width: 100%;
+	width: 50%;
 	padding-top:9px;
-	margin: auto; 
+	/*margin: auto; */
+	margin-left: 150px;
 	text-align: center; 
 }  
- 
-.navbar-center .navbar-form > .input-group {
-	display: inline;
-	width: 80%;
-}
+  
 
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
 	.navbar-center {
-		width: 55%;
+		width: 100%;
+		margin-left: 0px;
+		padding-top: 20px;
+		padding-left: 50px;
+		padding-right: 60px;
 	}	
 }
 
