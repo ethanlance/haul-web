@@ -1,7 +1,18 @@
+
+
+{{#if isFollowingText}}
+{{#if showButton}}
+<div class="box-rigid">
+<button {{action 'btnClick' }} class="btn btn-primary">{{ btnName }}</button>
+</div>
+{{/if}}
+<div class="box-rigid">
+	<span class="small">{{isFollowedByText}}</span><br/>
+	<span class="small">{{isFollowingText}}</span>
+</div>
+{{else}}
 {{#if showButton}}
 <button {{action 'btnClick' }} class="btn btn-primary">{{ btnName }}</button>
-<br/>
 {{/if}}
-<span class="small">{{isFollowedByText}}</span>
-<br/>
-<span class="small">{{isFollowingText}}</span>
+<br/><span class="small">{{isFollowedByText}}</span>
+{{/if}}
