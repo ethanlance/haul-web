@@ -96,6 +96,10 @@
 				var _this = this;
 				var model = this.model;
 				model.set('user_id', this.get('currentUser').get('id'));
+
+				//Trim
+				model.set('description', model.get('description').trim())
+				model.set('name', model.get('name').trim())
 				
 		 		//Model Validations:
 				model.validate().then(function(result){

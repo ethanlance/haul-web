@@ -3,6 +3,9 @@ body {
 	padding-top:31px;
 }
 
+.text-regular {
+	font-weight: normal;
+}
 
 .truncate {
   width: 250px;
@@ -216,7 +219,7 @@ body {
 }
 
 @media (max-width: 450px) {
-	.profile-circular-mask {
+	.media .profile-circular-mask {
 		width:35px;
 		height:35px;
 		-webkit-transition: all .2s ease-in-out;
@@ -324,16 +327,15 @@ body {
 	vertical-align: middle;
 }
 
-.haul-icon-support .profile-small-circular-mask {
+.profile-circular-mask .sm{
 	width: 50px;
 	height: 50px;
-	vertical-align: middle;
+	vertical-align: middle; 
 }
 
-.haul-icon-support .profile-small-circular-mask{
-	margin-right: 10px;
+.media-body {
+	padding-left: 10px;
 }
-
 
 
 .haul-profile-header{
@@ -349,6 +351,15 @@ body {
 	float: left;
 	padding: 20px 10px 10px 40px;
 	text-align: center;
+}
+@media (max-width: 450px) {
+	.haul-media-left {
+		width: 300px;
+		max-width:300px;
+		-webkit-transition: all .2s ease-in-out;
+		 -o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
+	}
 }
 
 .haul-grid {
@@ -428,7 +439,15 @@ body {
 	padding-bottom: 10px;
 }
 
+.box-rigid {
+	float: left;
+	padding-right: 10px;
+	position:relative;
+}
 
+.box-vert-align {
+	margin-top: 25%;
+}
 
 
 .box {
@@ -637,6 +656,7 @@ body {
 
 
 
+
 #haul-dropzone{
 	/*border: 1px solid blue;*/
 	min-height: 300px;
@@ -812,4 +832,18 @@ textarea.form-control {
 	-webkit-transition: opacity .15s linear;
 	 -o-transition: opacity .15s linear;
 		transition: opacity .15s linear;
+}
+
+
+.badge-success {
+	background-color: green;
+}
+
+.badge-danger {
+	background-color: red;
+}
+
+.alert-sm {
+	padding: 3px;
+	margin-top:3px;
 }

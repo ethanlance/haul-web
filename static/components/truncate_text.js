@@ -1,26 +1,27 @@
 Haul.TruncateTextComponent = Ember.Component.extend({
 
-	doTruncation: null, 
+	doTruncation: false, 
 
-	maxLength: 100,
+	maxLength: 50,
 
 	isOpen: false,
+
+	text: null,
 
 	textTruncated: null,
 
 	start: function() {
 
-
-		this.set('doTruncation', true);
-
-		var maxLength = this.get('maxLength');
-		var text = this.get('text');
-		text = text.trim();
-		var trimmedString = text.substr(0, maxLength); 
-		trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")));
-		console.log('textTruncated', trimmedString);
-		this.set('textTruncated', trimmedString);	
-	
+		if( this.get('maxLength') > this.get('text').length ) { 
+			this.set('doTruncation', false);
+		} else {
+			this.set('doTruncation', true);
+			var maxLength = this.get('maxLength');
+			var text = this.get('text').trim();	
+			var trimmedString = text.substr(0, maxLength); 
+			var finalString = trimmedString.substr(0, trimmedString.lastIndexOf(" "));
+			this.set('textTruncated', finalString);		
+		}
 
 	}.on('init'),
 

@@ -1,11 +1,11 @@
 {{!-- BUTTON --}}
 
 {{#if addMode}}
-<button {{action 'curate'}} class="btn btn-default">Add To: {{currentUser.user.market.market_name}}</button>
+<button {{action 'curate'}} class="btn btn-default"  {{bs-bind-tooltip content="Add to your store"}}>Curate</button>
 {{/if}}
 
 {{#if editMode}}
-<button {{action 'curate'}} class="btn btn-default">edit</button>
+<button {{action 'curate'}} class="btn btn-default">Edit</button>
 {{/if}}
 
 

@@ -12,7 +12,7 @@
 		 {{/link-to}}
 
 		  <div class="media-body">
-		     	<h1 class="media-heading">{{user.name}}</h1>
+		     	<h1 class="media-heading">{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
 				<div>
 				{{#if isProfileOwner }}
 				{{else}}

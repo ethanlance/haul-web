@@ -243,6 +243,10 @@
 				var _this = this;
 				var model = this.get('product');
 
+				//Trim
+				model.set('description', model.get('description').trim())
+				model.set('name', model.get('name').trim())
+
 		 		//Model Validations:
 				model.validate().then(function(result){
 					_this.saveProduct();	

@@ -1,57 +1,60 @@
 <div class="container content-fixed-nav">
 
-	<div class="row padding-top">
+	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-6 vcenter">
-		{{#if model.name }}
-			<h4>Edit Your Store</h4>
-		{{else}}
-			<h4>Create Your Store</h4>
-		{{/if}}
+			<h3>Edit Store</h3> 
 		</div>
 	</div>
 
+	{{!-- MARKET ICON UPLOAD --}}
+	{{#if model.id }}
+	<div class="row ">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			{{ icon-maker item=model currentUser=currentUser }}
+		</div>
+	</div>
+	{{/if}}
 
 	{{#form-for model wrapper="bs3-wrapper"}}
-		<div class="row">
-			<div class="col-md-12"> 	
-				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12"> 
-						<label>Name: (max 50 characters)</label>
-						{{input name canShowValidationError=showErrors placeholder="Pick a cool name!"}} 
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12"> 
-						<label>Description: (max 500 characters)</label>
-						{{input description as="text" canShowValidationError=showErrors placeholder="What makes your store special?"}}
-					</div> 
-				</div>
-
-				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12">
-
-					{{#if errorShow }}
-						{{bs-alert message=errorMessage type="danger"}}
-					{{/if}}
-
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12 text-right">
-					
-					{{#link-to 'base'}}<button class="btn btn-default">Cancel</button>{{/link-to}}
-
-					{{ladda-btn
-						name='Save'
-						class="display-inline"
-						btnClasses='btn btn-primary ladda-button'
-						btnClick='submit'
-						spin=isProcessing
-					}}
-					</div>
-				</div>
-			</div>
+			
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12"> 
+			<label>Store Name</label>
+			<label class="small pull-right text-regular">(max 50 characters)</label>				
+			{{input name canShowValidationError=showErrors placeholder="Pick a cool name!"}} 
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12"> 
+			<label>About Store</label>
+			<label class="small pull-right text-regular">(max 500 characters)</label>
+			{{input description as="text" canShowValidationError=showErrors placeholder="What makes your store special?"}}
+		</div> 
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+
+		{{#if errorShow }}
+			{{bs-alert message=errorMessage type="danger"}}
+		{{/if}}
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-right">
+		
+		{{#link-to 'base'}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+
+		{{ladda-btn
+			name='Save'
+			class="display-inline"
+			btnClasses='btn btn-primary ladda-button'
+			btnClick='submit'
+			spin=isProcessing
+		}}
+		</div>
+	</div>
 	{{/form-for}}
 </div>

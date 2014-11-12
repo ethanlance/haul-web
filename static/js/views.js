@@ -2,22 +2,22 @@
 (function () {
   'use strict';
 
-	function init() {
-		window.addEventListener('scroll', function(e){
+	// function init() {
+	// 	window.addEventListener('scroll', function(e){
 	        
-	        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-	            shrinkOn = 100,
-	            header = document.querySelector(".toolbar");
+	//         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+	//             shrinkOn = 100,
+	//             header = document.querySelector(".toolbar");
 
-	        console.log("distanceY", distanceY , " > shrinkOn" , shrinkOn )    
-	        if (distanceY > shrinkOn) {
-	            $('.toolbar').addClass('shrink');
-	        } else {
-	            $('.toolbar').removeClass('shrink');
-	        }
-	    });
-	}
-	window.onload = init();
+	//         console.log("distanceY", distanceY , " > shrinkOn" , shrinkOn )    
+	//         if (distanceY > shrinkOn) {
+	//             $('.toolbar').addClass('shrink');
+	//         } else {
+	//             $('.toolbar').removeClass('shrink');
+	//         }
+	//     });
+	// }
+	// window.onload = init();
 
 
   	/**

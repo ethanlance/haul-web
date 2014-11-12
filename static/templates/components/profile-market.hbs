@@ -3,9 +3,9 @@
 		<div class="media">
 
 			{{#link-to "market" market class="pull-left"}}
-			  	<div class="profile-circular-mask">
-			  	{{#if market.picture}}
-			    	<img {{bind-attr src=market.picture}}> 
+			  	<div class="profile-circular-mask text-center">
+			  	{{#if market.image}}
+			    	<img {{bind-attr src=market.image.thumb }}> 
 			    {{ else }}
 			    	{{#if isMarketOwner }}
 			    		<span>edit</span>

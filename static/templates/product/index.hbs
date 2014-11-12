@@ -1,21 +1,5 @@
 
-{{!-- HAUL TOOLBAR --}}
-<div class="toolbar text-right">
-	
-	{{#if currentUser }}
-		{{product-to-market 
-			class="display-inline" 
-			currentUser=currentUser 
-			product=model
-		}}
-	{{/if}}
 
-	{{#if isProfileOwner}}
-		{{#link-to 'product.edit' this}}<button class="btn btn-default">Edit</button>{{/link-to}}
-		<button {{action 'delete'}} class="btn btn-danger">Delete</button>
-	{{/if}}
-
-</div>
 
 
 
@@ -23,6 +7,25 @@
 	<div class="row">
 		<div class="col-md-6 padding-bottom">
 	    	{{ profile-seller user=user }}
+		</div>
+
+
+		<div class="col-md-6 padding-bottom text-right">
+
+			{{!-- HAUL TOOLBAR --}}
+			{{#if currentUser }}
+				{{product-to-market 
+					class="display-inline" 
+					currentUser=currentUser 
+					product=model
+				}}
+			{{/if}}
+
+			{{#if isProfileOwner}}
+				{{#link-to 'product.edit' this}}<button class="btn btn-default"  {{bs-bind-tooltip content="Edit your item"}}>Edit</button>{{/link-to}}
+				<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">Delete</button>
+			{{/if}}
+
 		</div>
 	</div>
 
