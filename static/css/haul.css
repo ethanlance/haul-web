@@ -90,6 +90,7 @@ body {
  
 .navbar-toggle {
 	float: left;
+	margin-left:5px;
 }
 
 .thumbnail.center {
@@ -98,9 +99,9 @@ body {
  
 
 .navbar-profile { 
-	width: 100%;
+	/*width: 100%;*/
 	left: 0;
-	margin-right: 80px;
+	margin-right: 5px;
 	margin-top: 8px;
 	margin-bottom: 5px;
 	padding:0px;
@@ -164,8 +165,7 @@ body {
 
 
 .haul-navbar .navbar-right{
-	float: right;
-	width:200px;
+	float: right; 
 	position:absolute;
 	right: 10px;
 }

@@ -1,46 +1,46 @@
-		{{#if  currentUser }}
- 
-		<div class="btn-group navbar-profile">
-		
-			<button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
-				{{#if currentUser.icon }}
-					<img {{bind-attr src=currentUser.icon}}> 
-				{{/if}}
-				<span class="profile-name">{{ currentUser.name }}</span>
-		  		
-			</button>
+{{#if  currentUser }}
 
-		  <div class="btn-group">
-		    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		      <span class="glyphicon glyphicon-cog"></span>
-		    </button>
-		    <ul class="dropdown-menu" role="menu">
+	<div class="btn-group navbar-profile">
+	
+		<button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
+			{{#if currentUser.icon }}
+				<img {{bind-attr src=currentUser.icon}}> 
+			{{/if}}
+			<span class="profile-name">{{ currentUser.name }}</span>
+	  		
+		</button>
 
-		    	<li>{{#link-to 'seller' currentUser.slug }}My Stuff{{/link-to}}</li>
-				<li>{{#link-to 'seller.new-product' currentUser.slug }}- Add Stuff{{/link-to}}</li> 
+	  <div class="btn-group">
+	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	      <span class="glyphicon glyphicon-cog"></span>
+	    </button>
+	    <ul class="dropdown-menu" role="menu">
 
-				{{#if currentUser.user.market}}
-				<li>{{#link-to 'market' currentUser.user.market.market_id }}My Store{{/link-to}}</li> 
-				<li>{{#link-to 'market.edit' currentUser.user.market.market_id }}- Edit Store{{/link-to}}</li> 
-				{{else}}
-				<li>{{#link-to 'seller.new-market' currentUser.slug }}Create A Store{{/link-to}}</li> 
-				{{/if}}
-					
-				<li class="divider"></li> 	
-				<li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
+	    	<li>{{#link-to 'seller' currentUser.slug }}My Stuff{{/link-to}}</li>
+			<li>{{#link-to 'seller.new-product' currentUser.slug }}- Add Stuff{{/link-to}}</li> 
 
-				<li class="divider"></li> 
-				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
-		    </ul>
-		  </div>
-		</div> 
+			{{#if currentUser.user.market}}
+			<li>{{#link-to 'market' currentUser.user.market.market_id }}My Store{{/link-to}}</li> 
+			<li>{{#link-to 'market.edit' currentUser.user.market.market_id }}- Edit Store{{/link-to}}</li> 
+			{{else}}
+			<li>{{#link-to 'seller.new-market' currentUser.slug }}Create A Store{{/link-to}}</li> 
+			{{/if}}
+				
+			<li class="divider"></li> 	
+			<li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
 
-		{{else}}
+			<li class="divider"></li> 
+			<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+	    </ul>
+	  </div>
+	</div> 
+
+	{{else}}
 
 
-		<div class="navbar-profile">
-			{{#link-to 'signup'}}<button type="button" class="btn btn-default signup">SIGNUP</button>{{/link-to}}
-			{{#link-to 'login'}}<button type="button" class="btn btn-default">LOGIN</button>{{/link-to}}
-		</div>
+	<div class="navbar-profile">
+		{{#link-to 'signup'}}<button type="button" class="btn btn-default signup">SIGNUP</button>{{/link-to}}
+		{{#link-to 'login'}}<button type="button" class="btn btn-default">LOGIN</button>{{/link-to}}
+	</div>
 
-		{{/if}}
+{{/if}}
