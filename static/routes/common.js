@@ -94,7 +94,7 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 
 //About route is the default landing page for anon users.  This route 
 //will explain to anon users how signup/login and how to browse the service.
-Haul.BaseRoute = Haul.AnonRoute.extend({
+Haul.HomeRoute = Haul.AnonRoute.extend({
 	renderTemplate: function(){
 		this._super();
 		this.render('homepage');

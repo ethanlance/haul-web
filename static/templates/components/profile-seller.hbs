@@ -18,17 +18,11 @@
 		  <div class="media-body">
 		     	<h1 class="media-heading">{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
 				<div>
-				{{#if isProfileOwner }}
-				{{else}}
-					
 					{{ follow-btn 
 						item=user 
 						currentUser = targetObject.currentUser
 						targetObject = targetObject
 					}} 
-
-				{{/if}}
-					 
 				</div>
 		  </div>
 		</div> 

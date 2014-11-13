@@ -46,7 +46,7 @@ Haul.Router.reopen({
 Haul.Router.map(function(){
 
 	//Home
-	this.resource('base', {path: "/"});
+	this.resource('home', {path: "/"});
 	this.resource('about');
 	this.resource('not-found');
 	this.resource('not-authorized');
