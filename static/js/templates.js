@@ -1112,7 +1112,7 @@ function program2(depth0,data) {
   var buffer = '';
   data.buffer.push("<img ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
-    'src': ("market.image.thumb")
+    'src': ("market.icon")
   },hashTypes:{'src': "ID"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
   data.buffer.push(">");
   return buffer;

@@ -5,7 +5,7 @@
 				
 			  	<div class="profile-circular-mask text-center">
 			  	{{#if market.image}}
-				    {{#link-to "market" market class="pull-left"}}<img {{bind-attr src=market.image.thumb }}>{{/link-to}}
+				    {{#link-to "market" market class="pull-left"}}<img {{bind-attr src=market.icon }}>{{/link-to}}
 			    {{ else }}
 			    	{{#if isMarketOwner }}
 			    		{{#link-to "market.edit" market class="pull-left"}}<span>add <br/>a logo</span>{{/link-to}}
