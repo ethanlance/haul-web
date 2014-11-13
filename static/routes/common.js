@@ -28,18 +28,18 @@ Haul.ApplicationRoute = Ember.Route.extend({
 // //ROOT
 // //Redirect logged in user to their profile.  
 // //Redirect anon users to the /about page.
-// Haul.BaseRoute = Ember.Route.extend({
-// 	beforeModel: function() {
+Haul.BaseRoute = Ember.Route.extend({
+	beforeModel: function() {
 		
-// 		var user = this.controllerFor('auth').get('currentUser');
+		var user = this.controllerFor('auth').get('currentUser');
 		
-// 		// if( !Ember.isEmpty(user) && user ) {
-// 		// 	return this.transitionTo('seller', user.get('slug'));
-// 		// }else{
-// 			return this.transitionTo('about');
-// 		//}
-// 	},
-// });
+		// if( !Ember.isEmpty(user) && user ) {
+		// 	return this.transitionTo('seller', user.get('slug'));
+		// }else{
+			return this.transitionTo('home');
+		//}
+	},
+});
 
 
 
@@ -92,14 +92,14 @@ Haul.AuthenticatedRoute = Ember.Route.extend({
 
 
 
-//About route is the default landing page for anon users.  This route 
-//will explain to anon users how signup/login and how to browse the service.
+//HOMEPAGE
 Haul.HomeRoute = Haul.AnonRoute.extend({
 	renderTemplate: function(){
 		this._super();
 		this.render('homepage');
 	}
 });
+
 
 /** 
 	NOT FOUND 404

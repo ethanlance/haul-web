@@ -15,7 +15,7 @@
 		currentUser: Ember.computed.alias('controllers.auth.currentUser')
 	}); 
 
-	Haul.HomeController = Ember.ArrayController.extend({
+	Haul.HomeController = Ember.ObjectController.extend({
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 	});
