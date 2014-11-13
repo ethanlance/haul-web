@@ -11,18 +11,31 @@ Haul.IconMakerComponent = Ember.Component.extend({
 	isProgress: false,
 	errorMessage: null,
 
+	imageBinding: "item.image.thumb",
+	pictureBinding: "item.picture", 
+
 	progressValue: null,
 	progressStyle: function() {
 		return "width:"+this.get('progressValue')+"px";
 	}.property('progressValue'),
 
+	/* Image has changed, update the Market or LocalUser model now */
+	newImageId: null,
+	updateModel: function() {
+		var itemType = this.get('itemType');
+		if(itemType == "users")
+			this.item.set('user.image_id', this.get('newImageId') );
+		else
+			this.item.set('image_id', this.get('newImageId') );
+	}.observes('newImageId'),
+
 	itemChanged: function() {
-		//Get Ref Type:
+		//Get Ref Type: 
 		var model = String(this.item.constructor);
 		var name = model.split('.');
         var itemType = Ember.String.camelize(name.pop());
 
-        if(itemType == "user")
+        if(itemType == "user" || itemType == "localUser")
         	this.set('itemType', 'users');
         else if(itemType == "market")
         	this.set('itemType', 'stores');
@@ -165,11 +178,10 @@ Haul.IconMakerComponent = Ember.Component.extend({
 
 		//SUCCESS, reset Dropzone and hand the image file off to Ember.
 		this.dropzone.on('success', function(file, response) {	 	
-
 			_this.set('isSuccess', true);
 			_this.set('isFailed', false);
 			_this.set('isProgress', false);
-
+			_this.set('newImageId', response.data.image_id);
 			window.clearInterval(file.progressInterval);
 		});
 	}

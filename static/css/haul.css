@@ -18,6 +18,9 @@ body {
 	color: red;
 }
 
+.media a:hover {
+	text-decoration: none;
+}
 
 .clearfix:after {
    content: " "; /* Older browser do not support empty content */
@@ -213,8 +216,8 @@ body {
 
 .profile-circular-mask span {
 	position:absolute;
-	top: 40px;
-	left: 50px;
+	top: 30px;
+	left: 30px;
 	-webkit-transition: all .2s ease-in-out;
 	 -o-transition: all .2s ease-in-out;
 		transition: all .2s ease-in-out;

@@ -2,7 +2,7 @@
 <div class="box-rigid">
 	<div class="dropzone-preview">
 		<div class="profile-circular-mask text-center">
-			<img {{bind-attr src=item.image.thumb }}> 
+			{{#if picture}}<img {{bind-attr src=picture }}>{{else}}<img {{bind-attr src=image }}>{{/if}}
 		</div>
 	</div>
 </div>

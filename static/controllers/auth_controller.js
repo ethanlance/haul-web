@@ -110,12 +110,12 @@
 				return _this.store.createRecord("local-user", 
 					{
 						id: user.get('id'),  
+						user: user,
 						name: user.get('name'),
-						slug: user.get('slug'),
-						picture: user.get('picture'),	
+						slug: user.get('slug'), 
 						access_token: accessToken,
 						refresh_token: refreshToken,
-						current: true
+						current: true,
 					}
 				)
 				.save()

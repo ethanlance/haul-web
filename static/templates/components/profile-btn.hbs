@@ -3,9 +3,10 @@
 		<div class="btn-group navbar-profile">
 		
 			<button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
-				
-				<img {{bind-attr src=currentUser.picture}}> 
-				<span class="profile-name">{{#link-to "seller" currentUser.id }}{{ currentUser.name }}{{/link-to}}</span>
+				{{#if currentUser.picture }}
+					<img {{bind-attr src=currentUser.picture}}> 
+				{{/if}}
+				<span class="profile-name">{{ currentUser.name }}</span>
 		  		
 			</button>
 
@@ -26,7 +27,7 @@
 				{{/if}}
 					
 				<li class="divider"></li> 	
-				<li>{{#link-to 'settings'}}Account Settings{{/link-to}}</li>
+				<li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
 
 				<li class="divider"></li> 
 				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>

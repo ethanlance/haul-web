@@ -49,8 +49,7 @@ Haul.UserImageSerializer =  Haul.RESTSerializer.extend({
 			} 
 		}); 
  
-		var payload = {'user-image': datas}; 
-		console.log('pay', payload)
+		var payload = {'user-image': datas};  
 		return this._super(store, primaryType, payload);
 	},
 

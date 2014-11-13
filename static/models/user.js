@@ -5,24 +5,14 @@ Haul.LocalUser = DS.Model.extend({
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
 	email: DS.attr('string'),
-	picture: DS.attr('string'),
+	pictureBinding: 'user.picture',
 
 	access_token: DS.attr('string'),
 	refresh_token: DS.attr('string'),	
-	current: DS.attr('boolean'),
+	current: DS.attr('boolean'), 
 
 	//Get's the user model.
-	user: function(){
-		var store = this.store;
-		var user_id = this.get('id');		
-		var promise = store.find('user', {id: user_id}); 
-		var promise = promise.then(function(results){
-			return results.get('firstObject')
-		});
-		return DS.PromiseObject.create({
-			promise: promise
-		});
-	}.property(),
+	user: DS.belongsTo('user')
 });
 Haul.LocalUserAdapter = Haul.LSAdapter.extend({});
 Haul.LocalUserSerializer = Haul.LSSerializer.extend({});
@@ -34,18 +24,71 @@ Haul.User = DS.Model.extend({
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
 	email: DS.attr('string'),
-	facebook_user_id: DS.attr('string'),  
+	facebook_user_id: DS.attr('string'),
+	image: DS.belongsTo('image'),
+	image_id: DS.attr('string'), 
 
 	isFollowedByCount: DS.belongsTo('user-is-followed-by-count'),
 	isFollowingCount: DS.belongsTo('user-is-following-count'),
 
-	picture: function() { 
-		if( this.get('facebook_user_id') ) { 
-			return "https://graph.facebook.com/" + this.get('facebook_user_id') + "/picture?width=200";
-		}else{
-			return null;
-		}
-	}.property(),
+	picture: DS.attr('string'), 
+	pictureChange: function() { 
+		Ember.run.once(this, 'pictureChangeSync');
+	}.observes('image_id', 'facebook_user_id').on('init'),
+
+	pictureChangeSync: function() {
+		if( this.get('image_id') ){
+			this.getIconImage();
+		}else if( this.get('facebook_user_id') ) { 
+			this.getIconFacebook()
+		} 
+	},
+
+	getIconFacebook: function() {
+		var url = "https://graph.facebook.com/" + this.get('facebook_user_id') + "/picture?width=200";
+		this.set('picture', url);
+	},
+
+	getIconImage: function() {
+		var _this = this;
+		var image_id = this.get('image_id')
+		var i = 0;
+		var retryTimes = 10;
+		var retryWait = 2000;
+
+		//If no thumb returns, then try again.
+		//This happens when icons are uploaded, the image
+		//takes time to crunch.
+		function waitingForResponse() {
+			i++;
+			_this.store.find('image', image_id)
+			.then(function(image){
+				return image.reload();	
+			}).then(function(image) {
+				var thumb  = image.get('thumb');
+				if( !thumb && i < retryTimes ) { 
+				} else { 
+					window.clearInterval(_this.getThumbInterval);
+					_this.set('picture', thumb);
+				} 
+			});
+		} 
+
+		//Get the thumb
+		_this.store.find('image', image_id)
+		.then(function(image){ 
+			return image; 
+		}).then(function(image) {
+			var thumb  = image.get('thumb');
+			if( !thumb && i < retryTimes ) { 
+				_this.getThumbInterval = setInterval(function () { 
+					waitingForResponse();
+				}, retryWait); 
+			} else {
+				_this.set('picture', thumb);
+			}
+		});
+	},
 
 	market: function() {
 		var store = this.store;
@@ -100,7 +143,9 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 			id: payload.data.user_id,
 			slug: payload.data.user_id,
 			isFollowedByCount: payload.data.user_id,
-			isFollowingCount: payload.data.user_id
+			isFollowingCount: payload.data.user_id,
+			image_id: payload.data.image_id,
+			image: payload.data.image_id
 		}  
 
 		if( payload.data.facebook_user_id ){

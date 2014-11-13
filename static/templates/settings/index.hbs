@@ -7,11 +7,8 @@
 		<div class="col-md-3 content-toc">
 			<div class="margin-top" data-spy="affix" data-offset-top="50">	
 				<div class="nav-wrapper">
-					<ul class="nav nav-pills nav-stacked toc" role="tablist">
-					  <li role="presentation"><a href="#settings">Account Settings</a></li>
-					  <li role="presentation"><a href="#profile">Profile</a></li>
-					  <li role="presentation"><a href="#notifications">Notfications</a></li>
-					  <li role="presentation"><a href="#social">Social Networks</a></li>
+					<ul class="nav nav-pills nav-stacked toc" role="tablist"> 
+					  <li role="presentation"><a href="#profile">Profile</a></li> 
 					</ul>
 				</div>
 			</div>
@@ -22,80 +19,13 @@
 
 		<div class="col-md-9 content-scroll" data-spy="scroll" data-target=".nav-wrapper" data-offset="200">
 
-			<div class="panel panel-default margin-top" id="settings">
-			  <!-- Default panel contents -->
-			  <div class="panel-heading">Account Settings</div>
-			  <div class="panel-body">
-			    <p>...</p>
-			  </div>
-
-			  <!-- List group -->
-			  <ul class="list-group">
-			    <li class="list-group-item">Cras justo odio</li>
-			    <li class="list-group-item">Dapibus ac facilisis in</li>
-			    <li class="list-group-item">Morbi leo risus</li>
-			    <li class="list-group-item">Porta ac consectetur ac</li>
-			    <li class="list-group-item">Vestibulum at eros</li>
-			  </ul>
-			</div>
-
-
-
-			<div class="panel panel-default" id="profile">
+			<div class="panel panel-default margin-top" id="profile">
 			  <!-- Default panel contents -->
 			  <div class="panel-heading">Profile</div>
 			  <div class="panel-body">
-			    <p>...</p>
-			  </div>
-
-			  <!-- List group -->
-			  <ul class="list-group">
-			    <li class="list-group-item">Cras justo odio</li>
-			    <li class="list-group-item">Dapibus ac facilisis in</li>
-			    <li class="list-group-item">Morbi leo risus</li>
-			    <li class="list-group-item">Porta ac consectetur ac</li>
-			    <li class="list-group-item">Vestibulum at eros</li>
-			  </ul>
-			</div>
-
-
-
-			<div class="panel panel-default" id="notifications">
-			  <!-- Default panel contents -->
-			  <div class="panel-heading">Notifications</div>
-			  <div class="panel-body">
-			    <p>...</p>
-			  </div>
-
-			  <!-- List group -->
-			  <ul class="list-group">
-			    <li class="list-group-item">Cras justo odio</li>
-			    <li class="list-group-item">Dapibus ac facilisis in</li>
-			    <li class="list-group-item">Morbi leo risus</li>
-			    <li class="list-group-item">Porta ac consectetur ac</li>
-			    <li class="list-group-item">Vestibulum at eros</li>
-			  </ul>
-			</div>
-
-
-
-
-			<div class="panel panel-default" id="social">
-			  <!-- Default panel contents -->
-			  <div class="panel-heading">Social</div>
-			  <div class="panel-body">
-			    <p>...</p>
-			  </div>
-
-			  <!-- List group -->
-			  <ul class="list-group">
-			    <li class="list-group-item">Cras justo odio</li>
-			    <li class="list-group-item">Dapibus ac facilisis in</li>
-			    <li class="list-group-item">Morbi leo risus</li>
-			    <li class="list-group-item">Porta ac consectetur ac</li>
-			    <li class="list-group-item">Vestibulum at eros</li>
-			  </ul>
-			</div>
+			    	{{ icon-maker item=currentUser currentUser=currentUser }}
+			  </div> 
+			</div> 
 		</div>
 	</div>
 </div>

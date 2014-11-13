@@ -1,15 +1,19 @@
 <div class="row">
-	<div class="col-md-9 col-sm-9 col-xs-12 haul-profile-header haul-font">
+	<div class="col-md-12 col-sm-12 col-xs-12 haul-profile-header haul-font">
 
 		<div class="media">
 
-		{{#link-to "seller" user class="pull-left"}}
-		  	<div class="profile-circular-mask">
-		  	{{#if user.picture}}
-		    	<img {{bind-attr src=user.picture}}> 
+		
+		  	<div class="profile-circular-mask pull-left">
+		  	{{#if user.picture }}
+				{{#link-to "seller" user}}<img {{bind-attr src=user.picture}}> {{/link-to}}
+		    {{else}}
+		    	{{#if isProfileOwner }}
+					<span>{{#link-to "settings"}}edit{{/link-to}}</span>
+				{{/if}}
 		    {{/if}}
 		    </div>
-		 {{/link-to}}
+		 
 
 		  <div class="media-body">
 		     	<h1 class="media-heading">{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
