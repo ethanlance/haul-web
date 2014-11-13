@@ -422,6 +422,10 @@ body {
 	width:100%;
 }
 
+
+
+
+
 .sell-text .glyphicon {
 	padding-bottom: 10px;
 }
@@ -522,6 +526,7 @@ body {
 	background-color: #eee;
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
+	box-shadow: 0px 2px 1px #ccc;
 }
 
 .haul-grid .price {
@@ -839,4 +844,36 @@ textarea.form-control {
 .alert-sm {
 	padding: 3px;
 	margin-top:3px;
+}
+
+
+
+
+
+
+
+
+
+.content-fixed-nav.home {
+	margin-top: 50px;
+}
+
+
+
+.home .price {
+	bottom: 40%;
+}
+
+.home .thumbnail {
+	margin-bottom: 0px;
+}
+
+.home .description {
+	display:block;
+	padding: 10px;
+	background-color: #eee;  
+	width:100%; 
+	min-height: 60px;
+	max-height: 60px;
+	overflow: hidden;
 }

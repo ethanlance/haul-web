@@ -105,9 +105,9 @@ Haul.ProductToMarketComponent = Ember.Component.extend({
 
 		//Does this user have this product in their store?
 		this.get('currentUser')
-		.get('user')
-		.then(function(user){
-			return user.get('market')})
+		.get('user').get('market')
+		// .then(function(user){
+		// 	return user.get('market')})
 		.then(function(user_market){
 			return user_market.get('market'); 
 		})

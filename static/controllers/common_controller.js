@@ -13,5 +13,10 @@
 	Haul.NotAuthorizedController = Ember.ObjectController.extend({
 		needs: ["auth"],  
 		currentUser: Ember.computed.alias('controllers.auth.currentUser')
-	}); 		
+	}); 
+
+	Haul.BaseController = Ember.ArrayController.extend({
+		needs: ["auth"], 
+		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+	});
 })();
