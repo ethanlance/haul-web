@@ -9,6 +9,7 @@ Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
 	slug: DS.attr( 'string' ),
 	isFollowedByCount: DS.belongsTo('market-is-followed-by-count'), 
 
+	iconBinding: "image.thumb", 
 	image: DS.belongsTo('image'),
 	image_id: DS.attr('string'), 
 	//imageIdChanged is fired when a new image_id is assigned to the model.

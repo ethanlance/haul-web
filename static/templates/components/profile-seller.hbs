@@ -5,8 +5,8 @@
 
 		
 		  	<div class="profile-circular-mask pull-left">
-		  	{{#if user.picture }}
-				{{#link-to "seller" user}}<img {{bind-attr src=user.picture}}> {{/link-to}}
+		  	{{#if user.icon }}
+				{{#link-to "seller" user}}<img {{bind-attr src=user.icon}}> {{/link-to}}
 		    {{else}}
 		    	{{#if isProfileOwner }}
 					<span>{{#link-to "settings"}}edit{{/link-to}}</span>

@@ -5,7 +5,7 @@ Haul.LocalUser = DS.Model.extend({
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
 	email: DS.attr('string'),
-	pictureBinding: 'user.picture',
+	iconBinding: 'user.icon',
 
 	access_token: DS.attr('string'),
 	refresh_token: DS.attr('string'),	
@@ -31,12 +31,12 @@ Haul.User = DS.Model.extend({
 	isFollowedByCount: DS.belongsTo('user-is-followed-by-count'),
 	isFollowingCount: DS.belongsTo('user-is-following-count'),
 
-	picture: DS.attr('string'), 
-	pictureChange: function() { 
-		Ember.run.once(this, 'pictureChangeSync');
+	icon: DS.attr('string'), 
+	iconChange: function() { 
+		Ember.run.once(this, 'iconChangeSync');
 	}.observes('image_id', 'facebook_user_id').on('init'),
 
-	pictureChangeSync: function() {
+	iconChangeSync: function() {
 		if( this.get('image_id') ){
 			this.getIconImage();
 		}else if( this.get('facebook_user_id') ) { 
@@ -46,7 +46,7 @@ Haul.User = DS.Model.extend({
 
 	getIconFacebook: function() {
 		var url = "https://graph.facebook.com/" + this.get('facebook_user_id') + "/picture?width=200";
-		this.set('picture', url);
+		this.set('icon', url);
 	},
 
 	getIconImage: function() {
@@ -69,7 +69,7 @@ Haul.User = DS.Model.extend({
 				if( !thumb && i < retryTimes ) { 
 				} else { 
 					window.clearInterval(_this.getThumbInterval);
-					_this.set('picture', thumb);
+					_this.set('icon', thumb);
 				} 
 			});
 		} 
@@ -85,7 +85,7 @@ Haul.User = DS.Model.extend({
 					waitingForResponse();
 				}, retryWait); 
 			} else {
-				_this.set('picture', thumb);
+				_this.set('icon', thumb);
 			}
 		});
 	},

@@ -4,6 +4,7 @@ Haul.IconMakerComponent = Ember.Component.extend({
 	item: null,
 	itemType: null,
 	itemIdBinding: "item.id",
+	iconBinding: "item.icon",
 	userTokenBinding: "currentUser.access_token",
 	userIdBinding: "currentUser.id",
 	isSuccess: false,
@@ -11,8 +12,7 @@ Haul.IconMakerComponent = Ember.Component.extend({
 	isProgress: false,
 	errorMessage: null,
 
-	imageBinding: "item.image.thumb",
-	pictureBinding: "item.picture", 
+	imageBinding: "item.image.thumb", 
 
 	progressValue: null,
 	progressStyle: function() {

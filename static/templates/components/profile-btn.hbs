@@ -3,8 +3,8 @@
 		<div class="btn-group navbar-profile">
 		
 			<button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
-				{{#if currentUser.picture }}
-					<img {{bind-attr src=currentUser.picture}}> 
+				{{#if currentUser.icon }}
+					<img {{bind-attr src=currentUser.icon}}> 
 				{{/if}}
 				<span class="profile-name">{{ currentUser.name }}</span>
 		  		
