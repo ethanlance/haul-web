@@ -1,33 +1,23 @@
-
-
-
-
+{{#if isProfileOwner}}
+	<div class="toolbar text-right">
+		<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">Delete</button>
+		{{#link-to 'product.edit' this}}<button class="btn btn-default"  {{bs-bind-tooltip content="Edit your item"}}>Edit</button>{{/link-to}}
+	</div>
+{{/if}}
 
 <div class="container content-fixed-nav">
 	<div class="row">
-		<div class="col-md-6 padding-bottom">
-	    	{{ profile-seller user=user isProfileOwner=isProfileOwner }}
-		</div>
 
+		<div class="col-md-12 col-sm-12 col-xs-12 haul-font">
+			<h2 class="heading haul-font">
+				{{ make-icon icon=model.user.icon  isSmall=true  class="pull-left" }}
+				{{#link-to 'seller' model.user}}{{ model.user.name }}{{/link-to}} -
+				{{ model.name }}
+			</h2>
+		</div>  
 
-		<div class="col-md-6 padding-bottom text-right">
-
-			{{!-- HAUL TOOLBAR --}}
-			{{#if currentUser }}
-				{{product-to-market 
-					class="display-inline" 
-					currentUser=currentUser 
-					product=model
-				}}
-			{{/if}}
-
-			{{#if isProfileOwner}}
-				{{#link-to 'product.edit' this}}<button class="btn btn-default"  {{bs-bind-tooltip content="Edit your item"}}>Edit</button>{{/link-to}}
-				<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">Delete</button>
-			{{/if}}
-
-		</div>
 	</div>
+
 
 	
 	<div class="row">
@@ -46,16 +36,10 @@
 			<div class="row">
 				<div class="col-md-12 haul-buy-card">
 					
-					{{!-- BUTTONS  --}}
-
-					<div class="row"> 
-						<div class="col-md-12 col-sm-12 col-xs-12 title">
-							{{ name }}
-						</div>
-					</div>
+					{{!-- BUTTONS  --}} 
 					<div class="row button-bar"> 
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<span class="lead haul-price">${{ price }}</span>
+							<div class="box-rigid lead haul-price">${{ price }}</div>
 							
 							{{!-- BUY --}}
 							<button type="button" class="btn btn-primary btn-lg">BUY</button>
@@ -71,6 +55,14 @@
 							<button type="button" class="btn btn-default btn-lg" {{bs-bind-tooltip content="Comment on This!"}}>4 <span class="glyphicon glyphicon-comment"></span>
 							</button>
 
+							{{!-- CURATE - ADD TO STORE --}}
+							{{store-btn
+								class="display-inline" 
+								currentUser=currentUser 
+								product=model
+								productPage=true
+							}}
+
 						</div>
 					</div>
 
@@ -78,7 +70,7 @@
 
 					<div class="row">
 						<div class="col-md-12">
-    						{{ breaklines description }}
+    						{{ product-details seller=model.user product=model isOpen=true }}
 						</div>
 					</div> 
 				</div>

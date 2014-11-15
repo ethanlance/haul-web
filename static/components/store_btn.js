@@ -8,7 +8,7 @@ ProductToMarketComponent
 	product: this is one record of the product model, which will be added to a market.
 
 **/
-Haul.ProductToMarketComponent = Ember.Component.extend({
+Haul.StoreBtnComponent = Ember.Component.extend({
 	
 	model: null,
 	product: null,

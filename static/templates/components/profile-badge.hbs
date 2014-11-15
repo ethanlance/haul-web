@@ -1,0 +1,23 @@
+<div class="box-rigid text-center box-soft">
+	
+  	<div class="profile-circular-mask text-center">
+  	{{#if item.icon}}
+	    {{#link-to "market" item class="pull-left"}}<img {{bind-attr src=item.icon }}>{{/link-to}}
+    {{ else }}
+    	{{#if isMarketOwner }}
+    		{{#link-to "market.edit" item class="pull-left"}}<span>add <br/>a logo</span>{{/link-to}}
+    	{{/if}}
+    	{{#if isPofileOwner }}
+    		<span>{{#link-to "settings"}}edit{{/link-to}}</span>
+    	{{/if}}
+    {{/if}}
+    </div>
+
+
+	{{ follow-btn 
+		item=item
+		currentUser = targetObject.currentUser
+		targetObject = targetObject
+	}} 
+	
+</div>

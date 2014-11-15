@@ -1,3 +1,4 @@
+
 Haul.FollowBtnComponent = Ember.Component.extend({
 
 	btnName: null,

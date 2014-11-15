@@ -1,9 +1,23 @@
 {{!-- STORE TEMPLATE --}}
 <div class="container content-fixed-nav padding-bottom">
 	<div class="row">
-		<div class="col-md-12">
-	    	{{ profile-market market=market isMarketOwner=isMarketOwner}}
-		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 haul-font">
+			<div class="media">
+				
+				{{ profile-badge item=market isMarketOwner=isMarketOwner }}
+
+				<div class="media-body">
+			     	<h2 class="heading haul-font">
+			     		{{#link-to "market" market }}{{market.name}}{{/link-to}}
+			     	</h2>
+
+			     	{{ truncate-text text=market.description }}
+
+			     	<h5>{{#link-to "seller" market.user}}by {{market.user.name}}{{/link-to}}</h5>
+
+				</div> 
+			</div>
+		</div>  
 	</div>
 </div>	
 

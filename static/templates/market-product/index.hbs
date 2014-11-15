@@ -1,25 +1,39 @@
+{{#if isMarketOwner}}
+	<div class="toolbar text-right">
+		{{store-btn
+			class="display-inline" 
+			currentUser=currentUser 
+			product=model.product
+			mode="edit"
+			marketPage=true
+		}}
+	</div>
+{{/if}}
 
-<div class="container-fluid content-fixed-nav">
+
+<div class="container content-fixed-nav">
 	<div class="row">
-		<div class="col-md-12  padding-bottom">
-	    	{{ profile-market market=model.market isMarketOwner=isMarketOwner }}
-		</div>		
+		<div class="col-md-12 col-sm-12 col-xs-12 haul-font">
+			<h2 class="heading haul-font">
+				{{ make-icon icon=model.market.icon isSmall=true class="pull-left" }}
+				{{#link-to 'market' model.market}}{{ model.market.name }}{{/link-to}} -
+				{{ model.product.name }}
+			</h2>
+		</div>  
 	</div>
 </div>	
 
 
 <div class="container">
-
-	
 	<div class="row">
 
 		{{!-- Images  --}}
 
 		<div class="col-md-6 col-sm-12 col-xs-12 padding-bottom">
 			{{#if model.product }}
-			{{#if model.product.images }}
-				{{view Haul.CarouselView contentBinding="model.product.images"}}
-			{{/if}}
+				{{#if model.product.images }}
+					{{view Haul.CarouselView contentBinding="model.product.images"}}
+				{{/if}}
 			{{/if}}
 		</div>
 
@@ -31,14 +45,11 @@
 					
 					{{!-- BUTTONS  --}}
 
-					<div class="row"> 
-						<div class="col-md-12 col-sm-12 col-xs-12 title">
-							{{ model.product.name }}
-						</div>
-					</div>
+
 					<div class="row button-bar"> 
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							<span class="lead haul-price">${{ model.product.price }}</span>
+							
+							<div class="box-rigid lead haul-price">${{model.product.price}}</div>		
 							
 							{{!-- BUY --}}
 							<button type="button" class="btn btn-primary btn-lg">BUY</button>
@@ -55,9 +66,10 @@
 							</button>
 
 						</div>
+
 					</div>
 
-					{{ seller-info seller=model.product.user product=model.product }}
+					{{ product-details seller=model.product.user product=model.product }}
 
 				</div>
 			</div>
@@ -76,12 +88,9 @@
 					</div>
 					
 					<div class="row">
-						<div class="col-md-10">	
+						<div class="col-md-12">	
 							{{!-- MARKET INFO --}}
 							{{ breaklines model.editorial }}
-		    			</div>
-		    			<div class="col-md-2">
-		    				{{product-to-market class="display-inline" currentUser=currentUser product=model.product }}
 		    			</div>
 		    		</div>
 		    	</div>

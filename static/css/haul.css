@@ -204,6 +204,8 @@ body {
 	border-radius: 50%;
 	overflow: hidden;
 	margin-bottom: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
 	background-color: #ddd;
 		-webkit-transition: all .2s ease-in-out;
 		 -o-transition: all .2s ease-in-out;
@@ -212,6 +214,7 @@ body {
 
 .profile-circular-mask img {
 	max-width: 100%;
+
 }
 
 .profile-circular-mask span {
@@ -223,7 +226,15 @@ body {
 		transition: all .2s ease-in-out;
 }
 
+.profile-circular-mask.sm{
+	width: 50px;
+	height: 50px;
+	vertical-align: middle; 
+}
 
+.heading .profile-circular-mask {
+	margin-top: -10px;
+}
 
 
 
@@ -234,7 +245,7 @@ body {
 	width: 100%;
 	padding-top:15px;
 	padding-bottom:10px;
-	padding-right: 65px;
+	padding-right: 15px;
 	/*background-color: ##F9F9F9;*/
 	background: rgba(248, 248, 248, .90);
 	z-index: 1029;
@@ -301,7 +312,7 @@ body {
 	font-family: Arvo, serif;
 	font-weight: bold;
 	font-size: 200%;
-	padding-right: 10px;
+	padding-top: 5px;
 }
 
 
@@ -314,11 +325,7 @@ body {
 	vertical-align: middle;
 }
 
-.profile-circular-mask .sm{
-	width: 50px;
-	height: 50px;
-	vertical-align: middle; 
-}
+
 
 .media-body {
 	padding-left: 10px;

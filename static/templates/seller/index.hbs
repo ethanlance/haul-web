@@ -4,9 +4,34 @@
 
 <div class="container content-fixed-nav">
 	<div class="row">
-		<div class="col-md-12">
-	    	{{ profile-seller user=user isProfileOwner=isProfileOwner }}
-		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 haul-profile-header haul-font">
+
+			<div class="media">
+
+			
+			  	<div class="profile-circular-mask pull-left">
+			  	{{#if user.icon }}
+					{{#link-to "seller" user}}<img {{bind-attr src=user.icon}}> {{/link-to}}
+			    {{else}}
+			    	{{#if isProfileOwner }}
+						<span>{{#link-to "settings"}}edit{{/link-to}}</span>
+					{{/if}}
+			    {{/if}}
+			    </div>
+			 
+
+			  <div class="media-body">
+			     	<h1 class="heading haul-font">{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
+					<div>
+						{{ follow-btn 
+							item=user 
+							currentUser = currentUser
+							targetObject = targetObject
+						}} 
+					</div>
+			  </div>
+			</div> 
+		</div> 
 	</div>
 </div>	
 
