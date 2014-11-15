@@ -2,7 +2,7 @@
 
 {{#if marketPage}}
 	{{#if editMode}}
-		<button {{action 'curate'}} class="btn btn-default" {{bs-bind-tooltip content="Edit Product"}}>Edit</button> 
+		<button {{action 'curate'}} class="btn btn-primary" {{bs-bind-tooltip content="Edit Product"}}>Edit</button> 
 	{{/if}}
 {{/if}}
 
@@ -10,7 +10,7 @@
 {{#if productPage }}
 	
 	{{#if addMode}}
-		<button {{action 'curate'}} class="btn btn-default btn-lg haul-font" 
+		<button {{action 'curate'}} class="btn btn-default btn-responsive haul-font" 
 			{{bs-bind-tooltip content="Haul it! Add to your store"}}>
 		Haul
 		<span class="glyphicon glyphicon-plus"></span>
@@ -19,7 +19,7 @@
 	
 	{{#if editMode}}
 		{{#link-to 'market' model.market.id }}
-		<button class="btn btn-default btn-lg  haul-font"
+		<button class="btn btn-default btn-responsive  haul-font"
 			{{bs-bind-tooltip content="This is in your store"}}>
 			Hauled
 			<span class="glyphicon glyphicon-plus"></span>
@@ -28,7 +28,7 @@
 
 	{{#if createStoreMode}}
 		{{#link-to 'seller.new-market' currentUser.user.slug}}
-		<button class="btn btn-default btn-lg  haul-font" 
+		<button class="btn btn-default btn-responsive  haul-font" 
 			{{bs-bind-tooltip content="Haul it! Add to your store"}}>
 		Haul
 		<span class="glyphicon glyphicon-plus"></span>

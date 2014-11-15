@@ -745,7 +745,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  data.buffer.push("<button type=\"button\" class=\"btn btn-default btn-lg\" \n	");
+  data.buffer.push("<button type=\"button\" class=\"btn btn-default btn-responsive\" \n	");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "btnClick", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(" ");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
@@ -1042,7 +1042,7 @@ function program2(depth0,data) {
   var buffer = '', helper, options;
   data.buffer.push("\n		<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "curate", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class=\"btn btn-default\" ");
+  data.buffer.push(" class=\"btn btn-primary\" ");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Edit Product")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
@@ -1070,7 +1070,7 @@ function program5(depth0,data) {
   var buffer = '', helper, options;
   data.buffer.push("\n		<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "curate", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class=\"btn btn-default btn-lg haul-font\" \n			");
+  data.buffer.push(" class=\"btn btn-default btn-responsive haul-font\" \n			");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Haul it! Add to your store")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
@@ -1090,7 +1090,7 @@ function program7(depth0,data) {
 function program8(depth0,data) {
   
   var buffer = '', helper, options;
-  data.buffer.push("\n		<button class=\"btn btn-default btn-lg  haul-font\"\n			");
+  data.buffer.push("\n		<button class=\"btn btn-default btn-responsive  haul-font\"\n			");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("This is in your store")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
@@ -1110,7 +1110,7 @@ function program10(depth0,data) {
 function program11(depth0,data) {
   
   var buffer = '', helper, options;
-  data.buffer.push("\n		<button class=\"btn btn-default btn-lg  haul-font\" \n			");
+  data.buffer.push("\n		<button class=\"btn btn-default btn-responsive  haul-font\" \n			");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Haul it! Add to your store")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
@@ -1496,6 +1496,20 @@ function program6(depth0,data) {
   return buffer;
   }
 
+function program8(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("\n								");
+  data.buffer.push(escapeExpression((helper = helpers['store-btn'] || (depth0 && depth0['store-btn']),options={hash:{
+    'class': ("display-inline"),
+    'currentUser': ("currentUser"),
+    'product': ("model"),
+    'productPage': (true)
+  },hashTypes:{'class': "STRING",'currentUser': "ID",'product': "ID",'productPage': "BOOLEAN"},hashContexts:{'class': depth0,'currentUser': depth0,'product': depth0,'productPage': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "store-btn", options))));
+  data.buffer.push("\n							");
+  return buffer;
+  }
+
   stack1 = helpers['if'].call(depth0, "isMarketOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12 haul-font\">\n			<h2 class=\"heading haul-font\">\n				");
@@ -1516,17 +1530,20 @@ function program6(depth0,data) {
   data.buffer.push("\n		</div>\n\n		\n\n		<div class=\"col-md-6 col-sm-12 col-xs-12\">\n			<div class=\"row\">\n				<div class=\"col-md-12 haul-buy-card\">\n					\n					\n\n\n					<div class=\"row button-bar\"> \n						<div class=\"col-md-12 col-sm-12 col-xs-12\">\n							\n							<div class=\"box-rigid lead haul-price\">$");
   stack1 = helpers._triageMustache.call(depth0, "model.product.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</div>		\n							\n							\n							<button type=\"button\" class=\"btn btn-primary btn-lg\">BUY</button>\n\n							\n							");
+  data.buffer.push("</div>		\n							\n							\n							<button type=\"button\" class=\"btn btn-primary btn-responsive\">BUY</button>\n\n							\n							");
   data.buffer.push(escapeExpression((helper = helpers['like-btn'] || (depth0 && depth0['like-btn']),options={hash:{
     'class': ("display-inline"),
     'item': ("model.product"),
     'currentUser': ("currentUser")
   },hashTypes:{'class': "STRING",'item': "ID",'currentUser': "ID"},hashContexts:{'class': depth0,'item': depth0,'currentUser': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "like-btn", options))));
-  data.buffer.push("\n\n							\n							<button type=\"button\" class=\"btn btn-default btn-lg\" ");
+  data.buffer.push("\n\n							\n							<button type=\"button\" class=\"btn btn-default btn-responsive\" ");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Comment on This!")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
-  data.buffer.push(">4 <span class=\"glyphicon glyphicon-comment\"></span>\n							</button>\n\n						</div>\n\n					</div>\n\n					");
+  data.buffer.push(">4 <span class=\"glyphicon glyphicon-comment\"></span>\n							</button>\n\n							\n							");
+  stack1 = helpers.unless.call(depth0, "isMarketOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n\n						</div>\n\n					</div>\n\n					");
   data.buffer.push(escapeExpression((helper = helpers['product-details'] || (depth0 && depth0['product-details']),options={hash:{
     'seller': ("model.product.user"),
     'product': ("model.product")
@@ -1949,7 +1966,7 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   var buffer = '', helper, options;
-  data.buffer.push("<button class=\"btn btn-default\"  ");
+  data.buffer.push("<button class=\"btn btn-primary\"  ");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Edit your item")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
@@ -1996,17 +2013,17 @@ function program6(depth0,data) {
   data.buffer.push(" \n		</div>\n\n		\n\n		<div class=\"col-md-6 col-sm-12 col-xs-12\">\n			<div class=\"row\">\n				<div class=\"col-md-12 haul-buy-card\">\n					\n					 \n					<div class=\"row button-bar\"> \n						<div class=\"col-md-12 col-sm-12 col-xs-12\">\n							<div class=\"box-rigid lead haul-price\">$");
   stack1 = helpers._triageMustache.call(depth0, "price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</div>\n							\n							\n							<button type=\"button\" class=\"btn btn-primary btn-lg\">BUY</button>\n\n							\n							");
+  data.buffer.push("</div>\n							\n							\n							<button type=\"button\" class=\"btn btn-primary btn-responsive\">BUY</button>\n\n							\n							");
   data.buffer.push(escapeExpression((helper = helpers['like-btn'] || (depth0 && depth0['like-btn']),options={hash:{
     'class': ("display-inline"),
     'item': ("model"),
     'currentUser': ("currentUser")
   },hashTypes:{'class': "STRING",'item': "ID",'currentUser': "ID"},hashContexts:{'class': depth0,'item': depth0,'currentUser': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "like-btn", options))));
-  data.buffer.push("\n\n							\n							<button type=\"button\" class=\"btn btn-default btn-lg\" ");
+  data.buffer.push("\n\n							\n							<button type=\"button\" class=\"btn btn-default btn-responsive\" \n								");
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Comment on This!")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
-  data.buffer.push(">4 <span class=\"glyphicon glyphicon-comment\"></span>\n							</button>\n\n							\n							");
+  data.buffer.push(">4 \n								<span class=\"glyphicon glyphicon-comment\"></span>\n							</button>\n\n							\n							");
   data.buffer.push(escapeExpression((helper = helpers['store-btn'] || (depth0 && depth0['store-btn']),options={hash:{
     'class': ("display-inline"),
     'currentUser': ("currentUser"),

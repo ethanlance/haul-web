@@ -884,3 +884,13 @@ textarea.form-control {
 	max-height: 60px;
 	overflow: hidden;
 }
+
+
+@media (min-width: 768px) {
+	.btn-responsive {
+		padding: 10px 16px;
+		font-size: 18px;
+		line-height: 1.33;
+		border-radius: 6px;
+	}
+}

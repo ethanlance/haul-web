@@ -52,7 +52,7 @@
 							<div class="box-rigid lead haul-price">${{model.product.price}}</div>		
 							
 							{{!-- BUY --}}
-							<button type="button" class="btn btn-primary btn-lg">BUY</button>
+							<button type="button" class="btn btn-primary btn-responsive">BUY</button>
 
 							{{!-- LIKE --}}
 							{{like-btn
@@ -62,8 +62,18 @@
 							}}
 
 							{{!-- COMMENT --}}
-							<button type="button" class="btn btn-default btn-lg" {{bs-bind-tooltip content="Comment on This!"}}>4 <span class="glyphicon glyphicon-comment"></span>
+							<button type="button" class="btn btn-default btn-responsive" {{bs-bind-tooltip content="Comment on This!"}}>4 <span class="glyphicon glyphicon-comment"></span>
 							</button>
+
+							{{!-- CURATE - ADD TO STORE --}}
+							{{#unless isMarketOwner }}
+								{{store-btn
+									class="display-inline" 
+									currentUser=currentUser 
+									product=model
+									productPage=true
+								}}
+							{{/unless}}
 
 						</div>
 
