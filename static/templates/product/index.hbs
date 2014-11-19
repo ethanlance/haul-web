@@ -76,27 +76,19 @@
 						</div>
 					</div> 
 				</div>
-
- 
-
-				{{!-- COMMENTS --}}
-				<div class="col-md-12 haul-buy-card">
-					<div class="row">
-						<div class="col-md-12">
-						<h4>Comments</h4>
-
-						{{textarea value=message name="message" cols="80" rows="3" class="form-control"}}
-							<div class="text-right padding-top">
-								<button class="btn btn-default">post</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
 			</div>
 		</div> 
+	</div>
+	
+	{{!-- COMMENTS --}}
+	<div class="row">
+		<div class="col-md-12">
+			{{ comment-section
+				contextObject=model.user
+				itemObject=model 
+				currentUser=currentUser
+			}}
+		</div>
 	</div>
 </div>
 

@@ -53,8 +53,8 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 		this.isFollowingCountChange();
 
 		var store = this.get('targetObject.store');
-		var _this = this;
-
+		var _this = this; 
+		
 		//Get Ref Type:
 		var model = String(this.item.constructor);
 		var name = model.split('.');

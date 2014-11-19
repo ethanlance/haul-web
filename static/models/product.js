@@ -12,7 +12,7 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 
 	user: DS.belongsTo('user'), 
 	images: DS.hasMany('image', {async:true}),
-	comments: DS.hasMany('comment', {async:true}),
+	
 
 	//GET ONE IMAGE:
 	first_image: function() { 
@@ -20,6 +20,21 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 			return images.get('firstObject');
 		});
 	}.property(),
+
+	// /comments: DS.hasMany('comment', {async:true}),
+	// comments: function() {
+	// 	var store = this.store;
+	// 	var product_id = this.get('id');
+
+	// 	store.find('comment-list', {product_id: product_id});
+
+	// 	return store.filter('comment-list', function(comment){
+	// 		if( comment.get('product_id') == product_id ) {
+	// 			return comment;
+	// 		}
+	// 	});
+		
+	// }.property()
 
 	validations: { 
 		name: {

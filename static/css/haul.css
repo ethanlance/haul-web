@@ -219,8 +219,8 @@ body {
 
 .profile-circular-mask span {
 	position:absolute;
-	top: 30px;
-	left: 30px;
+	top: 40px;
+	left: 55px;
 	-webkit-transition: all .2s ease-in-out;
 	 -o-transition: all .2s ease-in-out;
 		transition: all .2s ease-in-out;

@@ -13,7 +13,7 @@ Haul.ProductList = DS.Model.extend(Ember.Validations.Mixin, {
 	image: DS.belongsTo('image',{async:true}), 
 	user: DS.belongsTo('user'),
 	
-	comments: DS.hasMany('comment',{async:true}),
+	//comments: DS.hasMany('comment',{async:true}),
 
 	validations: { 
 		name: {
