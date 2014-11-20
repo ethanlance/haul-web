@@ -1,8 +1,5 @@
-
-
-
 Haul.CommentSectionComponent = Ember.Component.extend({
-currentUser: null,
+	currentUser: null,
 	isProcessing:false,
 
 	comments: null,
@@ -16,23 +13,28 @@ currentUser: null,
 	contextObject: null,
 	contextType: null,
 	contextIdBinding: "contextObject.id",
-
+ 
 	userIdBinding: "currentUser.id",
 
-	userTokenBinding: "currentUser.access_token",
-	userIdBinding: "currentUser.id",
+	type_map: {
+		"markets": "stores",
+		"products": "products",
+		"users": "users",
+	},
+
+	reverse_type_map: {
+		"stores": "markets",
+		"products": "products",
+		"users": "users"
+	},
 	
 	//Normally a Product
 	itemChanged: function() {
 		//Get Ref Type: 
 		var model = String(this.itemObject.constructor);
 		var name = model.split('.');
-        var itemType = Ember.String.camelize(name.pop());
-
-        if(itemType == "product")
-        	this.set('itemType', 'products');
-        else
-        	this.set('itemType', itemType);
+        var itemType = Ember.String.pluralize(Ember.String.camelize(name.pop())); 
+        this.set('itemType', itemType);
 
 	}.observes('itemObject'),
 
@@ -42,12 +44,8 @@ currentUser: null,
 		//Get Ref Type: 
 		var model = String(this.contextObject.constructor);
 		var name = model.split('.');
-        var contextType = Ember.String.camelize(name.pop());
-
-        if(contextType == "product")
-        	this.set('contextType', 'products');
-        else
-        	this.set('contextType', 'stores');
+        var contextType = Ember.String.pluralize(Ember.String.camelize(name.pop()));
+        this.set('contextType', contextType);
 
 	}.observes('contextObject'),
 
@@ -62,9 +60,13 @@ currentUser: null,
 		var store = this.get('targetObject.store');
 		var _this = this;
 		var comments = store.filter('product-comment', function(comment) {
-			if( comment.get('product_id') === _this.itemId 
-				&& comment.get('context_id') === _this.contextId 
-				&& comment.get('context_type') === _this.contextType ){ 
+
+			var itemId = comment.get('product_id');
+			var contextId = comment.get('context_id');
+			var contextType = _this.reverse_type_map[comment.get('context_type')];
+
+			if( itemId && itemId === _this.itemId && contextId === _this.contextId 
+				&& contextType === _this.contextType ){ 
 
 				//Can this comment be deleted by the currentUser?
 				if (comment.get('user_id') === _this.get('userId')) {
@@ -92,11 +94,22 @@ currentUser: null,
 
 		var query = {'contextId':this.contextId, 'contextType':this.contextType, 'itemId':this.itemId};
 		store.find('product-comment', query).then(function(comments){
-			console.log("FOUND", comments)
-			//_this.set('comments', comments);
 		}, function(error) {
 			console.log("ERROR", error) 
 		});
+	},
+
+	updateCommentCount: function(direction) {
+		var store = this.get('targetObject.store');
+		var key = this.contextType + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
+		var record = store.getById('product-comment-count', key );
+
+		if(record){
+			if( direction === "up")
+				record.incrementProperty('total');
+			else
+				record.decrementProperty('total'); 
+		}
 	},
 
 	saveModel: function() {
@@ -105,7 +118,6 @@ currentUser: null,
 
 		model.save().then(
 			function(result) { 
-				console.log("SAVED", result);
 
 				_this.set('isProcessing', false);
 				_this.set('errorShow', false);
@@ -113,6 +125,7 @@ currentUser: null,
 				//Reload!
 				_this.loadComments();
 				_this.makeModel();
+				_this.updateCommentCount('up');
 
 			},
 			function(error){ 
@@ -127,11 +140,11 @@ currentUser: null,
 	actions: {
 
 		delete: function(record) {
-			console.log("DELETE", record);
+			var _this = this;
 
 			record.deleteRecord();
 			record.save().then(function(result){
-				console.log("Deleted" , result);
+				_this.updateCommentCount('down');
 			}, function(error){
 				console.log("Error" , error);
 				record.rollback();

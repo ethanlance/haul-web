@@ -1,6 +1,8 @@
-<div class="row">
+<div class="row padding-top">
 	<div class="col-md-12 haul-buy-card">
-		<div class="row">
+		
+		{{!-- COMMENT FORM --}}
+		<div class="row"  id="leaveComment">
 			<div class="col-md-12">
 			<h4>Comments</h4>
 
@@ -9,7 +11,7 @@
 				
 				{{input comment as="text" canShowValidationError=showErrors placeholder="Leave a comment."}}
 				
-				<div class="text-right padding-top">
+				<div class="text-right">
 					
 					{{ladda-btn
 						name='Post Comment'
@@ -21,22 +23,31 @@
 
 				</div>
 			{{/form-for}}
+			</div>
+		</div>
 
 
 
-
-
+		{{!-- COMMENTS --}}
+		<div class="row">
+			<div class="col-md-12">
 
 
 				{{#each sortedComments }}
 
-					<div class="media">
+					<div class="media media-divider">
 						 
 							{{ make-icon icon=user.icon isSmall=true class="pull-left"}}
 						 
 						<div class="media-body">
 
-							<strong>{{ user.name }}</strong>
+							{{#if this.canDelete }}
+							<div class="pull-right">
+								<button {{action 'delete' this}} class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
+							</div>
+							{{/if}}
+
+							<strong>{{#link-to "seller" user}}{{ user.name }}{{/link-to}}</strong>
 
 							<br/>
 
@@ -46,11 +57,7 @@
 
 							<span class="small">{{ format-date created_at }}</span>
 
-							{{#if this.canDelete }}
-							<div class="pull-right">
-								<button {{action 'delete' this}} class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
-							</div>
-							{{/if}}
+
 						</div>
 					</div>
 

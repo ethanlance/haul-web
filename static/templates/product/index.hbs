@@ -51,11 +51,15 @@
 								currentUser=currentUser 									
 							}}
 
+							
+
 							{{!-- COMMENT --}}
-							<button type="button" class="btn btn-default btn-responsive" 
-								{{bs-bind-tooltip content="Comment on This!"}}>4 
-								<span class="glyphicon glyphicon-comment"></span>
-							</button>
+							{{comment-btn
+								class="display-inline"
+								contextObject=model.user
+								itemObject=model 
+								currentUser=currentUser
+							}}
 
 							{{!-- CURATE - ADD TO STORE --}}
 							{{store-btn

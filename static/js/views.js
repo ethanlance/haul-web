@@ -57,15 +57,15 @@
 
 
 
-  Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
+Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
 	inputTemplate: 'form-fields/input',
-
 	labelClass: 'control-label',
 	inputClass: 'form-group',
 	buttonClass: 'btn btn-primary',
 	fieldErrorClass: 'has-error',
 	errorClass: 'help-block'
-  });
+});
+ 
 
 
   Ember.View.reopen({

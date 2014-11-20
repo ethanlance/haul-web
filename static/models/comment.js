@@ -27,31 +27,37 @@ Haul.ProductCommentAdapter = Haul.ApplicationAdapter.extend({
 
 	host: Haul.COMMENT_SERVER_HOST, 
 
+	type_map: {
+		'markets': 'stores',
+		'stores': 'stores',
+		'products': 'products',
+		'users': 'users'
+	},
+
 	findQuery: function(store, type, query) {
-		var url = this.host + "/" + query.contextType + "/" + query.contextId + "/products/" + query.itemId + "/comments"
+		var contextType = this.type_map[Ember.String.pluralize(query.contextType)];
+		var url = this.host + "/" + contextType + "/" + query.contextId + "/products/" + query.itemId + "/comments"
 		return this.ajax(url, 'GET');
 	},
 
 	createRecord: function(store, type, record) {
-		var product_id = record.get('product_id');
-		var type = record.get('type');
-		var id = record.get('id');
-		var user_id = record.get('user_id');
-		var comment = record.get('comment');
-		var data = { 'comment':comment, 'user_id': user_id };
-		var url = this.host + '/'+ type + '/' + id +'/products/'+ product_id + '/comments';
+		var itemId = record.get('product_id');
+		var contextType = this.type_map[record.get('type')];
+		var contextId = record.get('id');
+		var data = { 'comment':record.get('comment'), 'user_id': record.get('user_id') };
+
+		var url = this.host + '/'+ contextType + '/' + contextId +'/products/'+ itemId + '/comments';
 		return this.ajax(url, "POST", {data: data}); 
 	},
 
 	deleteRecord: function(store, type, record) {
-		var product_id = record.get('product_id');
-		var type = record.get('context_type');
-		var id = record.get('context_id');
-		var user_id = record.get('user_id');
-		var comment_id = record.get('id');
-		var data = { 'user_id': user_id };
+		var itemId = record.get('product_id');
+		var contextType = this.type_map[record.get('context_type')];
+		var contextId = record.get('context_id'); 
+		var commentId = record.get('id');
+		var data = { 'user_id': record.get('user_id') };
 
-		var url = this.host + '/'+ type + '/' + id +'/products/'+ product_id + '/comments/' + comment_id;
+		var url = this.host + '/'+ contextType + '/' + contextId +'/products/'+ itemId + '/comments/' + commentId;
 		return this.ajax(url, "DELETE", {data: data}); 
 	}	
 
@@ -87,8 +93,63 @@ Haul.ProductCommentSerializer =  DS.RESTSerializer.extend({
 				context_type: record.context.type + 's',
 			}
 		}); 
-		var payload = {'product-comment': data}; 
-		console.log("WHAT? ", payload)
+		var payload = {'product-comment': data};  
 		return this._super(store, primaryType, payload);
+	}
+});
+
+
+
+
+
+
+
+/**
+ COMMENT COUNT MODEL
+**/
+
+Haul.ProductCommentCount = DS.Model.extend({
+	total: DS.attr('string'),
+	product: DS.belongsTo('product')
+});
+
+Haul.ProductCommentCountAdapter = Haul.ApplicationAdapter.extend({
+
+	host: Haul.COMMENT_SERVER_HOST,
+
+	makeKey: function(id) {
+		var id = String(id);
+		var s = id.split(':');
+		return {
+			contextType : s[0],
+			contextId : s[1],
+			itemId : s[3]
+		};
+	},
+
+	find: function(store, type, id) {
+		var key = this.makeKey(id);
+		var url = this.host + '/' + key.contextType +'/' + key.contextId + '/products/'+ key.itemId + '/comments/total'
+		return this.ajax(url, 'GET');
+	}
+});
+
+
+
+Haul.ProductCommentCountSerializer =  DS.RESTSerializer.extend({
+
+	extractSingle: function(store, type, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		} 
+
+		var data = { 
+			id: payload.data.id,
+			total: payload.data.total,	
+		};
+
+		var payload ={'product-comment-count': data}; 
+		return this._super(store, type, payload);
 	}
 });

@@ -9,3 +9,4 @@ Ember.Handlebars.registerBoundHelper('breaklines', function(text) {
     text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
     return new Handlebars.SafeString(text);
 });
+
