@@ -160,13 +160,11 @@ Haul.CommentSectionComponent = Ember.Component.extend({
 			model.set('user_id', this.get('userId'));
 			model.set('product_id', this.get('itemId'));
 			model.set('type', this.get('contextType'));
-			model.set('id', this.get('contextId'));
-
-			//Trim
-			model.set('comment', model.get('comment').trim()) 
+			model.set('id', this.get('contextId')); 
 
 	 		//Model Validations:
 			model.validate().then(function(result){
+				model.set('comment', model.get('comment').trim()) 
 				_this.saveModel();	
 			}, function(error) {
 				_this.set('isProcessing', false);
