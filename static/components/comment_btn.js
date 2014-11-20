@@ -15,7 +15,7 @@ Haul.CommentBtnComponent = Ember.Component.extend(Haul.ScrollToMixin, {
 	userIdBinding: "currentUser.id",
 
 	commentCount: 0,
-	commentCountBinding: "count.content.firstObject.total",
+	commentCountBinding: "promiseCount.total",
 
 	type_map: {
 		"markets": "stores",
@@ -59,16 +59,8 @@ Haul.CommentBtnComponent = Ember.Component.extend(Haul.ScrollToMixin, {
 		this.contextChanged();
 
 		var store = this.get('targetObject.store');
-		var _this = this; 
 		var key = this.get('key');
-		store.find('product-comment-count', key );
-
-		var counts = store.filter('product-comment-count', function(record) {
-			if( record.get('id') === key ){  
-				return record;
-			}
-		});
-		this.set('count', counts);
+		this.set('promiseCount', store.find('product-comment-count', key ));
 
 	}.on('init'),
 
