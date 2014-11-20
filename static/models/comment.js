@@ -117,6 +117,13 @@ Haul.ProductCommentCountAdapter = Haul.ApplicationAdapter.extend({
 
 	host: Haul.COMMENT_SERVER_HOST,
 
+	type_map: {
+		'markets': 'stores',
+		'stores': 'stores',
+		'products': 'products',
+		'users': 'users'
+	},
+
 	makeKey: function(id) {
 		var id = String(id);
 		var s = id.split(':');
@@ -129,7 +136,8 @@ Haul.ProductCommentCountAdapter = Haul.ApplicationAdapter.extend({
 
 	find: function(store, type, id) {
 		var key = this.makeKey(id);
-		var url = this.host + '/' + key.contextType +'/' + key.contextId + '/products/'+ key.itemId + '/comments/total'
+		var contextType = this.type_map[key.contextType];
+		var url = this.host + '/' + contextType +'/' + key.contextId + '/products/'+ key.itemId + '/comments/total'
 		return this.ajax(url, 'GET');
 	}
 });

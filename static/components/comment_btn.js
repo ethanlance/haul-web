@@ -17,8 +17,20 @@ Haul.CommentBtnComponent = Ember.Component.extend(Haul.ScrollToMixin, {
 	commentCount: 0,
 	commentCountBinding: "count.content.firstObject.total",
 
+	type_map: {
+		"markets": "stores",
+		"products": "products",
+		"users": "users",
+	},
+
+	reverse_type_map: {
+		"stores": "markets",
+		"products": "products",
+		"users": "users"
+	},
+
 	key: function() {
-		return this.contextType + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
+		return this.type_map[this.contextType] + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
 	}.property('contextType', 'contextId', 'itemType', 'itemId'),
 
 
@@ -52,7 +64,7 @@ Haul.CommentBtnComponent = Ember.Component.extend(Haul.ScrollToMixin, {
 		store.find('product-comment-count', key );
 
 		var counts = store.filter('product-comment-count', function(record) {
-			if( record.get('id') === key ){ 
+			if( record.get('id') === key ){  
 				return record;
 			}
 		});

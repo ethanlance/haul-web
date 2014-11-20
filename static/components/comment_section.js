@@ -101,7 +101,8 @@ Haul.CommentSectionComponent = Ember.Component.extend({
 
 	updateCommentCount: function(direction) {
 		var store = this.get('targetObject.store');
-		var key = this.contextType + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
+		var key = this.type_map[this.contextType] + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
+		console.log("HERE KEY", key);
 		var record = store.getById('product-comment-count', key );
 
 		if(record){
