@@ -13,7 +13,18 @@ module.exports = function(grunt) {
                 dest: 'static/js/templates.js'
             }
         },
+        sass: {
+            dist: {
+                files: {
+                    'static/css/haul.css' : 'static/css/haul.scss'
+                }
+            }
+        },
         watch: {
+            css: {
+                files: 'static/css/*.scss',
+                tasks: ['sass']
+            },
             options: {
                 livereload: 35729,
             },
@@ -24,6 +35,7 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-ember-template-compiler');
 

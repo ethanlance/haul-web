@@ -10,7 +10,9 @@
     "grunt-ember-template-compiler": "^1.5.0",
     "hapi": "^6.11.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt-contrib-sass": "^0.8.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
