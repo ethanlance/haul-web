@@ -13,17 +13,18 @@ module.exports = function(grunt) {
                 dest: 'static/js/templates.js'
             }
         },
-        sass: {
+        compass: {
             dist: {
-                files: {
-                    'static/css/haul.css' : 'static/css/haul.scss'
+                options: {
+                    sassDir: 'static/css/',
+                    cssDir: 'static/css/'
                 }
             }
-        },
+        }, 
         watch: {
             css: {
                 files: 'static/css/*.scss',
-                tasks: ['sass']
+                tasks: ['compass']
             },
             options: {
                 livereload: 35729,
@@ -35,7 +36,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-ember-template-compiler');
 

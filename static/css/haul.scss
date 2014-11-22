@@ -1,5 +1,12 @@
 $font-stack: Arvo, serif;
 
+@import "compass/css3/transition";
+
+
+
+
+
+
 
 body {
   position: relative;
@@ -59,9 +66,9 @@ body {
 
 
 .logo-outer {
-  -webkit-transition: all .2s ease-in-out;
-     -o-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
+  
+  @include transition(all .2s ease-in-out);
+
 
   z-index:2000;
   position:absolute;
@@ -139,9 +146,8 @@ body {
 
 
 .navbar-center {
-  -webkit-transition: all .2s ease-in-out;
-   -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+  @include transition(all .2s ease-in-out);
+  
   position: relative;
   width: 50%;
   padding-top:9px;
@@ -207,6 +213,8 @@ body {
 
 
 .profile-circular-mask {
+  @include transition(all .2s ease-in-out);
+  
   display: inline-block;
   width: 100px;
   height: 100px;
@@ -216,9 +224,6 @@ body {
   margin-right: 10px;
   margin-left: 10px;
   background-color: #ddd;
-    -webkit-transition: all .2s ease-in-out;
-     -o-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
 }
 
 .profile-circular-mask img {
@@ -227,12 +232,11 @@ body {
 }
 
 .profile-circular-mask span {
+  @include transition(all .2s ease-in-out);
+
   position:absolute;
   top: 40px;
   left: 55px;
-  -webkit-transition: all .2s ease-in-out;
-   -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
 }
 
 .profile-circular-mask.sm{
@@ -271,11 +275,10 @@ body {
 }
 
 .toolbar.shrink {
+  @include transition(all .2s ease-in-out);
+
   padding-top:5px;
   padding-bottom:5px;
-  -webkit-transition: all .2s ease-in-out;
-     -o-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
 }
 
 .navbar-profile .profile-circular-mask {
@@ -357,11 +360,10 @@ body {
 }
 @media (max-width: 450px) {
   .haul-media-left {
+    @include transition(all .2s ease-in-out);
+
     width: 300px;
     max-width:300px;
-    -webkit-transition: all .2s ease-in-out;
-     -o-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
   }
 }
 
@@ -391,11 +393,9 @@ body {
 }
 @media (min-width: 1200px) {
   .haul-grid-li{ 
-  width:25%; 
-  -webkit-transition: all .2s ease-in-out;
-     -o-transition: all .2s ease-in-out;
-      transition: all .2s ease-in-out;
-   
+    @include transition(all .2s ease-in-out);
+
+    width:25%;
   }
 } 
 
@@ -491,12 +491,11 @@ body {
 }
 @media (min-width: 1200px) {
   .box{ 
+    
+    @include transition(all .2s ease-in-out);
+
     width:75%; 
     padding-top:20%;
-    -webkit-transition: all .2s ease-in-out;
-       -o-transition: all .2s ease-in-out;
-        transition: all .2s ease-in-out;
-   
   }
 } 
  
@@ -513,7 +512,8 @@ body {
 
 
 .haul-grid-li .info { 
-/*  border: 1px solid green;*/
+  @include transition(opacity .15s linear);
+
   position: absolute;
   top:0px;
   left:0px;
@@ -522,11 +522,7 @@ body {
   font-family: $font-stack;
   font-weight: bold;
   color: #000;  
-
   opacity: 1;
-  -webkit-transition: opacity .15s linear;
-     -o-transition: opacity .15s linear;
-      transition: opacity .15s linear;
 }
 
 .haul-grid-li .info:hover {
@@ -835,15 +831,11 @@ textarea.form-control {
 
 
 .trucate-text .hide {
-  -webkit-transition: opacity .15s linear;
-   -o-transition: opacity .15s linear;
-    transition: opacity .15s linear;
+  @include transition(opacity .15s linear);
 }
 
 .trucate-text .show {
-  -webkit-transition: opacity .15s linear;
-   -o-transition: opacity .15s linear;
-    transition: opacity .15s linear;
+  @include transition(opacity .15s linear);
 }
 
 
