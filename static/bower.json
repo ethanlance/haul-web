@@ -29,5 +29,8 @@
     "handlebars": "~2.0.0",
     "jquery-ui": "~1.11.1",
     "ladda-bootstrap": "~0.1.0"
+  },
+  "resolutions": {
+    "handlebars": ">= 1.0.0 < 2.0.0"
   }
 }
