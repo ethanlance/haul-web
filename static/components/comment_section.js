@@ -17,13 +17,13 @@ Haul.CommentSectionComponent = Ember.Component.extend({
 	userIdBinding: "currentUser.id",
 
 	type_map: {
-		"markets": "stores",
+		"collections": "stores",
 		"products": "products",
 		"users": "users",
 	},
 
 	reverse_type_map: {
-		"stores": "markets",
+		"stores": "collections",
 		"products": "products",
 		"users": "users"
 	},
@@ -39,7 +39,7 @@ Haul.CommentSectionComponent = Ember.Component.extend({
 	}.observes('itemObject'),
 
 
-	//Normally a Market or User
+	//Normally a Collection or User
 	contextChanged: function() {
 		//Get Ref Type: 
 		var model = String(this.contextObject.constructor);

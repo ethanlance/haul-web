@@ -1,16 +1,16 @@
 /**
-	Single Market Product View
+	Single Collection Product View
 **/
-Haul.MarketProductRoute = Haul.AnonRoute.extend({
+Haul.CollectionProductRoute = Haul.AnonRoute.extend({
 	
-	controllerName: "market-product",
+	controllerName: "collection-product",
 
 	model: function(params) {
-		var market_id = this.modelFor('market').id;
+		var collection_id = this.modelFor('collection').id;
 		var product_id = params.product_slug;
-		var id = product_id + market_id;
-		var data = {'market_id':market_id, 'product_id':product_id};
-		var promiseArray = this.store.find('market-product', data);
+		var id = product_id + collection_id;
+		var data = {'collection_id':collection_id, 'product_id':product_id};
+		var promiseArray = this.store.find('collection-product', data);
 
 		return promiseContent = promiseArray.then(function(results){ 
 			return results.get('content');

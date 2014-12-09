@@ -22,11 +22,11 @@
 	/seller/:seller_slug/product/new
 	/seller/:seller_slug/store/new
 
-	STORE
-	/store/:store_slug/
-	/store/:store_slug/edit
-	/store/:store_slug/:store_product_slug
-	/store/:store_slug/:store_product_slug/edit
+	COLLECTION
+	/collection/:collection_slug/
+	/collection/:collection_slug/edit
+	/collection/:collection_slug/:product_slug
+	/collection/:collection_slug/:product_slug/edit
 	
 	PROFILE
 	/account/messages
@@ -54,17 +54,20 @@ Haul.Router.map(function(){
 
 	//Profiles
 	this.resource('seller', {path: "/seller/:user_slug"}, function() {
+
+		this.route('products');
 		this.resource('product', {path: "/:product_slug"}, function() {
 			this.route('edit')
 		});
+
 		this.route('new-product');
-		this.route('new-market', {path: "new-store"});
+		this.route('new-collection', {path: "new-collection"});
 	});
 
 	//Store
-	this.resource('market', {path: "/store/:market_slug"}, function() {
+	this.resource('collection', {path: "/collection/:collection_slug"}, function() {
 		this.route('edit')
-		this.resource('market-product', {path: "/:product_slug"}, function() {
+		this.resource('collection-product', {path: "/:product_slug"}, function() {
 			this.route('edit')
 		});
 	});

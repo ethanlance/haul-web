@@ -191,11 +191,13 @@
 		updateSortOrder: function(indexes) { 
 			var selectedImages = this.get('selectedImages');
 		    selectedImages.beginPropertyChanges();
+
 		    selectedImages.forEach(function(item) {
 		      var index = indexes[item.get('id')];
 		      item.set('idx', index);
 		    }, selectedImages);
 		    selectedImages = selectedImages.sortBy('idx')
+		    
 		    selectedImages.endPropertyChanges();
 		    this.set('selectedImages', selectedImages);
 		},
@@ -244,8 +246,10 @@
 				var model = this.get('product');
 
 				//Trim
-				model.set('description', model.get('description').trim())
-				model.set('name', model.get('name').trim())
+				if( model.get('description') )
+					model.set('description', model.get('description').trim())
+				if( model.get('name') )
+					model.set('name', model.get('name').trim())
 
 		 		//Model Validations:
 				model.validate().then(function(result){

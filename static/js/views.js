@@ -57,6 +57,41 @@
 
 
 
+
+	Haul.SortableProductViewTemplate = Ember.View.extend({
+		templateName: 'components/product-order',		
+	}); 
+
+	Haul.SortableProductView = Ember.CollectionView.extend({
+		
+		contentBinding: 'controller',
+		tagName: 'ul',
+		classNames: ["sortable"],
+		itemViewClass: Haul.SortableProductViewTemplate, 
+	 
+		didInsertElement: function(){
+			this._super();
+			var controller = this.get('controller');
+
+			//JQuery sortable component.
+			this.$().sortable({
+				update: function(event, ui) {
+					var indexes = {};
+
+					$(this).find('.item').each(function(index) {
+						indexes[$(this).data('id')] = index;
+					});
+
+					//Tell the controller the new sort.
+					controller.updateSortOrder(indexes);
+				}
+			}).disableSelection();
+		}
+	});
+
+
+
+
 Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
 	inputTemplate: 'form-fields/input',
 	labelClass: 'control-label',

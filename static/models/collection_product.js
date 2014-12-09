@@ -1,26 +1,26 @@
 
 
 //Models
-Haul.MarketProduct = DS.Model.extend(Ember.Validations.Mixin, {
+Haul.CollectionProduct = DS.Model.extend(Ember.Validations.Mixin, {
 	editorial: DS.attr('string'),
 
 	product: DS.belongsTo('product'),
-	market: DS.belongsTo('market'),
+	collection: DS.belongsTo('collection'),
 
 	validations: { 
 		editorial: {
-		 	presence: true,
+		 	//presence: true,
 		 	length: { maximum: 2000, minimum: 0 }
 		}
 	}
 });	
 
-Haul.MarketProductAdapter = Haul.ApplicationAdapter.extend({
+Haul.CollectionProductAdapter = Haul.ApplicationAdapter.extend({
 	
 	host: Haul.STORE_SERVER_HOST,
 
 	findQuery: function(store, type, args) {
-		var url = this.host + "/stores/" + args.market_id + "/products/" + args.product_id;
+		var url = this.host + "/stores/" + args.collection_id + "/products/" + args.product_id;
         return this.ajax(url, 'GET');
     },
 
@@ -29,9 +29,9 @@ Haul.MarketProductAdapter = Haul.ApplicationAdapter.extend({
     	record.rollback();
 
       	var data = {user_id:  this.get('currentUserId')}
-		var market_id = record.get('market').get('id');
+		var collection_id = record.get('collection').get('id');
 		var product_id = record.get('product').get('id');
-		var url = this.host + "/stores/" + market_id + "/products/" + product_id;
+		var url = this.host + "/stores/" + collection_id + "/products/" + product_id;
 
 		//record.rollforward()?
 
@@ -45,8 +45,8 @@ Haul.MarketProductAdapter = Haul.ApplicationAdapter.extend({
 			user_id: this.get('currentUserId')
 		}
 
-		var market_id = record.get('market').get('id');
-		var url = this.host + "/stores/" + market_id + "/products/" + record.get('product').get('id');
+		var collection_id = record.get('collection').get('id');
+		var url = this.host + "/stores/" + collection_id + "/products/" + record.get('product').get('id');
 		return this.ajax(url, "PUT", { data: data }); 
 	},
 
@@ -57,13 +57,13 @@ Haul.MarketProductAdapter = Haul.ApplicationAdapter.extend({
 			user_id: this.get('currentUserId')
 		}
 
-		var market_id = record.get('market').get('id');
-		var url = this.host + "/stores/" + market_id + "/products/" + record.get('product').get('id');
+		var collection_id = record.get('collection').get('id');
+		var url = this.host + "/stores/" + collection_id + "/products/" + record.get('product').get('id');
 		return this.ajax(url, "PUT", { data: data }); 
 	}
 });
 
-Haul.MarketProductSerializer =  DS.RESTSerializer.extend({
+Haul.CollectionProductSerializer =  DS.RESTSerializer.extend({
 
 
 	//Need this for Delete, Update record
@@ -85,10 +85,10 @@ Haul.MarketProductSerializer =  DS.RESTSerializer.extend({
 			id: id,	
 			editorial: payload.data.editorial,
 			product: payload.data.product_id,
-			market: payload.data.store_id
+			collection: payload.data.store_id
 		} 
 
-		var payload = {'market-product': [data]};  
+		var payload = {'collection-product': [data]};  
 		return this._super(store, primaryType, payload);
 	}
 });

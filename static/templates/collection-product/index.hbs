@@ -1,11 +1,10 @@
-{{#if isMarketOwner}}
+{{#if isCollectionOwner}}
 	<div class="toolbar text-right">
-		{{store-btn
+		{{collection-btn
 			class="display-inline" 
 			currentUser=currentUser 
+			collection=model.collection
 			product=model.product
-			mode="edit"
-			marketPage=true
 		}}
 	</div>
 {{/if}}
@@ -15,8 +14,8 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12 haul-font">
 			<h2 class="heading haul-font">
-				{{ make-icon icon=model.market.icon isSmall=true class="pull-left" }}
-				{{#link-to 'market' model.market}}{{ model.market.name }}{{/link-to}} -
+				{{ make-icon icon=model.collection.icon isSmall=true class="pull-left" }}
+				{{#link-to 'collection' model.collection}}{{ model.collection.name }}{{/link-to}} -
 				{{ model.product.name }}
 			</h2>
 		</div>  
@@ -64,15 +63,15 @@
 							{{!-- COMMENT --}}
 							{{comment-btn
 								class="display-inline"
-								contextObject=model.market
+								contextObject=model.collection
 								itemObject=model.product 
 								currentUser=currentUser
 							}}
 							
 
 							{{!-- CURATE - ADD TO STORE --}}
-							{{#unless isMarketOwner }}
-								{{store-btn
+							{{#unless isCollectionOwner }}
+								{{collection-btn
 									class="display-inline" 
 									currentUser=currentUser 
 									product=model.product
@@ -98,7 +97,7 @@
 
 					<div class="row">
 						<div class="col-md-6">
-							<span class="haul-font"><strong>{{ model.market.name }} says:</strong></span>
+							<span class="haul-font"><strong>{{ model.collection.name }} says:</strong></span>
 						</div>
 					</div>
 					
@@ -117,7 +116,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			{{ comment-section
-				contextObject=model.market
+				contextObject=model.collection
 				itemObject=model.product 
 				currentUser=currentUser
 			}}

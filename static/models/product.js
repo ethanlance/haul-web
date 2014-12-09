@@ -15,8 +15,9 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 	
 
 	//GET ONE IMAGE:
-	first_image: function() { 
-		return this.get('images').then(function(images){ 
+	first_image: function() {  
+		return this.get('images').then(function(images){
+			console.log("FUUUCK", images)
 			return images.get('firstObject');
 		});
 	}.property(),

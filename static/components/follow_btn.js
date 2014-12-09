@@ -56,13 +56,14 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 		var _this = this; 
 		
 		//Get Ref Type:
-		var model = String(this.item.constructor);
-		var name = model.split('.');
-        var ref_type = Ember.String.camelize(name.pop());
+		// var model = String(this.item.constructor);
+		// var name = model.split('.');
+  //       var ref_type = Ember.String.camelize(name.pop());
 
+  		var ref_type = this.get('ref_type');
         if(ref_type == "user")
         	this.set('ref_type', 'users');
-        else if(ref_type == "market")
+        else if(ref_type == "collection")
         	this.set('ref_type', 'stores');
 
 		//Can't follow self.

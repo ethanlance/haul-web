@@ -4,14 +4,12 @@
 
 <div class="container content-fixed-nav">
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12 haul-profile-header haul-font">
+		<div class="col-md-6 col-sm-12 col-xs-12  haul-font">
 
 			<div class="media">
-
-			
 			  	<div class="profile-circular-mask pull-left">
-			  	{{#if user.icon }}
-					{{#link-to "seller" user}}<img {{bind-attr src=user.icon}}> {{/link-to}}
+			  	{{#if icon }}
+					{{#link-to "seller" model}}<img {{bind-attr src=icon}}> {{/link-to}}
 			    {{else}}
 			    	{{#if isProfileOwner }}
 						<span>{{#link-to "settings"}}edit{{/link-to}}</span>
@@ -19,109 +17,71 @@
 			    {{/if}}
 			    </div>
 			 
-
-			  <div class="media-body">
-			     	<h1 class="heading haul-font">{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
+			 	<div class="media-body">
+			     	<h1 class="heading haul-font">{{#link-to "seller" model }}{{name}}{{/link-to}}</h1>
 					<div>
 						{{ follow-btn 
-							item=user 
+							item=model 
+							ref_type="user"
 							currentUser = currentUser 
 						}} 
 					</div>
-			  </div>
+			  	</div>
 			</div> 
 		</div> 
+	 
+		<div class="col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right">
+			{{!-- SELL SOMETHING  --}}
+
+			{{#if isProfileOwner }}
+			<div class="btn-group" role="group">
+
+				{{#link-to 'seller.new-collection' currentUser.slug }}
+				<button class="btn btn-default">
+					Create a collection
+					<span class="glyphicon glyphicon-plus-sign"></span>
+				</button>
+				{{/link-to}}
+
+				{{#link-to 'seller.new-product' currentUser.slug }}
+				<button class="btn btn-default">
+					Sell Something
+					<span class="glyphicon glyphicon-plus-sign"></span>
+				</button>
+				{{/link-to}}
+
+				{{#link-to 'seller.products' currentUser.slug }}
+				<button class="btn btn-default">
+					My Items
+					<span class="glyphicon glyphicon-plus-sign"></span>
+				</button>
+				{{/link-to}}
+			</div>
+			{{/if}}
+	
+		</div>
 	</div>
 </div>	
 
-{{!-- SELLER PRODUCTS --}}
 
-{{#if content}}{{else}}
-	{{#if isProfileOwner }}{{else}}
-<div class="container">
-	<div class="haul-container">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<h3>{{user.name}} has nothing to sell yet.</h3>
-			</div>
-		</div>
-	</div>
-</div>
-	{{/if}}
-{{/if}}
  
-<div class="container">
+<div class="container"> 
+	{{!-- USERS PUBLIC COLLECTIONS --}}
 
-	{{!-- CREATE STORE  --}}
-	{{#if isProfileOwner }}
-	{{#if user.market.market_id}}
-
-	<div class="haul-grid-li ">	
-		<div class="sell"> 
-			{{#link-to 'market' user.market.market_id }}
-			<div class="sell-button text-center">
-				<div class="sell-text text-center haul-font">
-					My Store:<br/>	
-					{{user.market.market_name}}
-				</div>
-			</div>
-			{{/link-to}}
-		</div>
-	</div>
-
-
-
-	{{else}}
-	<div class="haul-grid-li ">	
-		<div class="sell"> 
-			{{#link-to 'seller.new-market' currentUser.slug }}
-			<div class="sell-button text-center">
-				<div class="sell-text text-center haul-font">
-					<div class="glyphicon glyphicon-plus-sign"></div><br/>	
-					Start Your Store
-				</div>
-			</div>
-			{{/link-to}}
-		</div>
-	</div>
-	{{/if}}
-	{{/if}}
-	
-
-	{{!-- SELL SOMETHING  --}}
-	{{#if isProfileOwner }}
-	<div class="haul-grid-li">	
-		<div class="sell"> 
-			{{#link-to 'seller.new-product' currentUser.slug }}
-			<div class="sell-button text-center">
-				<div class="sell-text text-center haul-font">
-					<div class="glyphicon glyphicon-plus-sign"></div><br/>
-					Sell Something
-				</div>
-			</div>
-			{{/link-to}}
-		</div>
-	</div>
-	{{/if}}
-
-
-	{{!-- SELLER PRODUCTS --}}
-    {{#each this}}
-    	{{#link-to 'product' this.id }}
+	{{#each model.collections }}
+		{{#link-to 'collection' collection }}
     	<div class="haul-grid-li"> 
-			<img class="thumbnail" {{bind-attr src=image.small}}>
-
-			{{#if sold}}
-				<div class="sold">Sold</div>
-			{{/if}}
+			<img class="thumbnail" {{bind-attr src=collection.image.small}}>
 			
+			<div class="sold">edit</div>
+
+
 			<div class="info">		
-		 	  	<div class="price"> ${{price}}</div>   
+		 	  	<div class="price"> {{ collection_name }}</div>   
 			</div>			
 	 	</div>
-	 	{{/link-to}}	
-	{{/each}}
-	
+	 	{{/link-to}}
+	{{/each}} 
 </div> 
 
 

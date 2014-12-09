@@ -19,6 +19,23 @@ Haul.SellerRoute = Haul.AnonRoute.extend({
 
 Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 	model: function(params) {
+		return this.modelFor('seller')//.get('products');
+	},
+ 	// setupController: function(controller, model) {
+ 	// 	controller.set('user', this.modelFor('seller'));
+ 	// 	controller.set('content', model);
+ 	// },
+	renderTemplate: function(){
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('seller/index');
+	}
+});
+
+Haul.SellerProductsRoute = Haul.AnonRoute.extend({
+	model: function(params) {
 		return this.modelFor('seller').get('products');
 	},
  	setupController: function(controller, model) {
@@ -30,19 +47,19 @@ Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('seller/index');
+		this.render('seller/products');
 	}
 });
 
 
-Haul.SellerNewMarketRoute = Haul.AuthenticatedRoute.extend({ 
-	controllerName: "market-edit",
+Haul.SellerNewCollectionRoute = Haul.AuthenticatedRoute.extend({ 
+	controllerName: "collection-edit",
 	model: function() {
-		return this.store.createRecord('market');
+		return this.store.createRecord('collection');
 	},
 	renderTemplate: function(controller, model) {  
 		this._super();
-		this.render('market/edit', {
+		this.render('collection/edit', {
 			into: 'application',
 			outlet: 'main',
 			controller: controller,

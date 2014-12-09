@@ -28,7 +28,7 @@ Haul.ProductCommentAdapter = Haul.ApplicationAdapter.extend({
 	host: Haul.COMMENT_SERVER_HOST, 
 
 	type_map: {
-		'markets': 'stores',
+		'collections': 'stores',
 		'stores': 'stores',
 		'products': 'products',
 		'users': 'users'
@@ -118,7 +118,7 @@ Haul.ProductCommentCountAdapter = Haul.ApplicationAdapter.extend({
 	host: Haul.COMMENT_SERVER_HOST,
 
 	type_map: {
-		'markets': 'stores',
+		'collections': 'stores',
 		'stores': 'stores',
 		'products': 'products',
 		'users': 'users'

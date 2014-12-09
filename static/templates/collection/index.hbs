@@ -1,0 +1,76 @@
+
+{{!-- STORE TEMPLATE --}}
+<div class="container content-fixed-nav">
+	<div class="row">
+		<div class="col-md-6 col-sm-12 col-xs-12 haul-font">
+			<div class="media">
+				
+				{{ profile-badge item=collection isCollectionOwner=isCollectionOwner }}
+
+				<div class="media-body">
+			     	<h2 class="heading haul-font">
+			     		{{#link-to "collection" collection }}{{collection.name}}{{/link-to}}
+			     	</h2>
+
+			     	{{ truncate-text text=collection.description }}
+
+			     	<h5>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</h5>
+
+				</div> 
+			</div>
+		</div>  
+
+
+		<div class="col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right	">
+			{{!-- SELL SOMETHING  --}}
+
+			{{#if isCollectionOwner }}
+			<div class="btn-group" role="group">
+
+				{{#link-to 'collection.edit' collection }}
+				<button class="btn btn-default">
+					Edit Collection
+					<span class="glyphicon glyphicon-plus-sign"></span>
+				</button>
+				{{/link-to}}
+
+			</div>
+			{{/if}}
+	
+		</div>
+
+
+	</div>
+</div>	
+ 
+
+
+{{!-- COLLECTION ITEMS --}} 
+<div class="container">
+
+    {{#each products}}
+    
+    	{{#link-to 'collection-product' this.product_id }}
+    	<div class="haul-grid-li"> 
+
+				<img class="thumbnail" {{bind-attr src=image.small}}>
+
+				{{#if sold}}
+					<div class="sold">Sold</div>
+				{{/if}}
+				
+				<div class="info">		
+			 	  	<div class="price"> ${{price}}</div>   
+				</div>
+
+				{{!-- {{editorial}} --}}
+			
+	 	</div>
+	 	{{/link-to}}	
+    
+	{{/each}}
+	
+</div> 
+
+
+

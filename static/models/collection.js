@@ -1,26 +1,26 @@
 
 //Models
-Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
+Haul.Collection = DS.Model.extend(Ember.Validations.Mixin, {
 
 	name: DS.attr( 'string' ),
 	description: DS.attr( 'string' ),
 	user_id: DS.attr( 'string' ), 
 	user: DS.belongsTo('user'),
 	slug: DS.attr( 'string' ),
-	isFollowedByCount: DS.belongsTo('market-is-followed-by-count'), 
+	isFollowedByCount: DS.belongsTo('collection-is-followed-by-count'), 
 
 	iconBinding: "image.thumb", 
 	image: DS.belongsTo('image'),
 	image_id: DS.attr('string'), 
 	//imageIdChanged is fired when a new image_id is assigned to the model.
-	//this happens when a user uploads a new user icon for their market.
+	//this happens when a user uploads a new user icon for their collection.
 	imageIdChanged: function() {
 		this.getIconImage();
 	}.observes('image_id'),
 
-	//getIconImage asks the API for the market image.
+	//getIconImage asks the API for the collection image.
 	//If the size thumb is not retured it asks the API for the image again for "retryTimes" times.
-	//When a user uploads a new market profile image it takes time for the image resizer to crunch
+	//When a user uploads a new collection profile image it takes time for the image resizer to crunch
 	//all the image sizes.
 	getIconImage: function() {
 		var _this = this;
@@ -61,24 +61,13 @@ Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
 		});
 	},
 
-	// //Get's the user model.
-	products: function(){
-		var store = this.store;
-		var id = this.get('id');		
-		store.find('market-product-list', {market_id: id}); 
-		return store.filter('market-product-list', function(mp){ 
-			if( mp.get('market_id')  == id ) return mp;
-		});
-
-	}.property(),
-
 	validations: { 
 		name: {
 		 	presence: true,
 		 	length: { minimum: 3, maximum: 50 }
 		},
 		description: {
-		 	presence: true,
+		 	// presence: true,
 		 	length: { maximum: 500 }
 		}
 	}
@@ -87,7 +76,7 @@ Haul.Market = DS.Model.extend(Ember.Validations.Mixin, {
 
 
 
-Haul.MarketAdapter = Haul.ApplicationAdapter.extend({
+Haul.CollectionAdapter = Haul.ApplicationAdapter.extend({
 	
 	host: Haul.STORE_SERVER_HOST,
 
@@ -96,11 +85,14 @@ Haul.MarketAdapter = Haul.ApplicationAdapter.extend({
         return this.ajax(url, 'GET');
     },
 
-	
-	findQuery: function(store, type, query) { 
-        var url = this.host + "/users/" + query.user_id + "/products";
-        return this.ajax(url, 'GET');
-    },    
+	// findMany: function(store, type, ids) {
+	// 	console.log("FOUDN YOU")
+	// },
+
+	// findQuery: function(store, type, query) { 
+ //        var url = this.host + "/users/" + query.user_id + "/products";
+ //        return this.ajax(url, 'GET');
+ //    },    
  
 
 	updateRecord: function(store, type, record) {
@@ -130,19 +122,18 @@ Haul.MarketAdapter = Haul.ApplicationAdapter.extend({
 });
  
 
-Haul.MarketSerializer =  DS.RESTSerializer.extend({
+Haul.CollectionSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
-			console.log("OK:", store, primaryType, payload, recordId, requestType);
+		if( payload.data == "ok" ){ 
 			return;
 		}
-
+ 
 		var data = {
 			id: payload.data.store_id,	
 			name: payload.data.name,
-			slug: payload.data.name,
+			slug: payload.data.slug,
 			description: payload.data.description,
 			user: payload.data.user_id,
 			user_id: payload.data.user_id,
@@ -155,8 +146,7 @@ Haul.MarketSerializer =  DS.RESTSerializer.extend({
 		// 	data['products'] = payload.data.product_ids
 		// }
 
-		var payload = {'market': data}; 
-		
+		var payload = {'collection': data}; 
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},
 });

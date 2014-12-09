@@ -1,0 +1,33 @@
+{{!-- SELLER PROFILE  --}}
+
+
+
+<div class="container content-fixed-nav">
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 haul-profile-header haul-font">
+			<h1>Your Items</h1>
+			<h4>Below are only items you have uploaded</h4>
+		</div> 
+	</div>
+</div>	
+
+
+ 
+<div class="container">
+	{{!-- SELLER PRODUCTS --}}
+    {{#each this}}
+    	{{#link-to 'product' this.id }}
+    	<div class="haul-grid-li"> 
+			<img class="thumbnail" {{bind-attr src=image.small}}>
+
+			{{#if sold}}
+				<div class="sold">Sold</div>
+			{{/if}}
+			
+			<div class="info">		
+		 	  	<div class="price"> ${{price}}</div>   
+			</div>			
+	 	</div>
+	 	{{/link-to}}	
+	{{/each}} 
+</div>

@@ -2,7 +2,7 @@ Haul.TruncateTextComponent = Ember.Component.extend({
 
 	doTruncation: false, 
 
-	maxLength: 50,
+	maxLength: 200,
 
 	isOpen: false,
 
@@ -11,7 +11,8 @@ Haul.TruncateTextComponent = Ember.Component.extend({
 	textTruncated: null,
 
 	start: function() {
-
+		if(!this.get('text')) return;
+		
 		if( this.get('maxLength') > this.get('text').length ) { 
 			this.set('doTruncation', false);
 		} else {

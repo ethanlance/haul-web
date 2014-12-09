@@ -1,29 +1,29 @@
 /*global Products, Ember */
 (function () {
 	'use strict'; 
-	Haul.MarketProductController = Ember.ObjectController.extend({ 
+	Haul.CollectionProductController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 	});
 
 	//SHOW one product
-	Haul.MarketProductIndexController = Ember.ObjectController.extend({ 
+	Haul.CollectionProductIndexController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
 		//Is currentUser viewing his own page?
-		isMarketOwner: false,
+		isCollectionOwner: false,
 		isProductOwner: false,
-		marketProductPromise:null,
+		collectionProductPromise:null,
 
 		setup: function() { 
 			var currentUser = this.get('currentUser');
 			var model = this.get('model');
 			if( currentUser && model ){
 
-				//Market's Owner
-				if( !Ember.isEmpty(currentUser) && model.get('market').get('user').get('id') === currentUser.get('id')) {
-					this.set('isMarketOwner', true);
+				//Collection's Owner
+				if( !Ember.isEmpty(currentUser) && model.get('collection').get('user').get('id') === currentUser.get('id')) {
+					this.set('isCollectionOwner', true);
 				}	
 
 				//Product's Owner

@@ -62,7 +62,7 @@ Haul.FollowSerializer =  DS.RESTSerializer.extend({
 
 /*
 	UserIsFollowingCount:
-	How many ITEMS (users & markets combined) is this user following
+	How many ITEMS (users & collections combined) is this user following
 */
 
 Haul.UserIsFollowingCount = DS.Model.extend({
@@ -140,16 +140,16 @@ Haul.UserIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 
 
 /*
-	FollowMarketCount:
-	How many user's follow this market
+	FollowCollectionCount:
+	How many user's follow this collection
 */
 
-Haul.MarketIsFollowedByCount = DS.Model.extend({
+Haul.CollectionIsFollowedByCount = DS.Model.extend({
 	total: DS.attr('string'),
 	product: DS.belongsTo('product')
 });
 
-Haul.MarketIsFollowedByCountAdapter = Haul.ApplicationAdapter.extend({
+Haul.CollectionIsFollowedByCountAdapter = Haul.ApplicationAdapter.extend({
 
 	host: Haul.FOLLOW_SERVER_HOST,
 
@@ -159,7 +159,7 @@ Haul.MarketIsFollowedByCountAdapter = Haul.ApplicationAdapter.extend({
 	}
 });
  
-Haul.MarketIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
+Haul.CollectionIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
@@ -172,7 +172,7 @@ Haul.MarketIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 			total: payload.data.total,	
 		};
 
-		var payload ={'market-is-followed-by-count': data}; 
+		var payload ={'collection-is-followed-by-count': data}; 
 		return this._super(store, type, payload);
 	}
 });

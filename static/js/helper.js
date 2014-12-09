@@ -10,3 +10,12 @@ Ember.Handlebars.registerBoundHelper('breaklines', function(text) {
     return new Handlebars.SafeString(text);
 });
 
+
+
+function convertToSlug(text){
+  return text
+      .toLowerCase()
+      .replace(/[^\w ]+/g,'')
+      .replace(/ +/g,'-')
+      ;
+}

@@ -20,6 +20,9 @@
 
 	<link rel="stylesheet" href="/static/bower_components/ladda-bootstrap/dist/ladda-themeless.min.css"> 
 	<link rel="stylesheet" href="/static/bower_components/ladda-bootstrap/css/prism.css"> 
+
+
+	<link rel="stylesheet" href="/static/js/thirdparty/quill/quill.snow.css"> 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -45,6 +48,7 @@
 		<script src="/static/bower_components/ember/ember.js"></script> 
 		<script src="/static/bower_components/ember-data/ember-data.js"></script> 
 		<script src="/static/js/thirdparty/ember-localstorage.js"></script>
+		<script src="/static/js/thirdparty/quill/quill.js"></script>
 		<script src="/static/bower_components/moment/min/moment.min.js"></script> 
 		<script src="/static/bower_components/holderjs/holder.js"></script> 
 		<script src="/static/bower_components/ember-validations/index.js"></script> 
@@ -70,8 +74,8 @@
 		<!-- //Routes -->
 		<script src="/static/routes/auth.js"></script>
 		<script src="/static/routes/common.js"></script>
-		<script src="/static/routes/market.js"></script>
-		<script src="/static/routes/market_product.js"></script>
+		<script src="/static/routes/collection.js"></script>
+		<script src="/static/routes/collection_product.js"></script>
 		<script src="/static/routes/product.js"></script>
 		<script src="/static/routes/user.js"></script> 
 		<script src="/static/routes/settings.js"></script> 
@@ -81,12 +85,13 @@
 		<script src="/static/models/comment.js"></script>
 		<script src="/static/models/image.js"></script>
 		<script src="/static/models/product.js"></script>
+		<script src="/static/models/product_collection_list.js"></script>
 		<script src="/static/models/product_list.js"></script>
 		<script src="/static/models/user.js"></script> 
 		<script src="/static/models/user_image.js"></script> 
-		<script src="/static/models/market.js"></script> 
-		<script src="/static/models/market_product.js"></script>  
-		<script src="/static/models/market_product_list.js"></script>  
+		<script src="/static/models/collection.js"></script> 
+		<script src="/static/models/collection_product.js"></script>  
+		<script src="/static/models/collection_product_list.js"></script>  
 		<script src="/static/models/like.js"></script>  
 		<script src="/static/models/follow.js"></script>  
 		<script src="/static/models/comment.js"></script>
@@ -96,7 +101,8 @@
 		<script src="/static/components/image_card.js"></script>
 		<script src="/static/components/image_picker.js"></script>
 		<script src="/static/components/ladda_btn.js"></script>
-		<script src="/static/components/store_btn.js"></script>
+		<script src="/static/components/collection_btn.js"></script>
+		<script src="/static/components/collection_selector.js"></script>
 		<script src="/static/components/profile_btn.js"></script>
 		<script src="/static/components/like_btn.js"></script>
 		<script src="/static/components/follow_btn.js"></script>
@@ -109,8 +115,8 @@
 		<script src="/static/controllers/auth_controller.js"></script> 
 		<script src="/static/controllers/seller_controller.js"></script> 
 		<script src="/static/controllers/products_controller.js"></script> 
-		<script src="/static/controllers/market_controller.js"></script> 
-		<script src="/static/controllers/market_product_controller.js"></script> 
+		<script src="/static/controllers/collection_controller.js"></script> 
+		<script src="/static/controllers/collection_product_controller.js"></script> 
 		<script src="/static/controllers/messages_controller.js"></script> 
 		<script src="/static/controllers/common_controller.js"></script> 
 		<script src="/static/controllers/settings_controller.js"></script>

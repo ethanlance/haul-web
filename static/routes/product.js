@@ -20,7 +20,8 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 	},
  	setupController: function(controller, model) {
  		controller.reset();	
-        controller.set('productPromise', this.store.find('product', this.modelFor('product').get('id')));
+ 		var product_id = this.modelFor('product').get('id');
+        controller.set('productPromise', this.store.find('product', product_id));
     },
 	renderTemplate: function(controller, model) {
 		this.render('product/edit', {
@@ -39,6 +40,11 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 	Single Product View
 **/
 Haul.ProductRoute = Haul.AnonRoute.extend({
+	beforeModel: function(transition) {
+		//Get the users collections
+		var user = this.controllerFor('auth').get('currentUser');
+		this.store.find('user-collection', {user_id:user.id});
+	},
 	model: function(params) {
 		return this.store.find('product', params.product_slug);
 	},
@@ -47,5 +53,6 @@ Haul.ProductRoute = Haul.AnonRoute.extend({
   	},
   	setupController: function(controller, model) {
   		controller.set('model', model );
+        controller.set('collections', this.store.find('product-collection-list', model.get('id')) );
   	}
 });

@@ -19,11 +19,11 @@
 	    	<li>{{#link-to 'seller' currentUser.slug }}My Stuff{{/link-to}}</li>
 			<li>{{#link-to 'seller.new-product' currentUser.slug }}- Add Stuff{{/link-to}}</li> 
 
-			{{#if currentUser.user.market}}
-			<li>{{#link-to 'market' currentUser.user.market.market_id }}My Store{{/link-to}}</li> 
-			<li>{{#link-to 'market.edit' currentUser.user.market.market_id }}- Edit Store{{/link-to}}</li> 
+			{{#if currentUser.user.collection}}
+			<li>{{#link-to 'collection' currentUser.user.collection.collection_id }}My Store{{/link-to}}</li> 
+			<li>{{#link-to 'collection.edit' currentUser.user.collection.collection_id }}- Edit Store{{/link-to}}</li> 
 			{{else}}
-			<li>{{#link-to 'seller.new-market' currentUser.slug }}Create A Store{{/link-to}}</li> 
+			<li>{{#link-to 'seller.new-collection' currentUser.slug }}Create A Store{{/link-to}}</li> 
 			{{/if}}
 				
 			<li class="divider"></li> 	

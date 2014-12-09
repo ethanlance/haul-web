@@ -1,6 +1,10 @@
 {{#if isProfileOwner}}
 	<div class="toolbar text-right">
-		<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">Delete</button>
+
+
+		<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">
+			Delete
+		</button>
 		{{#link-to 'product.edit' this}}<button class="btn btn-primary"  {{bs-bind-tooltip content="Edit your item"}}>Edit</button>{{/link-to}}
 	</div>
 {{/if}}
@@ -20,80 +24,47 @@
 
 
 	
-	<div class="row">
+	<div class="row padding-top"> 
+
+		{{!-- Collection Info --}}
+		<div class="col-md-6 col-sm-12 col-xs-12 vcenter text-center ">
+			{{collection-btn 
+				class="display-inline"
+				currentUser=currentUser 
+				product=model
+			}}
+			<p>For other people to see this item, add it to a collection</p>
+
+{{!-- 			BOOOOM {{collections.id}}
+			<ul>
+			{{#each collections.collections }}
+				<li>.{{ name }}</li>
+			{{/each}}
+			</ul> --}}
+
+
+		</div>
 
 		{{!-- Images  --}}
-
 		<div class="col-md-6 col-sm-12 col-xs-12">
 			{{#if model.images}}
 				{{view Haul.CarouselView contentBinding="model.images"}}
 			{{/if}} 
 		</div>
 
-		{{!-- Product Info --}}
 
-		<div class="col-md-6 col-sm-12 col-xs-12">
-			<div class="row">
-				<div class="col-md-12 haul-buy-card">
-					
-					{{!-- BUTTONS  --}} 
-					<div class="row button-bar"> 
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="box-rigid lead haul-price">${{ price }}</div>
-							
-							{{!-- BUY --}}
-							<button type="button" class="btn btn-primary btn-responsive">BUY</button>
+ 	</div>
 
-							{{!-- LIKE --}}
-							{{like-btn
-								class="display-inline" 
-								item=model
-								currentUser=currentUser 									
-							}}
 
-							
-
-							{{!-- COMMENT --}}
-							{{comment-btn
-								class="display-inline"
-								contextObject=model.user
-								itemObject=model 
-								currentUser=currentUser
-							}}
-
-							{{!-- CURATE - ADD TO STORE --}}
-							{{store-btn
-								class="display-inline" 
-								currentUser=currentUser 
-								product=model
-								productPage=true
-							}}
-
-						</div>
-					</div>
-
-					{{!-- PRODUCT INFO --}}
-
-					<div class="row">
-						<div class="col-md-12">
-    						{{ product-details seller=model.user product=model isOpen=true }}
-						</div>
-					</div> 
-				</div>
-			</div>
-		</div> 
-	</div>
-	
-	{{!-- COMMENTS --}}
-	<div class="row">
-		<div class="col-md-12">
-			{{ comment-section
-				contextObject=model.user
-				itemObject=model 
-				currentUser=currentUser
-			}}
+ 	<div class="row padding-top padding-bottom"> 
+ 		{{!-- DETAILS --}}
+ 		<div class="col-md-6 col-sm-12 col-xs-12">
+			{{ product-details seller=model.user product=model }}
 		</div>
 	</div>
+
+
+
 </div>
 
 <div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

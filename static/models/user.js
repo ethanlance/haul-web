@@ -90,16 +90,16 @@ Haul.User = DS.Model.extend({
 		});
 	},
 
-	market: function() {
+	collections: function() {
 		var store = this.store;
-		var user_id = this.get('id');		
-		var promise = store.find('user-market', {user_id: user_id})
-		.then(function(userMarkets){
-			return userMarkets.get('firstObject')
-		});
-		return DS.PromiseObject.create({
-			promise: promise
-		});
+		var user_id = this.get('id');
+		store.find('user-collection', {user_id: user_id});
+ 
+		return store.filter('user-collection', function(result){  
+			if( result.get('user_id') == user_id ) { 
+				return result;
+			}
+		}); 
 	}.property(),
 
 	products: function() {
@@ -159,29 +159,32 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 
 
 
-/** Users' Markets **/
-Haul.UserMarket = DS.Model.extend({
+/** Users' Collections **/
+Haul.UserCollection = DS.Model.extend({
 	user: DS.belongsTo('user'),
-	market: DS.belongsTo('market'),
-	market_name: DS.attr('string'),
-	market_id: DS.attr('string'),
+	user_id: DS.attr('string'),
+	collection: DS.belongsTo('collection'),
+	collection_name: DS.attr('string'),
+	collection_id: DS.attr('string'),
+	slug: DS.attr('string'),
 });
 
-Haul.UserMarketAdapter = Haul.ApplicationAdapter.extend({
+Haul.UserCollectionAdapter = Haul.ApplicationAdapter.extend({
 	
 	host: Haul.STORE_SERVER_HOST,
 
 	findQuery: function(store, type, query) { 
         var url = this.host + "/users/" + query.user_id + "/stores"; 
+        console.log("URL", url);
         return this.ajax(url, 'GET');
     },
 
 });
 
 
-Haul.UserMarketSerializer =  DS.RESTSerializer.extend({
+Haul.UserCollectionSerializer =  DS.RESTSerializer.extend({
 extractArray: function(store, primaryType, payload, recordId, requestType) {
-
+console.log("MADE IT")
 		if( payload.data == "ok" ){
 			return;
 		}
@@ -189,14 +192,16 @@ extractArray: function(store, primaryType, payload, recordId, requestType) {
 			var id = result.store_id + result.user_id;
 			return {
 				id: id,
-				market_id: result.store_id,	
-				market_name: result.store_name,	
+				collection_id: result.store_id,	
+				collection_name: result.store_name,	
+				user_id: result.user_id,
 				user: result.user_id,
-				market: result.store_id
+				collection: result.store_id,
+				slug: result.slug
 			}
 		});
 
-		var payload = {'user-market': data}; 
+		var payload = {'user-collection': data}; 
 
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},

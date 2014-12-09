@@ -112,7 +112,11 @@ body {
 .thumbnail.center {
   display:inline;
 }
- 
+
+.thumbnail.small{
+  width: 100px;
+  height: 100px;
+}
 
 .navbar-profile { 
   /*width: 100%;*/
@@ -578,6 +582,10 @@ body {
   padding-top: 20px;
 }
 
+.btn-xs.margin-top {
+  margin-top: 5px;
+}
+
 .padding-bottom {
   padding-bottom: 20px;
 }
@@ -892,4 +900,11 @@ textarea.form-control {
     line-height: 1.33;
     border-radius: 6px;
   }
+}
+
+
+.form-list { 
+  list-style: none;
+  padding-left: -10px;
+  margin-left: -30px;
 }

@@ -1,0 +1,204 @@
+
+{{!-- ADD TO COLLECTION BUTTON --}}
+<button {{action 'openModal'}} class="btn btn-default btn-responsive haul-font" 
+	{{bs-bind-tooltip content="Haul it! Add to your collection"}}>
+	Add To Collection
+	<span class="glyphicon glyphicon-plus"></span>
+</button>
+
+
+	 
+
+
+
+{{!--  
+
+{{#if collectionPage}}
+	{{#if editMode}}
+		<button {{action 'curate'}} class="btn btn-primary" {{bs-bind-tooltip content="Edit Product"}}>Edit</button> 
+	{{/if}}
+{{/if}}
+
+
+{{#if productPage }}
+	
+	{{#if addMode}}
+		<button {{action 'curate'}} class="btn btn-default btn-responsive haul-font" 
+			{{bs-bind-tooltip content="Haul it! Add to your store"}}>
+		Haul
+		<span class="glyphicon glyphicon-plus"></span>
+		</button>
+	{{/if}}
+	
+	{{#if editMode}}
+		{{#link-to 'collection' model.collection.id }}
+		<button class="btn btn-default btn-responsive  haul-font"
+			{{bs-bind-tooltip content="This is in your store"}}>
+			Hauled
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>{{/link-to}}
+	{{/if}}
+
+	{{#if createStoreMode}}
+		{{#link-to 'seller.new-collection' currentUser.user.slug}}
+		<button class="btn btn-default btn-responsive  haul-font" 
+			{{bs-bind-tooltip content="Haul it! Add to your store"}}>
+		Haul
+		<span class="glyphicon glyphicon-plus"></span>
+		</button>{{/link-to}}
+	{{/if}}
+{{/if}}
+
+ --}}
+
+
+
+{{!-- MODAL --}}
+
+<div id="curateModal" class="modal fade in danger text-left" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="mySmallModalLabel">
+					Add Your Haul
+				</h4>
+			</div>
+
+			<div class="modal-body"> 
+
+				{{!-- EDIT FORM --}}
+
+				<div {{bind-attr class="showForm:show:hide"}}>
+					<div class="row">
+ 
+
+						{{!-- COLLECTION --}}
+						<div class="col-md-8 col-sm-6 col-xs-12">
+
+						{{#form-for model wrapper="bs3-wrapper"}}
+						
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12">  
+								<h4>Collection</h4>
+
+									{{collection-selector
+										class="display-inline" 	
+										currentUser=currentUser
+										targetObject=targetObject
+										selectedCollectionId=selectedCollectionId
+										isShowCreateCollection=isShowCreateCollection
+									}}
+ 
+								</div>
+							</div>
+
+							<div {{bind-attr class="isShowCreateCollection:hide:show"}}>
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12"> 
+									
+										<div class="media">
+
+
+											<div class="pull-right">
+												<button {{action 'showCreateCollection'}} class="btn btn-default ">New Collection</button>
+											</div>
+											<div class="pull-right vcenter">OR</div>
+											
+	 								
+		 									<div class="media-body">
+											{{view Ember.Select
+											  	contentBinding="userCollections"
+											  	optionValuePath="content.collection_id"
+											  	optionLabelPath="content.collection_name" 
+											 	selectionBinding='selectedCollection'
+											  	class="form-control"
+											  	prompt="Pick a collection"
+											}}
+											</div>
+
+
+										</div>
+
+										<br/>
+									</div> 
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12">  
+ 										
+ 									<h4>Editorial</h4>
+
+									{{input editorial as="text" canShowValidationError=showErrors 
+											placeholder="Tell everyone what's so awesome about this item"
+									}} 
+ 
+								</div> 
+							</div>
+
+						{{/form-for}}	
+
+						</div>
+
+
+						{{!-- IMAGE --}}
+						<div class="col-md-4 col-sm-6 col-xs-6 text-center"> 
+							<img class="thumbnail small center" {{bind-attr src=productImage}}>
+							<p>{{ model.product.name }}</p> 
+						</div>
+
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+
+						{{#if errorShow }}
+							{{bs-alert message=errorMessage type="danger"}}
+						{{/if}}
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-right">
+
+							<button {{action 'curateCancel'}} class="btn btn-default">Cancel</button>
+
+							{{ladda-btn
+								name='Save'
+								class="display-inline"
+								btnClasses='btn btn-primary ladda-button'
+								btnClick='submit'
+								spin=isProcessing
+							}} 
+						</div>
+					</div> 
+				</div>
+
+
+				{{!-- SUCCESS MESSAGE --}}
+
+				<div {{bind-attr class="showSuccessMessage:show:hide"}}>
+					<div class="row" {{bind-attr style="styleSuccessMessage:off"}}>
+						<div class="col-md-6 col-sm-12 col-xs-12">
+						 	<img class="thumbnail" {{bind-attr src=productImage}}> 
+						</div>
+
+						<div class="col-md-6 col-sm-12 col-xs-12">
+ 
+							<h4>Added to {{model.collection.name}}<strong>{{model.collection.name}}</strong><h4>
+
+							<p>Go to {{#link-to 'collection' model.collection }}<button {{ action "close"}} class="btn btn-default">{{ model.collection.name }}</button>{{/link-to}} or <button class="btn btn-default" {{action 'close' }}>close window</button></p>
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>

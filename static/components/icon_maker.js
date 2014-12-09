@@ -19,7 +19,7 @@ Haul.IconMakerComponent = Ember.Component.extend({
 		return "width:"+this.get('progressValue')+"px";
 	}.property('progressValue'),
 
-	/* Image has changed, update the Market or LocalUser model now */
+	/* Image has changed, update the Collection or LocalUser model now */
 	newImageId: null,
 	updateModel: function() {
 		var itemType = this.get('itemType');
@@ -37,7 +37,7 @@ Haul.IconMakerComponent = Ember.Component.extend({
 
         if(itemType == "user" || itemType == "localUser")
         	this.set('itemType', 'users');
-        else if(itemType == "market")
+        else if(itemType == "collection")
         	this.set('itemType', 'stores');
 
 	}.observes('item'),
