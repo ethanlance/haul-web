@@ -1,33 +1,39 @@
 
-
-
-<div class="container content-fixed-nav">
-	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-12 haul-font">
-			
-			<div class="pull-left seller-nav">
-				{{#link-to 'collection' model.collection}}
-					{{ make-icon icon=model.collection.icon isSmall=true class="pull-left" }}
-					{{ model.collection.name }}
-				{{/link-to}}
-				<h1>{{ model.product.name }}</h1>
-			</div>
-			 
-		</div>  
-		<div class="col-md-6 col-sm-6 col-xs-12 haul-font padding-top text-right">
-
-			{{#if isCollectionOwner}} 
-				<button class="btn btn-default">
-					Edit Your Post
-					<span class="glyphicon glyphicon-plus-sign"></span>
-				</button> 
-			{{/if}}
-
-		</div>
-	</div>
+<div class="seller-nav haul-font">
+	<div class="content-fixed-nav text-center">
+     	<h2>
+     		<strong>
+     			{{#link-to "collection" collection}}{{model.collection.name}}{{/link-to}}
+     		</strong> 
+     	</h2>
+	     <small>{{#link-to "seller" collection.user}}by {{model.collection.user.name}}{{/link-to}}</small>
+	</div>	
 </div>	
 
-<div class="toolbar"><span></span></div>
+
+<div class="toolbar haul-font">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">	
+
+
+			{{#link-to 'collection' collection}}
+			<button class="btn btn-default pull-left">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				Back To Collection
+			</button>
+			{{/link-to}}
+				 
+				{{#if isCollectionOwner}} 
+					<button class="btn btn-default pull-right">
+						Edit Your Post
+						<span class="glyphicon glyphicon-plus-sign"></span>
+					</button> 
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="container">
 	<div class="row">
@@ -35,6 +41,7 @@
 		{{!-- Images  --}}
 
 		<div class="col-md-6 col-sm-12 col-xs-12 padding-bottom">
+
 			{{#if model.product }}
 				{{#if model.product.images }}
 					{{view Haul.CarouselView contentBinding="model.product.images"}}
@@ -45,14 +52,25 @@
 		{{!-- Product Info --}}
 
 		<div class="col-md-6 col-sm-12 col-xs-12">
+
 			<div class="row">
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<h1>{{ model.product.name }}</h1>
+				</div>
+			</div>
+
+			<div class="row">
+
 				<div class="col-md-12 haul-buy-card">
+
+
 					
 					{{!-- BUTTONS  --}}
 
 
 					<div class="row button-bar"> 
 						<div class="col-md-12 col-sm-12 col-xs-12">
+
 							
 							<div class="box-rigid lead haul-price">${{model.product.price}}</div>		
 							

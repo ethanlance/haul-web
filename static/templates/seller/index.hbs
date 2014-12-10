@@ -7,33 +7,73 @@
 }}
 
 
-<div class="toolbar"><span></span></div>
+<div class="toolbar text-right">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">	
+
+	{{!-- BUTTON  --}}
+	{{#if isProfileOwner }} 
+
+
+		<div class="btn-group" role="group"> 
+			<button type="button" {{bind-attr class="pageCreateCollections:selected :btn :btn-default :haul-font"}}>
+				{{#link-to 'seller.new-collection' this.slug }}
+					<span class="glyphicon glyphicon-plus-sign"></span>
+					Create Collection
+				{{/link-to}} 
+			</button>
+			<button {{bind-attr class="pageCreateItems:selected :btn :btn-default :haul-font"}}>
+				{{#link-to 'seller.new-product' this.slug }}	
+				<span class="glyphicon glyphicon-camera"></span>
+				Add Item
+				{{/link-to}}
+			</button> 
+		</div>
+	{{/if}}
+			</div>
+		</div>
+	</div>
+</div>
  
 <div class="container"> 
 
-
-	{{!-- INFORMATION POD --}}
-	{{#if isProfileOwner}}
-	<div class="haul-grid-li ">	
+	{{#if this.products }}
+	{{#link-to 'seller.products' this.slug }}
+	<div class="haul-grid-li">	
 		<div class="sell">  
 			<div class="sell-button text-center">
 				<div class="sell-text text-center haul-font">
-					
-					{{#if model.collections }}
-						Your collections.  
-					{{else}}
-						Make a collection
-						<span class="glyphicon glyphicon-plus-sign"></span>
-					{{/if}} 
-
+						All Items
 				</div>
 			</div> 
 		</div>
 	</div>
+	{{/link-to}}
 	{{/if}}
 
+	{{#if isProfileOwner}}
+	{{#unless this.products }} 
+	{{#link-to 'seller.new-product' this.slug }}	
+	<div class="haul-grid-li">	
+		<div class="sell">  
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+						Sell Something<br/>
+						<span class="glyphicon glyphicon-camera"></span>
+				</div>
+			</div> 
+		</div>
+	</div>
+	{{/link-to}}
+	{{/unless}}
+	{{/if}}
+	
+	
+
 	{{#unless isProfileOwner}}
-	{{#unless model.collections }}
+	{{#unless this.products }}
 	<div class="haul-grid-li ">	
 		<div class="sell">  
 			<div class="sell-button text-center">

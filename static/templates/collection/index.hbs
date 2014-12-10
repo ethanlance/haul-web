@@ -1,49 +1,62 @@
 
 {{!-- STORE TEMPLATE --}}
-<div class="container content-fixed-nav seller-nav">
+<div class="seller-nav ">
+	<div class="container content-fixed-nav">
 
-	<div class="row ">
-		<div class="col-md-6 col-sm-12 col-xs-12">
-			   	
-			{{ make-icon icon=collection.icon isSmall=false class="pull-left" }}
-			 	
-	     	<h4 class="haul-font">
-	     		<strong>{{collection.name}}</strong> 
-	     		<small>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
-	     	</h4>
-			
-			{{ follow-btn 
-				item=collection 
-				ref_type="collection"
-				currentUser = currentUser 
-			}}  
-			 
-		</div>
- 
-
-		<div class="col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right">
-
-			{{!-- SELL SOMETHING  --}}
-
-			{{#if isCollectionOwner }}
-			<div class="btn-group" role="group">
-
-				{{#link-to 'collection.edit' collection }}
-				<button class="btn btn-default">
-					Edit Collection
-					<span class="glyphicon glyphicon-plus-sign"></span>
-				</button>
-				{{/link-to}}
-
+		<div class="row ">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
+				   	
+		     	<h1>
+		     		{{ make-icon icon=collection.icon isSmall=false  }}
+		     		<strong>{{collection.name}}</strong> 
+		     	</h1>
+		     	<small>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
+				 
 			</div>
-			{{/if}}
-	
-		</div>
-	</div>
+	 	</div>
+	</div>	
 </div>	
  
-<div class="toolbar ">
+
+
+ {{!-- TOOLBAR --}}
+<div class="toolbar">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+
+				<div class="pull-left">
+				{{ follow-btn 
+					item=collection 
+					ref_type="collection"
+					currentUser = currentUser  
+				}} 
+				</div>
+			 
+
+
+				{{!-- EDIT COLLECTION --}}
+				{{#if isCollectionOwner }}
+				<div class="pull-right">
+
+					{{#link-to 'collection.edit' collection }}
+					<button class="btn btn-default">
+						Edit Collection
+						<span class="glyphicon glyphicon-plus-sign"></span>
+					</button>
+					{{/link-to}}
+
+				</div>
+				{{/if}}
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="haul-font-weak">
@@ -51,14 +64,21 @@
 			</div>
 		</div>
 	</div>
-</div>
-</div>
 
 
-<div class="container">
-
-
-
+	{{!-- INFORMATION POD --}}
+	{{#link-to "seller" collection.user }}
+	<div class="haul-grid-li ">	
+		<div class="sell">  
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Back to Collections
+				</div>
+			</div> 
+		</div>
+	</div>
+	{{/link-to}}
 
 
 	{{!-- COLLECTION ITEMS --}} 

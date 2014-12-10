@@ -1,20 +1,44 @@
-{{seller-nav
-	user=model.user
-	currentUser=currentUser
-	isProfileOwner=isProfileOwner
-}}
+<div class="seller-nav haul-font">
+	<div class="content-fixed-nav text-center">
+     	<h2>
+     		<strong>
+     			{{#link-to "seller.products" model.user}}Just My Items{{/link-to}}
+     		</strong> 
+     	</h2>
+	     <small>{{#link-to "seller" model.user}}by {{model.user.name}}{{/link-to}}</small>
+	</div>	
+</div>	
 
 
-<div class="toolbar text-right">
-	<span></span>
-	{{#if isProfileOwner}}
-	<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">
-		Delete
-	</button>
-	{{#link-to 'product.edit' this}}<button class="btn btn-primary"  {{bs-bind-tooltip content="Edit your item"}}>Edit</button>{{/link-to}}
-	{{/if}}
+<div class="toolbar haul-font">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">	
+
+				{{#link-to 'seller.products' model.user}}
+				<button class="btn btn-default ">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Back To Collection
+				</button>
+				{{/link-to}}
+
+				{{#if isProfileOwner}}
+				<div class="pull-right">
+					<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">
+						Delete
+					</button>
+					{{#link-to 'product.edit' this}}
+						<button class="btn btn-default"  {{bs-bind-tooltip content="Edit your item"}}>
+							Edit
+						</button>
+					{{/link-to}}
+				</div>
+				{{/if}}
+			
+			</div>
+		</div>
+	</div>
 </div>
-
 
 <div class="container">
 	

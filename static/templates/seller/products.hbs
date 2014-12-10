@@ -1,11 +1,21 @@
-{{!-- SELLER PROFILE  --}}
+{{!-- STORE TEMPLATE --}}
+<div class="seller-nav ">
+	<div class="container content-fixed-nav">
 
-{{seller-nav
-	user=user
-	currentUser=currentUser
-	isProfileOwner=isProfileOwner
-	pageItems=true
-}}
+		<div class="row ">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
+				   	
+		     	<h1>
+		     		{{ make-icon icon=user.icon isSmall=false  }}
+		     		<strong>Just My Items</strong> 
+		     	</h1>
+		     	<small>{{#link-to "seller" user}}by {{user.name}}{{/link-to}}</small>
+				 
+			</div>
+	 	</div>
+	</div>	
+</div>	
+
 
 <div class="toolbar"><span></span></div>
  
@@ -13,16 +23,18 @@
 
 	
 	{{!-- INFORMATION POD --}}
+	{{#link-to "seller" user }}
 	<div class="haul-grid-li ">	
 		<div class="sell">  
 			<div class="sell-button text-center">
 				<div class="sell-text text-center haul-font">
-					Your items.  
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Back to Collections
 				</div>
 			</div> 
 		</div>
 	</div>
-
+	{{/link-to}}
 
 
 	{{!-- SELLER PRODUCTS --}}

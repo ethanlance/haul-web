@@ -183,6 +183,9 @@ body {
   }
 }
 
+.haul-navbar{
+  border-bottom: 1px solid #ddd;
+}
 
 .haul-navbar .navbar-right{
   float: right; 
@@ -261,10 +264,11 @@ body {
   //display:inline;
   top:50px;
   width: 100%;
-  margin-top: 10px;
+  margin-bottom: 10px;
   padding-top:10px;
   padding-bottom:10px;
-  padding-right: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
   /*background-color: ##F9F9F9;*/
   border-top: 1px solid #ccc;
   border-bottom: 1px dashed #ddd;
@@ -287,16 +291,21 @@ body {
   @include transition(all .2s ease-in-out);
   position: fixed;
   display:inline;
-  top:48px;
-  padding-top:5px;
+  top:55px;
+  padding-top:20px;
   padding-bottom:5px;
   z-index: 1029;
 }
 
 @media (max-width: 768px) {
   .toolbar.shrink {
-    top:40px;
+    top:48px;
   }
+}
+
+.toolbar h1 {
+  margin-top:0px;
+  margin-bottom:0px;
 }
 
 .navbar-profile .profile-circular-mask {
@@ -936,10 +945,22 @@ textarea.form-control {
   margin-left: -30px;
 }
 
-
+.seller-nav {
+  background-color: #eee;
+  border: 1px solid #eed;
+  padding-bottom:5px;
+}
 
 .seller-nav h1 {
   margin-top: -3px;
+}
+
+.seller-nav h2 {
+  margin-top: -3px;
+}
+
+.seller-nav h3 {
+  margin-top: 10px;
 }
 
 .seller-nav h1 a {
