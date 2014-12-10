@@ -1,0 +1,70 @@
+<div class="container content-fixed-nav">
+	<div class="row haul-font">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+
+			<div class="media">
+			  	<div class="profile-circular-mask pull-left">
+			  	{{#if user.icon }}
+					{{#link-to "seller" user}}<img {{bind-attr src=user.icon}}> {{/link-to}}
+			    {{else}}
+			    	{{#if isProfileOwner }}
+						<span>{{#link-to "settings"}}edit{{/link-to}}</span>
+					{{/if}}
+			    {{/if}}
+			    </div>
+			 
+			 	<div class="media-body">
+			     	<h1 class="heading haul-font">{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
+					<div>
+						{{ follow-btn 
+							item=user 
+							ref_type="user"
+							currentUser = currentUser 
+						}} 
+					</div> 
+				</div>
+			</div> 
+		</div>
+	</div>
+
+
+	{{!-- BUTTON  --}}
+	{{#if isProfileOwner }}
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center padding-top">
+
+
+			{{#link-to "seller" user }}
+			<button {{bind-attr class="pageCollections:selected :btn :btn-default :btn-responsive :haul-font"}}>
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				Collections
+			</button>
+			{{/link-to}}
+
+			{{#link-to 'seller.new-collection' currentUser.slug }}
+				<button {{bind-attr class="pageCreateCollections:selected :btn :btn-default :btn-responsive :haul-font"}}>
+					<span class="glyphicon glyphicon-plus-sign"></span>
+					Collection
+				</button>
+			{{/link-to}} 
+
+
+
+			{{#link-to 'seller.new-product' currentUser.slug }}
+			<button {{bind-attr class="pageCreateItems:selected :btn :btn-default :btn-responsive :haul-font"}}>
+				Sell 
+				<span class="glyphicon glyphicon-camera"></span>
+			</button>
+			{{/link-to}}
+		 
+			{{#link-to 'seller.products' currentUser.slug }}
+			<button {{bind-attr class="pageItems:selected :btn :btn-default :btn-responsive :haul-font"}}>
+				My Items
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+			{{/link-to}}
+		  
+		</div>
+	</div> 
+	{{/if}}
+</div>	

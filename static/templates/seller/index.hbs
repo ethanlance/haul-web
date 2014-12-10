@@ -1,74 +1,56 @@
 {{!-- SELLER PROFILE  --}}
+{{seller-nav
+	user=this
+	currentUser=currentUser
+	isProfileOwner=isProfileOwner
+	pageCollections=true
+}}
 
 
+<div class="toolbar"><span></span></div>
+ 
+<div class="container"> 
 
-<div class="container content-fixed-nav">
-	<div class="row haul-font">
-		<div class="col-md-12 col-sm-12 col-xs-12">
 
-			<div class="media">
-			  	<div class="profile-circular-mask pull-left">
-			  	{{#if icon }}
-					{{#link-to "seller" model}}<img {{bind-attr src=icon}}> {{/link-to}}
-			    {{else}}
-			    	{{#if isProfileOwner }}
-						<span>{{#link-to "settings"}}edit{{/link-to}}</span>
-					{{/if}}
-			    {{/if}}
-			    </div>
-			 
-			 	<div class="media-body">
-			     	<h1 class="heading haul-font">{{#link-to "seller" model }}{{name}}{{/link-to}}</h1>
-					<div>
-						{{ follow-btn 
-							item=model 
-							ref_type="user"
-							currentUser = currentUser 
-						}} 
-					</div> 
+	{{!-- INFORMATION POD --}}
+	{{#if isProfileOwner}}
+	<div class="haul-grid-li ">	
+		<div class="sell">  
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					
+					{{#if model.collections }}
+						Your collections.  
+					{{else}}
+						Make a collection
+						<span class="glyphicon glyphicon-plus-sign"></span>
+					{{/if}} 
+
 				</div>
 			</div> 
 		</div>
 	</div>
-</div>	
-
-
- 
-<div class="container"> 
-
-	{{!-- BUTTON  --}}
-	{{#if isProfileOwner }}
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12 text-center padding-top">
-			{{#link-to 'seller.new-product' currentUser.slug }}
-			<button class="btn btn-default btn-responsive haul-font">
-				Sell Something
-				<span class="glyphicon glyphicon-plus-sign"></span>
-			</button>
-			{{/link-to}}
-
-			{{#link-to 'seller.new-collection' currentUser.slug }}
-				<button class="btn btn-default btn-responsive haul-font">
-					Create a collection
-					<span class="glyphicon glyphicon-plus-sign"></span>
-				</button>
-			{{/link-to}} 
-		 
-			{{#link-to 'seller.products' currentUser.slug }}
-			<button class="btn btn-default btn-responsive haul-font">
-				My Items
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
-			{{/link-to}}
-		  
-		</div>
-	</div> 
 	{{/if}}
+
+	{{#unless isProfileOwner}}
+	{{#unless model.collections }}
+	<div class="haul-grid-li ">	
+		<div class="sell">  
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					
+					{{this.name}} had not added anything yet.
+
+				</div>
+			</div> 
+		</div>
+	</div>
+	{{/unless}}
+	{{/unless}}
 
 
 
 	{{!-- USERS PUBLIC COLLECTIONS --}}
-
 	{{#each model.collections }}
 		{{#link-to 'collection' collection }}
     	<div class="haul-grid-li"> 

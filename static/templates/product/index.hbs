@@ -1,28 +1,22 @@
-{{#if isProfileOwner}}
-	<div class="toolbar text-right">
+{{seller-nav
+	user=model.user
+	currentUser=currentUser
+	isProfileOwner=isProfileOwner
+}}
 
 
-		<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">
-			Delete
-		</button>
-		{{#link-to 'product.edit' this}}<button class="btn btn-primary"  {{bs-bind-tooltip content="Edit your item"}}>Edit</button>{{/link-to}}
-	</div>
-{{/if}}
-
-<div class="container content-fixed-nav">
-	<div class="row">
-
-		<div class="col-md-12 col-sm-12 col-xs-12 haul-font">
-			<h2 class="heading haul-font">
-				{{ make-icon icon=model.user.icon  isSmall=true  class="pull-left" }}
-				{{#link-to 'seller' model.user}}{{ model.user.name }}{{/link-to}} -
-				{{ model.name }}
-			</h2>
-		</div>  
-
-	</div>
+<div class="toolbar text-right">
+	<span></span>
+	{{#if isProfileOwner}}
+	<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">
+		Delete
+	</button>
+	{{#link-to 'product.edit' this}}<button class="btn btn-primary"  {{bs-bind-tooltip content="Edit your item"}}>Edit</button>{{/link-to}}
+	{{/if}}
+</div>
 
 
+<div class="container">
 	
 	<div class="row padding-top"> 
 

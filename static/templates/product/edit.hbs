@@ -1,3 +1,10 @@
+{{seller-nav
+	user=currentUser.user
+	currentUser=currentUser
+	isProfileOwner=true
+	pageCreateItems=true
+}}
+
 
 {{!-- HAUL TOOLBAR --}}
 <div class="toolbar">
@@ -38,7 +45,7 @@
 
 
 
-<div class="container content-fixed-nav">
+<div class="container">
 
 
 	{{!-- IMAGE PICKER: --}}
@@ -46,8 +53,7 @@
 	<div id="stepOne" {{bind-attr class=":collapse showImagePicker:in:out"}}>
 		<div class="row padding-top">
 			<div class="col-md-6 col-sm-6 col-xs-6 vcenter">
-				<h4>Start With Photos</h4>
-				<small>Each item can have up to 5 photos</small>
+				<h4>Start With Photos <small>(up to 5 per item)</small></h4>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6 text-right vcenter">
 				

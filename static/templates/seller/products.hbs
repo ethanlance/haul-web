@@ -1,60 +1,28 @@
 {{!-- SELLER PROFILE  --}}
 
+{{seller-nav
+	user=user
+	currentUser=currentUser
+	isProfileOwner=isProfileOwner
+	pageItems=true
+}}
 
-
-<div class="container content-fixed-nav">
-	<div class="row">
-
-		<div class="col-md-6 col-sm-12 col-xs-12  haul-font">
-
-			<div class="media">
-
-
-				{{#link-to "seller" user}}
-					<span class="glyphicon glyphicon-chevron-left pull-left padding-top margin-top"></span>
-				{{/link-to}}
-
-			  	<div class="profile-circular-mask pull-left">
-			  	{{#if user.icon }}
-					{{#link-to "seller" user}}<img {{bind-attr src=user.icon}}> {{/link-to}}
-			    {{else}}
-			    	{{#if isProfileOwner }}
-						<span>{{#link-to "settings"}}edit{{/link-to}}</span>
-					{{/if}}
-			    {{/if}}
-			    </div>
-			 
-			 	<div class="media-body">
-			     	<h1>Your Items</h1>
-					<h4>Add them to collections.</h4>
-			  	</div>
-			</div> 
-		</div>  
-
-		 
-
-
-	</div>
-</div>	
-
-
+<div class="toolbar"><span></span></div>
  
-<div class="container">
+<div class="container"> 
+
 	
-	{{!-- BUTTON  --}}
-
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12 text-center padding-top">
-			{{#link-to 'seller.new-product' currentUser.slug }}
-			<button class="btn btn-default btn-responsive haul-font">
-				Add Something To Sell
-				<span class="glyphicon glyphicon-plus-sign"></span>
-			</button>
-			{{/link-to}}
+	{{!-- INFORMATION POD --}}
+	<div class="haul-grid-li ">	
+		<div class="sell">  
+			<div class="sell-button text-center">
+				<div class="sell-text text-center haul-font">
+					Your items.  
+				</div>
+			</div> 
 		</div>
-	</div> 
+	</div>
 
- 
 
 
 	{{!-- SELLER PRODUCTS --}}
