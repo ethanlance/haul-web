@@ -703,11 +703,11 @@ function program9(depth0,data) {
 function program11(depth0,data) {
   
   var buffer = '';
-  data.buffer.push("\n	<div class=\"row\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12\">\n			<h3>Order The Items</h3>\n			\n\n			");
+  data.buffer.push("\n	<div class=\"row\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12\">\n			<h3>Order The Items</h3>\n			\n			");
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Haul.SortableProductView", {hash:{
     'contentBinding': ("products")
   },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
-  data.buffer.push("\n\n		 \n		</div>\n	</div>\n	");
+  data.buffer.push("\n\n		</div>\n	</div>\n	");
   return buffer;
   }
 
@@ -1378,12 +1378,12 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 
   data.buffer.push("<div class=\"sort-item-wrapper\">\n	<img data-id=\"");
-  data.buffer.push(escapeExpression(helpers.unbound.call(depth0, "view.content.id", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push(escapeExpression(helpers.unbound.call(depth0, "view.content.product_id", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push("\" class=\"thumbnail haul-thumb item\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'src': ("view.content.image.small")
   },hashTypes:{'src': "ID"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push("  draggable=\"true\">\n	<span class=\"glyphicon glyphicon-move\"></span>\n</div>");
+  data.buffer.push("  draggable=\"true\">\n	<span class=\"glyphicon glyphicon-move\"></span> \n</div>");
   return buffer;
   
 });Ember.TEMPLATES['components/profile-badge'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {

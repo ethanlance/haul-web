@@ -68,6 +68,14 @@ Haul.CollectionProductListAdapter = Haul.ApplicationAdapter.extend({
 Haul.CollectionProductListSerializer =  DS.RESTSerializer.extend({ 
 
 
+	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		}
+	
+	},
+
 	extractArray: function(store, primaryType, payload) {
 
 		if( payload.data == "ok" ){
