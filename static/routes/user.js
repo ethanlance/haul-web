@@ -21,10 +21,6 @@ Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 	model: function(params) {
 		return this.modelFor('seller')//.get('products');
 	},
- 	// setupController: function(controller, model) {
- 	// 	controller.set('user', this.modelFor('seller'));
- 	// 	controller.set('content', model);
- 	// },
 	renderTemplate: function(){
 		this.render('layouts/header_base', {
 			into: 'application',

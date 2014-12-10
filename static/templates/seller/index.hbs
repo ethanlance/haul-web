@@ -3,8 +3,8 @@
 
 
 <div class="container content-fixed-nav">
-	<div class="row">
-		<div class="col-md-6 col-sm-12 col-xs-12  haul-font">
+	<div class="row haul-font">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 
 			<div class="media">
 			  	<div class="profile-circular-mask pull-left">
@@ -25,40 +25,9 @@
 							ref_type="user"
 							currentUser = currentUser 
 						}} 
-					</div>
-			  	</div>
+					</div> 
+				</div>
 			</div> 
-		</div> 
-	 
-		<div class="col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right">
-			{{!-- SELL SOMETHING  --}}
-
-			{{#if isProfileOwner }}
-			<div class="btn-group" role="group">
-
-				{{#link-to 'seller.new-collection' currentUser.slug }}
-				<button class="btn btn-default">
-					Create a collection
-					<span class="glyphicon glyphicon-plus-sign"></span>
-				</button>
-				{{/link-to}}
-
-				{{#link-to 'seller.new-product' currentUser.slug }}
-				<button class="btn btn-default">
-					Sell Something
-					<span class="glyphicon glyphicon-plus-sign"></span>
-				</button>
-				{{/link-to}}
-
-				{{#link-to 'seller.products' currentUser.slug }}
-				<button class="btn btn-default">
-					My Items
-					<span class="glyphicon glyphicon-plus-sign"></span>
-				</button>
-				{{/link-to}}
-			</div>
-			{{/if}}
-	
 		</div>
 	</div>
 </div>	
@@ -66,6 +35,38 @@
 
  
 <div class="container"> 
+
+	{{!-- BUTTON  --}}
+	{{#if isProfileOwner }}
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center padding-top">
+			{{#link-to 'seller.new-product' currentUser.slug }}
+			<button class="btn btn-default btn-responsive haul-font">
+				Sell Something
+				<span class="glyphicon glyphicon-plus-sign"></span>
+			</button>
+			{{/link-to}}
+
+			{{#link-to 'seller.new-collection' currentUser.slug }}
+				<button class="btn btn-default btn-responsive haul-font">
+					Create a collection
+					<span class="glyphicon glyphicon-plus-sign"></span>
+				</button>
+			{{/link-to}} 
+		 
+			{{#link-to 'seller.products' currentUser.slug }}
+			<button class="btn btn-default btn-responsive haul-font">
+				My Items
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+			{{/link-to}}
+		  
+		</div>
+	</div> 
+	{{/if}}
+
+
+
 	{{!-- USERS PUBLIC COLLECTIONS --}}
 
 	{{#each model.collections }}

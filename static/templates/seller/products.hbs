@@ -4,16 +4,59 @@
 
 <div class="container content-fixed-nav">
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12 haul-profile-header haul-font">
-			<h1>Your Items</h1>
-			<h4>Below are only items you have uploaded</h4>
-		</div> 
+
+		<div class="col-md-6 col-sm-12 col-xs-12  haul-font">
+
+			<div class="media">
+
+
+				{{#link-to "seller" user}}
+					<span class="glyphicon glyphicon-chevron-left pull-left padding-top margin-top"></span>
+				{{/link-to}}
+
+			  	<div class="profile-circular-mask pull-left">
+			  	{{#if user.icon }}
+					{{#link-to "seller" user}}<img {{bind-attr src=user.icon}}> {{/link-to}}
+			    {{else}}
+			    	{{#if isProfileOwner }}
+						<span>{{#link-to "settings"}}edit{{/link-to}}</span>
+					{{/if}}
+			    {{/if}}
+			    </div>
+			 
+			 	<div class="media-body">
+			     	<h1>Your Items</h1>
+					<h4>Add them to collections.</h4>
+			  	</div>
+			</div> 
+		</div>  
+
+		 
+
+
 	</div>
 </div>	
 
 
  
 <div class="container">
+	
+	{{!-- BUTTON  --}}
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center padding-top">
+			{{#link-to 'seller.new-product' currentUser.slug }}
+			<button class="btn btn-default btn-responsive haul-font">
+				Add Something To Sell
+				<span class="glyphicon glyphicon-plus-sign"></span>
+			</button>
+			{{/link-to}}
+		</div>
+	</div> 
+
+ 
+
+
 	{{!-- SELLER PRODUCTS --}}
     {{#each this}}
     	{{#link-to 'product' this.id }}

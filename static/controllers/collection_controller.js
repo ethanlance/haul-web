@@ -2,11 +2,16 @@
 (function () {
 	'use strict'; 
 
+
 	Haul.CollectionController = Ember.ObjectController.extend({
 		needs: ["auth"],
 		model: {},
 	});
 
+
+	/**
+	* 	Display a collection
+	**/
 	Haul.CollectionIndexController = Ember.ObjectController.extend({
 		needs: ["auth"],  
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
@@ -41,13 +46,13 @@
 	});
 
 
-
-
-
+	/**
+	* 	Edit a collection
+	**/
 	Haul.CollectionEditController = Ember.ObjectController.extend({
 		needs: ["auth"],
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
-		products: {},
+		products: [],
 		model: {},
 		orderModel:null, 
 
@@ -58,25 +63,33 @@
 		errorShow: false,
 		errorMessage: null,
 
-		setup: function() {
-			var collection_id = this.get('id');
-			this.store.find('collection-product-list', {collection_id: collection_id});
-	 		var filter = this.store.filter('collection-product-list', function(mpl) {
-	 			if( mpl.get('id') && mpl.get('collection_id') === collection_id ) return true;
-	 		});
-	 		this.set("products", filter);
+		reset: function() {
+			this.set('errorMessage', null);
+			this.set('isProcessing', false);
+			this.set('errorShow', false);
+			this.set('orderedProducts', []);
+		},
 
+		setup: function() {
+			if( this.get('id') ) {
+				var collection_id = this.get('id');
+				this.store.find('collection-product-list', {collection_id: collection_id});
+		 		var filter = this.store.filter('collection-product-list', function(mpl) {
+		 			if( mpl.get('id') && mpl.get('collection_id') === collection_id ) return true;
+		 		});
+		 		this.set("products", filter);
+	 		}	
 		}.observes('model'),
 
 		//Preserves the drag sort order of the images.
 		updateSortOrder: function(indexes) {  
-			this.set('orderedProducts', Object.keys(indexes)); 
-			console.log('orderedProducts', this.get('orderedProducts'))
+			if( !Ember.isEmpty(indexes)){
+				this.set('orderedProducts', Object.keys(indexes)); 
+			}
 		},
 
 		createOrderModel: function() {
-			var orderModel = this.store.createRecord('collection-product-list');
-			console.log("COLLECTION ",  this.model.get('id'))
+			var orderModel = this.store.createRecord('collection-product-list'); 
 			orderModel.set('collection_id', this.model.get('id'));
 			orderModel.set('product_ids', this.get('orderedProducts'));
 			this.set('orderModel', orderModel);
@@ -92,7 +105,10 @@
 
 			model.save()
 			.then(function() {
-				orderModel.save();
+				if( !Ember.isEmpty(_this.get('orderedProducts')) )
+					return orderModel.save();
+				else
+					return;
 			}).then(
 				function(result) { 
 					_this.set('isProcessing', false);
@@ -101,7 +117,12 @@
 				function(error){ 
 					_this.set('isProcessing', false);
 					_this.set('errorShow', true);
-					_this.set('errorMessage', Haul.errorMessages.get(error.status));
+
+					if( error.status === 409 ){
+						_this.set('errorMessage', "Oops, you already have a collection with that name.");
+					}else{
+						_this.set('errorMessage', Haul.errorMessages.get(error.status));	
+					}
 					console.log("Error" , error);
 				}
 			);
@@ -119,10 +140,7 @@
 				//Trim
 				if( model.get('description') ) {
 					model.set('description', model.get('description').trim())
-				}else{
-					var userName = this.get('currentUser.name');
-					model.set('description', userName + " hasn't written a description yet.")
-				}
+				} 
 				if( model.get('name') )
 					model.set('name', model.get('name').trim())
 

@@ -951,7 +951,7 @@ function program5(depth0,data) {
   data.buffer.push(escapeExpression((helper = helpers['bs-bind-tooltip'] || (depth0 && depth0['bs-bind-tooltip']),options={hash:{
     'content': ("Haul it! Add to your collection")
   },hashTypes:{'content': "STRING"},hashContexts:{'content': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bs-bind-tooltip", options))));
-  data.buffer.push(">\n	Add To Collection\n	<span class=\"glyphicon glyphicon-plus\"></span>\n</button>\n\n\n	 \n\n\n\n\n\n\n\n\n\n<div id=\"curateModal\" class=\"modal fade in danger text-left\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n	<div class=\"modal-dialog modal-lg\">\n		<div class=\"modal-content\">\n\n			<div class=\"modal-header\">\n				<button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>\n				<h4 class=\"modal-title\" id=\"mySmallModalLabel\">\n					Add Your Haul\n				</h4>\n			</div>\n\n			<div class=\"modal-body\"> \n\n				\n\n				<div ");
+  data.buffer.push(">\n	Add To Collection\n	<span class=\"glyphicon glyphicon-plus\"></span>\n</button>\n\n \n\n\n\n<div id=\"curateModal\" class=\"modal fade in danger text-left\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n	<div class=\"modal-dialog modal-lg\">\n		<div class=\"modal-content\">\n\n			<div class=\"modal-header\">\n				<button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>\n				<h4 class=\"modal-title\" id=\"mySmallModalLabel\">\n					Add Your Haul\n				</h4>\n			</div>\n\n			<div class=\"modal-body\"> \n\n				\n\n				<div ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'class': ("showForm:show:hide")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
@@ -1832,9 +1832,15 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
+  
+  data.buffer.push("<button class=\"btn btn-default\">Cancel</button>");
+  }
+
+function program3(depth0,data) {
+  
   var buffer = '', stack1, helper, options;
   data.buffer.push("\n				");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.id", options) : helperMissing.call(depth0, "link-to", "product", "product.id", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "product.id", options) : helperMissing.call(depth0, "link-to", "product", "product.id", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n\n				");
   data.buffer.push(escapeExpression((helper = helpers['ladda-btn'] || (depth0 && depth0['ladda-btn']),options={hash:{
@@ -1847,13 +1853,8 @@ function program1(depth0,data) {
   data.buffer.push("\n			");
   return buffer;
   }
-function program2(depth0,data) {
-  
-  
-  data.buffer.push("<button class=\"btn btn-default\">Cancel</button>");
-  }
 
-function program4(depth0,data) {
+function program5(depth0,data) {
   
   var buffer = '', helper, options;
   data.buffer.push("\n				");
@@ -1868,7 +1869,7 @@ function program4(depth0,data) {
   return buffer;
   }
 
-function program6(depth0,data) {
+function program7(depth0,data) {
   
   var buffer = '', stack1, helper, options;
   data.buffer.push("\n		<div class=\"row\">\n			<div class=\"col-md-12\"> 	\n				<div class=\"row\">\n					<div class=\"col-md-8 col-sm-8 col-xs-12\"> \n						<label>Name:</label>\n						");
@@ -1881,7 +1882,7 @@ function program6(depth0,data) {
     'canShowValidationError': ("showErrors")
   },hashTypes:{'as': "STRING",'canShowValidationError': "ID"},hashContexts:{'as': depth0,'canShowValidationError': depth0},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "description", options) : helperMissing.call(depth0, "input", "description", options))));
   data.buffer.push("\n					</div> \n				</div>\n				<div class=\"row\">\n					<div class=\"col-md-6 col-sm-6 col-xs-12\"> \n						");
-  stack1 = (helper = helpers.input || (depth0 && depth0.input),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "price", options) : helperMissing.call(depth0, "input", "price", options));
+  stack1 = (helper = helpers.input || (depth0 && depth0.input),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "price", options) : helperMissing.call(depth0, "input", "price", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n					</div>\n				</div>\n				<div class=\"row\">\n					<div class=\"col-md-6 col-sm-6 col-xs-12\"> \n						<label>Quantity:</label>\n						");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
@@ -1891,7 +1892,7 @@ function program6(depth0,data) {
   data.buffer.push("\n	 				</div>\n				</div>\n			</div>\n		</div>\n		");
   return buffer;
   }
-function program7(depth0,data) {
+function program8(depth0,data) {
   
   var buffer = '', helper, options;
   data.buffer.push("\n						");
@@ -1907,7 +1908,7 @@ function program7(depth0,data) {
   return buffer;
   }
 
-function program9(depth0,data) {
+function program10(depth0,data) {
   
   var buffer = '', helper, options;
   data.buffer.push("\n				");
@@ -1923,7 +1924,10 @@ function program9(depth0,data) {
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'class': (":collapse showImagePicker:in:out")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push(">\n			<button ");
+  data.buffer.push(">\n\n			");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.products", "currentUser.slug", options) : helperMissing.call(depth0, "link-to", "seller.products", "currentUser.slug", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n\n			<button ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'class': (":btn :btn-primary imagesAreSelected:enabled:disabled")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
@@ -1936,7 +1940,7 @@ function program9(depth0,data) {
   data.buffer.push(">\n			<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "clickPrev", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(" class=\"btn btn-primary\"><span class=\"glyphicon 	glyphicon-picture\"></span> Change Images</button>\n				\n			");
-  stack1 = helpers['if'].call(depth0, "productExists", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(4, program4, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "productExists", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n		</span>\n	</div>\n</div>\n\n\n\n<div class=\"container content-fixed-nav\">\n\n\n	\n\n	<div id=\"stepOne\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
@@ -1962,10 +1966,10 @@ function program9(depth0,data) {
   data.buffer.push("	\n					</div>\n				</div>\n			</div>\n		</div>\n\n\n		");
   stack1 = (helper = helpers['form-for'] || (depth0 && depth0['form-for']),options={hash:{
     'wrapper': ("bs3-wrapper")
-  },hashTypes:{'wrapper': "STRING"},hashContexts:{'wrapper': depth0},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product", options) : helperMissing.call(depth0, "form-for", "product", options));
+  },hashTypes:{'wrapper': "STRING"},hashContexts:{'wrapper': depth0},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "product", options) : helperMissing.call(depth0, "form-for", "product", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n\n\n\n		<div class=\"row\">\n			<div class=\"col-md-12 col-sm-12 col-xs-12\">\n\n			");
-  stack1 = helpers['if'].call(depth0, "errorShow", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "errorShow", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n\n			</div>\n		</div>\n		<div class=\"row padding-bottom\">\n			<div class=\"col-md-12 col-sm-12 col-xs-12 verical-align text-right\">\n\n			\n\n\n				\n			</div>\n		</div> \n\n	</div>\n</div>\n");
   return buffer;
@@ -2123,34 +2127,34 @@ function program8(depth0,data) {
 function program10(depth0,data) {
   
   var buffer = '', stack1, helper, options;
-  data.buffer.push("\n			<div class=\"btn-group\" role=\"group\">\n\n				");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.new-collection", "currentUser.slug", options) : helperMissing.call(depth0, "link-to", "seller.new-collection", "currentUser.slug", options));
+  data.buffer.push("\n	<div class=\"row\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12 text-center padding-top\">\n			");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.new-product", "currentUser.slug", options) : helperMissing.call(depth0, "link-to", "seller.new-product", "currentUser.slug", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n				");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.new-product", "currentUser.slug", options) : helperMissing.call(depth0, "link-to", "seller.new-product", "currentUser.slug", options));
+  data.buffer.push("\n\n			");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.new-collection", "currentUser.slug", options) : helperMissing.call(depth0, "link-to", "seller.new-collection", "currentUser.slug", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n				");
+  data.buffer.push(" \n		 \n			");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(15, program15, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.products", "currentUser.slug", options) : helperMissing.call(depth0, "link-to", "seller.products", "currentUser.slug", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			</div>\n			");
+  data.buffer.push("\n		  \n		</div>\n	</div> \n	");
   return buffer;
   }
 function program11(depth0,data) {
   
   
-  data.buffer.push("\n				<button class=\"btn btn-default\">\n					Create a collection\n					<span class=\"glyphicon glyphicon-plus-sign\"></span>\n				</button>\n				");
+  data.buffer.push("\n			<button class=\"btn btn-default btn-responsive haul-font\">\n				Sell Something\n				<span class=\"glyphicon glyphicon-plus-sign\"></span>\n			</button>\n			");
   }
 
 function program13(depth0,data) {
   
   
-  data.buffer.push("\n				<button class=\"btn btn-default\">\n					Sell Something\n					<span class=\"glyphicon glyphicon-plus-sign\"></span>\n				</button>\n				");
+  data.buffer.push("\n				<button class=\"btn btn-default btn-responsive haul-font\">\n					Create a collection\n					<span class=\"glyphicon glyphicon-plus-sign\"></span>\n				</button>\n			");
   }
 
 function program15(depth0,data) {
   
   
-  data.buffer.push("\n				<button class=\"btn btn-default\">\n					My Items\n					<span class=\"glyphicon glyphicon-plus-sign\"></span>\n				</button>\n				");
+  data.buffer.push("\n			<button class=\"btn btn-default btn-responsive haul-font\">\n				My Items\n				<span class=\"glyphicon glyphicon-chevron-right\"></span>\n			</button>\n			");
   }
 
 function program17(depth0,data) {
@@ -2176,7 +2180,7 @@ function program18(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("\n\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-6 col-sm-12 col-xs-12  haul-font\">\n\n			<div class=\"media\">\n			  	<div class=\"profile-circular-mask pull-left\">\n			  	");
+  data.buffer.push("\n\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row haul-font\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12\">\n\n			<div class=\"media\">\n			  	<div class=\"profile-circular-mask pull-left\">\n			  	");
   stack1 = helpers['if'].call(depth0, "icon", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(4, program4, data),fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n			    </div>\n			 \n			 	<div class=\"media-body\">\n			     	<h1 class=\"heading haul-font\">");
@@ -2188,10 +2192,10 @@ function program18(depth0,data) {
     'ref_type': ("user"),
     'currentUser': ("currentUser")
   },hashTypes:{'item': "ID",'ref_type': "STRING",'currentUser': "ID"},hashContexts:{'item': depth0,'ref_type': depth0,'currentUser': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "follow-btn", options))));
-  data.buffer.push(" \n					</div>\n			  	</div>\n			</div> \n		</div> \n	 \n		<div class=\"col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right\">\n			\n\n			");
+  data.buffer.push(" \n					</div> \n				</div>\n			</div> \n		</div>\n	</div>\n</div>	\n\n\n \n<div class=\"container\"> \n\n	\n	");
   stack1 = helpers['if'].call(depth0, "isProfileOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	\n		</div>\n	</div>\n</div>	\n\n\n \n<div class=\"container\"> \n	\n\n	");
+  data.buffer.push("\n\n\n\n	\n\n	");
   stack1 = helpers.each.call(depth0, "model.collections", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(17, program17, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \n</div> \n\n\n\n");
@@ -2200,18 +2204,74 @@ function program18(depth0,data) {
 });Ember.TEMPLATES['seller/products'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
+  
+  data.buffer.push("\n					<span class=\"glyphicon glyphicon-chevron-left pull-left padding-top margin-top\"></span>\n				");
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1, helper, options;
+  data.buffer.push("\n					");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller", "user", options) : helperMissing.call(depth0, "link-to", "seller", "user", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			    ");
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = '';
+  data.buffer.push("<img ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'src': ("user.icon")
+  },hashTypes:{'src': "ID"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push("> ");
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n			    	");
+  stack1 = helpers['if'].call(depth0, "isProfileOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			    ");
+  return buffer;
+  }
+function program7(depth0,data) {
+  
+  var buffer = '', stack1, helper, options;
+  data.buffer.push("\n						<span>");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "settings", options) : helperMissing.call(depth0, "link-to", "settings", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\n					");
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  
+  data.buffer.push("edit");
+  }
+
+function program10(depth0,data) {
+  
+  
+  data.buffer.push("\n			<button class=\"btn btn-default btn-responsive haul-font\">\n				Add Something To Sell\n				<span class=\"glyphicon glyphicon-plus-sign\"></span>\n			</button>\n			");
+  }
+
+function program12(depth0,data) {
+  
   var buffer = '', stack1, helper, options;
   data.buffer.push("\n    	");
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "id", options) : helperMissing.call(depth0, "link-to", "product", "id", options));
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "product", "id", options) : helperMissing.call(depth0, "link-to", "product", "id", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("	\n	");
   return buffer;
   }
-function program2(depth0,data) {
+function program13(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\n    	<div class=\"haul-grid-li\"> \n			<img class=\"thumbnail\" ");
@@ -2219,7 +2279,7 @@ function program2(depth0,data) {
     'src': ("image.small")
   },hashTypes:{'src': "ID"},hashContexts:{'src': depth0},contexts:[],types:[],data:data})));
   data.buffer.push(">\n\n			");
-  stack1 = helpers['if'].call(depth0, "sold", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers['if'].call(depth0, "sold", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(14, program14, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n			\n			<div class=\"info\">		\n		 	  	<div class=\"price\"> $");
   stack1 = helpers._triageMustache.call(depth0, "price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
@@ -2227,14 +2287,23 @@ function program2(depth0,data) {
   data.buffer.push("</div>   \n			</div>			\n	 	</div>\n	 	");
   return buffer;
   }
-function program3(depth0,data) {
+function program14(depth0,data) {
   
   
   data.buffer.push("\n				<div class=\"sold\">Sold</div>\n			");
   }
 
-  data.buffer.push("\n\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12 haul-profile-header haul-font\">\n			<h1>Your Items</h1>\n			<h4>Below are only items you have uploaded</h4>\n		</div> \n	</div>\n</div>	\n\n\n \n<div class=\"container\">\n	\n    ");
-  stack1 = helpers.each.call(depth0, "", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\n\n\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n\n		<div class=\"col-md-6 col-sm-12 col-xs-12  haul-font\">\n\n			<div class=\"media\">\n\n\n				");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller", "user", options) : helperMissing.call(depth0, "link-to", "seller", "user", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n\n			  	<div class=\"profile-circular-mask pull-left\">\n			  	");
+  stack1 = helpers['if'].call(depth0, "user.icon", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(6, program6, data),fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n			    </div>\n			 \n			 	<div class=\"media-body\">\n			     	<h1>Your Items</h1>\n					<h4>Add them to collections.</h4>\n			  	</div>\n			</div> \n		</div>  \n\n		 \n\n\n	</div>\n</div>	\n\n\n \n<div class=\"container\">\n	\n	\n\n	<div class=\"row\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12 text-center padding-top\">\n			");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.new-product", "currentUser.slug", options) : helperMissing.call(depth0, "link-to", "seller.new-product", "currentUser.slug", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		</div>\n	</div> \n\n \n\n\n	\n    ");
+  stack1 = helpers.each.call(depth0, "", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push(" \n</div>");
   return buffer;

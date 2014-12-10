@@ -16,26 +16,10 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 
 	//GET ONE IMAGE:
 	first_image: function() {  
-		return this.get('images').then(function(images){
-			console.log("FUUUCK", images)
+		return this.get('images').then(function(images){ 
 			return images.get('firstObject');
 		});
-	}.property(),
-
-	// /comments: DS.hasMany('comment', {async:true}),
-	// comments: function() {
-	// 	var store = this.store;
-	// 	var product_id = this.get('id');
-
-	// 	store.find('comment-list', {product_id: product_id});
-
-	// 	return store.filter('comment-list', function(comment){
-	// 		if( comment.get('product_id') == product_id ) {
-	// 			return comment;
-	// 		}
-	// 	});
-		
-	// }.property()
+	}.property(), 
 
 	validations: { 
 		name: {

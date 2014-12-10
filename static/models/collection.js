@@ -85,20 +85,21 @@ Haul.CollectionAdapter = Haul.ApplicationAdapter.extend({
         return this.ajax(url, 'GET');
     },
 
-	// findMany: function(store, type, ids) {
-	// 	console.log("FOUDN YOU")
-	// },
-
-	// findQuery: function(store, type, query) { 
- //        var url = this.host + "/users/" + query.user_id + "/products";
- //        return this.ajax(url, 'GET');
- //    },    
- 
+	setDescription: function(){
+		var description = this.get('currentUser').get('name') + " hasn't written a description yet."
+		return description;
+	},
 
 	updateRecord: function(store, type, record) {
+		
+		var description = record.get('description');
+		if(!description) {
+			description = this.setDescription();
+		} 
+
 		var data = {
 			name: record.get('name'),
-			description: record.get('description'),
+			description: description,
 			user_id: record.get('user_id')
 		}
 
@@ -110,9 +111,14 @@ Haul.CollectionAdapter = Haul.ApplicationAdapter.extend({
 
 	createRecord: function(store, type, record) {
 
+		var description = record.get('description');
+		if(!description) {
+			description = this.setDescription();
+		} 
+
 		var data = {
 			name: record.get('name'),
-			description: record.get('description'),
+			description: description,
 			user_id: record.get('user_id')
 		}
 		

@@ -29,6 +29,9 @@ Haul.CollectionIndexRoute = Haul.AnonRoute.extend({
 
 Haul.CollectionEditRoute = Haul.AuthenticatedRoute.extend({ 
 	controllerName: "collection-edit",
+	beforeModel: function() {
+		this.controllerFor('collection-edit').reset();
+	},
 	model: function() {
 		return this.modelFor('collection');
 	}, 
