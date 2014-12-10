@@ -1,23 +1,27 @@
 
-{{!-- STORE TEMPLATE --}}
 <div class="seller-nav ">
 	<div class="container content-fixed-nav">
-
 		<div class="row ">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
 				   	
 		     	<h1>
-		     		{{ make-icon icon=collection.icon isSmall=false  }}
+		     		{{ make-icon icon=collection.icon isSmall=false isCollection=true }}
 		     		<strong>{{collection.name}}</strong> 
 		     	</h1>
 		     	<small>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
-				 
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">				 
+				<div class="haul-font-weak">
+			    	{{ truncate-text text=collection.description }}
+				</div>
 			</div>
 	 	</div>
 	</div>	
 </div>	
  
-
 
  {{!-- TOOLBAR --}}
 <div class="toolbar">
@@ -56,15 +60,6 @@
 
 
 <div class="container">
-
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="haul-font-weak">
-			    {{ truncate-text text=collection.description }}
-			</div>
-		</div>
-	</div>
-
 
 	{{!-- INFORMATION POD --}}
 	{{#link-to "seller" collection.user }}
