@@ -1,24 +1,25 @@
-{{#if isCollectionOwner}}
-	<div class="toolbar text-right">
-		{{collection-btn
-			class="display-inline" 
-			currentUser=currentUser 
-			collection=model.collection
-			product=model.product
-		}}
-	</div>
-{{/if}}
+
 
 
 <div class="container content-fixed-nav">
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12 haul-font">
+		<div class="col-md-6 col-sm-6 col-xs-12 haul-font">
 			<h2 class="heading haul-font">
 				{{ make-icon icon=model.collection.icon isSmall=true class="pull-left" }}
 				{{#link-to 'collection' model.collection}}{{ model.collection.name }}{{/link-to}} -
 				{{ model.product.name }}
 			</h2>
 		</div>  
+		<div class="col-md-6 col-sm-6 col-xs-12 haul-font padding-top padding-bottom text-right">
+
+			{{#if isCollectionOwner}} 
+				<button class="btn btn-default">
+					Edit Your Post
+					<span class="glyphicon glyphicon-plus-sign"></span>
+				</button> 
+			{{/if}}
+
+		</div>
 	</div>
 </div>	
 

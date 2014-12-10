@@ -252,8 +252,8 @@ body {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   position: absolute;
-  top: 40px;
-  left: 55px;
+  top: 30px;
+  left: 35px;
 }
 
 /* line 246, haul.scss */
@@ -627,11 +627,16 @@ body {
 }
 
 /* line 593, haul.scss */
+.btn-fit-select {
+  padding-bottom: 12px;
+}
+
+/* line 597, haul.scss */
 .padding-bottom {
   padding-bottom: 20px;
 }
 
-/* line 597, haul.scss */
+/* line 601, haul.scss */
 .vcenter {
   float: none;
   display: inline-block;
@@ -639,12 +644,12 @@ body {
   margin-right: -4px;
 }
 
-/* line 606, haul.scss */
+/* line 610, haul.scss */
 .btn-no-radius {
   border-radius: 0;
 }
 
-/* line 610, haul.scss */
+/* line 614, haul.scss */
 .btn-facebook {
   color: #fff;
   background-color: #3B5998;
@@ -654,13 +659,13 @@ body {
   font-weight: 700;
 }
 
-/* line 619, haul.scss */
+/* line 623, haul.scss */
 .btn-facebook:hover {
   background-color: #879ac0;
   border: none;
 }
 
-/* line 629, haul.scss */
+/* line 633, haul.scss */
 .haul-grid-thumbs {
   list-style: none;
   float: left;
@@ -669,7 +674,7 @@ body {
   width: 20%;
 }
 
-/* line 637, haul.scss */
+/* line 641, haul.scss */
 .alert-wrapper {
   position: absolute;
   display: block;
@@ -678,7 +683,7 @@ body {
   left: 0px;
 }
 
-/* line 646, haul.scss */
+/* line 650, haul.scss */
 .alert-wrapper .alert {
   border-radius: 0px;
   background-color: rgba(242, 222, 222, 0.9);
@@ -686,7 +691,7 @@ body {
   /*text-align:center;*/
 }
 
-/* line 653, haul.scss */
+/* line 657, haul.scss */
 .progress-wrapper {
   position: absolute;
   display: block;
@@ -695,19 +700,19 @@ body {
   margin-left: 0px;
 }
 
-/* line 661, haul.scss */
+/* line 665, haul.scss */
 .progress-wrapper .progress {
   border-radius: 0px;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
-/* line 668, haul.scss */
+/* line 672, haul.scss */
 .haul-grid-thumbs:hover .delete {
   opacity: 1;
 }
 
-/* line 672, haul.scss */
+/* line 676, haul.scss */
 .haul-grid-thumbs .delete {
   position: absolute;
   right: 10px;
@@ -715,18 +720,18 @@ body {
   opacity: 0;
 }
 
-/* line 682, haul.scss */
+/* line 686, haul.scss */
 #haul-dropzone {
   /*border: 1px solid blue;*/
   min-height: 300px;
 }
 
-/* line 687, haul.scss */
+/* line 691, haul.scss */
 .dropzone-preview {
   /* border: 1px solid pink;*/
 }
 
-/* line 691, haul.scss */
+/* line 695, haul.scss */
 .ember-view .selected img {
   border-left: 4px solid #428bca;
   border-right: 4px solid #428bca;
@@ -734,75 +739,75 @@ body {
   border-bottom: 4px solid #428bca;
 }
 
-/* line 698, haul.scss */
+/* line 702, haul.scss */
 .ember-view .selected .delete {
   opacity: 0;
 }
 
-/* line 706, haul.scss */
+/* line 710, haul.scss */
 .modal .danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
 
-/* line 713, haul.scss */
+/* line 717, haul.scss */
 .carousel-control.left {
   background-image: none;
 }
 
-/* line 716, haul.scss */
+/* line 720, haul.scss */
 .carousel-control.right {
   background-image: none;
 }
 
-/* line 720, haul.scss */
+/* line 724, haul.scss */
 .slide {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
 }
 
-/* line 725, haul.scss */
+/* line 729, haul.scss */
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
   width: 100%;
 }
 
-/* line 730, haul.scss */
+/* line 734, haul.scss */
 .haul-thumb {
   cursor: hand;
   margin-bottom: 0px;
   width: 100%;
 }
 
-/* line 736, haul.scss */
+/* line 740, haul.scss */
 .sortable {
   list-style: none;
 }
 
-/* line 740, haul.scss */
+/* line 744, haul.scss */
 .ui-sortable {
   padding: 0px;
   position: relative;
 }
 
-/* line 745, haul.scss */
+/* line 749, haul.scss */
 .sortable li {
   float: left;
   width: 20%;
   cursor: hand;
 }
 
-/* line 751, haul.scss */
+/* line 755, haul.scss */
 .sort-item-wrapper {
   position: relative;
 }
 
-/* line 754, haul.scss */
+/* line 758, haul.scss */
 .sortable li .glyphicon {
   display: none;
 }
 
-/* line 757, haul.scss */
+/* line 761, haul.scss */
 .sortable li:hover .glyphicon {
   display: inline-block;
   position: absolute;
@@ -815,42 +820,42 @@ body {
   font-size: 3em;
 }
 
-/* line 771, haul.scss */
+/* line 775, haul.scss */
 .sortable li:hover img {
   opacity: .5;
 }
 
-/* line 776, haul.scss */
+/* line 780, haul.scss */
 .input-sm {
   width: 100px;
 }
 
-/* line 780, haul.scss */
+/* line 784, haul.scss */
 .input-xs {
   width: 75px;
 }
 
-/* line 784, haul.scss */
+/* line 788, haul.scss */
 .input-group .input-sm {
   width: 100px;
 }
 
-/* line 788, haul.scss */
+/* line 792, haul.scss */
 label {
   padding-top: 10px;
 }
 
-/* line 792, haul.scss */
+/* line 796, haul.scss */
 .border {
   border: 1px solid pink;
 }
 
-/* line 796, haul.scss */
+/* line 800, haul.scss */
 textarea.form-control {
   height: 200px;
 }
 
-/* line 813, haul.scss */
+/* line 817, haul.scss */
 .toc {
   float: left;
   width: 200px;
@@ -859,22 +864,22 @@ textarea.form-control {
 }
 
 @media (max-width: 992px) {
-  /* line 820, haul.scss */
+  /* line 824, haul.scss */
   .toc {
     display: none;
   }
 }
-/* line 825, haul.scss */
+/* line 829, haul.scss */
 .relative {
   position: relative;
 }
 
-/* line 829, haul.scss */
+/* line 833, haul.scss */
 .content-toc {
   padding-top: 60px;
 }
 
-/* line 833, haul.scss */
+/* line 837, haul.scss */
 .content-scroll {
   overflow: scroll;
   height: 120%;
@@ -882,12 +887,12 @@ textarea.form-control {
   padding-bottom: 0%;
 }
 
-/* line 840, haul.scss */
+/* line 844, haul.scss */
 .content-fixed-nav {
   margin-top: 65px;
 }
 
-/* line 845, haul.scss */
+/* line 849, haul.scss */
 .trucate-text .hide {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -895,7 +900,7 @@ textarea.form-control {
   transition: opacity 0.15s linear;
 }
 
-/* line 849, haul.scss */
+/* line 853, haul.scss */
 .trucate-text .show {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -903,38 +908,38 @@ textarea.form-control {
   transition: opacity 0.15s linear;
 }
 
-/* line 854, haul.scss */
+/* line 858, haul.scss */
 .badge-success {
   background-color: green;
 }
 
-/* line 858, haul.scss */
+/* line 862, haul.scss */
 .badge-danger {
   background-color: red;
 }
 
-/* line 862, haul.scss */
+/* line 866, haul.scss */
 .alert-sm {
   padding: 3px;
   margin-top: 3px;
 }
 
-/* line 875, haul.scss */
+/* line 879, haul.scss */
 .content-fixed-nav.home {
   margin-top: 50px;
 }
 
-/* line 881, haul.scss */
+/* line 885, haul.scss */
 .home .price {
   bottom: 40%;
 }
 
-/* line 885, haul.scss */
+/* line 889, haul.scss */
 .home .thumbnail {
   margin-bottom: 0px;
 }
 
-/* line 889, haul.scss */
+/* line 893, haul.scss */
 .home .description {
   display: block;
   padding: 10px;
@@ -946,7 +951,7 @@ textarea.form-control {
 }
 
 @media (min-width: 768px) {
-  /* line 901, haul.scss */
+  /* line 905, haul.scss */
   .btn-responsive {
     padding: 10px 16px;
     font-size: 18px;
@@ -954,12 +959,12 @@ textarea.form-control {
     border-radius: 6px;
   }
 }
-/* line 909, haul.scss */
+/* line 913, haul.scss */
 .btn-responsive.selected {
   background-color: #eee;
 }
 
-/* line 915, haul.scss */
+/* line 919, haul.scss */
 .form-list {
   list-style: none;
   padding-left: -10px;

@@ -2,14 +2,7 @@
 <div {{bind-attr class="isShowCreateCollection:show:hide"}}>
 	<div class="row"> 
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="media">
-			
-
-				<div class="pull-left">
-					<button {{action "cancel"}} class="btn btn-default">
-						<span class="glyphicon glyphicon-chevron-left"></span>
-						Cancel</button>
-				</div>
+			<div class="media"> 
 
 				<div class="pull-right">
 				{{ladda-btn
@@ -21,9 +14,9 @@
 				}}
 				</div>
 				<div class="media-body">
-					{{input name canShowValidationError=showErrors placeholder="type a new collection title" }}  
-				</div>
-
+					{{input name canShowValidationError=showErrors placeholder="collection title" }}  
+				</div> 
+				
 			</div>
 	 	</div>
 	 </div>

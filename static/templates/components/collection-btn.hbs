@@ -26,13 +26,12 @@
 				{{!-- EDIT FORM --}}
 
 				<div {{bind-attr class="showForm:show:hide"}}>
+					{{#form-for model wrapper="bs3-wrapper"}}
+
 					<div class="row">
- 
 
 						{{!-- COLLECTION --}}
-						<div class="col-md-8 col-sm-6 col-xs-12">
-
-						{{#form-for model wrapper="bs3-wrapper"}}
+						<div class="col-md-6 col-sm-6 col-xs-12">
 						
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12">  
@@ -49,62 +48,56 @@
 								</div>
 							</div>
 
-							<div {{bind-attr class="isShowCreateCollection:hide:show"}}>
-								<div class="row">
-									<div class="col-md-12 col-sm-12 col-xs-12"> 
-									
-										<div class="media">
-
-
-											<div class="pull-right">
-												<button {{action 'showCreateCollection'}} class="btn btn-default ">New Collection</button>
-											</div>
-											<div class="pull-right vcenter">OR</div>
-											
-	 								
-		 									<div class="media-body">
-											{{view Ember.Select
-											  	contentBinding="userCollections"
-											  	optionValuePath="content.collection_id"
-											  	optionLabelPath="content.collection_name" 
-											 	selectionBinding='selectedCollection'
-											  	class="form-control"
-											  	prompt="Pick a collection"
-											}}
-											</div>
-
-
-										</div>
-
-										<br/>
-									</div> 
-								</div>
-							</div>
 							
 							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12">  
- 										
- 									<h4>Editorial</h4>
+								<div class="col-md-12 col-sm-12 col-xs-12"> 
+								
+									<div class="media">
 
-									{{input editorial as="text" canShowValidationError=showErrors 
-											placeholder="Tell everyone what's so awesome about this item"
-									}} 
- 
+										<div {{bind-attr class="isShowCreateCollection:hide:show"}}>
+											<div class="pull-right">
+												<button {{action 'showCreateCollection'}} class="btn btn-default btn-fit-select">
+													<span class="glyphicon glyphicon-plus"></span>
+												</button>
+											</div>
+										</div>
+	 								
+	 									<div class="media-body">
+										{{view Ember.Select
+										  	contentBinding="userCollections"
+										  	optionValuePath="content.collection_id"
+										  	optionLabelPath="content.collection_name" 
+										 	selectionBinding='selectedCollection'
+										  	class="form-control"
+										  	prompt="Pick a collection"
+										}}
+										</div>
+									</div> 
+
 								</div> 
-							</div>
-
-						{{/form-for}}	
-
+							</div> 
 						</div>
 
-
 						{{!-- IMAGE --}}
-						<div class="col-md-4 col-sm-6 col-xs-6 text-center"> 
+						<div class="col-md-6 col-sm-6 col-xs-12 text-center padding-top"> 
 							<img class="thumbnail small center" {{bind-attr src=productImage}}>
 							<p>{{ model.product.name }}</p> 
 						</div>
+					</div>
 
 
+							{{!-- </div> --}}
+							
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">  
+									
+								<h4>Editorial</h4>
+
+							{{input editorial as="text" canShowValidationError=showErrors 
+									placeholder="Tell everyone what's so awesome about this item"
+							}} 
+
+						</div> 
 					</div>
 
 					<div class="row">
@@ -130,7 +123,9 @@
 								spin=isProcessing
 							}} 
 						</div>
-					</div> 
+					</div>
+
+					{{/form-for}} 
 				</div>
 
 
