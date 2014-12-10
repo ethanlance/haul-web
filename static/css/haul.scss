@@ -63,7 +63,9 @@ body {
   font-weight: bold;
 }
 
-
+.haul-font-weak {
+  font-weight: normal;
+}
 
 .logo-outer {
   
@@ -932,6 +934,10 @@ textarea.form-control {
 
 
 
+.seller-nav h1 {
+  margin-top: -3px;
+}
+
 .seller-nav h1 a {
   color:black;
 }
@@ -939,3 +945,8 @@ textarea.form-control {
 .seller-nav h2 a {
   color:black;
 }
+
+
+
+
+

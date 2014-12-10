@@ -4,13 +4,17 @@
 <div class="container content-fixed-nav">
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-12 haul-font">
-			<h2 class="heading haul-font">
-				{{ make-icon icon=model.collection.icon isSmall=true class="pull-left" }}
-				{{#link-to 'collection' model.collection}}{{ model.collection.name }}{{/link-to}} -
-				{{ model.product.name }}
-			</h2>
+			
+			<div class="pull-left seller-nav">
+				{{#link-to 'collection' model.collection}}
+					{{ make-icon icon=model.collection.icon isSmall=true class="pull-left" }}
+					{{ model.collection.name }}
+				{{/link-to}}
+				<h1>{{ model.product.name }}</h1>
+			</div>
+			 
 		</div>  
-		<div class="col-md-6 col-sm-6 col-xs-12 haul-font padding-top padding-bottom text-right">
+		<div class="col-md-6 col-sm-6 col-xs-12 haul-font padding-top text-right">
 
 			{{#if isCollectionOwner}} 
 				<button class="btn btn-default">
@@ -23,6 +27,7 @@
 	</div>
 </div>	
 
+<div class="toolbar"><span></span></div>
 
 <div class="container">
 	<div class="row">

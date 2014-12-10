@@ -8,13 +8,13 @@
 				{{ profile-badge item=collection isCollectionOwner=isCollectionOwner }}
 
 				<div class="media-body">
-			     	<h2 class="heading haul-font">
-			     		{{#link-to "collection" collection }}{{collection.name}}{{/link-to}}
-			     	</h2>
+			     	<h4><strong>{{collection.name}}</strong></h4>
+			     	<p>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</p>
 
-			     	{{ truncate-text text=collection.description }}
-
-			     	<h5>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</h5>
+			     	<div class="haul-font-weak">
+			     		{{ truncate-text text=collection.description }}
+			     	</div>
+			     	
 
 				</div> 
 			</div>
@@ -41,7 +41,7 @@
 	</div>
 </div>	
  
-
+<div class="toolbar"><span></span></div>
 
 
 <div class="container">

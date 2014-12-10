@@ -1,29 +1,21 @@
 <div class="container content-fixed-nav seller-nav">
-	<div class="row haul-font">
-		<div class="col-md-12 col-sm-12 col-xs-12">
 
-			<div class="media">
-			  	<div class="profile-circular-mask pull-left">
-			  	{{#if user.icon }}
-					{{#link-to "seller" user}}<img {{bind-attr src=user.icon}}> {{/link-to}}
-			    {{else}}
-			    	{{#if isProfileOwner }}
-						<span>{{#link-to "settings"}}edit{{/link-to}}</span>
-					{{/if}}
-			    {{/if}}
-			    </div>
-			 
-			 	<div class="media-body ">
-			     	<h1 class="heading haul-font">{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
-					<div>
-						{{ follow-btn 
-							item=user 
-							ref_type="user"
-							currentUser = currentUser 
-						}} 
-					</div> 
-				</div>
+
+
+	<div class="row ">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			   	
+			{{ make-icon icon=user.icon isSmall=false class="pull-left" }}
+			 	
+	     	<h1>{{#link-to "seller" user }}{{user.name}}{{/link-to}}</h1>
+			<div>
+				{{ follow-btn 
+					item=user 
+					ref_type="user"
+					currentUser = currentUser 
+				}} 
 			</div> 
+				 
 		</div>
 	</div>
 
