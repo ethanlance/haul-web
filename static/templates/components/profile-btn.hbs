@@ -16,15 +16,11 @@
 	    </button>
 	    <ul class="dropdown-menu" role="menu">
 
-	    	<li>{{#link-to 'seller' currentUser.slug }}My Stuff{{/link-to}}</li>
-			<li>{{#link-to 'seller.new-product' currentUser.slug }}- Add Stuff{{/link-to}}</li> 
-
-			{{#if currentUser.user.collection}}
-			<li>{{#link-to 'collection' currentUser.user.collection.collection_id }}My Store{{/link-to}}</li> 
-			<li>{{#link-to 'collection.edit' currentUser.user.collection.collection_id }}- Edit Store{{/link-to}}</li> 
-			{{else}}
-			<li>{{#link-to 'seller.new-collection' currentUser.slug }}Create A Store{{/link-to}}</li> 
-			{{/if}}
+	    	<li>{{#link-to 'seller.products' currentUser.slug }}My Items{{/link-to}}</li>
+			<li>{{#link-to 'seller.new-product' currentUser.slug }}- Create Item{{/link-to}}</li> 
+			<li>{{#link-to 'seller' currentUser.slug }}My Collections{{/link-to}}</li>
+			<li>{{#link-to 'seller.new-collection' currentUser.slug }}- Create Collection{{/link-to}}</li>  
+			
 				
 			<li class="divider"></li> 	
 			<li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
