@@ -1,27 +1,28 @@
 
 {{!-- STORE TEMPLATE --}}
-<div class="container content-fixed-nav">
-	<div class="row">
-		<div class="col-md-6 col-sm-12 col-xs-12 haul-font seller-nav">
-			<div class="media">
-				
-				{{ profile-badge item=collection isCollectionOwner=isCollectionOwner }}
+<div class="container content-fixed-nav seller-nav">
 
-				<div class="media-body">
-			     	<h4><strong>{{collection.name}}</strong></h4>
-			     	<p>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</p>
+	<div class="row ">
+		<div class="col-md-6 col-sm-12 col-xs-12">
+			   	
+			{{ make-icon icon=collection.icon isSmall=false class="pull-left" }}
+			 	
+	     	<h4 class="haul-font">
+	     		<strong>{{collection.name}}</strong> 
+	     		<small>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
+	     	</h4>
+			
+			{{ follow-btn 
+				item=collection 
+				ref_type="collection"
+				currentUser = currentUser 
+			}}  
+			 
+		</div>
+ 
 
-			     	<div class="haul-font-weak">
-			     		{{ truncate-text text=collection.description }}
-			     	</div>
-			     	
+		<div class="col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right">
 
-				</div> 
-			</div>
-		</div>  
-
-
-		<div class="col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right	">
 			{{!-- SELL SOMETHING  --}}
 
 			{{#if isCollectionOwner }}
@@ -41,7 +42,17 @@
 	</div>
 </div>	
  
-<div class="toolbar"><span></span></div>
+<div class="toolbar ">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="haul-font-weak">
+			    {{ truncate-text text=collection.description }}
+			</div>
+		</div>
+	</div>
+</div>
+</div>
 
 
 <div class="container">

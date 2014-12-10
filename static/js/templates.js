@@ -802,25 +802,32 @@ function program8(depth0,data) {
   data.buffer.push("\n					<div class=\"sold\">Sold</div>\n				");
   }
 
-  data.buffer.push("\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-6 col-sm-12 col-xs-12 haul-font seller-nav\">\n			<div class=\"media\">\n				\n				");
-  data.buffer.push(escapeExpression((helper = helpers['profile-badge'] || (depth0 && depth0['profile-badge']),options={hash:{
-    'item': ("collection"),
-    'isCollectionOwner': ("isCollectionOwner")
-  },hashTypes:{'item': "ID",'isCollectionOwner': "ID"},hashContexts:{'item': depth0,'isCollectionOwner': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "profile-badge", options))));
-  data.buffer.push("\n\n				<div class=\"media-body\">\n			     	<h4><strong>");
+  data.buffer.push("\n\n<div class=\"container content-fixed-nav seller-nav\">\n\n	<div class=\"row \">\n		<div class=\"col-md-6 col-sm-12 col-xs-12\">\n			   	\n			");
+  data.buffer.push(escapeExpression((helper = helpers['make-icon'] || (depth0 && depth0['make-icon']),options={hash:{
+    'icon': ("collection.icon"),
+    'isSmall': (false),
+    'class': ("pull-left")
+  },hashTypes:{'icon': "ID",'isSmall': "BOOLEAN",'class': "STRING"},hashContexts:{'icon': depth0,'isSmall': depth0,'class': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "make-icon", options))));
+  data.buffer.push("\n			 	\n	     	<h4 class=\"haul-font\">\n	     		<strong>");
   stack1 = helpers._triageMustache.call(depth0, "collection.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</strong></h4>\n			     	<p>");
+  data.buffer.push("</strong> \n	     		<small>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller", "collection.user", options) : helperMissing.call(depth0, "link-to", "seller", "collection.user", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</p>\n\n			     	<div class=\"haul-font-weak\">\n			     		");
+  data.buffer.push("</small>\n	     	</h4>\n			\n			");
+  data.buffer.push(escapeExpression((helper = helpers['follow-btn'] || (depth0 && depth0['follow-btn']),options={hash:{
+    'item': ("collection"),
+    'ref_type': ("collection"),
+    'currentUser': ("currentUser")
+  },hashTypes:{'item': "ID",'ref_type': "STRING",'currentUser': "ID"},hashContexts:{'item': depth0,'ref_type': depth0,'currentUser': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "follow-btn", options))));
+  data.buffer.push("  \n			 \n		</div>\n \n\n		<div class=\"col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right\">\n\n			\n\n			");
+  stack1 = helpers['if'].call(depth0, "isCollectionOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n	\n		</div>\n	</div>\n</div>	\n \n<div class=\"toolbar \">\n<div class=\"container\">\n	<div class=\"row\">\n		<div class=\"col-md-12 col-sm-12 col-xs-12\">\n			<div class=\"haul-font-weak\">\n			    ");
   data.buffer.push(escapeExpression((helper = helpers['truncate-text'] || (depth0 && depth0['truncate-text']),options={hash:{
     'text': ("collection.description")
   },hashTypes:{'text': "ID"},hashContexts:{'text': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "truncate-text", options))));
-  data.buffer.push("\n			     	</div>\n			     	\n\n				</div> \n			</div>\n		</div>  \n\n\n		<div class=\"col-md-6 col-sm-12 col-xs-12 haul-font padding-top text-right	\">\n			\n\n			");
-  stack1 = helpers['if'].call(depth0, "isCollectionOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n	\n		</div>\n	</div>\n</div>	\n \n<div class=\"toolbar\"><span></span></div>\n\n\n<div class=\"container\">\n\n\n\n\n\n	 \n    ");
+  data.buffer.push("\n			</div>\n		</div>\n	</div>\n</div>\n</div>\n\n\n<div class=\"container\">\n\n\n\n\n\n	 \n    ");
   stack1 = helpers.each.call(depth0, "products", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n	\n</div> \n\n\n\n");
