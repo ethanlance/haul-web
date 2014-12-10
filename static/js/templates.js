@@ -808,7 +808,7 @@ function program10(depth0,data) {
   data.buffer.push("\n					<div class=\"sold\">Sold</div>\n				");
   }
 
-  data.buffer.push("\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-6 col-sm-12 col-xs-12 haul-font\">\n			<div class=\"media\">\n				\n				");
+  data.buffer.push("\n\n<div class=\"container content-fixed-nav\">\n	<div class=\"row\">\n		<div class=\"col-md-6 col-sm-12 col-xs-12 haul-font seller-nav\">\n			<div class=\"media\">\n				\n				");
   data.buffer.push(escapeExpression((helper = helpers['profile-badge'] || (depth0 && depth0['profile-badge']),options={hash:{
     'item': ("collection"),
     'isCollectionOwner': ("isCollectionOwner")

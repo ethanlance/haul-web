@@ -283,9 +283,18 @@ body {
 
 .toolbar.shrink {
   @include transition(all .2s ease-in-out);
-
+  position: fixed;
+  display:inline;
+  top:48px;
   padding-top:5px;
   padding-bottom:5px;
+  z-index: 1029;
+}
+
+@media (max-width: 768px) {
+  .toolbar.shrink {
+    top:40px;
+  }
 }
 
 .navbar-profile .profile-circular-mask {
@@ -924,5 +933,9 @@ textarea.form-control {
 
 
 .seller-nav h1 a {
+  color:black;
+}
+
+.seller-nav h2 a {
   color:black;
 }
