@@ -1,8 +1,6 @@
 <div class="container content-fixed-nav seller-nav">
 
-
-
-	<div class="row ">
+	<div {{bind-attr class="editMode:hide:show :row"}}>
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			   	
 			{{ make-icon icon=user.icon isSmall=false class="pull-left" }}
@@ -25,36 +23,40 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12 text-center padding-top">
 
-
-			{{#link-to "seller" user }}
-			<button {{bind-attr class="pageCollections:selected :btn :btn-default :btn-responsive :haul-font"}}>
-				<span class="glyphicon glyphicon-chevron-left"></span>
-				Collections
+		
+		<div class="btn-group" role="group">	
+			<button type="button" {{bind-attr class="pageCollections:selected :btn :btn-default :btn-responsive :haul-font"}}>
+				{{#link-to "seller" user }}
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Collections
+				{{/link-to}}
 			</button>
-			{{/link-to}}
 
-			{{#link-to 'seller.new-collection' currentUser.slug }}
-				<button {{bind-attr class="pageCreateCollections:selected :btn :btn-default :btn-responsive :haul-font"}}>
+			<button type="button" {{bind-attr class="pageCreateCollections:selected :btn :btn-default :btn-responsive :haul-font"}}>
+				{{#link-to 'seller.new-collection' currentUser.slug }}
 					<span class="glyphicon glyphicon-plus-sign"></span>
-					Collection
-				</button>
-			{{/link-to}} 
-
-
-
-			{{#link-to 'seller.new-product' currentUser.slug }}
-			<button {{bind-attr class="pageCreateItems:selected :btn :btn-default :btn-responsive :haul-font"}}>
-				Sell 
-				<span class="glyphicon glyphicon-camera"></span>
+				{{/link-to}} 
 			</button>
-			{{/link-to}}
+		</div>
+
+
+		<div class="btn-group" role="group">
+			<button {{bind-attr class="pageCreateItems:selected :btn :btn-default :btn-responsive :haul-font"}}>
+				{{#link-to 'seller.new-product' currentUser.slug }}	
+				<span class="glyphicon glyphicon-camera"></span>
+				{{/link-to}}
+			</button>
+			
 		 
-			{{#link-to 'seller.products' currentUser.slug }}
+			
 			<button {{bind-attr class="pageItems:selected :btn :btn-default :btn-responsive :haul-font"}}>
+				{{#link-to 'seller.products' currentUser.slug }}
 				My Items
 				<span class="glyphicon glyphicon-chevron-right"></span>
+				{{/link-to}}
 			</button>
-			{{/link-to}}
+		</div>
+			
 		  
 		</div>
 	</div> 
