@@ -54,10 +54,12 @@
 	{{#each model.collections }}
 		{{#link-to 'collection' collection }}
     	<div class="haul-grid-li"> 
-			<img class="thumbnail" {{bind-attr src=collection.image.small}}>
-			
-			<div class="sold">edit</div>
 
+    		{{#if collection.image.small }}
+				<img class="thumbnail" {{bind-attr src=collection.image.small}}>
+			{{else}}
+				<img class="thumbnail" src="/static/images/blank-thumb.jpg">
+			{{/if}}
 
 			<div class="info">		
 		 	  	<div class="price"> {{ collection_name }}</div>   

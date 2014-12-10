@@ -183,8 +183,9 @@ Haul.UserCollectionAdapter = Haul.ApplicationAdapter.extend({
 
 
 Haul.UserCollectionSerializer =  DS.RESTSerializer.extend({
-extractArray: function(store, primaryType, payload, recordId, requestType) {
-console.log("MADE IT")
+
+	extractArray: function(store, primaryType, payload, recordId, requestType) {
+
 		if( payload.data == "ok" ){
 			return;
 		}
