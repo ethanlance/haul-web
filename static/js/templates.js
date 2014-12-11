@@ -2189,7 +2189,7 @@ function program2(depth0,data) {
 function program4(depth0,data) {
   
   
-  data.buffer.push("	\n			<button class=\"selected btn btn-default btn-right\">\n				<span class=\"glyphicon glyphicon-camera\"></span>\n				Add Item\n			</button> \n			");
+  data.buffer.push("	\n			<button class=\"selected btn btn-default btn-right\">\n				<span class=\"glyphicon glyphicon-camera\"></span>\n				Sell Something\n			</button> \n			");
   }
 
 function program6(depth0,data) {
@@ -2353,7 +2353,7 @@ function program5(depth0,data) {
 function program6(depth0,data) {
   
   
-  data.buffer.push("	\n					<button class=\"btn btn-default btn-right\">\n						<span class=\"glyphicon glyphicon-camera\"></span>\n						Add Item\n					</button> \n					");
+  data.buffer.push("	\n					<button class=\"btn btn-default btn-right\">\n						<span class=\"glyphicon glyphicon-camera\"></span>\n						Sell Something\n					</button> \n					");
   }
 
 function program8(depth0,data) {
@@ -2410,7 +2410,7 @@ function program10(depth0,data) {
   data.buffer.push("\n\n			</div>\n		</div>\n	</div>\n</div>\n \n<div class=\"container\">  \n\n\n	\n    ");
   stack1 = helpers.each.call(depth0, "", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push(" \n</div>");
+  data.buffer.push(" \n</div>\n");
   return buffer;
   
 });Ember.TEMPLATES['settings/index'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
