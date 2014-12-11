@@ -26,10 +26,12 @@
 				{{/link-to}}
 				 
 				{{#if isCollectionOwner}} 
+					{{#link-to 'collection-product.edit' model}}
 					<button class="btn btn-default pull-right">
 						Edit Your Post
 						<span class="glyphicon glyphicon-plus-sign"></span>
 					</button> 
+					{{/link-to}}
 				{{/if}}
 			</div>
 		</div>

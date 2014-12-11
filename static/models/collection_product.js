@@ -17,7 +17,17 @@ Haul.CollectionProduct = DS.Model.extend(Ember.Validations.Mixin, {
 
 Haul.CollectionProductAdapter = Haul.ApplicationAdapter.extend({
 	
-	host: Haul.STORE_SERVER_HOST,
+	host: Haul.STORE_SERVER_HOST, 
+
+	find: function(store, type, id){
+		var id = String(id);
+		var key = id.split('-');
+		var collection_id = key[0];
+		var product_id = key[1];
+		var url = this.host + "/stores/" + collection_id + "/products/" + product_id;
+
+        return this.ajax(url, 'GET');
+	},
 
 	findQuery: function(store, type, args) {
 		var url = this.host + "/stores/" + args.collection_id + "/products/" + args.product_id;
@@ -72,6 +82,17 @@ Haul.CollectionProductSerializer =  DS.RESTSerializer.extend({
 		if( payload.data == "ok" ){
 			return;
 		}
+
+		var id = payload.data.store_id + payload.data.product_id; 
+		var data = {
+			id: id,	
+			editorial: payload.data.editorial,
+			product: payload.data.product_id,
+			collection: payload.data.store_id
+		} 
+
+		var payload = {'collection-product': [data]};  
+		return this._super(store, primaryType, payload);
 	},
 
 	extractArray: function(store, primaryType, payload) {
@@ -80,7 +101,7 @@ Haul.CollectionProductSerializer =  DS.RESTSerializer.extend({
 			return;
 		} 
 		
-		var id = payload.data.product_id + payload.data.store_id; 
+		var id = payload.data.store_id + payload.data.product_id; 
 		var data = {
 			id: id,	
 			editorial: payload.data.editorial,

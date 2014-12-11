@@ -1,3 +1,25 @@
+/**
+	Single Product View
+**/
+Haul.ProductRoute = Haul.AnonRoute.extend({
+	beforeModel: function(transition) {
+		//Get the users collections
+		var user = this.controllerFor('auth').get('currentUser');
+		this.store.find('user-collection', {user_id:user.id});
+	},
+	model: function(params) {
+		return this.store.find('product', params.product_slug);
+	},
+	serialize: function(model) {
+    	return { product_slug: model.get('id') };
+  	},
+  	setupController: function(controller, model) {
+  		controller.set('model', model );
+        controller.set('collections', this.store.find('product-collection-list', model.get('id')) );
+  	}
+});
+
+
 
 //NEEDS AUTH
 Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({ 
@@ -36,23 +58,3 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 
 
 
-/**
-	Single Product View
-**/
-Haul.ProductRoute = Haul.AnonRoute.extend({
-	beforeModel: function(transition) {
-		//Get the users collections
-		var user = this.controllerFor('auth').get('currentUser');
-		this.store.find('user-collection', {user_id:user.id});
-	},
-	model: function(params) {
-		return this.store.find('product', params.product_slug);
-	},
-	serialize: function(model) {
-    	return { product_slug: model.get('id') };
-  	},
-  	setupController: function(controller, model) {
-  		controller.set('model', model );
-        controller.set('collections', this.store.find('product-collection-list', model.get('id')) );
-  	}
-});

@@ -49,7 +49,7 @@ Haul.CommentSectionComponent = Ember.Component.extend({
 
 	}.observes('contextObject'),
 
-	start: function() {
+	start: function() { 
 		this.itemChanged();
 		this.contextChanged();
 
