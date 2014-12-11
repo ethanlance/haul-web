@@ -1,14 +1,23 @@
 
-<div class="seller-nav ">
+<div class="seller-nav">
 	<div class="container content-fixed-nav">
 		<div class="row ">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
-				   	
+				
+				<div class="follow">
+				{{ follow-btn 
+					item=collection 
+					ref_type="collection"
+					currentUser = currentUser  
+				}}  
+				</div>
+
 		     	<h1>
 		     		{{ make-icon icon=collection.icon isSmall=false isCollection=true }}
 		     		<strong>{{collection.name}}</strong> 
 		     	</h1>
 		     	<small>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
+
 			</div>
 		</div>
 
@@ -24,33 +33,30 @@
  
 
  {{!-- TOOLBAR --}}
-<div class="toolbar">
+<div class="toolbar haul-font">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 
-				<div class="pull-left">
-				{{ follow-btn 
-					item=collection 
-					ref_type="collection"
-					currentUser = currentUser  
-				}} 
-				</div>
-			 
 
+				{{#link-to "seller" collection.user }}
+				<button class="btn btn-default btn-left">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Back To Collections
+				</button>
+				{{/link-to}}
+
+
+				
 
 				{{!-- EDIT COLLECTION --}}
 				{{#if isCollectionOwner }}
-				<div class="pull-right">
-
 					{{#link-to 'collection.edit' collection }}
-					<button class="btn btn-default">
+					<button class="btn btn-default btn-right">
 						Edit Collection
 						<span class="glyphicon glyphicon-plus-sign"></span>
 					</button>
 					{{/link-to}}
-
-				</div>
 				{{/if}}
 				
 			</div>
@@ -59,21 +65,9 @@
 </div>
 
 
-<div class="container">
+<div class="container"> 
 
-	{{!-- INFORMATION POD --}}
-	{{#link-to "seller" collection.user }}
-	<div class="haul-grid-li ">	
-		<div class="sell">  
-			<div class="sell-button text-center">
-				<div class="sell-text text-center haul-font">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					Back to Collections
-				</div>
-			</div> 
-		</div>
-	</div>
-	{{/link-to}}
+	{{#unless products}}<div class="row text-center"><strong>Nothing has been added to this collection yet</strong></div>{{/unless}}
 
 
 	{{!-- COLLECTION ITEMS --}} 

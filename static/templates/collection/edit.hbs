@@ -5,7 +5,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
 				   	
 		     	<h1>
-		     		{{ make-icon icon=icon isSmall=false isCollection=true }}
+		     		{{#if model.id }}{{ make-icon icon=icon isSmall=false isCollection=true }}{{/if}}
 		     		<strong>{{name}}</strong> 
 		     	</h1>
 		     	
@@ -36,12 +36,6 @@
 
 
 <div class="container padding-bottom">
-
-	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-6 vcenter">
-			<h3>Collection</h3> 
-		</div>
-	</div>
 
 	{{!-- MARKET ICON UPLOAD --}}
 	{{#if model.id }}

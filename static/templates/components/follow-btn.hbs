@@ -1,18 +1,14 @@
-
-
 {{#if isFollowingText}}
 	{{#if showButton}}
-		<div class="box-rigid">
-			<button {{action 'btnClick' }} class="btn btn-primary btn-sm">{{ btnName }}</button>
-		</div>
+		<button {{action 'btnClick' }} class="btn btn-primary btn-default">{{ btnName }}</button>
+		<br/>
 	{{/if}}
-		<div class="box-rigid">
-			<span class="small">{{isFollowedByText}}</span><br/>
-			<span class="small">{{isFollowingText}}</span>
-		</div>
+	<span class="small">{{isFollowedByText}}</span><br/>
+	<span class="small">{{isFollowingText}}</span>
 {{else}}
 	{{#if showButton}}
-		<button {{action 'btnClick' }} class="btn btn-primary btn-sm">{{ btnName }}</button>
+		<button {{action 'btnClick' }} class="btn btn-primary btn-default">{{ btnName }}</button>
+		<br/>
 	{{/if}}
 	<span class="small">{{isFollowedByText}}</span>
 {{/if}}

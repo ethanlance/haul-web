@@ -1,46 +1,64 @@
-{{seller-nav
-	user=currentUser.user
-	currentUser=currentUser
-	isProfileOwner=true
-	pageCreateItems=true
-	editMode=true
-}}
+<div class="seller-nav haul-font">
+	<div class="content-fixed-nav text-center">
+     	<h2>
+     		<strong>
+     			{{#link-to "seller.products" model.user}}My For Sale{{/link-to}}
+     		</strong> 
+     	</h2>
+	</div>	
+</div>	
 
 
 {{!-- HAUL TOOLBAR --}}
-<div class="toolbar">
-	<div class="text-right">
 
-		<span {{bind-attr class=":collapse showImagePicker:in:out"}}>
+<div class="toolbar haul-font">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">	 
 
-			{{#link-to 'seller.products' currentUser.slug}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+				<span {{bind-attr class=":collapse showImagePicker:in:out"}}>
 
-			<button {{bind-attr class=":btn :btn-primary imagesAreSelected:enabled:disabled"}} {{action "clickNext"}}>Next Step<span class="glyphicon glyphicon-chevron-right"></span></button> 
-		</span>
+					
 
-		<span {{bind-attr class=":collapse showImagePicker:out:in"}}>
-			<button {{action "clickPrev"}} class="btn btn-primary"><span class="glyphicon 	glyphicon-picture"></span> Change Images</button>
-				
-			{{#if productExists }}
-				{{#link-to 'product' product.id}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+					<button {{bind-attr class=":btn :btn-primary :btn-right imagesAreSelected:enabled:disabled"}} {{action "clickNext"}}>
+						Next Step<span class="glyphicon glyphicon-chevron-right"></span>
+					</button> 
 
-				{{ladda-btn
-					name='Save'
-					class="display-inline"
-					btnClasses='btn btn-primary ladda-button'
-					btnClick='submit'
-					spin=isProcessing
-				}}
-			{{ else }}
-				{{ladda-btn
-					name='Create'
-					class="display-inline"
-					btnClasses='btn btn-primary ladda-button'
-					btnClick='submit'
-					spin=isProcessing
-				}}
-			{{/if}}
-		</span>
+					{{#link-to 'seller.products' currentUser.slug}}
+						<button class="btn btn-default btn-right">Cancel</button>
+					{{/link-to}}
+
+				</span>
+
+				<span {{bind-attr class=":collapse showImagePicker:out:in"}}>
+					<button {{action "clickPrev"}} class="btn btn-primary"><span class="glyphicon 	glyphicon-picture"></span> Change Images</button>
+						
+					{{#if productExists }}
+
+						{{ladda-btn
+							name='Save'
+							class="display-inline"
+							btnClasses='btn btn-primary btn-right ladda-button'
+							btnClick='submit'
+							spin=isProcessing
+						}}
+					{{ else }}
+						{{ladda-btn
+							name='Create'
+							class="display-inline"
+							btnClasses='btn btn-primary btn-right ladda-button'
+							btnClick='submit'
+							spin=isProcessing
+						}}
+					{{/if}}
+
+					
+					{{#link-to 'product' product.id}}
+						<button class="btn btn-default btn-right">Cancel</button>
+					{{/link-to}}
+				</span>
+			</div>
+		</div>
 	</div>
 </div>
 

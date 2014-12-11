@@ -1000,41 +1000,61 @@ textarea.form-control {
   background-color: #eee;
 }
 
-/* line 946, haul.scss */
+/* line 945, haul.scss */
+.btn-left {
+  float: left !important;
+  margin-right: 10px;
+}
+
+/* line 950, haul.scss */
+.btn-right {
+  float: right !important;
+  margin-left: 10px;
+}
+
+/* line 956, haul.scss */
 .form-list {
   list-style: none;
   padding-left: -10px;
   margin-left: -30px;
 }
 
-/* line 952, haul.scss */
+/* line 962, haul.scss */
 .seller-nav {
   background-color: #eee;
   border: 1px solid #eed;
   padding-bottom: 5px;
 }
 
-/* line 958, haul.scss */
+/* line 968, haul.scss */
 .seller-nav h1 {
-  margin-top: -3px;
+  margin-top: 10px;
 }
 
-/* line 962, haul.scss */
+/* line 972, haul.scss */
 .seller-nav h2 {
   margin-top: -3px;
 }
 
-/* line 966, haul.scss */
+/* line 976, haul.scss */
 .seller-nav h3 {
   margin-top: 10px;
 }
 
-/* line 970, haul.scss */
+/* line 980, haul.scss */
 .seller-nav h1 a {
   color: black;
 }
 
-/* line 974, haul.scss */
+/* line 984, haul.scss */
 .seller-nav h2 a {
   color: black;
+}
+
+/* line 988, haul.scss */
+.seller-nav .follow {
+  position: absolute;
+  right: 40px;
+  margin-left: 10px;
+  text-align: left;
 }

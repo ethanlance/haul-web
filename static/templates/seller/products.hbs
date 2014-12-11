@@ -1,9 +1,18 @@
 {{!-- STORE TEMPLATE --}}
-<div class="seller-nav ">
+<div class="seller-nav haul-font">
 	<div class="container content-fixed-nav">
 
 		<div class="row ">
-			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+
+				<div class="follow">
+					{{ follow-btn 
+						item=user 
+						ref_type="user"
+						currentUser = currentUser 
+					}} 
+				</div>
+
 				   	
 		     	<h1>
 		     		{{ make-icon icon=user.icon isSmall=false  }}
@@ -17,24 +26,36 @@
 </div>	
 
 
-<div class="toolbar"><span></span></div>
- 
-<div class="container"> 
+<div class="toolbar haul-font">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">	
+			<span></span>
 
-	
-	{{!-- INFORMATION POD --}}
-	{{#link-to "seller" user }}
-	<div class="haul-grid-li ">	
-		<div class="sell">  
-			<div class="sell-button text-center">
-				<div class="sell-text text-center haul-font">
+
+				{{#link-to "seller" user }}
+				<button class="btn btn-default btn-left">
 					<span class="glyphicon glyphicon-chevron-left"></span>
-					Back to Collections
-				</div>
-			</div> 
+					Back To Collection
+				</button>
+				{{/link-to}}
+
+				{{!-- BUTTON  --}}
+				{{#if isProfileOwner }}  
+					{{#link-to 'seller.new-product' user.slug }}	
+					<button class="btn btn-default btn-right">
+						<span class="glyphicon glyphicon-camera"></span>
+						Add Item
+					</button> 
+					{{/link-to}}
+				{{/if}}
+
+			</div>
 		</div>
 	</div>
-	{{/link-to}}
+</div>
+ 
+<div class="container">  
 
 
 	{{!-- SELLER PRODUCTS --}}
