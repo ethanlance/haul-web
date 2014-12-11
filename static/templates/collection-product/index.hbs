@@ -1,4 +1,4 @@
-
+{{!-- HEADER --}}
 <div class="seller-nav haul-font">
 	<div class="content-fixed-nav text-center">
      	<h2>
@@ -11,6 +11,7 @@
 </div>	
 
 
+{{!-- TOOLBAR --}}
 <div class="toolbar haul-font">
 	<div class="container">
 		<div class="row">
@@ -35,118 +36,110 @@
 	</div>
 </div>
 
+
+{{!-- PAGE CONTENT --}}
 <div class="container">
 	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12 padding-bottom">
 
-		{{!-- Images  --}}
+			<h3>
+				<span class="pull-left">
+					{{ make-icon icon=model.collection.icon isSmall=true isCollection=true }}
+				</span>
+				{{ model.collection.name }} says:
+			</h3>
 
-		<div class="col-md-6 col-sm-12 col-xs-12 padding-bottom">
+			{{!-- EDITORIAL --}}
+			{{ breaklines model.editorial }}
 
-			{{#if model.product }}
-				{{#if model.product.images }}
-					{{view Haul.CarouselView contentBinding="model.product.images"}}
-				{{/if}}
-			{{/if}}
-		</div>
-
-		{{!-- Product Info --}}
-
-		<div class="col-md-6 col-sm-12 col-xs-12">
-
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<h1>{{ model.product.name }}</h1>
-				</div>
-			</div>
-
-			<div class="row">
-
-				<div class="col-md-12 haul-buy-card">
-
-
-					
-					{{!-- BUTTONS  --}}
-
-
-					<div class="row button-bar"> 
-						<div class="col-md-12 col-sm-12 col-xs-12">
-
-							
-							<div class="box-rigid lead haul-price">${{model.product.price}}</div>		
-							
-							{{!-- BUY --}}
-							<button type="button" class="btn btn-primary btn-responsive">BUY</button>
-
-							{{!-- LIKE --}}
-							{{like-btn
-								class="display-inline" 
-								item=model.product
-								currentUser=currentUser 									
-							}}
-
-							{{!-- COMMENT --}}
-							{{comment-btn
-								class="display-inline"
-								contextObject=model.collection
-								itemObject=model.product 
-								currentUser=currentUser
-							}}
-							
-
-							{{!-- CURATE - ADD TO STORE --}}
-							{{#unless isCollectionOwner }}
-								{{collection-btn
-									class="display-inline" 
-									currentUser=currentUser 
-									product=model.product
-									productPage=true
-								}}
-							{{/unless}}
-
-						</div>
-
-					</div>
-
-					{{ product-details seller=model.product.user product=model.product }}
-
-				</div>
-			</div>
-		</div>
-
-
-
-		<div class="col-md-6 col-sm-12 col-xs-12">
-			<div class="row">
-				<div class="col-md-12 haul-buy-card">
-
-					<div class="row">
-						<div class="col-md-6">
-							<span class="haul-font"><strong>{{ model.collection.name }} says:</strong></span>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-12">	
-							{{!-- MARKET INFO --}}
-							{{ breaklines model.editorial }}
-		    			</div>
-		    		</div>
-		    	</div>
-		    </div>
-		</div>
- 	</div>
-
-		{{!-- COMMENTS --}}
-	<div class="row">
-		<div class="col-md-12">
+			{{!-- COMMENTS --}}
 			{{ comment-section
 				contextObject=model.collection
 				itemObject=model.product 
 				currentUser=currentUser
 			}}
+
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+
+			<div class="haul-buy-card">
+				<span class="haul-font">
+					{{!-- BUTTONS --}}
+					<div class="btn-left haul-price">${{model.product.price}}</div>	 	
+						
+					{{!-- BUY --}}
+					<button type="button" class="btn btn-primary btn-responsive">BUY</button>
+
+					{{!-- LIKE --}}
+					{{like-btn
+						class="display-inline" 
+						item=model.product
+						currentUser=currentUser 									
+					}}
+
+					{{!-- COMMENT --}}
+					{{comment-btn
+						class="display-inline"
+						contextObject=model.collection
+						itemObject=model.product 
+						currentUser=currentUser
+					}}
+					
+
+					{{!-- CURATE - ADD TO STORE --}}
+					{{#unless isCollectionOwner }}
+						{{collection-btn
+							class="display-inline" 
+							currentUser=currentUser 
+							product=model.product
+							productPage=true
+						}}
+					{{/unless}}
+				</span>
+
+				<div class="padding-top">
+					{{!-- IMAGES --}}
+					{{#if model.product }}
+						{{#if model.product.images }}
+							{{view Haul.CarouselView contentBinding="model.product.images"}}
+						{{/if}}
+					{{/if}}
+				</div>
+
+				{{!-- PRODUCT DETAILS --}}
+				<h3 class="haul-font text-center bottom-border">{{ model.product.name }}</h3> 
+				
+		 
+				<div class="clearfix padding-top">
+					
+					<h4 class="pull-left">Seller</h4>
+					
+					<span class="pull-left">
+						{{#link-to "seller" model.product.user.slug}}
+							{{ make-icon icon=model.product.user.icon isSmall=true  }}
+						{{/link-to}}
+					</span>
+					
+					{{#link-to "seller" model.product.user.slug}}{{model.product.user.name}}{{/link-to}}
+					
+					{{ follow-btn 
+						item=model.product.user 
+						ref_type="user"
+						currentUser = currentUser  
+						isSmall=true
+						hideCounts=true
+					}}  
+
+				</div>
+	 
+				<h4 class="top-border padding-top">Details:</h4>
+				<p>{{ breaklines model.product.description }}</p>
+			  
+			</div>
 		</div> 
 	</div>
 </div>
+ 
 
 <div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">

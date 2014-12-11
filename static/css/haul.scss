@@ -184,7 +184,7 @@ body {
 }
 
 .haul-navbar{
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #A8B4BD; 
 }
 
 .haul-navbar .navbar-right{
@@ -324,7 +324,8 @@ body {
   padding: 10px;
   margin-bottom: 20px;
   /*background-color: #f5f5f5;*/
-  border: 1px solid #e3e3e3;
+  //border: 1px solid #e3e3e3;
+  border: 1px solid #A8B4BD;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
@@ -994,3 +995,13 @@ textarea.form-control {
 
 
 
+#leaveComment textarea {
+  height: 80px;
+}
+
+.top-border {
+  border-top: 1px solid #e3e3e3;
+}
+.bottom-border {
+  border-bottom: 1px solid #e3e3e3;
+}

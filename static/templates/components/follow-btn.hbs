@@ -1,14 +1,16 @@
 {{#if isFollowingText}}
 	{{#if showButton}}
-		<button {{action 'btnClick' }} class="btn btn-primary btn-default">{{ btnName }}</button>
+		<button {{action 'btnClick' }} {{bind-attr class=":btn :btn-primary isSmall:btn-xs:btn-default"}}>{{ btnName }}</button>
 		<br/>
 	{{/if}}
-	<span class="small">{{isFollowedByText}}</span><br/>
-	<span class="small">{{isFollowingText}}</span>
+	<span {{bind-attr class="hideCounts:hide:show"}}>
+		<span class="small">{{isFollowedByText}}</span><br/>
+		<span class="small">{{isFollowingText}}</span>
+	</span>
 {{else}}
 	{{#if showButton}}
-		<button {{action 'btnClick' }} class="btn btn-primary btn-default">{{ btnName }}</button>
+		<button {{action 'btnClick' }} {{bind-attr class=":btn :btn-primary isSmall:btn-xs:btn-default"}}>{{ btnName }}</button>
 		<br/>
 	{{/if}}
-	<span class="small">{{isFollowedByText}}</span>
+	<span {{bind-attr class="hideCounts:hide:show :small"}}>{{isFollowedByText}}</span>
 {{/if}}

@@ -121,7 +121,17 @@ Haul.CarouselView = Ember.View.extend({
 	templateName: 'modules/carousel',
 	classNames: ['carousel', 'slide'],
 	
+	singleImage: true,
 	imagesFound: false,
+	imageCount:0,
+
+	imageCountChanged: function() {
+		if(this.get('imageCount') > 1 ){
+			this.set('singleImage', false);
+		}else{
+			this.set('singleImage', true);
+		}
+	}.observes('imageCount'),
 
 	init: function() { 
 		this._super.apply(this, arguments);
@@ -131,13 +141,14 @@ Haul.CarouselView = Ember.View.extend({
 		var _this = this;
 		// at least one item must have the active class, so we set the first here, and the class will be added by class binding
 		var promise = this.get('content').then(function(results) { 
-
+			var imageCount = 0;
 			results.forEach(function(image){
 				if( image.get('medium') ) {
+					imageCount++;
 					_this.set('imagesFound', true);
 				}
 			});
-
+			_this.set('imageCount', imageCount);
 			var obj = Ember.get(results, 'firstObject');
 			if( obj ) {
 				Ember.set(obj, 'isActive', true);	
@@ -161,7 +172,7 @@ Haul.CarouselView = Ember.View.extend({
 
 	indicatorsView: Ember.CollectionView.extend({
 		tagName: 'ol',
-		classNames: ['carousel-indicators'],		
+		classNames: ['carousel-indicators'],	
 		contentBinding: 'parentView.content',
 		itemViewClass: Ember.View.extend({
 			click: function() {
