@@ -20,13 +20,16 @@
 
 	var toolbarScroll;
 	toolbarScroll = debounce( function() { 
-		var toolbar = $(".toolbar");
+		var toolbar = $(".toolbar"); 
         if(toolbar){ 
-        	var haulNavbarH = $('.haul-navbar').height(); 
-        	var distanceY = window.pageYOffset;
-	        if( distanceY > haulNavbarH ){
+        	var navBottom = $('.haul-navbar').height(); 
+        	var nextTop = (toolbar.next().offset().top - toolbar.height()) - $(window).scrollTop();
+
+        	if( nextTop <= navBottom){
+	        	// console.log("ADD " + nextTop + " <= "+ navBottom) 
 	        	toolbar.addClass('fixed');
 	        }else{
+	        	// console.log("REMOVE " + nextTop + " <= "+ navBottom)
 	        	toolbar.removeClass('fixed');
 	        }
 	    } 
@@ -36,7 +39,7 @@
 		window.addEventListener('scroll', toolbarScroll);
 	}
 	window.onload = init();
-		
+
 
 	Haul.Resizing = Em.Mixin.create({
 		bindResizing: function(opts) {
