@@ -67,6 +67,10 @@ body {
   font-weight: normal;
 }
 
+.show {
+  @include transition(all .2s ease-in-out);
+}
+
 .logo-outer {
   
   @include transition(all .2s ease-in-out);
@@ -1013,7 +1017,7 @@ textarea.form-control {
   overflow:auto;
   height:300px;
   padding:10px;
-  border-bottom: 1px solid #e3e3e3
+  // border-bottom: 1px solid #e3e3e3
 }
 
 .image-scroll img {

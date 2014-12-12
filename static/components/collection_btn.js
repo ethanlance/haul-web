@@ -10,12 +10,29 @@ Haul.CollectionBtnComponent = Ember.Component.extend({
 
 	selectedCollection: null,
  	selectedCollectionId: null,
+	editorialForQuill: '',
+	isCollectionPicked: false,
 
-	 selectedCollectionIdChanged: function(){
+	//Is this product already in this collection? If so get the editorial.
+	selectedCollectionChanged: function() {	
+		var _this = this;
+		var store = this.get('targetObject.store');
+		var key = this.get('selectedCollection').get('collection').get('id') + "-" + this.get('product').get('id');
+		var collection_product = store.find('collection-product', key);
+		collection_product.then(function(cp) {
+			console.log(cp.get('editorial'));
+			_this.set('editorialForQuill', cp.get('editorial'));
+			_this.set('isCollectionPicked', true);
+		}, function(error){
+			_this.set('isCollectionPicked', true);
+		});
+	}.observes('selectedCollection'),
+
+	selectedCollectionIdChanged: function(){
 	 	var _this = this;
 	 	collection_id = this.get('selectedCollectionId')
 	 	this.get('userCollections').forEach(function(uc){
-	 		if( uc.get('collection_id') === collection_id){
+	 		if( uc.get('collection_id') === collection_id){ 
 	 			_this.set('selectedCollection', uc); 
 	 		}
 	 	});	
@@ -83,6 +100,11 @@ Haul.CollectionBtnComponent = Ember.Component.extend({
 
 	actions: {
 
+		quillChange: function(text) {
+			var model = this.get('model');
+			model.set('editorial', text);
+		},
+
 		curateCancel: function() {
 			this.reset(); 
 			$('#curateModal').modal('hide');
@@ -108,14 +130,19 @@ Haul.CollectionBtnComponent = Ember.Component.extend({
 			var model = this.get('model');
 
 			model.set('collection', this.get('selectedCollection.collection'));
-
  
 	 		//Model Validations:
 			model.validate().then(function(result){
 				_this.saveModel();	//Validation complete, now save.
 			}, function(error) {
+				console.log("ERROR", error);
 				_this.set('isProcessing', false);
-				_this.set('showErrors', true);
+
+				if( error.collection.length > 0 ) {
+					_this.set('errorMessage', "Oops, please pick a collection.")
+					_this.set('errorShow', true);
+				}
+				
 			}); 
 		},
 

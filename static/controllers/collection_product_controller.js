@@ -106,7 +106,7 @@
 				if( model.get('editorial') ) {
 					model.set('editorial', model.get('editorial').trim())
 				}
-console.log("ED", model.get('editorial'))
+
 		 		//Model Validations:
 				model.validate().then(function(result){
 					_this.saveModel();	

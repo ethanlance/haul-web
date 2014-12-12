@@ -11,6 +11,12 @@ Haul.CollectionProduct = DS.Model.extend(Ember.Validations.Mixin, {
 		editorial: {
 		 	//presence: true,
 		 	length: { maximum: 2000, minimum: 0 }
+		},
+		collection: {
+		 	presence: true, 
+		},
+		product: {
+		 	presence: true, 
 		}
 	}
 });	

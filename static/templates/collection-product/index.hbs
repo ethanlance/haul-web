@@ -67,6 +67,10 @@
 		<div class="col-md-5 col-sm-5 col-xs-12">
 
 			<div class="haul-buy-card">
+
+				{{!-- PRODUCT DETAILS --}}
+				<h3 class="haul-font text-center bottom-border">{{ model.product.name }}</h3> 
+			
 				<span class="haul-font">
 					{{!-- BUTTONS --}}
 					<div class="btn-left haul-price">${{model.product.price}}</div>	 	
@@ -110,8 +114,7 @@
 					{{/if}}
 				</div>
 
-				{{!-- PRODUCT DETAILS --}}
-				<h3 class="haul-font text-center bottom-border">{{ model.product.name }}</h3> 
+				
 				
 		 
 				<div class="clearfix padding-top">
