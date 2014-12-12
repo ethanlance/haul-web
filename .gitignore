@@ -72,3 +72,8 @@ Thumbs.db
 .sass-cache
 .sass-cache/*
 *.css.map
+
+# VIM #
+#######
+*.swp
+*.swo
