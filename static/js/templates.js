@@ -2207,33 +2207,100 @@ function program10(depth0,data) {
   return buffer;
   }
 
-  data.buffer.push("<div class=\"seller-nav haul-font\">\n	<div class=\"content-fixed-nav text-center\">\n     	<h2>\n     		<strong>\n     			");
+function program12(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("\n						");
+  data.buffer.push(escapeExpression((helper = helpers['collection-btn'] || (depth0 && depth0['collection-btn']),options={hash:{
+    'class': ("display-inline"),
+    'currentUser': ("currentUser"),
+    'product': ("model"),
+    'productPage': (true)
+  },hashTypes:{'class': "STRING",'currentUser': "ID",'product': "ID",'productPage': "BOOLEAN"},hashContexts:{'class': depth0,'currentUser': depth0,'product': depth0,'productPage': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "collection-btn", options))));
+  data.buffer.push("\n					");
+  return buffer;
+  }
+
+function program14(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("\n							");
+  data.buffer.push(escapeExpression((helper = helpers['make-icon'] || (depth0 && depth0['make-icon']),options={hash:{
+    'icon': ("model.user.icon"),
+    'isSmall': (true)
+  },hashTypes:{'icon': "ID",'isSmall': "BOOLEAN"},hashContexts:{'icon': depth0,'isSmall': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "make-icon", options))));
+  data.buffer.push("\n						");
+  return buffer;
+  }
+
+function program16(depth0,data) {
+  
+  var stack1;
+  stack1 = helpers._triageMustache.call(depth0, "model.user.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  else { data.buffer.push(''); }
+  }
+
+  data.buffer.push("\n<div class=\"seller-nav haul-font\">\n	<div class=\"content-fixed-nav text-center\">\n     	<h2>\n     		<strong>\n     			");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.products", "model.user", options) : helperMissing.call(depth0, "link-to", "seller.products", "model.user", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n     		</strong> \n     	</h2>\n	     <small>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller", "model.user", options) : helperMissing.call(depth0, "link-to", "seller", "model.user", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</small>\n	</div>	\n</div>	\n\n\n<div class=\"toolbar haul-font\">\n	<div class=\"container\">\n		<div class=\"row\">\n			<div class=\"col-md-12 col-sm-12 col-xs-12\">	\n\n				");
+  data.buffer.push("</small>\n	</div>	\n</div>	\n\n\n\n<div class=\"toolbar haul-font\">\n	<div class=\"container\">\n		<div class=\"row\">\n			<div class=\"col-md-12 col-sm-12 col-xs-12\">	\n\n				");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller.products", "model.user", options) : helperMissing.call(depth0, "link-to", "seller.products", "model.user", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n\n				");
   stack1 = helpers['if'].call(depth0, "isProfileOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n			\n			</div>\n		</div>\n	</div>\n</div>\n\n<div class=\"container\">\n	\n	<div class=\"row padding-top\"> \n\n		\n		<div class=\"col-md-6 col-sm-12 col-xs-12 vcenter text-center \">\n			");
-  data.buffer.push(escapeExpression((helper = helpers['collection-btn'] || (depth0 && depth0['collection-btn']),options={hash:{
-    'class': ("display-inline"),
-    'currentUser': ("currentUser"),
-    'product': ("model")
-  },hashTypes:{'class': "STRING",'currentUser': "ID",'product': "ID"},hashContexts:{'class': depth0,'currentUser': depth0,'product': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "collection-btn", options))));
-  data.buffer.push("\n			<p>For other people to see this item, add it to a collection</p>\n\n\n\n		</div>\n\n		\n		<div class=\"col-md-6 col-sm-12 col-xs-12\">\n			");
+  data.buffer.push("\n			\n			</div>\n		</div>\n	</div>\n</div>\n\n\n\n\n<div class=\"container\">\n	<div class=\"row\"> \n		<div class=\"col-md-6 col-sm-6 col-xs-12 padding-bottom\">\n\n			\n			");
   stack1 = helpers['if'].call(depth0, "model.images", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push(" \n		</div>\n\n\n 	</div>\n\n\n 	<div class=\"row padding-top padding-bottom\"> \n 		\n 		<div class=\"col-md-6 col-sm-12 col-xs-12\">\n			");
-  data.buffer.push(escapeExpression((helper = helpers['product-details'] || (depth0 && depth0['product-details']),options={hash:{
-    'seller': ("model.user"),
-    'product': ("model")
-  },hashTypes:{'seller': "ID",'product': "ID"},hashContexts:{'seller': depth0,'product': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "product-details", options))));
-  data.buffer.push("\n		</div>\n	</div>\n\n\n\n</div>\n\n<div id=\"deleteModal\" class=\"modal fade bs-example-modal-sm in danger\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n	<div class=\"modal-dialog modal-sm\">\n		<div class=\"modal-content\">\n\n		<div class=\"modal-header\">\n			<button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>\n			<h4 class=\"modal-title\" id=\"mySmallModalLabel\">Delete?<br/>This cannot be undone</h4>\n		</div>\n		<div class=\"modal-body\"> \n			<p class=\"text-center\">\n				<button ");
+  data.buffer.push(" \n\n\n\n			\n			");
+  data.buffer.push(escapeExpression((helper = helpers['comment-section'] || (depth0 && depth0['comment-section']),options={hash:{
+    'contextObject': ("model.user"),
+    'itemObject': ("model"),
+    'currentUser': ("currentUser")
+  },hashTypes:{'contextObject': "ID",'itemObject': "ID",'currentUser': "ID"},hashContexts:{'contextObject': depth0,'itemObject': depth0,'currentUser': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "comment-section", options))));
+  data.buffer.push("\n\n		</div>\n		<div class=\"col-md-6 col-sm-6 col-xs-12\">\n			<div class=\"haul-buy-card\">\n				\n				\n				<h3 class=\"haul-font text-center bottom-border\">");
+  stack1 = helpers._triageMustache.call(depth0, "model.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</h3> \n\n				\n				<div class=\"bottom-border padding-bottom\">\n					<div class=\"btn-left haul-price\">$");
+  stack1 = helpers._triageMustache.call(depth0, "model.price", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</div>	 	\n						\n					\n					<button type=\"button\" class=\"btn btn-primary btn-responsive\">BUY</button>\n\n					\n					");
+  data.buffer.push(escapeExpression((helper = helpers['like-btn'] || (depth0 && depth0['like-btn']),options={hash:{
+    'class': ("display-inline"),
+    'item': ("model"),
+    'currentUser': ("currentUser")
+  },hashTypes:{'class': "STRING",'item': "ID",'currentUser': "ID"},hashContexts:{'class': depth0,'item': depth0,'currentUser': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "like-btn", options))));
+  data.buffer.push("\n\n					\n					");
+  data.buffer.push(escapeExpression((helper = helpers['comment-btn'] || (depth0 && depth0['comment-btn']),options={hash:{
+    'class': ("display-inline"),
+    'contextObject': ("model.user"),
+    'itemObject': ("model"),
+    'currentUser': ("currentUser")
+  },hashTypes:{'class': "STRING",'contextObject': "ID",'itemObject': "ID",'currentUser': "ID"},hashContexts:{'class': depth0,'contextObject': depth0,'itemObject': depth0,'currentUser': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "comment-btn", options))));
+  data.buffer.push("\n					\n\n					\n					");
+  stack1 = helpers.unless.call(depth0, "isProductOwner", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(12, program12, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n				</div>\n\n\n\n				<div class=\"clearfix padding-top\">\n					\n					<h4 class=\"pull-left\">Seller</h4>\n					\n					<span class=\"pull-left\">\n						");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(14, program14, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller", "model.user.slug", options) : helperMissing.call(depth0, "link-to", "seller", "model.user.slug", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n					</span>\n					\n					");
+  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(16, program16, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "seller", "model.user.slug", options) : helperMissing.call(depth0, "link-to", "seller", "model.user.slug", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n					\n					");
+  data.buffer.push(escapeExpression((helper = helpers['follow-btn'] || (depth0 && depth0['follow-btn']),options={hash:{
+    'item': ("model.user"),
+    'ref_type': ("user"),
+    'currentUser': ("currentUser"),
+    'isSmall': (true),
+    'hideCounts': (true)
+  },hashTypes:{'item': "ID",'ref_type': "STRING",'currentUser': "ID",'isSmall': "BOOLEAN",'hideCounts': "BOOLEAN"},hashContexts:{'item': depth0,'ref_type': depth0,'currentUser': depth0,'isSmall': depth0,'hideCounts': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "follow-btn", options))));
+  data.buffer.push("  \n\n				</div>\n	 \n				<h4 class=\"top-border padding-top\">Details:</h4>\n				<p>");
+  data.buffer.push(escapeExpression((helper = helpers.breaklines || (depth0 && depth0.breaklines),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "model.description", options) : helperMissing.call(depth0, "breaklines", "model.description", options))));
+  data.buffer.push("</p>\n\n\n\n			</div>\n		</div>\n	</div>\n</div>\n\n\n<div id=\"deleteModal\" class=\"modal fade bs-example-modal-sm in danger\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">\n	<div class=\"modal-dialog modal-sm\">\n		<div class=\"modal-content\">\n\n		<div class=\"modal-header\">\n			<button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>\n			<h4 class=\"modal-title\" id=\"mySmallModalLabel\">Delete?<br/>This cannot be undone</h4>\n		</div>\n		<div class=\"modal-body\"> \n			<p class=\"text-center\">\n				<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteCancel", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(" class=\"btn btn-default\">Cancel</button>\n				<button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "deleteProceed", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
