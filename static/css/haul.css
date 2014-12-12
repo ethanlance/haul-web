@@ -1073,3 +1073,38 @@ textarea.form-control {
 .bottom-border {
   border-bottom: 1px solid #e3e3e3;
 }
+
+/* line 1009, haul.scss */
+.image-scroll {
+  overflow: auto;
+  height: 300px;
+  padding: 10px;
+}
+
+/* line 1015, haul.scss */
+.image-scroll img {
+  width: 50%;
+  float: left !important;
+}
+
+/* line 1020, haul.scss */
+.editorial img {
+  width: 100%;
+}
+
+/* line 1024, haul.scss */
+#editor img {
+  width: 100%;
+}
+
+/* line 1028, haul.scss */
+.editorWrapper {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+}
+
+/* line 1033, haul.scss */
+.ql-toolbar {
+  background-color: rgba(248, 248, 248, 0.9);
+  box-shadow: 0px 1px 1px #eee;
+}

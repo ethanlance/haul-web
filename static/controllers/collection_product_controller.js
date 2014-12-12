@@ -47,21 +47,18 @@
 		isProductOwner: false,
 		collectionProductPromise:null,
 		model:null,
+		editorialForQuill: null,
 
 		setup: function() { 
 			var currentUser = this.get('currentUser');
 			var model = this.get('model');
+			this.set('editorialForQuill', model.get('editorial'));
 			if( currentUser && model ){
 
 				//Collection's Owner
 				if( !Ember.isEmpty(currentUser) && model.get('collection').get('user').get('id') === currentUser.get('id')) {
 					this.set('isCollectionOwner', true);
 				}	
-
-				//Product's Owner
-				// if( !Ember.isEmpty(currentUser) && this.get('product').get('user').get('id') === currentUser.get('id')) {
-				// 	this.set('isProductOwner', true);
-				// }
 			}
 		}.observes('model'),
 
@@ -86,11 +83,18 @@
 		},
 
 		actions: {
+
+			quillChange: function(text) {
+				var model = this.get('model');
+				model.set('editorial', text);
+			},
+
 			cancel: function() {
 				this.transitionToRoute('collection-product', this.get('model'));
 			},
 
-			submit: function() {
+			submit: function() { 
+				
 				this.set('isProcessing', true);
 
 				var _this = this;
@@ -100,7 +104,7 @@
 				if( model.get('editorial') ) {
 					model.set('editorial', model.get('editorial').trim())
 				}
-
+console.log("ED", model.get('editorial'))
 		 		//Model Validations:
 				model.validate().then(function(result){
 					_this.saveModel();	
