@@ -1,42 +1,42 @@
 {{#if  currentUser }}
 
-	<div class="btn-group navbar-profile">
-	
-		<button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
-			{{#if currentUser.icon }}
-				<img {{bind-attr src=currentUser.icon}}> 
-			{{/if}}
-			<span class="profile-name">{{ currentUser.name }}</span>
-	  		
-		</button>
+    <div class="btn-group navbar-profile">
 
-	  <div class="btn-group">
-	    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-	      <span class="glyphicon glyphicon-cog"></span>
-	    </button>
-	    <ul class="dropdown-menu" role="menu">
+        <button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
+            {{#if currentUser.icon }}
+                <img {{bind-attr src=currentUser.icon}}>
+            {{/if}}
+            <span class="profile-name">{{ currentUser.name }}</span>
 
-	    	<li>{{#link-to 'seller.products' currentUser.slug }}My For Sale{{/link-to}}</li>
-			<li>{{#link-to 'seller.new-product' currentUser.slug }}- Add For Sale{{/link-to}}</li> 
-			<li>{{#link-to 'seller' currentUser.slug }}My Collections{{/link-to}}</li>
-			<li>{{#link-to 'seller.new-collection' currentUser.slug }}- Create Collection{{/link-to}}</li>  
-			
-				
-			<li class="divider"></li> 	
-			<li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
+        </button>
 
-			<li class="divider"></li> 
-			<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
-	    </ul>
-	  </div>
-	</div> 
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-cog"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
 
-	{{else}}
+            <li>{{#link-to 'seller.products' currentUser.slug }}<strong>My For Sale</strong>{{/link-to}}</li>
+            <li>{{#link-to 'seller.new-product' currentUser.slug }}+ Sell Something{{/link-to}}</li>
+            <li>{{#link-to 'seller' currentUser.slug }}<strong>My Collections</strong>{{/link-to}}</li>
+            <li>{{#link-to 'seller.new-collection' currentUser.slug }}+ Create Collection{{/link-to}}</li>
 
 
-	<div class="navbar-profile">
-		{{#link-to 'signup'}}<button type="button" class="btn btn-default signup">SIGNUP</button>{{/link-to}}
-		{{#link-to 'login'}}<button type="button" class="btn btn-default">LOGIN</button>{{/link-to}}
-	</div>
+            <li class="divider"></li>
+            <li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
+
+            <li class="divider"></li>
+            <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+        </ul>
+      </div>
+    </div>
+
+    {{else}}
+
+
+    <div class="navbar-profile">
+        {{#link-to 'signup'}}<button type="button" class="btn btn-default signup">SIGNUP</button>{{/link-to}}
+        {{#link-to 'login'}}<button type="button" class="btn btn-default">LOGIN</button>{{/link-to}}
+    </div>
 
 {{/if}}

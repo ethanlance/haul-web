@@ -1,0 +1,64 @@
+<div class="seller-nav ">
+	<div class="container content-fixed-nav">
+
+		<div class="row ">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
+				   	
+		     	<h1>
+		     		{{ make-icon icon=model.collection.icon isSmall=false isCollection=true }}
+		     		<strong>{{model.collection.name}}</strong> 
+		     	</h1>
+		     	
+			</div>
+	 	</div>
+	</div>	
+</div>	
+
+
+<div class="toolbar">
+	<div class="text-right">
+
+			<button {{action 'cancel'}} class="btn btn-default">Cancel</button>
+
+			{{ladda-btn
+				name='Save'
+				class="display-inline"
+				btnClasses='btn btn-primary ladda-button'
+				btnClick='submit'
+				spin=isProcessing
+			}} 
+
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-sm-8 col-xs-8">  
+			{{#form-for model wrapper="bs3-wrapper"}}
+
+				<h4>Tell everyone why you collected this!</h4>
+
+				{{quill-editor content=editorialForQuill quillChange='quillChange'}}
+ 
+			{{/form-for}}
+		</div> 
+
+		<div class="col-md-4 col-sm-4 col-xs-4"> 
+
+			<h3 class="haul-font text-center bottom-border">{{ model.product.name }}</h3> 
+			
+			<div class="row">			
+				<div class="col-md-12 col-sm-12 col-xs-12 image-scroll">
+					<p>You can drag images into your post.</p>
+					{{#if model.product }}
+						{{#if model.product.images }}
+							{{#each model.product.images}}
+								<img class="thumbnail" {{bind-attr src='medium'}}>
+							{{/each}}
+						{{/if}}
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
