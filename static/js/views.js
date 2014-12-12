@@ -2,21 +2,75 @@
 (function () {
   'use strict';
 
-	function init() {
-		window.addEventListener('scroll', function(e){
-	        
-	        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-	            shrinkOn = 100;
 
-	        //console.log("distanceY", distanceY , " > shrinkOn" , shrinkOn )    
-	        if (distanceY > shrinkOn) {
-	            $('.toolbar').addClass('shrink');
-	        } else {
-	            $('.toolbar').removeClass('shrink');
-	        } 
-	    });
+	function debounce(func, wait, immediate) {
+		var timeout;
+		return function() {
+			var context = this, args = arguments;
+			var later = function() {
+				timeout = null;
+				if (!immediate) func.apply(context, args);
+			};
+			var callNow = immediate && !timeout;
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+			if (callNow) func.apply(context, args);
+		};
+	};
+
+	var toolbarScroll;
+	toolbarScroll = debounce( function() { 
+		var toolbar = $(".toolbar");
+        if(toolbar){ 
+        	var haulNavbarH = $('.haul-navbar').height(); 
+        	var distanceY = window.pageYOffset;
+	        if( distanceY > haulNavbarH ){
+	        	toolbar.addClass('fixed');
+	        }else{
+	        	toolbar.removeClass('fixed');
+	        }
+	    } 
+	}, 10);
+
+	function init() {
+		window.addEventListener('scroll', toolbarScroll);
 	}
 	window.onload = init();
+		
+
+	Haul.Resizing = Em.Mixin.create({
+		bindResizing: function(opts) {
+			var onResize, _this = this;
+ 
+			onResize = debounce(function(){ 
+				return _this.resized(); 
+			}, 250);
+			  
+			$(window).bind('resize', onResize);
+		},
+
+		unbindResizing: function() {
+			$(window).unbind('resize'); 
+		}
+	});
+
+	Haul.Scrolling = Em.Mixin.create({
+		bindScrolling: function(opts) {
+			var onScroll, _this = this;
+ 
+			onScroll = debounce(function(){ 
+				return _this.scrolled(); 
+			}, 0);
+			 
+			$(document).bind('touchmove', onScroll);
+			$(window).bind('scroll', onScroll);
+		},
+
+		unbindScrolling: function() {
+			$(window).unbind('scroll');
+			$(document).unbind('touchmove');
+		}
+	});
 
 
   	/**
@@ -110,6 +164,7 @@ Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
 	afterRenderEvent : function(){
 		// Holder.run(); 
 		// console.log("ADD THIS HERE")
+		//console.log("AFTER RENDER")
 	}
   });
 

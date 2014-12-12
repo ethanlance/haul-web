@@ -1752,16 +1752,12 @@ function program19(depth0,data) {
 });Ember.TEMPLATES['components/quill-editor'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+  var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("<div class=\"editorWrapper\" ");
-  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
-    'style': ("height")
-  },hashTypes:{'style': "STRING"},hashContexts:{'style': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push(">\n	<div id=\"toolbar\" class=\"ql-toolbar ql-snow\">\n\n		<span class=\"ql-format-group\">\n			<span title=\"Bold\" class=\"ql-format-button ql-bold\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Italic\" class=\"ql-format-button ql-italic\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Underline\" class=\"ql-format-button ql-underline\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Strikethrough\" class=\"ql-format-button ql-strike\"></span>\n		</span>\n\n		<span class=\"ql-format-group\">\n			<span title=\"List\" class=\"ql-format-button ql-list\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Bullet\" class=\"ql-format-button ql-bullet\"></span>\n			<span class=\"ql-format-separator\"></span>\n\n			<span title=\"Link\" class=\"ql-format-button ql-link\"></span> \n\n		</span>\n	</div>\n\n	<div id=\"editor\">");
+  data.buffer.push("<div class=\"editorWrapper\">\n	<div id=\"toolbar\" class=\"ql-toolbar ql-snow\">\n\n		<span class=\"ql-format-group\">\n			<span title=\"Bold\" class=\"ql-format-button ql-bold\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Italic\" class=\"ql-format-button ql-italic\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Underline\" class=\"ql-format-button ql-underline\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Strikethrough\" class=\"ql-format-button ql-strike\"></span>\n		</span>\n\n		<span class=\"ql-format-group\">\n			<span title=\"List\" class=\"ql-format-button ql-list\"></span>\n			<span class=\"ql-format-separator\"></span>\n			<span title=\"Bullet\" class=\"ql-format-button ql-bullet\"></span>\n			<span class=\"ql-format-separator\"></span>\n\n			<span title=\"Link\" class=\"ql-format-button ql-link\"></span> \n\n		</span>\n	</div>\n\n	<div id=\"editor\">");
   data.buffer.push(escapeExpression((helper = helpers.breaklines || (depth0 && depth0.breaklines),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "content", options) : helperMissing.call(depth0, "breaklines", "content", options))));
-  data.buffer.push("</div>\n</div>");
+  data.buffer.push("</div>\n\n</div>");
   return buffer;
   
 });Ember.TEMPLATES['components/truncate-text'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {

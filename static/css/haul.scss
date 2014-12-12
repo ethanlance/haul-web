@@ -291,8 +291,8 @@ body {
   top: -100px; 
 }
 
-.toolbar.shrink {
-  @include transition(all .2s ease-in-out);
+.toolbar.fixed {
+  @include transition(position .2s ease-in-out);
   position: fixed;
   display:inline;
   top:55px;
@@ -303,8 +303,9 @@ body {
 
 
 
+
 @media (max-width: 768px) {
-  .toolbar.shrink {
+  .toolbar.fixed {
     top:48px;
   }
 }
@@ -1032,6 +1033,9 @@ textarea.form-control {
   width: 100%;
 }
 
+#editor {
+  overflow: auto;
+}
 
 #editor img{
   width: 100%;

@@ -11,8 +11,7 @@ Haul.ApplicationRoute = Ember.Route.extend({
             controller: controller,
             into: "application" // important when using at root level
         });
-    },
-
+    }, 
     //This is the end of the road for actions.
     actions: {
     	

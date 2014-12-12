@@ -1,51 +1,48 @@
-Haul.ImageScrollerComponent = Ember.Component.extend({
+// Haul.ImageScrollerComponent = Ember.Component.extend( Haul.Scrolling, Haul.Resizing, {
 
-	width: null,
-	height: null,
+// 	width: null,
+// 	height: null,
 
-	widthChanges: function() {
-		var width = this.get('width');
-		var height = this.get('height');
-		// console.log('height:'+height+'px;width:' +width+'px');
-		this.set('style', 'height:'+height+'px;width:' +width+'px');
-	},
+// 	scrolled: function() {
 
-	didInsertElement: function(){
-		var _this = this;
-		var h = window.innerHeight;
-		var hh = $('.image-scroll').offset().top;
-		var height = h - hh;
-		var width = $('.image-scroll').parent().width();
+// 		var distanceY = $('.image-scroll').scrollTop();
+// 		var navbar  = $('.haul-navbar');
+//         var toolbar = $('.toolbar');    
+//         var h = navbar.height() + toolbar.height();
+//         console.log(distanceY + " " + h)
+//         if (distanceY > h) {	  
+//             $('.image-scroll').addClass('fixed');      
+//         	this.resized();	
+//         } else {
+//         	this.set('style','');
+//             $('.image-scroll').removeClass('fixed');      
+//         	this.resized();	
+//         } 
+// 	},
 
-		this.set('height', height);
-		this.set('width', width);
+// 	resized: function() {
+// 		var w = $('.image-scroll').parent().width();
+// 		this.set('width', w);
+// 		var width = this.get('width');
+// 		var height = this.get('height');
+// 		this.set('style', 'height:'+height+'px;width:' +width+'px');
+//     },
 
-		$(window).resize(function() {
-			clearTimeout(this.id);
-    		this.id = setTimeout(doneResizing, 500);
-		});
+// 	willDestroyElement: function() {
+//         this.unbindResizing();
+// 		this.unbindScrolling();
+//     },
 
-		function doneResizing() {
-			var w = $('.image-scroll').parent().width();
-			// console.log("PLEASE W", w)
-			_this.set('width', w);
-			_this.widthChanges();
-		}
+// 	didInsertElement: function(){
 
-		$(window).scroll(function() {        
-	        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-	            shrinkOn = 100;
-	        
-	        if (distanceY > shrinkOn) {	  
-	            $('.image-scroll').addClass('fixed');      
-	        	doneResizing();	
-	        } else {
-	        	_this.set('style','');
-	            $('.image-scroll').removeClass('fixed');      
-	        	doneResizing();	
-	        } 
-	    });
-	},
+// 		var _this = this; 
+// 		var height = window.innerHeight - $('.image-scroll').offset().top; 
+// 		var width = $('.image-scroll').parent().width();
 
+// 		this.set('height', height);
+// 		this.set('width', width);
 
-});
+// 		this.bindResizing();
+// 		this.bindScrolling();
+// 	}
+// });
