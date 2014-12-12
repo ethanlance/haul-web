@@ -4,10 +4,9 @@
 		<div class="row ">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
 				   	
-		     	<h1>
-		     		{{ make-icon icon=model.collection.icon isSmall=false isCollection=true }}
+		     	<h2>
 		     		<strong>{{model.collection.name}}</strong> 
-		     	</h1>
+		     	</h2>
 		     	
 			</div>
 	 	</div>
@@ -46,19 +45,9 @@
 		<div class="col-md-4 col-sm-4 col-xs-4"> 
 
 			<h3 class="haul-font text-center bottom-border">{{ model.product.name }}</h3> 
-			
-			<div class="row">			
-				<div class="col-md-12 col-sm-12 col-xs-12 image-scroll">
-					<p>You can drag images into your post.</p>
-					{{#if model.product }}
-						{{#if model.product.images }}
-							{{#each model.product.images}}
-								<img class="thumbnail" {{bind-attr src='medium'}}>
-							{{/each}}
-						{{/if}}
-					{{/if}}
-				</div>
-			</div>
+		
+			{{image-scroller images=model.product.images }}
+		
 		</div>
 	</div>
 </div>

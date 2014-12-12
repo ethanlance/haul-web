@@ -60,6 +60,8 @@
 					this.set('isCollectionOwner', true);
 				}	
 			}
+
+
 		}.observes('model'),
 
 		saveModel: function() { 

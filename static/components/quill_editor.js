@@ -2,6 +2,7 @@ Haul.QuillEditorComponent = Ember.Component.extend({
 
 
 	didInsertElement: function(){
+
  		var editor = new Quill('#editor', {
 		  modules: {
 		    'toolbar': { container: '#toolbar' },

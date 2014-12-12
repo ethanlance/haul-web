@@ -325,24 +325,24 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* line 305, haul.scss */
+  /* line 307, haul.scss */
   .toolbar.shrink {
     top: 48px;
   }
 }
-/* line 310, haul.scss */
+/* line 312, haul.scss */
 .toolbar h1 {
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-/* line 315, haul.scss */
+/* line 317, haul.scss */
 .navbar-profile .profile-circular-mask {
   width: 25px;
   height: 25px;
 }
 
-/* line 320, haul.scss */
+/* line 322, haul.scss */
 .haul-buy-card {
   min-height: 20px;
   margin-right: 15px;
@@ -356,7 +356,7 @@ body {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 335, haul.scss */
+/* line 337, haul.scss */
 .haul-buy-card .title {
   font-family: inherit;
   font-weight: 500;
@@ -365,18 +365,18 @@ body {
   padding-bottom: 10px;
 }
 
-/* line 344, haul.scss */
+/* line 346, haul.scss */
 .haul-buy-card .profile-circular-mask {
   width: 50px;
   height: 50px;
 }
 
-/* line 351, haul.scss */
+/* line 353, haul.scss */
 .haul-buy-card .media:first-child {
   margin-top: 15px;
 }
 
-/* line 355, haul.scss */
+/* line 357, haul.scss */
 .haul-buy-card .haul-price {
   font-family: Arvo, serif;
   font-weight: bold;
@@ -384,35 +384,35 @@ body {
   padding-top: 5px;
 }
 
-/* line 363, haul.scss */
+/* line 365, haul.scss */
 .haul-buy-card .button-bar {
   margin-bottom: 15px;
   vertical-align: middle;
 }
 
-/* line 367, haul.scss */
+/* line 369, haul.scss */
 .haul-buy-card .haul-counts {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 374, haul.scss */
+/* line 376, haul.scss */
 .media-body {
   padding-left: 10px;
 }
 
-/* line 379, haul.scss */
+/* line 381, haul.scss */
 .haul-profile-header {
   color: #000;
 }
 
-/* line 383, haul.scss */
+/* line 385, haul.scss */
 .haul-media-left {
   float: left;
   max-width: 40%;
 }
 
-/* line 388, haul.scss */
+/* line 390, haul.scss */
 .haul-media-left-end {
   float: left;
   padding: 20px 10px 10px 40px;
@@ -420,7 +420,7 @@ body {
 }
 
 @media (max-width: 450px) {
-  /* line 394, haul.scss */
+  /* line 396, haul.scss */
   .haul-media-left {
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
@@ -430,13 +430,13 @@ body {
     max-width: 300px;
   }
 }
-/* line 402, haul.scss */
+/* line 404, haul.scss */
 .haul-grid {
   margin: 0;
   margin-top: 30px;
 }
 
-/* line 407, haul.scss */
+/* line 409, haul.scss */
 .haul-grid-li {
   float: left;
   padding: 10px;
@@ -445,19 +445,19 @@ body {
 }
 
 @media (min-width: 768px) {
-  /* line 415, haul.scss */
+  /* line 417, haul.scss */
   .haul-grid-li {
     width: 33%;
   }
 }
 @media (min-width: 992px) {
-  /* line 422, haul.scss */
+  /* line 424, haul.scss */
   .haul-grid-li {
     width: 25%;
   }
 }
 @media (min-width: 1200px) {
-  /* line 427, haul.scss */
+  /* line 429, haul.scss */
   .haul-grid-li {
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
@@ -466,14 +466,14 @@ body {
     width: 25%;
   }
 }
-/* line 437, haul.scss */
+/* line 439, haul.scss */
 .haul-grid-li img {
   width: 100%;
   max-width: 320px;
   max-height: 320px;
 }
 
-/* line 444, haul.scss */
+/* line 446, haul.scss */
 .haul-grid-li .sell {
   width: 100%;
   margin: 0px;
@@ -483,7 +483,7 @@ body {
   max-height: 320px;
 }
 
-/* line 454, haul.scss */
+/* line 456, haul.scss */
 .haul-grid-li .sell-button {
   border: 1px dashed grey;
   border-radius: 4px;
@@ -497,31 +497,31 @@ body {
   font-size: 1.5em;
 }
 
-/* line 467, haul.scss */
+/* line 469, haul.scss */
 .haul-grid-li .sell-text {
   position: absolute;
   top: 30%;
   width: 100%;
 }
 
-/* line 477, haul.scss */
+/* line 479, haul.scss */
 .sell-text .glyphicon {
   padding-bottom: 10px;
 }
 
-/* line 481, haul.scss */
+/* line 483, haul.scss */
 .box-rigid {
   float: left;
   padding-right: 10px;
   position: relative;
 }
 
-/* line 487, haul.scss */
+/* line 489, haul.scss */
 .box-vert-align {
   margin-top: 25%;
 }
 
-/* line 492, haul.scss */
+/* line 494, haul.scss */
 .box {
   /*border: 1px dashed grey;*/
   float: left;
@@ -531,34 +531,34 @@ body {
   max-height: 320px;
 }
 
-/* line 501, haul.scss */
+/* line 503, haul.scss */
 .box-soft {
   background-color: #f9f9f9;
   padding: 2px;
   border-radius: 4px;
 }
 
-/* line 507, haul.scss */
+/* line 509, haul.scss */
 .box-inside {
   max-height: 320px;
 }
 
 @media (min-width: 768px) {
-  /* line 512, haul.scss */
+  /* line 514, haul.scss */
   .box {
     width: 66%;
     padding-top: 20px;
   }
 }
 @media (min-width: 992px) {
-  /* line 519, haul.scss */
+  /* line 521, haul.scss */
   .box {
     width: 75%;
     padding-top: 20px;
   }
 }
 @media (min-width: 1200px) {
-  /* line 525, haul.scss */
+  /* line 527, haul.scss */
   .box {
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
@@ -568,7 +568,7 @@ body {
     padding-top: 20%;
   }
 }
-/* line 535, haul.scss */
+/* line 537, haul.scss */
 .haul-image-picker-well {
   margin-top: 10px;
   padding-top: 20px;
@@ -579,7 +579,7 @@ body {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 546, haul.scss */
+/* line 548, haul.scss */
 .haul-grid-li .info {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -596,12 +596,12 @@ body {
   opacity: 1;
 }
 
-/* line 560, haul.scss */
+/* line 562, haul.scss */
 .haul-grid-li .info:hover {
   opacity: 1;
 }
 
-/* line 564, haul.scss */
+/* line 566, haul.scss */
 .haul-grid-li .price {
   /*  border: 1px solid red;*/
   position: absolute;
@@ -614,19 +614,19 @@ body {
   box-shadow: 0px 2px 1px #ccc;
 }
 
-/* line 576, haul.scss */
+/* line 578, haul.scss */
 .haul-grid .price {
   float: right;
   padding-left: 20px;
 }
 
-/* line 581, haul.scss */
+/* line 583, haul.scss */
 .haul-grid .control {
   float: right;
   padding-left: 20px;
 }
 
-/* line 586, haul.scss */
+/* line 588, haul.scss */
 .haul-grid .sold {
   position: absolute;
   right: 0px;
@@ -643,32 +643,32 @@ body {
   border-bottom-left-radius: 4px;
 }
 
-/* line 605, haul.scss */
+/* line 607, haul.scss */
 .margin-top {
   margin-top: 20px;
 }
 
-/* line 609, haul.scss */
+/* line 611, haul.scss */
 .padding-top {
   padding-top: 20px;
 }
 
-/* line 613, haul.scss */
+/* line 615, haul.scss */
 .btn-xs.margin-top {
   margin-top: 5px;
 }
 
-/* line 617, haul.scss */
+/* line 619, haul.scss */
 .btn-fit-select {
   padding-bottom: 12px;
 }
 
-/* line 621, haul.scss */
+/* line 623, haul.scss */
 .padding-bottom {
   padding-bottom: 20px;
 }
 
-/* line 625, haul.scss */
+/* line 627, haul.scss */
 .vcenter {
   float: none;
   display: inline-block;
@@ -676,12 +676,12 @@ body {
   margin-right: -4px;
 }
 
-/* line 634, haul.scss */
+/* line 636, haul.scss */
 .btn-no-radius {
   border-radius: 0;
 }
 
-/* line 638, haul.scss */
+/* line 640, haul.scss */
 .btn-facebook {
   color: #fff;
   background-color: #3B5998;
@@ -691,13 +691,13 @@ body {
   font-weight: 700;
 }
 
-/* line 647, haul.scss */
+/* line 649, haul.scss */
 .btn-facebook:hover {
   background-color: #879ac0;
   border: none;
 }
 
-/* line 657, haul.scss */
+/* line 659, haul.scss */
 .haul-grid-thumbs {
   list-style: none;
   float: left;
@@ -706,7 +706,7 @@ body {
   width: 20%;
 }
 
-/* line 665, haul.scss */
+/* line 667, haul.scss */
 .alert-wrapper {
   position: absolute;
   display: block;
@@ -715,7 +715,7 @@ body {
   left: 0px;
 }
 
-/* line 674, haul.scss */
+/* line 676, haul.scss */
 .alert-wrapper .alert {
   border-radius: 0px;
   background-color: rgba(242, 222, 222, 0.9);
@@ -723,7 +723,7 @@ body {
   /*text-align:center;*/
 }
 
-/* line 681, haul.scss */
+/* line 683, haul.scss */
 .progress-wrapper {
   position: absolute;
   display: block;
@@ -732,19 +732,19 @@ body {
   margin-left: 0px;
 }
 
-/* line 689, haul.scss */
+/* line 691, haul.scss */
 .progress-wrapper .progress {
   border-radius: 0px;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
-/* line 696, haul.scss */
+/* line 698, haul.scss */
 .haul-grid-thumbs:hover .delete {
   opacity: 1;
 }
 
-/* line 700, haul.scss */
+/* line 702, haul.scss */
 .haul-grid-thumbs .delete {
   position: absolute;
   right: 10px;
@@ -752,18 +752,18 @@ body {
   opacity: 0;
 }
 
-/* line 710, haul.scss */
+/* line 712, haul.scss */
 #haul-dropzone {
   /*border: 1px solid blue;*/
   min-height: 300px;
 }
 
-/* line 715, haul.scss */
+/* line 717, haul.scss */
 .dropzone-preview {
   /* border: 1px solid pink;*/
 }
 
-/* line 719, haul.scss */
+/* line 721, haul.scss */
 .ember-view .selected img {
   border-left: 4px solid #428bca;
   border-right: 4px solid #428bca;
@@ -771,75 +771,75 @@ body {
   border-bottom: 4px solid #428bca;
 }
 
-/* line 726, haul.scss */
+/* line 728, haul.scss */
 .ember-view .selected .delete {
   opacity: 0;
 }
 
-/* line 734, haul.scss */
+/* line 736, haul.scss */
 .modal .danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
 
-/* line 741, haul.scss */
+/* line 743, haul.scss */
 .carousel-control.left {
   background-image: none;
 }
 
-/* line 744, haul.scss */
+/* line 746, haul.scss */
 .carousel-control.right {
   background-image: none;
 }
 
-/* line 748, haul.scss */
+/* line 750, haul.scss */
 .slide {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
 }
 
-/* line 753, haul.scss */
+/* line 755, haul.scss */
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
   width: 100%;
 }
 
-/* line 758, haul.scss */
+/* line 760, haul.scss */
 .haul-thumb {
   cursor: hand;
   margin-bottom: 0px;
   width: 100%;
 }
 
-/* line 764, haul.scss */
+/* line 766, haul.scss */
 .sortable {
   list-style: none;
 }
 
-/* line 768, haul.scss */
+/* line 770, haul.scss */
 .ui-sortable {
   padding: 0px;
   position: relative;
 }
 
-/* line 773, haul.scss */
+/* line 775, haul.scss */
 .sortable li {
   float: left;
   width: 20%;
   cursor: hand;
 }
 
-/* line 779, haul.scss */
+/* line 781, haul.scss */
 .sort-item-wrapper {
   position: relative;
 }
 
-/* line 782, haul.scss */
+/* line 784, haul.scss */
 .sortable li .glyphicon {
   display: none;
 }
 
-/* line 785, haul.scss */
+/* line 787, haul.scss */
 .sortable li:hover .glyphicon {
   display: inline-block;
   position: absolute;
@@ -852,42 +852,42 @@ body {
   font-size: 3em;
 }
 
-/* line 799, haul.scss */
+/* line 801, haul.scss */
 .sortable li:hover img {
   opacity: .5;
 }
 
-/* line 804, haul.scss */
+/* line 806, haul.scss */
 .input-sm {
   width: 100px;
 }
 
-/* line 808, haul.scss */
+/* line 810, haul.scss */
 .input-xs {
   width: 75px;
 }
 
-/* line 812, haul.scss */
+/* line 814, haul.scss */
 .input-group .input-sm {
   width: 100px;
 }
 
-/* line 816, haul.scss */
+/* line 818, haul.scss */
 label {
   padding-top: 10px;
 }
 
-/* line 820, haul.scss */
+/* line 822, haul.scss */
 .border {
   border: 1px solid pink;
 }
 
-/* line 824, haul.scss */
+/* line 826, haul.scss */
 textarea.form-control {
   height: 200px;
 }
 
-/* line 841, haul.scss */
+/* line 843, haul.scss */
 .toc {
   float: left;
   width: 200px;
@@ -896,22 +896,22 @@ textarea.form-control {
 }
 
 @media (max-width: 992px) {
-  /* line 848, haul.scss */
+  /* line 850, haul.scss */
   .toc {
     display: none;
   }
 }
-/* line 853, haul.scss */
+/* line 855, haul.scss */
 .relative {
   position: relative;
 }
 
-/* line 857, haul.scss */
+/* line 859, haul.scss */
 .content-toc {
   padding-top: 60px;
 }
 
-/* line 861, haul.scss */
+/* line 863, haul.scss */
 .content-scroll {
   overflow: scroll;
   height: 120%;
@@ -919,12 +919,12 @@ textarea.form-control {
   padding-bottom: 0%;
 }
 
-/* line 868, haul.scss */
+/* line 870, haul.scss */
 .content-fixed-nav {
   margin-top: 55px;
 }
 
-/* line 873, haul.scss */
+/* line 875, haul.scss */
 .trucate-text .hide {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -932,7 +932,7 @@ textarea.form-control {
   transition: opacity 0.15s linear;
 }
 
-/* line 877, haul.scss */
+/* line 879, haul.scss */
 .trucate-text .show {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -940,38 +940,38 @@ textarea.form-control {
   transition: opacity 0.15s linear;
 }
 
-/* line 882, haul.scss */
+/* line 884, haul.scss */
 .badge-success {
   background-color: green;
 }
 
-/* line 886, haul.scss */
+/* line 888, haul.scss */
 .badge-danger {
   background-color: red;
 }
 
-/* line 890, haul.scss */
+/* line 892, haul.scss */
 .alert-sm {
   padding: 3px;
   margin-top: 3px;
 }
 
-/* line 903, haul.scss */
+/* line 905, haul.scss */
 .content-fixed-nav.home {
   margin-top: 50px;
 }
 
-/* line 909, haul.scss */
+/* line 911, haul.scss */
 .home .price {
   bottom: 40%;
 }
 
-/* line 913, haul.scss */
+/* line 915, haul.scss */
 .home .thumbnail {
   margin-bottom: 0px;
 }
 
-/* line 917, haul.scss */
+/* line 919, haul.scss */
 .home .description {
   display: block;
   padding: 10px;
@@ -983,75 +983,75 @@ textarea.form-control {
 }
 
 @media (min-width: 768px) {
-  /* line 929, haul.scss */
+  /* line 931, haul.scss */
   .btn-responsive {
     font-size: 18px;
     line-height: 1.33;
     border-radius: 6px;
   }
 }
-/* line 937, haul.scss */
+/* line 939, haul.scss */
 .btn-responsive a {
   color: #000;
 }
 
-/* line 941, haul.scss */
+/* line 943, haul.scss */
 .btn-responsive.selected {
   background-color: #eee;
 }
 
-/* line 946, haul.scss */
+/* line 948, haul.scss */
 .btn-left {
   float: left !important;
   margin-right: 10px;
 }
 
-/* line 951, haul.scss */
+/* line 953, haul.scss */
 .btn-right {
   float: right !important;
   margin-left: 10px;
 }
 
-/* line 957, haul.scss */
+/* line 959, haul.scss */
 .form-list {
   list-style: none;
   padding-left: -10px;
   margin-left: -30px;
 }
 
-/* line 963, haul.scss */
+/* line 965, haul.scss */
 .seller-nav {
   background-color: #eee;
   border: 1px solid #eed;
   padding-bottom: 5px;
 }
 
-/* line 969, haul.scss */
+/* line 971, haul.scss */
 .seller-nav h1 {
   margin-top: 10px;
 }
 
-/* line 973, haul.scss */
+/* line 975, haul.scss */
 .seller-nav h2 {
   margin-top: -3px;
 }
 
-/* line 977, haul.scss */
+/* line 979, haul.scss */
 .seller-nav h3 {
   margin-top: 10px;
 }
 
-/* line 981, haul.scss */
+/* line 983, haul.scss */
 .seller-nav h1 a {
   color: black;
 }
 
-/* line 985, haul.scss */
+/* line 987, haul.scss */
 .seller-nav h2 a {
   color: black;
 }
 
-/* line 989, haul.scss */
+/* line 991, haul.scss */
 .seller-nav .follow {
   position: absolute;
   right: 40px;
@@ -1059,51 +1059,60 @@ textarea.form-control {
   text-align: left;
 }
 
-/* line 998, haul.scss */
+/* line 1000, haul.scss */
 #leaveComment textarea {
   height: 80px;
 }
 
-/* line 1002, haul.scss */
+/* line 1004, haul.scss */
 .top-border {
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1005, haul.scss */
+/* line 1007, haul.scss */
 .bottom-border {
   border-bottom: 1px solid #e3e3e3;
 }
 
-/* line 1009, haul.scss */
+/* line 1011, haul.scss */
 .image-scroll {
   overflow: auto;
   height: 300px;
   padding: 10px;
+  border-bottom: 1px solid #e3e3e3;
 }
 
-/* line 1015, haul.scss */
+/* line 1018, haul.scss */
 .image-scroll img {
   width: 50%;
   float: left !important;
 }
 
-/* line 1020, haul.scss */
+/* line 1023, haul.scss */
+.image-scroll.fixed {
+  position: fixed;
+  display: inline;
+  top: 125px;
+  width: 300px;
+}
+
+/* line 1031, haul.scss */
 .editorial img {
   width: 100%;
 }
 
-/* line 1024, haul.scss */
+/* line 1036, haul.scss */
 #editor img {
   width: 100%;
 }
 
-/* line 1028, haul.scss */
+/* line 1040, haul.scss */
 .editorWrapper {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
 }
 
-/* line 1033, haul.scss */
+/* line 1045, haul.scss */
 .ql-toolbar {
   background-color: rgba(248, 248, 248, 0.9);
   box-shadow: 0px 1px 1px #eee;

@@ -6,15 +6,14 @@
 		window.addEventListener('scroll', function(e){
 	        
 	        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-	            shrinkOn = 100,
-	            header = document.querySelector(".toolbar");
+	            shrinkOn = 100;
 
 	        //console.log("distanceY", distanceY , " > shrinkOn" , shrinkOn )    
 	        if (distanceY > shrinkOn) {
 	            $('.toolbar').addClass('shrink');
 	        } else {
 	            $('.toolbar').removeClass('shrink');
-	        }
+	        } 
 	    });
 	}
 	window.onload = init();

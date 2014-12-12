@@ -301,6 +301,8 @@ body {
   z-index: 1029;
 }
 
+
+
 @media (max-width: 768px) {
   .toolbar.shrink {
     top:48px;
@@ -1010,6 +1012,7 @@ textarea.form-control {
   overflow:auto;
   height:300px;
   padding:10px;
+  border-bottom: 1px solid #e3e3e3
 }
 
 .image-scroll img {
@@ -1017,9 +1020,18 @@ textarea.form-control {
   float: left !important;
 }
 
+.image-scroll.fixed{ 
+  //@include transition(all .2s ease-in-out);
+  position: fixed;
+  display:inline;
+  top:125px; 
+  width:300px;
+}  
+
 .editorial img {
   width: 100%;
 }
+
 
 #editor img{
   width: 100%;
@@ -1034,3 +1046,8 @@ textarea.form-control {
   background-color: rgba(248, 248, 248, .90);
   box-shadow: 0px 1px 1px #eee;
 }
+
+
+
+
+
