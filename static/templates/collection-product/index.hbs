@@ -142,6 +142,16 @@
 				<h4 class="top-border padding-top">Details:</h4>
 				<p>{{ breaklines model.product.description }}</p>
 			  
+
+				{{#if hasCollections }}
+					<h4 class="top-border padding-top">Featured In</h4>
+				{{/if}}
+				<ul>
+				{{#each collections.collections}}
+					<li>{{#link-to "collection" this}}{{name}}{{/link-to}}</li>
+				{{/each}}				
+				</ul>
+
 			</div>
 		</div> 
 	</div>

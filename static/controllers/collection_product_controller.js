@@ -14,6 +14,7 @@
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 		model: null,
+		hasCollections: "collections.collections",
 
 		//Is currentUser viewing his own page?
 		isCollectionOwner: false,
