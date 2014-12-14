@@ -2,6 +2,7 @@
 (function () {
 	'use strict'; 
 
+	
 	Haul.SettingsController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),

@@ -116,7 +116,6 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 			likeCount: payload.data.product_id
 		};
 
-
 		var payload ={'product': data}; 
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},

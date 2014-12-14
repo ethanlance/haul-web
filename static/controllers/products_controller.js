@@ -2,7 +2,7 @@
 (function () {
 	'use strict'; 
 
-
+	
 	Haul.ProductController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser')
@@ -15,7 +15,8 @@
 
 		//Is currentUser viewing his own page?
 		isProfileOwner: false,
-		
+		hasCollections: "collections.collections",
+		 
 		setup: function() { 
 			var currentUser = this.get('currentUser');
 			if( currentUser ){
@@ -25,11 +26,8 @@
 			}
 		}.observes('model'),
 
-		commentCount: function() {
-			return this.get('model.comments').get('length');
-		}.property('comments'),
-
 		actions: {
+
 			//Click "delete" in UI
 			delete: function() {
 				$('#deleteModal').modal('show');
@@ -68,7 +66,9 @@
 
 		}
 	});
+	
 
+	
 
 	//EDIT or CREATE product.
 	Haul.ProductEditController = Ember.ArrayController.extend({

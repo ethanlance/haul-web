@@ -2,12 +2,11 @@
 (function () {
 	'use strict'; 
 
-
 	Haul.SellerController = Ember.ObjectController.extend({
 		needs: ["auth"],  
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 	}); 
-	
+
 
 	//SHOW all user's products
 	Haul.SellerIndexController = Ember.ObjectController.extend({
@@ -26,8 +25,7 @@
 		}.observes('model'),
 
 	}); 
-
-
+	
 	Haul.SellerProductsController = Ember.ArrayController.extend({
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),

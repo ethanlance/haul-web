@@ -20,17 +20,19 @@
 
 	var toolbarScroll;
 	toolbarScroll = debounce( function() { 
-		var toolbar = $(".toolbar"); 
+		
+		var toolbar = $(".toolbar");  
+
         if(toolbar){ 
         	var navBottom = $('.haul-navbar').height(); 
         	var nextTop = (toolbar.next().offset().top - toolbar.height()) - $(window).scrollTop();
 
         	if( nextTop <= navBottom){
-	        	// console.log("ADD " + nextTop + " <= "+ navBottom) 
-	        	toolbar.addClass('fixed');
+	        	//console.log("ADD " + nextTop + " <= "+ navBottom) 
+	        	toolbar.addClass('fixed'); 
 	        }else{
-	        	// console.log("REMOVE " + nextTop + " <= "+ navBottom)
-	        	toolbar.removeClass('fixed');
+	        	//console.log("REMOVE " + nextTop + " <= "+ navBottom)
+	        	toolbar.removeClass('fixed'); 
 	        }
 	    } 
 	}, 10);
@@ -159,17 +161,17 @@ Ember.EasyForm.Config.registerWrapper('bs3-wrapper', {
  
 
 
-  Ember.View.reopen({
-	didInsertElement : function(){
-		this._super();
-		Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
-	},
-	afterRenderEvent : function(){
-		// Holder.run(); 
-		// console.log("ADD THIS HERE")
-		//console.log("AFTER RENDER")
-	}
-  });
+ //  Ember.View.reopen({
+	// didInsertElement : function(){
+	// 	this._super();
+	// 	Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
+	// },
+	// afterRenderEvent : function(){
+	// 	// Holder.run(); 
+	// 	// console.log("ADD THIS HERE")
+	// 	//console.log("AFTER RENDER")
+	// }
+ //  });
 
 
 

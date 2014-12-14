@@ -21,11 +21,8 @@ Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 	model: function(params) {
 		return this.modelFor('seller');
 	},
-	renderTemplate: function(){
-		this.render('layouts/header_base', {
-			into: 'application',
-			outlet: 'header'
-		});
+	renderTemplate: function(controller, model){
+		this._super(controller, model);
 		this.render('seller/index');
 	}
 });
@@ -38,11 +35,8 @@ Haul.SellerProductsRoute = Haul.AnonRoute.extend({
  		controller.set('user', this.modelFor('seller'));
  		controller.set('content', model);
  	},
-	renderTemplate: function(){
-		this.render('layouts/header_base', {
-			into: 'application',
-			outlet: 'header'
-		});
+	renderTemplate: function(controller, model){
+		this._super(controller, model);
 		this.render('seller/products');
 	}
 });
@@ -67,6 +61,9 @@ Haul.SellerNewCollectionRoute = Haul.AuthenticatedRoute.extend({
 	}
 });
 
+// Haul.SellerView = Ember.View.extend();
+Haul.SellerIndexView = Ember.View.extend();
+Haul.SellerProductsView = Ember.View.extend();
 
 Haul.SellerNewProductRoute = Haul.AuthenticatedRoute.extend({ 
 	controllerName: "product-edit",

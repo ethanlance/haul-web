@@ -1,3 +1,4 @@
+
 Haul.SettingsRoute = Haul.AnonRoute.extend({
 	model: function(params) {
 		var _this = this;

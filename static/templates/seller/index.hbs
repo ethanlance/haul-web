@@ -1,3 +1,5 @@
+
+
 {{!-- SELLER PROFILE  --}}
 <div class="seller-nav haul-font">
 	<div class="container content-fixed-nav">
@@ -34,13 +36,14 @@
 	{{#if isProfileOwner }} 
 
 			{{#link-to 'seller.new-collection' this.slug }}
-			<button type="button" class="selected btn btn-default btn-right"}}>
+			<button type="button" class="selected btn btn-default btn-right">
 					<span class="glyphicon glyphicon-plus-sign"></span>
 					Create Collection
 			</button>
 			{{/link-to}} 
 
-			{{#link-to 'seller.new-product' this.slug }}	
+			{{!-- {{#link-to 'seller.new-product' this.slug }}	 --}}
+			{{#link-to 'seller.new-product' this.slug}}
 			<button class="selected btn btn-default btn-right">
 				<span class="glyphicon glyphicon-camera"></span>
 				Sell Something
@@ -53,15 +56,17 @@
 		</div>
 	</div>
 </div>
- 
+
+
+
 <div class="container"> 
 
 	{{#if this.products }}
-	{{#link-to 'seller.products' this.slug }}
+	{{#link-to 'seller.products' this.slug}}
 	<div class="haul-grid-li">	
 		<img class="thumbnail" src="/static/images/blank-thumb.jpg">
 		<div class="info">		
-			<div class="price">My For Sale</div>   
+			<div class="price">My For Sale??</div>   
 		</div>	
 	</div>
 	{{/link-to}}

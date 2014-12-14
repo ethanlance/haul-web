@@ -55,11 +55,11 @@ Haul.Router.map(function(){
 	//Profiles
 	this.resource('seller', {path: "/seller/:user_slug"}, function() {
 
-		this.route('products');
 		this.resource('product', {path: "/:product_slug"}, function() {
 			this.route('edit')
 		});
 
+		this.route('products');
 		this.route('new-product');
 		this.route('new-collection', {path: "new-collection"});
 	});

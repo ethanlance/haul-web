@@ -175,7 +175,6 @@ Haul.UserCollectionAdapter = Haul.ApplicationAdapter.extend({
 
 	findQuery: function(store, type, query) { 
         var url = this.host + "/users/" + query.user_id + "/stores"; 
-        console.log("URL", url);
         return this.ajax(url, 'GET');
     },
 

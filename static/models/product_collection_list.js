@@ -14,6 +14,11 @@ Haul.ProductCollectionListAdapter = Haul.ApplicationAdapter.extend({
 		var url = this.host + "/products/" + id + "/stores"; 
         return this.ajax(url, 'GET');
     },
+
+	findQuery: function(store, type, query) { 
+        var url = this.host + "/products/" + query.product_id + "/stores";
+        return this.ajax(url, 'GET');
+    },
 });
 
 
@@ -29,13 +34,13 @@ Haul.ProductCollectionListSerializer =  DS.RESTSerializer.extend({
 		var product_id = null;
 		var collection_ids = [];
 
-		data = payload.data.map(function(result){ 
+		var data = payload.data.map(function(result){ 
 			product_id =  result.product_id;
 			collection_ids.push( result.store_id );
 			return 
 		}); 
 
-		var data = {
+		data = {
 			id: product_id,	
 			product: product_id,
 			collections: collection_ids
@@ -43,5 +48,30 @@ Haul.ProductCollectionListSerializer =  DS.RESTSerializer.extend({
 
 		var payload = {'product-collection-list': data};  
 		return this._super(store, primaryType, payload, recordId, requestType);
+	},
+
+	extractArray: function(store, primaryType, payload) {
+
+		if( payload.data == "ok" ){
+			return;
+		}
+		
+		var product_id = null;
+		var collection_ids = [];
+
+		payload.data.map(function(result){ 
+			product_id =  result.product_id;
+			collection_ids.push( result.store_id );
+			return;
+		}); 
+
+		var data = [{
+			id: product_id,	
+			product: product_id,
+			collections: collection_ids
+		}]
+
+		var payload = {'product-collection-list': data};   
+		return this._super(store, primaryType, payload);
 	}
 });

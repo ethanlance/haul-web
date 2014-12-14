@@ -268,9 +268,9 @@ body {
 
 
 .toolbar {
-  //position: fixed;
-  //display:inline;
-  top:50px;
+  // position: fixed;
+  // // display:inline;
+  // top:50px;
   width: 100%;
   margin-bottom: 10px;
   padding-top:10px;
@@ -285,6 +285,8 @@ body {
   //z-index: 1029;
   //box-shadow: 2px 1px 3px #ccc;
 }
+
+
 
 .toolbar:empty {
   display:none;
@@ -305,6 +307,15 @@ body {
   z-index: 1029;
 }
 
+.toolbar.fixed-bottom{
+  top: inherit;
+  bottom:0px;
+  position: fixed;
+  display:inline;
+  padding-top:20px;
+  padding-bottom:5px;
+  z-index: 1029;
+}
 
 
 
@@ -1059,3 +1070,14 @@ textarea.form-control {
 
 
 
+.animated-outlet {
+  position: relative;
+}
+
+.haul-container {
+  background-color: #fff;
+}
+
+// .ember-animated-container.no-transform{
+//   transform: none;
+// }

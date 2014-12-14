@@ -2,7 +2,7 @@
 (function () {
 	'use strict'; 
 
-
+	Haul.CollectionView = Ember.View.extend()
 	Haul.CollectionController = Ember.ObjectController.extend({
 		needs: ["auth"],
 		model: {},
@@ -12,6 +12,7 @@
 	/**
 	* 	Display a collection
 	**/
+	Haul.CollectionIndexView = Ember.View.extend()
 	Haul.CollectionIndexController = Ember.ObjectController.extend({
 		needs: ["auth"],  
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
@@ -49,6 +50,7 @@
 	/**
 	* 	Edit a collection
 	**/
+	Haul.CollectionEditView = Ember.View.extend()
 	Haul.CollectionEditController = Ember.ObjectController.extend({
 		needs: ["auth"],
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),

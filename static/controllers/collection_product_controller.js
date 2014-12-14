@@ -1,12 +1,15 @@
 /*global Products, Ember */
 (function () {
 	'use strict'; 
+
+	Haul.CollectionProductView = Ember.View.extend()
 	Haul.CollectionProductController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 	});
 
 	//SHOW one product
+	Haul.CollectionProductIndexEditView = Ember.View.extend()
 	Haul.CollectionProductIndexController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
@@ -38,6 +41,7 @@
 
 
 	//EDIT
+	Haul.CollectionProductEditView = Ember.View.extend()
 	Haul.CollectionProductEditController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),

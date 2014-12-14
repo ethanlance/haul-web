@@ -1,7 +1,7 @@
 
 
 // AUTH
-//Login Form
+//Login Form 
 Haul.LoginRoute = Ember.Route.extend({
 	controllerName: "authlogin",
 	model: function() {
@@ -18,9 +18,9 @@ Haul.LoginRoute = Ember.Route.extend({
 		this.controllerFor('login').reset();
 	}
 });
+Haul.LoginView = Ember.View.extend();
 
-
-//Sign Up Form
+//Sign Up Form 
 Haul.SignupRoute = Ember.Route.extend({
 	controllerName: "signup",
 	model: function() {
@@ -37,7 +37,7 @@ Haul.SignupRoute = Ember.Route.extend({
 		this.controllerFor('signup').reset();
 	}
 });
-
+ 
 Haul.SignupconfirmRoute = Ember.Route.extend({
 	controllerName: "signupconfirm",
 	model: function() {
@@ -56,7 +56,7 @@ Haul.SignupconfirmRoute = Ember.Route.extend({
 });
 
 
-//FORGOT PASSWORD:
+//FORGOT PASSWORD: 
 Haul.ForgotpasswordRoute = Ember.Route.extend({
 	controllerName: "forgotpassword",
 	renderTemplate: function() {
@@ -70,7 +70,7 @@ Haul.ForgotpasswordRoute = Ember.Route.extend({
 		this.controllerFor('forgotpassword').reset();
 	}
 });
-
+ 
 Haul.ForgotpasswordconfirmRoute = Ember.Route.extend({
 	controllerName: "forgotpasswordconfirm",
 	model: function() {
@@ -88,8 +88,7 @@ Haul.ForgotpasswordconfirmRoute = Ember.Route.extend({
 	}
 });
 
-
-
+ 
 Haul.LogoutRoute = Ember.Route.extend({
 	controllerName: "auth",
 	beforeModel: function(){
