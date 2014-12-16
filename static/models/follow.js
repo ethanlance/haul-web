@@ -176,3 +176,115 @@ Haul.CollectionIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 		return this._super(store, type, payload);
 	}
 });
+
+
+
+
+/**
+	List of users who follow a user.
+**/ 
+Haul.UserFollowersList = DS.Model.extend({
+	user: DS.belongsTo('user'), 
+	followers: DS.hasMany('user', {async:true}),
+});
+
+Haul.UserFollowersListAdapter = Haul.ApplicationAdapter.extend({
+
+	host: Haul.FOLLOW_SERVER_HOST,
+
+	find: function(store, type, id) {
+		var url = this.host + "/follows/users/" + id;
+		return this.ajax(url, 'GET');
+	}
+});
+
+Haul.UserFollowersListSerializer =  DS.RESTSerializer.extend({
+
+	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		} 
+
+		var user_id = null;
+		var follower_ids = [];
+
+		payload.data.map(function(result){ 
+			user_id =  result.object.id
+			follower_ids.push( result.user_id );
+			return;
+		}); 
+
+		var data = {
+			id: user_id,	
+			user: user_id,
+			followers: follower_ids
+		}
+	
+		
+		console.log("PAYLOAD", payload);	
+		var payload ={'user-followers-list': data}; 
+		return this._super(store, primaryType, payload);
+	}
+});
+
+
+
+
+
+
+
+
+/**
+	List of users who a user follows
+**/ 
+Haul.UserFollowsList = DS.Model.extend({
+	user: DS.belongsTo('user'), 
+	follows_users: DS.hasMany('user', {async:true}),
+	follows_collections: DS.hasMany('collection', {async:true}),
+});
+
+Haul.UserFollowsListAdapter = Haul.ApplicationAdapter.extend({
+
+	host: Haul.FOLLOW_SERVER_HOST,
+
+	find: function(store, type, id) {
+		var url = this.host + "/users/" + id + "/follows";
+		return this.ajax(url, 'GET');
+	}
+});
+
+Haul.UserFollowsListSerializer =  DS.RESTSerializer.extend({
+
+	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		} 
+
+		var user_id = null;
+		var follows_user_ids = [];
+		var follows_collection_ids = [];
+
+		payload.data.map(function(result){ 
+			user_id =  result.user_id
+			if( result.object.type === 'user')
+				follows_user_ids.push( result.object.id );
+			if( result.object.type === 'store')
+				follows_collection_ids.push( result.object.id );
+			return;
+		}); 
+
+		var data = {
+			id: user_id,	
+			user: user_id,
+			follows_users: follows_user_ids,
+			follows_collections: follows_collection_ids
+		}
+	
+		
+		console.log("PAYLOAD", payload);	
+		var payload ={'user-follows-list': data}; 
+		return this._super(store, primaryType, payload);
+	}
+});

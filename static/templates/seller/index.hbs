@@ -1,24 +1,22 @@
-
-
 {{!-- SELLER PROFILE  --}}
 <div class="seller-nav haul-font">
-	<div class="container content-fixed-nav">
-
+	<div class="container content-fixed-nav"> 
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 
 
 				<div class="follow">
 					{{ follow-btn 
-						item=this 
+						item=user 
 						ref_type="user"
-						currentUser = currentUser   
+						currentUser=currentUser   
+						hideCounts=true
 					}} 
 				</div> 			
 				   	
-				{{ make-icon icon=this.icon isSmall=false class="pull-left" }}
+				{{ make-icon icon=user.icon isSmall=false class="pull-left" }}
 				 	
-		     	<h1>{{this.name}}</h1>
+		     	<h1>{{user.name}}</h1>
 	
 			
 			</div>
@@ -26,6 +24,23 @@
 	</div>
 </div>
 
+
+ 
+<div class="container">  
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+			{{ user-tabs 
+				user=this 
+				isCollections=true
+			}}	
+
+		</div>
+	</div>
+</div>
+
+ 
 
 <div class="toolbar haul-font">
 	<div class="container">
@@ -43,10 +58,10 @@
 			{{/link-to}} 
 
 			{{!-- {{#link-to 'seller.new-product' this.slug }}	 --}}
-			{{#link-to 'seller.new-product' this.slug}}
+			{{#link-to 'product.new' 'product'}}
 			<button class="selected btn btn-default btn-right">
 				<span class="glyphicon glyphicon-camera"></span>
-				Sell Something
+				Sell Something?
 			</button> 
 			{{/link-to}}
 
@@ -74,7 +89,7 @@
 
 	{{#if isProfileOwner}}
 	{{#unless this.products }} 
-	{{#link-to 'seller.new-product' this.slug }}	
+	{{#link-to 'product.new' 'product'}}
 	<div class="haul-grid-li">	
 		<div class="sell">  
 			<div class="sell-button text-center">

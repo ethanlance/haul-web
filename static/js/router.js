@@ -54,14 +54,18 @@ Haul.Router.map(function(){
 
 	//Profiles
 	this.resource('seller', {path: "/seller/:user_slug"}, function() {
+		this.route('followers');
+		this.route('follows');
+		this.route('likes');
+		this.route('products');
+		this.route('new-collection', {path: "new-collection"});
 
 		this.resource('product', {path: "/:product_slug"}, function() {
 			this.route('edit')
+			this.route('new')
 		});
 
-		this.route('products');
-		this.route('new-product');
-		this.route('new-collection', {path: "new-collection"});
+
 	});
 
 	//Store

@@ -128,10 +128,29 @@ Haul.UserAdapter = Haul.ApplicationAdapter.extend({
 	findQuery: function(store, type, query) { 
         var url = this.host + "/users/" + query.id;
         return this.ajax(url, 'GET');
-    },    
+    },   
+
+    findMany: function(store, type, ids) { 
+		if( ids.length < 2 ){
+			var url = this.host + "/users/" + ids[0];
+			return this.ajax(url, 'GET');
+		}else{	
+			var url = this.host + "/users";
+			return this.ajax(url, 'GET', { data: { image_ids: ids } });
+		}
+	},
 });
 
 Haul.UserSerializer =  DS.RESTSerializer.extend({
+
+
+	extractFindMany: function(store, type, payload){
+		if( payload.data.type === "user" ){
+			return [this.extractSingle(store, type, payload)];
+		}else{
+			return this.extractArray(store, type, payload);
+		}
+    },
 
 	normalizePayload: function(store, payload) {
 

@@ -30,58 +30,29 @@
 
 			{{ user-tabs 
 				user=user 
-				isProducts=true
+				isFollowers=true
 			}}	
 
 		</div>
 	</div>
 </div>
 
-
 <div class="toolbar haul-font">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">	
-			<span></span>
-
-
-				{{#link-to "seller" user }}
-				<button class="btn btn-default btn-left">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					Back To Collection
-				</button>
-				{{/link-to}}
-
-				{{!-- BUTTON  --}}
-				{{#if isProfileOwner }}  
-					{{#link-to 'product.new' 'product'}}
-					<button class="btn btn-default btn-right">
-						<span class="glyphicon glyphicon-camera"></span>
-						Sell Something
-					</button> 
-					{{/link-to}}
-				{{/if}}
-
-			</div>
-		</div>
-	</div>
+	<span></span>
 </div>
- 
+
 <div class="container">  
 
 
 	{{!-- SELLER PRODUCTS --}}
-    {{#each this}}
-    	{{#link-to 'product' this.id }}
+    {{#each model.followers}}
+    	{{#link-to 'seller' this.id }}
     	<div class="haul-grid-li"> 
-			<img class="thumbnail" {{bind-attr src=image.small}}>
+			<img class="thumbnail" {{bind-attr src=this.icon}}>
 
-			{{#if sold}}
-				<div class="sold">Sold</div>
-			{{/if}}
 			
 			<div class="info">		
-		 	  	<div class="price"> ${{price}}</div>   
+		 	  	<div class="price">{{name}}</div>   
 			</div>			
 	 	</div>
 	 	{{/link-to}}	

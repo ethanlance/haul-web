@@ -97,3 +97,70 @@ Haul.LikeCountSerializer =  DS.RESTSerializer.extend({
 		return this._super(store, type, payload);
 	}
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+	List of products a user likes.
+**/ 
+Haul.UserLikesList = DS.Model.extend({
+	user: DS.belongsTo('user'), 
+	products: DS.hasMany('product', {async:true}) 
+});
+
+Haul.UserLikesListAdapter = Haul.ApplicationAdapter.extend({
+
+	host: Haul.WANT_SERVER_HOST,
+
+	find: function(store, type, id) {
+		var url = this.host + "/users/" + id + "/likes";
+		return this.ajax(url, 'GET');
+	}
+});
+
+Haul.UserLikesListSerializer =  DS.RESTSerializer.extend({
+
+	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		} 
+
+		var user_id = null;
+		var product_ids = []; 
+
+		payload.data.map(function(result){ 
+			user_id =  result.user_id
+			product_ids.push( result.object.id );
+			return;
+		}); 
+
+		var data = {
+			id: user_id,	
+			user: user_id,
+			products: product_ids, 
+		}
+	
+		
+		console.log("PAYLOAD", payload);	
+		var payload ={'user-likes-list': data}; 
+		return this._super(store, primaryType, payload);
+	}
+});

@@ -54,6 +54,10 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 
 		var store = this.get('targetObject.store');
 		var _this = this; 
+
+	
+ 		
+ 	
 		
 		//Get Ref Type:
 		// var model = String(this.item.constructor);
@@ -88,7 +92,8 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 		}
 	}.on('init'),
 
-	actions: {
+	actions: {	
+
 		btnClick: function(event) { 
 			var _this = this;
 			var record = this.get('userFollowsRecord'); 

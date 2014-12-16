@@ -144,7 +144,7 @@ Haul.CollectionAdapter = Haul.ApplicationAdapter.extend({
 Haul.CollectionSerializer =  DS.RESTSerializer.extend({
 	
 	extractFindMany: function(store, type, payload){
-		if( payload.data.type === "image" ){
+		if( payload.data.type === "collection" ){
 			return [this.extractSingle(store, type, payload)];
 		}else{
 			return this.extractArray(store, type, payload);

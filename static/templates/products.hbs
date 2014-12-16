@@ -1,41 +1,29 @@
-{{!-- SELLER PROFILE  --}}
+{{!-- STORE TEMPLATE --}}
 <div class="seller-nav haul-font">
-	<div class="container content-fixed-nav"> 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="container content-fixed-nav">
 
+		<div class="row ">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 
 				<div class="follow">
 					{{ follow-btn 
 						item=user 
 						ref_type="user"
-						currentUser=currentUser   
-						hideCounts=true
+						currentUser = currentUser 
 					}} 
-				</div> 			
+				</div>
+
 				   	
-				{{ make-icon icon=user.icon isSmall=false class="pull-left" }}
-				 	
-		     	<h1>{{user.name}}</h1>
-	
-			
+		     	<h1>
+		     		{{ make-icon icon=user.icon isSmall=false  }}
+		     		<strong>My For Sale</strong> 
+		     	</h1>
+		     	<small>{{#link-to "seller" user}}by {{user.name}}{{/link-to}}</small>
+				 
 			</div>
-		</div>
-	</div>
-</div>
-
-<div class="container">  
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-
-			{{ user-tabs 
-				user=user 
-				isProducts=true
-			}}	
-
-		</div>
-	</div>
-</div>
+	 	</div>
+	</div>	
+</div>	
 
 
 <div class="toolbar haul-font">
