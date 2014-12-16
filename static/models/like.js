@@ -61,8 +61,9 @@ Haul.LikeSerializer =  DS.RESTSerializer.extend({
 
 
 
-
-
+/**
+ Total likes a product has.
+ **/
 Haul.LikeCount = DS.Model.extend({
 	total: DS.attr('string'),
 	product: DS.belongsTo('product')
@@ -162,5 +163,47 @@ Haul.UserLikesListSerializer =  DS.RESTSerializer.extend({
 		console.log("PAYLOAD", payload);	
 		var payload ={'user-likes-list': data}; 
 		return this._super(store, primaryType, payload);
+	}
+});
+
+
+
+
+
+/**
+ How many things a user has liked.
+ **/
+Haul.UserLikesCount = DS.Model.extend({
+	total: DS.attr('string'),
+	user: DS.belongsTo('user')
+});
+
+Haul.UserLikesCountAdapter = Haul.ApplicationAdapter.extend({
+
+	host: Haul.WANT_SERVER_HOST,
+
+	find: function(store, type, id) {
+		var url = this.host + "/users/" + id + "/likes/total";  
+		return this.ajax(url, 'GET');
+	}
+});
+
+
+
+Haul.UserLikesCountSerializer =  DS.RESTSerializer.extend({
+
+	extractSingle: function(store, type, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		} 
+
+		var data = { 
+			id: payload.data.object.id,
+			total: payload.data.total,	
+		};
+
+		var payload ={'user-likes-count': data}; 
+		return this._super(store, type, payload);
 	}
 });

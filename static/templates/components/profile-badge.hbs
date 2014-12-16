@@ -2,7 +2,7 @@
 	
   	<div class="profile-circular-mask text-center">
   	{{#if user.icon}}
-	    {{#link-to "collection" user class="pull-left"}}<img {{bind-attr src=user.icon }}>{{/link-to}}
+	    {{#link-to "seller" user class="pull-left"}}<img {{bind-attr src=user.icon }}>{{/link-to}}
     {{ else }} 
     	{{#if isPofileOwner }}
     		<span>{{#link-to "settings"}}edit{{/link-to}}</span>

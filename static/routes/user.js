@@ -116,25 +116,3 @@ Haul.SellerLikesRoute = Haul.AnonRoute.extend({
 		this._super(controller, model);
 	}
 });
-
-
-
-Haul.SellerNewCollectionRoute = Haul.AuthenticatedRoute.extend({ 
-	controllerName: "collection-edit",
-	model: function() {
-		return this.store.createRecord('collection');
-	},
-	setupController: function(controller, model) {
-		controller.set('model', model);
-	}, 
-	renderTemplate: function(controller, model) {
-		this.render('user/edit', {
-			into: 'user/user',
-			outlet: 'user',
-			controller: controller,
-			model: model
-		});
-		this._super(controller, model);
-	}
-});
-

@@ -48,6 +48,9 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 	}.observes('isFollowingCount'),
 
 	start: function() {  
+
+		if(!this.get('ref_id'))
+			return;
 	
 		this.isFollowedByCountChange();
 		this.isFollowingCountChange();

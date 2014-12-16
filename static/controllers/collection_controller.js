@@ -29,20 +29,23 @@
 		setup: function() { 
 			var _this = this;
 			var currentUser = this.get('currentUser');	
-			var collection_id = this.get('collection').get('id');
+			
 
-			if( currentUser ){
-				if( !Ember.isEmpty(currentUser) && this.get('collection').get('user').get('id') === currentUser.get('id')) {
-					this.set('isCollectionOwner', true);
-				}
-			} 
+			if( this.get("collection").id ) {
+			
+				if( currentUser ){
+					if( !Ember.isEmpty(currentUser) && this.get('collection').get('user').get('id') === currentUser.get('id')) {
+						this.set('isCollectionOwner', true);
+					}
+				} 
 
-			this.store.find('collection-product-list', {collection_id: collection_id});
-	 		var filter = this.store.filter('collection-product-list', function(mpl) {
-	 			if( mpl.get('id') && mpl.get('collection_id') === collection_id) return true;
-	 		});
-	 		this.set("products", filter);
-
+				var collection_id = this.get('collection').get('id');
+				this.store.find('collection-product-list', {collection_id: collection_id});
+		 		var filter = this.store.filter('collection-product-list', function(mpl) {
+		 			if( mpl.get('id') && mpl.get('collection_id') === collection_id) return true;
+		 		});
+		 		this.set("products", filter);
+		 	}
 		}.observes('collection'),
 	});
 

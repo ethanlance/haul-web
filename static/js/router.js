@@ -58,21 +58,20 @@ Haul.Router.map(function(){
 		this.route('follows');
 		this.route('likes');
 		this.route('products');
-		this.route('new-collection', {path: "new-collection"});
 
 		this.resource('product', {path: "/:product_slug"}, function() {
-			this.route('edit')
-			this.route('new')
+			this.route('edit');
+			this.route('new');
 		});
-
-
 	});
 
 	//Store
+	this.resource('collection-new', {path: "/new-collection"})
 	this.resource('collection', {path: "/collection/:collection_slug"}, function() {
-		this.route('edit')
+		this.route('edit');
+
 		this.resource('collection-product', {path: "/:product_slug"}, function() {
-			this.route('edit')
+			this.route('edit');
 		});
 	});
 

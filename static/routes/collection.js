@@ -45,3 +45,24 @@ Haul.CollectionEditRoute = Haul.AuthenticatedRoute.extend({
 		});
 	}
 });
+
+
+Haul.CollectionNewRoute = Haul.AuthenticatedRoute.extend({ 
+	controllerName: "collection-edit",
+	beforeModel: function() {
+		this.controllerFor('collection-edit').reset();
+	},
+	model: function() {
+		console.log("HUH?")
+		return this.store.createRecord('collection');
+	}, 
+	renderTemplate: function(controller, model) {  console.log("WHT?")
+		this._super();
+		this.render('collection/edit', {
+			into: 'application',
+			outlet: 'main',
+			controller: controller,
+			model: model
+		});
+	}
+});
