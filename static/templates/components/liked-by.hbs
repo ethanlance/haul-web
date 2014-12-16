@@ -1,0 +1,6 @@
+{{!-- SELLER PRODUCTS --}}
+{{#each users}}
+	{{#link-to 'seller' this.id }}
+	{{profile-badge user=this currentUser=currentUser}}
+ 	{{/link-to}}	
+{{/each}} 

@@ -1,3 +1,6 @@
+/**
+ 	Set whether a user likes/unlikes a product.
+*/
 Haul.Like = DS.Model.extend({
 	ref_type: DS.attr('string'),
 	ref_id: DS.attr('string'),
@@ -9,7 +12,6 @@ Haul.LikeAdapter = Haul.ApplicationAdapter.extend({
 	host: Haul.WANT_SERVER_HOST,
 
 	find: function(store, type, id) {
-
 		var ref_type = 'products';
 		var ref_id = id;
 		var user_id = this.get('currentUserId');
@@ -61,6 +63,8 @@ Haul.LikeSerializer =  DS.RESTSerializer.extend({
 
 
 
+
+
 /**
  Total likes a product has.
  **/
@@ -78,8 +82,6 @@ Haul.LikeCountAdapter = Haul.ApplicationAdapter.extend({
 		return this.ajax(url, 'GET');
 	}
 });
-
-
 
 Haul.LikeCountSerializer =  DS.RESTSerializer.extend({
 
@@ -101,19 +103,53 @@ Haul.LikeCountSerializer =  DS.RESTSerializer.extend({
 
 
 
+/**
+	List of users who like a product.
+**/ 
+Haul.ProductLikedByList = DS.Model.extend({
+	product: DS.belongsTo('product'), 
+	users: DS.hasMany('users', {async:true}) 
+});
 
+Haul.ProductLikedByListAdapter = Haul.ApplicationAdapter.extend({
 
+	host: Haul.WANT_SERVER_HOST,
 
+	find: function(store, type, id) {
+		var url = this.host + "/likes/products/" + id + "/users";
+		return this.ajax(url, 'GET');
+	}
+});
 
+Haul.ProductLikedByListSerializer =  DS.RESTSerializer.extend({
 
+	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
+		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
+			return;
+		} 
 
+		var product_id = null;
+		var user_ids = []; 
 
+		payload.data.map(function(result){ 
+			product_id =  result.user_id
+			user_ids.push( result.object.id );
+			return;
+		}); 
 
-
-
-
-
+		var data = {
+			id: product_id,	
+			users: user_ids,
+			product: product_id, 
+		}
+	
+		
+		console.log("PAYLOAD", payload);	
+		var payload ={'product-liked-by-list': data}; 
+		return this._super(store, primaryType, payload);
+	}
+});
 
 
 
@@ -171,7 +207,7 @@ Haul.UserLikesListSerializer =  DS.RESTSerializer.extend({
 
 
 /**
- How many things a user has liked.
+  Total count of how many things a user has liked.
  **/
 Haul.UserLikesCount = DS.Model.extend({
 	total: DS.attr('string'),
@@ -187,8 +223,6 @@ Haul.UserLikesCountAdapter = Haul.ApplicationAdapter.extend({
 		return this.ajax(url, 'GET');
 	}
 });
-
-
 
 Haul.UserLikesCountSerializer =  DS.RESTSerializer.extend({
 
