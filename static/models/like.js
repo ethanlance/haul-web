@@ -139,7 +139,7 @@ Haul.UserLikesListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
 			return;
 		} 
 

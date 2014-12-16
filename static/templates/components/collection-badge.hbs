@@ -1,0 +1,21 @@
+<div class="box-rigid text-center box-soft">
+	
+  	<div class="profile-circular-mask collection text-center">
+  	{{#if collection.icon}}
+	    {{#link-to "collection" collection class="pull-left"}}<img {{bind-attr src=collection.icon }}>{{/link-to}}
+    {{ else }}
+    	{{#if isCollectionOwner }}
+    		{{#link-to "collection.edit" collection }}<span>edit</span>{{/link-to}}
+    	{{/if}}
+    {{/if}}
+    </div>
+
+
+	{{ follow-btn 
+		item=collection
+		currentUser = targetObject.currentUser
+		targetObject = targetObject
+        ref_type = "collection"
+	}} 
+	
+</div>

@@ -3,8 +3,7 @@
 		- Display seller's products
 **/	
 Haul.SellerRoute = Haul.AnonRoute.extend({
-	model: function(params) {
-		console.log("HRERE? ", params)
+	model: function(params) { 
 		var _this = this; 
 		return this.store.find('user', params.user_slug).then(function(user){
 			return user;
@@ -12,7 +11,7 @@ Haul.SellerRoute = Haul.AnonRoute.extend({
 			return _this.transitionTo('not-found');
 		});
 	},	
-	serialize: function(model) {console.log("BOOM?")
+	serialize: function(model) {
  	   return { user_slug: model.get('id') };
 	} 
 });
@@ -27,7 +26,6 @@ Haul.SellerRoute = Haul.AnonRoute.extend({
 **/
 Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 	model: function(params) {
-		console.log("WABOOM", params)
 		return this.modelFor('seller');
 	},
  	setupController: function(controller, model) {

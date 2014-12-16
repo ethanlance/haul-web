@@ -10,7 +10,7 @@ Haul.ProductCollectionListAdapter = Haul.ApplicationAdapter.extend({
 	
 	host: Haul.STORE_SERVER_HOST, 
 	
-	find: function(store, type, id) {
+	find: function(store, type, id) { 
 		var url = this.host + "/products/" + id + "/stores"; 
         return this.ajax(url, 'GET');
     },
@@ -26,8 +26,8 @@ Haul.ProductCollectionListAdapter = Haul.ApplicationAdapter.extend({
 Haul.ProductCollectionListSerializer =  DS.RESTSerializer.extend({ 
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
-
-		if( payload.data == "ok" ){
+ 
+		if( payload.data == "ok" || Ember.isEmpty(payload.data)){ 
 			return;
 		}
 		
@@ -51,11 +51,11 @@ Haul.ProductCollectionListSerializer =  DS.RESTSerializer.extend({
 	},
 
 	extractArray: function(store, primaryType, payload) {
-
-		if( payload.data == "ok" ){
+ 
+		if( payload.data == "ok" || Ember.isEmpty(payload.data)){
 			return;
 		}
-		
+		 
 		var product_id = null;
 		var collection_ids = [];
 

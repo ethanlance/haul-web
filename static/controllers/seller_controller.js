@@ -4,7 +4,7 @@
 
 	Haul.SellerController = Ember.ObjectController.extend({
 		needs: ["auth"],  
-		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+		currentUser: Ember.computed.alias('controllers.auth.currentUser')
 	}); 
 
 
@@ -92,9 +92,11 @@
 	}); 
 
 	Haul.SellerLikesController = Ember.ObjectController.extend({
-		needs: ["auth"], 
-		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+		needs: ["auth", "seller"], 
 		user: null,
+		
+		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+
 
 		// //Is currentUser viewing his own page?
 		isProfileOwner: false,
