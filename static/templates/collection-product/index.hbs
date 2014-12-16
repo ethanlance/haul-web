@@ -71,7 +71,7 @@
 				{{!-- PRODUCT DETAILS --}}
 				<h3 class="haul-font text-center bottom-border">{{ model.product.name }}</h3> 
 			
-				<span class="haul-font">
+				<div class="haul-font padding-bottom ">
 					{{!-- BUTTONS --}}
 					<div class="btn-left haul-price">${{model.product.price}}</div>	 	
 						
@@ -103,7 +103,15 @@
 							productPage=true
 						}}
 					{{/unless}}
-				</span>
+				</div>
+
+				{{!-- FACEBOOK, TWITTER, PINTEREST --}}
+				<div class="clearfix text-center">
+
+					{{social-btns product=model.product url=url}} 
+
+				</div>
+
 
 				<div class="padding-top">
 					{{!-- IMAGES --}}
@@ -113,6 +121,7 @@
 						{{/if}}
 					{{/if}}
 				</div>
+				
 
 				
 				

@@ -12,7 +12,8 @@
 	Haul.ProductIndexController = Ember.ObjectController.extend({ 
 		needs: ["auth"], 
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
-
+		url: "",
+		
 		//Is currentUser viewing his own page?
 		isProfileOwner: false,
 		hasCollections: "collections.collections",
@@ -24,6 +25,8 @@
 					this.set('isProfileOwner', true);
 				}
 			}
+
+			this.set('url', window.location.href);
 		}.observes('model'),
 
 		actions: {

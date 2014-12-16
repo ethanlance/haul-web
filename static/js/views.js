@@ -1,6 +1,35 @@
+
+// PINTEREST
+// (function(d){
+//     var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+//     p.type = 'text/javascript';
+//     p.async = true;
+//     p.src = '//assets.pinterest.com/js/pinit.js';
+//     f.parentNode.insertBefore(p, f);
+// }(document));
+
+
+// FACEBOOK
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=443672575768207&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// TWITTER
+window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+
+
+
+
+
 /*global Products, Ember */
 (function () {
   'use strict';
+
+
 
 
 	function debounce(func, wait, immediate) {

@@ -1154,3 +1154,8 @@ textarea.form-control {
 .haul-container {
   background-color: #fff;
 }
+
+/* line 1092, haul.scss */
+.padding-right {
+  padding-right: 10px;
+}

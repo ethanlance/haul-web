@@ -132,6 +132,7 @@ Haul.ProductLikedByListSerializer =  DS.RESTSerializer.extend({
 		var product_id = null;
 		var user_ids = []; 
 
+		console.log("PAYLOAD", payload);	
 		payload.data.map(function(result){ 
 			product_id =  result.user_id
 			user_ids.push( result.object.id );

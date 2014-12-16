@@ -1,4 +1,10 @@
-
+<meta property="og:title" content="The Rock" />
+<meta property="og:site_name" content="Haul" />
+<meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+<meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
+<meta property="og:description" content="Bee boo baaap" />
+<meta property="fb:app_id" content="443672575768207" />
+<meta property="og:type" content="video.movie" />
 
 {{!-- TOOLBAR --}}
 <div class="toolbar haul-font">
@@ -56,7 +62,7 @@
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="haul-buy-card">
 				
-				{{!-- PRODCUT NAME --}}
+				{{!-- PRODUCT NAME --}}
 				<h3 class="haul-font text-center bottom-border">{{ model.name }}</h3> 
 
 				{{!-- BUTTONS --}}
@@ -91,6 +97,14 @@
 							productPage=true
 						}}
 					{{/unless}}
+
+				</div>
+
+				{{!-- FACEBOOK, TWITTER, PINTEREST --}}
+				<div class="bottom-border padding-bottom clearfix text-center">
+
+					{{social-btns product=model.product url=url}} 
+
 				</div>
 
 
