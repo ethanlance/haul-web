@@ -135,17 +135,14 @@
 				<p>{{ breaklines model.description }}</p>
 
 
-				{{#if hasCollections }}
-					<h4 class="top-border padding-top">Featured In</h4>
-				{{/if}}
 				
-				<ul>
-				{{#each collections.collections}}
-					<li>{{#link-to "collection" this}}{{name}}{{/link-to}}</li>
-				{{/each}}				
-				</ul>
+				<div class="clearfix padding-top">
+					{{product-collections product=model }}	
+				</div>
 
-				{{liked-by product=model }}	
+				<div class="clearfix padding-top">
+					{{liked-by product=model }}	
+				</div>
 			</div>
 		</div>
 	</div>

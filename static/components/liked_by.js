@@ -1,14 +1,11 @@
 Haul.LikedByComponent = Ember.Component.extend({	
-	users: [],
+	content: null,
+	users: null,
+	usersBinding: "content.users",
 	ready: function() {
 		var _this = this;
 		var store = this.get('targetObject.store');
 		var product = this.get('product');
-		store.find('product-liked-by-list', product.id).then(function(results){
-			console.log("HERE? ", results)
-			if(!Ember.isEmpty(results)){
-				_this.set('users', results.users);
-			};
-		});
+		this.set('content', store.find('product-liked-by-list', product.get('id')));
 	}.on('init')
 });

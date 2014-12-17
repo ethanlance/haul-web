@@ -33,8 +33,6 @@ function init() {
 		xfbml	  : true,
 		version	: 'v2.1'
   	});
-  	
-  	console.log("FBBBB ", window.FB); 
 };
 
 if(window.FB) {

@@ -47,12 +47,21 @@ Haul.LikeSerializer =  DS.RESTSerializer.extend({
 			return;
 		} 
 
-		var id = payload.data.user_id +payload.data.object.id;
+		var id = String(payload.data.context_id);
+		var key = id.split(':');
+		user_id = key[1]
+
+		var id = String(payload.data.id);
+		var key = id.split(':');
+		product_id = key[1]
+		
+
+		var id = user_id + ":" + product_id;
 		var data = {
 			id: id,
-			ref_type: payload.data.object.type,
-			ref_id: payload.data.object.id,
-			user_id: payload.data.user_id
+			ref_type: payload.data.type,
+			ref_id: product_id,
+			user_id: user_id
 		}
 
 		var payload ={'like': data}; 
@@ -108,7 +117,7 @@ Haul.LikeCountSerializer =  DS.RESTSerializer.extend({
 **/ 
 Haul.ProductLikedByList = DS.Model.extend({
 	product: DS.belongsTo('product'), 
-	users: DS.hasMany('users', {async:true}) 
+	users: DS.hasMany('user', {async:true}) 
 });
 
 Haul.ProductLikedByListAdapter = Haul.ApplicationAdapter.extend({
@@ -116,7 +125,7 @@ Haul.ProductLikedByListAdapter = Haul.ApplicationAdapter.extend({
 	host: Haul.WANT_SERVER_HOST,
 
 	find: function(store, type, id) {
-		var url = this.host + "/likes/products/" + id + "/users";
+		var url = this.host + "/likes/products/" + id;
 		return this.ajax(url, 'GET');
 	}
 });
@@ -131,22 +140,28 @@ Haul.ProductLikedByListSerializer =  DS.RESTSerializer.extend({
 
 		var product_id = null;
 		var user_ids = []; 
+		var user_id = null;
 
-		console.log("PAYLOAD", payload);	
 		payload.data.map(function(result){ 
-			product_id =  result.user_id
-			user_ids.push( result.object.id );
-			return;
-		}); 
 
+			var id = String(result.context_id);
+			var key = id.split(':');
+			product_id = key[1]
+
+			var id = String(result.id);
+			var key = id.split(':');
+			user_id = key[1]
+			user_ids.push(user_id)
+			
+		});  
+
+		var id = product_id + ":" + user_id;
 		var data = {
-			id: product_id,	
+			id: id,
 			users: user_ids,
-			product: product_id, 
+			product_id: product_id,
 		}
-	
-		
-		console.log("PAYLOAD", payload);	
+
 		var payload ={'product-liked-by-list': data}; 
 		return this._super(store, primaryType, payload);
 	}
@@ -181,23 +196,30 @@ Haul.UserLikesListSerializer =  DS.RESTSerializer.extend({
 			return;
 		} 
 
+		var product_id = null;
 		var user_id = null;
 		var product_ids = []; 
 
 		payload.data.map(function(result){ 
-			user_id =  result.user_id
-			product_ids.push( result.object.id );
-			return;
-		}); 
 
+			var id = String(result.context_id);
+			var key = id.split(':');
+			user_id = key[1]
+
+			var id = String(result.id);
+			var key = id.split(':');
+			product_id = key[1]
+			product_ids.push(product_id)
+			
+		});  
+ 
+		var id = user_id + ":" + product_id;
 		var data = {
-			id: user_id,	
+			id: id,
 			user: user_id,
-			products: product_ids, 
+			products: product_ids,
 		}
-	
 		
-		console.log("PAYLOAD", payload);	
 		var payload ={'user-likes-list': data}; 
 		return this._super(store, primaryType, payload);
 	}

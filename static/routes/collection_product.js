@@ -23,7 +23,6 @@ Haul.CollectionProductIndexRoute = Haul.AnonRoute.extend({
 
  	setupController: function(controller, model) {	
   		controller.set('model', this.modelFor('collection-product') );
-  		controller.set('collections', this.store.find('product-collection-list', this.modelFor('collection-product').get('product').get('id') ) );
  	},
 	renderTemplate: function(controller, model){ 
 		this._super();

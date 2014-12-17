@@ -57,7 +57,6 @@ Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 			return this.ajax(url, 'GET');
 		}else{	
 			var url = this.host + "/products";
-			console.log("IDS", ids)
 			return this.ajax(url, 'GET', { data: { product_ids: ids } });
 		}
 	}, 
@@ -109,7 +108,7 @@ Haul.ProductAdapter = Haul.ApplicationAdapter.extend({
 Haul.ProductSerializer =  DS.RESTSerializer.extend({
 
 	extractFindMany: function(store, type, payload){
-		if( payload.data.type === "collection" ){
+		if( payload.data.type === "product" ){
 			return [this.extractSingle(store, type, payload)];
 		}else{
 			return this.extractArray(store, type, payload);

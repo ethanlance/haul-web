@@ -10,12 +10,15 @@
     {{/if}}
     </div>
 
+  {{#unless showFollows}}    
 
-	{{ follow-btn 
-		item=user
-		currentUser = targetObject.currentUser
-		targetObject = targetObject
-        ref_type = "user"
-	}} 
+  {{else}}
+  	{{ follow-btn 
+  		item=user
+  		currentUser = targetObject.currentUser
+  		targetObject = targetObject
+      ref_type = "user"
+  	}} 
+  {{/unless}}
 	
 </div>

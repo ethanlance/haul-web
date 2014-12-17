@@ -16,7 +16,7 @@
 		
 		//Is currentUser viewing his own page?
 		isProfileOwner: false,
-		hasCollections: "collections.collections",
+		collectionsBinding: "collections.collections",
 		 
 		setup: function() { 
 			var currentUser = this.get('currentUser');

@@ -42,7 +42,7 @@ Haul.FollowAdapter = Haul.ApplicationAdapter.extend({
 Haul.FollowSerializer =  DS.RESTSerializer.extend({
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		
-		if( payload.data == "ok" ){
+		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
 			return;
 		} 
 
@@ -84,7 +84,7 @@ Haul.UserIsFollowingCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
 			return;
 		} 
 
@@ -123,7 +123,7 @@ Haul.UserIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
 			return;
 		} 
 
@@ -163,7 +163,7 @@ Haul.CollectionIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
 			return;
 		} 
 
@@ -204,8 +204,14 @@ Haul.UserFollowersListSerializer =  DS.RESTSerializer.extend({
 
 		if( payload.data == "ok" ){
 			return;
-		} 
+		}
 
+		if( Ember.isEmpty(payload.data)){ 
+			var payload = {'user-followers-list': {id:1} }; 
+			return this._super(store, primaryType, payload);
+		}
+
+		
 		var user_id = null;
 		var follower_ids = [];
 
@@ -221,8 +227,6 @@ Haul.UserFollowersListSerializer =  DS.RESTSerializer.extend({
 			followers: follower_ids
 		}
 	
-		
-		console.log("PAYLOAD", payload);	
 		var payload ={'user-followers-list': data}; 
 		return this._super(store, primaryType, payload);
 	}
@@ -259,9 +263,15 @@ Haul.UserFollowsListSerializer =  DS.RESTSerializer.extend({
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
 		if( payload.data == "ok" ){
-			return;
+			return false;
 		} 
 
+
+		if( Ember.isEmpty(payload.data)){ 
+			var payload = {'user-follows-list': {id:1} }; 
+			return this._super(store, primaryType, payload);
+		}
+	
 		var user_id = null;
 		var follows_user_ids = [];
 		var follows_collection_ids = [];
@@ -282,8 +292,6 @@ Haul.UserFollowsListSerializer =  DS.RESTSerializer.extend({
 			follows_collections: follows_collection_ids
 		}
 	
-		
-		console.log("PAYLOAD", payload);	
 		var payload ={'user-follows-list': data}; 
 		return this._super(store, primaryType, payload);
 	}

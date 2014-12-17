@@ -54,7 +54,7 @@
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 		user: null,
 
-		// //Is currentUser viewing his own page?
+		//Is currentUser viewing his own page?
 		isProfileOwner: false,
 		isProfileOwnerChanged: function() {
 			var currentUser = this.get('currentUser');
@@ -62,9 +62,7 @@
 				if(!Ember.isEmpty(currentUser) && this.user.get('id') === currentUser.get('id') ) {
 					this.set('isProfileOwner', true);
 				}
-			} 
-
-			console.log("MODEL", this.get('model'));
+			}
 
 		}.observes('model'),
 

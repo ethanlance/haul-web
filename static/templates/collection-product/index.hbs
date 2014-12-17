@@ -151,15 +151,13 @@
 				<h4 class="top-border padding-top">Details:</h4>
 				<p>{{ breaklines model.product.description }}</p>
 			  
+				<div class="clearfix padding-top">
+					{{product-collections product=model.product }}	
+				</div>
 
-				{{#if hasCollections }}
-					<h4 class="top-border padding-top">Also Collected By</h4>
-				{{/if}}
-				<ul>
-				{{#each collections.collections}}
-					<li>{{#link-to "collection" this}}{{name}}{{/link-to}}</li>
-				{{/each}}				
-				</ul>
+				<div class="clearfix padding-top">
+					{{liked-by product=model.product }}	
+				</div>
 
 			</div>
 		</div> 
