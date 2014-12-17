@@ -211,6 +211,7 @@
 		userID: null,
 
 		facebookSetup: function() {
+
 			
 			var _this = this;
 
@@ -221,9 +222,11 @@
 					xfbml	  : true,  // parse social plugins on this page
 					version	: 'v2.1' // use version 2.1
 			  	});
-			  
-			  _this.FB = FB; 
+			  _this.set("FB", window.FB);
+				console.log("WIN", window.FB)
 			};
+
+			
 
 			if(window.FB) {
 				init();
@@ -237,7 +240,7 @@
 		getFBUser: function(cb) {
 			var _this = this;
 	  		//ME
-			this.FB.api('/me', {fields: 'first_name,last_name,email'}, function(response) { 
+			this.get('FB').api('/me', {fields: 'first_name,last_name,email'}, function(response) { 
 				var data =  {
 					email: response.email,
 					firstname: response.first_name,
@@ -256,39 +259,28 @@
 
 			var _this = this;
 
+			var FB = this.get("FB");
+			
 			return new Promise(function(resolve, reject) {
 
-				_this.FB.getLoginStatus(function(response) {
-
-					if (response.status !== 'connected' || response.status === 'not_authorized') {
-						return _this.FB.login(function(response){
-						  	if (response.authResponse) {
+				return FB.login(function(response){
+				  	if (response.authResponse) {
 
 
-								//Set the userId & accessToken
-						  		_this.set('userID', response.authResponse.userID);
-						  		_this.set('accessToken', response.authResponse.accessToken);
-						  		
-						  		return _this.getFBUser(function(data){
-						  			resolve(data);
-						  		});
-
-
-						  	} else {
-								console.log('User cancelled login or did not fully authorize.');
-								reject();
-						  	}
-					  	}, {scope: 'email'});
-					}else{
 						//Set the userId & accessToken
 				  		_this.set('userID', response.authResponse.userID);
 				  		_this.set('accessToken', response.authResponse.accessToken);
+				  		
+				  		return _this.getFBUser(function(data){
+				  			resolve(data);
+				  		});
 
-						return _this.getFBUser(function(data){
-							resolve(data);
-						});
-					}
-				});
+
+				  	} else {
+						console.log('User cancelled login or did not fully authorize.');
+						reject();
+				  	}
+			  	}, {scope: 'email'});	
 			});
 		} 
 	});

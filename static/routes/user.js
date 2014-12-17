@@ -5,8 +5,8 @@
 Haul.SellerRoute = Haul.AnonRoute.extend({
 	model: function(params) { 
 		var _this = this; 
-		return this.store.find('user', params.user_slug).then(function(user){
-			return user;
+		return this.store.find('user', params.user_slug).then(function(result){
+			return result;
 		}, function(error) {
 			return _this.transitionTo('not-found');
 		});

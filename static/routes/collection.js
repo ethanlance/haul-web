@@ -4,7 +4,12 @@
 **/	
 Haul.CollectionRoute = Haul.AnonRoute.extend({
 	model: function(params) {
-		return this.store.find('collection', params.collection_slug);
+		var _this = this;
+		return this.store.find('collection', params.collection_slug).then(function(result){
+			return result;
+		}, function(error) {
+			return _this.transitionTo('not-found');
+		});
 	},	
 	serialize: function(model) {
  	   return { collection_slug: model.get('slug') };
