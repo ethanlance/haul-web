@@ -24,10 +24,31 @@ h4 a{
   color: $font-color;
 }
 
+div.inline img{ 
+  float: left;
+}
+
+h2.inline{ 
+  float: left;
+  display: inline;
+}
+
+h2.inline img{ 
+  float: left;
+  display: inline;
+}
+
 label {
   font-family: $font-stack; 
 }
 
+.haul-header {
+  padding-top: 10px;
+}
+
+// .haul-header .profile-circular-mask {
+//   margin-top: -10px;
+// }
 
 
 body {
@@ -397,10 +418,7 @@ body {
 
 .haul-buy-card{
   min-height: 20px;
-  margin-right:15px;
-  margin-left:15px;
   padding: 10px;
-  margin-bottom: 20px;
   /*background-color: #f5f5f5;*/
   //border: 1px solid #e3e3e3;
   border: 1px solid #A8B4BD;
@@ -1039,6 +1057,31 @@ textarea.form-control {
   margin-left: -30px;
 }
 
+.collection-nav {
+  font-family: $font-stack;
+  background-color: $bg-color-secondary;
+  //border: 1px solid #ddd;
+  padding-top:10px;
+  padding-bottom:5px;
+
+
+  h1 a {
+    color:black;
+  }
+
+  h2 a {
+    color:black;
+  }
+
+  .profile-circular-mask {
+    margin-top: -10px;
+  }
+
+}
+
+
+
+
 .seller-nav {
   background-color: $bg-color-secondary;
   //border: 1px solid #ddd;
@@ -1170,7 +1213,7 @@ textarea.form-control {
   color: #3A4457;
   text-decoration: none;
   margin-right: 20px;
-  font-size: 1.1em;
+  font-size: 1.0em;
   display:inline-block;
 }
 

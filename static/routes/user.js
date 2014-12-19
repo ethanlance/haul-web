@@ -34,6 +34,8 @@ Haul.SellerIndexRoute = Haul.AnonRoute.extend({
  		controller.set('user', this.modelFor('seller'));
  		controller.set('content', model);
 
+ 		
+
  	}, 
 	renderTemplate: function(controller, model) {
 		this.render('seller/index');

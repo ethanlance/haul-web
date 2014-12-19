@@ -16,18 +16,51 @@ Haul.CollectionRoute = Haul.AnonRoute.extend({
  	}
 });
 
-
 Haul.CollectionIndexRoute = Haul.AnonRoute.extend({ 
-
+	model: function(params) {
+		var collection_id = this.modelFor('collection').get('id');
+		return this.store.find('collection-product-list', {collection_id: collection_id});
+ 		// return this.store.filter('collection-product-list', function(mpl) {
+ 		// 	if( mpl.get('id') && mpl.get('collection_id') === collection_id) return true;
+ 		// });
+	},
  	setupController: function(controller, model) {	
   		controller.set('collection', this.modelFor('collection'));
  	},
-	renderTemplate: function(){
-		this.render('layouts/header_base', {
+	renderTemplate: function(controller, model){
+		this.render('collection/index', {
 			into: 'application',
-			outlet: 'header'
+			outlet: 'main',
+			controller: controller,
+			model: model
 		});
-		this.render('collection/index');
+		this._super(controller, model);
+	}
+});
+
+
+
+/**
+	Collection's Followers
+	List of users who follow this user.
+**/
+Haul.CollectionFollowersRoute = Haul.AnonRoute.extend({
+	controllerName: "collection-index",
+	model: function(params) {
+		var collection_id = this.modelFor('collection').get('id'); 
+		return this.store.find('collection-followers-list', collection_id);
+	},
+ 	setupController: function(controller, model) {
+ 		controller.set('collection', this.modelFor('collection'));
+ 	}, 
+	renderTemplate: function(controller, model) {
+		this.render('collection/followers', {
+			into: 'application',
+			outlet: 'main',
+			controller: controller,
+			model: model
+		});
+		this._super(controller, model);
 	}
 });
 
@@ -41,13 +74,13 @@ Haul.CollectionEditRoute = Haul.AuthenticatedRoute.extend({
 		return this.modelFor('collection');
 	}, 
 	renderTemplate: function(controller, model) {  
-		this._super();
 		this.render('collection/edit', {
 			into: 'application',
 			outlet: 'main',
 			controller: controller,
 			model: model
 		});
+		this._super(controller, model);
 	}
 });
 

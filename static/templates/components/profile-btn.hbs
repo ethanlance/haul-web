@@ -5,7 +5,7 @@
         {{#link-to 'product-new' }}
         <button class=" btn btn-default btn-cta">
             <span class="glyphicon glyphicon-camera"></span>
-            Sell Something
+            Sell
         </button> 
         {{/link-to}}
 
@@ -13,7 +13,7 @@
             {{#if currentUser.icon }}
                 <img {{bind-attr src=currentUser.icon}}>
             {{/if}}
-            <span class="profile-name">{{ currentUser.name }}</span>
+            {{!-- <span class="profile-name">{{ currentUser.name }}</span> --}}
 
         </button>
 

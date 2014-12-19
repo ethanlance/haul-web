@@ -1,14 +1,32 @@
 {{!-- HEADER --}}
-<div class="seller-nav haul-font">
-	<div class="content-fixed-nav text-center">
-     	<h2>
-     		<strong>
-     			{{#link-to "collection" collection}}{{model.collection.name}}{{/link-to}}
-     		</strong> 
-     	</h2>
-	     {{!-- <small>{{#link-to "seller" collection.user}}by {{model.collection.user.name}}{{/link-to}}</small> --}}
-	</div>	
-</div>	
+<div class="container-fluid content-fixed-nav">
+	<div class="row collection-nav padding-top">
+		<div class="col-md-12 col-sm-12 col-xs-12  padding-top">
+
+	     	<h2 class="haul-header">	
+
+	     		{{#link-to "collection" collection}}
+					<button class="btn btn-default btn-xs pull-left margin-top"><</button>
+				{{/link-to}}
+
+				<div class="pull-left">
+					{{#link-to "collection" collection}}
+						{{ make-icon icon=collection.icon isSmall=true isCollection=true }}
+					{{/link-to}}	
+				</div>
+	     		
+	     		<strong>
+	     			{{#link-to "collection" collection}}{{model.collection.name}}{{/link-to}}
+	     		</strong>
+
+	     		{{#link-to "collection" collection}}
+					<button class="btn btn-default btn-sm pull-right">next ></button>
+				{{/link-to}} 
+	     	</h2>
+
+		</div>
+	</div>
+</div>
 <div class="seller-nav-footer"><span></span></div>
 
 
@@ -16,35 +34,36 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7 col-sm-7 col-xs-12 padding-bottom">
-
-			<h3>
-				<span class="pull-left">
-					{{ make-icon icon=model.collection.icon isSmall=true isCollection=true }}
-				</span>
-				{{ model.collection.name }} says:
-
+			<div class="haul-buy-card">
 
 				{{#if isCollectionOwner}}
-					<small class="pull-right">
-						{{#link-to 'collection-product.edit' model}}
-							<button class="btn btn-default btn-xs">edit</button>
-						{{/link-to}}
-					</small>
-				{{/if}}
-			</h3>
+						<small class="pull-right">
+							{{#link-to 'collection-product.edit' model}}
+								<button class="btn btn-default btn-xs">edit</button>
+							{{/link-to}}
+						</small>
+					{{/if}}
 
-			{{!-- EDITORIAL --}}
-			<span class="editorial">
-			{{ breaklines model.editorial }}
-			</span>
+				<h4>
+					<span class="pull-left">
+						{{ make-icon icon=model.collection.icon isSmall=true isCollection=true }}
+					</span>
+					{{ model.collection.name }} says:
+				</h4>
 
-			{{!-- COMMENTS --}}
-			{{ comment-section
-				contextObject=model.collection
-				itemObject=model.product 
-				currentUser=currentUser
-			}}
+				{{!-- EDITORIAL --}}
+				<span class="editorial">
+				{{ breaklines model.editorial }}
+				</span>
 
+				{{!-- COMMENTS --}}
+				{{ comment-section
+					contextObject=model.collection
+					itemObject=model.product 
+					currentUser=currentUser
+				}}
+
+			</div>
 		</div>
 		<div class="col-md-5 col-sm-5 col-xs-12">
 

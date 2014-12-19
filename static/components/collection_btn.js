@@ -41,7 +41,7 @@ Haul.CollectionBtnComponent = Ember.Component.extend({
  
 	start: function() {
 		//PRODUCT IMAGE		
-		this.set('productImage', this.product.get('image').get('small'));
+		//this.set('productImage', this.product.get('image').get('small'));
 		this.makeModel();
 
 	}.on('init'), 

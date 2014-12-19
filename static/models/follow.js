@@ -236,6 +236,58 @@ Haul.UserFollowersListSerializer =  DS.RESTSerializer.extend({
 
 
 
+/**
+	List of users who follow a user.
+**/ 
+Haul.CollectionFollowersList = DS.Model.extend({
+	collection: DS.belongsTo('collection'), 
+	followers: DS.hasMany('user', {async:true}),
+});
+
+Haul.CollectionFollowersListAdapter = Haul.ApplicationAdapter.extend({
+
+	host: Haul.FOLLOW_SERVER_HOST,
+
+	find: function(store, type, id) {
+		var url = this.host + "/follows/stores/" + id;
+		return this.ajax(url, 'GET');
+	}
+});
+
+Haul.CollectionFollowersListSerializer =  DS.RESTSerializer.extend({
+
+	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data == "ok" ){
+			return;
+		}
+
+		if( Ember.isEmpty(payload.data)){ 
+			var payload = {'collection-followers-list': {id:1} }; 
+			return this._super(store, primaryType, payload);
+		}
+
+		
+		var collection_id = null;
+		var follower_ids = [];
+
+		payload.data.map(function(result){ 
+			collection_id =  result.object.id
+			follower_ids.push( result.user_id );
+			return;
+		}); 
+
+		var data = {
+			id: collection_id,	
+			collection: collection_id,
+			followers: follower_ids
+		}
+	
+		var payload ={'collection-followers-list': data}; 
+		return this._super(store, primaryType, payload);
+	}
+});
+
 
 
 

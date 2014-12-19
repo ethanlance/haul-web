@@ -16,8 +16,11 @@
 	Haul.CollectionIndexController = Ember.ObjectController.extend({
 		needs: ["auth"],  
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
-		products: {},
-		model: {},
+		products: [],
+		model: [],
+		collection: null,
+		showAboutUs:false,
+		followsCount:0,
 
 		//Is currentUser viewing his own page?
 		isCollectionOwner: false, 
@@ -27,7 +30,9 @@
 			var currentUser = this.get('currentUser');	
 			
 
-			if( this.get("collection").id ) {
+			if( this.get("collection")  ) {
+
+				var collection_id = this.get("collection").id;
 			
 				if( currentUser ){
 					if( !Ember.isEmpty(currentUser) && this.get('collection').get('user').get('id') === currentUser.get('id')) {
@@ -35,16 +40,58 @@
 					}
 				} 
 
-				var collection_id = this.get('collection').get('id');
-				this.store.find('collection-product-list', {collection_id: collection_id});
-		 		var filter = this.store.filter('collection-product-list', function(mpl) {
-		 			if( mpl.get('id') && mpl.get('collection_id') === collection_id) return true;
-		 		});
-		 		this.set("products", filter);
+
+				this.store.find('collection-is-followed-by-count', collection_id).then(function(count){
+					_this.set('followsCount', count.get('total'));			
+				});
+
+
+				
 		 	}
 		}.observes('collection'),
+
+		actions: {
+			toggleAboutUs: function(){
+				this.toggleProperty('showAboutUs');
+			}
+		}
 	});
 
+
+// 	/**
+// 	* 	Display a collection
+// 	**/
+// 	Haul.CollectionFollowersController = Ember.ObjectController.extend({
+// 		needs: ["auth"],  
+// 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+// 		products: {},
+// 		model: {},
+// 		showAboutUs:false,
+
+// 		//Is currentUser viewing his own page?
+// 		isCollectionOwner: false, 
+ 
+// 		setup: function() { 
+// 			var _this = this;
+// 			var currentUser = this.get('currentUser');	
+			
+// // console.log('this.get("collection")', this.get("collection"))
+// // 			if( this.get("collection").id ) {
+			
+// // 				if( currentUser ){
+// // 					if( !Ember.isEmpty(currentUser) && this.get('collection').get('user').get('id') === currentUser.get('id')) {
+// // 						this.set('isCollectionOwner', true);
+// // 					}
+// // 				} 
+// // 		 	}
+// 		}.observes('collection'),
+
+// 		actions: {
+// 			toggleAboutUs: function(){
+// 				this.toggleProperty('showAboutUs');
+// 			}
+// 		}
+// 	});
 
 	/**
 	* 	Edit a collection

@@ -9,11 +9,33 @@ h4 a {
 }
 
 /* line 27, haul.scss */
+div.inline img {
+  float: left;
+}
+
+/* line 31, haul.scss */
+h2.inline {
+  float: left;
+  display: inline;
+}
+
+/* line 36, haul.scss */
+h2.inline img {
+  float: left;
+  display: inline;
+}
+
+/* line 41, haul.scss */
 label {
   font-family: Arvo, serif;
 }
 
-/* line 33, haul.scss */
+/* line 45, haul.scss */
+.haul-header {
+  padding-top: 10px;
+}
+
+/* line 54, haul.scss */
 body {
   background-color: #ffffff;
   position: relative;
@@ -21,12 +43,12 @@ body {
   padding-bottom: 80px;
 }
 
-/* line 40, haul.scss */
+/* line 61, haul.scss */
 .text-regular {
   font-weight: normal;
 }
 
-/* line 44, haul.scss */
+/* line 65, haul.scss */
 .truncate {
   width: 250px;
   white-space: nowrap;
@@ -34,23 +56,23 @@ body {
   text-overflow: ellipsis;
 }
 
-/* line 51, haul.scss */
+/* line 72, haul.scss */
 .glyphicon.red {
   color: red;
 }
 
-/* line 55, haul.scss */
+/* line 76, haul.scss */
 .media a:hover {
   text-decoration: none;
 }
 
-/* line 59, haul.scss */
+/* line 80, haul.scss */
 .media-divider {
   padding-top: 8px;
   border-top: 1px solid #e9e9e9;
 }
 
-/* line 64, haul.scss */
+/* line 85, haul.scss */
 .clearfix:after {
   content: " ";
   /* Older browser do not support empty content */
@@ -60,35 +82,35 @@ body {
   clear: both;
 }
 
-/* line 72, haul.scss */
+/* line 93, haul.scss */
 .haul-wrapper {
   margin-top: 75px;
 }
 
-/* line 76, haul.scss */
+/* line 97, haul.scss */
 .display-inline {
   display: inline;
 }
 
-/* line 80, haul.scss */
+/* line 101, haul.scss */
 .haul-container {
   margin-top: 50px;
   margin-right: 100px;
 }
 
-/* line 85, haul.scss */
+/* line 106, haul.scss */
 .haul-font {
   font-family: Arvo, serif;
   font-weight: bold;
 }
 
-/* line 90, haul.scss */
+/* line 111, haul.scss */
 .haul-font-weak {
   font-family: Arvo, serif;
   font-weight: normal;
 }
 
-/* line 95, haul.scss */
+/* line 116, haul.scss */
 .show {
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -96,7 +118,7 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-/* line 99, haul.scss */
+/* line 120, haul.scss */
 .logo-outer {
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -119,7 +141,7 @@ body {
 }
 
 @media (min-width: 768px) {
-  /* line 121, haul.scss */
+  /* line 142, haul.scss */
   .logo-outer {
     position: absolute;
     margin-left: 20px;
@@ -128,34 +150,34 @@ body {
     height: 70px;
   }
 }
-/* line 133, haul.scss */
+/* line 154, haul.scss */
 .logo-outer a {
   color: #fff;
 }
 
-/* line 137, haul.scss */
+/* line 158, haul.scss */
 .navbar-toggle {
   float: left;
   margin-left: 5px;
 }
 
-/* line 142, haul.scss */
+/* line 163, haul.scss */
 .thumbnail.center {
   display: inline;
 }
 
-/* line 146, haul.scss */
+/* line 167, haul.scss */
 .thumbnail.small {
   width: 100px;
   height: 100px;
 }
 
-/* line 151, haul.scss */
+/* line 172, haul.scss */
 .thumbnail.profile {
   border-radius: 4px;
 }
 
-/* line 155, haul.scss */
+/* line 176, haul.scss */
 .navbar-profile {
   /*width: 100%;*/
   left: 0;
@@ -165,7 +187,7 @@ body {
   padding: 0px;
 }
 
-/* line 164, haul.scss */
+/* line 185, haul.scss */
 .navbar-profile img {
   width: 25px;
   height: 25px;
@@ -173,30 +195,30 @@ body {
   float: left;
 }
 
-/* line 171, haul.scss */
+/* line 192, haul.scss */
 .navbar-profile a {
   color: inherit;
   padding-bottom: 10px;
   padding-top: 10px;
 }
 
-/* line 177, haul.scss */
+/* line 198, haul.scss */
 .navbar-profile a:hover {
   text-decoration: none;
 }
 
-/* line 181, haul.scss */
+/* line 202, haul.scss */
 .navbar-profile .profile-name {
   padding-left: 4px;
 }
 
-/* line 185, haul.scss */
+/* line 206, haul.scss */
 .navbar-right .btn-cta {
   float: left;
   margin-right: 10px;
 }
 
-/* line 191, haul.scss */
+/* line 212, haul.scss */
 .navbar-center {
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -211,7 +233,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* line 205, haul.scss */
+  /* line 226, haul.scss */
   .navbar-center {
     width: 100%;
     margin-left: 0px;
@@ -221,57 +243,57 @@ body {
   }
 }
 @media (max-width: 768px) {
-  /* line 218, haul.scss */
+  /* line 239, haul.scss */
   .dropdown-menu {
     right: 0;
     left: auto;
   }
 }
-/* line 225, haul.scss */
+/* line 246, haul.scss */
 .haul-navbar {
   background-color: #f7f7f7;
   border-bottom: 1px solid #ccc;
 }
 
-/* line 230, haul.scss */
+/* line 251, haul.scss */
 .haul-navbar .navbar-right {
   float: right;
   position: absolute;
   right: 10px;
 }
 
-/* line 236, haul.scss */
+/* line 257, haul.scss */
 .haul-navbar .navbar-right.in {
   overflow-y: visible;
 }
 
-/* line 240, haul.scss */
+/* line 261, haul.scss */
 .haul-navbar .signup {
   border: 1px solid #0192B5;
   color: #0192B5;
 }
 
-/* line 246, haul.scss */
+/* line 267, haul.scss */
 .input-group-btn .btn {
   height: 34px;
 }
 
-/* line 250, haul.scss */
+/* line 271, haul.scss */
 .btn-group .btn {
   height: 34px;
 }
 
-/* line 254, haul.scss */
+/* line 275, haul.scss */
 .navbar {
   margin-bottom: 40px;
 }
 
-/* line 258, haul.scss */
+/* line 279, haul.scss */
 .navbar-anon {
   margin-bottom: 80px;
 }
 
-/* line 263, haul.scss */
+/* line 284, haul.scss */
 .profile-circular-mask {
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -288,17 +310,17 @@ body {
   background-color: #ddd;
 }
 
-/* line 277, haul.scss */
+/* line 298, haul.scss */
 .profile-circular-mask.collection {
   border-radius: 20%;
 }
 
-/* line 281, haul.scss */
+/* line 302, haul.scss */
 .profile-circular-mask img {
   max-width: 100%;
 }
 
-/* line 286, haul.scss */
+/* line 307, haul.scss */
 .profile-circular-mask span {
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -309,19 +331,19 @@ body {
   left: 35px;
 }
 
-/* line 294, haul.scss */
+/* line 315, haul.scss */
 .profile-circular-mask.sm {
   width: 50px;
   height: 50px;
   vertical-align: middle;
 }
 
-/* line 300, haul.scss */
+/* line 321, haul.scss */
 .heading .profile-circular-mask {
   margin-top: -10px;
 }
 
-/* line 353, haul.scss */
+/* line 374, haul.scss */
 .toolbar.fixed {
   -moz-transition: position 0.2s ease-in-out;
   -o-transition: position 0.2s ease-in-out;
@@ -334,7 +356,7 @@ body {
   z-index: 1029;
 }
 
-/* line 362, haul.scss */
+/* line 383, haul.scss */
 .toolbar-footer {
   top: inherit;
   bottom: 0px;
@@ -354,24 +376,21 @@ body {
 }
 
 @media (max-width: 768px) {
-  /* line 383, haul.scss */
+  /* line 404, haul.scss */
   .toolbar.fixed {
     top: 48px;
   }
 }
-/* line 393, haul.scss */
+/* line 414, haul.scss */
 .navbar-profile .profile-circular-mask {
   width: 25px;
   height: 25px;
 }
 
-/* line 398, haul.scss */
+/* line 419, haul.scss */
 .haul-buy-card {
   min-height: 20px;
-  margin-right: 15px;
-  margin-left: 15px;
   padding: 10px;
-  margin-bottom: 20px;
   /*background-color: #f5f5f5;*/
   border: 1px solid #A8B4BD;
   border-radius: 4px;
@@ -379,7 +398,7 @@ body {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 413, haul.scss */
+/* line 431, haul.scss */
 .haul-buy-card .title {
   font-family: inherit;
   font-weight: 500;
@@ -388,18 +407,18 @@ body {
   padding-bottom: 10px;
 }
 
-/* line 422, haul.scss */
+/* line 440, haul.scss */
 .haul-buy-card .profile-circular-mask {
   width: 50px;
   height: 50px;
 }
 
-/* line 429, haul.scss */
+/* line 447, haul.scss */
 .haul-buy-card .media:first-child {
   margin-top: 15px;
 }
 
-/* line 433, haul.scss */
+/* line 451, haul.scss */
 .haul-buy-card .haul-price {
   font-family: Arvo, serif;
   font-weight: normal;
@@ -407,35 +426,35 @@ body {
   padding-top: 0px;
 }
 
-/* line 441, haul.scss */
+/* line 459, haul.scss */
 .haul-buy-card .button-bar {
   margin-bottom: 15px;
   vertical-align: middle;
 }
 
-/* line 445, haul.scss */
+/* line 463, haul.scss */
 .haul-buy-card .haul-counts {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 452, haul.scss */
+/* line 470, haul.scss */
 .media-body {
   padding-left: 10px;
 }
 
-/* line 457, haul.scss */
+/* line 475, haul.scss */
 .haul-profile-header {
   color: #000;
 }
 
-/* line 461, haul.scss */
+/* line 479, haul.scss */
 .haul-media-left {
   float: left;
   max-width: 40%;
 }
 
-/* line 466, haul.scss */
+/* line 484, haul.scss */
 .haul-media-left-end {
   float: left;
   padding: 20px 10px 10px 40px;
@@ -443,7 +462,7 @@ body {
 }
 
 @media (max-width: 450px) {
-  /* line 472, haul.scss */
+  /* line 490, haul.scss */
   .haul-media-left {
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
@@ -453,13 +472,13 @@ body {
     max-width: 300px;
   }
 }
-/* line 480, haul.scss */
+/* line 498, haul.scss */
 .haul-grid {
   margin: 0;
   margin-top: 30px;
 }
 
-/* line 485, haul.scss */
+/* line 503, haul.scss */
 .haul-grid-li {
   float: left;
   padding: 10px;
@@ -468,19 +487,19 @@ body {
 }
 
 @media (min-width: 768px) {
-  /* line 493, haul.scss */
+  /* line 511, haul.scss */
   .haul-grid-li {
     width: 33%;
   }
 }
 @media (min-width: 992px) {
-  /* line 500, haul.scss */
+  /* line 518, haul.scss */
   .haul-grid-li {
     width: 25%;
   }
 }
 @media (min-width: 1200px) {
-  /* line 505, haul.scss */
+  /* line 523, haul.scss */
   .haul-grid-li {
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
@@ -489,14 +508,14 @@ body {
     width: 25%;
   }
 }
-/* line 515, haul.scss */
+/* line 533, haul.scss */
 .haul-grid-li img {
   width: 100%;
   max-width: 320px;
   max-height: 320px;
 }
 
-/* line 522, haul.scss */
+/* line 540, haul.scss */
 .haul-grid-li .sell {
   width: 100%;
   margin: 0px;
@@ -506,7 +525,7 @@ body {
   max-height: 320px;
 }
 
-/* line 532, haul.scss */
+/* line 550, haul.scss */
 .haul-grid-li .sell-button {
   border: 1px dashed grey;
   border-radius: 4px;
@@ -519,31 +538,31 @@ body {
   font-color: #000;
 }
 
-/* line 544, haul.scss */
+/* line 562, haul.scss */
 .haul-grid-li .sell-text {
   position: absolute;
   top: 30%;
   width: 100%;
 }
 
-/* line 554, haul.scss */
+/* line 572, haul.scss */
 .sell-text .glyphicon {
   padding-bottom: 10px;
 }
 
-/* line 558, haul.scss */
+/* line 576, haul.scss */
 .box-rigid {
   float: left;
   padding-right: 10px;
   position: relative;
 }
 
-/* line 564, haul.scss */
+/* line 582, haul.scss */
 .box-vert-align {
   margin-top: 25%;
 }
 
-/* line 569, haul.scss */
+/* line 587, haul.scss */
 .box {
   /*border: 1px dashed grey;*/
   float: left;
@@ -553,34 +572,34 @@ body {
   max-height: 320px;
 }
 
-/* line 578, haul.scss */
+/* line 596, haul.scss */
 .box-soft {
   background-color: #f9f9f9;
   padding: 2px;
   border-radius: 4px;
 }
 
-/* line 584, haul.scss */
+/* line 602, haul.scss */
 .box-inside {
   max-height: 320px;
 }
 
 @media (min-width: 768px) {
-  /* line 589, haul.scss */
+  /* line 607, haul.scss */
   .box {
     width: 66%;
     padding-top: 20px;
   }
 }
 @media (min-width: 992px) {
-  /* line 596, haul.scss */
+  /* line 614, haul.scss */
   .box {
     width: 75%;
     padding-top: 20px;
   }
 }
 @media (min-width: 1200px) {
-  /* line 602, haul.scss */
+  /* line 620, haul.scss */
   .box {
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
@@ -590,7 +609,7 @@ body {
     padding-top: 20%;
   }
 }
-/* line 612, haul.scss */
+/* line 630, haul.scss */
 .haul-image-picker-well {
   margin-top: 10px;
   padding-top: 20px;
@@ -601,7 +620,7 @@ body {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-/* line 623, haul.scss */
+/* line 641, haul.scss */
 .haul-grid-li .info {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -618,12 +637,12 @@ body {
   opacity: 1;
 }
 
-/* line 637, haul.scss */
+/* line 655, haul.scss */
 .haul-grid-li .info:hover {
   opacity: 1;
 }
 
-/* line 641, haul.scss */
+/* line 659, haul.scss */
 .haul-grid-li .price {
   /*  border: 1px solid red;*/
   position: absolute;
@@ -636,19 +655,19 @@ body {
   box-shadow: 0px 2px 1px #ccc;
 }
 
-/* line 653, haul.scss */
+/* line 671, haul.scss */
 .haul-grid .price {
   float: right;
   padding-left: 20px;
 }
 
-/* line 658, haul.scss */
+/* line 676, haul.scss */
 .haul-grid .control {
   float: right;
   padding-left: 20px;
 }
 
-/* line 663, haul.scss */
+/* line 681, haul.scss */
 .haul-grid .sold {
   position: absolute;
   right: 0px;
@@ -665,32 +684,32 @@ body {
   border-bottom-left-radius: 4px;
 }
 
-/* line 682, haul.scss */
+/* line 700, haul.scss */
 .margin-top {
   margin-top: 20px;
 }
 
-/* line 686, haul.scss */
+/* line 704, haul.scss */
 .padding-top {
   padding-top: 20px;
 }
 
-/* line 692, haul.scss */
+/* line 710, haul.scss */
 .btn-xs.margin-top {
   margin-top: 5px;
 }
 
-/* line 696, haul.scss */
+/* line 714, haul.scss */
 .btn-fit-select {
   padding-bottom: 12px;
 }
 
-/* line 700, haul.scss */
+/* line 718, haul.scss */
 .padding-bottom {
   padding-bottom: 20px;
 }
 
-/* line 704, haul.scss */
+/* line 722, haul.scss */
 .vcenter {
   float: none;
   display: inline-block;
@@ -698,12 +717,12 @@ body {
   margin-right: -4px;
 }
 
-/* line 713, haul.scss */
+/* line 731, haul.scss */
 .btn-no-radius {
   border-radius: 0;
 }
 
-/* line 717, haul.scss */
+/* line 735, haul.scss */
 .btn-facebook {
   color: #fff;
   background-color: #3B5998;
@@ -713,13 +732,13 @@ body {
   font-weight: 700;
 }
 
-/* line 726, haul.scss */
+/* line 744, haul.scss */
 .btn-facebook:hover {
   background-color: #879ac0;
   border: none;
 }
 
-/* line 736, haul.scss */
+/* line 754, haul.scss */
 .haul-grid-thumbs {
   list-style: none;
   float: left;
@@ -728,7 +747,7 @@ body {
   width: 20%;
 }
 
-/* line 744, haul.scss */
+/* line 762, haul.scss */
 .alert-wrapper {
   position: absolute;
   display: block;
@@ -737,7 +756,7 @@ body {
   left: 0px;
 }
 
-/* line 753, haul.scss */
+/* line 771, haul.scss */
 .alert-wrapper .alert {
   border-radius: 0px;
   background-color: rgba(242, 222, 222, 0.9);
@@ -745,7 +764,7 @@ body {
   /*text-align:center;*/
 }
 
-/* line 760, haul.scss */
+/* line 778, haul.scss */
 .progress-wrapper {
   position: absolute;
   display: block;
@@ -754,19 +773,19 @@ body {
   margin-left: 0px;
 }
 
-/* line 768, haul.scss */
+/* line 786, haul.scss */
 .progress-wrapper .progress {
   border-radius: 0px;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
-/* line 775, haul.scss */
+/* line 793, haul.scss */
 .haul-grid-thumbs:hover .delete {
   opacity: 1;
 }
 
-/* line 779, haul.scss */
+/* line 797, haul.scss */
 .haul-grid-thumbs .delete {
   position: absolute;
   right: 10px;
@@ -774,18 +793,18 @@ body {
   opacity: 0;
 }
 
-/* line 789, haul.scss */
+/* line 807, haul.scss */
 #haul-dropzone {
   /*border: 1px solid blue;*/
   min-height: 300px;
 }
 
-/* line 794, haul.scss */
+/* line 812, haul.scss */
 .dropzone-preview {
   /* border: 1px solid pink;*/
 }
 
-/* line 798, haul.scss */
+/* line 816, haul.scss */
 .ember-view .selected img {
   border-left: 4px solid #428bca;
   border-right: 4px solid #428bca;
@@ -793,75 +812,75 @@ body {
   border-bottom: 4px solid #428bca;
 }
 
-/* line 805, haul.scss */
+/* line 823, haul.scss */
 .ember-view .selected .delete {
   opacity: 0;
 }
 
-/* line 813, haul.scss */
+/* line 831, haul.scss */
 .modal .danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
 
-/* line 820, haul.scss */
+/* line 838, haul.scss */
 .carousel-control.left {
   background-image: none;
 }
 
-/* line 823, haul.scss */
+/* line 841, haul.scss */
 .carousel-control.right {
   background-image: none;
 }
 
-/* line 827, haul.scss */
+/* line 845, haul.scss */
 .slide {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
 }
 
-/* line 832, haul.scss */
+/* line 850, haul.scss */
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
   width: 100%;
 }
 
-/* line 837, haul.scss */
+/* line 855, haul.scss */
 .haul-thumb {
   cursor: hand;
   margin-bottom: 0px;
   width: 100%;
 }
 
-/* line 843, haul.scss */
+/* line 861, haul.scss */
 .sortable {
   list-style: none;
 }
 
-/* line 847, haul.scss */
+/* line 865, haul.scss */
 .ui-sortable {
   padding: 0px;
   position: relative;
 }
 
-/* line 852, haul.scss */
+/* line 870, haul.scss */
 .sortable li {
   float: left;
   width: 20%;
   cursor: hand;
 }
 
-/* line 858, haul.scss */
+/* line 876, haul.scss */
 .sort-item-wrapper {
   position: relative;
 }
 
-/* line 861, haul.scss */
+/* line 879, haul.scss */
 .sortable li .glyphicon {
   display: none;
 }
 
-/* line 864, haul.scss */
+/* line 882, haul.scss */
 .sortable li:hover .glyphicon {
   display: inline-block;
   position: absolute;
@@ -874,42 +893,42 @@ body {
   font-size: 3em;
 }
 
-/* line 878, haul.scss */
+/* line 896, haul.scss */
 .sortable li:hover img {
   opacity: .5;
 }
 
-/* line 883, haul.scss */
+/* line 901, haul.scss */
 .input-sm {
   width: 100px;
 }
 
-/* line 887, haul.scss */
+/* line 905, haul.scss */
 .input-xs {
   width: 75px;
 }
 
-/* line 891, haul.scss */
+/* line 909, haul.scss */
 .input-group .input-sm {
   width: 100px;
 }
 
-/* line 895, haul.scss */
+/* line 913, haul.scss */
 label {
   padding-top: 10px;
 }
 
-/* line 899, haul.scss */
+/* line 917, haul.scss */
 .border {
   border: 1px solid pink;
 }
 
-/* line 903, haul.scss */
+/* line 921, haul.scss */
 textarea.form-control {
   height: 200px;
 }
 
-/* line 920, haul.scss */
+/* line 938, haul.scss */
 .toc {
   float: left;
   width: 200px;
@@ -918,22 +937,22 @@ textarea.form-control {
 }
 
 @media (max-width: 992px) {
-  /* line 927, haul.scss */
+  /* line 945, haul.scss */
   .toc {
     display: none;
   }
 }
-/* line 932, haul.scss */
+/* line 950, haul.scss */
 .relative {
   position: relative;
 }
 
-/* line 936, haul.scss */
+/* line 954, haul.scss */
 .content-toc {
   padding-top: 60px;
 }
 
-/* line 940, haul.scss */
+/* line 958, haul.scss */
 .content-scroll {
   overflow: scroll;
   height: 120%;
@@ -941,12 +960,12 @@ textarea.form-control {
   padding-bottom: 0%;
 }
 
-/* line 947, haul.scss */
+/* line 965, haul.scss */
 .content-fixed-nav {
   margin-top: 20px;
 }
 
-/* line 952, haul.scss */
+/* line 970, haul.scss */
 .trucate-text .hide {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -954,7 +973,7 @@ textarea.form-control {
   transition: opacity 0.15s linear;
 }
 
-/* line 956, haul.scss */
+/* line 974, haul.scss */
 .trucate-text .show {
   -moz-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
@@ -962,38 +981,38 @@ textarea.form-control {
   transition: opacity 0.15s linear;
 }
 
-/* line 961, haul.scss */
+/* line 979, haul.scss */
 .badge-success {
   background-color: green;
 }
 
-/* line 965, haul.scss */
+/* line 983, haul.scss */
 .badge-danger {
   background-color: red;
 }
 
-/* line 969, haul.scss */
+/* line 987, haul.scss */
 .alert-sm {
   padding: 3px;
   margin-top: 3px;
 }
 
-/* line 982, haul.scss */
+/* line 1000, haul.scss */
 .content-fixed-nav.home {
   margin-top: 50px;
 }
 
-/* line 988, haul.scss */
+/* line 1006, haul.scss */
 .home .price {
   bottom: 40%;
 }
 
-/* line 992, haul.scss */
+/* line 1010, haul.scss */
 .home .thumbnail {
   margin-bottom: 0px;
 }
 
-/* line 996, haul.scss */
+/* line 1014, haul.scss */
 .home .description {
   display: block;
   padding: 10px;
@@ -1005,75 +1024,95 @@ textarea.form-control {
 }
 
 @media (min-width: 768px) {
-  /* line 1008, haul.scss */
+  /* line 1026, haul.scss */
   .btn-responsive {
     font-size: 18px;
     line-height: 1.33;
     border-radius: 6px;
   }
 }
-/* line 1016, haul.scss */
+/* line 1034, haul.scss */
 .btn-responsive a {
   color: #000;
 }
 
-/* line 1020, haul.scss */
+/* line 1038, haul.scss */
 .btn-responsive.selected {
   background-color: #eee;
 }
 
-/* line 1025, haul.scss */
+/* line 1043, haul.scss */
 .btn-left {
   float: left !important;
   margin-right: 10px;
 }
 
-/* line 1030, haul.scss */
+/* line 1048, haul.scss */
 .btn-right {
   float: right !important;
   margin-left: 10px;
 }
 
-/* line 1036, haul.scss */
+/* line 1054, haul.scss */
 .form-list {
   list-style: none;
   padding-left: -10px;
   margin-left: -30px;
 }
 
-/* line 1042, haul.scss */
+/* line 1060, haul.scss */
+.collection-nav {
+  font-family: Arvo, serif;
+  background-color: #fafafa;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+/* line 1068, haul.scss */
+.collection-nav h1 a {
+  color: black;
+}
+/* line 1072, haul.scss */
+.collection-nav h2 a {
+  color: black;
+}
+/* line 1076, haul.scss */
+.collection-nav .profile-circular-mask {
+  margin-top: -10px;
+}
+
+/* line 1085, haul.scss */
 .seller-nav {
   background-color: #fafafa;
   padding-top: 10px;
   padding-bottom: 5px;
 }
 
-/* line 1049, haul.scss */
+/* line 1092, haul.scss */
 .seller-nav h1 {
   margin-top: 10px;
 }
 
-/* line 1053, haul.scss */
+/* line 1096, haul.scss */
 .seller-nav h2 {
   margin-top: -3px;
 }
 
-/* line 1057, haul.scss */
+/* line 1100, haul.scss */
 .seller-nav h3 {
   margin-top: 10px;
 }
 
-/* line 1061, haul.scss */
+/* line 1104, haul.scss */
 .seller-nav h1 a {
   color: black;
 }
 
-/* line 1065, haul.scss */
+/* line 1108, haul.scss */
 .seller-nav h2 a {
   color: black;
 }
 
-/* line 1069, haul.scss */
+/* line 1112, haul.scss */
 .seller-nav .follow {
   position: absolute;
   right: 40px;
@@ -1081,41 +1120,41 @@ textarea.form-control {
   text-align: left;
 }
 
-/* line 1076, haul.scss */
+/* line 1119, haul.scss */
 .seller-nav-footer {
   border-bottom: 1px solid #e3e3e3;
   margin-bottom: 20px;
 }
 
-/* line 1083, haul.scss */
+/* line 1126, haul.scss */
 #leaveComment textarea {
   height: 80px;
 }
 
-/* line 1087, haul.scss */
+/* line 1130, haul.scss */
 .top-border {
   border-top: 1px solid #e3e3e3;
 }
 
-/* line 1090, haul.scss */
+/* line 1133, haul.scss */
 .bottom-border {
   border-bottom: 1px solid #e3e3e3;
 }
 
-/* line 1094, haul.scss */
+/* line 1137, haul.scss */
 .image-scroll {
   overflow: auto;
   height: 300px;
   padding: 10px;
 }
 
-/* line 1101, haul.scss */
+/* line 1144, haul.scss */
 .image-scroll img {
   width: 50%;
   float: left !important;
 }
 
-/* line 1106, haul.scss */
+/* line 1149, haul.scss */
 .image-scroll.fixed {
   position: fixed;
   display: inline;
@@ -1123,50 +1162,50 @@ textarea.form-control {
   width: 300px;
 }
 
-/* line 1114, haul.scss */
+/* line 1157, haul.scss */
 .editorial img {
   width: 100%;
 }
 
-/* line 1118, haul.scss */
+/* line 1161, haul.scss */
 #editor {
   overflow: auto;
 }
 
-/* line 1122, haul.scss */
+/* line 1165, haul.scss */
 #editor img {
   width: 100%;
 }
 
-/* line 1126, haul.scss */
+/* line 1169, haul.scss */
 .editorWrapper {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
   font-weight: normal;
 }
 
-/* line 1132, haul.scss */
+/* line 1175, haul.scss */
 .ql-toolbar {
   background-color: rgba(248, 248, 248, 0.9);
   box-shadow: 0px 1px 1px #eee;
 }
 
-/* line 1141, haul.scss */
+/* line 1184, haul.scss */
 .animated-outlet {
   position: relative;
 }
 
-/* line 1145, haul.scss */
+/* line 1188, haul.scss */
 .haul-container {
   background-color: #fff;
 }
 
-/* line 1150, haul.scss */
+/* line 1193, haul.scss */
 .padding-right {
   padding-right: 10px;
 }
 
-/* line 1154, haul.scss */
+/* line 1197, haul.scss */
 .haul-toggle {
   font-family: Arvo, serif;
   background-color: #fafafa;
@@ -1175,48 +1214,48 @@ textarea.form-control {
   font-weight: normal;
 }
 
-/* line 1162, haul.scss */
+/* line 1205, haul.scss */
 .haul-toggle.fixed {
   background-color: #f7f7f7;
   border-bottom: 1px solid #ddd;
   box-shadow: 0px 1px 0px #ddd;
 }
 
-/* line 1169, haul.scss */
+/* line 1212, haul.scss */
 .haul-toggle div {
   color: #3A4457;
   text-decoration: none;
   margin-right: 20px;
-  font-size: 1.1em;
+  font-size: 1.0em;
   display: inline-block;
 }
 
-/* line 1177, haul.scss */
+/* line 1220, haul.scss */
 .haul-toggle small {
   text-decoration: none;
   color: black;
   font-weight: normal;
 }
 
-/* line 1183, haul.scss */
+/* line 1226, haul.scss */
 .haul-toggle div.here {
   color: red;
   text-decoration: none;
   font-weight: bold;
 }
 
-/* line 1189, haul.scss */
+/* line 1232, haul.scss */
 .haul-toggle a {
   color: inherit;
 }
 
-/* line 1193, haul.scss */
+/* line 1236, haul.scss */
 .haul-toggle a:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-/* line 1198, haul.scss */
+/* line 1241, haul.scss */
 .haul-checkerboard {
   background-image: -moz-linear-gradient(45deg, #000 25%, transparent 25%), -moz-linear-gradient(-45deg, #000 25%, transparent 25%), -moz-linear-gradient(45deg, transparent 75%, #000 75%), -moz-linear-gradient(-45deg, transparent 75%, #000 75%);
   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, #f7f4f4), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.25, #f7f4f4), color-stop(0.25, transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.75, transparent), color-stop(0.75, #f7f4f4)), -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.75, transparent), color-stop(0.75, #f7f4f4));
@@ -1227,7 +1266,7 @@ textarea.form-control {
   background-position: 0 0, 25px 0, 25px -50px, 0px 50px;
 }
 
-/* line 1218, haul.scss */
+/* line 1261, haul.scss */
 .haul-container {
   border-radius: 4px;
   border: 1px solid #ddd;

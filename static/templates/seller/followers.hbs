@@ -1,8 +1,5 @@
 {{user-header user=user currentUser=currentUser}}
 
-<div class="toolbar haul-font">
-	<span></span>
-</div>
 
 <div class="container">  
 
@@ -26,9 +23,9 @@
 	{{!-- SELLER PRODUCTS --}}
     {{#each model.followers}}
     	{{#link-to 'seller' this.id }}
-	    	{{#link-to 'seller' this.id }}
+	    
 	    	{{profile-badge user=this currentUser=currentUser}}
-		 	{{/link-to}}
+		
 	 	{{/link-to}}	
 	{{/each}} 
 </div>
