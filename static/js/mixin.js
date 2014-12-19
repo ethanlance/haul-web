@@ -1,8 +1,15 @@
 Haul.ScrollToMixin = Ember.Mixin.create({
   scrollDuration : 500, //default
-  scrollTo : function(selector){
+  scrollTo : function(selector, offset){
+  		var top = $(selector).offset().top;
+  		
+  		if ( offset && offset < top )
+  			top = top - offset; 
+  		if ( offset && offset > top )
+  			top = top - offset; 
+
 	    $('html, body').animate({
-	        scrollTop: $(selector).offset().top
+	        scrollTop: top
 	    }, this.get("scrollDuration"))
 	}
 });

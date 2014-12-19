@@ -58,16 +58,18 @@ Haul.CollectionNewRoute = Haul.AuthenticatedRoute.extend({
 		this.controllerFor('collection-edit').reset();
 	},
 	model: function() {
-		console.log("HUH?")
 		return this.store.createRecord('collection');
 	}, 
-	renderTemplate: function(controller, model) {  console.log("WHT?")
-		this._super();
+ 	setupController: function(controller, model) {	
+  		controller.set('content', model);
+ 	},
+	renderTemplate: function(controller, model) {
 		this.render('collection/edit', {
 			into: 'application',
 			outlet: 'main',
 			controller: controller,
 			model: model
 		});
+		this._super(controller, model);
 	}
 });

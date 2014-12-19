@@ -16,6 +16,8 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 	userFollowsRecord: null,
 	showButton: false,
 
+	item: '',
+
 	userFollowsChange: function() {
 		if( this.get('userFollows') ) {
 			this.set('btnName', 'unfollow');
@@ -47,8 +49,12 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 		}
 	}.observes('isFollowingCount'),
 
-	start: function() {  
+ 	start: function(){ 		
+ 		this.itemChanged();
+ 	}.on('init'),
 
+ 	itemChanged: function() {
+console.log("CHANGE");
 		if(!this.get('ref_id'))
 			return;
 	
@@ -88,7 +94,7 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 				_this.set('userFollows', false);
 			});
 		}
-	}.on('init'),
+	}.observes('item'),
 
 	actions: {	
 

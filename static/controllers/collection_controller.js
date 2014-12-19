@@ -19,10 +19,6 @@
 		products: {},
 		model: {},
 
-		//This array controller sorts it's images
-		sortProperties: ['id'],
-		sortAscending: true,	
-
 		//Is currentUser viewing his own page?
 		isCollectionOwner: false, 
  

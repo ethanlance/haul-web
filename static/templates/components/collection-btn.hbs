@@ -1,8 +1,8 @@
 
 {{!-- ADD TO COLLECTION BUTTON --}}
 <button {{action 'openModal'}} class="btn btn-default btn-responsive haul-font" 
-	{{bs-bind-tooltip content="Haul it! Add to your collection"}}>
-	Collect
+	{{bs-bind-tooltip content="Haul it! Add to your own marketplace"}}>
+	Haul
 	<span class="glyphicon glyphicon-plus"></span>
 </button>
 
@@ -17,7 +17,8 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 				<h4 class="modal-title haul-font" id="mySmallModalLabel">
-					Haul It!
+					Haul It! Add to your own marketplace.<br/>
+					<small>Curate anyone's items.  Earn credit if the item sells from your Haul Marketplace</small>
 				</h4>
 			</div>
 
@@ -67,7 +68,7 @@
 										<div {{bind-attr class="isShowCreateCollection:hide:show"}}>
 											<div class="pull-right">
 												<button {{action 'showCreateCollection'}} class="btn btn-default btn-fit-select">
-													<span class="glyphicon glyphicon-plus"></span>
+													<span class="glyphicon glyphicon-plus"></span> 
 												</button>
 											</div>
 										</div>
@@ -79,7 +80,7 @@
 										  	optionLabelPath="content.collection_name" 
 										 	selectionBinding='selectedCollection'
 										  	class="form-control"
-										  	prompt="Pick a collection"
+										  	prompt="Pick your Haul Marketplace"
 										}}
 										</div>
 									</div> 

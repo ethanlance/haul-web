@@ -67,7 +67,7 @@ Haul.CommentBtnComponent = Ember.Component.extend(Haul.ScrollToMixin, {
 
 	actions: {
 		scrollTo: function() { 
-            this.scrollTo('#leaveComment');
+            this.scrollTo('#leaveComment', 200);
 		}
 	}
 });

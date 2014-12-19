@@ -1,9 +1,29 @@
-<div class="text-center">
-<ul class="nav nav-tabs">
-  <li {{bind-attr class="isCollections:active"}}>{{#link-to 'seller' user }}Collections{{/link-to}}</li>
-  <li {{bind-attr class="isProducts:active"}}>{{#link-to 'seller.products' user }}My For Sale{{/link-to}}</li>
-  <li {{bind-attr class="isFollows:active"}}>{{#link-to 'seller.follows' user }}Following ({{followingCount}}){{/link-to}}</li>
-  <li {{bind-attr class="isFollowers:active"}}>{{#link-to 'seller.followers' user }}Followers ({{followsCount}}){{/link-to}}</li>
-  <li {{bind-attr class="isLikes:active"}}>{{#link-to 'seller.likes' user }}Likes ({{likesCount}}){{/link-to}}</li>
-</ul> 
-</div>
+
+  <div class="row haul-toggle toolbar text-center">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+      	<div {{bind-attr class="isProfile:here"}}>
+      		<br/>
+      		{{#link-to 'seller' user }}Profile{{/link-to}}
+      	</div>
+       
+      	<div {{bind-attr class="isFollows:here"}}>
+      		<small>{{followingCount}}</small><br/>
+      		{{#link-to 'seller.follows' user }}Following{{/link-to}}
+      	</div>
+       
+      	<div {{bind-attr class="isFollowers:here"}}>
+      		<small>{{followsCount}}</small><br/>
+      		{{#link-to 'seller.followers' user }}Followers{{/link-to}} 
+      	</div>
+       
+      	<div {{bind-attr class="isLikes:here"}}>
+      		<small>{{likesCount}}</small><br/>
+      		{{#link-to 'seller.likes' user }}Likes{{/link-to}} 
+      	</div>
+
+    </div> 
+  </div>    
+
+<div class="do_not_remove"></div> 
+

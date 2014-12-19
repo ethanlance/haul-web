@@ -1,47 +1,26 @@
-{{!-- SELLER PROFILE  --}}
-<div class="seller-nav haul-font">
-	<div class="container content-fixed-nav"> 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-
-
-				<div class="follow">
-					{{ follow-btn 
-						item=user 
-						ref_type="user"
-						currentUser=currentUser   
-						hideCounts=true
-					}} 
-				</div> 			
-				   	
-				{{ make-icon icon=user.icon isSmall=false class="pull-left" }}
-				 	
-		     	<h1>{{user.name}}</h1>
-	
-			
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="container">  
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-
-			{{ user-tabs 
-				user=user 
-				isFollowers=true
-			}}	
-
-		</div>
-	</div>
-</div>
+{{user-header user=user currentUser=currentUser}}
 
 <div class="toolbar haul-font">
 	<span></span>
 </div>
 
 <div class="container">  
+
+	{{#unless model.followers }}
+		<div class="padding-top text-center haul-font-weak">
+		{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} have no followers :(
+			<span>
+			{{#unless isProfileOwner}}
+				{{follow-btn item=user 
+					ref_type="user"
+					currentUser=currentUser   
+					hideCounts=true
+
+				}}
+			{{/unless}}
+			</span>
+		</div>
+	{{/unless}}
 
 
 	{{!-- SELLER PRODUCTS --}}

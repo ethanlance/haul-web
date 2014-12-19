@@ -17,10 +17,13 @@
 		// //Is currentUser viewing his own page?
 		isProfileOwner: false,
 		isProfileOwnerChanged: function() {
+
 			var currentUser = this.get('currentUser');
 			if( currentUser ){
 				if(!Ember.isEmpty(currentUser) && this.get('id') === currentUser.get('id') ) {
 					this.set('isProfileOwner', true);
+				}else{
+					this.set('isProfileOwner', false);
 				}
 			} 
 		}.observes('model'),
@@ -42,6 +45,8 @@
 			if( currentUser ){
 				if(!Ember.isEmpty(currentUser) && this.user.get('id') === currentUser.get('id') ) {
 					this.set('isProfileOwner', true);
+				}else{
+					this.set('isProfileOwner', false);
 				}
 			} 
 		}.observes('model'),
@@ -61,6 +66,8 @@
 			if( currentUser ){
 				if(!Ember.isEmpty(currentUser) && this.user.get('id') === currentUser.get('id') ) {
 					this.set('isProfileOwner', true);
+				}else{
+					this.set('isProfileOwner', false);
 				}
 			}
 
@@ -80,6 +87,8 @@
 			if( currentUser ){
 				if(!Ember.isEmpty(currentUser) && this.user.get('id') === currentUser.get('id') ) {
 					this.set('isProfileOwner', true);
+				}else{
+					this.set('isProfileOwner', false);
 				}
 			} 
 
@@ -103,6 +112,8 @@
 			if( currentUser ){
 				if(!Ember.isEmpty(currentUser) && this.user.get('id') === currentUser.get('id') ) {
 					this.set('isProfileOwner', true);
+				}else{
+					this.set('isProfileOwner', false);
 				}
 			} 
 

@@ -134,7 +134,7 @@ Haul.ProductLikedByListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
+		if( payload.data == "ok"){
 			return;
 		} 
 
@@ -192,9 +192,15 @@ Haul.UserLikesListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" || Ember.isEmpty(payload.data) ){
+		if( payload.data == "ok"){
 			return;
 		} 
+
+		if( Ember.isEmpty(payload.data)){ 
+			var payload = {'user-likes-list': {id:1} }; 
+			return this._super(store, primaryType, payload);
+		}
+		
 
 		var product_id = null;
 		var user_id = null;

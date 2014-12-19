@@ -92,7 +92,7 @@ Haul.UserImageAdapter = Haul.ApplicationAdapter.extend({
 
     //FIND IMAGES FOR A USERID
 	findQuery: function(store, type, query) { 
-		var url = this.host + '/users/' + query + '/images'; 
+		var url = this.host + '/users/' + query.user_id + '/images'; 
 		return this.ajax(url, 'GET');
 	}
 });

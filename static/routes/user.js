@@ -29,8 +29,11 @@ Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 		return this.modelFor('seller');
 	},
  	setupController: function(controller, model) {
+ 		var user_id = this.modelFor('seller').get('id');
+
  		controller.set('user', this.modelFor('seller'));
  		controller.set('content', model);
+
  	}, 
 	renderTemplate: function(controller, model) {
 		this.render('seller/index');
@@ -44,10 +47,12 @@ Haul.SellerIndexRoute = Haul.AnonRoute.extend({
 **/
 Haul.SellerProductsRoute = Haul.AnonRoute.extend({
 	model: function(params) {
-		console.log("WABOOM", params)
 		return this.modelFor('seller').get('products');
 	},
  	setupController: function(controller, model) {
+
+ 		console.log("HERE", this.modelFor('seller'));
+
  		controller.set('user', this.modelFor('seller'));
  		controller.set('content', model);
  	}, 
@@ -85,7 +90,7 @@ Haul.SellerFollowersRoute = Haul.AnonRoute.extend({
 Haul.SellerFollowsRoute = Haul.AnonRoute.extend({
 	model: function(params) {
 		var user_id = this.modelFor('seller').get('id');
-		return this.store.find('user-follows-list', user_id);
+		return this.store.find('user-follows-list', {id:user_id});
 	},
  	setupController: function(controller, model) {
  		controller.set('user', this.modelFor('seller'));

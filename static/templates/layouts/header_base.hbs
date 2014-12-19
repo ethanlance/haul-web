@@ -13,14 +13,18 @@
 			{{#link-to "home"}}Haul{{/link-to}}
 		</div>
 
-		<div class="navbar-right">
+		<div class="navbar-right haul-font">
+
+
+
+		{{!-- {{#link-to 'seller.new-product' this.slug }}	 --}}
 
 			{{ profile-btn currentUser=controllers.auth.currentUser clickTransition="clickTransition"}}
 		 
 		</div> 	
 	</div>
 
- 	<div class="navbar-center navbar-collapse collapse">
+ 	{{!-- <div class="navbar-center navbar-collapse collapse">
 		<form class="" role="search">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search">
@@ -31,5 +35,5 @@
 				</span>
 			</div>
 		</form>
-	</div>
+	</div> --}}
 </div>

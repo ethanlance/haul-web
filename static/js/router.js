@@ -61,9 +61,10 @@ Haul.Router.map(function(){
 
 		this.resource('product', {path: "/:product_slug"}, function() {
 			this.route('edit');
-			this.route('new');
 		});
 	});
+
+	this.route('product-new', {path: "/new-product"});
 
 	//Store
 	this.resource('collection-new', {path: "/new-collection"})

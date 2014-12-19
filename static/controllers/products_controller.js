@@ -74,27 +74,30 @@
 	
 
 	//EDIT or CREATE product.
-	Haul.ProductEditController = Ember.ArrayController.extend({
+	Haul.ProductEditController = Ember.ObjectController.extend({
 		
 		//Auth Controller
 		needs: ["auth"],
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+
+		model: null,
+		uploads: false,
+		//content: "model", 
 
 		//This array controller sorts it's images
 		sortProperties: ['created_at'],
 		sortAscending: false,
 
 		//Properties for UI display state
-		showImagePicker: false,
+		showImagePicker: true,
 		imagesAreSelected: false,
 		productExists: false,
+		isProcessing:false,
 
 		//Error
 		errorShow: false,
 		errorMessage: null,
 
-		//Product
-		product: false,
 
 		//This product's image objects.
 		selectedImages: [],
@@ -102,15 +105,16 @@
 		//This product's image_ids 
 		image_ids:[],
 
-		//Is currentUser authorized to view page?
-		authorized: function(transition) {
-			//AUTHORIZED?
-			var authController = this.get('controllers.auth');
-			var user = authController.get('currentUser');
-			if( !user || user.get('id') !== transition.params.seller.user_slug ) { 
-				return this.transitionToRoute("not-authorized");
-			} 
-		},
+
+		// //Is currentUser authorized to view page?
+		// authorized: function(transition) {
+		// 	//AUTHORIZED?
+		// 	var authController = this.get('controllers.auth');
+		// 	var user = authController.get('currentUser');
+		// 	if( !user || user.get('id') !== transition.params.seller.user_slug ) { 
+		// 		return this.transitionToRoute("not-authorized");
+		// 	} 
+		// },
 
 
 		//Blow away all property values
@@ -118,39 +122,50 @@
 			this.set('showImagePicker',true);
 			this.set('imagesAreSelected',false);
 			this.set('productExists',false);
-			this.set('dataComplete',false);
-			this.set('product',null);
-			this.set('selectedImages',[]);
-			this.set('productPromise', null);
-			this.forEach(function(img) {
-				img.set('isSelected', false);
-			});
+			this.set('selectedImages',[]); 
+			// if(this.get('uploads')){
+			// 	this.get('uploads').forEach(function(img) {
+			// 		img.set('isSelected', false);
+			// 	});	
+			// }
+			
 		},
 
-		// Observer: When editing a product we start with a productPromise.
-		// When creating a new product there is no productPromise.
-		productChanged: function() {
+		// // Observer: When editing a product we start with a productPromise.
+		// // When creating a new product there is no productPromise.
+		modelChanged: function() {
 
+			var _this = this;
+			var user_id = this.get('currentUser').get('id');
+			this.store.find('user-image', {user_id: user_id } ).then(function(results){
+
+ 				_this.set('uploads', results);
+
+ 				_this.imageMunge();
+ 			})
+		
+		}.on('init'),//.observes('model.id'),
+
+		imageMunge: function() {
 			var _this =this;
-			if( this.productPromise ){
-				this.productPromise.then(function(product) {
+			if( this.get('model').get('id') ){
+				
+				var product = this.get('model');
+ 
+				this.set('showImagePicker', false);
 
-					_this.set('productExists', true);
-					_this.set('showImagePicker', false);
-
-					_this.product = product; 
-
-
-					//What images does this product have?
-					var images = product.get('images').then(function(images){
-						images.map(function(image){ 
-							_this.selectedImages.pushObject(image); 
-							return image
-						});
-					}).then(function(){
-						//Now let's tell the all user images array which images
-						//the product has.
-						_this.forEach(function(img) {
+				//What images does this product have?
+				var images = product.get('images').then(function(images){
+					images.map(function(image){ 
+						_this.selectedImages.pushObject(image); 
+						return image
+					});
+				}).then(function(){
+					//Now let's tell the all user images array which images
+					//the product has.
+					var uploads = _this.get('uploads');
+					if( uploads ) {
+						uploads.forEach(function(img) {
 							_this.selectedImages.forEach(function(simg){
 								//Set this image isSelected.
 								if(simg.get('id') === img.get('id')) {
@@ -158,12 +173,13 @@
 								}
 							});
 						});
-					});
+					}
 				});
+				
 			}else{
-				_this.set('productExists', false);
+				_this.set('showImagePicker', true);
 			}
-		}.observes('productPromise'),
+		}.observes('model.id'),
 
 
 		//Observer: anytime our array of selected images changes, update
@@ -178,7 +194,7 @@
 
 		//Observes: When selectedImages changes, do things.
 		selectedImagesChange: function() {
-			
+		
 			var selectedImages = this.get('selectedImages');
 			//Highlight the image:
 			if( selectedImages.length == 0 ) {
@@ -206,9 +222,9 @@
 		},
 
 		saveProduct: function() {
-			var product = this.get('product');
+			var model = this.get('model');
 			
-			product.set('image_ids', this.get('image_ids'));
+			model.set('image_ids', this.get('image_ids'));
 
 			//Refresh the image models. Get data from api.
 			var _this = this;
@@ -220,15 +236,16 @@
 			});
 
 			var _this = this;
-			product.save().then(
+			model.save().then(
 				function(result) { 
 					_this.set('isProcessing', false);
 
 					//reload product_list model too.
 					_this.store.find('product-list', {user_id: _this.get('currentUser').id});
 
-
-					_this.transitionToRoute('product', product.reload());
+					var user = _this.get('currentUser').get('user');
+					
+					_this.transitionToRoute('product', user, model.reload());
 				},
 				function(error){
 					_this.set('isProcessing', false);	
@@ -246,7 +263,7 @@
 				this.set('isProcessing', true);
 
 				var _this = this;
-				var model = this.get('product');
+				var model = this.get('model');
 
 				//Trim
 				if( model.get('description') )
@@ -285,7 +302,7 @@
 						id: image.image_id,
 						created_at: image.created_at
 					});  
-					_this.unshiftObject(record);
+					_this.get('uploads').unshiftObject(record);
 				});				
 			},
 

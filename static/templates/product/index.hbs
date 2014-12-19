@@ -6,36 +6,10 @@
 <meta property="fb:app_id" content="443672575768207" />
 <meta property="og:type" content="video.movie" />
 
-{{!-- TOOLBAR --}}
-<div class="toolbar haul-font">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">	
+{{!-- SELLER PROFILE  --}}
+{{user-header user=model.user currentUser=currentUser}}
 
-				{{#link-to 'seller.products' model.user}}
-				<button class="btn btn-default ">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					Back To Collection
-				</button>
-				{{/link-to}}
 
-				{{#if isProfileOwner}}
-				<div class="pull-right">
-					<button {{action 'delete'}}  {{bs-bind-tooltip content="Delete your item"}} class="btn btn-danger">
-						Delete
-					</button>
-					{{#link-to 'product.edit' this}}
-						<button class="btn btn-default"  {{bs-bind-tooltip content="Edit your item"}}>
-							Edit
-						</button>
-					{{/link-to}}
-				</div>
-				{{/if}}
-			
-			</div>
-		</div>
-	</div>
-</div>
 
 
 
@@ -61,12 +35,20 @@
 		</div>
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="haul-buy-card">
+
+				{{#if isProfileOwner}}
+					<div class="pull-right">
+						{{#link-to 'product.edit' this}}
+							<button class="btn btn-default btn-xs">edit</button>
+						{{/link-to}}
+					</div>
+				{{/if}}
 				
 				{{!-- PRODUCT NAME --}}
 				<h3 class="haul-font text-center bottom-border">{{ model.name }}</h3> 
 
 				{{!-- BUTTONS --}}
-				<div class="bottom-border padding-bottom">
+				<div class="haul-font padding-bottom ">
 					<div class="btn-left haul-price">${{model.price}}</div>	 	
 						
 					{{!-- BUY --}}
@@ -101,7 +83,7 @@
 				</div>
 
 				{{!-- FACEBOOK, TWITTER, PINTEREST --}}
-				<div class="bottom-border padding-bottom clearfix text-center">
+				<div class="clearfix text-center">
 
 					{{social-btns product=model.product url=url}} 
 

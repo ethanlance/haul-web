@@ -1,0 +1,56 @@
+
+<div {{bind-attr class="hasContent:show:hide"}}>
+	<h4 class="haul-toggle haul-font bottom-border">
+		<a {{action 'clickFollows'}} {{bind-attr class="showFollows:active"}}>Following ({{followsCount}})</a> |
+		<a {{action 'clickFollowers'}} {{bind-attr class="showFollowers:active"}}>Followers ({{followersCount}})</a> |
+		<a {{action 'clickLikes'}} {{bind-attr class="showLikes:active"}}>Likes ({{likesCount}})</a> 
+	</h4>
+
+	<div class="well clearfix">
+		<div {{bind-attr class="showFollows:show:hide"}}>
+			{{#each follows}}
+				{{#if follows_collection}}
+			    	{{#link-to 'collection' follows_collection.id }}
+				 		{{collection-badge collection=follows_collection currentUser=currentUser}}
+				 	{{/link-to}}	
+			 	{{/if}}
+
+			 	{{#if follows_user}}
+		    		{{#link-to 'seller' follows_user.id }}
+		    			{{profile-badge user=follows_user currentUser=currentUser}}
+		 			{{/link-to}}	
+			 	{{/if}}
+			{{/each}} 
+		</div>
+
+
+
+		<div {{bind-attr class="showFollowers:show:hide"}}>
+			{{#each followers.followers}}
+		    	{{#link-to 'seller' this.id }}
+			    	{{#link-to 'seller' this.id }}
+			    	{{profile-badge user=this currentUser=currentUser}}
+				 	{{/link-to}}
+			 	{{/link-to}}	
+			{{/each}} 
+		</div>
+
+
+
+		<div {{bind-attr class="showLikes:show:hide"}}>
+			<div class="container">
+			 	{{#each likes.products}}
+			    	{{#link-to 'product' this }}
+			    	<div class="haul-grid-li"> 
+						<img class="thumbnail" {{bind-attr src=image.small}}>
+						
+						<div class="info">		
+					 	  	<div class="price">{{name}}</div>   
+						</div>			
+				 	</div>
+				 	{{/link-to}}	
+				{{/each}}  
+			</div>
+		</div>
+	</div>
+</div>

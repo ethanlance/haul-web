@@ -1,0 +1,9 @@
+{{#if collections }}
+	<h4 class="top-border padding-top">Featured In</h4>
+{{/if}}
+
+<ul>
+	{{#each collections}}
+		<li>{{#link-to "collection" this}}{{name}}{{/link-to}}</li>
+	{{/each}}				
+</ul>

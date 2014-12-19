@@ -74,7 +74,6 @@ Haul.Collection = DS.Model.extend(Ember.Validations.Mixin, {
 		}
 	}
 });	
- 
 
 
 

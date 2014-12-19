@@ -1,7 +1,9 @@
 {{!-- SELLER PRODUCTS --}}
-<h4 class="top-border padding-top">Liked By</h4>
-{{#each users}}
-	{{#link-to 'seller' this.id }}
-		{{profile-badge user=this currentUser=currentUser showFollows=false}}
- 	{{/link-to}}	
-{{/each}} 
+{{#if users}}
+	<h4 class="top-border padding-top">Liked By</h4>
+	{{#each users}}
+		{{#link-to 'seller' this.id }}
+			{{profile-badge user=this currentUser=currentUser showFollows=false}}
+	 	{{/link-to}}	
+	{{/each}} 
+{{/if}}

@@ -92,7 +92,7 @@ Haul.CollectionProductListSerializer =  DS.RESTSerializer.extend({
 				name: result.product_name,
 				product_id: result.product_id,
 				collection_id: result.store_id,
-
+				
 				//collection: result.store_id,	
 				product: result.product_id,
 				image: result.product_image_id,

@@ -6,41 +6,14 @@
      			{{#link-to "collection" collection}}{{model.collection.name}}{{/link-to}}
      		</strong> 
      	</h2>
-	     <small>{{#link-to "seller" collection.user}}by {{model.collection.user.name}}{{/link-to}}</small>
+	     {{!-- <small>{{#link-to "seller" collection.user}}by {{model.collection.user.name}}{{/link-to}}</small> --}}
 	</div>	
 </div>	
-
-
-{{!-- TOOLBAR --}}
-<div class="toolbar haul-font">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">	
-
-
-				{{#link-to 'collection' collection}}
-				<button class="btn btn-default pull-left">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					Back To Collection
-				</button>
-				{{/link-to}}
-				 
-				{{#if isCollectionOwner}} 
-					{{#link-to 'collection-product.edit' model}}
-					<button class="btn btn-default pull-right">
-						Edit Your Post
-						<span class="glyphicon glyphicon-plus-sign"></span>
-					</button> 
-					{{/link-to}}
-				{{/if}}
-			</div>
-		</div>
-	</div>
-</div>
+<div class="seller-nav-footer"><span></span></div>
 
 
 {{!-- PAGE CONTENT --}}
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-7 col-sm-7 col-xs-12 padding-bottom">
 
@@ -49,6 +22,15 @@
 					{{ make-icon icon=model.collection.icon isSmall=true isCollection=true }}
 				</span>
 				{{ model.collection.name }} says:
+
+
+				{{#if isCollectionOwner}}
+					<small class="pull-right">
+						{{#link-to 'collection-product.edit' model}}
+							<button class="btn btn-default btn-xs">edit</button>
+						{{/link-to}}
+					</small>
+				{{/if}}
 			</h3>
 
 			{{!-- EDITORIAL --}}
@@ -165,23 +147,7 @@
 </div>
  
 
-<div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
 
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-			<h4 class="modal-title" id="mySmallModalLabel">Delete?<br/>This cannot be undone</h4>
-		</div>
-		<div class="modal-body"> 
-			<p class="text-center">
-				<button {{action 'deleteCancel'}} class="btn btn-default">Cancel</button>
-				<button {{action 'deleteProceed'}} class="btn btn-danger">Yes, Delete</button>
-			</p>
-		</div>
-		</div>
-	</div>
-</div>
 
 
 

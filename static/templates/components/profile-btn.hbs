@@ -2,6 +2,13 @@
 
     <div class="btn-group navbar-profile">
 
+        {{#link-to 'product-new' }}
+        <button class=" btn btn-default btn-cta">
+            <span class="glyphicon glyphicon-camera"></span>
+            Sell Something
+        </button> 
+        {{/link-to}}
+
         <button {{action "clickProfile" currentUser.id}} type="button" class="btn btn-default">
             {{#if currentUser.icon }}
                 <img {{bind-attr src=currentUser.icon}}>
@@ -17,9 +24,9 @@
         <ul class="dropdown-menu" role="menu">
 
             <li>{{#link-to 'seller.products' currentUser.slug }}<strong>My For Sale</strong>{{/link-to}}</li>
-            <li>{{#link-to 'product.new' 'product'}}+ Sell Something{{/link-to}}</li>
-            <li>{{#link-to 'seller' currentUser.slug }}<strong>My Collections</strong>{{/link-to}}</li>
-            <li>{{#link-to 'collection-new' }}+ Create Collection{{/link-to}}</li>
+            <li>{{#link-to 'product-new' }}+ Sell Something{{/link-to}}</li>
+            <li>{{#link-to 'seller' currentUser.slug }}<strong>My Marketplace</strong>{{/link-to}}</li>
+            <li>{{#link-to 'collection-new' }}+ Create Marketplace{{/link-to}}</li>
 
 
             <li class="divider"></li>

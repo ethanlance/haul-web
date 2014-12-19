@@ -1,4 +1,4 @@
-<div class="seller-nav ">
+<div class="seller-nav">
 	<div class="container content-fixed-nav">
 
 		<div class="row ">
@@ -12,23 +12,7 @@
 	 	</div>
 	</div>	
 </div>	
-
-
-<div class="toolbar">
-	<div class="text-right">
-
-			<button {{action 'cancel'}} class="btn btn-default">Cancel</button>
-
-			{{ladda-btn
-				name='Save'
-				class="display-inline"
-				btnClasses='btn btn-primary ladda-button'
-				btnClick='submit'
-				spin=isProcessing
-			}} 
-
-	</div>
-</div>
+<div class="seller-nav-footer"><span></span></div>
 
 <div class="container">
 	<div class="row">
@@ -48,6 +32,44 @@
 		
 			{{image-scroller images=model.product.images }}
 		
+		</div>
+	</div>
+</div>
+
+<div class="toolbar-footer">
+	<div class="text-right">
+
+			<button {{action 'cancel'}} class="btn btn-danger pull-left">Delete</button>
+
+			<button {{action 'cancel'}} class="btn btn-default">Cancel</button>
+
+			{{ladda-btn
+				name='Save'
+				class="display-inline"
+				btnClasses='btn btn-primary ladda-button'
+				btnClick='submit'
+				spin=isProcessing
+			}} 
+
+	</div>
+</div>
+
+
+
+<div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="mySmallModalLabel">Delete?<br/>This cannot be undone</h4>
+		</div>
+		<div class="modal-body"> 
+			<p class="text-center">
+				<button {{action 'deleteCancel'}} class="btn btn-default">Cancel</button>
+				<button {{action 'deleteProceed'}} class="btn btn-danger">Yes, Delete</button>
+			</p>
+		</div>
 		</div>
 	</div>
 </div>

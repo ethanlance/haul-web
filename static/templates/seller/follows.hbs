@@ -1,41 +1,5 @@
-{{!-- SELLER PROFILE  --}}
-<div class="seller-nav haul-font">
-	<div class="container content-fixed-nav"> 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-
-
-				<div class="follow">
-					{{ follow-btn 
-						item=user 
-						ref_type="user"
-						currentUser=currentUser   
-						hideCounts=true
-					}} 
-				</div> 			
-				   	
-				{{ make-icon icon=user.icon isSmall=false class="pull-left" }}
-				 	
-		     	<h1>{{user.name}}</h1>
-	
-			
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="container">  
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-
-			{{ user-tabs 
-				user=user 
-				isFollows=true
-			}}	
-
-		</div>
-	</div>
-</div>
+{{user-header user=user currentUser=currentUser}}
+ 
 
 <div class="toolbar haul-font">
 	<span></span>
@@ -46,29 +10,25 @@
 	<div class="row">
 		<div class="col-md-6 col-sm-6 col-xs-6">
 
-			<h4 class="haul-font">Collections</h4>
+			{{#unless model }}
+				<p class="padding-top text-center haul-font-weak">
+				{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} don't follow any one yet.</p>
+			{{/unless}}
+ 
+			{{#each model}}
+				{{#if follows_collection}}
+			    	{{#link-to 'collection' follows_collection.id }}
+				 		{{collection-badge collection=follows_collection currentUser=currentUser}}
+				 	{{/link-to}}	
+			 	{{/if}}
 
-			{{#each model.follows_collections}}
-		    	{{#link-to 'collection' this.id }}
-			 	{{collection-badge collection=this currentUser=currentUser}}
-			 	{{/link-to}}	
+			 	{{#if follows_user}}
+		    		{{#link-to 'seller' follows_user.id }}
+		    			{{profile-badge user=follows_user currentUser=currentUser}}
+		 			{{/link-to}}	
+			 	{{/if}}
 			{{/each}} 
 
-		</div>
-
-		<div class="col-md-6 col-sm-6 col-xs-6">
-
-			<h4 class="haul-font">Users</h4>
-
-			{{!-- SELLER PRODUCTS --}}
-		    {{#each model.follows_users}}
-		    	{{#link-to 'seller' this.id }}
-		    	{{profile-badge user=this currentUser=currentUser}}
-			 	{{/link-to}}	
-			{{/each}} 
-
-
-
-		</div>
+		</div> 
 	</div>
 </div>

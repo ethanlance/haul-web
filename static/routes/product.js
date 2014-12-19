@@ -17,15 +17,7 @@ Haul.ProductRoute = Haul.AnonRoute.extend({
 	serialize: function(model) {
     	return { product_slug: model.get('id') };
   	},
-	renderTemplate: function(controller, model) {
-		this.render('product/product', {
-			into: 'application',
-			outlet: 'main',
-			controller: controller,
-			model: model
-		});
-		this._super(controller, model);
-	}
+	
 });
 
 Haul.ProductIndexRoute = Haul.AnonRoute.extend({
@@ -41,12 +33,7 @@ Haul.ProductIndexRoute = Haul.AnonRoute.extend({
   		controller.set('model', model ); 
   	},
 	renderTemplate: function(controller, model) {
-		this.render('product/index', {
-			into: 'product/product',
-			outlet: 'product',
-			controller: controller,
-			model: model
-		});
+		this.render('product/index');
 		this._super(controller, model);
 	}
 });
@@ -55,32 +42,22 @@ Haul.ProductIndexRoute = Haul.AnonRoute.extend({
 
 //NEEDS AUTH
 Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({ 
-	controllerName: "product-edit",
-	
 	needsAuthorization: true,
-
-	//Get the users images from api.
+	controllerName: "product-edit",
 	beforeModel: function(transition) {
-
 		//Is Authorized
-		this.controllerFor('product-edit').authorized(transition);
-
+		//this.controllerFor('product-edit').authorized(transition);
 		var user = this.controllerFor('auth').get('currentUser');
-		this.store.findQuery('image', user.id );
 		this.controllerFor('product-edit').reset();
 	},
 	model: function() { 
-		return this.get('store').all('image');
+		var product_id = this.modelFor('product').get('id');
+		return this.store.find('product', product_id)
 	},
- 	setupController: function(controller, model) {
- 		controller.reset();	
- 		var product_id = this.modelFor('product').get('id');
-        controller.set('productPromise', this.store.find('product', product_id));
-    },
 	renderTemplate: function(controller, model) {
 		this.render('product/edit', {
-			into: 'product/product',
-			outlet: 'product',
+			into: 'application',
+			outlet: 'main',
 			controller: controller,
 			model: model
 		});
@@ -91,29 +68,15 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 
 //NEEDS AUTH
 Haul.ProductNewRoute = Haul.AuthenticatedRoute.extend({ 
-	controllerName: "product-edit",
 	needsAuthorization: true,
-	//Get the users images from api.
-	beforeModel: function(transition) {
-
-		//Is Authorized
-		this.controllerFor('product-edit').authorized(transition);
-
-		var user = this.controllerFor('auth').get('currentUser');
-		this.store.findQuery('user-image', user.get('id') );
-		this.controllerFor('product-edit').reset();
+	controllerName: "product-edit",
+	model: function() {  
+		return this.store.createRecord('product');
 	},
-	model: function() { 
-		return this.get('store').all('user-image');
-	},
- 	setupController: function(controller, model) {
- 		controller.reset();	 
- 		controller.set('product', this.store.createRecord('product'));
-    },
 	renderTemplate: function(controller, model) {
 		this.render('product/edit', {
-			into: 'product/product',
-			outlet: 'product',
+			into: 'application',
+			outlet: 'main',
 			controller: controller,
 			model: model
 		});

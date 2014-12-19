@@ -2,8 +2,6 @@
 	Single Collection Product View
 **/
 Haul.CollectionProductRoute = Haul.AnonRoute.extend({
-	
-	controllerName: "collection-product",
 
 	model: function(params) { 
 		var collection_id = this.modelFor('collection').id;

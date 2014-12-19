@@ -1,63 +1,53 @@
-<div class="seller-nav ">
-	<div class="container content-fixed-nav">
+{{user-header user=currentUser currentUser=currentUser}}
 
-		<div class="row ">
-			<div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
-				   	
-		     	<h1>
-		     		{{#if model.id }}{{ make-icon icon=icon isSmall=false isCollection=true }}{{/if}}
-		     		<strong>{{name}}</strong> 
-		     	</h1>
-		     	
+
+
+
+<div class="container padding-bottom padding-top">
+
+	{{#unless model.id }}
+		<div class="row bottom-border">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<h2 class="haul-font">Create a Marketplace!</h2>
+				<h4 class="haul-font">Add anyone's forsale items to your marketplace. <small>
+				(Earn credit when items sell from your marketplace.)</small></h4>
 			</div>
-	 	</div>
-	</div>	
-</div>	
-
-{{!-- HAUL TOOLBAR --}}
-<div class="toolbar">
-	<div class="text-right">
-		
-		{{#if model.id }}
-			{{#link-to 'collection' model.slug}}<button class="btn btn-default">Cancel</button>{{/link-to}}
-		{{else}}
-			{{#link-to 'seller' currentUser.id}}<button class="btn btn-default">Cancel</button>{{/link-to}}
-		{{/if}}
-
-		{{ladda-btn
-			name='Save'
-			class="display-inline"
-			btnClasses='btn btn-primary ladda-button'
-			btnClick='submit'
-			spin=isProcessing
-		}}
-	</div>
-</div>
-
-
-<div class="container padding-bottom">
-
-	{{!-- MARKET ICON UPLOAD --}}
-	{{#if model.id }}
-	<div class="row ">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			{{ icon-maker item=model currentUser=currentUser isCollection=true }}
 		</div>
-	</div>
-	{{/if}}
+	{{else}}
+
+
+		<div class="row bottom-border">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<h2 class="haul-font">Edit Your Marketplace.</h2>
+			</div>
+		</div>
+
+		<div class="row padding-top">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				{{ icon-maker item=model currentUser=currentUser isCollection=true }}
+			</div>
+		</div>
+
+
+	{{/unless}}
+ 
 
 	{{#form-for model wrapper="bs3-wrapper"}}
 			
-	<div class="row">
+	<div class="row ">
 		<div class="col-md-12 col-sm-12 col-xs-12"> 
-			<label>Collection Name</label>
+			<label>What is your marketplaces name?</label>
+			<br/>
+			<small>You can change it anytime</small>
 			<label class="small pull-right text-regular">(max 50 characters)</label>				
 			{{input name canShowValidationError=showErrors placeholder="Pick a cool name!"}} 
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12"> 
-			<label>About Collection</label>
+			<label>What is your marketplace about?</label>
+			<br/>
+			<small>Tell people why they should follow it</small>
 			<label class="small pull-right text-regular">(max 500 characters)</label>
 			{{input description as="text" canShowValidationError=showErrors placeholder="What makes your collection special?"}}
 		</div> 
@@ -103,7 +93,25 @@
 
 
 
+{{!-- HAUL TOOLBAR --}}
+<div class="toolbar-footer">
+	<div class="text-right">
+		
+		{{#if model.id }}
+			{{#link-to 'collection' model.slug}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+		{{else}}
+			{{#link-to 'seller' currentUser.id}}<button class="btn btn-default">Cancel</button>{{/link-to}}
+		{{/if}}
 
+		{{ladda-btn
+			name='Save'
+			class="display-inline"
+			btnClasses='btn btn-primary ladda-button'
+			btnClick='submit'
+			spin=isProcessing
+		}}
+	</div>
+</div>
 
 
 

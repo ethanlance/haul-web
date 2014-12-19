@@ -15,6 +15,15 @@
                  <h1>
                      {{ make-icon icon=collection.icon isSmall=false isCollection=true }}
                      <strong>{{collection.name}}</strong>
+
+                     {{#if isCollectionOwner}}
+                     <small>
+                        {{#link-to 'collection.edit' collection }}
+                            <button class="btn btn-default btn-xs">edit</button>
+                        {{/link-to}}
+                    </small>
+                    {{/if}}
+                    
                  </h1>
                  <small>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
 
@@ -30,45 +39,7 @@
          </div>
     </div>
 </div>
-
-
- {{!-- TOOLBAR --}}
-<div class="toolbar haul-font">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-
-
-                {{#link-to "seller" collection.user }}
-                <button class="btn btn-default btn-left">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    Back To Collections
-                </button>
-                {{/link-to}}
-
-
-
-
-                {{!-- EDIT COLLECTION --}}
-                {{#if isCollectionOwner }}
-                    {{#link-to 'collection.edit' collection }}
-                    <button class="btn btn-default btn-right">
-                        Edit Collection
-                        <span class="glyphicon glyphicon-plus-sign"></span>
-                    </button>
-                    {{/link-to}}
-                    {{#link-to 'product.new' 'product'}}
-                    <button class="selected btn btn-default btn-right">
-                        <span class="glyphicon glyphicon-camera"></span>
-                        Sell Something
-                    </button>
-                    {{/link-to}}
-                {{/if}}
-
-            </div>
-        </div>
-    </div>
-</div>
+<div class="seller-nav-footer"><span></span></div>
 
 
 <div class="container">
