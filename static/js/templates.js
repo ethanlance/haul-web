@@ -1606,9 +1606,10 @@ function program6(depth0,data) {
 });Ember.TEMPLATES['components/facebook-btn'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  
+  var buffer = '';
 
 
+  return buffer;
   
 });Ember.TEMPLATES['components/follow-btn'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
@@ -1910,14 +1911,10 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 });Ember.TEMPLATES['components/pinterest-btn'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', escapeExpression=this.escapeExpression;
+  var buffer = '';
 
 
-  data.buffer.push("<a ");
-  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
-    'href': ("href")
-  },hashTypes:{'href': "STRING"},hashContexts:{'href': depth0},contexts:[],types:[],data:data})));
-  data.buffer.push("\n    data-pin-do=\"buttonPin\"\n    data-pin-config=\"beside\"\n    >\n    <img src=\"//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png\" />\n</a>\n");
+  data.buffer.push("\n    <img src=\"//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png\" />\n\n");
   return buffer;
   
 });Ember.TEMPLATES['components/product-collections'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
@@ -2197,8 +2194,10 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push(escapeExpression((helper = helpers['pinterest-btn'] || (depth0 && depth0['pinterest-btn']),options={hash:{
     'url': ("url"),
     'image': ("product.image.large"),
-    'description': ("product.name")
-  },hashTypes:{'url': "ID",'image': "ID",'description': "ID"},hashContexts:{'url': depth0,'image': depth0,'description': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "pinterest-btn", options))));
+    'description': ("product.name"),
+    'data-pin-do': ("buttonPin"),
+    'data-pin-config': ("beside")
+  },hashTypes:{'url': "ID",'image': "ID",'description': "ID",'data-pin-do': "STRING",'data-pin-config': "STRING"},hashContexts:{'url': depth0,'image': depth0,'description': depth0,'data-pin-do': depth0,'data-pin-config': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "pinterest-btn", options))));
   data.buffer.push("\n</div>  \n\n<div class=\"pull-left padding-right\">\n");
   data.buffer.push(escapeExpression((helper = helpers['twitter-btn'] || (depth0 && depth0['twitter-btn']),options={hash:{
     'data-url': ("url"),
@@ -2928,7 +2927,7 @@ function program6(depth0,data) {
   },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push("\n			\n\n			\n			\n			<div class=\"clearfix text-center padding-top\">\n\n				");
   data.buffer.push(escapeExpression((helper = helpers['social-btns'] || (depth0 && depth0['social-btns']),options={hash:{
-    'product': ("model.product"),
+    'product': ("model"),
     'url': ("url")
   },hashTypes:{'product': "ID",'url': "ID"},hashContexts:{'product': depth0,'url': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "social-btns", options))));
   data.buffer.push(" \n\n			</div>\n\n			\n			");
