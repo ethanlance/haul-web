@@ -12,7 +12,8 @@ Haul.SellerRoute = Haul.AnonRoute.extend({
 		});
 	},	
 	serialize: function(model) {
- 	   return { user_slug: model.get('id') };
+		if(model)
+ 	   		return { user_slug: model.get('id') };
 	} 
 });
 
@@ -34,7 +35,7 @@ Haul.SellerIndexRoute = Haul.AnonRoute.extend({
  		controller.set('user', this.modelFor('seller'));
  		controller.set('content', model);
 
- 		
+ 			
 
  	}, 
 	renderTemplate: function(controller, model) {

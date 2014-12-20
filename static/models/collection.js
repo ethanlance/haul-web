@@ -7,7 +7,9 @@ Haul.Collection = DS.Model.extend(Ember.Validations.Mixin, {
 	user_id: DS.attr( 'string' ), 
 	user: DS.belongsTo('user'),
 	slug: DS.attr( 'string' ),
-	isFollowedByCount: DS.belongsTo('collection-is-followed-by-count'), 
+	
+	getFollowedByCount: DS.belongsTo('collection-is-followed-by-count'), 
+	getFollowers: DS.belongsTo('collection-followers-list'),
 
 	iconBinding: "image.thumb", 
 	image: DS.belongsTo('image'),
@@ -70,7 +72,7 @@ Haul.Collection = DS.Model.extend(Ember.Validations.Mixin, {
 		},
 		description: {
 		 	// presence: true,
-		 	length: { maximum: 500 }
+		 	length: { maximum: 2000 }
 		}
 	}
 });	
@@ -92,7 +94,6 @@ Haul.CollectionAdapter = Haul.ApplicationAdapter.extend({
 			return this.ajax(url, 'GET');
 		}else{	
 			var url = this.host + "/stores";
-			console.log("IDS", ids)
 			return this.ajax(url, 'GET', { data: { store_ids: ids } });
 		}
 	}, 
@@ -163,8 +164,10 @@ Haul.CollectionSerializer =  DS.RESTSerializer.extend({
 			description: payload.data.description,
 			user: payload.data.user_id,
 			user_id: payload.data.user_id,
-			isFollowedByCount: payload.data.store_id,
-			image: payload.data.image_id
+			image: payload.data.image_id,
+
+			getFollowedByCount: payload.data.store_id,
+			getFollowers: payload.data.store_id,
 		};
 
 
@@ -192,6 +195,7 @@ Haul.CollectionSerializer =  DS.RESTSerializer.extend({
 				user: result.user_id,
 				user_id: result.user_id,
 				isFollowedByCount: result.store_id,
+				followers: result.store_id,
 				image: result.image_id
 			} 
 		});

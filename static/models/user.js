@@ -28,8 +28,8 @@ Haul.User = DS.Model.extend({
 	image: DS.belongsTo('image'),
 	image_id: DS.attr('string'), 
 
-	isFollowedByCount: DS.belongsTo('user-is-followed-by-count'),
-	isFollowingCount: DS.belongsTo('user-is-following-count'),
+	getFollowedByCount: DS.belongsTo('user-is-followed-by-count'),
+	getFollowingCount: DS.belongsTo('user-is-following-count'),
 
 	icon: DS.attr('string'), 
 	iconChange: function() { 
@@ -90,7 +90,7 @@ Haul.User = DS.Model.extend({
 		});
 	},
 
-	collections: function() {
+	getCollections: function() {
 		var store = this.store;
 		var user_id = this.get('id');
 		store.find('user-collection', {user_id: user_id});
@@ -102,7 +102,7 @@ Haul.User = DS.Model.extend({
 		}); 
 	}.property(),
 
-	products: function() {
+	getProducts: function() {
 		var store = this.store;
 		var user_id = this.get('id');
 
@@ -161,8 +161,8 @@ Haul.UserSerializer =  DS.RESTSerializer.extend({
 			email: payload.data.email,
 			id: payload.data.user_id,
 			slug: payload.data.user_id,
-			isFollowedByCount: payload.data.user_id,
-			isFollowingCount: payload.data.user_id,
+			getFollowedByCount: payload.data.user_id,
+			getFollowingCount: payload.data.user_id,
 			image_id: payload.data.image_id,
 			image: payload.data.image_id
 		}  

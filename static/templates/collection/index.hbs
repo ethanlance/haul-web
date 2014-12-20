@@ -6,6 +6,15 @@
 
                 <h2 class="haul-header">    
 
+                    <div class="pull-right">
+                        {{follow-btn 
+                            item=collection 
+                            ref_type="collection"
+                            currentUser=currentUser   
+                            hideCounts=true
+                        }} 
+                    </div>
+
                     <div class="pull-left">
                         {{#link-to "collection" collection}}
                             {{ make-icon icon=collection.icon isSmall=false isCollection=true }}
@@ -24,7 +33,7 @@
                         </small>
                     {{/if}} 
                 </h2>
-                <small class="haul-font-weak">{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
+                <small class="font-weak">{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
 
             </div>
         </div>
@@ -65,48 +74,6 @@
     </div>
 </div>
 
-{{!-- 
-<div class="seller-nav">
-    <div class="container content-fixed-nav">
-        <div class="row ">
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center haul-font">
-
-                <div class="follow">
-                {{ follow-btn
-                    item=collection
-                    ref_type="collection"
-                    currentUser = currentUser
-                }}
-                </div>
-
-                 <h1>
-                     {{ make-icon icon=collection.icon isSmall=false isCollection=true }}
-                     <strong>{{collection.name}}</strong>
-
-                     {{#if isCollectionOwner}}
-                     <small>
-                        {{#link-to 'collection.edit' collection }}
-                            <button class="btn btn-default btn-xs">edit</button>
-                        {{/link-to}}
-                    </small>
-                    {{/if}}
-                    
-                 </h1>
-                 <small>{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <div class="haul-font-weak">
-                    {{ truncate-text text=collection.description }}
-                </div>
-            </div>
-         </div>
-    </div>
-</div>
-<div class="seller-nav-footer"><span></span></div> --}}
 
 
 <div class="container">

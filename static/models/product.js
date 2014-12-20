@@ -14,12 +14,8 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 	images: DS.hasMany('image', {async:true}),
 	image: DS.belongsTo('image'),	
 
-	// //GET ONE IMAGE:
-	// first_image: function() {  
-	// 	return this.get('images').then(function(images){ 
-	// 		return images.get('firstObject');
-	// 	});
-	// }.property(), 
+	getCollections: DS.belongsTo('product-collection-list', {async:true}),
+	getLikes: DS.belongsTo('product-liked-by-list', {async:true}),
 
 	validations: { 
 		name: {
@@ -132,7 +128,10 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 			user: payload.data.user_id,
 			user_id: payload.data.user_id,
 			
-			likeCount: payload.data.product_id
+			likeCount: payload.data.product_id,
+
+			getCollections: payload.data.product_id,
+			getLikes: payload.data.product_id,
 		};
 
 		var payload ={'product': data}; 
@@ -159,7 +158,11 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 				user: result.user_id,
 				user_id: result.user_id,
 				
-				likeCount: payload.data.product_id
+				likeCount: payload.data.product_id,
+
+				getCollections: payload.data.product_id,
+				getLikes: payload.data.product_id,
+
 			}
 		});
 

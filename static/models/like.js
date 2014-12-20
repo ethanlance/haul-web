@@ -155,7 +155,7 @@ Haul.ProductLikedByListSerializer =  DS.RESTSerializer.extend({
 			
 		});  
 
-		var id = product_id + ":" + user_id;
+		var id = product_id;
 		var data = {
 			id: id,
 			users: user_ids,

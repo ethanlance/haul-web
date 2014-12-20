@@ -1,18 +1,14 @@
 {{user-header user=user currentUser=currentUser}}
- 
-
-<div class="toolbar haul-font">
-	<span></span>
-</div>
 
 <div class="container">  
 
 	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-6">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 
 			{{#unless model }}
-				<p class="padding-top text-center haul-font-weak">
-				{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} don't follow any one yet.</p>
+				<div class="padding-top text-center font-weak">
+				{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} don't follow any one yet.
+				</div>
 			{{/unless}}
  
 			{{#each model}}

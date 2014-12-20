@@ -1,9 +1,10 @@
-{{#if collections }}
+{{#if product.getCollections.collections }}
 	<h4 class="top-border padding-top">Featured In</h4>
 {{/if}}
 
-<ul>
-	{{#each collections}}
-		<li>{{#link-to "collection" this}}{{name}}{{/link-to}}</li>
+
+{{#with currentUser as currentUser}}
+	{{#each product.getCollections.collections}}
+		{{collection-badge collection=this currentUser=currentUser}}
 	{{/each}}				
-</ul>
+{{/with}}

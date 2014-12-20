@@ -5,142 +5,141 @@
 <div class="container">  
 
 
-			{{!-- UHOH, NO PRODUCTS AT ALL --}}
-			{{#unless isProfileOwner}}
-			{{#unless this.products }}
-				<p class="padding-top text-center haul-font-weak">{{user.name}} has nothing to sell.</p>
-			{{/unless}}
-			{{/unless}}
+	{{!-- UHOH, NO PRODUCTS AT ALL --}}
+	{{#unless isProfileOwner}}
+	{{#unless this.getProducts }}
+	{{#unless this.getCollections }}
+		<p class="padding-top text-center font-weak">{{user.name}} has nothing to sell.</p>
+	{{/unless}}
+	{{/unless}}
+	{{/unless}}
 
 
-			{{!-- CALL TO ACTION --}}
-			{{#if isProfileOwner}}
-				{{#unless this.products }} 
-				{{#link-to 'product-new'}}
-				<div class="haul-grid-li">	
-					<div class="sell">  
-						<div class="sell-button text-center">
-							<div class="sell-text text-center haul-font">
-									<span class="glyphicon glyphicon-camera"></span><br/>
-									Sell Something
-							</div>
-						</div> 
-					</div>
-				</div>
-				{{/link-to}}
-				{{/unless}}
-
-				{{#unless this.products }} 
-				{{#link-to 'collection-new' }}
-				<div class="haul-grid-li">	
-					<div class="sell">  
-						<div class="sell-button text-center">
-							<div class="sell-text text-center haul-font">
-									<span class="glyphicon glyphicon-plus-sign"></span><br/>
-									Start Marketplace
-							</div>
-						</div> 
-					</div>
-				</div>
-				{{/link-to}}
-				{{/unless}}
-			{{/if}}
-				
-
-
-
-				
-
-
-
-
-
-		{{#if model.collections}}	
+	{{!-- CALL TO ACTION --}}
+	{{#if isProfileOwner}}
+	{{#unless model.getCollections }} 
+		{{#unless model.getProducts }} 
 		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12 padding-top clearfix">
+			<div class="col-md-12 col-sm-12 col-xs-12  text-center">
+			<h3>Welcome to Haul. Let's get started!</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-6 text-center">
+				{{#link-to 'product-new'}}
+					<h3 class="pull-right">
+						<span class="glyphicon glyphicon-camera"></span><br/>
+						Sell Something
+					</h3>
+				{{/link-to}} 
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6 text-center">
+				{{#link-to 'collection-new' }}
+					<h3 class="pull-left text-center">
+						<span class="glyphicon glyphicon-plus-sign"></span><br/>
+						Start Marketplace 
+					</h3>
+				{{/link-to}}
+			</div>
+		</div>
+		{{/unless}}
+	{{/unless}}
+	{{/if}}
 		
-				
-				
-				{{#each model.collections }}
 
- 				
+
+
+				
+
+
+
+
+
+	{{#if model.getCollections}}	
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 padding-top clearfix">
+
+			<h4>Marketplace by {{model.name}}</h4>
+	 	 
+		 	{{#with controller as controller }}
+				{{#each model.getCollections }} 
 					<div class="row well">
 						<div class="col-md-4 col-sm-6 col-xs-6 ">
 							
 							<h4>{{#link-to 'collection' collection }}{{collection.name}}{{/link-to}}</h4>		
- 
-							{{#link-to 'collection' collection }}
-					    		{{#if collection.image.small }}
-									<img class="img-responsive thumbnail" {{bind-attr src=collection.image.small}}>
-								{{else}}
-									<img class="thumbnail" src="/static/images/blank-thumb.jpg">
-								{{/if}}
-							{{/link-to}}
 
+						
+				    		{{#if collection.image.small }}
+				    			{{#link-to 'collection' collection }}
+									<img class="img-responsive thumbnail" {{bind-attr src=collection.image.small}}>
+								{{/link-to}}
+							{{else}}
+
+								{{#if controller.isProfileOwner}}
+		 							{{#link-to 'collection.edit' collection.id }}
+		 							<div class="profile-circular-mask collection">
+		 								<br/>
+		 								<div class="text-center">add logo</div>	
+		 							</div>
+		 							{{/link-to}}
+		 						{{/if}}
+
+							{{/if}}
 			 			</div>
 			 			<div class="col-md-4 col-sm-6 col-xs-6">
 			 				<h4>
 			 					About Us
 			 				</h4>
 
-			 				<p>{{breaklines collection.description}}</p>
-
-
-			 				<div class="padding-top">
-			 				{{ follow-btn
-			                    item=collection
-			                    ref_type="collection"
-			                    currentUser=currentUser
-			                }}
-			                </div>
-
+			 				<p>
+			 					{{breaklines collection.description}}
+			 					{{#if controller.isProfileOwner}}
+			 						{{#link-to 'collection.edit' collection.id }}
+			 							<button class="btn btn-default btn-xs">edit</button>
+			 						{{/link-to}}
+			 					{{/if}}
+			 				</p>
 			            </div>
 
 			            <div class="col-md-4 col-sm-12 col-xs-12">
 
-			            <h5>Followers</h5>
+			            	<h5>Followers ({{collection.getFollowedByCount.total}})</h5>
 
+			            	<div class="box-rigid text-center">
+			            	
+				 				{{ follow-btn
+				                    item=collection
+				                    ref_type="collection"
+				                    currentUser=controller.currentUser
+				                    hideCounts=true
+				                }}
+				            </div>
+			            	<div class="row">
+			            		<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
 
+					            	{{#each collection.getFollowers.followers}}
+										{{#link-to 'seller' this }}
+				    						{{profile-badge user=this currentUser=currentUser}}
+				 						{{/link-to}}
+					            	{{/each}}
 
-			 				
-	
-						<div class="profile-circular-mask text-center"><a id="ember1706" class="ember-view" href="/seller/27821482570678272">
-						    </a><a id="ember1714" class="ember-view pull-left" href="/seller/27821482570678272"><img src="https://graph.facebook.com/1531138757143466/picture?width=200" data-bindattr-1716="1716"></a>
-					    </div>
-
-					<div class="profile-circular-mask text-center"><a id="ember1706" class="ember-view" href="/seller/27821482570678272">
-						    </a><a id="ember1714" class="ember-view pull-left" href="/seller/27821482570678272"><img src="https://graph.facebook.com/1531138757143466/picture?width=200" data-bindattr-1716="1716"></a>
-					    </div>
-					    <div class="profile-circular-mask text-center"><a id="ember1706" class="ember-view" href="/seller/27821482570678272">
-						    </a><a id="ember1714" class="ember-view pull-left" href="/seller/27821482570678272"><img src="https://graph.facebook.com/1531138757143466/picture?width=200" data-bindattr-1716="1716"></a>
-					    </div>
-					    <div class="profile-circular-mask text-center"><a id="ember1706" class="ember-view" href="/seller/27821482570678272">
-						    </a><a id="ember1714" class="ember-view pull-left" href="/seller/27821482570678272"><img src="https://graph.facebook.com/1531138757143466/picture?width=200" data-bindattr-1716="1716"></a>
-					    </div>
-					    <div class="profile-circular-mask text-center"><a id="ember1706" class="ember-view" href="/seller/27821482570678272">
-						    </a><a id="ember1714" class="ember-view pull-left" href="/seller/27821482570678272"><img src="https://graph.facebook.com/1531138757143466/picture?width=200" data-bindattr-1716="1716"></a>
-					    </div>
-					    <div class="profile-circular-mask text-center"><a id="ember1706" class="ember-view" href="/seller/27821482570678272">
-						    </a><a id="ember1714" class="ember-view pull-left" href="/seller/27821482570678272"><img src="https://graph.facebook.com/1531138757143466/picture?width=200" data-bindattr-1716="1716"></a>
-					    </div>
-				 	</div>
-				 </div>
+			            		</div>
+			            	</div>
+			 			</div>	
+				 	</div> 
 				{{/each}} 
-				</div>
-			</div>
+			{{/with}} 
 		</div>
+	</div>
 	{{/if}}
 </div>
 
-<div class="container">  
-
-
-
+<div class="container">   
 	{{!-- ALL PRODUCTS FOR THIS USER --}}
 	{{!-- SELLER PRODUCTS --}}
-	{{#if user.products}}
+	{{#if model.getProducts}}
 		<h4 class="bottom-border padding-top">For Sale By Me</h4>
-	    {{#each user.products}}
+	    {{#each model.getProducts}}
 	    	{{#link-to 'product' this.id }}
 	    	<div class="haul-grid-li"> 
 				<img class="thumbnail" {{bind-attr src=image.small}}>

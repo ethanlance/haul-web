@@ -10,8 +10,10 @@ Haul.TwitterBtnComponent = Ember.Component.extend({
   ],
 
   didInsertElement: function() {
-  	window.twttr.widgets.load();
-  	$('iframe.twitter-share-button').css('width', '78px')
+    if( window.twtrr ) {
+      window.twttr.widgets.load();
+      $('iframe.twitter-share-button').css('width', '78px')
+    }
   }
 
 });

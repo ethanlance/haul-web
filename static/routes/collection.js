@@ -47,8 +47,7 @@ Haul.CollectionIndexRoute = Haul.AnonRoute.extend({
 Haul.CollectionFollowersRoute = Haul.AnonRoute.extend({
 	controllerName: "collection-index",
 	model: function(params) {
-		var collection_id = this.modelFor('collection').get('id'); 
-		return this.store.find('collection-followers-list', collection_id);
+		return this.modelFor('collection');
 	},
  	setupController: function(controller, model) {
  		controller.set('collection', this.modelFor('collection'));

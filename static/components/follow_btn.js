@@ -6,10 +6,10 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 	ref_idBinding: "item.id",
 	user_idBinding: "currentUser.id",
 	
-	isFollowingCountBinding: "item.isFollowingCount.total",
+	isFollowingCountBinding: "item.getFollowingCount.total",
 	isFollowingText: null,
 	
-	isFollowedByCountBinding: "item.isFollowedByCount.total",
+	isFollowedByCountBinding: "item.getFollowedByCount.total",
 	isFollowedByText: null,
 
 	userFollows: null,
@@ -20,7 +20,7 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 
 	userFollowsChange: function() {
 		if( this.get('userFollows') ) {
-			this.set('btnName', 'unfollow');
+			this.set('btnName', 'following');
 		} else {
 			this.set('btnName', 'follow');
 		}
@@ -109,10 +109,11 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 			} else {
 				var store = this.get('targetObject.store');
 				var data = {
-					user_id: this.user_id,
-					ref_id: this.ref_id, 
-					ref_type: this.ref_type
+					user_id: this.get('user_id'),
+					ref_id: this.get('ref_id'), 
+					ref_type: this.get('ref_type')
 				}
+				
 				var record = store.createRecord('follow', data);
 				follow = true;
 			}

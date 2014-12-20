@@ -26,6 +26,8 @@ Haul.QuillEditorComponent = Ember.Component.extend({
 		editor.on('text-change', function(delta, source) { 
 			_this.sendAction('quillChange', editor.getHTML());
 		}); 
+
+		this.contentChanged();
 	},
 
 

@@ -26,6 +26,11 @@
 					this.set('isProfileOwner', false);
 				}
 			} 
+
+			//Find the sellers collections.  Then find the follower list for the first collection.
+
+
+
 		}.observes('model'),
 
 	}); 

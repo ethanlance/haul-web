@@ -15,7 +15,8 @@ Haul.ProductRoute = Haul.AnonRoute.extend({
 		});;
 	},
 	serialize: function(model) {
-    	return { product_slug: model.get('id') };
+		if(model)
+    		return { product_slug: model.get('id') };
   	},
 	
 });
@@ -51,8 +52,10 @@ Haul.ProductEditRoute = Haul.AuthenticatedRoute.extend({
 		this.controllerFor('product-edit').reset();
 	},
 	model: function() { 
-		var product_id = this.modelFor('product').get('id');
-		return this.store.find('product', product_id)
+		return this.modelFor('product');
+	},
+	setupController: function(controller, model) {
+		controller.set('model', model);
 	},
 	renderTemplate: function(controller, model) {
 		this.render('product/edit', {

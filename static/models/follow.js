@@ -237,7 +237,7 @@ Haul.UserFollowersListSerializer =  DS.RESTSerializer.extend({
 
 
 /**
-	List of users who follow a user.
+	List of users who follow this collection.
 **/ 
 Haul.CollectionFollowersList = DS.Model.extend({
 	collection: DS.belongsTo('collection'), 

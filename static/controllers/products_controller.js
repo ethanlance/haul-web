@@ -80,7 +80,7 @@
 		needs: ["auth"],
 		currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 
-		model: null,
+		model: [],
 		uploads: false,
 		//content: "model", 
 
@@ -100,10 +100,11 @@
 
 
 		//This product's image objects.
-		selectedImages: [],
+		//selectedImages: [],
 
 		//This product's image_ids 
-		image_ids:[],
+		imageIds:[],
+		selectedImages:[],
 
 
 		// //Is currentUser authorized to view page?
@@ -122,17 +123,16 @@
 			this.set('showImagePicker',true);
 			this.set('imagesAreSelected',false);
 			this.set('productExists',false);
-			this.set('selectedImages',[]); 
-			// if(this.get('uploads')){
-			// 	this.get('uploads').forEach(function(img) {
-			// 		img.set('isSelected', false);
-			// 	});	
-			// }
-			
+			this.set('imageIds',[]); 
+			this.set('model', []);
+			if(this.get('uploads')){
+				this.get('uploads').forEach(function(img) {
+					img.set('isSelected', false);
+				});	
+			} 
 		},
 
-		// // Observer: When editing a product we start with a productPromise.
-		// // When creating a new product there is no productPromise.
+		
 		modelChanged: function() {
 
 			var _this = this;
@@ -140,8 +140,8 @@
 			this.store.find('user-image', {user_id: user_id } ).then(function(results){
 
  				_this.set('uploads', results);
-
  				_this.imageMunge();
+
  			})
 		
 		}.on('init'),//.observes('model.id'),
@@ -149,31 +149,36 @@
 		imageMunge: function() {
 			var _this =this;
 			if( this.get('model').get('id') ){
-				
-				var product = this.get('model');
  
 				this.set('showImagePicker', false);
+				
 
 				//What images does this product have?
-				var images = product.get('images').then(function(images){
-					images.map(function(image){ 
-						_this.selectedImages.pushObject(image); 
-						return image
-					});
-				}).then(function(){
-					//Now let's tell the all user images array which images
-					//the product has.
+				this.get('model').get('images').then(function(images){
+
+					//hilight upload images
 					var uploads = _this.get('uploads');
 					if( uploads ) {
+
+						var selectedImages = _this.get('selectedImages');
+						selectedImages.beginPropertyChanges();
+						selectedImages = [];
+
 						uploads.forEach(function(img) {
-							_this.selectedImages.forEach(function(simg){
+							images.forEach(function(simg){
 								//Set this image isSelected.
 								if(simg.get('id') === img.get('id')) {
+									console.log("MATCH!")
 									img.set('isSelected', true);
+									selectedImages.pushObject(simg);
 								}
 							});
 						});
+
+						selectedImages.endPropertyChanges();
+						_this.set('selectedImages', selectedImages);
 					}
+
 				});
 				
 			}else{
@@ -185,19 +190,21 @@
 		//Observer: anytime our array of selected images changes, update
 		// our list of image_ids.
 		imagesIdsChanged: function() {
-			var ids = this.get('selectedImages').map(function(image) {
+			console.log("IMAGES CHANGE")
+			
+			var selectedImages = this.get('selectedImages');
+			var imageIds = this.get('imageIds');
+
+			var ids = selectedImages.map(function(image) {
 				return image.get('id');
 			});
-			this.set('image_ids', ids);
-		}.observes('selectedImages.@each'),
+			this.set('imageIds', ids); 
 
+			
+			console.log("imageIds.length", imageIds.length, imageIds)
 
-		//Observes: When selectedImages changes, do things.
-		selectedImagesChange: function() {
-		
-			var selectedImages = this.get('selectedImages');
 			//Highlight the image:
-			if( selectedImages.length == 0 ) {
+			if( imageIds.length == 0 ) {
 				this.set('imagesAreSelected', false);
 			}else{
 				this.set('imagesAreSelected', true);
@@ -222,12 +229,12 @@
 		},
 
 		saveProduct: function() {
+			var _this = this;
 			var model = this.get('model');
 			
-			model.set('image_ids', this.get('image_ids'));
+			model.set('image_ids', this.get('imageIds'));
 
 			//Refresh the image models. Get data from api.
-			var _this = this;
 			this.get('image_ids').forEach(function(id){
 				var img = _this.store.find('image', id )
 				img.then(function(i) {
@@ -235,7 +242,6 @@
 				});
 			});
 
-			var _this = this;
 			model.save().then(
 				function(result) { 
 					_this.set('isProcessing', false);
@@ -271,6 +277,7 @@
 				if( model.get('name') )
 					model.set('name', model.get('name').trim())
 
+
 		 		//Model Validations:
 				model.validate().then(function(result){
 					_this.saveProduct();	
@@ -281,30 +288,7 @@
 			},
 
 			
- 			
- 			//Image has been uploaded.
- 			//Push it into the store.
- 			//The images computed property in this controller will update the view.
-			refresh: function(response) {
-				var authController = this.get('controllers.auth'); 
-				var user_id  = authController.get('currentUser').id;
-				var store = this.store; 
-				var _this = this;
 
-				response.data.forEach( function(image){ 
-					var record = store.push('user-image', {
-						original: image.locations.original,
-						small: image.locations.small,
-						thumb: image.locations.thumb,
-						caption: image.caption,
-						locations: image.locations,
-						user_id: user_id,
-						id: image.image_id,
-						created_at: image.created_at
-					});  
-					_this.get('uploads').unshiftObject(record);
-				});				
-			},
 
 			//Image Picker Component has deleted/destroyed this image.
 			//Update our selectedImages.
@@ -320,9 +304,15 @@
 				});	
 				
 				if( image ) {
-					selectedImages.splice($.inArray(image, selectedImages),1); // remove image
-					selectedImages.splice(0,0,image); // add image to top of array
-					selectedImages.shiftObject(); // use ember's KVO shiftObject to remove image from top.
+					// selectedImages.splice($.inArray(image, selectedImages),1); // remove image
+					// selectedImages.splice(0,0,image); // add image to top of array
+					// selectedImages.shiftObject(); // use ember's KVO shiftObject to remove image from top. 
+					var collection = [];
+					selectedImages.forEach(function(result){
+						if( result.get('id') !== image.get('id'))
+							collection.push(result);
+					});
+					this.set('selectedImages', collection);
 				}
 			},
 		
@@ -348,10 +338,20 @@
 				
 				//Remove
 				}else if( found ) { 
-					selectedImages.splice($.inArray(image, selectedImages),1); // remove image
-					selectedImages.splice(0,0,image); // add image to top of array
-					selectedImages.shiftObject(); // use ember's KVO shiftObject to remove image from top.
+
+					//selectedImages.splice($.inArray(image, selectedImages),1); // remove image
+					//selectedImages.splice(0,0,image); // add image to top of array
+					//selectedImages.popObject(); // use ember's KVO shiftObject to remove image from top.
+
+					var collection = [];
+					selectedImages.forEach(function(result){
+						if( result.get('id') !== image.get('id'))
+							collection.push(result);
+					});
+					this.set('selectedImages', collection);
+
 					event.set('isSelected',false); 
+
 				//Add
 				}else{
 					selectedImages.pushObject(image);
@@ -359,13 +359,39 @@
 				}
 			},
 
+
 			clickNext: function() {
 				this.set('showImagePicker', false);
 			},
 
 			clickPrev: function() {
 				this.set('showImagePicker', true);
-			}
+			},
+ 
+ 			//Image has been uploaded.
+ 			//Push it into the store.
+ 			//The images computed property in this controller will update the view.
+			refresh: function(response) {
+				var authController = this.get('controllers.auth'); 
+				var user_id  = authController.get('currentUser').id;
+				var store = this.store; 
+				var _this = this;
+
+				response.data.forEach( function(image){ 
+					var record = store.push('user-image', {
+						original: image.locations.original,
+						small: image.locations.small,
+						thumb: image.locations.thumb,
+						caption: image.caption,
+						locations: image.locations,
+						user_id: user_id,
+						id: image.image_id,
+						created_at: image.created_at
+					});  
+					_this.get('uploads').unshiftObject(record);
+				});				
+			},
+
 		}
 	});
 })();

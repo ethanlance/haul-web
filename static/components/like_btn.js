@@ -1,3 +1,4 @@
+
 Haul.LikeBtnComponent = Ember.Component.extend({
 
 	ref_type: "products",

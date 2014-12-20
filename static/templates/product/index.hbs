@@ -19,11 +19,16 @@
 		<div class="col-md-6 col-sm-6 col-xs-12 padding-bottom">
 
 			{{!-- IMAGES --}}
-			{{#if model.images}}
-				{{view Haul.CarouselView contentBinding="model.images"}}
-			{{/if}} 
+			{{view Haul.CarouselView contentBinding="model.images"}}
+			
 
+			
+			{{!-- FACEBOOK, TWITTER, PINTEREST --}}
+			<div class="clearfix text-center padding-top">
 
+				{{social-btns product=model.product url=url}} 
+
+			</div>
 
 			{{!-- COMMENTS --}}
 			{{ comment-section
@@ -45,10 +50,10 @@
 				{{/if}}
 				
 				{{!-- PRODUCT NAME --}}
-				<h3 class="haul-font text-center bottom-border">{{ model.name }}</h3> 
+				<h3 class="text-center bottom-border">{{ model.name }}</h3> 
 
 				{{!-- BUTTONS --}}
-				<div class="haul-font padding-bottom ">
+				<div class="padding-bottom ">
 					<div class="btn-left haul-price">${{model.price}}</div>	 	
 						
 					{{!-- BUY --}}
@@ -82,56 +87,46 @@
 
 				</div>
 
-				{{!-- FACEBOOK, TWITTER, PINTEREST --}}
-				<div class="clearfix text-center">
-
-					{{social-btns product=model.product url=url}} 
-
-				</div>
-
-
 
 				<div class="clearfix padding-top">
-					
-					<h4 class="pull-left">Seller</h4>
-					
-					<span class="pull-left">
-						{{#link-to "seller" model.user.slug}}
-							{{ make-icon icon=model.user.icon isSmall=true  }}
-						{{/link-to}}
-					</span>
-					
-					{{#link-to "seller" model.user.slug}}{{model.user.name}}{{/link-to}}
-					
-					{{ follow-btn 
-						item=model.user 
-						ref_type="user"
-						currentUser = currentUser  
-						isSmall=true
-						hideCounts=true
-					}}  
+					<h4>Seller Details:</h4>
+ 
+					{{profile-badge user=model.user currentUser=currentUser showFollows=false}}
 
+					{{ breaklines model.description }}
 				</div>
-	 
-				<h4 class="top-border padding-top">Details:</h4>
-				<p>{{ breaklines model.description }}</p>
-
-
 				
-				<div class="clearfix padding-top">
-					{{product-collections product=model }}	
-				</div>
-
-				<div class="clearfix padding-top">
-					{{liked-by product=model }}	
-				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="clearfix padding-top">
+							{{liked-by product=model currentUser=currentUser  }}	
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="clearfix padding-top">
+							{{product-collections product=model currentUser=currentUser }}	
+						</div>
+					</div>
+				</div> 
 			</div>
 		</div>
 	</div>
+
+
+
+	<div class="row padding-top">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center padding-top top-border">
+			{{#link-to "seller" model.user}}
+				<button class="btn btn-default btn-sm">next item ></button>
+			{{/link-to}}
+		</div>
+	</div>
+
+
 </div>
 
 
-<div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+{{!-- <div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 
@@ -147,7 +142,7 @@
 		</div>
 		</div>
 	</div>
-</div>
+</div> --}}
 
 
 

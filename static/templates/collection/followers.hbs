@@ -4,7 +4,19 @@
         <div class="row padding-top">
             <div class="col-md-12 col-sm-12 col-xs-12  padding-top">
 
+
+
                 <h2 class="haul-header">    
+
+                    <div class="pull-right">
+                        {{follow-btn 
+                            item=collection 
+                            ref_type="collection"
+                            currentUser=currentUser   
+                            hideCounts=true
+                        }} 
+                    </div>
+
 
                     <div class="pull-left">
                         {{#link-to "collection" collection}}
@@ -13,7 +25,7 @@
                     </div>
                     
                     <strong>
-                        {{#link-to "collection" collection}}{{model.collection.name}}{{/link-to}}
+                        {{#link-to "collection" collection}}{{collection.name}}{{/link-to}}
                     </strong>
 
                     {{#if isCollectionOwner}}
@@ -24,7 +36,10 @@
                         </small>
                     {{/if}} 
                 </h2>
-                <small class="haul-font-weak">{{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}</small>
+                <small class="font-weak">
+                    {{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}
+                </small>
+
 
             </div>
         </div>
@@ -55,8 +70,8 @@
 
 <div class="container">  
 
-	{{#unless model.followers }}
-		<div class="padding-top text-center haul-font-weak">
+	{{#unless collection.getFollowers.followers }}
+		<div class="padding-top text-center font-weak">
 		  Oh no! No have no followers :(
           <br/>
           Be the first!
@@ -64,11 +79,11 @@
           <br/>
 			<span>
 			
-				{{follow-btn item=collection 
+				{{follow-btn 
+                    item=collection 
 					ref_type="collection"
 					currentUser=currentUser   
 					hideCounts=true
-
 				}} 
 			</span>
 		</div>
@@ -76,9 +91,11 @@
 
 
 	{{!-- SELLER PRODUCTS --}}
-    {{#each model.followers}}
+    {{#with currentUser as currentUser }}
+    {{#each collection.getFollowers.followers}}
     	{{#link-to 'collection' this.id }} 
 	    	{{profile-badge user=this currentUser=currentUser}}
 	 	{{/link-to}}	
 	{{/each}} 
+    {{/with}}
 </div>

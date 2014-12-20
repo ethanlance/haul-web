@@ -1,30 +1,30 @@
 {{user-header user=user currentUser=currentUser}}
 
-
-<div class="toolbar haul-font">
-	<span></span>
-</div>
-
 <div class="container">  
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 
-	
-	{{#unless model.products }}
-		<p class="padding-top text-center haul-font-weak">
-		{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} doesn't like anything yet.</p>
-	{{/unless}}
-
-
-	{{!-- SELLER PRODUCTS --}}
-    {{#each model.products}}
-    	{{#link-to 'product' this }}
-    	<div class="haul-grid-li"> 
-			<img class="thumbnail" {{bind-attr src=image.small}}>
 			
-			<div class="info">		
-		 	  	<div class="price">{{name}}</div>   
-			</div>			
-	 	</div>
-	 	{{/link-to}}	
-	{{/each}}  
+			{{#unless model.products }}
+				<p class="padding-top text-center font-weak">
+				{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} doesn't like anything yet.</p>
+			{{/unless}}
 
+
+			{{!-- SELLER PRODUCTS --}}
+		    {{#each model.products}}
+		    	{{#link-to 'product' this }}
+		    	<div class="haul-grid-li"> 
+					<img class="thumbnail" {{bind-attr src=image.small}}>
+					
+					<div class="info">		
+				 	  	<div class="price">{{name}}</div>   
+					</div>			
+			 	</div>
+			 	{{/link-to}}	
+			{{/each}}  
+
+
+		</div> 
+	</div>
 </div>

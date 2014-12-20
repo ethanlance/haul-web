@@ -8,7 +8,7 @@
 
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
-				<h2 class="haul-font">Let's sell!</h2> 
+				<h2>Let's sell!</h2> 
 			</div>
 		</div>
 
@@ -18,7 +18,7 @@
 	<div {{bind-attr class=":collapse showImagePicker:show:hide"}}>
 		<div class="row bottom-border">
 			<div class="col-md-12 col-sm-12 col-xs-12"> 
-				<h4 class="haul-font">Start With Photos <small>(up to 5 per item)</small></h4>
+				<h4>Start With Photos <small>(up to 5 per item)</small></h4>
 			</div>
 		</div>
 
@@ -46,15 +46,15 @@
 		
 		{{#form-for model wrapper="bs3-wrapper"}}
 		<div class="row">
-			<div class="col-md-12"> 	
+			<div class="col-md-9 col-sm-9 col-xs-12"> 
 				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12"> 
+					<div class="col-md-12 col-sm-12 col-xs-12"> 
 						<label>Name this item:</label>
 						{{input name canShowValidationError=showErrors}} 
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-8 col-sm-8 col-xs-12"> 
+					<div class="col-md-12 col-sm-12 col-xs-12"> 
 						<label>Describe this item:</label>
 						<br/>
 						<small>Don't forget #hashtags!</small>
@@ -81,18 +81,12 @@
 	 				</div>
 				</div>
 			</div>
-		</div>
-		{{/form-for}}
 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12"> 
+
+			<div class="col-md-3 col-sm-3 col-xs-12"> 
 				<div class="row">
- 					<div class="col-md-6 col-sm-6 col-xs-6 vcenter">
-						{{!-- REORDER IMAGES --}} 
+ 					<div class="col-md-12 col-sm-12 col-xs-12">  
 						<label>Drag images to sort</label>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-6 text-right vcenter">
-						
 					</div>
 				</div>
 
@@ -101,8 +95,21 @@
 						{{view Haul.JQuerySortableView contentBinding="selectedImages"}}	
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 padding-top"> 
+						<button {{action "clickPrev"}} class="btn btn-primary">
+							<span class="glyphicon 	glyphicon-picture"></span> Change Images
+						</button>
+					</div>
+				</div>
+
 			</div>
+
 		</div>
+		{{/form-for}}
+
+		
 
 
 
@@ -124,7 +131,7 @@
 
 {{!-- HAUL TOOLBAR --}}
 
-<div class="toolbar-footer haul-font">
+<div class="toolbar-footer">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">	 
@@ -142,7 +149,7 @@
 				</span>
 
 				<span {{bind-attr class=":collapse showImagePicker:out:in"}}>
-					<button {{action "clickPrev"}} class="btn btn-primary"><span class="glyphicon 	glyphicon-picture"></span> Change Images</button>
+					
 						
 					{{#if model.id }}
 

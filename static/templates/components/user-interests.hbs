@@ -1,6 +1,6 @@
 
 <div {{bind-attr class="hasContent:show:hide"}}>
-	<h4 class="haul-toggle haul-font bottom-border">
+	<h4 class="haul-toggle bottom-border">
 		<a {{action 'clickFollows'}} {{bind-attr class="showFollows:active"}}>Following ({{followsCount}})</a> |
 		<a {{action 'clickFollowers'}} {{bind-attr class="showFollowers:active"}}>Followers ({{followersCount}})</a> |
 		<a {{action 'clickLikes'}} {{bind-attr class="showLikes:active"}}>Likes ({{likesCount}})</a> 
