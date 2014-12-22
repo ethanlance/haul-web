@@ -1,47 +1,42 @@
-{{!-- HEADER --}}
-<div class="container-fluid collection-nav  content-fixed-nav">
-    <div class="container">
-        <div class="row padding-top">
-            <div class="col-md-12 col-sm-12 col-xs-12  padding-top">
+<div class="container-fluid content-fixed-nav">
+    <div class="row collection-nav padding-top">
+        <div class="col-md-12 col-sm-12 col-xs-12  padding-top">
+
+            <h2 class="haul-header">    
+
+                <div class="pull-right">
+                    {{follow-btn 
+                        item=collection 
+                        ref_type="collection"
+                        currentUser=currentUser   
+                        hideCounts=true
+                    }} 
+                </div>
 
 
+                <div class="pull-left">
+                    {{#link-to "collection" collection}}
+                        {{ make-icon icon=collection.icon isSmall=false isCollection=true }}
+                    {{/link-to}}    
+                </div>
+                
+                <strong>
+                    {{#link-to "collection" collection}}{{collection.name}}{{/link-to}}
+                </strong>
 
-                <h2 class="haul-header">    
-
-                    <div class="pull-right">
-                        {{follow-btn 
-                            item=collection 
-                            ref_type="collection"
-                            currentUser=currentUser   
-                            hideCounts=true
-                        }} 
-                    </div>
-
-
-                    <div class="pull-left">
-                        {{#link-to "collection" collection}}
-                            {{ make-icon icon=collection.icon isSmall=false isCollection=true }}
-                        {{/link-to}}    
-                    </div>
-                    
-                    <strong>
-                        {{#link-to "collection" collection}}{{collection.name}}{{/link-to}}
-                    </strong>
-
-                    {{#if isCollectionOwner}}
-                         <small>
-                            {{#link-to 'collection.edit' collection }}
-                                <button class="btn btn-default btn-xs">edit</button>
-                            {{/link-to}}
-                        </small>
-                    {{/if}} 
-                </h2>
-                <small class="font-weak">
-                    {{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}
-                </small>
+                {{#if isCollectionOwner}}
+                     <small>
+                        {{#link-to 'collection.edit' collection }}
+                            <button class="btn btn-default btn-xs">edit</button>
+                        {{/link-to}}
+                    </small>
+                {{/if}} 
+            </h2>
+            <small class="font-weak">
+                {{#link-to "seller" collection.user}}by {{collection.user.name}}{{/link-to}}
+            </small>
 
 
-            </div>
         </div>
     </div>
 </div>

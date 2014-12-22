@@ -54,7 +54,7 @@ Haul.FollowBtnComponent = Ember.Component.extend({
  	}.on('init'),
 
  	itemChanged: function() {
-
+ 
 		if(!this.get('ref_id'))
 			return;
 	

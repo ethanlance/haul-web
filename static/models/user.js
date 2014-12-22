@@ -90,7 +90,7 @@ Haul.User = DS.Model.extend({
 		});
 	},
 
-	getCollections: function() {
+	getCollections: function() { 
 		var store = this.store;
 		var user_id = this.get('id');
 		store.find('user-collection', {user_id: user_id});
@@ -102,7 +102,7 @@ Haul.User = DS.Model.extend({
 		}); 
 	}.property(),
 
-	getProducts: function() {
+	getProducts: function() { 
 		var store = this.store;
 		var user_id = this.get('id');
 

@@ -2,7 +2,7 @@
 	Single seller view 
 		- Display seller's products
 **/	
-Haul.SellerRoute = Haul.AnonRoute.extend({
+Haul.SellerRoute = Haul.AnonRoute.extend({ 
 	model: function(params) { 
 		var _this = this; 
 		return this.store.find('user', params.user_slug).then(function(result){
@@ -26,17 +26,16 @@ Haul.SellerRoute = Haul.AnonRoute.extend({
 	List of user's collections
 **/
 Haul.SellerIndexRoute = Haul.AnonRoute.extend({
+
+
+
 	model: function(params) {
 		return this.modelFor('seller');
 	},
  	setupController: function(controller, model) {
- 		var user_id = this.modelFor('seller').get('id');
-
+ 		var user_id = this.modelFor('seller').get('id'); 
  		controller.set('user', this.modelFor('seller'));
- 		controller.set('content', model);
-
- 			
-
+ 		controller.set('content', model); 
  	}, 
 	renderTemplate: function(controller, model) {
 		this.render('seller/index');

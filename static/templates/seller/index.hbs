@@ -7,8 +7,8 @@
 
 	{{!-- UHOH, NO PRODUCTS AT ALL --}}
 	{{#unless isProfileOwner}}
-	{{#unless this.getProducts }}
-	{{#unless this.getCollections }}
+	{{#unless hasProducts }}
+	{{#unless hasCollections }}
 		<p class="padding-top text-center font-weak">{{user.name}} has nothing to sell.</p>
 	{{/unless}}
 	{{/unless}}
@@ -17,8 +17,8 @@
 
 	{{!-- CALL TO ACTION --}}
 	{{#if isProfileOwner}}
-	{{#unless model.getCollections }} 
-		{{#unless model.getProducts }} 
+	{{#unless hasCollections }}
+		{{#unless hasProducts }} 
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12  text-center">
 			<h3>Welcome to Haul. Let's get started!</h3>
@@ -55,18 +55,23 @@
 
 
 
-	{{#if model.getCollections}}	
+	{{#if hasCollections}}	
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12 padding-top clearfix">
 
-			<h4>Marketplace by {{model.name}}</h4>
+		
 	 	 
 		 	{{#with controller as controller }}
-				{{#each model.getCollections }} 
+				{{#each hasCollections }} 
 					<div class="row well">
+
+						<div class="col-md-12 col-sm-12 col-xs-12">
+<h3>{{#link-to 'collection' collection }}{{collection.name}}{{/link-to}}</h3>		
+						</div>
+
 						<div class="col-md-4 col-sm-6 col-xs-6 ">
 							
-							<h4>{{#link-to 'collection' collection }}{{collection.name}}{{/link-to}}</h4>		
+							
 
 						
 				    		{{#if collection.image.small }}
@@ -86,7 +91,7 @@
 
 							{{/if}}
 			 			</div>
-			 			<div class="col-md-4 col-sm-6 col-xs-6">
+			 			{{!-- <div class="col-md-4 col-sm-6 col-xs-6">
 			 				<h4>
 			 					About Us
 			 				</h4>
@@ -99,11 +104,13 @@
 			 						{{/link-to}}
 			 					{{/if}}
 			 				</p>
-			            </div>
+			            </div> --}}
 
-			            <div class="col-md-4 col-sm-12 col-xs-12">
+			            <div class="col-md-8 col-sm-6 col-xs-6">
 
-			            	<h5>Followers ({{collection.getFollowedByCount.total}})</h5>
+			            	<h4>
+			            		Who's Following <strong>{{collection.name}}</strong> 
+			            	</h4>
 
 			            	<div class="box-rigid text-center">
 			            	
@@ -137,9 +144,9 @@
 <div class="container">   
 	{{!-- ALL PRODUCTS FOR THIS USER --}}
 	{{!-- SELLER PRODUCTS --}}
-	{{#if model.getProducts}}
+	{{#if hasProducts}}
 		<h4 class="bottom-border padding-top">For Sale By Me</h4>
-	    {{#each model.getProducts}}
+	    {{#each hasProducts}}
 	    	{{#link-to 'product' this.id }}
 	    	<div class="haul-grid-li"> 
 				<img class="thumbnail" {{bind-attr src=image.small}}>
