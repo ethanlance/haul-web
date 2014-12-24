@@ -5,12 +5,12 @@ Haul.ApplicationRoute = Ember.Route.extend({
         // Render default outlet
         this.render();
         // render extra outlets
-        var controller = this.controllerFor('tooltip-box');
-        this.render("bs-tooltip-box", {
-            outlet: "bs-tooltip-box",
-            controller: controller,
-            into: "application" // important when using at root level
-        });
+        // var controller = this.controllerFor('tooltip-box');
+        // this.render("bs-tooltip-box", {
+        //     outlet: "bs-tooltip-box",
+        //     controller: controller,
+        //     into: "application" // important when using at root level
+        // });
     }, 
     //This is the end of the road for actions.
     actions: {

@@ -67,7 +67,7 @@ Haul.ProductCommentSerializer =  DS.RESTSerializer.extend({
 	
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		} 
 
@@ -75,7 +75,7 @@ Haul.ProductCommentSerializer =  DS.RESTSerializer.extend({
 
 	extractArray: function(store, primaryType, payload) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		}
 		
@@ -148,7 +148,7 @@ Haul.ProductCommentCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		} 
 

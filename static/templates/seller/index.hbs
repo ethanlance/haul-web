@@ -26,20 +26,43 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-xs-6 text-center">
-				{{#link-to 'product-new'}}
-					<h3 class="pull-right">
-						<span class="glyphicon glyphicon-camera"></span><br/>
-						Sell Something
-					</h3>
-				{{/link-to}} 
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						
+						{{#link-to 'product-new'}}
+						<h3>
+							<span class="glyphicon glyphicon-camera"></span><br/>
+							Sell Something
+						</h3>
+						{{/link-to}} 
+					</div>
+					<div class="panel-body">
+						
+							
+						
+					</div>
+				</div>	
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6 text-center">
-				{{#link-to 'collection-new' }}
-					<h3 class="pull-left text-center">
-						<span class="glyphicon glyphicon-plus-sign"></span><br/>
-						Start Marketplace 
-					</h3>
-				{{/link-to}}
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+
+						{{#link-to 'collection-new' }}
+							<h3>
+								<span class="glyphicon glyphicon-plus-sign"></span><br/>
+								Start Marketplace 
+							</h3>
+						{{/link-to}}
+					</div>
+					<div class="panel-body">
+						
+							
+						
+					</div>
+				</div>
+
 			</div>
 		</div>
 		{{/unless}}
@@ -59,80 +82,97 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12 padding-top clearfix">
 
-		
+			
 	 	 
 		 	{{#with controller as controller }}
 				{{#each hasCollections }} 
-					<div class="row well">
+					
 
-						<div class="col-md-12 col-sm-12 col-xs-12">
-<h3>{{#link-to 'collection' collection }}{{collection.name}}{{/link-to}}</h3>		
+					<div class="panel panel-default haul-panel">		
+
+						<div class="panel-heading">
+
+ 							<h3 class="text-center">
+ 								My Haul 
+ 								{{haul-faq anchor='#myhaul'}}
+ 							</h3>
+							
 						</div>
-
-						<div class="col-md-4 col-sm-6 col-xs-6 ">
-							
-							
-
 						
-				    		{{#if collection.image.small }}
-				    			{{#link-to 'collection' collection }}
-									<img class="img-responsive thumbnail" {{bind-attr src=collection.image.small}}>
-								{{/link-to}}
-							{{else}}
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4 col-sm-4 col-xs-12 text-center">
+									
 
-								{{#if controller.isProfileOwner}}
-		 							{{#link-to 'collection.edit' collection.id }}
-		 							<div class="profile-circular-mask collection">
-		 								<br/>
-		 								<div class="text-center">add logo</div>	
-		 							</div>
-		 							{{/link-to}}
-		 						{{/if}}
+						    		{{#if collection.image.small }}
+						    			{{#link-to 'collection' collection }}
+											<img class="img-responsive thumbnail" {{bind-attr src=collection.image.small}}>
+										{{/link-to}}
+									{{else}}
 
-							{{/if}}
+										{{#if controller.isProfileOwner}}
+				 							{{#link-to 'collection.edit' collection.id }}
+				 							<div class="profile-circular-mask collection">
+				 								<br/>
+				 								<div class="text-center">add logo</div>	
+				 							</div>
+				 							{{/link-to}}
+				 						{{/if}}
+
+									{{/if}} 
+
+									<h3>
+										{{#link-to 'collection' collection }}{{collection.name}}{{/link-to}}
+
+										{{#if controller.isProfileOwner}}
+				 							{{#link-to 'collection.edit' collection.id }}
+				 							<button class="btn btn-default btn-xs">edit</button>
+				 							{{/link-to}}
+				 						{{/if}}
+
+									</h3>		
+
+					 			</div>
+
+					 			<div class="col-md-4 col-sm-4 col-xs-12 left-border scroll">
+					 				{{collection.description}}
+					 			</div>
+
+					            <div class="col-md-4 col-sm-4 col-xs-12 left-border scroll">
+
+					            	<h4>
+					            		Who's Following <strong>{{collection.name}}</strong> 
+					            	</h4>
+
+					            	<div class="row">
+					            		<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
+
+							            	{{#each collection.getFollowers.followers}}
+												{{#link-to 'seller' this }}
+						    						{{profile-badge user=this currentUser=currentUser isSmall=true}}
+						 						{{/link-to}}
+							            	{{/each}}
+
+					            		</div>
+					            	</div>
+
+					            	<div class="row">
+					            		<div class="col-md-12 col-sm-12 col-xs-12 padding-top text-center">
+
+										{{ follow-btn
+						                    item=collection
+						                    ref_type="collection"
+						                    currentUser=controller.currentUser
+						                    hideCounts=true
+						                    hideIfFollowing=true
+						                }}
+
+						                </div>
+						          	</div>  
+
+					 			</div>	
+				 			</div>
 			 			</div>
-			 			{{!-- <div class="col-md-4 col-sm-6 col-xs-6">
-			 				<h4>
-			 					About Us
-			 				</h4>
-
-			 				<p>
-			 					{{breaklines collection.description}}
-			 					{{#if controller.isProfileOwner}}
-			 						{{#link-to 'collection.edit' collection.id }}
-			 							<button class="btn btn-default btn-xs">edit</button>
-			 						{{/link-to}}
-			 					{{/if}}
-			 				</p>
-			            </div> --}}
-
-			            <div class="col-md-8 col-sm-6 col-xs-6">
-
-			            	<h4>
-			            		Who's Following <strong>{{collection.name}}</strong> 
-			            	</h4>
-
-			            	<div class="box-rigid text-center">
-			            	
-				 				{{ follow-btn
-				                    item=collection
-				                    ref_type="collection"
-				                    currentUser=controller.currentUser
-				                    hideCounts=true
-				                }}
-				            </div>
-			            	<div class="row">
-			            		<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
-
-					            	{{#each collection.getFollowers.followers}}
-										{{#link-to 'seller' this }}
-				    						{{profile-badge user=this currentUser=currentUser}}
-				 						{{/link-to}}
-					            	{{/each}}
-
-			            		</div>
-			            	</div>
-			 			</div>	
 				 	</div> 
 				{{/each}} 
 			{{/with}} 

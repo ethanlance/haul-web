@@ -1,8 +1,10 @@
 <div class="box-rigid text-center">
 	
-  	<div class="profile-circular-mask text-center">
+  	<div class="text-center">
+
       {{#link-to "seller" user class="pull-left"}}  
-        <img {{bind-attr src=user.icon }}>
+        {{!-- <img {{bind-attr src=user.icon }}> --}}
+        {{make-icon icon=user.icon isSmall=isSmall }}
       {{/link-to}}
     </div>
     <div>

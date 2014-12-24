@@ -1130,6 +1130,10 @@ textarea.form-control {
   border-bottom: 1px solid #e3e3e3;
 }
 
+.left-border {
+  border-left: 1px solid #e3e3e3;
+}
+
 .image-scroll {
   overflow:auto;
   height:300px;
@@ -1229,3 +1233,15 @@ textarea.form-control {
   cursor: pointer; 
 }
 
+.haul-panel {
+  h3 {
+    margin-top: 0px;
+  }
+  .title{
+    background-color: #ccc;
+  }
+  .scroll{
+    max-height: 300px;
+    overflow: scroll;
+  }
+}

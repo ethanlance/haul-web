@@ -16,7 +16,7 @@ Haul.Store = DS.Store.extend({
 });
 
 
-Haul.TooltipBoxController = Bootstrap.TooltipBoxController
+//Haul.TooltipBoxController = Bootstrap.TooltipBoxController
 
 //GLOABL SETTINGS.  HOW, WHERE SHOULD WE HANDLE THIS STUFF?
 Haul.COMMENT_SERVER_HOST = "http://localhost:8086";

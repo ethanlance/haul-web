@@ -24,6 +24,11 @@ Haul.FollowBtnComponent = Ember.Component.extend({
 		} else {
 			this.set('btnName', 'follow');
 		}
+
+		if( this.get('hideIfFollowing') == true ) {
+			this.set('showButton', false);
+		}
+
 	}.observes('userFollows'),
 
 	/**

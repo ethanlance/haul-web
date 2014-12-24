@@ -113,7 +113,7 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		}
 
@@ -141,7 +141,7 @@ Haul.ProductSerializer =  DS.RESTSerializer.extend({
 
 	extractArray: function(store, primaryType, payload) {
 
-		if( payload.data == "ok" ){ 
+		if( payload.data === "ok" ){ 
 			return;
 		}
  		

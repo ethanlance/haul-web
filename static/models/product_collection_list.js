@@ -27,7 +27,7 @@ Haul.ProductCollectionListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
  
-		if( payload.data == "ok" || Ember.isEmpty(payload.data)){ 
+		if( payload.data === "ok" || Ember.isEmpty(payload.data)){ 
 			return;
 		}
 		
@@ -52,7 +52,7 @@ Haul.ProductCollectionListSerializer =  DS.RESTSerializer.extend({
 
 	extractArray: function(store, primaryType, payload) {
  
-		if( payload.data == "ok" || Ember.isEmpty(payload.data)){
+		if( payload.data === "ok" || Ember.isEmpty(payload.data)){
 			return;
 		}
 		 

@@ -1,4 +1,4 @@
-Haul.UserTabsComponent = Ember.Component.extend({	
+var UserTabsComponent = Ember.Component.extend({	
 	followingCount: 0,
 	followsCount: 0,
 	likesCount: 0, 
@@ -18,14 +18,18 @@ Haul.UserTabsComponent = Ember.Component.extend({
 		this.set("isFollows", false);
 		this.set("isFollowers", false);
 		this.set("isProfile", false);
-		if( key == "likes" )
+		if( key === "likes" ){
 			this.set("isLikes", true);
-		if( key == "follows" )
+		}
+		if( key === "follows" ){
 			this.set("isFollows", true);
-		if( key == "followers" )
+		}
+		if( key === "followers" ){
 			this.set("isFollowers", true);
-		if( key == this.get('user').id )
+		}
+		if( key === this.get('user').id ){
 			this.set("isProfile", true);
+		}
 
 
 		if(this.get('user')){
@@ -47,3 +51,4 @@ Haul.UserTabsComponent = Ember.Component.extend({
 
 	}.observes('user'),
 });	
+export default UserTabsComponent;

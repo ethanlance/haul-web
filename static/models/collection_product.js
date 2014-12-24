@@ -85,7 +85,7 @@ Haul.CollectionProductSerializer =  DS.RESTSerializer.extend({
 	//Need this for Delete, Update record
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		}
 
@@ -103,7 +103,7 @@ Haul.CollectionProductSerializer =  DS.RESTSerializer.extend({
 
 	extractArray: function(store, primaryType, payload) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		} 
 		

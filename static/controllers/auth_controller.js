@@ -38,7 +38,7 @@
 					
 				}
 			}, function(error) {
-				console.log("ERROR", errror);
+				console.log("ERROR", error);
 			});
 		},
 

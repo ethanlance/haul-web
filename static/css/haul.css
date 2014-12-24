@@ -1143,19 +1143,24 @@ textarea.form-control {
 }
 
 /* line 1133, haul.scss */
+.left-border {
+  border-left: 1px solid #e3e3e3;
+}
+
+/* line 1137, haul.scss */
 .image-scroll {
   overflow: auto;
   height: 300px;
   padding: 10px;
 }
 
-/* line 1140, haul.scss */
+/* line 1144, haul.scss */
 .image-scroll img {
   width: 50%;
   float: left !important;
 }
 
-/* line 1145, haul.scss */
+/* line 1149, haul.scss */
 .image-scroll.fixed {
   position: fixed;
   display: inline;
@@ -1163,40 +1168,40 @@ textarea.form-control {
   width: 300px;
 }
 
-/* line 1154, haul.scss */
+/* line 1158, haul.scss */
 .editorial img {
   width: 100%;
 }
-/* line 1158, haul.scss */
+/* line 1162, haul.scss */
 .editorial .thumbnail {
   border-radius: 0px;
   padding: 0px;
 }
 
-/* line 1164, haul.scss */
+/* line 1168, haul.scss */
 #editor {
   overflow: auto;
 }
 
-/* line 1168, haul.scss */
+/* line 1172, haul.scss */
 #editor img {
   width: 100%;
 }
 
-/* line 1172, haul.scss */
+/* line 1176, haul.scss */
 .editorWrapper {
   border: 1px solid #e3e3e3;
   border-radius: 4px;
   font-weight: normal;
 }
 
-/* line 1178, haul.scss */
+/* line 1182, haul.scss */
 .ql-toolbar {
   background-color: rgba(248, 248, 248, 0.9);
   box-shadow: 0px 1px 1px #eee;
 }
 
-/* line 1188, haul.scss */
+/* line 1192, haul.scss */
 .haul-toggle {
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #fafafa;
@@ -1205,14 +1210,14 @@ textarea.form-control {
   font-weight: normal;
 }
 
-/* line 1196, haul.scss */
+/* line 1200, haul.scss */
 .haul-toggle.fixed {
   background-color: #f7f7f7;
   border-bottom: 1px solid #ddd;
   box-shadow: 0px 1px 0px #ddd;
 }
 
-/* line 1203, haul.scss */
+/* line 1207, haul.scss */
 .haul-toggle div {
   color: #3A4457;
   text-decoration: none;
@@ -1221,27 +1226,41 @@ textarea.form-control {
   display: inline-block;
 }
 
-/* line 1211, haul.scss */
+/* line 1215, haul.scss */
 .haul-toggle small {
   text-decoration: none;
   color: black;
   font-weight: normal;
 }
 
-/* line 1217, haul.scss */
+/* line 1221, haul.scss */
 .haul-toggle div.here {
   color: red;
   text-decoration: none;
   font-weight: bold;
 }
 
-/* line 1223, haul.scss */
+/* line 1227, haul.scss */
 .haul-toggle a {
   color: inherit;
 }
 
-/* line 1227, haul.scss */
+/* line 1231, haul.scss */
 .haul-toggle a:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* line 1237, haul.scss */
+.haul-panel h3 {
+  margin-top: 0px;
+}
+/* line 1240, haul.scss */
+.haul-panel .title {
+  background-color: #ccc;
+}
+/* line 1243, haul.scss */
+.haul-panel .scroll {
+  max-height: 300px;
+  overflow: scroll;
 }

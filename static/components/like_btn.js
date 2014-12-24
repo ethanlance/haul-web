@@ -1,5 +1,5 @@
 
-Haul.LikeBtnComponent = Ember.Component.extend({
+var LikeBtnComponent = Ember.Component.extend({
 
 	ref_type: "products",
 	ref_idBinding: "item.id",
@@ -36,7 +36,7 @@ Haul.LikeBtnComponent = Ember.Component.extend({
 					user_id: this.user_id,
 					ref_id: this.ref_id, 
 					ref_type: this.ref_type
-				}
+				};
 				var record = store.createRecord('like', data);
 				like = true;
 			}
@@ -58,3 +58,4 @@ Haul.LikeBtnComponent = Ember.Component.extend({
 		}
 	}
 });
+export default LikeBtnComponent;

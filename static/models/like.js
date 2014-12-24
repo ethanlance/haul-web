@@ -43,7 +43,7 @@ Haul.LikeAdapter = Haul.ApplicationAdapter.extend({
 Haul.LikeSerializer =  DS.RESTSerializer.extend({
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		} 
 
@@ -96,7 +96,7 @@ Haul.LikeCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		} 
 
@@ -134,7 +134,7 @@ Haul.ProductLikedByListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok"){
+		if( payload.data === "ok"){
 			return;
 		} 
 
@@ -192,7 +192,7 @@ Haul.UserLikesListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok"){
+		if( payload.data === "ok"){
 			return;
 		} 
 
@@ -257,7 +257,7 @@ Haul.UserLikesCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		} 
 

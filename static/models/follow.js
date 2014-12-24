@@ -42,7 +42,7 @@ Haul.FollowAdapter = Haul.ApplicationAdapter.extend({
 Haul.FollowSerializer =  DS.RESTSerializer.extend({
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		
-		if( payload.data == "ok"){
+		if( payload.data === "ok"){
 			return;
 		} 
 
@@ -84,7 +84,7 @@ Haul.UserIsFollowingCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok"){
+		if( payload.data === "ok"){
 			return;
 		} 
 
@@ -123,7 +123,7 @@ Haul.UserIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		} 
 
@@ -163,7 +163,7 @@ Haul.CollectionIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
-		if( payload.data == "ok"){
+		if( payload.data === "ok"){
 			return;
 		} 
 
@@ -202,7 +202,7 @@ Haul.UserFollowersListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		}
 
@@ -258,7 +258,7 @@ Haul.CollectionFollowersListSerializer =  DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-		if( payload.data == "ok" ){
+		if( payload.data === "ok" ){
 			return;
 		}
 
@@ -319,7 +319,7 @@ Haul.UserFollowsListSerializer =  DS.RESTSerializer.extend({
 
 	extractArray: function(store, primaryType, payload) {
 
-		if( payload.data == "ok" ){ 
+		if( payload.data === "ok" ){ 
 			return;
 		}
 
@@ -354,7 +354,7 @@ Haul.UserFollowsListSerializer =  DS.RESTSerializer.extend({
 
 	// extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
-	// 	if( payload.data == "ok" ){
+	// 	if( payload.data === "ok" ){
 	// 		return false;
 	// 	} 
 
