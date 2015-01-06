@@ -1,0 +1,30 @@
+{{user-header user=user session=session}}
+
+<div class="container">  
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+
+			{{#unless model }}
+				<div class="padding-top text-center font-weak">
+				{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} don't follow any one yet.
+				</div>
+			{{/unless}}
+ 
+			{{#each model}}
+				{{#if follows_collection}}
+			    	{{#link-to 'collection' follows_collection.id }}
+				 		{{collection-badge collection=follows_collection session=session}}
+				 	{{/link-to}}	
+			 	{{/if}}
+
+			 	{{#if follows_user}}
+		    		{{#link-to 'seller' follows_user.id }}
+		    			{{profile-badge user=follows_user session=session}}
+		 			{{/link-to}}	
+			 	{{/if}}
+			{{/each}} 
+
+		</div> 
+	</div>
+</div>

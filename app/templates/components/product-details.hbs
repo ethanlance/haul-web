@@ -1,0 +1,18 @@
+ 
+{{!-- SELLER INFO --}} 
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-3">
+		<div class="text-center">
+			<h4>Seller:</h4>
+			{{ make-icon icon=seller.icon isSmall=true }}
+			{{#link-to 'seller' seller}}{{ seller.name }}{{/link-to}}			
+		</div>
+	</div>
+		
+	<div class="col-md-9 col-sm-9 col-xs-9">
+		<h4>Details:</h4>
+		{{ breaklines product.description }}
+	</div>
+</div>
+
+

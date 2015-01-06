@@ -12,7 +12,7 @@ Haul.Product = DS.Model.extend(Ember.Validations.Mixin, {
 
 	user: DS.belongsTo('user'), 
 	images: DS.hasMany('image', {async:true}),
-	image: DS.belongsTo('image'),	
+	image: DS.belongsTo('image', {async:true}),	
 
 	getCollections: DS.belongsTo('product-collection-list', {async:true}),
 	getLikes: DS.belongsTo('product-liked-by-list', {async:true}),

@@ -1,0 +1,44 @@
+import DS from 'ember-data';
+
+var CollectionProductSerializer =  DS.RESTSerializer.extend({
+
+
+	//Need this for Delete, Update record
+	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data === "ok" ){
+			return;
+		}
+
+		var id = payload.data.store_id + payload.data.product_id; 
+		var data = {
+			id: id,	
+			editorial: payload.data.editorial,
+			product: payload.data.product_id,
+			collection: payload.data.store_id
+		};
+
+		payload = {'collection-product': [data]};  
+		return this._super(store, primaryType, payload, recordId, requestType);
+	},
+
+	extractArray: function(store, primaryType, payload) {
+
+		if( payload.data === "ok" ){
+			return;
+		} 
+		
+		var id = payload.data.store_id + payload.data.product_id; 
+		var data = {
+			id: id,	
+			editorial: payload.data.editorial,
+			product: payload.data.product_id,
+			collection: payload.data.store_id
+		};
+
+		payload = {'collection-product': [data]};  
+		return this._super(store, primaryType, payload);
+	}
+});
+export default CollectionProductSerializer;
+

@@ -1,0 +1,49 @@
+{{#if  session.isAuthenticated }}
+
+    <div class="btn-group navbar-profile">
+
+        {{#link-to 'product-new' }}
+        <button class=" btn btn-default btn-cta">
+            <span class="glyphicon glyphicon-camera"></span>
+            Sell
+        </button> 
+        {{/link-to}}
+
+        <button {{action "clickProfile" session.currentUser.id}} type="button" class="btn btn-default">
+            {{#if session.currentUser.icon }}
+                <img {{bind-attr src=session.currentUser.icon}}>
+            {{/if}}
+            
+
+        </button>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-cog"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+
+            <li>{{#link-to 'seller.products' session.currentUser.slug }}<strong>My For Sale</strong>{{/link-to}}</li>
+            <li>{{#link-to 'product-new' }}+ Sell Something{{/link-to}}</li>
+            <li>{{#link-to 'seller' session.currentUser.slug }}<strong>My Marketplace</strong>{{/link-to}}</li>
+            <li>{{#link-to 'collection-new' }}+ Create Marketplace{{/link-to}}</li>
+
+
+            <li class="divider"></li>
+            <li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
+
+            <li class="divider"></li>
+            <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+        </ul>
+      </div>
+    </div>
+
+    {{else}}
+
+
+    <div class="navbar-profile">
+        {{#link-to 'signup'}}<button type="button" class="btn btn-default signup">SIGNUP</button>{{/link-to}}
+        {{#link-to 'login'}}<button type="button" class="btn btn-default">LOGIN</button>{{/link-to}}
+    </div>
+
+{{/if}}

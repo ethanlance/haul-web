@@ -1,0 +1,28 @@
+import DS from 'ember-data';
+
+var UserCollectionSerializer =  DS.RESTSerializer.extend({
+
+	extractArray: function(store, primaryType, payload, recordId, requestType) {
+
+		if( payload.data === "ok" ){
+			return;
+		}
+		var data = payload.data.map(function(result){
+			var id = result.store_id + result.user_id;
+			return {
+				id: id,
+				collection_id: result.store_id,	
+				collection_name: result.store_name,	
+				user_id: result.user_id,
+				user: result.user_id,
+				collection: result.store_id,
+				slug: result.slug
+			};
+		});
+
+		payload = {'user-collection': data}; 
+
+		return this._super(store, primaryType, payload, recordId, requestType);
+	},
+});
+export default UserCollectionSerializer;

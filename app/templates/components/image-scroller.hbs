@@ -1,0 +1,9 @@
+<div class="row">			
+	<div class="col-md-12 col-sm-12 col-xs-12 image-scroll" {{bind-attr style="style"}}>
+		<p>Drag images into your post. <small>(optional)</small></p>
+	
+		{{#each  images}}
+			<img class="thumbnail" {{bind-attr src='medium'}}>
+		{{/each}}
+	</div>
+</div>

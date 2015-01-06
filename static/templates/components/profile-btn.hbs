@@ -1,4 +1,4 @@
-{{#if  currentUser }}
+{{#if  session.isAuthenticated }}
 
     <div class="btn-group navbar-profile">
 
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    {{else}}
+{{else}}
 
 
     <div class="navbar-profile">

@@ -1,0 +1,63 @@
+<div class="row ">
+	<div class="col-md-12 col-sm-12 col-xs-12"> 
+		<div id='haul-dropzone'>
+			<div>
+				<button id="haul-dropzone-browse" class="btn btn-default">Browse Your Photos</button> 
+				<small>or drop them in this box, then click photos to select.</small>
+			</div>	
+			
+			<div class="haul-grid">
+				<div class="dropzone-preview"></div>
+
+
+						
+				{{#each images}}
+					{{image-card 
+						image=this 
+						imageClick='imageClick'
+						imageDeleteProceed='imageDeleteProceed'
+					}}
+				{{/each}}
+
+				
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+</div>
+ 
+<div id="imagePickerModal"	class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="mySmallModalLabel">5 images max</h4>
+		</div>
+		<div class="modal-body">
+			<p>Hello, you've selected 5 images. That's the maximum images a product can have.</p>
+			<p>Deselect an image or click "Next Step".</p>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="modal fade bs-example-modal-sm in " tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" {{bind-attr style="errorDeleteModalStyle"}}>
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content danger">
+
+		<div class="modal-header">
+			<button {{action 'closeModal'}} type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="mySmallModalLabel">Oh no, an error!</h4>
+		</div>
+		<div class="modal-body"> 
+			<p class="text-center">
+				Something went wrong with delete.  
+			</p>
+		</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+
+  <div class="row haul-toggle toolbar text-center">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+      	<div {{bind-attr class="isProfile:here"}}>
+      		<br/>
+      		{{#link-to 'seller' user }}Profile{{/link-to}}
+      	</div>
+       
+      	<div {{bind-attr class="isFollows:here"}}>
+      		<small>{{followingCount}}</small><br/>
+      		{{#link-to 'seller.follows' user }}Following{{/link-to}}
+      	</div>
+       
+      	<div {{bind-attr class="isFollowers:here"}}>
+      		<small>{{followsCount}}</small><br/>
+      		{{#link-to 'seller.followers' user }}Followers{{/link-to}} 
+      	</div>
+       
+      	<div {{bind-attr class="isLikes:here"}}>
+      		<small>{{likesCount}}</small><br/>
+      		{{#link-to 'seller.likes' user }}Likes{{/link-to}} 
+      	</div>
+
+    </div> 
+  </div>    
+
+<div class="do_not_remove"></div> 
+

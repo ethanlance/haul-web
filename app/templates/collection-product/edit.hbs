@@ -1,0 +1,75 @@
+<div class="seller-nav">
+	<div class="container content-fixed-nav">
+
+		<div class="row ">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				   	
+		     	<h2>
+		     		<strong>{{model.collection.name}}</strong> 
+		     	</h2>
+		     	
+			</div>
+	 	</div>
+	</div>	
+</div>	
+<div class="seller-nav-footer"><span></span></div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-8 col-sm-8 col-xs-8">  
+			{{#form-for model wrapper="bs3-wrapper"}}
+
+				<h4>Your opinion on this item</h4>
+
+				{{quill-editor content=editorialForQuill quillChange='quillChange'}}
+ 
+			{{/form-for}}
+		</div> 
+
+		<div class="col-md-4 col-sm-4 col-xs-4"> 
+
+			<h3 class="text-center bottom-border">{{ model.product.name }}</h3> 
+		
+			{{image-scroller images=model.product.images }}
+		
+		</div>
+	</div>
+</div>
+
+<div class="toolbar-footer">
+	<div class="text-right">
+
+			<button {{action 'cancel'}} class="btn btn-danger pull-left">Delete</button>
+
+			<button {{action 'cancel'}} class="btn btn-default">Cancel</button>
+
+			{{ladda-btn
+				name='Save'
+				class="display-inline"
+				btnClasses='btn btn-primary ladda-button'
+				btnClick='submit'
+				spin=isProcessing
+			}} 
+
+	</div>
+</div>
+
+
+
+<div id="deleteModal" class="modal fade bs-example-modal-sm in danger" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="mySmallModalLabel">Delete?<br/>This cannot be undone</h4>
+		</div>
+		<div class="modal-body"> 
+			<p class="text-center">
+				<button {{action 'deleteCancel'}} class="btn btn-default">Cancel</button>
+				<button {{action 'deleteProceed'}} class="btn btn-danger">Yes, Delete</button>
+			</p>
+		</div>
+		</div>
+	</div>
+</div>

@@ -1,32 +1,38 @@
 {
-  "name": "haul-web",
-  "version": "1.0.0",
-  "description": "Haul Web App + Development Server",
-  "main": "Gruntfile.js",
-  "dependencies": {
-    "good": "^2.3.0",
-    "grunt": "^0.4.5",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-ember-template-compiler": "^1.5.0",
-    "hapi": "^6.11.1"
-  },
-  "devDependencies": {
-    "ember-cli-components": "^0.2.0",
-    "ember-idx-modal": "^0.1.2",
-    "grunt-contrib-compass": "^1.0.1",
-    "grunt-contrib-sass": "^0.8.1"
+  "name": "haul",
+  "version": "0.0.0",
+  "private": true,
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ember server",
+    "build": "ember build",
+    "test": "ember test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/haulio/haul-web"
+  "repository": "",
+  "engines": {
+    "node": ">= 0.10.0"
   },
-  "author": "Ethan Lance",
-  "license": "Copyright 2014, Haul.io",
-  "bugs": {
-    "url": "https://github.com/haulio/haul-web/issues"
-  },
-  "homepage": "https://github.com/haulio/haul-web"
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "broccoli-asset-rev": "^1.0.0",
+    "broccoli-ember-hbs-template-compiler": "^1.6.1",
+    "ember-cli": "0.1.4",
+    "ember-cli-dependency-checker": "0.0.6",
+    "ember-cli-esnext": "0.1.1",
+    "ember-cli-ic-ajax": "0.1.1",
+    "ember-cli-inject-live-reload": "^1.3.0",
+    "ember-cli-qunit": "0.1.2",
+    "ember-cli-simple-auth": "^0.7.2",
+    "ember-cli-simple-auth-oauth2": "^0.7.2",
+    "ember-data": "1.0.0-beta.12",
+    "ember-export-application-global": "^1.0.0",
+    "ember-idx-modal": "^0.1.2",
+    "ember-localstorage-adapter": "^0.5.0",
+    "express": "^4.8.5",
+    "glob": "^4.0.5"
+  }
 }

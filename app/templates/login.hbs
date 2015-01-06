@@ -1,0 +1,69 @@
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+        	<div class="col-md-4 "></div>
+			<div class="col-md-4 form">
+
+				<div class="form-group">
+						<h2 class="form-signin-heading">Login</h2>
+				</div>
+
+				  {{#if error404}}
+				  	<div class="alert">Sorry, you need to signup first.<br/>Go to {{#link-to 'signup'}}Sign Up{{/link-to}}</div>
+				  {{/if}}
+
+				<div class="form-group"> 
+
+					{{ladda-btn 
+						name='FACEBOOK'
+						btnClasses='btn btn-block btn-facebook ladda-button'
+						btnClick='facebookLogin'
+						spin=isProcessingFacebook
+					}}
+
+			    </div> 
+
+
+ 				<div class="form-group padding-top">
+					<h4 class="form-signin-heading">or with your <br/>email & password</h4>
+				</div>
+
+				{{#form-for model wrapper="bs3-wrapper"}}
+
+				  {{#if error}}
+				    <div class="alert">Invalid username or password.</div>
+				  {{/if}} 
+				  
+				  {{#if error409}}
+				    <div class="alert">Your email needs to be validated before you can login.</div>
+				  {{/if}} 
+
+
+				  	<div class="form-group" >
+			      		{{input email canShowValidationError=showErrors placeholder="email address"}}
+			      	</div>
+
+			 		<div class="form-group">	
+			      		{{input password canShowValidationError=showErrors placeholder="password"}}
+					</div> 
+
+					<div class="form-group">
+						{{ladda-btn 
+							name='LOGIN'
+							btnClasses='btn btn-primary btn-block ladda-button'
+							btnClick='submit'
+							spin=isProcessingLogin
+						}}
+				  	</div>
+
+				  	<div class="text-right">
+				  		<span class="muted">{{#link-to "forgotpassword"}}Forgot Password?{{/link-to}}</span>
+				  	</div>
+
+				{{/form-for}} 
+			</div>
+			<div class="col-md-4"></div>
+        </div>
+    </div>
+</header>
