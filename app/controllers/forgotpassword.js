@@ -1,11 +1,7 @@
 import Ember from 'ember';
-import auth from './auth';
 
-
-//Forgot Password Form:  Enter email address to request a password reset token
-var ForgotpasswordController = Ember.ObjectController.extend({
-	
-	//Controllers
+export default  Ember.ObjectController.extend({
+	 
 	needs: ['auth'],
 
 	queryParams: ['email'],
@@ -14,12 +10,13 @@ var ForgotpasswordController = Ember.ObjectController.extend({
 	emailSent: false,
 	isProcessing: false, 
 	error: false,
-	error409: false,
-	emailRegistrationRequested:false,
+	error409: false, 
 
 	reset: function() {
 		this.set('error', false);
-		this.set('error409', false);
+		this.set('error409', false); 
+		this.set('emailSent', false);
+		this.set('email', null);
 	},
 
 	actions: {
@@ -45,14 +42,9 @@ var ForgotpasswordController = Ember.ObjectController.extend({
 					},
 					dataType: 'json'
 			}).then(
-				function() {
-					
+				function() { 
 					_this.set('isProcessing', false); 
-					_this.set('emailSent', true);
-
-					//TRANSITION:
-					_this.set('emailRegistrationRequested', true);
-					
+					_this.set('emailSent', true); 
 				}, 
 
 				function(error) {
@@ -69,4 +61,3 @@ var ForgotpasswordController = Ember.ObjectController.extend({
 		}
 	}
 });
-export default ForgotpasswordController;

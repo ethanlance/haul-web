@@ -1,8 +1,8 @@
 import Ember from 'ember';
-var $ = Ember.$;
+//var $ = Ember.$;
 import SortableItemView from './sortable-item';
 
-var SortableView = Ember.CollectionView.extend({	
+export default Ember.CollectionView.extend({	
 	contentBinding: 'controller',
 	tagName: 'ul',
 	classNames: ["sortable"],
@@ -11,6 +11,7 @@ var SortableView = Ember.CollectionView.extend({
 	didInsertElement: function(){
 		this._super();
 		var controller = this.get('controller');
+		console.log("CONTROLLER", controller);
 
 		//JQuery sortable component.
 		this.$().sortable({
@@ -27,4 +28,3 @@ var SortableView = Ember.CollectionView.extend({
 		}).disableSelection();
 	}
 });
-export default SortableView;

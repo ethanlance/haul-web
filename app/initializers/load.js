@@ -22,7 +22,7 @@ export default {
 		application.deferReadiness();
 
 	  	container.lookup("store:main").find("user", user_id).then(function(user) {
-			
+			console.log("LOCAL STORE CURRENT USER")
 			//Add tokens to user object.
 			user.set('access_token', access_token);
 			user.set('refresh_token', refresh_token);

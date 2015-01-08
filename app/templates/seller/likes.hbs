@@ -7,7 +7,11 @@
 			
 			{{#unless model.products }}
 				<p class="padding-top text-center font-weak">
-				{{#unless isProfileOwner}}{{user.name}}{{else}}You{{/unless}} doesn't like anything yet.</p>
+				{{#unless isProfileOwner}}
+					{{user.name}} hasn't liked anything yet.
+				{{else}}
+					You haven't liked anything yet.
+				{{/unless}}</p>
 			{{/unless}}
 
 

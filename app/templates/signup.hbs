@@ -1,13 +1,9 @@
-<!-- Header -->
+<span class="anon">
 <header>
     <div class="container">
         <div class="row">
-        	<div class="col-md-4 "></div>
-			<div class="col-md-4 form">
-
-
-
-
+        	<div class="col-md-4 col-sm-2 col-xs-2"></div>
+			<div class="col-md-4 col-sm-8 col-xs-8 form-box">
 				{{#if error409}}
 
 			    	<div class="alert">
@@ -19,17 +15,17 @@
 			    {{else}}	
 				  	
 
-
-
 					{{#if emailRegistrationRequested}}
 
-						<h2 class="form-signin-heading">Please check your email inbox.  We sent you a confirmation email.</h2>
+						<h2>Please check your email inbox.  
+							<small>We sent you a confirmation email.</small>
+						</h2>
 
 					{{else}}	
 
 
 						<div class="form-group">
-							<h2 class="form-signin-heading">Signup With</h2>
+							<h2>Signup With</h2>
 						</div>
 
 						<div class="form-group"> 
@@ -81,8 +77,8 @@
 				{{/if}} 
 
 			</div>
-			<div class="col-md-4"></div>
+			<div class="col-md-4 col-sm-2 col-xs-2"></div>
         </div>
     </div>
 </header>
- 
+</span>

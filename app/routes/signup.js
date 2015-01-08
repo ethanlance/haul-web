@@ -1,10 +1,12 @@
 import Ember from 'ember';
 
-//Sign Up Form 
-var SignupRoute = Ember.Route.extend({
-	controllerName: "signup",
+export default Ember.Route.extend({ 
 	model: function() {
 		return this.store.createRecord('authsignup');
+	},
+	setupController: function(controller, model){ 
+		controller.reset();
+		this._super(controller, model);
 	},
 	renderTemplate: function() {
 		this.render('layouts/header_base', {
@@ -12,9 +14,5 @@ var SignupRoute = Ember.Route.extend({
 			outlet: 'header'
 		});
 		this.render('signup');
-	},
-	beforeModel: function() {
-		this.controllerFor('signup').reset();
 	}
 });
-export default SignupRoute;

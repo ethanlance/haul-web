@@ -1,8 +1,6 @@
 import Ember from 'ember';
 var $ = Ember.$; 
-//import auth from './../../auth';
 
-//EDIT or CREATE product.
 export default Ember.ObjectController.extend({
 	currentUserIdBinding: 'session.currentUser.id',
 

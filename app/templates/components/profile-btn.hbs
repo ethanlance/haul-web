@@ -9,12 +9,10 @@
         </button> 
         {{/link-to}}
 
-        <button {{action "clickProfile" session.currentUser.id}} type="button" class="btn btn-default">
-            {{#if session.currentUser.icon }}
-                <img {{bind-attr src=session.currentUser.icon}}>
-            {{/if}}
-            
-
+        <button type="button" class="btn btn-default">
+        {{#link-to 'seller' session.currentUser.slug }}
+            {{ make-icon icon=session.currentUser.icon isSmall=false}} 
+        {{/link-to}}
         </button>
 
       <div class="btn-group">
@@ -27,7 +25,6 @@
             <li>{{#link-to 'product-new' }}+ Sell Something{{/link-to}}</li>
             <li>{{#link-to 'seller' session.currentUser.slug }}<strong>My Marketplace</strong>{{/link-to}}</li>
             <li>{{#link-to 'collection-new' }}+ Create Marketplace{{/link-to}}</li>
-
 
             <li class="divider"></li>
             <li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>

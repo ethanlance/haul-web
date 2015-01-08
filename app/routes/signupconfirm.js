@@ -5,15 +5,16 @@ var SignupconfirmRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.createRecord('authconfirmation');
 	},
+	setupController: function(controller, model){ 
+		controller.reset();
+		this._super(controller, model);
+	},
 	renderTemplate: function() {
 		this.render('layouts/header_base', {
 			into: 'application',
 			outlet: 'header'
 		});
 		this.render('signup_confirm');
-	},
-	beforeModel: function() {
-		this.controllerFor('signupconfirm').reset();
 	}
 });
 export default SignupconfirmRoute;

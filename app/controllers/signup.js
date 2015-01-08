@@ -1,7 +1,5 @@
-import Ember from 'ember';
-import auth from './auth';
-import facebook from './facebook';
-/* global Haul*/
+import Ember from 'ember'; 
+/* global Haul */ 
 
 // Sign Up form
 var SignupController = Ember.ObjectController.extend({
@@ -34,9 +32,10 @@ var SignupController = Ember.ObjectController.extend({
 		this.set('error409', false);
 	}).observes('email'),
 
-	reset: function() {
+	reset: function() { 
 		this.set('error', false);
 		this.set('error409', false);
+		this.set('emailRegistrationRequested', false);
 	},
 
 	//createUser
@@ -95,7 +94,7 @@ var SignupController = Ember.ObjectController.extend({
 
 	actions: {
 
-		focus: function() {
+		focus: function() { 
 			this.reset();
 		},
 
@@ -140,7 +139,7 @@ var SignupController = Ember.ObjectController.extend({
 	 		//Model Validations:
 			model.validate().then(function(){
 				_this.createUserByEmail(data);	
-			}, function() {
+			}, function(error) {
 				_this.set('isProcessingSignup', false);
 				_this.set('showErrors', true);
 

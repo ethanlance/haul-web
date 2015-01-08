@@ -2,7 +2,7 @@ import Ember from 'ember';
 var $ = Ember.$;
 import Haul from "../app";
 
-var CollectionBtnComponent = Ember.Component.extend({
+export default Ember.Component.extend({
 
 	product:null,
 	collection_id:null,
@@ -152,4 +152,3 @@ var CollectionBtnComponent = Ember.Component.extend({
 		}
 	}, 
 });
-export default CollectionBtnComponent;

@@ -56,9 +56,7 @@ label {
 html, body{
   height: 100%;
   width: 100%;
-}
-
- 
+} 
 
 /* line 72, haul.scss */
 body {
@@ -66,7 +64,7 @@ body {
   background-image: none;
   position: relative;
   padding-top: 31px;
-  /*padding-bottom: 80px;*/
+  padding-bottom: 80px;
 }
 
 /* line 80, haul.scss */
@@ -181,6 +179,23 @@ body {
   border-radius: 4px;
 }
 
+.profile-image { 
+  width:100px;
+  height:100px;
+  background-color: #ddd;
+  border-radius: 50%; 
+  display: inline-block;
+}
+.profile-image.sm{
+  width:50px;
+  height:50px;
+}
+.profile-image.collection {
+  border-radius: 20%;
+}
+
+
+
 /* line 180, haul.scss */
 .navbar-profile {
   /*width: 100%;*/
@@ -192,11 +207,9 @@ body {
 }
 
 /* line 189, haul.scss */
-.navbar-profile img {
+.navbar-profile .profile-image {
   width: 25px;
   height: 25px;
-  border-radius: 50%;
-  float: left;
 }
 
 /* line 196, haul.scss */
@@ -297,6 +310,8 @@ body {
 .navbar-anon {
   margin-bottom: 80px;
 }
+
+
 
 /* line 289, haul.scss */
 .profile-circular-mask {
@@ -1275,12 +1290,13 @@ textarea.form-control {
 }
 
 
-header{
+.anon header{
+    position:absolute;
     padding-top:100px;
     text-align: center;
     color: #fff;
     background-attachment: scroll;
-    background-image: url(/assets/images/agency/header-bg.jpg);
+    background-image: url(/assets/images/header-bg.jpg);
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
@@ -1288,9 +1304,14 @@ header{
     background-size: cover;
     -o-background-size: cover;
     min-height: 100%;
+    min-width: 100%;
 }
 
-
+.anon .form-box {
+  background-color: rgba(0, 0, 0, 0.4); 
+  border-radius: 4px;
+  padding-bottom: 10px;
+}
 
 
 
