@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ApplicationAdapter from './application'; 
-
+/* global Haul */
 var ProductCommentAdapter = ApplicationAdapter.extend({
 
 	host: Haul.Server.COMMENT_SERVER_HOST, 
@@ -25,6 +25,7 @@ var ProductCommentAdapter = ApplicationAdapter.extend({
 		var data = { 'comment':record.get('comment'), 'user_id': record.get('user_id') };
 
 		var url = this.host + '/'+ contextType + '/' + contextId +'/products/'+ itemId + '/comments';
+		console.log("CREATE RECORD", data, url)
 		return this.ajax(url, "POST", {data: data}); 
 	},
 

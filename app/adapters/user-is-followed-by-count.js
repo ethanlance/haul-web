@@ -1,5 +1,5 @@
 import ApplicationAdapter from './application'; 
-
+/* global Haul */
 var UserIsFollowedByCountAdapter = ApplicationAdapter.extend({
 
 	host: Haul.Server.FOLLOW_SERVER_HOST,

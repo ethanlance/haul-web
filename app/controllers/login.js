@@ -2,6 +2,8 @@ import Ember from 'ember';
 import auth from './auth';
 import facebook from './facebook';
 
+/* global Haul */
+
 // LOGIN
 var LoginController = Ember.ObjectController.extend({
 	
@@ -46,7 +48,7 @@ var LoginController = Ember.ObjectController.extend({
 					dataType: 'json'
 			}).then(
 				function(response) {
-					_this.authController.send('setupUser', response);
+					_this.authController.setupUser(response);
 				},
 				function(error) {	
 					_this.set('isProcessingLogin', false);

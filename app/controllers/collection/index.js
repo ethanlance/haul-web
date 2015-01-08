@@ -1,14 +1,7 @@
-import Ember from 'ember'; 
-import auth from '../auth';
+import Ember from 'ember';   
 
-/**
-* 	Display a collection
-**/ 
-var CollectionIndexController = Ember.ObjectController.extend({
-	needs: ["auth"],  
-	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
-	products: [],
-	model: [],
+export default  Ember.ObjectController.extend({ 
+	currentUserIdBinding: 'session.currentUser.id',
 	collection: null,
 	showAboutUs:false,
 	followsCount:0,
@@ -17,27 +10,20 @@ var CollectionIndexController = Ember.ObjectController.extend({
 	isCollectionOwner: false, 
 
 	setup: function() { 
-		var _this = this;
-		var currentUser = this.get('currentUser');	
-		
 
 		if( this.get("collection")  ) {
-
-			var collection_id = this.get("collection").id;
-		
-			if( currentUser ){
-				if( !Ember.isEmpty(currentUser) && this.get('collection').get('user').get('id') === currentUser.get('id')) {
+ 
+			if( this.get('session').isAuthenticated ) {
+				if( this.get('collection').get('user').get('id') === this.currentUserId) {
 					this.set('isCollectionOwner', true);
 				}
 			} 
 
-
+			var _this = this; 
+			var collection_id = this.get("collection").id;
 			this.store.find('collection-is-followed-by-count', collection_id).then(function(count){
 				_this.set('followsCount', count.get('total'));			
 			});
-
-
-			
 	 	}
 	}.observes('collection'),
 
@@ -47,4 +33,3 @@ var CollectionIndexController = Ember.ObjectController.extend({
 		}
 	}
 });
-export default CollectionIndexController;

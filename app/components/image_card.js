@@ -30,7 +30,7 @@ var ImageCardComponent = Ember.Component.extend({
 	}.observes('image.isSelected'),
 
 	actions: {
-		imageClick: function() {
+		imageClick: function() { 
 			this.sendAction('imageClick', this);	
 		},
 		imageDelete: function() {

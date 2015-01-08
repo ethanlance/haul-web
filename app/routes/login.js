@@ -1,14 +1,11 @@
 import Ember from 'ember';
 
-// AUTH
-//Login Form 
-var LoginRoute = Ember.Route.extend({
-	
+export default Ember.Route.extend({
 	model: function() {
 		return this.store.createRecord('authlogin');
 	},
 	renderTemplate: function() {
-		this.render('layouts/header_anon', {
+		this.render('layouts/header_base', {
 			into: 'application',
 			outlet: 'header'
 		});
@@ -17,5 +14,4 @@ var LoginRoute = Ember.Route.extend({
 	beforeModel: function() {
 		this.controllerFor('login').reset();
 	}
-});
-export default LoginRoute;
+}); 

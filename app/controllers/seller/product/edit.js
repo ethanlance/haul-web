@@ -4,14 +4,10 @@ var $ = Ember.$;
 
 //EDIT or CREATE product.
 export default Ember.ObjectController.extend({
-	
-	// //Auth Controller
-	// needs: ["auth"],
-	// currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+	currentUserIdBinding: 'session.currentUser.id',
 
 	model: [],
-	uploads: false,
-	//content: "model", 
+	uploads: [],
 
 	//This array controller sorts it's images
 	sortProperties: ['created_at'],
@@ -27,24 +23,9 @@ export default Ember.ObjectController.extend({
 	errorShow: false,
 	errorMessage: null,
 
-
-	//This product's image objects.
-	//selectedImages: [],
-
 	//This product's image_ids 
 	imageIds:[],
 	selectedImages:[],
-
-
-	// //Is currentUser authorized to view page?
-	// authorized: function(transition) {
-	// 	//AUTHORIZED?
-	// 	var authController = this.get('controllers.auth');
-	// 	var user = authController.get('currentUser');
-	// 	if( !user || user.get('id') !== transition.params.seller.user_slug ) { 
-	// 		return this.transitionToRoute("not-authorized");
-	// 	} 
-	// },
 
 
 	//Blow away all property values
@@ -61,22 +42,23 @@ export default Ember.ObjectController.extend({
 		} 
 	},
 
+	modelChanged: function() {
+
+		var _this = this;
+		var user_id = this.get('currentUser').get('id');
+		this.store.find('user-image', {user_id: user_id } ).then(function(results){
+
+				_this.set('uploads', results);
+				_this.imageMunge();
+
+			})
 	
-	// modelChanged: function() {
-
-	// 	var _this = this;
-	// 	var user_id = this.get('currentUser').get('id');
-	// 	this.store.find('user-image', {user_id: user_id } ).then(function(results){
-
-	// 			_this.set('uploads', results);
-	// 			_this.imageMunge();
-
-	// 		});
-	
-	// }.on('init'),//.observes('model.id'),
+	}.on('init'),//.observes('model.id'),
 
 	imageMunge: function() {
 		var _this =this;
+		console.log("CLUSTER " , this.get('model') )
+
 		if( this.get('model').get('id') ){
 
 			this.set('showImagePicker', false);
@@ -87,6 +69,7 @@ export default Ember.ObjectController.extend({
 
 				//hilight upload images
 				var uploads = _this.get('uploads');
+
 				if( uploads ) {
 
 					var selectedImages = _this.get('selectedImages');
@@ -129,16 +112,13 @@ export default Ember.ObjectController.extend({
 		});
 		this.set('imageIds', ids); 
 
-		
-		
-
 		//Highlight the image:
-		if( imageIds.length === 0 ) {
+		if( this.get('imageIds').length === 0 ) {
 			this.set('imagesAreSelected', false);
 		}else{
 			this.set('imagesAreSelected', true);
 		}
-
+ 
 	}.observes('selectedImages.@each'),
 
 
@@ -178,9 +158,9 @@ export default Ember.ObjectController.extend({
 				//reload product_list model too.
 				_this.store.find('product-list', {user_id: _this.get('currentUser').id});
 
-				var user = _this.get('currentUser').get('user');
+				var user = _this.get('currentUser');
 				
-				_this.transitionToRoute('product', user, model.reload());
+				_this.transitionToRoute('seller.product', user, model.reload());
 			},
 			function(error){
 				_this.set('isProcessing', false);	
@@ -305,8 +285,7 @@ export default Ember.ObjectController.extend({
 			//Push it into the store.
 			//The images computed property in this controller will update the view.
 		refresh: function(response) {
-			var authController = this.get('controllers.auth'); 
-			var user_id  = authController.get('currentUser').id;
+			var user_id  = this.get('currentUserId');
 			var store = this.store; 
 			var _this = this;
 

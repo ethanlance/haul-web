@@ -24,8 +24,7 @@ var SignupconfirmController = Ember.ObjectController.extend({
 		var authController = this.get('controllers.auth');
 		var _this = this;
 		this.set('isProcessing', true);
-
-		//AJAX CALL - for getting the User Token back.  
+ 
 		//Pass params email/password to it.
 		return Ember.$.ajax({
 				url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
@@ -37,7 +36,7 @@ var SignupconfirmController = Ember.ObjectController.extend({
 				dataType: 'json'
 		}).then(
 			function(response) {
-				return authController.send('setupUser', response);
+				return authController.setupUser(response);
 			}
 		).then(null, function(error) {
 			console.log("Error submit confirm", error);

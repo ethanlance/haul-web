@@ -8,6 +8,7 @@ var CollectionRoute = Ember.Route.extend({
 	model: function(params) {
 		var _this = this;
 		return this.store.find('collection', params.collection_slug).then(function(result){
+			console.log("FOUND COLLECTION ", result)
 			return result;
 		}, function() {
 			return _this.transitionTo('not-found');

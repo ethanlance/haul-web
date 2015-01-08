@@ -9,15 +9,13 @@ var SettingsRoute = AnonRoute.extend({
 		}, function() {
 			return _this.transitionTo('not-found');
 		});
-	},
-	renderTemplate: function(controller, model) {  
-		this._super();
-		this.render('settings/index', {
+	},	
+	renderTemplate: function() {
+		this.render('layouts/header_base', {
 			into: 'application',
-			outlet: 'main',
-			controller: controller,
-			model: model
+			outlet: 'header'
 		});
+		this.render('settings');
 	},
 	setupController: function(controller, model) {
 		controller.set('model', model);

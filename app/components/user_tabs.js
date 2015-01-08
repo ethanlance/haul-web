@@ -36,7 +36,9 @@ var UserTabsComponent = Ember.Component.extend({
 
 		if(this.get('user')){
 			var user_id = this.get('user').id;
-			var store = this.get('targetObject.targetObject.store');
+
+			var store = this.container.lookup("store:main");
+			
 			var _this = this;
 			store.find('user-is-following-count', user_id).then(function(count){
 				_this.set('followingCount', count.get('total'));

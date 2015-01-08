@@ -1,11 +1,11 @@
 import Ember from 'ember'; 
 import auth from "../auth";
+/* global Haul */
 
 /**
 * 	Edit a collection
 **/
-export default Ember.ObjectController.extend({
-	needs: ["auth"],
+export default Ember.ObjectController.extend({ 
 	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
 	products: [],
 	model: {},

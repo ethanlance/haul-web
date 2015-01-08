@@ -1,10 +1,7 @@
 
-import Ember from 'ember'; 
-import auth from '../auth'; 
+import Ember from 'ember';  
 
-export default Ember.ArrayController.extend({
-	needs: ["auth"], 
-	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+export default Ember.ArrayController.extend({ 
 
 	//This array controller sorts it's images
 	sortProperties: ['id'],

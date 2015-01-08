@@ -6,7 +6,7 @@ var SignupconfirmRoute = Ember.Route.extend({
 		return this.store.createRecord('authconfirmation');
 	},
 	renderTemplate: function() {
-		this.render('layouts/header_anon', {
+		this.render('layouts/header_base', {
 			into: 'application',
 			outlet: 'header'
 		});

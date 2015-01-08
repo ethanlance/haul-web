@@ -1,11 +1,8 @@
 
-import Ember from 'ember';
-import auth from '../auth'; 
+import Ember from 'ember'; 
 
 
-var SellerFollowsController = Ember.ObjectController.extend({
-	needs: ["auth"], 
-	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+var SellerFollowsController = Ember.ObjectController.extend({ 
 	user: null,
 
 	// //Is currentUser viewing his own page?

@@ -17,7 +17,7 @@ var Collection = DS.Model.extend(Ember.Validations.Mixin, {
 	
 	image: DS.belongsTo('image', {async:true}), 
 	
-	iconBinding: Ember.computed.oneWay('image.thumb'), 
+	icon: Ember.computed.oneWay('image.thumb'), 
 
 	image_id: DS.attr('string'), 
 	//imageIdChanged is fired when a new image_id is assigned to the model.

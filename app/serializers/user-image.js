@@ -31,16 +31,13 @@ var UserImageSerializer =  DS.RESTSerializer.extend({
 					id: image.image_id,
 					created_at: image.created_at,
 					user_id: user_id 
-				};
- 
-				data.large = image.locations.large;
-				data.medium = image.locations.medium;
-				
+				};  
 				datas.push(data);
 			} 
 		}); 
  
 		payload = {'user-image': datas};  
+
 		return this._super(store, primaryType, payload);
 	},
 
@@ -53,6 +50,8 @@ var UserImageSerializer =  DS.RESTSerializer.extend({
 		var image = payload.data;
 		var data = {
 			original: image.locations.original,
+			large: image.locations.large,
+			medium: image.locations.medium,
 			small: image.locations.small,
 			thumb: image.locations.thumb,
 			caption: image.caption,

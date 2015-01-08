@@ -9,8 +9,8 @@ var CommentSectionComponent = Ember.Component.extend({
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('comments', 'commentsSorting'),
 
-	itemObject: null,
-	itemType: null,
+	itemObjectBinding: "itemObject",
+	itemType: "products",
 	itemIdBinding: "itemObject.id",
 
 	contextObject: null,
@@ -33,11 +33,14 @@ var CommentSectionComponent = Ember.Component.extend({
 	
 	//Normally a Product
 	itemChanged: function() {
-		//Get Ref Type: 
-		var model = String(this.itemObject.constructor);
-		var name = model.split('.');
-        var itemType = Ember.String.pluralize(Ember.String.camelize(name.pop())); 
-        this.set('itemType', itemType);
+	// 	//Get Ref Type: 
+	// 	console.log("ITEM", this.itemId);
+	// 	console.log("ITEM", this.itemObject);
+	// 	var model = String(this.itemObject.constructor);
+	// 	var name = model.split(':');
+	// 	console.log("NAME ", name)
+ //        var itemType = Ember.String.pluralize(Ember.String.camelize(name[1])); 
+ //        this.set('itemType', itemType);
 
 	}.observes('itemObject'),
 
@@ -46,8 +49,8 @@ var CommentSectionComponent = Ember.Component.extend({
 	contextChanged: function() {
 		//Get Ref Type: 
 		var model = String(this.contextObject.constructor);
-		var name = model.split('.');
-        var contextType = Ember.String.pluralize(Ember.String.camelize(name.pop()));
+		var name = model.split(':');
+        var contextType = Ember.String.pluralize(Ember.String.camelize(name[1]));
         this.set('contextType', contextType);
 
 	}.observes('contextObject'),
@@ -85,7 +88,6 @@ var CommentSectionComponent = Ember.Component.extend({
 
 	makeModel: function() {
 		var store = this.get('targetObject.store');
-		
 		var model = store.createRecord('product-comment');
 		this.set('model', model);
 	},
@@ -119,10 +121,10 @@ var CommentSectionComponent = Ember.Component.extend({
 	saveModel: function() {
 		var model = this.get('model');
 		var _this = this;
-
+console.log('model', model);
 		model.save().then(
 			function() { 
-
+console.log("saved?")
 				_this.set('isProcessing', false);
 				_this.set('errorShow', false);
 				
@@ -133,10 +135,10 @@ var CommentSectionComponent = Ember.Component.extend({
 
 			},
 			function(error){ 
+				console.log("ERROR", error)
 				_this.set('isProcessing', false);
 				_this.set('errorShow', true);
 				_this.set('errorMessage', Haul.errorMessages.get(error.status));
-				console.log("Error" , error);
 			}
 		);
 	},

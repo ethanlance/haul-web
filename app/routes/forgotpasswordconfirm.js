@@ -7,7 +7,7 @@ var ForgotpasswordconfirmRoute = Ember.Route.extend({
 		return this.store.createRecord('authresetpassword');
 	},
 	renderTemplate: function() {
-		this.render('layouts/header_anon', {
+		this.render('layouts/header_base', {
 			into: 'application',
 			outlet: 'header'
 		});

@@ -11,10 +11,10 @@ var CollectionProductList = DS.Model.extend(Ember.Validations.Mixin, {
 	product_id: DS.attr('string'),
 	collection_id: DS.attr('string'),
 
-	user: DS.belongsTo('user'),
-	collection: DS.belongsTo('collection'),
-	product: DS.belongsTo('product'),
-	image: DS.belongsTo('image'),
+	user: DS.belongsTo('user', {async:true}),
+	collection: DS.belongsTo('collection', {async:true}),
+	product: DS.belongsTo('product', {async:true}),
+	image: DS.belongsTo('image', {async:true}),
 
 	validations: { 
 		editorial: {

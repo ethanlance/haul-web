@@ -1,9 +1,5 @@
 import Ember from 'ember';
 
-/**
-	Single Product View
-**/
-
 export default Ember.Route.extend({
 	model: function(params) {
 		if( params.product_slug === "product"){

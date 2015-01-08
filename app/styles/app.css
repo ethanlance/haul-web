@@ -52,13 +52,21 @@ label {
   font-weight: normal;
 }
 
+
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
+ 
+
 /* line 72, haul.scss */
 body {
   background-color: #ffffff;
   background-image: none;
   position: relative;
   padding-top: 31px;
-  padding-bottom: 80px;
+  /*padding-bottom: 80px;*/
 }
 
 /* line 80, haul.scss */
@@ -1265,3 +1273,28 @@ textarea.form-control {
   max-height: 300px;
   overflow: scroll;
 }
+
+
+header{
+    padding-top:100px;
+    text-align: center;
+    color: #fff;
+    background-attachment: scroll;
+    background-image: url(/assets/images/agency/header-bg.jpg);
+    background-position: center center;
+    background-repeat: none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+}
+
+
+
+
+
+
+
+
+

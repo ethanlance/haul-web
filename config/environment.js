@@ -93,7 +93,6 @@ module.exports = function(environment) {
     store: 'simple-auth-session-store:local-storage',
     authorizer: 'simple-auth-authorizer:oauth2-bearer',
     authenticator: 'authenticator:custom',
-    //session: 'session:custom',
     authenticationRoute: 'login',
     routeAfterAuthentication: null,
   };

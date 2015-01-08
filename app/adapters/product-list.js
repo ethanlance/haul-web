@@ -1,5 +1,5 @@
 import ApplicationAdapter from './application'; 
-
+/* global Haul */
 var ProductListAdapter = ApplicationAdapter.extend({
 	
 	host: Haul.Server.PRODUCT_SERVER_HOST,

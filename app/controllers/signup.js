@@ -1,12 +1,16 @@
 import Ember from 'ember';
 import auth from './auth';
 import facebook from './facebook';
+/* global Haul*/
 
 // Sign Up form
 var SignupController = Ember.ObjectController.extend({
 	
 	//Controller
 	needs: ['auth', 'facebook'], 
+ 
+	client_token: Haul.Server.CLIENT_TOKEN,
+	host: Haul.Server.USER_SERVER_HOST,
 
 	//Template Keys
 	emailRegistrationRequested: false,
@@ -42,28 +46,20 @@ var SignupController = Ember.ObjectController.extend({
 		var _this = this;
 		//CREATE HAUL USER FOR FB USER:
 		return Ember.$.ajax({
-				url: _this.authController.host + '/users',
+				url: _this.get('host') + '/users',
 				type: 'post',
 				data: data,
 				headers: {
-					Authorization: 'Bearer client_' + _this.authController.client_token
+					Authorization: 'Bearer client_' + _this.get('client_token')
 				},
 				dataType: 'json'
 		}).then(
 			function() {
 				_this.set('isProcessingFacebook', false);
-
-				//NOW LOG FB USER INTO HAUL
 				return _this.authController.authenticateByFB();
-
 			},
 			function(error) {
-				_this.set('isProcessingFacebook', false);
-				if( error.status === 409){
-					_this.set('error409', true);
-				}else{
-					_this.set('error', true);	
-				} 
+				return error;
 			}
 		);
 	},
@@ -82,7 +78,7 @@ var SignupController = Ember.ObjectController.extend({
 				type: 'post',
 				data: data,
 				headers: {
-					Authorization: 'Bearer client_' + this.authController.client_token
+					Authorization: 'Bearer client_' + this.client_token
 				},
 				dataType: 'json'
 		}).then(
@@ -91,13 +87,8 @@ var SignupController = Ember.ObjectController.extend({
 				_this.set('emailRegistrationRequested', true);
 			}, 
 
-			function(error) {
-				_this.set('isProcessingSubmit', false);
-				if( error.status === 409){
-					_this.set('error409', true);
-				}else{
-					_this.set('error', true);
-				}
+			function(error) { 
+				return error;
 			}
 		);
 	}, 
@@ -116,12 +107,7 @@ var SignupController = Ember.ObjectController.extend({
 
 			this.facebookController.triggerFacebook().then(
 		 		function onFulfill(response) {
-					return _this.createUserByFB(response);
-
-				}, 
-				function onReject(error) {
-					console.error("Failed!", error);
-					this.set('isProcessingFacebook', false);
+					return _this.createUserByFB(response); 
 				}
 			).then(
 		 		function onFulfill(response) {
@@ -129,8 +115,15 @@ var SignupController = Ember.ObjectController.extend({
 
 				}, 
 				function onReject(error) {
-					console.error("Failed!", error);
-					this.set('isProcessingFacebook', false);
+					console.error("Failed Signup", error);
+					
+					_this.set('isProcessingFacebook', false);
+
+					if( error.status === 409){
+						_this.set('error409', true);
+					}else{
+						_this.set('error', true);	
+					} 
 				}
 			);
 		},
@@ -150,6 +143,12 @@ var SignupController = Ember.ObjectController.extend({
 			}, function() {
 				_this.set('isProcessingSignup', false);
 				_this.set('showErrors', true);
+
+				if( error.status === 409){
+					_this.set('error409', true);
+				}else{
+					_this.set('error', true);
+				}
 			});
 		}
 	}

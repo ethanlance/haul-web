@@ -26,11 +26,11 @@ var ProductLikedByListSerializer =  DS.RESTSerializer.extend({
 			
 		});  
 
-		var id = product_id;
+		var id = recordId;
 		var data = {
 			id: id,
 			users: user_ids,
-			product_id: product_id,
+			//product_id: product_id,
 		};
 
 		payload ={'product-liked-by-list': data}; 

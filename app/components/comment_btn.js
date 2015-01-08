@@ -7,7 +7,7 @@ var CommentBtnComponent = Ember.Component.extend(ScrolltoMixin, {
 	isProcessing:false,
 
 	itemObject: null,
-	itemType: null,
+	itemType: 'products',
 	itemIdBinding: "itemObject.id",
 
 	contextObject: null,
@@ -39,10 +39,10 @@ var CommentBtnComponent = Ember.Component.extend(ScrolltoMixin, {
 	//Normally a Product
 	itemChanged: function() {
 		//Get Ref Type: 
-		var model = String(this.itemObject.constructor);
-		var name = model.split(':');
-        var itemType = Ember.String.pluralize(Ember.String.camelize(name[1])); 
-        this.set('itemType', itemType);
+		// var model = String(this.itemObject.constructor);
+		// var name = model.split(':');
+  //       var itemType = Ember.String.pluralize(Ember.String.camelize(name[1])); 
+  //       this.set('itemType', itemType);
 	}.observes('itemObject'),
 
 

@@ -18,7 +18,7 @@ var CollectionProductSerializer =  DS.RESTSerializer.extend({
 			collection: payload.data.store_id
 		};
 
-		payload = {'collection-product': [data]};  
+		payload = {'collection-product': data};  
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},
 

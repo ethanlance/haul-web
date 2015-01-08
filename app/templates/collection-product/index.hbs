@@ -39,7 +39,7 @@
 
 				{{#if isCollectionOwner}}
 						<small class="pull-right">
-							{{#link-to 'collection-product.edit' model}}
+							{{#link-to 'collection.product.edit' model.collection model}}
 								<button class="btn btn-default btn-xs">edit</button>
 							{{/link-to}}
 						</small>
@@ -54,7 +54,7 @@
 
 				{{!-- EDITORIAL --}}
 				<span class="editorial">
-				{{ breaklines model.editorial }}
+				{{ break-lines model.editorial }}
 				</span>
 
 				{{!-- COMMENTS --}}
@@ -133,7 +133,7 @@
  
 					{{profile-badge user=model.product.user session=session showFollows=false}}
 
-					{{ breaklines model.product.description }}
+					{{ break-lines model.product.description }}
 				</div>
 
 				<div class="row">

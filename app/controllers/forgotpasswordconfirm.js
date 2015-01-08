@@ -32,10 +32,7 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 			this.set('isProcessing', true);
 
 			var data = this.getProperties('password');
-
-			//data['action'] = 'password-reset';
-
-			//AJAX CALL - for getting the User Token back.  
+ 
 			//Pass params email/password to it.
 			return Ember.$.ajax({
 					url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
@@ -47,7 +44,7 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 					dataType: 'json'
 			}).then(
 				function(response) {
-					authController.send('setupUser', response);
+					authController.setupUser(response);
 				}, 
 
 				function() {

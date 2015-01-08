@@ -120,14 +120,14 @@ var FollowBtnComponent = Ember.Component.extend({
 				record.deleteRecord();
 				follow = false;
 			} else {
-				//var store = this.get('targetObject.store');
-				// var data = {
-				// 	user_id: this.get('user_id'),
-				// 	ref_id: this.get('ref_id'), 
-				// 	ref_type: this.get('ref_type')
-				// };
+				var store = this.get('targetObject.store');
+				var data = {
+					user_id: this.get('user_id'),
+					ref_id: this.get('ref_id'), 
+					ref_type: this.get('ref_type')
+				};
 				
-				//var record = store.createRecord('follow', data);
+				var record = store.createRecord('follow', data);
 				follow = true;
 			}
 

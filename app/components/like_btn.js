@@ -34,13 +34,13 @@ var LikeBtnComponent = Ember.Component.extend({
 				record.deleteRecord();
 				like = false;
 			} else {
-				//var store = this.get('targetObject.store');
-				// var data = {
-				// 	user_id: this.user_id,
-				// 	ref_id: this.ref_id, 
-				// 	ref_type: this.ref_type
-				// };
-				//var record = store.createRecord('like', data);
+				var store = this.get('targetObject.store');
+				var data = {
+					user_id: this.user_id,
+					ref_id: this.ref_id, 
+					ref_type: this.ref_type
+				};
+				var record = store.createRecord('like', data);
 				like = true;
 			}
 

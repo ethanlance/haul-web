@@ -1,17 +1,10 @@
 
-import Ember from 'ember'; 
-import auth from '../auth';
-import seller from '../seller';
+import Ember from 'ember';  
 
 
 
-var SellerLikesController = Ember.ObjectController.extend({
-	needs: ["auth", "seller"], 
-	user: null,
-	
-	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
-
-
+var SellerLikesController = Ember.ObjectController.extend({ 
+	user: null, 
 	// //Is currentUser viewing his own page?
 	isProfileOwner: false,
 	isProfileOwnerChanged: function() {

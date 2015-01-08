@@ -1,5 +1,5 @@
 import ApplicationAdapter from './application'; 
-
+/* global Haul */
 
 var UserCollectionAdapter = ApplicationAdapter.extend({
 	

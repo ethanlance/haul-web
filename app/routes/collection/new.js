@@ -1,6 +1,6 @@
 import Ember from 'ember';
-
-var CollectionNewRoute = Ember.Route.extend({ 
+ 
+export default Ember.Route.extend({ 
 	controllerName: "collection.edit",
 	beforeModel: function() {
 		this.controllerFor('collection.edit').reset();
@@ -20,5 +20,4 @@ var CollectionNewRoute = Ember.Route.extend({
 		});
 		this._super(controller, model);
 	}
-});
-export default CollectionNewRoute;
+}); 

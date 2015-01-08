@@ -4,7 +4,7 @@ import DS from 'ember-data';
 **/ 
 var ProductLikedByList = DS.Model.extend({
 	//product: DS.belongsTo('product', {async:true}), 
-	product_id: DS.attr('string'),
+	//product_id: DS.attr('string'),
 	users: DS.hasMany('user', {async:true}) 
 });
 export default ProductLikedByList;

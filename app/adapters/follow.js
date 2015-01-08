@@ -1,5 +1,5 @@
 import ApplicationAdapter from './application'; 
-
+/* global Haul */
 var FollowAdapter = ApplicationAdapter.extend({
 
 	host: Haul.Server.FOLLOW_SERVER_HOST,
@@ -9,7 +9,7 @@ var FollowAdapter = ApplicationAdapter.extend({
 		var key = id.split('-');
 		var ref_id = key[0];
 		var ref_type = key[1];
-		var user_id = this.get('currentUser').id;
+		var user_id = this.get('currentUser').get('id');
 
 		var url = this.host + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
 		return this.ajax(url, 'GET');

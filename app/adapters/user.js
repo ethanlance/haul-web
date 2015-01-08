@@ -1,5 +1,5 @@
 import ApplicationAdapter from './application';
-
+/* global Haul */
 var UserAdapter = ApplicationAdapter.extend({
 	
 	host: Haul.Server.USER_SERVER_HOST,
@@ -9,11 +9,7 @@ var UserAdapter = ApplicationAdapter.extend({
         return this.ajax(url, 'GET');
     },
 
-	findQuery: function(store, type, query) { 
-		console.log("HAUL");
-		console.log(Haul);
-		console.log("ApplicationAdapter");
-		console.log(ApplicationAdapter);
+	findQuery: function(store, type, query) {  
         var url = this.host + "/users/" + query.id;
         return this.ajax(url, 'GET');
     },   

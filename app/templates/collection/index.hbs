@@ -66,7 +66,7 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 padding-bottom">
                 <h4>About This Marketplace</h4>
-                {{ breaklines collection.description}} 
+                {{ break-lines collection.description}} 
                 <button {{action 'toggleAboutUs' }} class="btn btn-default btn-xs">close</button>
             </div>
         </div>  
@@ -83,7 +83,7 @@
     {{!-- COLLECTION ITEMS --}}
     {{#each model}}
 
-        {{#link-to 'collection-product' this.product_id }}
+        {{#link-to 'collection.product' product }} 
         <div class="haul-grid-li">
 
                 <img class="thumbnail" {{bind-attr src=image.small}}>

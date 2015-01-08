@@ -1,4 +1,5 @@
 import ApplicationAdapter from './application'; 
+/* global Haul */
 
 var CollectionIsFollowedByCountAdapter = ApplicationAdapter.extend({
 

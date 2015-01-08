@@ -1,7 +1,6 @@
 import Ember from 'ember';
-
-//NEEDS AUTH
-var ProductEditRoute = Ember.Route.extend({ 
+ 
+export default Ember.Route.extend({ 
 	beforeModel: function() {
 		//Is Authorized
 		//this.controllerFor('product-edit').authorized(transition);
@@ -14,5 +13,4 @@ var ProductEditRoute = Ember.Route.extend({
 	setupController: function(controller, model) {
 		controller.set('model', model);
 	},
-});
-export default ProductEditRoute;
+}); 

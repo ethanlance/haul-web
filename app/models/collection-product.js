@@ -6,7 +6,7 @@ import DS from "ember-data";
 var CollectionProduct = DS.Model.extend(Ember.Validations.Mixin, {
 	editorial: DS.attr('string'),
 
-	product: DS.belongsTo('product'),
+	product: DS.belongsTo('product', {async:true}),
 	collection: DS.belongsTo('collection'),
 
 	validations: { 

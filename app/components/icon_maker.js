@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Haul from "../app";
+
 
 /* global Dropzone */
 
@@ -10,7 +10,7 @@ var IconMakerComponent = Ember.Component.extend({
 	itemType: null,
 	itemIdBinding: "item.id",
 	iconBinding: "item.icon",
-	userTokenBinding: "session.currentUser.accessToken",
+	userTokenBinding: "session.currentUser.access_token",
 	userIdBinding: "session.currentUser.id",
 	isSuccess: false,
 	isFailed: false,
@@ -28,19 +28,14 @@ var IconMakerComponent = Ember.Component.extend({
 	newImageId: null,
 	updateModel: function() {
 		var itemType = this.get('itemType');
-		if(itemType === "users"){
-			this.item.set('user.image_id', this.get('newImageId') );
-		}
-		else{
-			this.item.set('image_id', this.get('newImageId') );
-		}
+		this.item.set('image_id', this.get('newImageId') );
 	}.observes('newImageId'),
 
 	itemChanged: function() {
 		//Get Ref Type: 
 		var model = String(this.item.constructor);
-		var name = model.split('.');
-        var itemType = Ember.String.camelize(name.pop());
+		var name = model.split(':');
+        var itemType = Ember.String.camelize(name[1]);
 
         if(itemType === "user" || itemType === "localUser"){
         	this.set('itemType', 'users');
@@ -61,7 +56,7 @@ var IconMakerComponent = Ember.Component.extend({
 		//INIT
 		 this.dropzone = new Dropzone("#dropzone", { 
 
-			url: Haul.IMAGE_SERVER_HOST + "/" + this.itemType + "/" + this.itemId + "/images/profile",
+			url: this.Haul.Server.IMAGE_SERVER_HOST + "/" + this.itemType + "/" + this.itemId + "/images/profile",
 			maxFiles: 1,
 			method: "post",
 			headers: {"Authorization": "Bearer " + this.userToken},
@@ -174,11 +169,11 @@ var IconMakerComponent = Ember.Component.extend({
 			_this.set('isFailed', true);
 			
 			var message;
-			if( response.message.indexOf("maximum allowed") !== -1){
-				message = "Sorry, your image is too large.";
-			}else{
+			// if( response.message.indexOf("maximum allowed") !== -1){
+			// 	message = "Sorry, your image is too large.";
+			// }else{
 				message = "Image upload error.";
-			}
+			//}
 
 			_this.set('errorMessage', message);
 

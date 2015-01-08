@@ -42,7 +42,7 @@ Router.map(function(){
 		this.route('followers');
 		this.route('edit');
 
-		this.resource('collection-product', {path: "/:product_slug"}, function() {
+		this.route('product', {path: "/:product_slug"}, function() {
 			this.route('edit');
 		});
 	});

@@ -15,7 +15,7 @@ var UserSerializer =  DS.RESTSerializer.extend({
 		};
 
 		if( payload.data.facebook_user_id ){
-			data['facebook_user_id'] = payload.data.facebook_user_id;
+			data.facebook_user_id = payload.data.facebook_user_id;
 		}
 
 		payload = {'user': data}; 

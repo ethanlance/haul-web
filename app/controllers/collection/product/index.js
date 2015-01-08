@@ -1,32 +1,20 @@
-import Ember from 'ember';
-import auth from '../../auth';
+import Ember from 'ember'; 
 
-
-//SHOW one product
-var CollectionProductIndexController = Ember.ObjectController.extend({ 
-	needs: ["auth"], 
-	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
-	model: null,
-	hasCollections: "collections.collections",
-
-	//Is currentUser viewing his own page?
-	isCollectionOwner: false,
-	isProductOwner: false,
-	collectionProductPromise:null,
+export default Ember.ObjectController.extend({ 
+ 
+	isCollectionOwner: false, 
+	hasCollections: "collections.collections", 
+	currentUserIdBinding: 'session.currentUser.id',
+	ownerIdBinding: 'model.collection.user.id',
 
 	setup: function() {  
+		this.set('isCollectionOwner', false);
 
-		var currentUser = this.get('currentUser');
-		var model = this.get('model');
-		if( currentUser && model ){
-
-			//Collection's Owner
-			if( !Ember.isEmpty(currentUser) && model.get('collection').get('user').get('id') === currentUser.get('id')) {
+		if( this.get('session').isAuthenticated ) {
+			if( this.ownerId === this.currentUserId) {
 				this.set('isCollectionOwner', true);
 			}	 
-
 		}
-	}.observes('model'),
-
+		
+	}.observes('model')
 });
-export default CollectionProductIndexController;
