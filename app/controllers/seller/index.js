@@ -1,13 +1,12 @@
 import Ember from 'ember';  
 
-//SHOW all user's products
-var SellerIndexController = Ember.ObjectController.extend({
+export default Ember.ObjectController.extend({
+	currentUserIdBinding: 'Haul.currentUser.id',
 	collection: null,
 	user: null, 
 	hasProducts: false,
 	hasCollections: false,
 	isProfileOwner: false,
-	currentUserIdBinding: 'session.currentUser.id',
 
 	isProfileOwnerChanged: function() {
 
@@ -33,4 +32,3 @@ var SellerIndexController = Ember.ObjectController.extend({
 
 	}.observes('model'),
 }); 
-export default SellerIndexController;

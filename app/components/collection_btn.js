@@ -36,11 +36,13 @@ export default Ember.Component.extend({
 	selectedCollectionIdChanged: function(){
 	 	var _this = this;
 	 	var collection_id = this.get('selectedCollectionId');
-	 	this.get('userCollections').forEach(function(uc){
-	 		if( uc.get('collection_id') === collection_id){ 
-	 			_this.set('selectedCollection', uc); 
-	 		}
-	 	});	
+	 	if( !Ember.isEmpty(this.get('userCollections'))){
+		 	this.get('userCollections').forEach(function(uc){
+		 		if( uc.get('collection_id') === collection_id){ 
+		 			_this.set('selectedCollection', uc); 
+		 		}
+		 	});	
+		}
 	 }.observes('selectedCollectionId', 'userCollections.@each'),
  
  

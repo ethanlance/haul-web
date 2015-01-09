@@ -1,6 +1,7 @@
 import AnonRoute from './common';
+import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
-var SettingsRoute = AnonRoute.extend({
+export default Ember.Route.extend(AuthenticatedRouteMixin,{
 	model: function() {
 		var _this = this;
 		var user = this.controllerFor('auth').get('currentUser');
@@ -21,4 +22,3 @@ var SettingsRoute = AnonRoute.extend({
 		controller.set('model', model);
 	}
 });
-export default SettingsRoute;

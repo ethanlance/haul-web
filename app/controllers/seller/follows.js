@@ -3,6 +3,7 @@ import Ember from 'ember';
 
 
 var SellerFollowsController = Ember.ObjectController.extend({ 
+	currentUserBinding: 'Haul.currentUser',
 	user: null,
 
 	// //Is currentUser viewing his own page?

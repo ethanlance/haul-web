@@ -1,9 +1,6 @@
 import Ember from 'ember';
-import ApplicationRoute from './application';
 
-import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
-
-var SellerRoute = ApplicationRoute.extend(AuthenticatedRouteMixin,{
+export default Ember.Route.extend({
 	model: function(params) { 
 		var _this = this; 
 		return this.store.find('user', params.user_slug).then(function(result){ 
@@ -18,4 +15,3 @@ var SellerRoute = ApplicationRoute.extend(AuthenticatedRouteMixin,{
 		}
 	}
 });
-export default SellerRoute;

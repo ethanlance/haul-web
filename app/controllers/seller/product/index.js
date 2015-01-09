@@ -1,19 +1,14 @@
 import Ember from 'ember';
 var $ = Ember.$;  
 
-
-//SHOW one product
-var ProductIndexController = Ember.ObjectController.extend({  
-	//currentUser: Ember.computed.alias('controllers.auth.currentUser'),
-	url: "",
-
-	init: function() {
-
-	},
+export default Ember.ObjectController.extend({  
+	currentUserBinding: 'Haul.currentUser',
+	collectionsBinding: "collections.collections",
+	
+	url: "", 
 	
 	//Is currentUser viewing his own page?
 	isProfileOwner: false,
-	collectionsBinding: "collections.collections",
 	 
 	setup: function() { 
 		var currentUser = this.get('currentUser');
@@ -66,4 +61,3 @@ var ProductIndexController = Ember.ObjectController.extend({
 
 	}
 });
-export default ProductIndexController;

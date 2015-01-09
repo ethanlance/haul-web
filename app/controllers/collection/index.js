@@ -1,7 +1,7 @@
 import Ember from 'ember';   
 
 export default  Ember.ObjectController.extend({ 
-	currentUserIdBinding: 'session.currentUser.id',
+	currentUserIdBinding: 'Haul.currentUser.id',
 	collection: null,
 	showAboutUs:false,
 	followsCount:0,

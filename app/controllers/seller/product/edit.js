@@ -2,7 +2,8 @@ import Ember from 'ember';
 var $ = Ember.$; 
 
 export default Ember.ObjectController.extend({
-	currentUserIdBinding: 'session.currentUser.id',
+	currentUserIdBinding: 'Haul.currentUser.id',
+	currentUserBinding: 'Haul.currentUser',
 
 	model: [],
 	uploads: [],
@@ -44,23 +45,20 @@ export default Ember.ObjectController.extend({
 
 		var _this = this;
 		var user_id = this.get('currentUser').get('id');
+		console.log("FOOL ", this.get('currentUser'));
+		console.log("FOOL ", this.get('currentUser').get('id'));
 		this.store.find('user-image', {user_id: user_id } ).then(function(results){
-
-				_this.set('uploads', results);
-				_this.imageMunge();
-
-			})
-	
+			_this.set('uploads', results);
+			_this.imageMunge();
+		});
 	}.on('init'),//.observes('model.id'),
 
 	imageMunge: function() {
 		var _this =this;
-		console.log("CLUSTER " , this.get('model') )
 
 		if( this.get('model').get('id') ){
 
-			this.set('showImagePicker', false);
-			
+			this.set('showImagePicker', false);			
 
 			//What images does this product have?
 			this.get('model').get('images').then(function(images){
@@ -101,9 +99,7 @@ export default Ember.ObjectController.extend({
 	// our list of image_ids.
 	imagesIdsChanged: function() {
 		
-		
 		var selectedImages = this.get('selectedImages');
-		var imageIds = this.get('imageIds');
 
 		var ids = selectedImages.map(function(image) {
 			return image.get('id');
@@ -163,7 +159,7 @@ export default Ember.ObjectController.extend({
 			function(error){
 				_this.set('isProcessing', false);	
 				_this.set('errorShow', true);
-				_this.set('errorMessage', Haul.errorMessages.get(error.status));
+				_this.set('errorMessage', this.Haul.errorMessages.get(error.status));
 				console.log("Error" , error);
 			}
 		);

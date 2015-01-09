@@ -1,10 +1,15 @@
 import DS from 'ember-data'; 
 
+export default DS.RESTAdapter.extend({
 
-// //Default Rest Adapter.  All routes use this unless they explicitly extend another adapter.
-var ApplicationAdapter = DS.RESTAdapter.extend({
-	headers: {
-		'Authorization': 'Bearer client_5eed07b8d71cf26f6df6566cf705adaa', 
-	}
+	currentUserBinding: 'Haul.currentUser',
+	accessTokenBinding: 'Haul.currentUser.access_token',
+
+	headers: function() {
+		if( this.get('accessToken') ){
+			return {'Authorization':  "Bearer " + this.get('accessToken')};
+		}else{
+			return {'Authorization': 'Bearer client_5eed07b8d71cf26f6df6566cf705adaa'}
+		}
+	}.property()
 }); 
-export default ApplicationAdapter;

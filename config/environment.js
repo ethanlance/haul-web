@@ -94,7 +94,7 @@ module.exports = function(environment) {
     authorizer: 'simple-auth-authorizer:oauth2-bearer',
     authenticator: 'authenticator:custom',
     authenticationRoute: 'login',
-    routeAfterAuthentication: null,
+    //routeAfterAuthentication: null,
   };
   return ENV;
 };

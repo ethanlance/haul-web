@@ -1,6 +1,6 @@
-{{user-header user=currentUser session=session}}
+{{!-- {{user-header user=session.currentUser}} --}}
 
-<div class="container">
+<div class="container content-fixed-nav padding-top">
 
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
@@ -59,7 +59,7 @@
 					</div> 
 				</div>
 				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12"> 
+					<div class="col-md-6 col-sm-6 col-xs-6"> 
 						{{#input price}}
 						{{label-field price}}
 						<div class="input-group">
@@ -71,7 +71,7 @@
 						{{/input}}
 					</div>
 				
-					<div class="col-md-6 col-sm-6 col-xs-12"> 
+					<div class="col-md-6 col-sm-6 col-xs-6"> 
 						<label>Quantity:</label>
 						{{input quantity class="input-xs" canShowValidationError=showErrors}}
 	 				</div>

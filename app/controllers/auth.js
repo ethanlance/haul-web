@@ -27,17 +27,6 @@ var AuthController = Ember.ObjectController.extend({
 	 
 	isProcessing: false, 
 	attemptedTransition: null, 
-	currentUser: false, 
-	accessToken: false,
-
-	resetHeader: function() {
-		ApplicationAdapter.reopen({
-			headers: {
-				'Authorization': 'Bearer ' + this.get('accessToken'), 
-				},
-				currentUser: this.currentUser
-		});	
-	}.observes('currentUser'),
  
 
 	authenticateByFB: function() {

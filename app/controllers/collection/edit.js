@@ -1,12 +1,11 @@
-import Ember from 'ember'; 
-import auth from "../auth";
+import Ember from 'ember';  
 /* global Haul */
 
 /**
 * 	Edit a collection
 **/
-export default Ember.ObjectController.extend({ 
-	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+export default Ember.ObjectController.extend({  
+	currentUserBinding: 'Haul.currentUser',
 	products: [],
 	model: {},
 	orderModel:null, 

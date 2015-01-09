@@ -1,9 +1,7 @@
-
-import Ember from 'ember';  
-
-
+import Ember from 'ember';   
 
 var SellerLikesController = Ember.ObjectController.extend({ 
+	currentUserBinding: 'Haul.currentUser',
 	user: null, 
 	// //Is currentUser viewing his own page?
 	isProfileOwner: false,

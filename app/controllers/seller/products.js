@@ -1,8 +1,7 @@
-
 import Ember from 'ember';  
 
 export default Ember.ArrayController.extend({ 
-
+	currentUserBinding: 'Haul.currentUser',
 	//This array controller sorts it's images
 	sortProperties: ['id'],
 	sortAscending: false,

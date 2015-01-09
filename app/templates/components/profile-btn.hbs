@@ -20,14 +20,10 @@
           <span class="glyphicon glyphicon-cog"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-
-            <li>{{#link-to 'seller' session.currentUser.slug }}<strong>My For Sale</strong>{{/link-to}}</li>
-            <li>{{#link-to 'product-new' }}+ Sell Something{{/link-to}}</li>
-            <li>{{#link-to 'seller' session.currentUser.slug }}<strong>My Marketplace</strong>{{/link-to}}</li>
-            <li>{{#link-to 'collection-new' }}+ Create Marketplace{{/link-to}}</li>
+            <li>{{#link-to 'seller' session.currentUser.slug }}Profile{{/link-to}}</li>
 
             <li class="divider"></li>
-            <li>{{#link-to 'settings'}}Profile Settings{{/link-to}}</li>
+            <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
 
             <li class="divider"></li>
             <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
