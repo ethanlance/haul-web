@@ -1,29 +1,15 @@
-<div class="container">
-
-	<div class="row">
-		
-		{{!-- NAVIGTION --}}
-
-		<div class="col-md-3 content-toc">
-			<div class="margin-top" data-spy="affix" data-offset-top="50">	
-				<div class="nav-wrapper">
-					<ul class="nav nav-pills nav-stacked toc" role="tablist"> 
-					  <li role="presentation"><a href="#profile">Profile</a></li> 
-					</ul>
-				</div>
-			</div>
-		</div>
+<div class="container content-fixed-nav home padding-bottom">
 
 
-		{{!-- FORM CONTENT --}}
+	<div class="row"> 
 
-		<div class="col-md-9 content-scroll" data-spy="scroll" data-target=".nav-wrapper" data-offset="200">
+		<div class="col-md-12">
 
-			<div class="panel panel-default margin-top" id="profile">
+			<div class="panel panel-default margin-top">
 			  <!-- Default panel contents -->
-			  <div class="panel-heading">Profile</div>
-			  <div class="panel-body">
-			    	{{ icon-maker item=session.currentUser session=session Haul=Haul}}
+			  <div class="panel-heading">Settings</div>
+			  <div class="panel-body"> 
+			    {{ icon-maker item=user Haul=Haul}} 
 			  </div> 
 			</div> 
 		</div>

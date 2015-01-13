@@ -1,5 +1,5 @@
 import Ember from 'ember';  
-/* global Haul */
+
 
 /**
 * 	Edit a collection

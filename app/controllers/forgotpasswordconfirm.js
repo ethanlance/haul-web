@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import auth from './auth';
-
 
 //Forgot Password Confirm: Form to change a user password w/ ticket_id (token)
 var ForgotpasswordconfirmController = Ember.ObjectController.extend({

@@ -40,7 +40,7 @@ var LikeBtnComponent = Ember.Component.extend({
 					ref_id: this.ref_id, 
 					ref_type: this.ref_type
 				};
-				var record = store.createRecord('like', data);
+				record = store.createRecord('like', data);
 				like = true;
 			}
 

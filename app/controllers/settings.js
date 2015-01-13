@@ -1,20 +1,13 @@
 import Ember from 'ember';
 	
-var SettingsController = Ember.ObjectController.extend({ 
+export default Ember.ObjectController.extend({
 	currentUserBinding: 'Haul.currentUser',
-
-	start: function() {
-		// $('#myAffix').affix({
-		//   offset: {
-		//     top: 100,
-		//     bottom: function () {
-		//       return (this.bottom = $('.footer').outerHeight(true))
-		//     }
-		//   }
-		// })
-
-
-	}.on("init"),
-
-});
-export default SettingsController;
+	currentUserIdBinding: 'Haul.currentUser.id',
+	user: null,
+	setup: function() { 
+		var _this = this;
+		this.store.find('user', this.get('currentUser').get('id')).then(function(user){
+			_this.set('user', user);
+		});
+	}.observes('currentUser')
+}); 

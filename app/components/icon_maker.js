@@ -6,7 +6,7 @@ import Ember from 'ember';
 var IconMakerComponent = Ember.Component.extend({
 	
 	dropzone: null, 
-	item: null,
+	itemBinding: "item",
 	itemType: null,
 	itemIdBinding: "item.id",
 	iconBinding: "item.icon",
@@ -27,12 +27,15 @@ var IconMakerComponent = Ember.Component.extend({
 	/* Image has changed, update the Collection or LocalUser model now */
 	newImageId: null,
 	updateModel: function() {
-		var itemType = this.get('itemType');
 		this.item.set('image_id', this.get('newImageId') );
 	}.observes('newImageId'),
 
 	itemChanged: function() {
-		//Get Ref Type: 
+
+		if( Ember.isEmpty(this.item)){
+			return;
+		}
+
 		var model = String(this.item.constructor);
 		var name = model.split(':');
         var itemType = Ember.String.camelize(name[1]);
@@ -44,7 +47,7 @@ var IconMakerComponent = Ember.Component.extend({
         	this.set('itemType', 'stores');
         }
 
-	}.observes('item'),
+	}.observes('itemId'),
 
 	start: function() {
 		this.itemChanged();
@@ -162,7 +165,7 @@ var IconMakerComponent = Ember.Component.extend({
 		 	
 
 		//ERROR, figure error handling here.
-		this.dropzone.on('error', function(file, response) { 
+		this.dropzone.on('error', function(file) { 
 
 			_this.set('isSuccess', false);
 			_this.set('isProgress', false);

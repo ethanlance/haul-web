@@ -32,14 +32,12 @@ var Collection = DS.Model.extend(Ember.Validations.Mixin, {
 	//all the image sizes.
 	getIconImage: function() {
 
-		return;
-
-		var _this = this;
 		var image_id = this.get('image_id');
 		if( !image_id ){
 			 return;	
 		}
 		
+		var _this = this;
 		var i = 0;
 		var retryTimes = 10;
 		var retryWait = 2000;

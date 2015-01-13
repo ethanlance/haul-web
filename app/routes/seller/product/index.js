@@ -1,10 +1,9 @@
 import Ember from 'ember';
-
+ 
 export default Ember.Route.extend({
 	beforeModel: function() { 
 		if( !Ember.isEmpty(Haul.get('currentUser')) ){
-			console.log("HELLO?")
-			this.store.find('user-collection', {user_id:Haul.get('currentUser').id});
+			this.store.find('user-collection', {user_id: Haul.get('currentUser').id});
 		} 
 	},
 	model: function() { 

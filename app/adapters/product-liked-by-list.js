@@ -1,5 +1,8 @@
 import ApplicationAdapter from './application'; 
-/* global Haul */
+
+import config from '../config/environment';
+var Haul = config.APP;
+
 var ProductLikedByListAdapter = ApplicationAdapter.extend({
 
 	host: Haul.Server.WANT_SERVER_HOST,

@@ -127,7 +127,7 @@ var FollowBtnComponent = Ember.Component.extend({
 					ref_type: this.get('ref_type')
 				};
 				
-				var record = store.createRecord('follow', data);
+				record = store.createRecord('follow', data);
 				follow = true;
 			}
 

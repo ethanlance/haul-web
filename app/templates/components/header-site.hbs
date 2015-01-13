@@ -1,13 +1,22 @@
+<nav>
 
-<div class="navbar navbar-default navbar-fixed-top haul-navbar" role="navigation">
-	
+	<div class="logo">
+		{{#link-to "home"}}Haul{{/link-to}}
+	</logo>
+
+	<home></home>
+
+	<sell></sell>
+
+	<settings></settings>
+
+	<auth></auth>
+
+</nav>
+
+
+{{!-- 	
 	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
 				
 		<div class="logo-outer">
 			{{#link-to "home"}}Haul{{/link-to}}
@@ -15,14 +24,14 @@
 
 		<div class="navbar-right">
 
-		{{!-- {{#link-to 'seller.new-product' this.slug }}	 --}}
+		{{#link-to 'seller.new-product' this.slug }}	
 
 			{{ profile-btn clickTransition="clickTransition"}}
 		 
 		</div> 	
 	</div>
 
- 	{{!-- <div class="navbar-center navbar-collapse collapse">
+ 	<div class="navbar-center navbar-collapse collapse">
 		<form class="" role="search">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Search">
@@ -33,5 +42,5 @@
 				</span>
 			</div>
 		</form>
-	</div> --}}
-</div>
+	</div>
+</div> --}}

@@ -1,10 +1,9 @@
 import Ember from 'ember'; 
-import auth from '../../auth';
 
-//EDIT
-var CollectionProductEditController = Ember.ObjectController.extend({ 
+
+export default Ember.ObjectController.extend({ 
 	needs: ["auth"], 
-	currentUser: Ember.computed.alias('controllers.auth.currentUser'),
+	currentUserBinding: 'Haul.currentUser',
 
 	//Is currentUser viewing his own page?
 	isCollectionOwner: false,
@@ -17,6 +16,11 @@ var CollectionProductEditController = Ember.ObjectController.extend({
 
 		var currentUser = this.get('currentUser');
 		var model = this.get('model');
+
+		if( Ember.isEmpty(model) || Ember.isEmpty(currentUser)){
+			return;
+		}
+
 		this.set('editorialForQuill', model.get('editorial'));
 		if( currentUser && model ){
 
@@ -27,7 +31,7 @@ var CollectionProductEditController = Ember.ObjectController.extend({
 		}
 
 
-	}.observes('model'),
+	}.observes('model', 'currentUser'),
 
 	saveModel: function() { 
 
@@ -82,4 +86,3 @@ var CollectionProductEditController = Ember.ObjectController.extend({
 		}
 	}  
 });
-export default CollectionProductEditController;

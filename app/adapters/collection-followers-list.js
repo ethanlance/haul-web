@@ -1,5 +1,7 @@
 import ApplicationAdapter from './application'; 
-/* global Haul */
+
+import config from '../config/environment';
+var Haul = config.APP;
 
 var CollectionFollowersListAdapter = ApplicationAdapter.extend({
 

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Haul from "../app";
+
 
 var CommentSectionComponent = Ember.Component.extend({
 	
@@ -120,11 +120,9 @@ var CommentSectionComponent = Ember.Component.extend({
 
 	saveModel: function() {
 		var model = this.get('model');
-		var _this = this;
-console.log('model', model);
+		var _this = this; 
 		model.save().then(
-			function() { 
-console.log("saved?")
+			function() {  
 				_this.set('isProcessing', false);
 				_this.set('errorShow', false);
 				
@@ -135,7 +133,6 @@ console.log("saved?")
 
 			},
 			function(error){ 
-				console.log("ERROR", error)
 				_this.set('isProcessing', false);
 				_this.set('errorShow', true);
 				_this.set('errorMessage', Haul.errorMessages.get(error.status));

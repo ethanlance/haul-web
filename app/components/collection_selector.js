@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Haul from "../app";
+
 
 var CollectionSelectorComponent = Ember.Component.extend({
 	

@@ -1,8 +1,11 @@
 import Ember from 'ember';
-import app from '../app'; 
+
+import config from '../config/environment';
+var Config = config.APP;
+
 
 /* global FB */
-/* global Haul */
+
 
 //FacebookController makes API Calls to Facebook
 var FacebookController = Ember.ObjectController.extend({
@@ -22,7 +25,7 @@ var FacebookController = Ember.ObjectController.extend({
 
 		function init() { 
 			FB.init({
-				appId	  : Haul.Server.FACEBOOK_APP_ID,
+				appId	  : Config.Server.FACEBOOK_APP_ID,
 				cookie	 : true,  // enable cookies to allow the server to access
 				xfbml	  : true,  // parse social plugins on this page
 				version	: 'v2.1' // use version 2.1

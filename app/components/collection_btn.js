@@ -1,6 +1,5 @@
 import Ember from 'ember';
 var $ = Ember.$;
-import Haul from "../app";
 
 export default Ember.Component.extend({
 

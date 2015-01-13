@@ -1,5 +1,8 @@
 import ApplicationAdapter from './application'; 
-/* global Haul */
+
+import config from '../config/environment';
+var Haul = config.APP;
+
 var ProductCollectionListAdapter = ApplicationAdapter.extend({
 	
 	host: Haul.Server.STORE_SERVER_HOST, 

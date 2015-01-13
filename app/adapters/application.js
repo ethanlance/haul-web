@@ -9,7 +9,7 @@ export default DS.RESTAdapter.extend({
 		if( this.get('accessToken') ){
 			return {'Authorization':  "Bearer " + this.get('accessToken')};
 		}else{
-			return {'Authorization': 'Bearer client_5eed07b8d71cf26f6df6566cf705adaa'}
+			return {'Authorization': 'Bearer client_5eed07b8d71cf26f6df6566cf705adaa'};
 		}
 	}.property()
 }); 

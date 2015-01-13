@@ -2,7 +2,6 @@
 
 module.exports = function(environment) {
   var ENV = {
-
     modulePrefix: 'haul',
     podModulePrefix: 'app/pods',
     environment: environment,
@@ -18,6 +17,20 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+
+      Server: {
+        get: function(key) {
+          if( this[key] ){
+            return this[key];
+          }else{
+            return this[400]
+          }
+        },
+        400: "Oops, there was an error. Please try again.",
+        401: "Yikes, you are not authorized to do that.",
+        404: "Uhoh, not found.",
+        409: "Whoops, conflict. This cannot be done."
+      }
     }
   };
 
@@ -40,37 +53,15 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    server = {};
-    server.COMMENT_SERVER_HOST = "http://localhost:8086";
-    server.FOLLOW_SERVER_HOST = "http://localhost:8085";
-    server.WANT_SERVER_HOST = "http://localhost:8084";
-    server.STORE_SERVER_HOST = "http://localhost:8083";
-    server.PRODUCT_SERVER_HOST = "http://localhost:8082";
-    server.IMAGE_SERVER_HOST = "http://localhost:8081";
-    server.USER_SERVER_HOST = "http://localhost:8080";
-    server.CLIENT_TOKEN = "5eed07b8d71cf26f6df6566cf705adaa";
-    server.FACEBOOK_APP_ID = "443672575768207";
-
-
-    ENV.APP.Server = server;
-
-
-
-    errorMessages = {
-      get: function(key) {
-        if( this[key] ){
-          return this[key];
-        }else{
-          return this[400]
-        }
-      },
-      400: "Oops, there was an error. Please try again.",
-      401: "Yikes, you are not authorized to do that.",
-      404: "Uhoh, not found.",
-      409: "Whoops, conflict. This cannot be done."
-    };  
-    ENV.APP.errorMessages;
-
+    ENV.APP.Server.COMMENT_SERVER_HOST = "http://localhost:8086";
+    ENV.APP.Server.FOLLOW_SERVER_HOST = "http://localhost:8085";
+    ENV.APP.Server.WANT_SERVER_HOST = "http://localhost:8084";
+    ENV.APP.Server.STORE_SERVER_HOST = "http://localhost:8083";
+    ENV.APP.Server.PRODUCT_SERVER_HOST = "http://localhost:8082";
+    ENV.APP.Server.IMAGE_SERVER_HOST = "http://localhost:8081";
+    ENV.APP.Server.USER_SERVER_HOST = "http://localhost:8080";
+    ENV.APP.Server.CLIENT_TOKEN = "5eed07b8d71cf26f6df6566cf705adaa";
+    ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
   }
 
   if (environment === 'test') {
@@ -86,7 +77,15 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.APP.Server.COMMENT_SERVER_HOST = "http://localhost:8086";
+    ENV.APP.Server.FOLLOW_SERVER_HOST = "http://localhost:8085";
+    ENV.APP.Server.WANT_SERVER_HOST = "http://localhost:8084";
+    ENV.APP.Server.STORE_SERVER_HOST = "http://localhost:8083";
+    ENV.APP.Server.PRODUCT_SERVER_HOST = "http://localhost:8082";
+    ENV.APP.Server.IMAGE_SERVER_HOST = "http://localhost:8081";
+    ENV.APP.Server.USER_SERVER_HOST = "http://localhost:8080";
+    ENV.APP.Server.CLIENT_TOKEN = "5eed07b8d71cf26f6df6566cf705adaa";
+    ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
   }
 
   ENV['simple-auth'] = {

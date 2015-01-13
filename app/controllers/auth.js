@@ -1,7 +1,8 @@
 import Ember from 'ember';
-import ApplicationAdapter from '../adapters/application';
 
-/* global Haul */
+import config from '../config/environment';
+var Config = config.APP;
+
 
 // Load the SDK asynchronously
 (function(d, s, id){
@@ -14,16 +15,15 @@ import ApplicationAdapter from '../adapters/application';
 
 
 
-//AUTHENTICATE
-//AuthController makes API Calls to Haul
+
 var AuthController = Ember.ObjectController.extend({
 
 	needs: ['facebook'],
 	//Turn this off:
 	email: null, //'ethan@haul.io',
 	password: null, //'Bailey007!',
-	client_token: Haul.Server.CLIENT_TOKEN,
-	host: Haul.Server.USER_SERVER_HOST,
+	client_token: Config.Server.CLIENT_TOKEN,
+	host: Config.Server.USER_SERVER_HOST,
 	 
 	isProcessing: false, 
 	attemptedTransition: null, 

@@ -1,14 +1,15 @@
 import Ember from 'ember'; 
-/* global Haul */ 
+ 
+import config from '../config/environment';
+var Config = config.APP;
 
-// Sign Up form
 var SignupController = Ember.ObjectController.extend({
 	
 	//Controller
 	needs: ['auth', 'facebook'], 
  
-	client_token: Haul.Server.CLIENT_TOKEN,
-	host: Haul.Server.USER_SERVER_HOST,
+	client_token: Config.Server.CLIENT_TOKEN,
+	host: Config.Server.USER_SERVER_HOST,
 
 	//Template Keys
 	emailRegistrationRequested: false,

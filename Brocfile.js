@@ -2,7 +2,9 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+	minifyJS:{'enabled':true, options:{'compress':true}}
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -27,10 +29,9 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
   destDir: 'assets'
 });
 
-app.import('bower_components/ember-addons.bs_for_ember/dist/js/bs-core.max.js');
-app.import('bower_components/ember-addons.bs_for_ember/dist/js/bs-alert.max.js');
+//app.import('bower_components/ember-addons.bs_for_ember/dist/js/bs-core.max.js');
+//app.import('bower_components/ember-addons.bs_for_ember/dist/js/bs-alert.max.js');
 
-app.import('bower_components/ember-localstorage-adapter/localstorage_adapter.js');
 app.import('bower_components/jquery/dist/jquery.js');
 app.import('bower_components/jquery-ui/jquery-ui.js');
 app.import('bower_components/moment/moment.js');
@@ -47,5 +48,11 @@ app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css');
 app.import('vendor/ember-easyform.js');
 app.import('vendor/ember-validations.js');
 
+
+
 module.exports = app.toTree();
+
+
+
+
 

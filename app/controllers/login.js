@@ -1,8 +1,4 @@
 import Ember from 'ember';
-import auth from './auth';
-import facebook from './facebook';
-
-/* global Haul */
 
 // LOGIN
 var LoginController = Ember.ObjectController.extend({

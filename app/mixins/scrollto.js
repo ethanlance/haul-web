@@ -15,6 +15,6 @@ export default Ember.Mixin.create({
 
 	    $('html, body').animate({
 	        scrollTop: top
-	    }, this.get("scrollDuration"))
+	    }, this.get("scrollDuration"));
 	}
 });

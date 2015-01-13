@@ -1,6 +1,13 @@
 {{#if  session.isAuthenticated }}
 
     <div class="btn-group navbar-profile">
+    
+        {{#link-to 'home' }}
+        <button class=" btn btn-default btn-cta">
+            <span class="glyphicon glyphicon-home"></span> 
+        </button> 
+        {{/link-to}}
+
 
         {{#link-to 'product-new' }}
         <button class=" btn btn-default btn-cta">

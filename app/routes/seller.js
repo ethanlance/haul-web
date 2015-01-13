@@ -10,8 +10,8 @@ export default Ember.Route.extend({
 		});
 	},	
 	serialize: function(model) { 
-		if(!Ember.isEmpty(model)){
- 	   		return { user_slug: model.get('id') };
+		if(!Ember.isEmpty(model) && model.id){
+ 	   		return { user_slug: model.id };
 		}
 	}
 });

@@ -43,6 +43,13 @@ export default Ember.ObjectController.extend({
 
 	modelChanged: function() {
 
+		var currentUser = this.get('currentUser');
+		var model = this.get('model');
+
+		if( Ember.isEmpty(model) || Ember.isEmpty(currentUser) ){
+			return;
+		}
+
 		var _this = this;
 		var user_id = this.get('currentUser').get('id');
 		console.log("FOOL ", this.get('currentUser'));
@@ -51,7 +58,7 @@ export default Ember.ObjectController.extend({
 			_this.set('uploads', results);
 			_this.imageMunge();
 		});
-	}.on('init'),//.observes('model.id'),
+	}.observes('model', 'currentUser'),
 
 	imageMunge: function() {
 		var _this =this;

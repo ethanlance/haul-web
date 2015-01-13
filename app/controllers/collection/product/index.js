@@ -4,7 +4,7 @@ export default Ember.ObjectController.extend({
  
 	isCollectionOwner: false, 
 	hasCollections: "collections.collections", 
-	currentUserIdBinding: 'session.currentUser.id',
+	currentUserIdBinding: 'Haul.currentUser.id',
 	ownerIdBinding: 'model.collection.user.id',
 
 	setup: function() {  

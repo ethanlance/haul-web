@@ -14,16 +14,12 @@ Router.map(function(){
 	//Home
 	this.route('home', {path: "/"});
 
-	this.route('poop');
-	
-
-
 	this.route('about');
 	this.route('not-found');
 	this.route('not-authorized');
 
 	//Profiles
-	this.resource('seller', {path: "/seller/:user_slug"}, function() {
+	this.resource('seller', {path: "/profile/:user_slug"}, function() {
 		this.route('followers');
 		this.route('follows');
 		this.route('likes');

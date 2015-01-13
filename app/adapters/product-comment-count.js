@@ -1,5 +1,8 @@
 import ApplicationAdapter from './application'; 
-/* global Haul */
+
+import config from '../config/environment';
+var Haul = config.APP;
+
 var ProductCommentCountAdapter = ApplicationAdapter.extend({
 
 	host: Haul.Server.COMMENT_SERVER_HOST,

@@ -1,5 +1,8 @@
 import ApplicationAdapter from './application'; 
-/* global Haul */
+
+import config from '../config/environment';
+var Haul = config.APP;
+
 var UserImageAdapter = ApplicationAdapter.extend({
 	
 	host: Haul.Server.IMAGE_SERVER_HOST,

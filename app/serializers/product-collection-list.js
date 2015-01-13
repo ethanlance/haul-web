@@ -1,11 +1,9 @@
-import Ember from 'ember';
 import DS from 'ember-data';
-
 
 var ProductCollectionListSerializer =  DS.RESTSerializer.extend({ 
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
- console.log("HERE", payload, recordId)
+ 		
 		if( payload.data === "ok"  ){ 
 			return;
 		}
@@ -29,7 +27,7 @@ var ProductCollectionListSerializer =  DS.RESTSerializer.extend({
 			id: recordId,
 			collections: collection_ids 
 		};
-console.log('data', data)
+
 		payload = {'product-collection-list': data};  
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},
