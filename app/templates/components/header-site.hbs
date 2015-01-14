@@ -1,46 +1,65 @@
 <nav>
-
 	<div class="logo">
 		{{#link-to "home"}}Haul{{/link-to}}
-	</logo>
+	</div>
 
-	<home></home>
+	<div class="container-fluid">
 
-	<sell></sell>
+	{{#if  session.isAuthenticated }}
 
-	<settings></settings>
+		{{#link-to 'home' }}
+		<button class="btn btn-default btn-home">
+			<span class="glyphicon glyphicon-home"></span> 
+		</button> 
+		{{/link-to}}
+		
 
-	<auth></auth>
-
-</nav>
-
-
-{{!-- 	
-	<div class="navbar-header">
-				
-		<div class="logo-outer">
-			{{#link-to "home"}}Haul{{/link-to}}
+		<div class="btn-group btn-search">
+		  <input type="text" class="form-control" placeholder="Search words or #hashtags">
+		  <button type="button" class="btn btn-default">
+		  	<span class="glyphicon glyphicon-search"></span>
+		  </button>
 		</div>
+		
+		<button type="button" class="btn btn-default btn-go-search">
+		  	<span class="glyphicon glyphicon-search"></span>
+		</button>
 
-		<div class="navbar-right">
+	
+		<div class="btn-group btn-profile">
+			<button type="button" class="btn btn-default">
+			{{#link-to 'seller' session.currentUser.slug }}
+				{{ make-icon icon=session.currentUser.icon isSmall=true}} 
+			{{/link-to}}
+			</button>
+		
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			  <span class="glyphicon glyphicon-cog"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-right" role="menu">
+				<li>{{#link-to 'seller' session.currentUser.slug }}Profile{{/link-to}}</li>
 
-		{{#link-to 'seller.new-product' this.slug }}	
+				<li class="divider"></li>
+				<li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
 
-			{{ profile-btn clickTransition="clickTransition"}}
-		 
-		</div> 	
+				<li class="divider"></li>
+				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+			</ul>
+		</div>
+	
+		{{#link-to 'product-new' }}
+		<button class=" btn btn-default btn-sell">
+			<span class="glyphicon glyphicon-camera"></span>
+			Post
+		</button> 
+		{{/link-to}}
+
+	{{else}}
+
+		{{#link-to 'signup'}}<button type="button" class="btn btn-default btn-signup">SIGNUP</button>{{/link-to}}
+		{{#link-to 'login'}}<button type="button" class="btn btn-default btn-login">LOGIN</button>{{/link-to}}
+
+	{{/if}}
+
 	</div>
-
- 	<div class="navbar-center navbar-collapse collapse">
-		<form class="" role="search">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</span>
-			</div>
-		</form>
-	</div>
-</div> --}}
+</nav>

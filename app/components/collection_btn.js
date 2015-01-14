@@ -1,6 +1,9 @@
 import Ember from 'ember';
 var $ = Ember.$;
 
+import config from '../config/environment';
+var Haul = config.APP;
+
 export default Ember.Component.extend({
 
 	product:null,

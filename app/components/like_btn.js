@@ -5,7 +5,7 @@ import Ember from 'ember';
 var LikeBtnComponent = Ember.Component.extend({
 
 	ref_type: "products",
-	ref_idBinding: "item.id",
+	ref_idBinding: "id",
 	user_idBinding: "session.currentUser.id",
 	totalBinding: "item.likeCount.total",
 	userLikes: false,
@@ -14,7 +14,7 @@ var LikeBtnComponent = Ember.Component.extend({
 	start: function() {
 		var store = this.get('targetObject.store');
 		var _this = this;
-
+return;
 		//currentUser like item?
 		store.find('like', this.ref_id).then(function(uLike){
 			if(!Ember.isEmpty(uLike)){

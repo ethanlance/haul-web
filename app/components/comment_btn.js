@@ -8,7 +8,7 @@ var CommentBtnComponent = Ember.Component.extend(ScrolltoMixin, {
 
 	itemObject: null,
 	itemType: 'products',
-	itemIdBinding: "itemObject.id",
+	itemIdBinding: "id",
 
 	contextObject: null,
 	contextType: null,
@@ -57,6 +57,9 @@ var CommentBtnComponent = Ember.Component.extend(ScrolltoMixin, {
 
 
 	start: function() {
+
+		return;
+
 		this.itemChanged();
 		this.contextChanged();
 

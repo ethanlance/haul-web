@@ -1,29 +1,48 @@
 {{!-- SELLER PROFILE  --}}
+<header class="profile">
 
-<div class="container-fluid content-fixed-nav">  
-	<div class="row seller-nav">
-		<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+	{{ make-icon icon=user.icon isSmall=false isCollection=true}}
 
+	<button class="btn btn-primary btn-follow">follow</button>
 
-			<div class="follow">
-				{{ follow-btn 
-					item=user 
-					ref_type="user"
-					hideCounts=true
-				}} 
-			</div> 			
-			   	
-			{{ make-icon icon=user.icon isSmall=false}}
-			 	
-	     	<h1>{{user.name}}</h1>
-
-		</div>
+	<div class="info-block">
+		<h1>{{user.name}}</h1>
+		<div class="name">@{{user.name}}</div> 
 	</div>
 
-	{{ user-tabs 
-		user=user 
-		isProfile=true
-	}}
+	<div class="stats-block">
 
-	<div class="row seller-nav-footer"><span></span></div>	
-</div>
+		<div class="stats">
+			
+			<span>following</span><br/>
+			<a>2399</a>
+
+		</div>
+
+		<div class="stats">
+			
+			<span>followers</span><br/>
+			<a>2399</a>
+			
+		</div>
+
+		<div class="stats">
+			
+			<span>likes</span><br/>
+			<a>17</a>
+			
+		</div>
+
+		<div class="stats">
+			
+			<span>hauls</span><br/>
+			<a>170</a>
+			<div class="highlight-wrap">
+			<div class="highlight"></div>
+			</div>
+		</div> 
+
+		<div class="clearfix"></div>
+	</div> 
+
+</header>
