@@ -6,6 +6,7 @@ export default Ember.ObjectController.extend({
 	currentUserBinding: 'Haul.currentUser',
 
 	model: [],
+	modelProduct: [],
 	uploads: [],
 
 	//This array controller sorts it's images
@@ -34,6 +35,7 @@ export default Ember.ObjectController.extend({
 		this.set('productExists',false);
 		this.set('imageIds',[]); 
 		this.set('model', []);
+		this.set('productModel', []);
 		if(this.get('uploads')){
 			this.get('uploads').forEach(function(img) {
 				img.set('isSelected', false);
@@ -62,13 +64,18 @@ export default Ember.ObjectController.extend({
 
 	imageMunge: function() {
 		var _this =this;
+		var modelProduct = this.get('modelProduct');
+console.log("MODEL PRODUCT", modelProduct)
+		if( Ember.isEmpty(modelProduct)){
+			return;
+		}
 
-		if( this.get('model').get('id') ){
+		if( modelProduct.get('id') ){
 
 			this.set('showImagePicker', false);			
 
 			//What images does this product have?
-			this.get('model').get('images').then(function(images){
+			modelProduct.get('images').then(function(images){
 
 				//hilight upload images
 				var uploads = _this.get('uploads');
@@ -99,7 +106,7 @@ export default Ember.ObjectController.extend({
 		}else{
 			_this.set('showImagePicker', true);
 		}
-	}.observes('model.id'),
+	}.observes('modelProduct.id'),
 
 
 	//Observer: anytime our array of selected images changes, update
@@ -140,33 +147,57 @@ export default Ember.ObjectController.extend({
 
 	saveProduct: function() {
 		var _this = this;
-		var model = this.get('model');
+		var modelProduct = this.get('modelProduct');
 		
-		model.set('image_ids', this.get('imageIds'));
+		modelProduct.set('image_ids', this.get('imageIds'));
 
 		//Refresh the image models. Get data from api.
-		this.get('image_ids').forEach(function(id){
+		this.get('imageIds').forEach(function(id){
 			var img = _this.store.find('image', id );
 			img.then(function(i) {
 				i.reload();
 			});
 		});
 
-		model.save().then(
-			function() { 
-				_this.set('isProcessing', false);
-
-				//reload product_list model too.
-				_this.store.find('product-list', {user_id: _this.get('currentUser').id});
+		modelProduct.save().then(
+			function(product) { 
 
 				var user = _this.get('currentUser');
+
+				//Save to the collection now
+				var modelCollection = _this.get('model');
+				var id = user.get('collection').get('id') + "-" + product.get('id');
+				modelCollection.set('id', id);
+				modelCollection.set('product', product);
+				modelCollection.set('collection', user.get('collection'));
+				modelCollection.set('editorial', "FAKE EDITORIAL");
 				
-				_this.transitionToRoute('seller.product', user, model.reload());
+				modelCollection.save()
+
+				.then(function(record){
+					return record.reload();
+				})
+
+				// .then(function(){
+				// 	return _this.store.find("collection-product-list", {'collection_id':user.get('collection').get('id')} );//.reload();
+				// })
+		
+				// .then(function(records){
+				// 	console.log("RECORDS", records);
+				// 	return records
+				// })
+
+				.then(function(){
+					_this.set('isProcessing', false);
+					console.log("SAVED COLLECTION PROD");
+					_this.transitionToRoute('seller', user.get('collection').get('slug'));
+				});
+				
 			},
 			function(error){
 				_this.set('isProcessing', false);	
 				_this.set('errorShow', true);
-				_this.set('errorMessage', this.Haul.errorMessages.get(error.status));
+				_this.set('errorMessage', _this.Haul.errorMessages.get(error.status));
 				console.log("Error" , error);
 			}
 		);
@@ -179,21 +210,22 @@ export default Ember.ObjectController.extend({
 			this.set('isProcessing', true);
 
 			var _this = this;
-			var model = this.get('model');
+			var modelProduct = this.get('modelProduct');
 
 			//Trim
-			if( model.get('description') ){
-				model.set('description', model.get('description').trim());
+			if( modelProduct.get('description') ){
+				modelProduct.set('description', modelProduct.get('description').trim());
 			}
-			if( model.get('name') ){
-				model.set('name', model.get('name').trim());
+			if( modelProduct.get('name') ){
+				modelProduct.set('name', modelProduct.get('name').trim());
 			}
 
 
 	 		//Model Validations:
-			model.validate().then(function(){
+			modelProduct.validate().then(function(){
 				_this.saveProduct();	
-			}, function() {
+			}, function(errors) {
+				console.log('errors', errors);
 				_this.set('isProcessing', false);
 				_this.set('showErrors', true);
 			});

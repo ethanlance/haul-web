@@ -18,12 +18,19 @@ export default {
 					
 					user.set('access_token', _this.get('access_token'));
 					user.set('refresh_token', _this.get('refresh_token'));
-					
-					//Setting currentUser on SESSION and HAUL objects.
-					_this.set("currentUser", user);
-					application.set('currentUser', user);
 
-					console.log("SESSION CURRENT USER CHANGED", user.get('name')); 
+					container.lookup("store:main").find('user-collection', user_id)
+					.then(function(record){
+						console.log("HERE DUDE ", record);
+						return container.lookup("store:main").find('collection', record.get('collection_id'))
+					})
+					.then(function(record) {
+						user.set('collection', record);	
+						_this.set("currentUser", user);
+						application.set('currentUser', user);
+						console.log("SESSION CURRENT USER CHANGED", user.get('name')); 
+						return;
+					});					
 
 				}, function(error){
 					console.log("INITIALIZER ERROR", error);

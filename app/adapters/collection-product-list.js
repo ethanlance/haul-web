@@ -6,7 +6,8 @@ var Haul = config.APP;
 var CollectionProductListAdapter = ApplicationAdapter.extend({
 	
 	host: Haul.Server.STORE_SERVER_HOST,  
-    findMany: function(store, type, ids, record) {  
+    findMany: function(store, type, ids, record) { 
+    console.log("HERE?", record.get('id')) 
 		var url = this.host + "/stores/" + record.get('id') + "/products"; 
 		return this.ajax(url, 'GET');
 	},

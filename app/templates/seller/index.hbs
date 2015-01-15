@@ -1,60 +1,75 @@
 
-{{user-header user=user}}
+{{user-header model=model}}
 
 {{!-- PAGE CONTENT --}}
 <div class="container-fluid haul-content">   
 	<div class="row">
-		<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="col-md-6 col-sm-8 col-xs-12">
 
 
-		{{!-- ALL PRODUCTS FOR THIS USER --}}
-		{{!-- SELLER PRODUCTS --}}
-		{{#if hasProducts}}
-		    {{#each hasProducts}}
+		{{#each model.products}}
 			
 
 			<div class="row post">   
-				<div class="col-md-2 col-sm-2 col-xs-2">
-					
-					{{!-- POSTER --}}	
-					{{ make-icon icon=user.icon isSmall=true}}
+				<div class="col-md-12 col-sm-12 col-xs-12"> 
 
+					<div class="citation">
 
-				</div>
-				<div class="col-md-10 col-sm-10 col-xs-10"> 
+						<span class="glyphicon glyphicon-retweet"></span>
+						<div class="name">{{collection.user.name}} <span class="rehauled">rehauled</span></div>
 
-					<h2>
-						{{#link-to 'seller.product' this.id }}{{name}}{{/link-to}}
-					</h2>
-
-					<div class="moment">1 day ago</div>
-					
-
-					{{#link-to 'seller.product' this.id }}
-						<div class="price">${{price}}</div>
-						<img class="img-responsive thumbnail" {{bind-attr src=image.small}}>
-				 	{{/link-to}}
-
-				 	<div class="btn-wrapper">
-
-					 	{{like-btn product=this.id class="display-inline" }}
-
-					 	{{comment-btn product=this.id class="display-inline" }}
-
-						<button class="btn btn-default">
-							<span class="glyphicon glyphicon-retweet"></span>
-						</button>
+						
+						{{#link-to 'seller.product' this.id }}
+						<div class="image">
+							{{ make-icon icon=product.user.icon isSmall=true}}
+						</div>
+						<div class="name">{{product.user.name}}</div>
+						{{/link-to}}
+						
 					</div>
 
+					<div class="article">
+						<h2>
+							{{#link-to 'seller.product' this.id }}{{name}}{{/link-to}}
+						</h2>
+
+						<div class="moment">1 day ago</div>
+						
+
+						{{#link-to 'seller.product' this.id }}
+						<div class="image">
+							<div class="price">${{product.price}}</div>
+							<img class="img-responsive thumbnail" {{bind-attr src=product.image.small}}>
+						</div>
+					 	{{/link-to}}
+
+					 	<div class="btn-wrapper">
+
+					 		<button class="btn btn-default">
+								buy
+							</button>
+
+						 	{{like-btn product=product.id class="display-inline" }}
+
+						 	{{comment-btn product=product.id class="display-inline" }}
+
+							<button class="btn btn-default">
+								<span class="glyphicon glyphicon-retweet"></span>
+							</button>
+
+							<button class="btn btn-default">
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
+						</div>
+					</div>
 
 				</div>
 			</div>	
 
-			{{/each}} 
-		{{/if}}
+		{{/each}} 
 		 
 		</div> 
-		<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="col-md-6 col-sm-4 col-xs-12">
 
 			{{!-- Side content --}}
 
@@ -74,7 +89,7 @@
 
 
 
-{{!-- 	{{#unless isProfileOwner}}
+{{#unless isProfileOwner}}
 	{{#unless hasProducts }}
 	{{#unless hasCollections }}
 		<p class="padding-top text-center font-weak">{{user.name}} has no posts.</p>
@@ -89,25 +104,19 @@
 		{{#unless hasProducts }} 
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12  text-center">
-			<h3>Welcome to Haul. Let's get started!</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12  text-center">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						
-						{{#link-to 'product-new'}}
-						<h3>
-							<span class="glyphicon glyphicon-camera"></span><br/>
-							Sell Something
-						</h3>
-						{{/link-to}} 
-					</div>
-				</div>
+				
+				<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
+				
+				{{#link-to 'product-new'}}
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-camera"></span><br/>
+					Post Something For Sale
+				</button>
+				{{/link-to}} 
+		
 			</div>	
 		</div>
 		{{/unless}}
 	{{/unless}}
-	{{/if}} --}}
+	{{/if}}  
 		 

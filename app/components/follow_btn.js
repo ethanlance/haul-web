@@ -3,28 +3,21 @@ import Ember from 'ember';
 
 var FollowBtnComponent = Ember.Component.extend({
 
-	btnName: null,
-	ref_type: null,
-	ref_idBinding: "item.id",
-	user_idBinding: "session.currentUser.id",
-	
-	isFollowingCountBinding: "item.getFollowingCount.total",
-	isFollowingText: null,
-	
-	isFollowedByCountBinding: "item.getFollowedByCount.total",
-	isFollowedByText: null,
-
-	userFollows: null,
-	userFollowsRecord: null,
 	showButton: false,
-
-	item: '',
+	hideIfFollowing:false,
+	userFollows: false,
+	buttonText: 'follow',
+	followType: 'stores',
+	followIdBinding: "followObj.id",
+	userIdBinding: "session.currentUser.id",
+	userFollowsRecord: false,
+	
 
 	userFollowsChange: function() {
 		if( this.get('userFollows') ) {
-			this.set('btnName', 'following');
+			this.set('buttonText', 'following');
 		} else {
-			this.set('btnName', 'follow');
+			this.set('buttonText', 'follow');
 		}
 
 		if( this.get('hideIfFollowing') === true ) {
@@ -33,30 +26,6 @@ var FollowBtnComponent = Ember.Component.extend({
 
 	}.observes('userFollows'),
 
-	/**
-	 	Number of users following this ITEM
-	**/
-	isFollowedByCountChange: function() { 
-		var total = this.get('isFollowedByCount');
-		if( total ) {
-			if( total === 1 ){
-				this.set('isFollowedByText', total + " follower");
-			}
-			else {
-				this.set('isFollowedByText', total + " followers");
-			}
-		}
-	}.observes('isFollowedByCount'),
-
-	/** 
-		Number of user's this ITEM is following
-	**/
-	isFollowingCountChange: function() { 
-		var total = this.get('isFollowingCount'); 
-		if( total ) {
-			this.set('isFollowingText', "following " + total);
-		}
-	}.observes('isFollowingCount'),
 
  	start: function(){ 		
  		this.itemChanged();
@@ -64,83 +33,63 @@ var FollowBtnComponent = Ember.Component.extend({
 
  	itemChanged: function() {
  
-		if(!this.get('ref_id')){
-			return;
-		}
-	
-
-		if( !this.get('targetObject.store')) {
+		if(!this.get('userId') || !this.get('followId') ){
 			return;
 		}
 
-		this.isFollowedByCountChange();
-		this.isFollowingCountChange();
 
-		var store = this.get('targetObject.store');
+		var store = this.container.lookup("store:main");
 		var _this = this; 
 
-  		var ref_type = this.get('ref_type');
-        if(ref_type === "user"){
-        	this.set('ref_type', 'users');
-        }
-        else if(ref_type === "collection"){
-        	this.set('ref_type', 'stores');
-        }
 
-		//Can't follow self.
-		if( this.get('user_id') === this.get('ref_id') ) {
-			this.set('showButton', false);
-			return;
-		} else {
-			this.set('showButton', true);
+		this.set('showButton', true);
 
-			//currentUser follows item?
-			var key = this.ref_id + "-" + this.ref_type;
-			store.find('follow', key).then(function(ufollow){
-				if(!Ember.isEmpty(ufollow)){
-					_this.set('userFollows', true);
-					_this.set('userFollowsRecord', ufollow);
-				}
-			}, function() {
-				
-				_this.set('userFollowsRecord', false);
-				_this.set('userFollows', false);
-			});
-		}
-	}.observes('item'),
+		//currentUser follows item?
+		var key = this.followId + "-" + this.followType;
+		store.find('follow', key).then(function(record){
+			if(!Ember.isEmpty(record)){
+				_this.set('userFollows', true);
+				_this.set('userFollowsRecord', record);
+			}
+		}, function() {
+			_this.set('userFollowsRecord', false);
+			_this.set('userFollows', false);
+		});
+		
+	}.observes('followId', 'userId'),
 
 	actions: {	
 
-		btnClick: function() { 
+		buttonClick: function() { 
 			var _this = this;
 			var record = this.get('userFollowsRecord'); 
-
+			var store = this.container.lookup("store:main");
 			var follow;
+			
 			if( record ){
 				record.deleteRecord();
 				follow = false;
 			} else {
-				var store = this.get('targetObject.store');
-				var data = {
-					user_id: this.get('user_id'),
-					ref_id: this.get('ref_id'), 
-					ref_type: this.get('ref_type')
-				};
+				record = store.createRecord('follow', {user_id: this.get('userId'),ref_id: this.get('followId'), ref_type: this.get('followType')});
 				
-				record = store.createRecord('follow', data);
 				follow = true;
 			}
 
-			record.save().then(function(){
-				_this.toggleProperty('userFollows');
+			record.save()
+			.then(function(){
 
 				if( follow ){
 					_this.set('userFollowsRecord', record);
-					_this.incrementProperty('isFollowedByCount');
+					_this.set('userFollows', true); 
 				}else{
-					_this.set('userFollowsRecord', null);
-					_this.decrementProperty('isFollowedByCount');
+					_this.set('userFollowsRecord', false);
+					_this.set('userFollows', false); 
 				}
+
+				store.find('collection-is-followed-by-count', _this.get('followId'))
+				.then(function(r){
+					r.reload();
+				});
 				
 			}, function(error){
 				console.log("Error", error);

@@ -4,10 +4,11 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 export default Ember.Route.extend(AuthenticatedRouteMixin,{
 	controllerName: "seller.product.edit",
 	model: function() {
-		return this.store.createRecord('product');
+		return this.store.createRecord('collection-product');
 	},
  	setupController: function(controller, model) {	
   		controller.reset();
+  		controller.set('modelProduct', this.store.createRecord('product'));
   		this._super(controller, model);
  	},
 	renderTemplate: function(controller, model) {

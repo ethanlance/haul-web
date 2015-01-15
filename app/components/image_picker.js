@@ -14,9 +14,8 @@ var ImagePickerComponent = Ember.Component.extend({
 	user_tokenBinding: 'session.currentUser.access_token',
 
 
-	didInsertElement: function(){
+	start: function(){
 		var _this = this; 
-
 		//INIT
 		 this.dropzone = new Dropzone("#haul-dropzone", { 
 
@@ -159,7 +158,7 @@ var ImagePickerComponent = Ember.Component.extend({
 			self.removeFile(file);
 			
 		});
-	},
+	}.observes('user_id'),
  
 	//Send Event To Controller:
 	refreshImages: function(file, response) {	 

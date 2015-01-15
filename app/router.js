@@ -19,7 +19,7 @@ Router.map(function(){
 	this.route('not-authorized');
 
 	//Profiles
-	this.resource('seller', {path: "/profile/:user_slug"}, function() {
+	this.resource('seller', {path: "/profile/:slug"}, function() {
 		this.route('followers');
 		this.route('follows');
 		this.route('likes');
@@ -33,15 +33,15 @@ Router.map(function(){
 	this.route('product-new', {path: "/new-product"});
 
 	//Store
-	this.resource('collection-new', {path: "/new-collection"});
-	this.resource('collection', {path: "/collection/:collection_slug"}, function() {
-		this.route('followers');
-		this.route('edit');
+	// this.resource('collection-new', {path: "/new-collection"});
+	// this.resource('collection', {path: "/collection/:collection_slug"}, function() {
+	// 	this.route('followers');
+	// 	this.route('edit');
 
-		this.route('product', {path: "/:product_slug"}, function() {
-			this.route('edit');
-		});
-	});
+	// 	this.route('product', {path: "/:product_slug"}, function() {
+	// 		this.route('edit');
+	// 	});
+	// });
 
 	//Auth
 	this.route('login');

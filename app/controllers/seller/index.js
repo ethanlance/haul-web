@@ -2,33 +2,24 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 	currentUserIdBinding: 'Haul.currentUser.id',
-	collection: null,
-	user: null, 
-	hasProducts: false,
-	hasCollections: false,
+	userIdBinding: 'model.user.id',
 	isProfileOwner: false,
-
+	
 	isProfileOwnerChanged: function() {
 
-		this.set('isProfileOwner', false);
-		this.set('hasProducts', false);
-		this.set('hasCollections', false);
-
-		if( this.get('session').isAuthenticated ) {
-			if (this.get('user').id === this.currentUserId) {
+		this.set('isProfileOwner', false); 
+		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId')) ) {
+			if (this.get('userId') === this.get('currentUserId')) {
 				this.set('isProfileOwner', true);
 			}
-		}
+		} 
+	}.observes('userId', 'currentUserId'),
 
-		var _this = this;
-		//Find the sellers collections.  Then find the follower list for the first collection.
-		this.store.find('user-collection', {user_id:this.user.id}).then(function(result) {
-			_this.set('hasCollections', result);
+	getProducts: function() {
+		var model = this.get('model');
+		this.store.find("collection-product-list", {'collection_id':model.get('id')} )
+		.then(function(records){
+			model.set('products', records);
 		});
-		
-		this.store.find('product-list', {user_id: this.user.id}).then(function(result) {
-			_this.set('hasProducts', result);
-		});
-
 	}.observes('model'),
 }); 

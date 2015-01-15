@@ -9,6 +9,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
 		return this.modelFor('seller.product');
 	},
 	setupController: function(controller, model) {
+  		controller.set('modelProduct', model.get('product'));
 		controller.set('model', model);
 	},
 }); 

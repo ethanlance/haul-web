@@ -22,15 +22,18 @@ var CollectionProductListSerializer =  DS.RESTSerializer.extend({
 			return {
 				id: id,	
 				editorial: result.editorial,
-				currency: result.product_currency,				
-				price: result.product_price,
-				name: result.product_name,
-				product_id: result.product_id,
-				collection_id: result.store_id,
-				
-				//collection: result.store_id,	
 				product: result.product_id,
-				image: result.product_image_id,
+				collection: result.store_id,
+
+				// currency: result.product_currency,				
+				// price: result.product_price,
+				// name: result.product_name,
+				// product_id: result.product_id,
+				// collection_id: result.store_id,
+				
+				// //collection: result.store_id,	
+				// product: result.product_id,
+				// image: result.product_image_id,
 			};
 		}); 
 

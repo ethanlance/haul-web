@@ -22,7 +22,6 @@
 		
 		{{image-picker 
 			images=uploads
-			session=session
 			refresh='refresh'
 			imageClick='imageClick' 
 			imageDeleted='imageDeleted'
@@ -40,7 +39,7 @@
 
 	<div {{bind-attr class="showImagePicker:hide:show"}}>
 		
-		{{#form-for model wrapper="bs3-wrapper"}}
+		{{#form-for modelProduct wrapper="bs3-wrapper"}}
 		<div class="row">
 			<div class="col-md-9 col-sm-9 col-xs-12"> 
 				<div class="row">

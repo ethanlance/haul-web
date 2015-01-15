@@ -13,7 +13,7 @@ export default Ember.ObjectController.extend({
 	setup: function() { 
 		var currentUser = this.get('currentUser');
 		if( currentUser ){
-			if( !Ember.isEmpty(currentUser) && this.get('user').id === currentUser.get('id')) {
+			if( !Ember.isEmpty(currentUser) && this.get('user').get('id') === currentUser.get('id')) {
 				this.set('isProfileOwner', true);
 			}
 		}

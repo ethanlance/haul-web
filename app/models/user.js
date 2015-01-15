@@ -10,8 +10,11 @@ export default DS.Model.extend({
 	image: DS.belongsTo('image', {async:true}),
 	image_id: DS.attr('string'), 
 
+
+	collection: DS.belongsTo('collection', {async:true}),
 	getFollowedByCount: DS.belongsTo('user-is-followed-by-count', {async:true}),
 	getFollowingCount: DS.belongsTo('user-is-following-count', {async:true}),
+	getLikesCount: DS.belongsTo('user-likes-count', {async:true}),
 
 	icon: DS.attr('string'), 
 	iconChange: function() { 
@@ -76,6 +79,7 @@ export default DS.Model.extend({
 	getCollections: function() { 
 		var store = this.store;
 		var user_id = this.get('id');
+		
 		store.find('user-collection', {user_id: user_id});
  
 		return store.filter('user-collection', function(result){  

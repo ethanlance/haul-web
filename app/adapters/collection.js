@@ -21,19 +21,11 @@ var CollectionAdapter = ApplicationAdapter.extend({
 			url = this.host + "/stores";
 			return this.ajax(url, 'GET', { data: { store_ids: ids } });
 		}
-	}, 
-
-	setDescription: function(){
-		var description = this.get('currentUser').get('name') + " hasn't written a description yet.";
-		return description;
-	},
+	},  
 
 	updateRecord: function(store, type, record) {
 		
-		var description = record.get('description');
-		if(!description) {
-			description = this.setDescription();
-		} 
+		var description = record.get('description'); 
 
 		var data = {
 			name: record.get('name'),
@@ -49,11 +41,7 @@ var CollectionAdapter = ApplicationAdapter.extend({
 
 	createRecord: function(store, type, record) {
 
-		var description = record.get('description');
-		if(!description) {
-			description = this.setDescription();
-		} 
-
+		var description = record.get('description'); 
 		var data = {
 			name: record.get('name'),
 			description: description,

@@ -4,17 +4,20 @@ import DS from "ember-data";
 
 //Models
 var CollectionProductList = DS.Model.extend(Ember.Validations.Mixin, {
+	
 	editorial: DS.attr('string'),
+	collection: DS.belongsTo('collection', {async:true}),
+	product: DS.belongsTo('product', {async:true}),
+
+	//Do we need the below?
 	currency: DS.attr('string'),
 	price: DS.attr('string'),
 	name: DS.attr('string'),
 	product_id: DS.attr('string'),
 	collection_id: DS.attr('string'),
-
 	user: DS.belongsTo('user', {async:true}),
-	collection: DS.belongsTo('collection', {async:true}),
-	product: DS.belongsTo('product', {async:true}),
 	image: DS.belongsTo('image', {async:true}),
+	
 
 	validations: { 
 		editorial: {
