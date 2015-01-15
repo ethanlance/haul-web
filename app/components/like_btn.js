@@ -1,28 +1,28 @@
-
 import Ember from 'ember';
 
+export default Ember.Component.extend({
 
-var LikeBtnComponent = Ember.Component.extend({
-
-	ref_type: "products",
-	ref_idBinding: "id",
-	user_idBinding: "session.currentUser.id",
-	totalBinding: "item.likeCount.total",
+	productType: 'products',
+	productIdBinding: "product.id",
+	userIdBinding: "session.currentUser.id",
+	totalBinding: "product.likeCount.total",
 	userLikes: false,
 	userLikesRecord: false,
 
+
+
 	start: function() {
-		var store = this.get('targetObject.store');
+		var store = this.container.lookup("store:main");
 		var _this = this;
-return;
+console.log("ASS HOLE")
 		//currentUser like item?
-		store.find('like', this.ref_id).then(function(uLike){
+		store.find('like', this.get('productId')).then(function(uLike){
 			if(!Ember.isEmpty(uLike)){
 				_this.set('userLikes', true);
 				_this.set('userLikesRecord', uLike);
 			}
 		});
-	}.on('init'),
+	}.on('init').observes('productId'),
 
 	actions: {
 		btnClick: function() { 
@@ -34,12 +34,13 @@ return;
 				record.deleteRecord();
 				like = false;
 			} else {
-				var store = this.get('targetObject.store');
+				var store = this.container.lookup("store:main");
 				var data = {
-					user_id: this.user_id,
-					ref_id: this.ref_id, 
-					ref_type: this.ref_type
+					user_id: this.get('userId'),
+					ref_id: this.get('productId'), 
+					ref_type: this.get('productType')
 				};
+				console.log("DATA", data);
 				record = store.createRecord('like', data);
 				like = true;
 			}
@@ -61,4 +62,3 @@ return;
 		}
 	}
 });
-export default LikeBtnComponent;
