@@ -2,24 +2,24 @@ import Ember from 'ember';
 var $ = Ember.$;  
 
 export default Ember.ObjectController.extend({  
-	currentUserBinding: 'Haul.currentUser',
+	currentUserIdBinding: 'Haul.currentUser.id',
 	collectionsBinding: "collections.collections",
+	userIdBinding: 'model.user.id',
 	
 	url: "", 
 	
 	//Is currentUser viewing his own page?
 	isProfileOwner: false,
 	 
-	setup: function() { 
-		var currentUser = this.get('currentUser');
-		if( currentUser ){
-			if( !Ember.isEmpty(currentUser) && this.get('user').get('id') === currentUser.get('id')) {
+	setup: function() {  
+		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
+			if( this.get('userId') === this.get('currentUserId')) {
 				this.set('isProfileOwner', true);
 			}
 		}
-
 		this.set('url', window.location.href);
-	}.observes('model'),
+
+	}.observes('userId', 'currentUserId'),
 
 	actions: {
 

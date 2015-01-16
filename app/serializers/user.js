@@ -10,6 +10,7 @@ var UserSerializer =  DS.RESTSerializer.extend({
 			slug: payload.data.user_id,
 			getFollowedByCount: payload.data.user_id,
 			getFollowingCount: payload.data.user_id,
+			getLikesCount: payload.data.user_id,
 			image_id: payload.data.image_id,
 			image: payload.data.image_id
 		};

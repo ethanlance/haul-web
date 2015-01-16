@@ -20,6 +20,17 @@ var Product = DS.Model.extend(Ember.Validations.Mixin, {
 	getCollections: DS.belongsTo('product-collection-list', {async:true}),
 	getLikes: DS.belongsTo('product-liked-by-list', {async:true}),
 
+	slug: function() {		
+		if(Ember.isEmpty(this.get('name'))){
+			return;
+		}
+		
+		var slug = this.get('name');
+		slug = slug.toLowerCase().replace(/ /g,'-').replace(/[-]+/g, '-').replace(/[^\w-]+/g,''); 
+		
+		return slug;
+	}.property('name'),
+
 	validations: { 
 		name: {
 		 	presence: true,

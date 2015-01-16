@@ -357,6 +357,11 @@ header.profile{
 	background-color: #fafafa;
 	border-bottom: 1px solid #ccc;
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	
+	.sidebar{
+		padding-top: 10px;
+		padding-right: 30px;
+	}
 
 	.post {
 		background-color: #ffffff;
@@ -371,6 +376,8 @@ header.profile{
 		padding-left: 10px;
 		padding-right: 10px;
 		padding-bottom: 20px;
+
+
 
 		.citation {
 			border-top: 1px solid #eee;

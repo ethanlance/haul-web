@@ -28,19 +28,18 @@ console.log("ASS HOLE")
 		btnClick: function() { 
 			var _this = this;
 			var record = this.get('userLikesRecord'); 
+			var store = this.container.lookup("store:main");
 
 			var like;
 			if( record ){
 				record.deleteRecord();
 				like = false;
 			} else {
-				var store = this.container.lookup("store:main");
 				var data = {
 					user_id: this.get('userId'),
 					ref_id: this.get('productId'), 
 					ref_type: this.get('productType')
 				};
-				console.log("DATA", data);
 				record = store.createRecord('like', data);
 				like = true;
 			}
@@ -55,6 +54,11 @@ console.log("ASS HOLE")
 					_this.set('userLikesRecord', null);
 					_this.decrementProperty('total');
 				}
+
+				store.find('user-likes-count', _this.get('userId'))
+				.then(function(r){
+					r.reload();
+				});
 				
 			}, function(error){
 				console.log("Error", error);

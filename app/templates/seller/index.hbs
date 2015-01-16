@@ -6,10 +6,8 @@
 	<div class="row">
 		<div class="col-md-6 col-sm-8 col-xs-12">
 
-
 		{{#each model.products}}
 			
-
 			<div class="row post">   
 				<div class="col-md-12 col-sm-12 col-xs-12"> 
 
@@ -19,7 +17,7 @@
 						<div class="name">{{collection.user.name}} <span class="rehauled">rehauled</span></div>
 
 						
-						{{#link-to 'seller.product' this.id }}
+						{{#link-to 'seller' product.user }}
 						<div class="image">
 							{{ make-icon icon=product.user.icon isSmall=true}}
 						</div>
@@ -29,19 +27,21 @@
 					</div>
 
 					<div class="article">
-						<h2>
-							{{#link-to 'seller.product' this.id }}{{name}}{{/link-to}}
-						</h2>
+						{{!-- <h2>
+							{{#link-to 'seller.product' collection product }}{{product.name}}{{/link-to}}
+						</h2> --}}
 
 						<div class="moment">1 day ago</div>
 						
 
-						{{#link-to 'seller.product' this.id }}
+						
 						<div class="image">
-							<div class="price">${{product.price}}</div>
-							<img class="img-responsive thumbnail" {{bind-attr src=product.image.small}}>
+							{{!-- <div class="price">${{product.price}}</div> --}}
+							{{#link-to 'seller.product' collection product.id product.slug }}
+								<img class="img-responsive thumbnail" {{bind-attr src=product.image.small}}>
+							{{/link-to}}
 						</div>
-					 	{{/link-to}}
+					 	
 
 					 	<div class="btn-wrapper">
 
@@ -62,7 +62,6 @@
 							</button>
 						</div>
 					</div>
-
 				</div>
 			</div>	
 

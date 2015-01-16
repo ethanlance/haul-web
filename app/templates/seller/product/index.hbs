@@ -1,4 +1,85 @@
-<div class="container-fluid haul-content">   
+<div class="container-fluid haul-content padding-top">  
+
+	
+
+	<div class="row">
+		<div class="col-md-6 col-sm-8 col-xs-12">
+
+			<div class="row post">   
+				<div class="col-md-12 col-sm-12 col-xs-12"> 
+
+					<div class="citation">
+
+						<span class="glyphicon glyphicon-retweet"></span>
+						< Back | <div class="name">{{collection.user.name}} <span class="rehauled">rehauled</span></div>
+
+						
+						{{#link-to 'seller' collection }}
+						<div class="image">
+							{{ make-icon icon=product.user.icon isSmall=true}}
+						</div>
+						<div class="name">{{product.user.name}}</div>
+						{{/link-to}}
+						
+					</div>
+
+					<div class="article">
+						<h2>
+							{{#link-to 'seller.product' this.id }}{{name}}{{/link-to}}
+						</h2>
+
+						<div class="moment">1 day ago</div>
+						
+
+						
+						<div class="image">
+							<div class="price">${{product.price}}</div>
+							<img class="img-responsive thumbnail" {{bind-attr src=product.image.small}}>
+						</div>
+					 	
+
+					 	<div class="btn-wrapper">
+
+					 		<button class="btn btn-default">
+								buy
+							</button>
+
+						 	{{like-btn product=product class="display-inline" }}
+
+						 	{{comment-btn product=product class="display-inline" }}
+
+							<button class="btn btn-default">
+								<span class="glyphicon glyphicon-retweet"></span>
+							</button>
+						</div>
+					</div>
+
+				</div>
+			</div>	 
+		 
+		</div> 
+		<div class="col-md-6 col-sm-4 col-xs-12 sidebar">
+
+			{{!-- Side content --}}
+
+			{{!-- DETAILS --}}
+			<h3>Seller</h3>
+			{{ make-icon icon=product.user.icon isSmall=true}}
+			{{product.user.name}}
+
+			<h4>Description</h4>
+			{{ product.description }}
+
+
+			{{!-- COMMMENTS --}}
+
+			{{comment-section itemObject=product contextObject=collection  class="display-inline" }}
+
+		</div>
+	</div>
+</div>
+
+{{!-- <div class="container-fluid haul-content">   
 	<div class="row">
 		<div class="col-md-6 col-sm-8 col-xs-12">
 
@@ -66,3 +147,4 @@
 		</div>
 	</div>
 </div>
+ --}}

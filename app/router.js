@@ -25,11 +25,10 @@ Router.map(function(){
 		this.route('likes');
 		this.route('products');
 
-		this.route('product', {path: "/:product_slug"}, function() {
+		this.route('product', {path: "/:product_id/:product_slug"}, function() {
 			this.route('edit');
 		});
 	});
-
 	this.route('product-new', {path: "/new-product"});
 
 	//Store

@@ -8,7 +8,7 @@ var CollectionProductAdapter = ApplicationAdapter.extend({
 	host: Haul.Server.STORE_SERVER_HOST, 
 
 	find: function(store, type, id){
-			id = String(id);
+		id = String(id);
 		var key = id.split('-');
 		var collection_id = key[0];
 		var product_id = key[1];
