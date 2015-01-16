@@ -108,16 +108,28 @@ var CommentSectionComponent = Ember.Component.extend({
 	updateCommentCount: function(direction) {
 		var store = this.get('targetObject.store');
 		var key = this.type_map[this.contextType] + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
-		var record = store.getById('product-comment-count', key );
+		
+		var key = this.contextId + "-" + this.itemId;
 
-		if(record){
+		var storeName = null;
+		if( this.contextType == "collections"){
+			storeName = "collection-product-comment-count"
+		}
+
+		if( this.contextType == "users"){
+			storeName = "product-comment-count"
+		}
+
+		store.find(storeName, key )
+		.then(function(record){
 			if( direction === "up"){
 				record.incrementProperty('total');
-			}
-			else{
+			}else{
 				record.decrementProperty('total'); 
 			}
-		}
+		});
+
+
 	},
 
 	saveModel: function() {

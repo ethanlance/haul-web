@@ -6,11 +6,11 @@ var Haul = config.APP;
 export default ApplicationAdapter.extend({
 
 	host: Haul.Server.COMMENT_SERVER_HOST,
-
+	
 	find: function(store, type, id) {
 		id = String(id);
 		var s = id.split('-');
-		var url = this.host + '/users/' + s[0] + '/products/'+ s[1] + '/comments/total';
+		var url = this.host + '/stores/' + s[0] + '/products/'+ s[1] + '/comments/total';
 		return this.ajax(url, 'GET');
 	}
 });

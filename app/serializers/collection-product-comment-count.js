@@ -19,7 +19,7 @@ export default  DS.RESTSerializer.extend({
 			total: payload.data.total,	
 		};
 
-		payload ={'product-comment-count': data}; 
+		payload ={'collection-product-comment-count': data}; 
 		return this._super(store, type, payload, recordId, requestType);
 	}
 });

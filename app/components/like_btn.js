@@ -9,12 +9,10 @@ export default Ember.Component.extend({
 	userLikes: false,
 	userLikesRecord: false,
 
-
-
 	start: function() {
 		var store = this.container.lookup("store:main");
 		var _this = this;
-console.log("ASS HOLE")
+
 		//currentUser like item?
 		store.find('like', this.get('productId')).then(function(uLike){
 			if(!Ember.isEmpty(uLike)){

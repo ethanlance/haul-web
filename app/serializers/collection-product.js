@@ -10,12 +10,14 @@ var CollectionProductSerializer =  DS.RESTSerializer.extend({
 			return;
 		}
 
+		var commentCountId = payload.data.store_id +"-"+payload.data.product_id
 		var id = payload.data.store_id + payload.data.product_id; 
 		var data = {
 			id: id,	
 			editorial: payload.data.editorial,
 			product: payload.data.product_id,
-			collection: payload.data.store_id
+			collection: payload.data.store_id,
+			commentCount: commentCountId
 		};
 
 		payload = {'collection-product': data};  
@@ -28,12 +30,14 @@ var CollectionProductSerializer =  DS.RESTSerializer.extend({
 			return;
 		} 
 		
+		var commentCountId = payload.data.store_id +"-"+payload.data.product_id
 		var id = payload.data.store_id + payload.data.product_id; 
 		var data = {
 			id: id,	
 			editorial: payload.data.editorial,
 			product: payload.data.product_id,
-			collection: payload.data.store_id
+			collection: payload.data.store_id,
+			commentCount: commentCountId
 		};
 
 		payload = {'collection-product': [data]};  

@@ -9,6 +9,8 @@ var CollectionProduct = DS.Model.extend(Ember.Validations.Mixin, {
 	product: DS.belongsTo('product', {async:true}),
 	collection: DS.belongsTo('collection'),
 
+	commentCount: DS.belongsTo('collection-product-comment-count', {async:true}),
+
 	validations: { 
 		editorial: {
 		 	//presence: true,

@@ -8,6 +8,7 @@ var CollectionProductList = DS.Model.extend(Ember.Validations.Mixin, {
 	editorial: DS.attr('string'),
 	collection: DS.belongsTo('collection', {async:true}),
 	product: DS.belongsTo('product', {async:true}),
+	commentCount: DS.belongsTo('collection-product-comment-count', {async:true}),
 
 	//Do we need the below?
 	currency: DS.attr('string'),

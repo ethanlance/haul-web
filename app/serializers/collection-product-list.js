@@ -18,12 +18,15 @@ var CollectionProductListSerializer =  DS.RESTSerializer.extend({
 		}
 		
 		var data = payload.data.map(function(result){ 
+			var commentCountId = result.store_id +"-"+ result.product_id
 			var id =  result.product_id + result.store_id;
 			return {
 				id: id,	
 				editorial: result.editorial,
 				product: result.product_id,
 				collection: result.store_id,
+				commentCount: commentCountId
+
 
 				// currency: result.product_currency,				
 				// price: result.product_price,

@@ -17,6 +17,8 @@ var ProductSerializer =  DS.RESTSerializer.extend({
 			return;
 		}
 
+		var commentCountId = payload.data.user_id +"-"+payload.data.product_id
+
 		var data = {
 			id: payload.data.product_id,	
 			name: payload.data.name,
@@ -29,6 +31,7 @@ var ProductSerializer =  DS.RESTSerializer.extend({
 			user_id: payload.data.user_id,
 			
 			likeCount: payload.data.product_id,
+			commentCount: commentCountId,
 
 			getCollections: payload.data.product_id,
 			getLikes: payload.data.product_id,

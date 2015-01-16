@@ -15,7 +15,7 @@ var Product = DS.Model.extend(Ember.Validations.Mixin, {
 	images: DS.hasMany('image', {async:true}),
 	image: DS.belongsTo('image', {async:true}),	
 
-
+	commentCount: DS.belongsTo('product-comment-count', {async:true}),
 	likeCount: DS.belongsTo('like-count', {async:true}),
 	getCollections: DS.belongsTo('product-collection-list', {async:true}),
 	getLikes: DS.belongsTo('product-liked-by-list', {async:true}),
