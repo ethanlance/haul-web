@@ -16,7 +16,7 @@ var CommentSectionComponent = Ember.Component.extend({
 	itemIdBinding: "itemObject.id",
 
 	contextObject: null,
-	contextType: null,
+	contextType: 'collections',
 	contextIdBinding: "contextObject.id",
  
 	userIdBinding: "session.currentUser.id",
@@ -33,33 +33,8 @@ var CommentSectionComponent = Ember.Component.extend({
 		"users": "users"
 	},
 	
-	//Normally a Product
-	itemChanged: function() {
-	// 	//Get Ref Type: 
-	// 	console.log("ITEM", this.itemId);
-	// 	console.log("ITEM", this.itemObject);
-	// 	var model = String(this.itemObject.constructor);
-	// 	var name = model.split(':');
-	// 	console.log("NAME ", name)
- //        var itemType = Ember.String.pluralize(Ember.String.camelize(name[1])); 
- //        this.set('itemType', itemType);
-
-	}.observes('itemObject'),
-
-
-	//Normally a Collection or User
-	contextChanged: function() {
-		//Get Ref Type: 
-		var model = String(this.contextObject.constructor);
-		var name = model.split(':');
-        var contextType = Ember.String.pluralize(Ember.String.camelize(name[1]));
-        this.set('contextType', contextType);
-
-	}.observes('contextObject'),
 
 	start: function() { 
-		this.itemChanged();
-		this.contextChanged();
 
 		this.makeModel();
 		
@@ -71,8 +46,9 @@ var CommentSectionComponent = Ember.Component.extend({
 
 			var itemId = comment.get('product_id');
 			var contextId = comment.get('context_id');
+			
 			var contextType = _this.reverse_type_map[comment.get('context_type')];
-
+			
 			if( itemId && itemId === _this.itemId && contextId === _this.contextId && contextType === _this.contextType ){ 
 
 				//Can this comment be deleted by the currentUser?
@@ -89,15 +65,14 @@ var CommentSectionComponent = Ember.Component.extend({
 	}.on('init'),
 
 	makeModel: function() {
-		var store = this.get('targetObject.store');
+		var store = this.container.lookup('store:main');
 		var model = store.createRecord('product-comment');
 		this.set('model', model);
 	},
 
 	loadComments: function() {
-		var store = this.get('targetObject.store');
+		var store = this.container.lookup('store:main');
 		
-
 		var query = {'contextId':this.contextId, 'contextType':this.contextType, 'itemId':this.itemId};
 		store.find('product-comment', query).then(function(){
 		}, function(error) {
@@ -106,9 +81,9 @@ var CommentSectionComponent = Ember.Component.extend({
 	},
 
 	updateCommentCount: function(direction) {
-		var store = this.get('targetObject.store');
-		var key = this.type_map[this.contextType] + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
-		
+		var store = this.container.lookup('store:main');
+		//var key = this.type_map[this.contextType] + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
+	
 		var key = this.contextId + "-" + this.itemId;
 
 		var storeName = null;

@@ -13,6 +13,16 @@
 
 	<div class="stats-block">
 
+		{{#link-to "seller" model}}
+		<div {{bind-attr class=":stats isSelected:activehack"}}>
+			<span>hauls</span><br/>
+			<a>170</a>
+			<div class="highlight-wrap">
+			<div class="highlight"></div>
+			</div>
+		</div> 
+		{{/link-to}}
+
 		{{#link-to "seller.follows" model}}
 		<div class="stats">
 			<span>following</span><br/>
@@ -33,15 +43,6 @@
 			<a>{{model.user.getLikesCount.total}}</a>
 		</div>
 		{{/link-to}}
-
-		<div class="stats">
-			
-			<span>rehauls</span><br/>
-			<a>170</a>
-			<div class="highlight-wrap">
-			<div class="highlight"></div>
-			</div>
-		</div> 
 
 		<div class="clearfix"></div>
 	</div> 

@@ -17,7 +17,7 @@
 
 			{{!-- SELLER PRODUCTS --}}
 		    {{#each model.user.getLikes.products}}
-		    	{{#link-to 'seller.product' user.collection id slug }}
+		    	{{#link-to 'seller.product' user.collection.slug id slug }}
 		    	<div class="haul-grid-li"> 
 					<img class="thumbnail" {{bind-attr src=image.small}}>
 					
@@ -27,8 +27,6 @@
 			 	</div>
 			 	{{/link-to}}	
 			{{/each}}  
-
-
 		</div> 
 	</div>
 </div>

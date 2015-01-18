@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.ObjectController.extend({
 	currentUserIdBinding: 'Haul.currentUser.id',
 	userIdBinding: 'model.user.id',
-	isProfileOwner: false,
-	
+	isProfileOwner: false, 
+
 	isProfileOwnerChanged: function() {
 
 		this.set('isProfileOwner', false); 

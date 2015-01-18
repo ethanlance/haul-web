@@ -310,7 +310,13 @@ header.profile{
 		border-top: 1px solid #ddd;
 		border-bottom: 2px solid #E1E8ED;
 
-		.active {
+
+
+		.active ~ .active {
+			color: red;
+		}
+
+		.activehack{
 			color: red;
 		}
 

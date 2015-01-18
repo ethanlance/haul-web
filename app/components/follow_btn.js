@@ -37,6 +37,11 @@ var FollowBtnComponent = Ember.Component.extend({
 			return;
 		}
 
+		if( this.get('followObj').get('user').get('id') === this.get('userId')){
+			this.set('showButton', false);
+			return;
+		}
+
 		var _this = this;
 		var store = this.container.lookup("store:main");
 		this.set('showButton', true); 
