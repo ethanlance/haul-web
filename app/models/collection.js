@@ -1,9 +1,7 @@
 import Ember from "ember";
 import DS from "ember-data"; 
 
-
-//Models
-var Collection = DS.Model.extend(Ember.Validations.Mixin, {
+export default DS.Model.extend(Ember.Validations.Mixin, {
 
 	name: DS.attr( 'string' ),
 	description: DS.attr( 'string' ),
@@ -85,12 +83,3 @@ var Collection = DS.Model.extend(Ember.Validations.Mixin, {
 		}
 	}
 });	
-export default Collection;
-
-
-
- 
-
-
-
-

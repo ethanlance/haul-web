@@ -10,8 +10,9 @@ export default Ember.Route.extend({
 		});
 	},	
 	// serialize: function(model) { 
-	// 	if(!Ember.isEmpty(model) && model.id){
- // 	   		return { slug: model.slug };
-	// 	}
+	// //	if(!Ember.isEmpty(model) && model.id){
+	// 	console.log("HERE MODEL SLUG", model.get('slug'))
+ // 	   		return { slug: model.get('slug') };
+	// //	}
 	// }
 });

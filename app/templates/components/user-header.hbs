@@ -1,7 +1,8 @@
 {{!-- SELLER PROFILE  --}}
 <header class="profile">
-
-	{{ make-icon icon=model.user.icon isSmall=false isCollection=true}}
+	{{#link-to 'seller' model}}
+		{{ make-icon icon=model.user.icon isSmall=false isCollection=true}}
+	{{/link-to}}
 
 	{{ follow-btn followObj=model}}
 
@@ -12,26 +13,26 @@
 
 	<div class="stats-block">
 
+		{{#link-to "seller.follows" model}}
 		<div class="stats">
-			
 			<span>following</span><br/>
 			<a>{{model.user.getFollowingCount.total}}</a>
-
 		</div>
+		{{/link-to}}
 
+		{{#link-to "seller.followers" model}}
 		<div class="stats">
-			
 			<span>followers</span><br/>
 			<a>{{model.getFollowedByCount.total}}</a>
-			
 		</div>
+		{{/link-to}}
 
+		{{#link-to "seller.likes" model}}
 		<div class="stats">
-			
 			<span>likes</span><br/>
 			<a>{{model.user.getLikesCount.total}}</a>
-			
 		</div>
+		{{/link-to}}
 
 		<div class="stats">
 			

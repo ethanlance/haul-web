@@ -1,6 +1,6 @@
 import DS from 'ember-data';
  
-var CollectionIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
+export default DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
@@ -17,5 +17,3 @@ var CollectionIsFollowedByCountSerializer =  DS.RESTSerializer.extend({
 		return this._super(store, type, payload, recordId, requestType);
 	}
 });
-export default CollectionIsFollowedByCountSerializer;
-

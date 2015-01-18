@@ -8,9 +8,6 @@ var UserAdapter = ApplicationAdapter.extend({
 	host: Haul.Server.USER_SERVER_HOST,
 
 	find: function(store, type, id) {
-
-
-		console.log("HERE YOU GO ", Haul);
 		var url = this.host + "/users/" + id;
         return this.ajax(url, 'GET');
     },

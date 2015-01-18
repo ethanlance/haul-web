@@ -37,16 +37,14 @@ var FollowBtnComponent = Ember.Component.extend({
 			return;
 		}
 
-
+		var _this = this;
 		var store = this.container.lookup("store:main");
-		var _this = this; 
-
-
-		this.set('showButton', true);
+		this.set('showButton', true); 
 
 		//currentUser follows item?
 		var key = this.followId + "-" + this.followType;
 		store.find('follow', key).then(function(record){
+			console.log("RECORD", record)
 			if(!Ember.isEmpty(record)){
 				_this.set('userFollows', true);
 				_this.set('userFollowsRecord', record);
@@ -90,6 +88,22 @@ var FollowBtnComponent = Ember.Component.extend({
 				.then(function(r){
 					r.reload();
 				});
+
+				store.find('collection-followers-list', _this.get('followId'))
+				.then(function(r){
+					r.reload();
+				});
+
+				store.find('user-is-following-count', _this.get('userId'))
+				.then(function(r){
+					r.reload();
+				});
+
+				store.find('user-follows-list', _this.get('userId'))
+				.then(function(r){
+					r.reload();
+				});
+
 				
 			}, function(error){
 				console.log("Error", error);

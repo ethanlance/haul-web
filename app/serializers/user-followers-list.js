@@ -7,13 +7,7 @@ var UserFollowersListSerializer =  DS.RESTSerializer.extend({
 
 		if( payload.data === "ok" ){
 			return;
-		}
-
-		if( Ember.isEmpty(payload.data)){ 
-			payload = {'user-followers-list': {id:1} }; 
-			return this._super(store, primaryType, payload);
-		}
-
+		} 
 		
 		var user_id = null;
 		var follower_ids = [];

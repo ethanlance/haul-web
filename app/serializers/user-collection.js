@@ -21,8 +21,6 @@ var UserCollectionSerializer =  DS.RESTSerializer.extend({
 					slug: result.slug
 				};
 			});
-
-console.log("FUCK YOU ", data)
  
 		payload = {'user-collection': data}; 
 		return this._super(store, primaryType, payload, recordId, requestType);

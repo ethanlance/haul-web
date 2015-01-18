@@ -10,11 +10,30 @@ export default DS.Model.extend({
 	image: DS.belongsTo('image', {async:true}),
 	image_id: DS.attr('string'), 
 
+	//collection: DS.belongsTo('collection', {async:true}),
 
-	collection: DS.belongsTo('collection', {async:true}),
-	//getFollowedByCount: DS.belongsTo('user-is-followed-by-count', {async:true}),
+	collection: function() {
+		var _this = this;
+		
+		var collection = this.store.find('user-collection', this.id)
+		.then(function(record){
+			console.log("RECORD", record.get('collection_id'));
+			return _this.store.find('collection', record.get('collection_id'))
+		})
+		.then(function(record) {
+			console.log('collection', record)
+			return record;
+		});	
+
+		return DS.PromiseObject.create({promise:collection});
+
+	}.property(),
+
+
 	getFollowingCount: DS.belongsTo('user-is-following-count', {async:true}),
 	getLikesCount: DS.belongsTo('user-likes-count', {async:true} ),
+	getFollows: DS.belongsTo('user-follows-list', {async:true}), 
+	getLikes: DS.belongsTo('user-likes-list', {async:true}), 
 
 	icon: DS.attr('string'), 
 	iconChange: function() { 

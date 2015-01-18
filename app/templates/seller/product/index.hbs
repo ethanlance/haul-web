@@ -25,7 +25,7 @@
 
 					<div class="article">
 						<h2>
-							{{#link-to 'seller.product' this.id }}{{name}}{{/link-to}}
+							{{name}}
 						</h2>
 
 						<div class="moment">1 day ago</div>
@@ -80,72 +80,3 @@
 	</div>
 </div>
 
-{{!-- <div class="container-fluid haul-content">   
-	<div class="row">
-		<div class="col-md-6 col-sm-8 col-xs-12">
-
-			<div class="row post">   
-				<div class="col-md-12 col-sm-12 col-xs-12"> 
-
-					<div class="citation">
-
-						<span class="glyphicon glyphicon-retweet"></span>
-						<div class="name">{{user.name}} <span class="rehauled">rehauled</span></div>
-
-						
-						{{#link-to 'seller.product' this.id }}
-						<div class="image">
-							{{ make-icon icon=user.icon isSmall=true}}
-						</div>
-						<div class="name">{{user.name}}</div>
-						{{/link-to}}
-						
-					</div>
-
-					<div class="article">
-						<h2>
-							{{#link-to 'seller.product' this.id }}{{name}}{{/link-to}}
-						</h2>
-
-						<div class="moment">1 day ago</div>
-						
-
-						{{#link-to 'seller.product' this.id }}
-						<div class="image">
-							<div class="price">${{price}}</div>
-							<img class="img-responsive thumbnail" {{bind-attr src=image.small}}>
-						</div>
-					 	{{/link-to}}
-
-					 	<div class="btn-wrapper">
-
-					 		<button class="btn btn-default">
-								buy
-							</button>
-
-						 	{{like-btn product=this.id class="display-inline" }}
-
-						 	{{comment-btn product=this.id class="display-inline" }}
-
-							<button class="btn btn-default">
-								<span class="glyphicon glyphicon-retweet"></span>
-							</button>
-
-							<button class="btn btn-default">
-								<span class="glyphicon glyphicon-arrow-right"></span>
-							</button>
-						</div>
-					</div>
-
-				</div>
-			</div>	
-
-		</div> 
-		<div class="col-md-6 col-sm-4 col-xs-12">
-
-			{{image-carousel contentBinding="model.product.images"}}
-
-		</div>
-	</div>
-</div>
- --}}

@@ -6,10 +6,8 @@ var HaulAuthenticator = Base.extend({
 	restore: function (data) {
 		return new Ember.RSVP.Promise(function (resolve, reject) {
 			if (!Ember.isEmpty(data.access_token)) {
-				console.log('found data ', data );
 				resolve(data);
 			} else {
-				console.log('no token found');
 				reject();
 			}
 		});

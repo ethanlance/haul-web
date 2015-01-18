@@ -1,26 +1,18 @@
-
 import Ember from 'ember'; 
 
-
-var SellerFollowsController = Ember.ObjectController.extend({ 
-	currentUserBinding: 'Haul.currentUser',
-	user: null,
-
-	// //Is currentUser viewing his own page?
+export default Ember.ObjectController.extend({ 
+	currentUserIdBinding: 'Haul.currentUser.id',
+	userIdBinding: 'model.user.id',
 	isProfileOwner: false,
+
 	isProfileOwnerChanged: function() {
-		var currentUser = this.get('currentUser');
-		if( currentUser ){
-			if(!Ember.isEmpty(currentUser) && this.user.get('id') === currentUser.get('id') ) {
+
+		this.set('isProfileOwner', false); 
+		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId')) ) {
+			if (this.get('userId') === this.get('currentUserId')) {
 				this.set('isProfileOwner', true);
-			}else{
-				this.set('isProfileOwner', false);
 			}
 		} 
+	}.observes('userId', 'currentUserId'),
 
-		console.log("MODEL", this.get('model'));
-
-	}.observes('model'),
-
-}); 
-export default SellerFollowsController;
+});

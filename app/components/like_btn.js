@@ -57,6 +57,16 @@ export default Ember.Component.extend({
 				.then(function(r){
 					r.reload();
 				});
+
+				store.find('user-likes-list', _this.get('userId'))
+				.then(function(r){
+					r.reload();
+				});
+
+				store.find('like-count', _this.get('productId'))
+				.then(function(r){
+					r.reload();
+				});
 				
 			}, function(error){
 				console.log("Error", error);

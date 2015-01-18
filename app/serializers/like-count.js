@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-var LikeCountSerializer =  DS.RESTSerializer.extend({
+export default DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 
@@ -9,7 +9,7 @@ var LikeCountSerializer =  DS.RESTSerializer.extend({
 		} 
 
 		var data = { 
-			id: payload.data.object.id,
+			id: recordId,
 			total: payload.data.total,	
 		};
 
@@ -17,4 +17,3 @@ var LikeCountSerializer =  DS.RESTSerializer.extend({
 		return this._super(store, type, payload, recordId, requestType);
 	}
 });
-export default LikeCountSerializer;

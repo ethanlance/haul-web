@@ -11,7 +11,7 @@ var Product = DS.Model.extend(Ember.Validations.Mixin, {
 	user_id: DS.attr( 'string' ),
 
 
-	user: DS.belongsTo('user'), 
+	user: DS.belongsTo('user', {async:true}), 
 	images: DS.hasMany('image', {async:true}),
 	image: DS.belongsTo('image', {async:true}),	
 

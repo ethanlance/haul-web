@@ -1,25 +1,17 @@
 <div class="box-rigid text-center">
-	
   	<div class="text-center">
-
-      {{#link-to "seller" user class="pull-left"}}  
-        {{!-- <img {{bind-attr src=user.icon }}> --}}
-        {{make-icon icon=user.icon isSmall=isSmall }}
+      {{#link-to "seller" profile class="pull-left"}}  
+        {{make-icon icon=profile.user.icon isSmall=isSmall isCollection=true }}
       {{/link-to}}
     </div>
     <div>
-      {{#link-to "seller" user}}  
-        {{user.name}}
+      {{#link-to "seller" profile}}  
+        {{profile.name}}
       {{/link-to}}
     </div>
 
   {{#if showFollows}}
-  	{{ follow-btn 
-  		item=user
-  		session = session
-  		targetObject = targetObject
-      ref_type = "user"
-  	}} 
+  	{{ follow-btn followObj=profile }} 
   {{/if}}
 	
 </div>

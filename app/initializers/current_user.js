@@ -21,7 +21,6 @@ export default {
 
 					container.lookup("store:main").find('user-collection', user_id)
 					.then(function(record){
-						console.log("HERE DUDE ", record);
 						return container.lookup("store:main").find('collection', record.get('collection_id'))
 					})
 					.then(function(record) {

@@ -1,35 +1,22 @@
-{{user-header user=user session=session}}
+{{user-header model=model}}
 
-<div class="container">  
+<div class="container haul-content">  
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 
-			{{#unless model.followers }}
+			{{#unless model.getFollowers.followers }}
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
-					{{user.name}}{{else}}You{{/unless}} have no followers :(
-
-					<span>
-					{{#unless isProfileOwner}}
-						{{follow-btn item=user 
-							ref_type="user"
-							session=session   
-							hideCounts=true
-
-						}}
-					{{/unless}}
-					</span>
+					{{user.name}}  has no followers :(
+				{{else}}
+					You have no followers :(
+				{{/unless}} 
 				</div>
 			{{/unless}}
 
-
 			{{!-- SELLER PRODUCTS --}}
-		    {{#each model.followers}}
-		    	{{#link-to 'seller' this.id }}
-			    
-			    	{{profile-badge user=this session=session}}
-				
-			 	{{/link-to}}	
+		    {{#each model.getFollowers.followers}} 
+		    	{{profile-badge profile=collection}}
 			{{/each}} 
 
 		</div> 
