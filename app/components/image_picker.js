@@ -14,8 +14,13 @@ var ImagePickerComponent = Ember.Component.extend({
 	user_tokenBinding: 'session.currentUser.access_token',
 
 
-	start: function(){
+	didInsertElement: function(){
 		var _this = this; 
+
+		if(!this.get('user_id')){
+			return;
+		}
+		
 		//INIT
 		 this.dropzone = new Dropzone("#haul-dropzone", { 
 

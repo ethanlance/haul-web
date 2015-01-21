@@ -1,16 +1,18 @@
-<div class="row ">
+<div class="row image-picker">
 	<div class="col-md-12 col-sm-12 col-xs-12"> 
 		<div id='haul-dropzone'>
-			<div>
-				<button id="haul-dropzone-browse" class="btn btn-default">Browse Your Photos</button> 
-				<small>or drop them in this box, then click photos to select.</small>
+			<div class="text-center">
+				<button id="haul-dropzone-browse" class="btn btn-primary">
+					<span class="glyphicon glyphicon-picture"></span>
+					Browse Your Photos
+					<br/>
+					<small>or drop them here</small>
+				</button> 
 			</div>	
 			
-			<div class="haul-grid">
+			<div class="haul-grid user-images">
 				<div class="dropzone-preview"></div>
 
-
-						
 				{{#each images}}
 					{{image-card 
 						image=this 
@@ -18,7 +20,6 @@
 						imageDeleteProceed='imageDeleteProceed'
 					}}
 				{{/each}}
-
 				
 			</div>
 			<div style="clear: both;"></div>

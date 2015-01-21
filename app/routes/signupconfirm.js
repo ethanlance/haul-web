@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-var SignupconfirmRoute = Ember.Route.extend({
+import AnonRoute from './anon';
+export default AnonRoute.extend({
 	controllerName: "signupconfirm",
 	model: function() {
 		return this.store.createRecord('authconfirmation');
@@ -17,4 +16,3 @@ var SignupconfirmRoute = Ember.Route.extend({
 		this.render('signup_confirm');
 	}
 });
-export default SignupconfirmRoute;

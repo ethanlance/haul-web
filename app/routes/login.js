@@ -1,6 +1,6 @@
 import Ember from 'ember';
-
-export default Ember.Route.extend({
+import AnonRoute from './anon';
+export default AnonRoute.extend({
 	model: function() {
 		return this.store.createRecord('authlogin');
 	},

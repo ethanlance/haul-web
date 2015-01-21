@@ -1,7 +1,5 @@
-import Ember from 'ember'; 
-
- 
-var ForgotpasswordconfirmRoute = Ember.Route.extend({
+import AnonRoute from './anon';
+export default AnonRoute.extend({
 	controllerName: "forgotpasswordconfirm",
 	model: function() {
 		return this.store.createRecord('authresetpassword');
@@ -17,4 +15,3 @@ var ForgotpasswordconfirmRoute = Ember.Route.extend({
 		this.controllerFor('forgotpasswordconfirm').reset();
 	}
 });
-export default ForgotpasswordconfirmRoute;

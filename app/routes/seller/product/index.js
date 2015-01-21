@@ -8,8 +8,5 @@ export default Ember.Route.extend({
 	// },
 	model: function() { 
 		return this.modelFor('seller.product');
-	},
-  	setupController: function(controller, model) {
-  		controller.set('model', model ); 
-  	}
+	}
 });

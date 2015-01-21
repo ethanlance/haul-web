@@ -3,7 +3,7 @@ import ApplicationAdapter from './application';
 import config from '../config/environment';
 var Haul = config.APP;
 
-var ProductAdapter = ApplicationAdapter.extend({
+export default ApplicationAdapter.extend({
 	
 	host: Haul.Server.PRODUCT_SERVER_HOST,
  
@@ -63,4 +63,3 @@ var ProductAdapter = ApplicationAdapter.extend({
 		return this.ajax(url, "POST", { data: data }); 
 	}
 });
-export default ProductAdapter;

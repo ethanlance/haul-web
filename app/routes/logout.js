@@ -1,6 +1,6 @@
 import Ember from 'ember';
-
-var LogoutRoute = Ember.Route.extend({
+import AnonRoute from './anon';
+export default AnonRoute.extend({
 	controllerName: "auth",
 	beforeModel: function(){
 	
@@ -11,6 +11,3 @@ var LogoutRoute = Ember.Route.extend({
 		this.transitionTo('login');
 	}
 });
-export default LogoutRoute;
-
-

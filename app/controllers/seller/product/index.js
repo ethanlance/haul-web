@@ -4,7 +4,7 @@ var $ = Ember.$;
 export default Ember.ObjectController.extend({  
 	currentUserIdBinding: 'Haul.currentUser.id',
 	collectionsBinding: "collections.collections",
-	userIdBinding: 'model.user.id',
+	userIdBinding: 'model.collection.user.id',
 	
 	url: "", 
 	
@@ -12,6 +12,7 @@ export default Ember.ObjectController.extend({
 	isProfileOwner: false,
 	 
 	setup: function() {  
+
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
 			if( this.get('userId') === this.get('currentUserId')) {
 				this.set('isProfileOwner', true);
@@ -19,7 +20,7 @@ export default Ember.ObjectController.extend({
 		}
 		this.set('url', window.location.href);
 
-	}.observes('userId', 'currentUserId'),
+	}.observes('userId', 'currentUserId', 'model.id'),
 
 	actions: {
 

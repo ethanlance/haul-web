@@ -5,7 +5,7 @@ var $ = Ember.$;
 
 var QuillEditorComponent = Ember.Component.extend({
 
-	height: "80%",
+	height: "800px",
 	content: '',
 	editor: null,
 
@@ -23,7 +23,7 @@ var QuillEditorComponent = Ember.Component.extend({
 		    	'toolbar': { container: '#toolbar' },
 		    	'link-tooltip': true 
 		  	},
-		  	//theme: 'snow'
+		  	theme: 'snow'
 		});
 
 		this.set('editor', editor);

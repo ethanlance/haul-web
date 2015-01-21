@@ -1,180 +1,169 @@
-{{!-- {{user-header user=session.currentUser}} --}}
 
-<div class="container content-fixed-nav padding-top">
+<div class="container haul-edit">
 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<h2>Let's sell!</h2> 
-			</div>
+	
+
+{{!-- 	<ul class="nav nav-tabs">
+	  	<li {{bind-attr class="showProduct:active"}}><a {{action 'showProduct'}}>Details</a></li>
+	  	<li {{bind-attr class="showPost:active"}}><a {{action 'showPost'}}>Post</a></li>
+	</ul>  --}}
+
+
+
+	<div {{bind-attr class="createMode:show:hide"}}>
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center"> 
+			<h4>Start with photos</h4>
 		</div>
+	</div>
 
-
-	{{!-- IMAGE PICKER: --}}
-
-	<div {{bind-attr class="showImagePicker:show:hide"}}>
-		<div class="row bottom-border">
-			<div class="col-md-12 col-sm-12 col-xs-12"> 
-				<h4>Start With Photos <small>(up to 5 per item)</small></h4>
-			</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			{{view Sortable contentBinding="selectedImages"}}
+			{{break-lines imagesBlank}}
 		</div>
-
-		<div class="padding-top">
-		
-		{{image-picker 
-			images=uploads
-			refresh='refresh'
-			imageClick='imageClick' 
-			imageDeleted='imageDeleted'
-			Haul=Haul
-		}}
-		</div>
-
 	</div>
 
 
+	<div {{bind-attr class="showProduct:show:hide"}}>
 
-	{{!-- PRODUCT FORM --}}
+		<div {{bind-attr class="showImages:show:hide"}}>
+			<div class="padding-top">
+				{{image-picker 
+					images=userImages
+					refresh='refresh'
+					imageClick='imageClick' 
+					imageDeleted='imageDeleted'
+					Haul=Haul
+				}}
+			</div>
+		</div>
 
+		<div {{bind-attr class="showImages:hide:show"}}>
 
-
-	<div {{bind-attr class="showImagePicker:hide:show"}}>
-		
-		{{#form-for modelProduct wrapper="bs3-wrapper"}}
-		<div class="row">
-			<div class="col-md-9 col-sm-9 col-xs-12"> 
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<label>Name this item:</label>
-						{{input name canShowValidationError=showErrors}} 
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<label>Describe this item:</label>
-						<br/>
-						<small>Don't forget #hashtags!</small>
-						<label class="small pull-right text-regular">(max 2000 characters)</label>
-						{{input description as="text" canShowValidationError=showErrors }}
-					</div> 
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-6"> 
-						{{#input price}}
-						{{label-field price}}
-						<div class="input-group">
-							<span class="input-group-addon">$</span>
-						  	{{input-field price class="form-control input-sm" canShowValidationError=showErrors}}
-						  	<br/>
+		{{#if modelProduct}}
+			{{#form-for modelProduct wrapper="bs3-wrapper"}}
+			<div class="row">
+				<div class="col-md-9 col-sm-9 col-xs-12"> 
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12"> 
+							<label>Name this item:</label>
+							{{input name canShowValidationError=showErrors}} 
 						</div>
-						{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
-						{{/input}}
 					</div>
-				
-					<div class="col-md-6 col-sm-6 col-xs-6"> 
-						<label>Quantity:</label>
-						{{input quantity class="input-xs" canShowValidationError=showErrors}}
-	 				</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12"> 
+							<label>Describe this item:</label>
+							<label class="small pull-right text-regular">(max 2000 characters)</label>
+							{{input description placeholder="Don't forget #hashtags!" as="text" canShowValidationError=showErrors }}
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6"> 
+							{{#input price}}
+							{{label-field price}}
+							<div class="input-group">
+								<span class="input-group-addon">$</span>
+							  	{{input-field price class="form-control input-sm" canShowValidationError=showErrors}}
+							  	<br/>
+							</div>
+							{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
+							{{/input}}
+						</div>
+					
+						<div class="col-md-6 col-sm-6 col-xs-6"> 
+							<label>Quantity:</label>
+							{{input quantity class="input-xs" canShowValidationError=showErrors}}
+		 				</div>
+					</div>
 				</div>
 			</div>
+			{{/form-for}}
+		{{/if}}
+		</div>
 
-
-			<div class="col-md-3 col-sm-3 col-xs-12"> 
+		<div {{bind-attr class="showImages:show:hide :toolbar-footer"}}>
+			<div class="container">
 				<div class="row">
- 					<div class="col-md-12 col-sm-12 col-xs-12">  
-						<label>Drag images to sort</label>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						{{view Sortable contentBinding="selectedImages"}}	
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12 padding-top"> 
-						<button {{action "clickPrev"}} class="btn btn-primary">
-							<span class="glyphicon 	glyphicon-picture"></span> Change Images
+					<div class="col-md-12 col-sm-12 col-xs-12">	
+						<button {{action "toggleImages"}} 
+							{{bind-attr class="imagesAreSelected::disabled showImages:show:hide :btn :btn-primary :btn-right"}}>
+							continue
+							<span class="glyphicon glyphicon-menu-right"></span>
 						</button>
 					</div>
 				</div>
-
-			</div>
-
-		</div>
-		{{/form-for}}
-
-		
-
-
-
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-
-			{{#if errorShow }}
-				{{bs-alert message=errorMessage type="danger"}}
-			{{/if}}
-
 			</div>
 		</div>
-	</div>
-</div>
 
+		<div {{bind-attr class="showImages:hide:show :toolbar-footer"}}>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
 
-
-
-
-{{!-- HAUL TOOLBAR --}}
-
-<div class="toolbar-footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">	 
-
-				<span {{bind-attr class=":collapse showImagePicker:in:out"}}>
-
-					<button {{bind-attr class=":btn :btn-primary :btn-right imagesAreSelected:enabled:disabled"}} {{action "clickNext"}}>
-						Next Step<span class="glyphicon glyphicon-chevron-right"></span>
-					</button> 
-
-					{{#link-to 'seller' session.currentUser}}
-						<button class="btn btn-default btn-right">Cancel</button>
-					{{/link-to}}
-
-				</span>
-
-				<span {{bind-attr class=":collapse showImagePicker:out:in"}}>
-					
+						<button {{action 'cancel'}} class="btn btn-default btn-left">Cancel</button>
 						
-					{{#if model.id }}
-
-						<button {{action 'delete'}}   class="btn btn-danger">
-							Delete
+						<button {{action "toggleImages"}} 
+							{{bind-attr class="showImages:hide:show :btn :btn-primary"}}>
+							<span class="glyphicon glyphicon-picture"></span> Change Images
 						</button>
 
 						{{ladda-btn
-							name='Save'
+							name='next'
 							class="display-inline"
 							btnClasses='btn btn-primary btn-right ladda-button'
-							btnClick='submit'
+							btnClick='saveProduct'
 							spin=isProcessing
 						}}
-					{{ else }}
-						{{ladda-btn
-							name='Create'
-							class="display-inline"
-							btnClasses='btn btn-primary btn-right ladda-button'
-							btnClick='submit'
-							spin=isProcessing
-						}}
-					{{/if}}
 
-					
-					{{#link-to 'seller' session.currentUser }}
-						<button class="btn btn-default btn-right">Cancel</button>
-					{{/link-to}}
-				</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+	<div {{bind-attr class="showPost:show:hide"}}>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">  
+				{{#form-for model wrapper="bs3-wrapper"}}
+					<h4>What's great about this?</h4>
+					{{quill-editor content=editorialForQuill quillChange='quillChange'}}
+				{{/form-for}}
+			</div>
+		</div>
+
+		<div class="toolbar-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
+
+						
+						<button {{action 'showProduct'}} class="btn btn-default btn-left">details</button>
+						
+						{{ladda-btn
+							name='save'
+							class="display-inline"
+							btnClasses='btn btn-primary btn-right ladda-button'
+							btnClick='savePost'
+							spin=isProcessing
+						}}
+
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
+

@@ -38,9 +38,6 @@ app.import('bower_components/moment/moment.js');
 app.import('bower_components/dropzone/downloads/dropzone.js');
 
 
-app.import('bower_components/quill/dist/quill.js');
-app.import('bower_components/quill/dist/quill.base.css');
-
 app.import('bower_components/ladda-bootstrap/dist/spin.js');
 app.import('bower_components/ladda-bootstrap/dist/ladda.js');
 app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css'); 
@@ -49,6 +46,10 @@ app.import('vendor/ember-easyform.js');
 app.import('vendor/ember-validations.js');
 
 
+
+app.import('bower_components/quill/dist/quill.js');
+app.import('bower_components/quill/dist/quill.base.css');
+app.import('bower_components/quill/dist/quill.snow.css');
 
 module.exports = app.toTree();
 

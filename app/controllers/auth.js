@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 import ApplicationAdapter from '../adapters/application';
 import config from '../config/environment';
 var Config = config.APP;
@@ -65,6 +66,13 @@ var AuthController = Ember.ObjectController.extend({
 		var accessToken = response.data[0].token_id;
 		var refreshToken =response.data[1].token_id; 
 		var user_id = response.data[0].user_id; 
+
+
+		DS.RESTAdapter.reopen({
+		  headers: { 
+		    "Authorization": "Bearer " + accessToken
+		  }
+		});
  
 		//Now get the user:
 		var _this = this;

@@ -1,4 +1,5 @@
 import Ember from "ember";  
+import DS from 'ember-data'; 
 import Session from "simple-auth/session";
  
 export default {  
@@ -18,6 +19,12 @@ export default {
 					
 					user.set('access_token', _this.get('access_token'));
 					user.set('refresh_token', _this.get('refresh_token'));
+
+					DS.RESTAdapter.reopen({
+					  headers: { 
+					    "Authorization": "Bearer " + _this.get('access_token')
+					  }
+					});
 
 					container.lookup("store:main").find('user-collection', user_id)
 					.then(function(record){

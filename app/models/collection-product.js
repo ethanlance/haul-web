@@ -1,9 +1,6 @@
 import Ember from "ember";
 import DS from "ember-data";
-
-
-//Models
-var CollectionProduct = DS.Model.extend(Ember.Validations.Mixin, {
+export default DS.Model.extend(Ember.Validations.Mixin, {
 	
 	editorial: DS.attr('string'),
 	product: DS.belongsTo('product', {async:true}),
@@ -24,8 +21,3 @@ var CollectionProduct = DS.Model.extend(Ember.Validations.Mixin, {
 		}
 	}
 });	
-export default CollectionProduct;
-
-
-
-

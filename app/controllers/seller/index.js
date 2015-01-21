@@ -6,7 +6,6 @@ export default Ember.ObjectController.extend({
 	isProfileOwner: false, 
 
 	isProfileOwnerChanged: function() {
-
 		this.set('isProfileOwner', false); 
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId')) ) {
 			if (this.get('userId') === this.get('currentUserId')) {

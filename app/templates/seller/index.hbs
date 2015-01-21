@@ -5,6 +5,7 @@
 	<div class="row">
 		<div class="col-md-6 col-sm-8 col-xs-12">
 
+
 		{{#each model.products}}
 			
 			<div class="row post">   
@@ -16,7 +17,7 @@
 						<div class="name">{{collection.user.name}} <span class="rehauled">rehauled</span></div>
 
 						
-						{{#link-to 'seller' product.user }}
+						{{#link-to 'seller' collection }}
 						<div class="image">
 							{{ make-icon icon=product.user.icon isSmall=true}}
 						</div>
@@ -31,8 +32,6 @@
 						</h2> --}}
 
 						<div class="moment">1 day ago</div>
-						
-
 						
 						<div class="image">
 							{{!-- <div class="price">${{product.price}}</div> --}}
@@ -50,18 +49,67 @@
 
 						 	{{like-btn product=product class="display-inline" }}
 
-						 	{{comment-btn itemObject=this class="display-inline" }}
+						 	{{#link-to 'seller.product' collection product.id product.slug }}
+						 		{{comment-btn anchor='false' itemObject=this class="display-inline" }}
+						 	{{/link-to}}
 
+							
+
+						 	{{!-- EDIT --}}
+						 	{{#link-to 'seller.product.edit' collection product.id product.slug }}
 							<button class="btn btn-default">
-								<span class="glyphicon glyphicon-retweet"></span> haul
+								{{#if ../../isProfileOwner}}
+								edit
+								{{else}}
+								<span class="glyphicon glyphicon-retweet"></span>
+								{{/if}}
 							</button>
-
+							{{/link-to}} 
 						</div>
 					</div>
 				</div>
 			</div>	
 
 		{{/each}} 
+		 
+
+
+
+
+
+
+
+	{{#unless isProfileOwner}} 
+	{{#unless model.products }}
+		<p class="padding-top text-center font-weak">{{user.name}} has no posts.</p>
+	{{/unless}} 
+	{{/unless}}
+
+
+	
+	{{#if isProfileOwner}} 
+		{{#unless model.products }} 
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12  text-center">
+				
+				<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
+				
+				{{#link-to 'product-new'}}
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-camera"></span><br/>
+					Post Something For Sale
+				</button>
+				{{/link-to}} 
+		
+			</div>	
+		</div> 
+	{{/unless}}
+	{{/if}}  
+		 
+
+
+
+
 		 
 		</div> 
 		<div class="col-md-6 col-sm-4 col-xs-12">
@@ -84,34 +132,4 @@
 
 
 
-{{#unless isProfileOwner}}
-	{{#unless hasProducts }}
-	{{#unless hasCollections }}
-		<p class="padding-top text-center font-weak">{{user.name}} has no posts.</p>
-	{{/unless}}
-	{{/unless}}
-	{{/unless}}
 
-
-	
-	{{#if isProfileOwner}}
-	{{#unless hasCollections }}
-		{{#unless hasProducts }} 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12  text-center">
-				
-				<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
-				
-				{{#link-to 'product-new'}}
-				<button class="btn btn-default">
-					<span class="glyphicon glyphicon-camera"></span><br/>
-					Post Something For Sale
-				</button>
-				{{/link-to}} 
-		
-			</div>	
-		</div>
-		{{/unless}}
-	{{/unless}}
-	{{/if}}  
-		 

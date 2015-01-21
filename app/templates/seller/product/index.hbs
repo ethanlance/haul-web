@@ -1,7 +1,4 @@
 <div class="container-fluid haul-content padding-top">  
-
-	
-
 	<div class="row">
 		<div class="col-md-6 col-sm-8 col-xs-12">
 
@@ -10,10 +7,6 @@
 
 					<div class="citation">
 
-						<span class="glyphicon glyphicon-retweet"></span>
-						< Back | <div class="name">{{collection.user.name}} <span class="rehauled">rehauled</span></div>
-
-						
 						{{#link-to 'seller' collection }}
 						<div class="image">
 							{{ make-icon icon=product.user.icon isSmall=true}}
@@ -25,7 +18,7 @@
 
 					<div class="article">
 						<h2>
-							{{name}}
+							{{name}} 
 						</h2>
 
 						<div class="moment">1 day ago</div>
@@ -36,6 +29,8 @@
 							<div class="price">${{product.price}}</div>
 							<img class="img-responsive thumbnail" {{bind-attr src=product.image.small}}>
 						</div>
+
+
 					 	
 
 					 	<div class="btn-wrapper">
@@ -48,16 +43,34 @@
 						 	
 						 	{{comment-btn itemObject=this class="display-inline" }}
 						 	
+						 	{{#if isProfileOwner}}
 
-							<button class="btn btn-default">
-								<span class="glyphicon glyphicon-retweet"></span>
-							</button>
+							 	{{!-- EDIT --}}
+							 	{{#link-to 'seller.product.edit' collection product.id product.slug }}
+								<button class="btn btn-default">
+									edit
+								</button>
+								{{/link-to}}
+							
+							{{else}}
+
+								{{!-- REPOST --}}
+								{{#link-to 'seller.product.edit' collection product.id product.slug }}
+								<button class="btn btn-default">
+									<span class="glyphicon glyphicon-retweet"></span>
+								</button>
+								{{/link-to}}
+
+							{{/if}}
+
+						</div>
+
+						<div class="editorial">
+							{{break-lines editorial}}
 						</div>
 					</div>
-
 				</div>
 			</div>	 
-		 
 		</div> 
 		<div class="col-md-6 col-sm-4 col-xs-12 sidebar">
 
