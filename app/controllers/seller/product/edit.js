@@ -4,55 +4,80 @@ import config from '../../../config/environment';
 var Haul = config.APP;
 
 export default Ember.ObjectController.extend({
-	createMode: null,
+
+	
 	modelProduct: null,
 	productImagesBinding: "model.product.images",
 	currentUserBinding: 'Haul.currentUser',
 	currentUserIdBinding: 'Haul.currentUser.id',
 	isProcessing: false,
 	
-	showProduct: true,
 	showPost: false,
-	showImages: false,
+	showProduct: false,
+	showUpload: false,
 	imagesAreSelected: false,
 	
-	imagesBlank: '',
 	totalImages: 5,
 
-	userImages: [],
 	productImageIds: [],
 	selectedImages: [],
 
 	editorialForQuill: "",
 
-	reset: function(){
-		console.log("RESET")
-		this.set('selectedImages', []);
-		this.set('productImageIds', []);
-		this.set('totalImages', 5);
-		this.set('imagesBlank', '');
-		this.set('showProduct', true);
-		this.set('showPost', false);
-		this.set('showImages', false);
-		this.set('isProcessing', false);
-		this.set('imagesAreSelected', false);
-		this.set('editorialForQuill', '');
-		if(this.get('userImages')){
-			this.get('userImages').forEach(function(img) {
-				img.set('isSelected', false);
-			});	
-		} 
+
+	state: null,
+	states:{
+		0:'showUpload', 
+		1:'showProduct', 
+		2:'showPost'
 	},
 
+	findState: function() {
+
+		var _this = this;
+		var state = this.get('newState'); 
+
+		var states = this.get('states');
+
+		var newKey = null;
+		for(var key  in states) {
+			if(states[key]===state){
+				newKey = key;
+			}
+		}
+
+		for(var key  in states) {
+			var s = states[key];
+			
+			if(s===state){
+				_this.set(s, true);
+				_this.set(s+'OutRight', false);
+				_this.set(s+'OutLeft', false);
+			}else{
+				if(key < newKey ){
+					_this.set(s+'OutRight', false);
+					_this.set(s+'OutLeft', true);
+				}else{
+					_this.set(s+'OutRight', true);
+					_this.set(s+'OurLeft', false);
+				}
+				_this.set(s, false);
+			}
+
+			window.scrollTo(0,0);
+		};
+
+	}.observes('newState'),
+
+
 	setup: function() { 
+		console.log("SETUP", this.get('model'))
 		if( !this.get('model').id ){  
-			this.set('showImages', true);
-			this.set('createMode', true);
+			this.set('newState', 'showUpload');
 		}else{
-			this.set('createMode', false);
+			this.set('newState', 'showPost');
 		}
 	}.observes('model'),
-
 
 	setUpQuill: function() {
 		if( this.get('model').get('editorial') ){
@@ -60,56 +85,21 @@ export default Ember.ObjectController.extend({
 		}
 	}.observes('model'),
 
-	/* Get and set the current user's image upload gallery. */
-	setUserImages: function() {
-		var _this = this;
-		if( this.get('currentUserId')){
-			this.store.find('user-image', {user_id: this.get('currentUserId') } )
-			.then(function(results){
-				_this.set('userImages', results);
-			});	
-		}
-	}.observes('model', 'currentUserId'),
 
 	/* Get and set the products images. */
 	setSelectedImages: function() {
-		var _this = this;	
-		if( Ember.isEmpty(_this.get('userImages')) ){
+		if( Ember.isEmpty(this.get('productImages')) ){
+			this.set('selectedImages', []);
 			return;
 		}
 
-		if( Ember.isEmpty(_this.get('productImages')) ){
-			return;
-		}
-
-		//What images does this product have?
-		this.get('productImages').then(function(productImages){	
-			var objects = [];
-			productImages.forEach(function(productImg){
-				_this.get('userImages').forEach(function(userImg) {
-					if(productImg.get('id') === userImg.get('id')) {
-						userImg.set('isSelected', true);
-						objects.pushObject(userImg);
-					}
-				});
-			});
-			
-			_this.set('selectedImages', objects); 
-
+		var obj = [];
+		this.get('productImages').forEach(function(image){
+			obj.push(image);
 		});
-	}.observes('productImages.@each', 'userImages.@each', 'model'),
+		this.set('selectedImages', obj);
 
-
-	blankImages: function() {		
-
-		var c = this.get('totalImages') - this.get('selectedImages').length;
-		var h = '<ul class="sortable ui-sortable">';
-		for( var i=0; i<c; i++){
-			h += '<li><div class="sort-item-wrapper"><img class="thumbnail haul-thumb item" src="/assets/images/blank-thumb.jpg"></div></li>';
-		}
-		h += '</ul>';	
-		this.set('imagesBlank', h);	 
-	}.on('init').observes('selectedImages.@each', 'model'),
+	}.observes('productImages.@each', 'model'),
 
 
 	//Observer: anytime our array of selected images changes, update
@@ -128,6 +118,9 @@ export default Ember.ObjectController.extend({
 		}
  
 	}.observes('selectedImages.@each'),
+
+
+
 
 
 
@@ -191,7 +184,7 @@ export default Ember.ObjectController.extend({
 			function() { 
 				_this.set('isProcessing', false);
 				_this.set('showProduct', false);
-				_this.set('showPost', true);		
+				_this.set('newState', 'showPost');		
 			},
 			function(error){
 				_this.set('isProcessing', false);	
@@ -203,22 +196,48 @@ export default Ember.ObjectController.extend({
 		);
 	},
 
+	selectImage: function(image) {
+		var selectedImages = this.get('selectedImages'); 
+		var found = false;
+
+		selectedImages.forEach(function(result){
+			if(result.get('id') === image.get('id')){
+				found = true;
+				return;
+			}
+		});
+
+		if( found ) { 
+			var objects = [];
+			selectedImages.forEach(function(result){
+				if( result.get('id') !== image.get('id')){
+					objects.push(result);
+				}
+			});
+			this.set('selectedImages', objects);
+
+			//image.set('isSelected',false); 
+
+		//Add
+		} else {
+			selectedImages.pushObject(image);
+			//image.set('isSelected',true);
+		}
+	},
 
 
 	actions: {
 
 		showPost: function() {
-			this.set('showProduct', false);
-			this.set('showPost', true);	
+			this.set('newState', 'showPost');
 		},
 
 		showProduct: function() {
-			this.set('showProduct', true);
-			this.set('showPost', false);	
+			this.set('newState', 'showProduct');
 		},
 
-		toggleImages: function() {
-			this.set('showImages', !this.get('showImages'));
+		showUpload: function() {
+			this.set('newState', 'showUpload');
 		},
 
 		cancel: function() {
@@ -266,6 +285,10 @@ export default Ember.ObjectController.extend({
 				model.set('editorial', model.get('editorial').trim());
 			}
 
+			if(Ember.isEmpty(model.get('editorial'))){
+				model.set('editorial', " ");
+			}
+
 	 		//Model Validations:
 			model.validate().then(function(){
 				_this.savePost();	
@@ -278,38 +301,7 @@ export default Ember.ObjectController.extend({
 		//Click "imageClick" in UI
 		imageClick: function(event) {
 			var image = event.get('image');
-			var selectedImages = this.get('selectedImages'); 
-			var found = false;
-
-			selectedImages.forEach(function(result){
-				if(result.get('id') === image.get('id')){
-					found = true;
-					return;
-				}
-			});
-
-			//Only allow 5 images.
-			if( selectedImages.length === 5 && !found ) {
-				//Show our modal.
-				$('#imagePickerModal').modal('show');
-				return;
-			//Remove
-			} else if( found ) { 
-				var objects = [];
-				selectedImages.forEach(function(result){
-					if( result.get('id') !== image.get('id')){
-						objects.push(result);
-					}
-				});
-				this.set('selectedImages', objects);
-
-				event.set('isSelected',false); 
-
-			//Add
-			} else {
-				selectedImages.pushObject(image);
-				event.set('isSelected',true);
-			}
+			this.selectImage(image);
 		},
 
 		refresh: function(response) {
@@ -328,8 +320,8 @@ export default Ember.ObjectController.extend({
 					id: image.image_id,
 					created_at: image.created_at
 				});  
-				//record.set('isSelected', true);
-				_this.get('userImages').unshiftObject(record);
+				
+				_this.selectImage(record);
 			});				
 		},
 

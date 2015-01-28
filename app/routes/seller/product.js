@@ -1,6 +1,6 @@
 import Ember from 'ember';
-
-export default Ember.Route.extend({
+import ResetScrollMixin from '../../mixins/resetscroll';
+export default Ember.Route.extend(ResetScrollMixin,{
 	model: function(params) {
 
 		if( params.product_slug === "product"){

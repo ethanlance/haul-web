@@ -13,8 +13,8 @@
 
 					<div class="citation">
 
-						<span class="glyphicon glyphicon-retweet"></span>
-						<div class="name">{{collection.user.name}} <span class="rehauled">rehauled</span></div>
+						{{!-- <span class="glyphicon glyphicon-retweet"></span>
+						<div class="name">{{collection.user.name}} <span class="rehauled">rehauled</span></div> --}}
 
 						
 						{{#link-to 'seller' collection }}
@@ -31,9 +31,9 @@
 							{{#link-to 'seller.product' collection product }}{{product.name}}{{/link-to}}
 						</h2> --}}
 
-						<div class="moment">1 day ago</div>
+						<div class="moment">{{format-date updated_at}}</div>
 						
-						<div class="image">
+						<div class="product-image">
 							{{!-- <div class="price">${{product.price}}</div> --}}
 							{{#link-to 'seller.product' collection product.id product.slug }}
 								<img class="img-responsive thumbnail" {{bind-attr src=product.image.small}}>
@@ -43,7 +43,7 @@
 
 					 	<div class="btn-wrapper">
 
-					 		<button class="btn btn-default">
+					 		<button class="btn btn-default btn-buy">
 								buy
 							</button>
 

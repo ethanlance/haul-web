@@ -7,7 +7,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin,{
 		return this.store.createRecord('collection-product');
 	},
  	setupController: function(controller, model) {	
-  		controller.reset();
   		controller.set('modelProduct', this.store.createRecord('product'));
   		this._super(controller, model);
  	},

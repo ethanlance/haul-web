@@ -29,10 +29,10 @@ var ImagePickerComponent = Ember.Component.extend({
 			headers: {"Authorization": "Bearer " + this.user_token},
 			paramName: "attachment",
 			dictDefaultMessage: "Drop Files Here <br/> OR <br/> Click Here To Browse Your Files",
-			previewTemplate: '<li class="haul-grid-thumbs"><div class="dz-preview dz-file-preview"><div class="dz-details"><img class="thumbnail haul-thumb" data-dz-thumbnail  /></div><div class="alert-wrapper hide"><div class="alert alert-danger" role="alert">Upload Failed</div></div><div class="progress-wrapper"><div class="progress"><div class="progress-bar progress-bar-striped active"	role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 10%" data-dz-uploadprogress><span class="sr-only">10% Complete</span></div></div></div></div><div class="delete text-right"><button data-dz-remove type="button" class="btn btn-default btn-sm btn-no-radius"><span class="glyphicon glyphicon-trash"></span></button></div></li>',
+			previewTemplate: '<div class="selected-image dz-preview dz-file-preview"><div class="dz-details"><img class="thumbnail haul-thumb" data-dz-thumbnail /></div><div class="alert-wrapper hide"><div class="alert alert-danger" role="alert">Upload Failed</div></div><div class="progress-wrapper"><div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 10%" data-dz-uploadprogress><span class="sr-only">10% Complete</span></div></div></div><button data-dz-remove type="button" class="btn btn-default btn-sm btn-delete"><span class="glyphicon glyphicon-trash"></span></button></div>',
 			previewsContainer: ".dropzone-preview",
-			thumbnailWidth: 155,
-			thumbnailHeight: 155,
+			thumbnailWidth: 100,
+			thumbnailHeight: 100,
 			clickable: "#haul-dropzone-browse", 
 			uploadprogress: function(file, progress) {
 
@@ -66,9 +66,9 @@ var ImagePickerComponent = Ember.Component.extend({
 					file.previewTemplate = file.previewElement;
 
 					//Get first child - HAUL OVERDIDE
-					var firstChild = this.previewsContainer.firstChild;
+					var firstChild = this.previewsContainer.lastChild;
 					if( firstChild ){
-					this.previewsContainer.insertBefore(file.previewElement, firstChild);
+					this.previewsContainer.insertBefore(file.previewElement, firstChild.nextSibling);
 					}else{
 					this.previewsContainer.appendChild(file.previewElement);
 					}
@@ -146,7 +146,7 @@ var ImagePickerComponent = Ember.Component.extend({
 		//SUCCESS, reset Dropzone and hand the image file off to Ember.
 		this.dropzone.on('success', function(file, response) {	 		
 			
-			console.log("UPLOAD", response);
+			//console.log("UPLOAD", response);
 
 			window.clearInterval(file.progressInterval);
 

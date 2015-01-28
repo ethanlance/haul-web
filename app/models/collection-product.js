@@ -3,6 +3,7 @@ import DS from "ember-data";
 export default DS.Model.extend(Ember.Validations.Mixin, {
 	
 	editorial: DS.attr('string'),
+	updated_at: DS.attr('string'),
 	product: DS.belongsTo('product', {async:true}),
 	collection: DS.belongsTo('collection', {async:true}),
 

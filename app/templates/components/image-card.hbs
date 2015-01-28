@@ -1,15 +1,14 @@
 {{!-- DISPLAY ONE IMAGE --}}
 
-<div class="haul-grid-thumbs"> 
-	
+<li> 
 	<div class="delete text-right">
 		<button {{action "imageDelete" image}} type="button" class="btn btn-default btn-sm btn-no-radius">
 			<span class="glyphicon glyphicon-trash"></span>
 		</button>
 	</div>
 
-	<img {{action "imageClick" image}} class="thumbnail haul-thumb" {{bind-attr src=image.small}}>
-</div> 
+	<img {{action "imageClick" image}} class="img-responsive thumbnail haul-thumb" {{bind-attr src=image.small}}>
+</li> 
 
 
 

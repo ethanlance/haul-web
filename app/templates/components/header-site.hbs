@@ -12,6 +12,14 @@
 			<span class="glyphicon glyphicon-home"></span> 
 		</button> 
 		{{/link-to}}
+
+		
+		{{#link-to 'product-new' }}
+		<button class=" btn btn-default btn-sell">
+			<span class="glyphicon glyphicon-camera"></span>
+			Post
+		</button> 
+		{{/link-to}}
 		
 
 		<div class="btn-group btn-search">
@@ -25,13 +33,15 @@
 		  	<span class="glyphicon glyphicon-search"></span>
 		</button>
 
+
+
 	
 		<div class="btn-group btn-profile">
-			<button type="button" class="btn btn-default">
 			{{#link-to 'seller' session.currentUser.collection.slug }}
+			<button type="button" class="btn btn-default">
 				{{ make-icon icon=session.currentUser.icon isSmall=true}} 
-			{{/link-to}}
 			</button>
+			{{/link-to}}
 		
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 			  <span class="glyphicon glyphicon-cog"></span>
@@ -47,12 +57,6 @@
 			</ul>
 		</div>
 	
-		{{#link-to 'product-new' }}
-		<button class=" btn btn-default btn-sell">
-			<span class="glyphicon glyphicon-camera"></span>
-			Post
-		</button> 
-		{{/link-to}}
 
 	{{else}}
 

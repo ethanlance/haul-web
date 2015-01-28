@@ -22,6 +22,7 @@ var CollectionProductListSerializer =  DS.RESTSerializer.extend({
 			var id =  result.product_id + result.store_id;
 			return {
 				id: id,	
+				updated_at: result.updated_at,
 				editorial: result.editorial,
 				product: result.product_id,
 				collection: result.store_id,

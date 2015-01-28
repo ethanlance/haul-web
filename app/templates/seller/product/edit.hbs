@@ -1,92 +1,66 @@
+<div class="container-fluid haul-edit">
 
-<div class="container haul-edit">
-
-	
-
-{{!-- 	<ul class="nav nav-tabs">
-	  	<li {{bind-attr class="showProduct:active"}}><a {{action 'showProduct'}}>Details</a></li>
-	  	<li {{bind-attr class="showPost:active"}}><a {{action 'showPost'}}>Post</a></li>
-	</ul>  --}}
-
-
-
-	<div {{bind-attr class="createMode:show:hide"}}>
-		<div class="col-md-12 col-sm-12 col-xs-12 text-center"> 
-			<h4>Start with photos</h4>
-		</div>
-	</div>
 
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			{{view Sortable contentBinding="selectedImages"}}
-			{{break-lines imagesBlank}}
+		<div {{bind-attr class="showUpload:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+			<h4>Start with photos</h4>
+		</div>
+
+		<div {{bind-attr class="showProduct:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+			<h4>Tell us the details</h4>
+		</div>
+
+		<div {{bind-attr class="showPost:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+			<h4>What's great about this?</h4>
 		</div>
 	</div>
 
 
-	<div {{bind-attr class="showProduct:show:hide"}}>
 
-		<div {{bind-attr class="showImages:show:hide"}}>
-			<div class="padding-top">
-				{{image-picker 
-					images=userImages
-					refresh='refresh'
-					imageClick='imageClick' 
-					imageDeleted='imageDeleted'
-					Haul=Haul
-				}}
-			</div>
-		</div>
 
-		<div {{bind-attr class="showImages:hide:show"}}>
 
-		{{#if modelProduct}}
-			{{#form-for modelProduct wrapper="bs3-wrapper"}}
-			<div class="row">
-				<div class="col-md-9 col-sm-9 col-xs-12"> 
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12"> 
-							<label>Name this item:</label>
-							{{input name canShowValidationError=showErrors}} 
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12"> 
-							<label>Describe this item:</label>
-							<label class="small pull-right text-regular">(max 2000 characters)</label>
-							{{input description placeholder="Don't forget #hashtags!" as="text" canShowValidationError=showErrors }}
-						</div> 
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-sm-6 col-xs-6"> 
-							{{#input price}}
-							{{label-field price}}
-							<div class="input-group">
-								<span class="input-group-addon">$</span>
-							  	{{input-field price class="form-control input-sm" canShowValidationError=showErrors}}
-							  	<br/>
-							</div>
-							{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
-							{{/input}}
-						</div>
-					
-						<div class="col-md-6 col-sm-6 col-xs-6"> 
-							<label>Quantity:</label>
-							{{input quantity class="input-xs" canShowValidationError=showErrors}}
-		 				</div>
+
+	<div {{bind-attr class="showUpload:hide:show :fade showUpload::in :row :image-gallery-wrapper"}}>
+		<div class="col-md-3 col-sm-2 col-xs-12"></div>
+		<div class="col-md-6 col-sm-8 col-xs-12 gallery-col text-center">
+			<div class="gallery-wrapper"> 
+				<div class="gallery"> 
+					<div class="gallery-inside">
+						{{#each selectedImages}} 
+							<img {{bind-attr src=small}}> 
+						{{/each}}
 					</div>
 				</div>
 			</div>
-			{{/form-for}}
-		{{/if}}
 		</div>
+		<div class="col-md-3 col-sm-2 col-xs-12"></div>
+	</div>
 
-		<div {{bind-attr class="showImages:show:hide :toolbar-footer"}}>
+
+
+
+	{{!-- SHOW UPLOAD --}}
+	{{!-- SHOW UPLOAD --}}
+	{{!-- SHOW UPLOAD --}}
+	{{!-- SHOW UPLOAD --}}
+	{{!-- SHOW UPLOAD --}}
+	<div {{bind-attr class=":slide showUpload:in showUploadOutLeft:outleft showUploadOutRight:outright"}}> 
+
+		{{image-picker 
+			images=userImages
+			selectedImages=selectedImages
+			refresh='refresh'
+			imageClick='imageClick' 
+			imageDeleted='imageDeleted'
+			Haul=Haul
+		}} 
+	
+		<div {{bind-attr class="showUpload:show:hide :toolbar-footer"}}>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">	
-						<button {{action "toggleImages"}} 
-							{{bind-attr class="imagesAreSelected::disabled showImages:show:hide :btn :btn-primary :btn-right"}}>
+						<button {{action "showProduct"}} 
+							{{bind-attr class="imagesAreSelected::disabled :btn :btn-primary :btn-right"}}>
 							continue
 							<span class="glyphicon glyphicon-menu-right"></span>
 						</button>
@@ -94,21 +68,85 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div {{bind-attr class="showImages:hide:show :toolbar-footer"}}>
+
+
+
+
+
+
+
+
+
+
+	{{!-- SHOW PRODUCT --}}
+	{{!-- SHOW PRODUCT --}}
+	{{!-- SHOW PRODUCT --}}
+	{{!-- SHOW PRODUCT --}}
+	{{!-- SHOW PRODUCT --}}
+	<div {{bind-attr class=":slide showProduct:in showProductOutLeft:outleft showProductOutRight:outright"}}>
+ 
+
+		{{#if modelProduct}}
+		{{#form-for modelProduct wrapper="bs3-wrapper"}}
+		<div class="row">
+
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+
+			<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12"> 
+						<label>Name this item:</label>
+						{{input name canShowValidationError=showErrors}} 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12"> 
+						<label>Describe this item:</label>
+						<label class="small pull-right text-regular">(max 2000 characters)</label>
+						{{input description placeholder="Don't forget #hashtags!" as="text" canShowValidationError=showErrors }}
+					</div> 
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-6"> 
+						{{#input price}}
+						{{label-field price}}
+						<div class="input-group">
+							<span class="input-group-addon">$</span>
+						  	{{input-field price class="form-control input-sm" canShowValidationError=showErrors}}
+						  	<br/>
+						</div>
+						{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
+						{{/input}}
+					</div>
+				
+					<div class="col-md-6 col-sm-6 col-xs-6"> 
+						<label>Quantity:</label>
+						{{input quantity class="input-xs" canShowValidationError=showErrors}}
+	 				</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+
+		</div>
+		{{/form-for}}
+		{{/if}}
+
+		<div {{bind-attr class="showProduct:show:hide :toolbar-footer"}}>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
-
-						<button {{action 'cancel'}} class="btn btn-default btn-left">Cancel</button>
 						
-						<button {{action "toggleImages"}} 
-							{{bind-attr class="showImages:hide:show :btn :btn-primary"}}>
-							<span class="glyphicon glyphicon-picture"></span> Change Images
+						<button {{action "showUpload"}} 
+							{{bind-attr class="showImages:hide:show :btn :btn-primary :btn-left"}}>
+							<span class="glyphicon glyphicon-arrow-left"></span> back
 						</button>
 
 						{{ladda-btn
-							name='next'
+							name='continue'
 							class="display-inline"
 							btnClasses='btn btn-primary btn-right ladda-button'
 							btnClick='saveProduct'
@@ -126,40 +164,66 @@
 
 
 
+	{{!-- SHOW POST --}}
+	{{!-- SHOW POST --}}
+	{{!-- SHOW POST --}}
+	{{!-- SHOW POST --}}
+	{{!-- SHOW POST --}}
+	{{!-- SHOW POST --}}
+	{{!-- SHOW POST --}}
+	<div {{bind-attr class=":slide showPost:in showPostOutLeft:outleft showPostOutRight:outright"}}>
 
+		{{view Editor showPost=showPost}}
 
-
-
-
-	<div {{bind-attr class="showPost:show:hide"}}>
 		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">  
-				{{#form-for model wrapper="bs3-wrapper"}}
-					<h4>What's great about this?</h4>
-					{{quill-editor content=editorialForQuill quillChange='quillChange'}}
-				{{/form-for}}
-			</div>
-		</div>
 
-		<div class="toolbar-footer">
-			<div class="container">
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+
+			<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
+
+				<div class="row text-center">
+					<div {{bind-attr class=":fade showPost:in :col-md-12 :col-sm-12 :col-xs-12"}}>
+						<h5>
+							Drag images into your post
+						</h5>
+					</div>
+				</div>
+
+
 				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
+					<div class="col-md-12 col-sm-12 col-xs-12 ql-editor-col">  
+						{{#form-for model wrapper="bs3-wrapper"}}
+							{{quill-editor content=editorialForQuill quillChange='quillChange'}}
+						{{/form-for}}
+					</div>
+				</div>
 
-						
-						<button {{action 'showProduct'}} class="btn btn-default btn-left">details</button>
-						
-						{{ladda-btn
-							name='save'
-							class="display-inline"
-							btnClasses='btn btn-primary btn-right ladda-button'
-							btnClick='savePost'
-							spin=isProcessing
-						}}
+				<div {{bind-attr class="showPost:show:hide :toolbar-footer"}}>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
 
+								
+								<button {{action 'showProduct'}} class="btn btn-default btn-left">
+									<span class="glyphicon glyphicon-arrow-left"></span> back
+								</button>
+								
+								{{ladda-btn
+									name='post'
+									class="display-inline"
+									btnClasses='btn btn-primary btn-right ladda-button'
+									btnClick='savePost'
+									spin=isProcessing
+								}}
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+
 		</div>
 	</div>
 </div>

@@ -1,8 +1,7 @@
 import Ember from 'ember';
-
-export default Ember.Route.extend({
+import ResetScrollMixin from '../../mixins/resetscroll';
+export default Ember.Route.extend(ResetScrollMixin,{
 	model: function() {
-		console.log("HERE?")
 		return this.modelFor('seller');
 	},
 	renderTemplate: function(controller, model) {

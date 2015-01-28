@@ -12,6 +12,7 @@ var CollectionProductSerializer =  DS.RESTSerializer.extend({
 		
 		var data = {
 			id: recordId,	
+			updated_at: payload.data.updated_at,
 			editorial: payload.data.editorial,
 			product: payload.data.product_id,
 			collection: payload.data.store_id,
@@ -32,6 +33,7 @@ var CollectionProductSerializer =  DS.RESTSerializer.extend({
 		var id = payload.data.store_id +"-"+ payload.data.product_id; 
 		var data = {
 			id: id,	
+			updated_at: payload.data.updated_at,
 			editorial: payload.data.editorial,
 			product: payload.data.product_id,
 			collection: payload.data.store_id,
