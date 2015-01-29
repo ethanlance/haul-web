@@ -5,7 +5,7 @@ var $ = Ember.$;
 
 var QuillEditorComponent = Ember.Component.extend({
 
-	
+	height: false,
 	content: '',
 	editor: null,
 
@@ -15,16 +15,15 @@ var QuillEditorComponent = Ember.Component.extend({
 
 	didInsertElement: function(){
 		var _this = this;
-
 		
+		if( this.get('height')){
+			var h = this.get('height');
+		}else{
+			var h = window.innerHeight; 
+		}
 
-
+		$('#editor').css("height", h);	
 		
-		var h = window.innerHeight; 
-		$('#editor').css("height", h);
-
-
-
  		var editor = new Quill('#editor',{
 		  	modules: {
 		    	'toolbar': { container: '#toolbar' },
@@ -37,30 +36,6 @@ var QuillEditorComponent = Ember.Component.extend({
 
 		editor.on('text-change', function() { 
 			_this.sendAction('quillChange', editor.getHTML());
-		
-			
-
-			// var bottom = $('.ql-images').position().top + 100;
-			// console.log("H", $('.toolbar-footer').height())
-			// var toolbarH = 34;//$('.toolbar-footer').height();
-			// var editorBar = 50;
-			
-			// console.log("BOTTOM", bottom)
-
-
-			// var h = h - (bottom  + toolbarH + editorBar);
-
-
-
-			// var b = $('.ql-editor')
-			// console.log("HERE?", h, b.css('max-height'))
-
-			// $('.ql-editor').css('max-height', h+"px");
-
-			// console.log("HERE?", b.css('max-height'))
-
-
-
 		}); 
 
 		this.contentChanged();

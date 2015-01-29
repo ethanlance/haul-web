@@ -1,7 +1,6 @@
 {{user-header model=model}}
 
 <div class="container haul-content">  
-
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 
@@ -13,6 +12,10 @@
 					You don't follow any one yet.
 				{{/unless}}
 				</div>
+
+				<p class="text-center padding-top">
+					<span class="glyphicon glyphicon-bookmark sad-heart"></span>
+				</p>
 			{{/unless}}
 
 		 	{{#each model.user.getFollows.follows}}

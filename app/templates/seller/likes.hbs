@@ -3,15 +3,18 @@
 <div class="container haul-content">  
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-
 			
 			{{#unless model.user.getLikes.products }}
-				<p class="padding-top text-center font-weak">
+				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
 					{{user.name}} hasn't liked anything yet.
 				{{else}}
 					You haven't liked anything yet.
-				{{/unless}}</p>
+				{{/unless}}</div>
+
+				<p class="text-center">
+					<span class="glyphicon glyphicon-heart-empty sad-heart"></span>
+				</p>
 			{{/unless}}
 
 

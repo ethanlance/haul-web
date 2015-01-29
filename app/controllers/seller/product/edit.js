@@ -16,8 +16,6 @@ export default Ember.ObjectController.extend({
 	showProduct: false,
 	showUpload: false,
 	imagesAreSelected: false,
-	
-	totalImages: 5,
 
 	productImageIds: [],
 	selectedImages: [],
@@ -304,25 +302,26 @@ export default Ember.ObjectController.extend({
 			this.selectImage(image);
 		},
 
-		refresh: function(response) {
-			var user_id  = this.get('currentUserId');
-			var store = this.store; 
-			var _this = this;
+		refresh: function(image) {
+			this.selectImage(image);
+			// var user_id  = this.get('currentUserId');
+			// var store = this.store; 
+			// var _this = this;
 
-			response.data.forEach( function(image){ 
-				var record = store.push('user-image', {
-					original: image.locations.original,
-					small: image.locations.small,
-					thumb: image.locations.thumb,
-					caption: image.caption,
-					locations: image.locations,
-					user_id: user_id,
-					id: image.image_id,
-					created_at: image.created_at
-				});  
+			// response.data.forEach( function(image){ 
+			// 	var record = store.push('user-image', {
+			// 		original: image.locations.original,
+			// 		small: image.locations.small,
+			// 		thumb: image.locations.thumb,
+			// 		caption: image.caption,
+			// 		locations: image.locations,
+			// 		user_id: user_id,
+			// 		id: image.image_id,
+			// 		created_at: image.created_at
+			// 	});  
 				
-				_this.selectImage(record);
-			});				
+			// 	_this.selectImage(record);
+			// });				
 		},
 
 		quillChange: function(text) {

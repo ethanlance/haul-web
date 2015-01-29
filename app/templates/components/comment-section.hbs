@@ -4,17 +4,15 @@
 		{{!-- COMMENT FORM --}}
 		<div class="row" id="leaveComment">
 			<div class="col-md-12 col-sm-12 col-xs-12 ">
-			<h4>Leave a comment</h4>
-
-
+			<h5>Comments</h5>
 			{{#form-for model wrapper="bs3-wrapper"}}
 				
-				{{input comment as="text" canShowValidationError=showErrors placeholder="Leave a comment."}}
+				{{input comment as="text" canShowValidationError=showErrors placeholder="add a comment..."}}
 				
 				<div class="text-right">
 					
 					{{ladda-btn
-						name='Post Comment'
+						name='post comment'
 						class="display-inline"
 						btnClasses='btn btn-default ladda-button'
 						btnClick='submit'
@@ -49,36 +47,6 @@
 					<p class="single-comment">
 						{{ break-lines comment }} 
 					</p>
-
-
-					
-
-
-					{{!-- <div class="media">
-						 
-							{{ make-icon icon=user.icon isSmall=true class="pull-left"}}
-						 
-						<div class="media-body border">
-
-							{{#if this.canDelete }}
-							<div class="pull-right">
-								<button {{action 'delete' this}} class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
-							</div>
-							{{/if}}
-
-							<strong>{{#link-to "seller" user}}{{ user.name }}{{/link-to}}</strong>
-
-							<br/>
-
-							{{ break-lines comment }} 
-
-							<br/>
-
-							<span class="small">{{ format-date created_at }}</span>
-
-
-						</div>
-					</div> --}}
 
 				{{/each}}
 

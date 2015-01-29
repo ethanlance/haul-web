@@ -6,9 +6,7 @@ export default Ember.Component.extend(ScrolltoMixin, {
 	anchor: true,
 	actions: {
 		scrollTo: function() { 
-			if( !this.get('anchor') ){
-            	this.scrollTo('#leaveComment', 200);
-			}
+			this.scrollTo('#leaveComment', 200);
 		}
 	}
 });

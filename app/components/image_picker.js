@@ -12,7 +12,7 @@ var ImagePickerComponent = Ember.Component.extend({
 
 	user_idBinding: 'session.currentUser.id',
 	user_tokenBinding: 'session.currentUser.access_token',
-
+	store: null,
 
 	didInsertElement: function(){
 		var _this = this; 
@@ -20,6 +20,8 @@ var ImagePickerComponent = Ember.Component.extend({
 		if(!this.get('user_id')){
 			return;
 		}
+
+		this.set('store', this.container.lookup("store:main"));
 		
 		//INIT
 		 this.dropzone = new Dropzone("#haul-dropzone", { 
@@ -144,30 +146,74 @@ var ImagePickerComponent = Ember.Component.extend({
 		});
 
 		//SUCCESS, reset Dropzone and hand the image file off to Ember.
-		this.dropzone.on('success', function(file, response) {	 		
-			
-			//console.log("UPLOAD", response);
+		this.dropzone.on('success', function(file, response) {	
 
-			window.clearInterval(file.progressInterval);
+			var _self = this;
+			var store = _this.get('store');
+			var image_id = response.data[0].image_id;
+			var i = 0;
+			var retryTimes = 10;
+			var retryWait = 1000;
+			var getThumbInterval = false;
 
-			//Get the base 64 thumb.
-			var img = $(file.previewElement).find('img');
- 			var src = img.prop('src');
- 			response.data[0].locations.small = src;
+			//If no thumb returns, then try again.
+			//This happens when icons are uploaded, the image
+			//takes time to crunch.
+			function waitingForResponse() {
+				i++;
+				store.find('image', image_id)
+				.then(function(image){
+					return image.reload();	
+				}).then(function(image) {
+					var thumb  = image.get('thumb');
 
- 			//Send our new file to the controllers action.
-			_this.refreshImages(file, response); 
+					if(thumb) {
+						window.clearInterval(getThumbInterval);
+						window.clearInterval(file.progressInterval); 
+						_self.removeFile(file);
+						_this.refreshImages(image);
+						return;
+					} 
 
-			//Fade out then remove from dropzone.
-			var self = this;
-			self.removeFile(file);
+					if( i > retryTimes ) { 
+
+						console.log("TOO MANY TRIES, ERROR OUT")
+
+					}
+
+				});
+			} 
+
+			//Get the thumb
+			store.find('image', image_id)
+			.then(function(image){ 
+				return image; 
+			}).then(function(image) {
+				var thumb  = image.get('thumb');
+				if( !thumb ) { 
+					getThumbInterval = setInterval(function () { 
+						waitingForResponse();
+					}, retryWait); 
+				} else {
+					window.clearInterval(file.progressInterval); 
+					
+					//_self.removeFile(file);
+					_this.refreshImages(image);
+					return;
+				}
+			});
+
+
 			
 		});
 	}.observes('user_id'),
  
 	//Send Event To Controller:
-	refreshImages: function(file, response) {	 
-		this.sendAction('refresh', response);	
+	refreshImages: function(image) {	
+
+		console.log("REFRESH IMAGE ", image);
+
+		this.sendAction('refresh', image);	
 	},
 
 	actions: {
