@@ -1,13 +1,11 @@
-
 import Ember from 'ember';
-
-// //ROOT
-// //Redirect logged in user to their profile.  
-// //Redirect anon users to the /about page.
-export default Ember.Route.extend({
-	// renderTemplate: function() {
-	// 	this._super();
-	// 	console.log("FUK")
-	// 	this.render('not-found');
-	// }
+import AnonRoute from './anon';
+export default AnonRoute.extend({
+	renderTemplate: function() {
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this._super();
+	}
 });

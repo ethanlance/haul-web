@@ -31,17 +31,6 @@ Router.map(function(){
 	});
 	this.route('product-new', {path: "/new-product"});
 
-	//Store
-	// this.resource('collection-new', {path: "/new-collection"});
-	// this.resource('collection', {path: "/collection/:collection_slug"}, function() {
-	// 	this.route('followers');
-	// 	this.route('edit');
-
-	// 	this.route('product', {path: "/:product_slug"}, function() {
-	// 		this.route('edit');
-	// 	});
-	// });
-
 	//Auth
 	this.route('login');
 	this.route('logout');
@@ -57,6 +46,9 @@ Router.map(function(){
 
 	//Search
 	this.route('search');
+
+	//404
+	this.route('not-found', { path: '/*path' });
 });
 
 
