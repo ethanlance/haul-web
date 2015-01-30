@@ -8,6 +8,7 @@ export default Ember.Component.extend({
 	showModal: false,
 	store: false,
 	repost:false,
+	postComplete:false,
 
 	start: function() {
 		this.set('store', this.container.lookup("store:main"));
@@ -37,7 +38,7 @@ export default Ember.Component.extend({
 		model.save()
 		.then(function(){
 			_this.set('isProcessing', false);
-			console.log("DONE");
+			_this.set('postComplete', true);
 		}, function(error){
 			return error;
 		});
@@ -54,6 +55,7 @@ export default Ember.Component.extend({
 		quillChange: function(text) {
 			this.get('repost').set('editorial', text);
 		},
+ 
 
 		savePost: function() { 
 			

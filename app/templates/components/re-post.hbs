@@ -23,25 +23,42 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div {{bind-attr class="postComplete:hide:show :row"}}>
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					{{#form-for repost wrapper="bs3-wrapper"}}
 						{{quill-editor content=editorialForQuill height='200px' quillChange='quillChange'}}
 					{{/form-for}}
 				</div>
 			</div>
+
+
+			<div {{bind-attr class="postComplete:show:hide :row :text-center"}}>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h5>Re-Post Complete!</h5>
+					<button {{action 'close'}} class="btn btn-default">close</button>
+					
+					{{#link-to 'seller' currentUser.collection.slug }}
+					<button class="btn btn-default">go to my feed</button>
+					{{/link-to}}
+				</div>
+			</div>
+
+
       </div>
       <div class="modal-footer">
-        <button {{action 'close'}} type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
-        
-        {{ladda-btn
-			name='post'
-			class="display-inline"
-			btnClasses='btn btn-primary btn-right ladda-button'
-			btnClick='savePost'
-			spin=isProcessing
-		}}
 
+
+      	<div {{bind-attr class="postComplete:hide:show"}}>
+	        <button {{action 'close'}} type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+	        
+	        {{ladda-btn
+				name='post'
+				class="display-inline"
+				btnClasses='btn btn-primary btn-right ladda-button'
+				btnClick='savePost'
+				spin=isProcessing
+			}}
+		</div>
 
       </div>
     </div>
