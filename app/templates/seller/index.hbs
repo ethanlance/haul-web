@@ -7,61 +7,8 @@
 
 
 		{{#each model.products}}
-			
 			{{#if product.image}}
-			<div class="post">   
-				<div class="citation">
-				{{#unless-equal param1=product.user.id param2=collection.user.id}}
-					<span class="glyphicon glyphicon-retweet"></span>
-					<div class="name">
-						{{collection.user.name}} 
-						<span class="rehauled">rehauled</span>
-					</div>
-				{{/unless-equal}}
-
-
-					{{#link-to 'seller' collection }}
-					<div class="image">
-						{{ make-icon icon=product.user.icon isSmall=true}}
-					</div>
-					<div class="name">{{product.user.name}}</div>
-					{{/link-to}}
-					
-				</div>
-
-				<div class="article">
-					 <h2>
-						{{#link-to 'seller.product' collection product.id product.slug }}{{product.name}}{{/link-to}}
-					</h2> 
-
-					<div class="moment">{{format-date updated_at}}</div>
-					
-					<div class="product-image">
-						<div class="price">${{product.price}}</div>
-						{{#link-to 'seller.product' collection product.id product.slug }}
-							<img class="img-responsive" {{bind-attr src=product.image.medium}}>
-						{{/link-to}}
-					
-
-					 	<div class="btn-wrapper">
-
-					 		<button class="btn btn-default btn-buy">
-								buy
-							</button>
-
-						 	{{like-btn product=product class="display-inline" }}
-
-						 	{{#link-to 'seller.product' collection product.id product.slug }}
-						 		{{comment-btn anchor='false' itemObject=this class="display-inline" }}
-						 	{{/link-to}}
-
-							
-							{{re-post post=product  class="display-inline" }}
-						 	
-						</div>
-					</div>
-				</div> 
-			</div>	
+				{{partial 'post'}}	
 			{{/if}}
 		{{/each}} 
 		 
