@@ -1,6 +1,6 @@
 import ApplicationRoute from './../application';
-
-export default ApplicationRoute.extend({
+import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
+export default ApplicationRoute.extend(AuthenticatedRouteMixin, {
 	model: function() { 
 		return this.modelFor('seller');
 	}

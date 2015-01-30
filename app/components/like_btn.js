@@ -13,6 +13,11 @@ export default Ember.Component.extend({
 		var store = this.container.lookup("store:main");
 		var _this = this;
 
+		//Skip if user is anon.
+		if(!this.get('userId')){
+			return;
+		}
+
 		//currentUser like item?
 		store.find('like', this.get('productId')).then(function(uLike){
 			if(!Ember.isEmpty(uLike)){
@@ -24,6 +29,13 @@ export default Ember.Component.extend({
 
 	actions: {
 		btnClick: function() { 
+
+			//Anon?
+			if(!this.get('userLikesRecord')){
+				this.sendAction('loginModal');
+				return;
+			}
+
 			var _this = this;
 			var record = this.get('userLikesRecord'); 
 			var store = this.container.lookup("store:main");
