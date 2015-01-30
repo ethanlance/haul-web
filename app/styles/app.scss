@@ -136,15 +136,11 @@ body {
 .profile-image {
 	width: 100px;
 	height: 100px;
-	//background-color: #ddd;
-	border-radius: 50%;
+	border-radius: 20%;
 	display: inline-block;
 	&.sm {
 		width: 50px;
 		height: 50px;
-	}
-	&.collection {
-		border-radius: 20%;
 	}
 }
 
@@ -241,6 +237,7 @@ nav {
 			float:left;
 			
 			.btn:first-child{
+				padding:1px 20px 1px 2px;
 				border-top-right-radius: 0;
 				border-bottom-right-radius: 0;
 			}
@@ -262,8 +259,8 @@ nav {
 	}
 
 	.profile-image.sm{
-		width: 20px;
-		height: 20px;
+		width: 30px;
+		height: 30px;
 		padding:1px;
 	}
 
@@ -298,107 +295,179 @@ nav {
 		}
 
 	} 
+
+	.logo.shrink {
+		padding-top: 10px;
+		height: 50px;
+	}
+
+	@media (max-width: 768px) {
+		.logo.shrink {
+			padding-top: 20px;
+			height: 50px;
+		}
+	}
 }
 
 
 
 /* Basic header for a user. */
 header.profile{
-	padding:0px;
-	margin:0px;
-	position:relative;
-	background-color: #f5f5f5;
-	padding-top:30px;  
-	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	min-height:100px;
+	.profile-container{
+		padding:0px;
+		margin:0px;
+		position:relative;
+		background-color: #f5f5f5;
+		padding-top:30px;  
+		font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 
-	.btn-follow {
-		float: right;
-		margin-top:15px;
-		margin-right: 20px;
-	}
-
-	.profile-image {
-		position:absolute;
-		top: 30px;
-		left: 20px;
-		width: 100px;
-		height: 100px;
-	}
- 
-	.info-block{
-		padding-left:130px;
-		padding-top:15px;
-		height: 40px;
-
-		h1 {
-			margin:0px;
-			padding: 0px;  
-			font-size: 24px;
+		.btn-follow {
+			float: right;
+			margin-top:15px;
+			margin-right: 20px;
 		}
-		
-		.name {
-			font-size: 12px;
-			margin-top: 0px;
 
-			a:hover{
+		.profile-image {
+			-moz-transition: all 0.2s ease-in-out;
+			-o-transition: all 0.2s ease-in-out;
+			-webkit-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+			
+			position:absolute;
+			top: 30px;
+			left: 20px;
+			width: 100px;
+			height: 100px;
+		}
+	 
+		.info-block{
+			padding-left:130px;
+			padding-top:15px;
+			height: 40px;
+
+			h1 {
+				margin:0px;
+				padding: 0px;  
+				font-size: 24px;
+			}
+			
+			.name {
+				font-size: 12px;
+				margin-top: 0px;
+
+				a:hover{
+					cursor:pointer;
+					text-decoration: none;
+				}
+			}
+		}
+
+		.stats-block { 
+			padding: 10px 0px 0px 130px;
+			background-color: white;
+			margin-top: 25px; 
+			border-top: 1px solid #ddd;
+			border-bottom: 2px solid #E1E8ED;
+
+			.active ~ .active {
+				color: red;
+			}
+
+			.activehack{
+				color: red;
+			}
+
+			.stats {
+				transition: all 0.5s ease-out-in;
+				border-bottom: 4px solid transparent;
+				float: left;
+				padding-left: 0px;
+				padding-right: 25px;
+				font-size: 14px;
+
+				a span {
+					font-weight: bold;
+				}
+
+
+				a:hover{
+					cursor:pointer;
+					text-decoration: none;
+				}
+			}
+
+			@media (max-width: 768px) {
+				.stats {
+					display: inline;
+					font-size: 11px;
+					padding-right: 15px;
+				}
+			}
+
+			.stats:hover{
+				transition: all 0.5s ease-in-out;
+				border-bottom: 4px solid red;
+				text-decoration: none; 
 				cursor:pointer;
-				text-decoration: none;
 			}
-		}
-	}
-
-	.stats-block { 
-		padding: 10px 0px 0px 130px;
-		background-color: white;
-		margin-top: 25px; 
-		border-top: 1px solid #ddd;
-		border-bottom: 2px solid #E1E8ED;
-
-		.active ~ .active {
-			color: red;
-		}
-
-		.activehack{
-			color: red;
-		}
-
-		.stats {
-			transition: all 0.5s ease-out-in;
-			border-bottom: 4px solid transparent;
-			float: left;
-			padding-left: 0px;
-			padding-right: 25px;
-			font-size: 14px;
-
-			a span {
-				font-weight: bold;
-			}
-
-
-			a:hover{
-				cursor:pointer;
-				text-decoration: none;
-			}
-		}
-
-		.stats:hover{
-			transition: all 0.5s ease-in-out;
-			border-bottom: 4px solid red;
-			text-decoration: none; 
-			cursor:pointer;
 		}
 	}
 }
-@media (max-width: 768px) {
-	header.profile{
+
+header.profile.shrink{
+	min-height:65px;
+}
+header.profile{
+	.profile-container.fixed{
+		position:fixed;
+		top:50px;
+		z-index: 2001;
+		padding: 0px 0px 4px 0px;
+		margin:0px;
+		width: 100%;
+		background-color: #fff;
+		border-bottom: 2px solid #E1E8ED;
+
+		.back{ 
+			float:left; 
+			position:relative;
+			left:20px;
+			padding:20px 0px 0px 0px;
+		}
+
+		.profile-image {  
+			margin:0;
+			padding:1px;
+			float:left; 
+			position:relative;
+			top: 10px;
+			left: 47px;
+			width: 40px;
+			height: 40px;
+		}
+
+		.info-block{
+			display:none;
+		}
+
 		.stats-block{
-			.stats {
-				display: inline;
-				font-size: 11px;
-				padding-right: 15px;
+			float:left;
+			position:relative;
+			left:54px;
+			padding:15px 0px 0px 0px;
+			margin:0;
+			border:none;
+		}
+		@media (max-width: 768px) {
+			.profile-image { 
+				left: 37px; 
+			}
+			.stats-block{
+				left:44px;
 			}
 		}
-	}
+	}	
 }
 
 
@@ -423,7 +492,8 @@ header.profile{
 		display:inline-block;
 		padding:0px;
 		margin:0px;
-		margin-bottom:10px;
+		margin-bottom:10px; 
+		margin-top:10px;
 		width: 100%;
 		
 		.glyphicon-retweet {
@@ -472,7 +542,7 @@ header.profile{
 		position: relative;
 		background-color: #ffffff;
 		border: 1px solid #ccc;
-		padding: 15px;
+		padding: 15px 15px 15px 15px;
 		margin-top:15px;
 
 		max-width: 540px;
@@ -481,8 +551,15 @@ header.profile{
 
 		.btn-edit-post {
 			position:absolute;
-			right:-15px;
-			top:-15px;
+			right:-1px;
+			top:-20px;
+			border-bottom: none;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		.citation.no-top-margin {
+			margin-top:0px;
 		}
 		
 		.article { 	
@@ -589,12 +666,24 @@ header.profile{
 	}
 
 
+	.sidebar-header{
+		text-align: center;
+		padding:0;
+		margin:0;
+		margin-top:-5px;
+		padding-top:5px;
+		border: 1px solid #ccc;
+		border-bottom:none;
+	}
+
 	.sidebar {
 		border: 1px solid #ccc;
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
 		padding:15px;
-		margin-top:45px;
+		background-color: #f3f3f4;
+
 		.seller{
-			background-color: #f9f9f9;
 
 			.profile-image {
 				position:absolute;
@@ -618,10 +707,18 @@ header.profile{
 				display: inline-block;
 			}
 			.name{
-				padding-top: 5px;
+				a{
+					text-decoration: none;
+					color: #3a4457;	
+				}
+				
+				padding-top: 15px;
+				margin-bottom: 15px;
 				font-size: 18px;
+				border-bottom: 1px solid #eee;
 			}
 		 
+
 			.info-block{
 				padding-left:65px;
 				padding-top:15px;
@@ -635,7 +732,7 @@ header.profile{
 					font-size: 18px;
 				}
 				
-				.name {
+				.username {
 					font-size: 12px;
 					margin-top: 0px;
 
@@ -658,9 +755,9 @@ header.profile{
 		}
 	}
 	@media (max-width: 768px) {
-		.sidebar{
-			margin-top:0px;
-			border-top: none;
+		.sidebar-header{
+			margin-top: 20px;
+			//border-top: none;
 		}
 	}
 
@@ -1097,75 +1194,6 @@ header.profile{
 
 
 
-// .profile-circular-mask {
-// 	-moz-transition: all 0.2s ease-in-out;
-// 	-o-transition: all 0.2s ease-in-out;
-// 	-webkit-transition: all 0.2s ease-in-out;
-// 	transition: all 0.2s ease-in-out;
-// 	display: inline-block;
-// 	width: 75px;
-// 	height: 75px;
-// 	border-radius: 50%;
-// 	overflow: hidden;
-// 	margin-bottom: 10px;
-// 	margin-right: 10px;
-// 	margin-left: 10px;
-// 	background-color: #ddd;
-// 	&.collection {
-// 		border-radius: 20%;
-// 	}
-// 	img {
-// 		max-width: 100%;
-// 	}
-// 	span {
-// 		-moz-transition: all 0.2s ease-in-out;
-// 		-o-transition: all 0.2s ease-in-out;
-// 		-webkit-transition: all 0.2s ease-in-out;
-// 		transition: all 0.2s ease-in-out;
-// 		position: absolute;
-// 		top: 30px;
-// 		left: 35px;
-// 	}
-// 	&.sm {
-// 		width: 50px;
-// 		height: 50px;
-// 		vertical-align: middle;
-// 	}
-// }
-
-// .heading .profile-circular-mask {
-// 	margin-top: -10px;
-// }
-
-// .toolbar.fixed {
-// 	-moz-transition: position 0.2s ease-in-out;
-// 	-o-transition: position 0.2s ease-in-out;
-// 	-webkit-transition: position 0.2s ease-in-out;
-// 	transition: position 0.2s ease-in-out;
-// 	position: fixed;
-// 	width: 100%;
-// 	display: inline-block;
-// 	top: 50px;
-// 	z-index: 1029;
-// }
-
-
-
-// @media (max-width: 768px) {
-// 	.toolbar.fixed {
-// 		top: 48px;
-// 	}
-// }
-
-// .navbar-profile .profile-circular-mask {
-// 	width: 25px;
-// 	height: 25px;
-// }
-
-
-// .media-body {
-// 	padding-left: 10px;
-// }
 
 .haul-grid {
 	margin: 0;

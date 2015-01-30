@@ -1,50 +1,59 @@
 {{!-- SELLER PROFILE  --}}
-<header class="profile">
-	{{#link-to 'seller' model}}
-		{{ make-icon icon=model.user.icon isSmall=false isCollection=true}}
-	{{/link-to}}
+<header {{bind-attr class=":profile fixedByDefault:shrink"}}>
+	<div {{bind-attr class=":profile-container fixedByDefault:fixed"}}>
 
-	{{ follow-btn followObj=model}}
-
-	<div class="info-block">
-		<h1>{{model.name}}</h1>
-		<div class="name">@{{model.user.name}}</div> 
+	<div {{bind-attr class=":back fixedByDefault:show:hide"}}>
+		{{#link-to 'seller' model}}
+			<span class="glyphicon glyphicon-arrow-left"></span>
+		{{/link-to}}
 	</div>
 
-	<div class="stats-block">
+		{{#link-to 'seller' model}}
+			{{ make-icon icon=model.user.icon isSmall=false isCollection=true}}
+		{{/link-to}}
 
-		{{#link-to "seller" model}}
-		<div {{bind-attr class=":stats isSelected:activehack"}}>
-			<span>posts</span><br/>
-			<a>0</a>
-			<div class="highlight-wrap">
-			<div class="highlight"></div>
+
+		{{ follow-btn followObj=model}}
+
+		<div class="info-block">
+			<h1>{{model.name}}</h1>
+			<div class="name">@{{model.user.name}}</div> 
+		</div>
+
+		<div class="stats-block">
+
+			{{#link-to "seller" model}}
+			<div {{bind-attr class=":stats isSelected:activehack"}}>
+				<span>posts</span><br/>
+				<a>0</a>
+				<div class="highlight-wrap">
+				<div class="highlight"></div>
+				</div>
+			</div> 
+			{{/link-to}}
+
+			{{#link-to "seller.follows" model}}
+			<div class="stats">
+				<span>following</span><br/>
+				<a>{{model.user.getFollowingCount.total}}</a>
 			</div>
+			{{/link-to}}
+
+			{{#link-to "seller.followers" model}}
+			<div class="stats">
+				<span>followers</span><br/>
+				<a>{{model.getFollowedByCount.total}}</a>
+			</div>
+			{{/link-to}}
+
+			{{#link-to "seller.likes" model}}
+			<div class="stats">
+				<span>likes</span><br/>
+				<a>{{model.user.getLikesCount.total}}</a>
+			</div>
+			{{/link-to}}
+
+			<div class="clearfix"></div>
 		</div> 
-		{{/link-to}}
-
-		{{#link-to "seller.follows" model}}
-		<div class="stats">
-			<span>following</span><br/>
-			<a>{{model.user.getFollowingCount.total}}</a>
-		</div>
-		{{/link-to}}
-
-		{{#link-to "seller.followers" model}}
-		<div class="stats">
-			<span>followers</span><br/>
-			<a>{{model.getFollowedByCount.total}}</a>
-		</div>
-		{{/link-to}}
-
-		{{#link-to "seller.likes" model}}
-		<div class="stats">
-			<span>likes</span><br/>
-			<a>{{model.user.getLikesCount.total}}</a>
-		</div>
-		{{/link-to}}
-
-		<div class="clearfix"></div>
-	</div> 
-
+	</div>
 </header>

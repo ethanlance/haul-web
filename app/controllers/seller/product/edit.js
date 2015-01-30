@@ -155,7 +155,7 @@ export default Ember.ObjectController.extend({
 			model.set('collection', user.get('collection'));
 		}
 		
-		model.save()
+		return model.save()
 		.then(function(){
 			_this.set('isProcessing', false);
 			_this.transitionToRoute('seller.product', model.get('collection'), model.get('product').get('id'), model.get('product').get('slug'));
@@ -178,7 +178,7 @@ export default Ember.ObjectController.extend({
 			});
 		});
 
-		modelProduct.save().then(
+		return modelProduct.save().then(
 			function() { 
 				_this.set('isProcessing', false);
 				_this.set('showProduct', false);
