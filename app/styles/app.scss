@@ -1543,7 +1543,21 @@ textarea.form-control {
 
 
 body.anon{
+	padding:0;
+	margin:0;
+
+	display:block;
+	background-attachment: scroll;
 	background-image: url(/assets/images/header-bg.jpg);
+	background-position: center center;
+	background-attachment: scroll;
+	background-position: center center;
+	background-repeat: none;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	overflow-x: hidden;
 }
 
 .anon {
@@ -1558,13 +1572,7 @@ body.anon{
 		padding-top: 100px;
 		text-align: center;
 		color: #fff;
-		background-attachment: scroll;
-		background-position: center center;
-		background-repeat: none;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		background-size: cover;
-		-o-background-size: cover;
+		
 		min-height: 100%;
 		min-width: 100%;
 	}
