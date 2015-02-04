@@ -1,9 +1,11 @@
+
+
 <div class="post">   
 	<div class="citation">
 	{{#unless-equal param1=product.user.id param2=collection.user.id}}
 		<span class="glyphicon glyphicon-retweet"></span>
 		<div class="name">
-			{{collection.user.name}} 
+			{{collection.user.name}} {{../galleryView}}
 			<span class="rehauled">rehauled</span>
 		</div>
 	{{/unless-equal}}

@@ -20,6 +20,6 @@
     "jquery-ui": "~1.11.2",
     "quill": "~0.19.8",
     "ember-addons.bs_for_ember": "~0.7.0",
-    "ember-simple-auth": "0.7.2"
+    "ember-simple-auth": "0.7.2",
   }
 }

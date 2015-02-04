@@ -43,6 +43,7 @@ export default Ember.Component.extend({
 	    	var nav = $("nav");
 	    	var fixThis = $(".profile-container");
 	    	var logo = $(".logo");
+	    	var btn = $('.btn-list-grid');
 
 	    	var scrollTop = $(window).scrollTop();
 	    	var navBottom = nav.height();
@@ -52,11 +53,16 @@ export default Ember.Component.extend({
 	       		//console.log("ADD " + fixTop + " <= "+ navBottom) 
 	        	fixThis.addClass('fixed');  
 	        	logo.addClass('shrink');  
-	        	
+	        	if(btn){
+	        		btn.addClass('fixed'); 
+	        	} 
 	        }else{
 	        	//console.log("REMOVE " + fixTop + " > "+ navBottom)
 	        	fixThis.removeClass('fixed');
-	        	logo.removeClass('shrink');  
+	        	logo.removeClass('shrink'); 
+	        	if(btn){
+	        		btn.removeClass('fixed'); 
+	        	} 
 	        }
 	    
 		}, 10);

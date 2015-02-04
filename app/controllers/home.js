@@ -12,7 +12,10 @@ export default Ember.ObjectController.extend({
 		var _this = this; 
 		var currentUser = this.get('currentUser');
 
-		
+		if( !this.get('currentUser')){
+			return;
+		}
+
 		return this.store.find('collection', currentUser.get('collection').get('slug')).then(function(result){ 
 			_this.set('model', result);
 		}, function(error) {
@@ -20,7 +23,7 @@ export default Ember.ObjectController.extend({
 		});
 
 
-	}.observes('currentUserId'), 
+	}.on('init').observes('currentUserId'), 
 
 	getProducts: function() {
 		if(!this.get('model').id){

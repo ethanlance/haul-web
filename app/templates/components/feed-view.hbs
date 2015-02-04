@@ -1,0 +1,11 @@
+<button {{action 'toggleGrid'}} {{bind-attr class=":fade renderIsDone:in :btn :btn-default :btn-list-grid"}}>
+	<span {{bind-attr class=":glyphicon galleryView:glyphicon-th-list:glyphicon-th"}}></span>	
+</button>
+
+<div {{bind-attr class="galleryView:gallery"}}>
+{{#each model.products}}
+	{{#if product.image}}
+		{{partial 'post'}}	
+	{{/if}}
+{{/each}} 
+</div>

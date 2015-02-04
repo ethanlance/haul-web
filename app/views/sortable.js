@@ -11,14 +11,8 @@ export default Ember.CollectionView.extend({
 	didInsertElement: function(){
 		this._super();
 		var controller = this.get('controller');
-console.log("IMAGES", this.get('images'))
 
-this.get('images').forEach(function(image){
-	console.log("HERE", image);
-})
-
-
-this.set('content', this.get('images'))
+		this.set('content', this.get('images'));
 		//JQuery sortable component.
 		this.$().sortable({
 			update: function() {
