@@ -9,6 +9,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			return _this.transitionTo('not-found');
 		});
 	},	
+	setupController: function(controller, model) {
+		controller.set('collection', model);
+		this._super(controller, model);
+	},
 	// serialize: function(model) { 
 	// //	if(!Ember.isEmpty(model) && model.id){
 	// 	console.log("HERE MODEL SLUG", model.get('slug'))

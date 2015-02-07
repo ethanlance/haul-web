@@ -1,16 +1,18 @@
 {{!-- SELLER PROFILE  --}}
-<header {{bind-attr class=":profile fixedByDefault:shrink"}}>
-	<div {{bind-attr class=":profile-container fixedByDefault:fixed"}}>
+<header {{bind-attr class=":profile showHeader:show:hide"}}>
+	<div class="profile-container">
 
-	<div {{bind-attr class=":back fixedByDefault:show:hide"}}>
+	<div {{action "clickBack"}} bind-attr class="post-back-button hide">
 		{{#link-to 'seller' model}}
 			<span class="glyphicon glyphicon-arrow-left"></span>
 		{{/link-to}}
 	</div>
 
+		<span {{action "clickBack"}}>
 		{{#link-to 'seller' model}}
 			{{ make-icon icon=model.user.icon isSmall=false isCollection=true}}
 		{{/link-to}}
+		</span>
 
 
 		{{ follow-btn followObj=model}}

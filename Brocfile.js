@@ -32,10 +32,11 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
 app.import('bower_components/jquery/dist/jquery.js');
 app.import('bower_components/jquery-ui/jquery-ui.js');
 
+app.import('bower_components/velocity/velocity.js');
 app.import('bower_components/moment/moment.js');
 app.import('bower_components/dropzone/downloads/dropzone.js');
 
-app.import('bower_components/ember-animate/ember-animate.js');
+
 
 app.import('bower_components/ladda-bootstrap/dist/spin.js');
 app.import('bower_components/ladda-bootstrap/dist/ladda.js');

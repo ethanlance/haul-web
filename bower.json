@@ -21,5 +21,6 @@
     "quill": "~0.19.8",
     "ember-addons.bs_for_ember": "~0.7.0",
     "ember-simple-auth": "0.7.2",
+    "velocity": "~1.2.1"
   }
 }

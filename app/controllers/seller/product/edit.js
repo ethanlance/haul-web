@@ -4,7 +4,17 @@ import config from '../../../config/environment';
 var Haul = config.APP;
 
 export default Ember.ObjectController.extend({
+ 
+ 	needs: ['seller'],
 
+ 	thisPage: "postEdit",
+ 	currentPageBinding: Ember.computed.alias('controllers.seller.currentPage'),
+ 	showHeaderChange: function(){  
+ 		if( this.get('currentPage') === this.get('thisPage')){
+ 			console.log(this.get('currentPage') +" === " +this.get('thisPage'))
+ 			this.get('controllers.seller').set('showHeader', false);	
+ 		} 		
+ 	}.observes('currentPage'),
 	
 	modelProduct: null,
 	productImagesBinding: "model.product.images",
@@ -69,7 +79,7 @@ export default Ember.ObjectController.extend({
 
 
 	setup: function() { 
-		console.log("SETUP", this.get('model'))
+ 
 		if( !this.get('model').id ){  
 			this.set('newState', 'showUpload');
 		}else{

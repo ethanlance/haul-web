@@ -96,8 +96,7 @@ body {
 	background-color: #ffffff;
 	background-image: none;
 	position: relative;
-	padding-top: 50px;
-	
+	padding-top: 50px;	
 }
 
 .text-regular {
@@ -313,7 +312,14 @@ nav {
 
 /* Basic header for a user. */
 header.profile{
-	min-height:100px;
+	width: 100%;
+	border: 1px solid #ccc;
+}
+
+// header.profile.post-page{
+// 	max-height:65px;
+// }
+
 	.profile-container{
 		padding:0px;
 		margin:0px;
@@ -420,62 +426,84 @@ header.profile{
 			}
 		}
 	}
-}
+
 
 header.profile.shrink{
 	min-height:65px;
 }
-header.profile{
-	.profile-container.fixed{
-		position:fixed;
-		top:50px;
-		z-index: 2001;
-		padding: 0px 0px 4px 0px;
-		margin:0px;
-		width: 100%;
-		background-color: #fff;
-		border-bottom: 2px solid #E1E8ED;
 
-		.back{ 
-			float:left; 
-			position:relative;
-			left:20px;
-			padding:20px 0px 0px 0px;
-		}
-
-		.profile-image {  
-			margin:0;
-			padding:1px;
-			float:left; 
-			position:relative;
-			top: 10px;
-			left: 47px;
-			width: 40px;
-			height: 40px;
-		}
-
-		.info-block{
-			display:none;
-		}
-
-		.stats-block{
-			float:left;
-			position:relative;
-			left:54px;
-			padding:15px 0px 0px 0px;
-			margin:0;
-			border:none;
-		}
-		@media (max-width: 768px) {
-			.profile-image { 
-				left: 37px; 
-			}
-			.stats-block{
-				left:44px;
-			}
-		}
-	}	
+@media (max-width: 768px) {
+	header.profile.shrink{
+		min-height:55px;
+	}
 }
+.profile-container.fixed{
+	position:fixed;
+	top:50px;
+	z-index: 2001;
+	padding: 0px 0px 4px 0px;
+	margin:0px;
+	width: 100%;
+	background-color: #fff;
+	border-bottom: 2px solid #E1E8ED;
+
+	.post-back-button{ 
+		float:left; 
+		position:relative;
+		left:20px;
+		padding:20px 0px 0px 0px;
+	}
+
+	.profile-image {  
+		margin:0;
+		padding:1px;
+		float:left; 
+		position:relative;
+		top: 10px;
+		left: 47px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.info-block{
+		display:none;
+	}
+
+	.stats-block{
+		float:left;
+		position:relative;
+		left:54px;
+		padding:15px 0px 0px 0px;
+		margin:0;
+		border:none;
+	}
+	@media (max-width: 768px) {
+		.profile-image { 
+			left: 37px; 
+		}
+		.stats-block{
+			left:44px;
+		}
+	}
+}
+
+.btn-list-grid{
+	position: absolute;
+	bottom: 12px;
+	right: 15px;
+	z-index: 2;
+	@media (max-width: 768px) {
+		bottom: 8px;
+	}
+}
+
+
+
+
+
+
+
+
 
 
 .haul-content {
@@ -491,24 +519,7 @@ header.profile{
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	}
 	
-	.btn-list-grid{
-		position:fixed;
-		top: 155px;
-		right: 15px;
-	}
-	@media (max-width: 768px) {
-		.btn-list-grid{
-			position:fixed;
-			top: 151px;
-			right: 10px;
-		}
-	}
-	.btn-list-grid.fixed{
-		position:fixed;
-		top: 65px;
-		right: 15px;
-		z-index: 2001;
-	}
+	
 
 	.citation {
 		border-top: 1px solid #eee;
@@ -563,6 +574,11 @@ header.profile{
 
 
 	.post {
+		width:100%;
+		transition: width 0.2s ease-in-out;
+
+
+
 		position: relative;
 		background-color: #ffffff;
 		border: 1px solid #ccc;
@@ -586,6 +602,7 @@ header.profile{
 		}
 		
 		.article { 	
+			transition: all 0.2s ease-in-out;
 			display:table;
 			margin:auto;
 			max-width: 500px;
@@ -594,7 +611,7 @@ header.profile{
 				display:block;
 				margin:0px;
 				padding:0px;
-
+				transition: all 0.2s ease-in-out;
 				a{
 					text-decoration: none;
 					color: #3a4457;
@@ -606,12 +623,15 @@ header.profile{
 				font-size: 12px;
 				padding-bottom: 3px;
 				display:block;
+				transition: all 0.2s ease-in-out;
 			}
 
 			.product-image {
 				position:relative;
+				transition: all 0.2s ease-in-out;
 
 				.price {
+
 					min-width: 70px;
 					position:absolute;
 					padding: 3px 5px 3px 5px;
@@ -623,6 +643,7 @@ header.profile{
 					border-right: 1px solid #333;
 					border-bottom: 1px solid #333;
 					z-index:2000;
+					transition: all 0.2s ease-in-out;
 				}
 
 				.thumbnail{
@@ -659,6 +680,7 @@ header.profile{
 			}
 
 			.btn-wrapper{
+
 				width:100%;
 				position:absolute;
 				display:block;
@@ -689,15 +711,15 @@ header.profile{
 			float: left;
 			border: 0;
 			
-
 			.btn-edit-post, .citation, .moment, .editorial, .btn-wrapper, h2{
 				display:none;
 			}
+
 			.product-image{
 				border: 1px solid #ccc;
 				padding:1px;
 				img{
-					transition: all 0.2s ease-in-out;
+					
 					margin-right:auto;
 					margin-left:auto;
 					min-width:0;
@@ -1194,12 +1216,13 @@ header.profile{
 	position: absolute;
 	width: 100%;
     left:-1000px;
+
     -moz-transition: left 0.2s ease-in-out;
 	    -o-transition: left 0.2s ease-in-out;
 	    -webkit-transition: left 0.2s ease-in-out;
 	    transition: left 0.2s ease-in-out;
-}
 
+}
 
 
 // .in-from-right {

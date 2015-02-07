@@ -2,16 +2,30 @@ import Ember from 'ember';
 var $ = Ember.$;  
 
 export default Ember.ObjectController.extend({  
+
+ 	needs: ['seller'],
+ 	
+ 	thisPage: "postPage", 
+ 	currentPageBinding: Ember.computed.alias('controllers.seller.currentPage'),
+ 	showHeaderChange: function(){ 
+ 		console.log("CURRENTPAGE IS", this.get('currentPage')) 
+ 		if( this.get('currentPage') === this.get('thisPage')){
+ 			console.log(this.get('currentPage') +" === " +this.get('thisPage'))
+ 			this.get('controllers.seller').set('showHeader', true);	
+ 		} 		
+ 	}.observes('currentPage'),
+
+
 	currentUserIdBinding: 'Haul.currentUser.id',
 	collectionsBinding: "collections.collections",
 	userIdBinding: 'model.collection.user.id',
-	
+	watchScroll:null,
 	url: "", 
 	
 	//Is currentUser viewing his own page?
 	isProfileOwner: false,
-	 
-	setup: function() {  
+
+	setup: function() { 
 
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
 			if( this.get('userId') === this.get('currentUserId')) {
