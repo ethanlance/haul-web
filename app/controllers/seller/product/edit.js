@@ -10,14 +10,16 @@ export default Ember.ObjectController.extend({
  	thisPage: "postEdit",
  	currentPageBinding: Ember.computed.alias('controllers.seller.currentPage'),
  	showHeaderChange: function(){  
+ 		console.log("CURRENTPAGE IS", this.get('currentPage'))
  		if( this.get('currentPage') === this.get('thisPage')){
  			console.log(this.get('currentPage') +" === " +this.get('thisPage'))
  			this.get('controllers.seller').set('showHeader', false);	
  		} 		
  	}.observes('currentPage'),
 	
-	modelProduct: null,
+	modelProductBinding: "model.product",
 	productImagesBinding: "model.product.images",
+	
 	currentUserBinding: 'Haul.currentUser',
 	currentUserIdBinding: 'Haul.currentUser.id',
 	isProcessing: false,
@@ -26,6 +28,8 @@ export default Ember.ObjectController.extend({
 	showProduct: false,
 	showUpload: false,
 	imagesAreSelected: false,
+
+	showImageModal: false,
 
 	productImageIds: [],
 	selectedImages: [],
@@ -78,8 +82,7 @@ export default Ember.ObjectController.extend({
 	}.observes('newState'),
 
 
-	setup: function() { 
- 
+	setup: function() {  
 		if( !this.get('model').id ){  
 			this.set('newState', 'showUpload');
 		}else{
@@ -249,6 +252,7 @@ export default Ember.ObjectController.extend({
 		},
 
 		cancel: function() {
+			console.log("CANCEL CLICK")
 			var model = this.get('model');
 			if( model.get('id')){
 				this.transitionToRoute('seller.product', model.get('collection'), model.get('product').get('id'), model.get('product').get('slug'));
@@ -282,7 +286,7 @@ export default Ember.ObjectController.extend({
 		},
 
 		savePost: function() { 
-			
+			console.log("POST CLICK")
 			this.set('isProcessing', true);
 
 			var _this = this;
@@ -313,30 +317,20 @@ export default Ember.ObjectController.extend({
 		},
 
 		refresh: function(image) {
-			this.selectImage(image);
-			// var user_id  = this.get('currentUserId');
-			// var store = this.store; 
-			// var _this = this;
-
-			// response.data.forEach( function(image){ 
-			// 	var record = store.push('user-image', {
-			// 		original: image.locations.original,
-			// 		small: image.locations.small,
-			// 		thumb: image.locations.thumb,
-			// 		caption: image.caption,
-			// 		locations: image.locations,
-			// 		user_id: user_id,
-			// 		id: image.image_id,
-			// 		created_at: image.created_at
-			// 	});  
-				
-			// 	_this.selectImage(record);
-			// });				
+			this.selectImage(image);			
 		},
 
 		quillChange: function(text) {
 			var model = this.get('model');
 			model.set('editorial', text);
 		},
+
+		showImageModal: function(){
+			this.set('showImageModal', true);
+		},
+
+		closeImageModal: function(){
+			this.set('showImageModal', false);
+		}, 
 	}
 });

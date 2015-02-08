@@ -10,6 +10,14 @@ export default Ember.Component.extend({
 	    	$(window).unbind('scroll');
 	    	this.set('watchScroll', null);
 	    }
+console.log("WILL willDestroyElement ", this.get('page'))
+	    if( this.get('page') === "postEdit") {
+			$('.toolbar-footer').remove();
+	    }
+  	},
+
+  	parentViewDidChange: function(){
+  		console.log('parentViewDidChange');
   	},
 
 	didInsertElement: function() {
@@ -18,6 +26,8 @@ export default Ember.Component.extend({
 		this.set('currentPage', page);
 
 		console.log("NEW CURRENT PAGE", page);
+
+
 		
 		if(page === "postEdit"){
 			this.postEdit();
@@ -38,6 +48,15 @@ export default Ember.Component.extend({
 
 	postEdit: function() {
 		this.set('showHeader', false);
+
+		var toolbars = $('.toolbar-footer');
+		$('.liquid-container').after(toolbars);
+		$('.liquid-container').find('.toolbar-footer').remove();
+		console.log(toolbars)
+		// toolbars.each(function(toolbar){
+		// 	console.log("TOOLBAR", $(this))
+		// 	$('.liquid-container').before(toolbars[toolbar]);
+		// });
 	},
 
 	postPage: function() {

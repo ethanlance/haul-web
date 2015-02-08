@@ -11,7 +11,7 @@ export default function(){
   this.transition(
     this.fromRoute('seller.product.index'),
     this.toRoute('seller.product.edit'),
-    this.use('toUp'),
-    this.reverse('toDown', {duration:500})
+    this.use('toLeft', {easing:'spring'}),
+    this.reverse('toRight', {easing:'spring'})
   );
 };
