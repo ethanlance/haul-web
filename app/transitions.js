@@ -17,4 +17,5 @@ export default function(){
     this.use('toLeft', {easing:'spring'}),
     this.reverse('toRight', {easing:'spring'})
   );
+  
 };

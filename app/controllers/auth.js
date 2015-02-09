@@ -159,6 +159,7 @@ var AuthController = Ember.ObjectController.extend({
 						}
 					).then(function(){
 
+						_this.send('closeModal');
 						
 
 						if(Ember.isEmpty(attemptedTrans)){  

@@ -11,7 +11,11 @@ var FollowBtnComponent = Ember.Component.extend({
 	followIdBinding: "followObj.id",
 	userIdBinding: "session.currentUser.id",
 	userFollowsRecord: false,
-	
+
+	didInsertElement: function() {
+		this.set('showButton', true); 
+	},
+
 
 	userFollowsChange: function() {
 		if( this.get('userFollows') ) {
@@ -45,7 +49,7 @@ var FollowBtnComponent = Ember.Component.extend({
 
 		var _this = this;
 		var store = this.container.lookup("store:main");
-		this.set('showButton', true); 
+		
 
 		//currentUser follows item?
 		var key = this.followId + "-" + this.followType;
@@ -62,9 +66,20 @@ var FollowBtnComponent = Ember.Component.extend({
 		
 	}.observes('followId', 'userId'),
 
+	
+
 	actions: {	
 
 		buttonClick: function() { 
+
+			//Intercept if user is anonymous:
+			if( !this.get('user_id')){
+				console.log("SEND MODAL")
+				this.sendAction('openModal', 'loginmodal', {});
+				return;
+			}
+
+
 			var _this = this;
 			var record = this.get('userFollowsRecord'); 
 			var store = this.container.lookup("store:main");

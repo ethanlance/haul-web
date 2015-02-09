@@ -7,8 +7,8 @@ export default Ember.ObjectController.extend({
  
  	needs: ['seller'],
 	
-	modelProductBinding: "model.product",
-	productImagesBinding: "model.product.images",
+	modelProduct: null,
+	productImages: null,
 	
 	currentUserBinding: 'Haul.currentUser',
 	currentUserIdBinding: 'Haul.currentUser.id',

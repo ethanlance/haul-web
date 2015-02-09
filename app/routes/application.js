@@ -7,6 +7,7 @@ export default Ember.Route.extend({
     	},
   	 	
 		openModal: function(modalName, model) {
+			console.log("MODAL TRIGGER")
 			this.controllerFor(modalName).set('model', model);
 			return this.render(modalName, {
 				into: 'application',

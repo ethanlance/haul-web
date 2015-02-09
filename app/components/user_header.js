@@ -1,6 +1,6 @@
 import Ember from 'ember';
-
-export default Ember.Component.extend({	 
+import openmodalMixin from '../mixins/openmodal';
+export default Ember.Component.extend(openmodalMixin, {	 
 
 	showHeader:true, 
 

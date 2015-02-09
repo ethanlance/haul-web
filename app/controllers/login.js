@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
-// LOGIN
-var LoginController = Ember.ObjectController.extend({
+export default Ember.ObjectController.extend({
 	
 	needs: ['auth', 'facebook'],
 
@@ -103,4 +102,3 @@ var LoginController = Ember.ObjectController.extend({
 	 	}
 	}
 });
-export default LoginController;

@@ -20,15 +20,16 @@ var ImagePickerComponent = Ember.Component.extend({
 		if(!this.get('user_id')){
 			return;
 		}
-
+		var user_id = this.get('user_id');
 		this.set('store', this.container.lookup("store:main"));
 		
 		//INIT
 		 this.dropzone = new Dropzone("#haul-dropzone", { 
 
-			url: this.Haul.Server.IMAGE_SERVER_HOST + "/users/" + this.user_id + "/images",
+			url: this.Haul.Server.IMAGE_SERVER_HOST + "/images",
 			method: "post",
 			headers: {"Authorization": "Bearer " + this.user_token},
+			params: {'user_id':user_id},
 			paramName: "attachment",
 			dictDefaultMessage: "Drop Files Here <br/> OR <br/> Click Here To Browse Your Files",
 			previewTemplate: '<div class="selected-image dz-preview dz-file-preview"><div class="dz-details"><img class="thumbnail haul-thumb" data-dz-thumbnail /></div><div class="alert-wrapper hide"><div class="alert alert-danger" role="alert">Upload Failed</div></div><div class="progress-wrapper"><div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 10%" data-dz-uploadprogress><span class="sr-only">10% Complete</span></div></div></div><button data-dz-remove type="button" class="btn btn-default btn-sm btn-delete"><span class="glyphicon glyphicon-trash"></span></button></div>',
@@ -122,7 +123,7 @@ var ImagePickerComponent = Ember.Component.extend({
 
 		//ERROR, figure error handling here.
 		this.dropzone.on('error', function(file, response) { 
-			
+			console.log("ERROR", response);
 			var alertWrapper = file.previewElement.querySelector('.alert-wrapper');
 			$(alertWrapper).removeClass('hide');
 			

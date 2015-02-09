@@ -1,7 +1,7 @@
 import Ember from 'ember';  
 
 export default Ember.ObjectController.extend({
-
+	
  	needs: ['seller'],
  	thisPage: "feedPage", 
  	currentPageBinding: Ember.computed.alias('controllers.seller.currentPage'),

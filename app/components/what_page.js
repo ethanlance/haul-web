@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 	    	$(window).unbind('scroll');
 	    	this.set('watchScroll', null);
 	    }
-console.log("WILL willDestroyElement ", this.get('page'))
+		console.log("WILL willDestroyElement ", this.get('page'))
 	    if( this.get('page') === "postEdit") {
 			$('.toolbar-footer').remove();
 	    }
