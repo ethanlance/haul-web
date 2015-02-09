@@ -1,6 +1,8 @@
 import { animate, stop } from "liquid-fire";
 
 export default function(){
+
+  //Feed -> Post
   this.transition(
     this.fromRoute('seller.index'),
     this.toRoute('seller.product'),
@@ -8,6 +10,7 @@ export default function(){
     this.reverse('toRight', {duration:500})
   );
 
+  //Post -> Edit Post
   this.transition(
     this.fromRoute('seller.product.index'),
     this.toRoute('seller.product.edit'),

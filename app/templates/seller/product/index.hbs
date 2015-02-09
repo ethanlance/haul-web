@@ -82,7 +82,9 @@
 						 	
 						 	{{comment-btn itemObject=this class="display-inline" }}
 						 	
-						 	{{re-post post=product  class="display-inline" }}
+						 	<button {{action 'openModal' 'repost' collection}} class="btn btn-default">
+								<span class="glyphicon glyphicon-retweet"></span>
+							</button>
 
 						</div>
 						<img class="img-responsive" {{bind-attr src=product.image.medium}}/>

@@ -1,21 +1,11 @@
 import Ember from 'ember';
 var $ = Ember.$; 
-import config from '../../../config/environment';
+import config from '../config/environment';
 var Haul = config.APP;
 
 export default Ember.ObjectController.extend({
  
  	needs: ['seller'],
-
- 	thisPage: "postEdit",
- 	currentPageBinding: Ember.computed.alias('controllers.seller.currentPage'),
- 	showHeaderChange: function(){  
- 		console.log("CURRENTPAGE IS", this.get('currentPage'))
- 		if( this.get('currentPage') === this.get('thisPage')){
- 			console.log(this.get('currentPage') +" === " +this.get('thisPage'))
- 			this.get('controllers.seller').set('showHeader', false);	
- 		} 		
- 	}.observes('currentPage'),
 	
 	modelProductBinding: "model.product",
 	productImagesBinding: "model.product.images",
@@ -28,8 +18,6 @@ export default Ember.ObjectController.extend({
 	showProduct: false,
 	showUpload: false,
 	imagesAreSelected: false,
-
-	showImageModal: false,
 
 	productImageIds: [],
 	selectedImages: [],
@@ -83,17 +71,7 @@ export default Ember.ObjectController.extend({
 
 
 	setup: function() {  
-		if( !this.get('model').id ){  
-			this.set('showImageModal', true);
-		}else{
-			this.set('newState', 'showPost');
-		}
-	}.observes('model'),
-
-	setUpQuill: function() {
-		if( this.get('model').get('editorial') ){
-			this.set('editorialForQuill', this.get('model').get('editorial'));
-		}
+		this.set('newState', 'showUpload');
 	}.observes('model'),
 
 
@@ -130,14 +108,6 @@ export default Ember.ObjectController.extend({
  
 	}.observes('selectedImages.@each'),
 
-
-
-
-
-
-
-
-
 	//Preserves the drag sort order of the images.
 	updateSortOrder: function(indexes) { 
 		var selectedImages = this.get('selectedImages');
@@ -152,7 +122,6 @@ export default Ember.ObjectController.extend({
 	    selectedImages.endPropertyChanges();
 	    this.set('selectedImages', selectedImages);
 	},
-
 
 	savePost: function() {
 		var _this = this;
@@ -226,9 +195,6 @@ export default Ember.ObjectController.extend({
 				}
 			});
 			this.set('selectedImages', objects);
-
-			//image.set('isSelected',false); 
-
 		//Add
 		} else {
 			selectedImages.pushObject(image);
@@ -323,14 +289,6 @@ export default Ember.ObjectController.extend({
 		quillChange: function(text) {
 			var model = this.get('model');
 			model.set('editorial', text);
-		},
-
-		showImageModal: function(){
-			this.set('showImageModal', true);
-		},
-
-		closeImageModal: function(){
-			this.set('showImageModal', false);
-		}, 
+		}
 	}
 });

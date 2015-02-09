@@ -1,6 +1,18 @@
 import Ember from 'ember'; 
 
 export default Ember.ObjectController.extend({ 
+
+ 	needs: ['seller'],
+ 	thisPage: "followsPage", 
+ 	currentPageBinding: Ember.computed.alias('controllers.seller.currentPage'),
+ 	showHeaderChange: function(){  
+ 		console.log("CURRENTPAGE IS", this.get('currentPage')) 
+ 		if( this.get('currentPage') === this.get('thisPage')){
+ 			console.log(this.get('currentPage') +" === " +this.get('thisPage'))
+ 			this.get('controllers.seller').set('showHeader', true);	
+ 		} 		
+ 	}.observes('currentPage'),
+
 	currentUserIdBinding: 'Haul.currentUser.id',
 	userIdBinding: 'model.user.id',
 	isProfileOwner: false,
