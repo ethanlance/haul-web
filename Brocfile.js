@@ -29,6 +29,8 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
   destDir: 'assets'
 });
 
+app.import('bower_components/typeahead.js/dist/typeahead.bundle.js'); 
+
 app.import('bower_components/jquery/dist/jquery.js');
 app.import('bower_components/jquery-ui/jquery-ui.js');
 
