@@ -1,17 +1,15 @@
-<div class="container content-fixed-nav home padding-bottom">
+{{header-site}}
 
-
-	<div class="row"> 
-
-		<div class="col-md-12">
-
-			<div class="panel panel-default margin-top">
-			  <!-- Default panel contents -->
-			  <div class="panel-heading">Settings</div>
-			  <div class="panel-body"> 
-			   {{!--  {{ icon-maker item=user Haul=Haul}}  --}}
-			  </div> 
-			</div> 
+<div class="container-fluid haul-jargon">
+	<div class="row">
+		<div class="col-md-3 col-sm-3 col-xs-3 nav-column">
+			<div class="list-group">
+			  {{#link-to 'settings.profile' class="list-group-item"}}Edit Profile{{/link-to}}
+			  {{#link-to 'settings.password' class="list-group-item"}}Change Password{{/link-to}}
+			</div>
+		</div>
+		<div class="col-md-9 col-sm-9 col-xs-9">
+			{{outlet}}
 		</div>
 	</div>
 </div>

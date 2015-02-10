@@ -13,6 +13,9 @@ var FollowBtnComponent = Ember.Component.extend({
 	userFollowsRecord: false,
 
 	didInsertElement: function() {
+
+
+
 		this.set('showButton', true); 
 	},
 
@@ -37,16 +40,16 @@ var FollowBtnComponent = Ember.Component.extend({
 
  	itemChanged: function() {
  
-		if(!this.get('userId') || !this.get('followId') ){
-			return;
-		}
 
 		//Don't follow self.
-		if( this.get('followObj').get('user').get('id') === this.get('userId')){
+		if( !this.get('followObj') || this.get('followObj').get('id') === this.get('userId')){
 			this.set('showButton', false);
 			return;
 		}
 
+		if(!this.get('userId') || !this.get('followId') ){
+			return;
+		}
 		var _this = this;
 		var store = this.container.lookup("store:main");
 		

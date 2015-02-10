@@ -48,9 +48,12 @@
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right" role="menu">
 				<li>{{#link-to 'seller' session.currentUser.collection.slug }}Profile{{/link-to}}</li>
-
+				
 				<li class="divider"></li>
-				<li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
+				<li>{{#link-to 'settings.profile'}}Settings{{/link-to}}</li>
+				
+	            <li class="divider"></li>
+	            <li>{{#link-to 'haul.about'}}About {{/link-to}}</li>
 
 				<li class="divider"></li>
 				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
@@ -60,8 +63,11 @@
 
 	{{else}}
 
+
 		{{#link-to 'signup'}}<button type="button" class="btn btn-default btn-signup">SIGNUP</button>{{/link-to}}
 		{{#link-to 'login'}}<button type="button" class="btn btn-default btn-login">LOGIN</button>{{/link-to}}
+
+		{{#link-to 'haul.about'}}<button type="button" class="btn btn-default btn-signup">ABOUT</button>{{/link-to}}
 
 	{{/if}}
 

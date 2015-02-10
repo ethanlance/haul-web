@@ -17,7 +17,7 @@
         {{/link-to}}
 
         <button type="button" class="btn btn-default">
-        {{#link-to 'seller' session.currentUser.slug }}
+        {{#link-to 'seller' session.currentUser.slug}}
             {{ make-icon icon=session.currentUser.icon isSmall=false}} 
         {{/link-to}}
         </button>
@@ -31,6 +31,9 @@
 
             <li class="divider"></li>
             <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
+
+            <li class="divider"></li>
+            <li>{{#link-to 'haul.about'}}About {{/link-to}}</li>
 
             <li class="divider"></li>
             <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>

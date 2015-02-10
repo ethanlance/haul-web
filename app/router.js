@@ -14,7 +14,14 @@ Router.map(function(){
 	//Home
 	this.route('home', {path: "/"});
 
-	this.route('about');
+	this.route('haul', function(){
+		this.route('about');
+		this.route('tos');
+		this.route('faq');
+		this.route('privacy');
+	});
+
+
 	this.route('not-found');
 	this.route('not-authorized');
 
@@ -41,8 +48,11 @@ Router.map(function(){
 	this.route('signup');
 	this.route('signupconfirm', {path: "register"});
 
-	//Settings
-	this.route('settings');
+	
+	this.route('settings', function(){
+		this.route('profile');
+		this.route('password');
+	});
 
 	//Search
 	this.route('search');
