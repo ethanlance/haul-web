@@ -10,6 +10,19 @@ export default Ember.Component.extend({
 	userLikesRecord: false,
 
 	start: function() {
+		
+
+
+		return;
+
+
+
+
+
+
+
+
+
 		var store = this.container.lookup("store:main");
 		var _this = this;
 

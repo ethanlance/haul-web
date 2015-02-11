@@ -53,6 +53,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
 
+    ENV.APP.Server.SEARCH_SERVER_HOST = "http://localhost:8087";
     ENV.APP.Server.COMMENT_SERVER_HOST = "http://localhost:8086";
     ENV.APP.Server.FOLLOW_SERVER_HOST = "http://localhost:8085";
     ENV.APP.Server.WANT_SERVER_HOST = "http://localhost:8084";
@@ -77,6 +78,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.APP.Server.SEARCH_SERVER_HOST = "http://localhost:8087";
     ENV.APP.Server.COMMENT_SERVER_HOST = "http://localhost:8086";
     ENV.APP.Server.FOLLOW_SERVER_HOST = "http://localhost:8085";
     ENV.APP.Server.WANT_SERVER_HOST = "http://localhost:8084";

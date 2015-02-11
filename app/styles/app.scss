@@ -1,5 +1,5 @@
 $primary-color: #3a4457;
-
+$secondary-color: #596885;
 
 .modal{
 	display:inline;
@@ -209,23 +209,96 @@ nav {
 		margin-left: 110px
 	}
 
+	.search-wrapper {
+		display:inline;
+	}
+
 	.btn-search {
 		margin-left: 5px;
+
 		.btn{
-			float:right;
+			color: #555;
+			padding-right: 2px;
+			border-right:none;
+			border-top-right-radius: 0px;
+			border-bottom-right-radius: 0px;
+		}
+		.form-control:focus {
+			box-shadow: none;
 		}
 		input {
-
 			-moz-transition: all 0.2s ease-in-out;
 			-o-transition: all 0.2s ease-in-out;
 			-webkit-transition: all 0.2s ease-in-out;
 			transition: all 0.2s ease-in-out;
+
+			padding-left:0px;
 			float: left; 
 			width: 200px;
-			border-top-right-radius: 0px;
-			border-bottom-right-radius: 0px;
-			border-right: none;
+			border-top-left-radius: 0px;
+			border-bottom-left-radius: 0px;
+			border-left: none;
+			&:focus{
+				border: 1px solid #ccc;
+				border-left: none;
+			}
 		}
+		li {
+			padding: 4px;
+			cursor: pointer;
+			&:hover{
+				background-color: #ccc;
+			}
+
+		}
+
+
+		.tt-query,
+		.tt-hint {
+		    outline: none;
+		}
+
+		.tt-query {
+		    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		}
+
+		.tt-hint {
+		    color: #999
+		}
+
+
+		.tt-dropdown-menu {
+		  width: 200px;
+		  margin-top: 0px;
+		  //padding: 8px 0;
+		  background-color: #fff;
+		  border: 1px solid #ccc;
+		  border: 1px solid rgba(0, 0, 0, 0.2);
+		  -webkit-border-radius: 8px;
+		     -moz-border-radius: 8px;
+		          border-radius: 8px;
+		  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+		     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+		          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+		}
+
+		.tt-suggestion {
+		    padding: 3px 20px;
+		    //font-size: 18px;
+		    // /line-height: 24px;
+		    cursor: pointer;
+		}
+
+		.tt-suggestion.tt-cursor {
+			color: #fff;
+		 	background-color: $secondary-color;
+		}
+
+
+
+
+
+
 	}
 
 	.btn-go-search{
@@ -237,7 +310,9 @@ nav {
 		float: left;  
 		margin-left:5px
 	}
-
+.mask{
+	display:none;
+}
 	.btn-profile {
 		float: right;
 		margin-left:5px;
@@ -298,9 +373,60 @@ nav {
 			margin-left: 5px;
 		}
 
-		.btn-search {
-			display:none;
+		.search-wrapper {
+			width: 100%;
+			display:hidden;
+			position: fixed;
 			margin-left: 5px;
+			left:-10px;
+			width:110%;
+			top:-50px;
+			opacity:1;
+			z-index: -2;
+			background-color: #eee;
+			border-top: 1px solid #ddd;
+			border-bottom: 1px solid #ddd;
+			text-align: center;
+		}
+
+		.btn-search {
+			border:0px;
+			padding: 10px;
+			text-align: center; 
+
+			input{
+				width:250px; 
+				//border: 1px solid #ccc;
+				//border-radius:4px;
+			}
+			.btn-default{ 
+				//display:none;
+			}
+
+		  	-webkit-transition: all .15s linear;
+		       -o-transition: all .15s linear;
+		          transition: all .15s linear;
+		}
+
+		.mask{
+			display:inline;
+			background-color: #fff;
+			width:100%;
+			height:50px;
+			position:fixed;
+			top:0;
+			left:0;
+			z-index:-1;
+		}
+		.search-wrapper.expand{
+
+	  		-webkit-transition: top .15s linear;
+	       	-o-transition: top .15s linear;
+          	transition: top .15s linear;
+
+			opacity:1;
+			display:inline;
+			top:50px;
 		}
 
 	} 
@@ -493,6 +619,7 @@ header.profile.shrink{
 		}
 		.stats-block{
 			left:44px;
+			padding:8px 0px 8px 0px;
 		}
 	}
 }
@@ -503,7 +630,7 @@ header.profile.shrink{
 	right: 15px;
 	z-index: 2;
 	@media (max-width: 768px) {
-		bottom: 8px;
+		bottom: 5px;
 		right: 4px;
 	}
 }
@@ -1799,66 +1926,6 @@ body.anon{
 
 
 
-
-
-
-
-
-
-
-
-.tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
-.tt-hint {
-    //width: 396px;
-    //height: 30px;
-    //padding: 8px 12px;
-    //font-size: 24px;
-    //line-height: 30px;
-    //border: 2px solid #ccc;
-    //border-radius: 8px;
-    outline: none;
-}
-
-.tt-query { /* UPDATE: newer versions use tt-input instead of tt-query */
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-.tt-hint {
-    color: #999
-}
-
-
-.tt-dropdown-menu {
-  width: 200px;
-  margin-top: 0px;
-  padding: 8px 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 8px;
-     -moz-border-radius: 8px;
-          border-radius: 8px;
-  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-          box-shadow: 0 5px 10px rgba(0,0,0,.2);
-}
-
-.tt-suggestion {
-    padding: 3px 20px;
-    //font-size: 18px;
-    line-height: 24px;
-}
-
-.tt-suggestion.tt-is-under-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
-    color: #fff;
-    background-color: #0097cf;
-
-}
-
-.tt-suggestion.tt-cursor {
-	color: #fff;
- 	background-color: #0097cf;
-}
 
 
 

@@ -20,6 +20,13 @@ export default Ember.Route.extend({
 				outlet: 'modal',
 				parentView: 'application'
 			});
+		},
+
+		goToRoute: function(arg1, arg2) {
+			console.log("INTERCEPTED at application route");
+			console.log(arg1)
+			console.log(arg2)
+			this.transitionTo(arg1, arg2);
 		}
 	}
 });

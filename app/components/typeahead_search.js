@@ -1,31 +1,68 @@
 import Ember from 'ember';
+import config from '../config/environment';
+var Haul = config.APP;
+/*global Bloodhound*/
+/*global Handlebars*/
+/*global $*/
+
 export default Ember.Component.extend({
+
+	searchType: 'tag',
+	searchSymbol: '#',
+	searchSymbols: {
+		'tag':'#',
+		'user':'@',
+		'post':'$',
+	},
+
+	toggle: false,
 
 	user_tokenBinding: 'session.currentUser.access_token',
 
 	didInsertElement: function() {
 		var _this = this;
+		
 		var search = new Bloodhound({
 		  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
 		  queryTokenizer: Bloodhound.tokenizers.whitespace,
-		  //prefetch: '../data/films/post_1960.json',
 		  remote: {
-		  	url:'http://localhost:8087/search/tags?query=%QUERY',
+		  	url:Haul.Server.SEARCH_SERVER_HOST,
 		  	ajax: {
-            	beforeSend: function(jqXHR, settings) {
-                	var authHeaders;
-                	// pull apart jqXHR, set authHeaders to what it should be
+            	beforeSend: function(jqXHR) {
                		jqXHR.setRequestHeader('Authorization', 'Bearer ' + _this.user_token);
            		}
        		},
        		filter: function(response) {
-       			console.log("RESP", response);
-       			return response.data;
+       			var data = response.data.map(function(result){
+       				result.searchSymbol = _this.get('searchSymbol');
+
+       				if( result.facebook_user_id ) {
+       					result.image = "https://graph.facebook.com/" + result.facebook_user_id + "/picture?width=20";
+       				}else if( result.image_id) {
+       					result.image = "http://static.haul.io/images/local/"+result.image_id+"/thumb";
+       				}
+
+       				return result;
+       			});
+
+       			return data;
+       		},
+       		replace: function(url,query){ 
+       			if( _this.get('searchType') === "tag"){
+       				url = '/search/tags?query=' + query;
+       			}else if( _this.get('searchType') === "user"){
+       				url = '/search/users?query=' + query;
+       			}else if( _this.get('searchType') === "post"){
+       				url = '/search/products?query=' + query;
+       			}
+       			url = Haul.Server.SEARCH_SERVER_HOST + url;
+       			return url;
        		}
 		  }
 		});
 		 
 		search.initialize();
+
 		 
 		$('#remote .typeahead').typeahead(null, {
 		  name: 'search', 
@@ -33,8 +70,39 @@ export default Ember.Component.extend({
 		  displayKey: 'name',
 		  source: search.ttAdapter(),
 		  templates: {
-		  	suggestion: Handlebars.compile('<p><strong class="hash">#{{name}}</strong> <span class="pull-right">{{total}} posts</span></p>')
+		  	suggestion: Handlebars.compile(
+		  		[
+		  			'<p class="text-left">',
+		  				'{{#if image}}<img width="20px" src="{{image}}">{{/if}}',
+		  				'<strong>{{searchSymbol}}{{name}}</strong>',
+		  				'{{#if total}} <span class="pull-right">{{total}} posts</span>{{/if}}',
+		  			'</p>'
+
+		  		].join('\n'))
 		  }
 		});
+
+		//EVENTS
+		$('#remote .typeahead').bind('typeahead:selected', function(obj, datum) {   
+			var type = _this.get('searchType');
+		    _this.sendAction('goToRoute', 'search', {queryParams: {type:type, q:datum.name}});
+		});
+
+		this.changeSearchType('tag');
+	},
+
+	changeSearchType: function(arg) {
+		this.set('searchType', arg); 
+		this.set('searchSymbol', this.get('searchSymbols')[arg]);
+	},
+
+	actions: {
+		toggle: function() {
+			this.set('toggle', !this.get('toggle'));
+		},
+
+		changeSearchType: function(arg) {
+			this.changeSearchType(arg);
+		}
 	}
 });

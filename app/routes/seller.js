@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 export default Ember.Route.extend( {
 	model: function(params) { 
 		var _this = this; 
@@ -18,5 +17,5 @@ export default Ember.Route.extend( {
 	// 	console.log("HERE MODEL SLUG", model.get('slug'))
  // 	   		return { slug: model.get('slug') };
 	// //	}
-	// }
+	// } 
 });

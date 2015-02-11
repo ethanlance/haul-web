@@ -1,10 +1,25 @@
-<div id="remote" class="btn-group btn-search">
-	<input type="text" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="search for users and things">
-	<button type="button" class="btn btn-default">
-  		<span class="glyphicon glyphicon-search"></span>
-  	</button>
-</div>
+<div class="search-wrapper" {{bind-attr class=":search-wrapper toggle:expand"}}>
+  <div id="remote" class="btn-group btn-search">
+  	
 
-<button type="button" class="btn btn-default btn-go-search">
+
+  	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span> {{searchSymbol}}</button>
+      <ul class="dropdown-menu" role="menu">
+        <li {{action 'changeSearchType' 'tag'}}># hashtag</li>
+        <li {{action 'changeSearchType' 'user'}}>@ user</li>
+        <li {{action 'changeSearchType' 'post'}}>$ posts</li>
+      </ul>
+  	
+    <input placeholder="search" type="text" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false">
+  	
+      {{!-- <button {{action 'toggle'}} type="button" class="btn btn-default">
+    		<span class="glyphicon glyphicon-search"></span>
+    	</button> --}}
+
+  </div>
+</div>
+<div class="mask"></div>
+
+<button {{action 'toggle'}} type="button" class="btn btn-default btn-go-search">
   	<span class="glyphicon glyphicon-search"></span>
 </button>
