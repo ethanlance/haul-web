@@ -10,14 +10,14 @@ export default Ember.Component.extend({
 
 		var backgrounds = [
 			'/assets/images/slide1.jpg',
-			'/assets/images/slide1.jpg',
-			'/assets/images/slide1.jpg',
+			'/assets/images/slide2.jpg',
+			'/assets/images/slide3.jpg',
 		]
 
 		function getRandomInt(min, max) {
 		  return Math.floor(Math.random() * (max - min)) + min;
 		}
-		var random = getRandomInt(0,2);
+		var random = getRandomInt(0,3);
 
 		var src = backgrounds[random];
 

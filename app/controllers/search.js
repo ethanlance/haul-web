@@ -6,7 +6,7 @@ export default Ember.ArrayController.extend({
 
 	queryChanged: function() {
 		console.log("SEARCH FOR ", this.get('q'));
-	}.observes('q', 'type'),
+	}.observes('q', 'type', 'model'),
 
 	// actions:{
 	// 	goToRoute: function(arg1, arg2) {

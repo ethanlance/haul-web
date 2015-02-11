@@ -213,36 +213,51 @@ nav {
 		display:inline;
 	}
 
+.twitter-typeahead {
+  width: 100%;
+}
+.input-group .twitter-typeahead {
+  display: table-cell !important;
+  float: left;
+}
+
+
 	.btn-search {
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-webkit-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+
 		margin-left: 5px;
-
-		.btn{
-			color: #555;
-			padding-right: 2px;
-			border-right:none;
-			border-top-right-radius: 0px;
-			border-bottom-right-radius: 0px;
+		display: inline-block;	
+		width:200px; 
+		
+		.input-group-addon {
+			background-color: #fff;
+			max-height:20px;
 		}
-		.form-control:focus {
-			box-shadow: none;
-		}
+		
 		input {
-			-moz-transition: all 0.2s ease-in-out;
-			-o-transition: all 0.2s ease-in-out;
-			-webkit-transition: all 0.2s ease-in-out;
-			transition: all 0.2s ease-in-out;
-
+			display:inline;
 			padding-left:0px;
-			float: left; 
-			width: 200px;
-			border-top-left-radius: 0px;
-			border-bottom-left-radius: 0px;
+			//float: left; 
+			//width: 100%;
+			border-radius: 0px; 
 			border-left: none;
+			border-right: none;
 			&:focus{
 				border: 1px solid #ccc;
 				border-left: none;
+				border-right: none;
 			}
 		}
+
+
+		.form-control:focus {
+			box-shadow: none;
+		}
+
+
 		li {
 			padding: 4px;
 			cursor: pointer;
@@ -258,16 +273,19 @@ nav {
 		    outline: none;
 		}
 
-		.tt-query {
-		    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		.twitter-typeahead {
+			//height:50px;
 		}
 
 		.tt-hint {
-		    color: #999
+		    color: #999;
+		    left: -30px;
 		}
 
 
 		.tt-dropdown-menu {
+			position:absolute;
+			left: -30px;
 		  width: 200px;
 		  margin-top: 0px;
 		  //padding: 8px 0;
@@ -1829,7 +1847,18 @@ body.anon{
 
 .anon {
 	nav {
-		background-color: #ddd;
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+
+		.btn {
+			background-color: rgba(255,255,255,0.2);
+			color: #fff;
+			&:hover{
+				background-color: #fff;
+				color: #000;
+			}
+		}
 	}
 	header {
 
@@ -1849,6 +1878,20 @@ body.anon{
 		background-color: rgba(0, 0, 0, 0.8);
 		border-radius: 4px;
 		padding-bottom: 10px;
+
+		.toc {
+			padding-top: 20px;
+			font-size: 10px;
+			a {
+				font-weight: normal;
+				text-decoration: underline;
+			}
+		}
+
+		.btn-primary{
+			border-color:#337ab7;
+			background-color:#2e6da4;
+		}
 	}
 	.alert{
 		color: yellow;
@@ -1858,7 +1901,7 @@ body.anon{
 	}
 
 	.or-login{
-		margin-top:50px;
+		//margin-top:50px;
 		padding-top: 15px;
 		padding-bottom: 15px;
 		border-top: 1px solid #333;

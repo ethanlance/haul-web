@@ -64,7 +64,7 @@ export default Ember.Component.extend({
 		search.initialize();
 
 		 
-		$('#remote .typeahead').typeahead(null, {
+		$('.search-wrapper input').typeahead(null, {
 		  name: 'search', 
 		  highlight: true,
 		  displayKey: 'name',
@@ -83,9 +83,15 @@ export default Ember.Component.extend({
 		});
 
 		//EVENTS
-		$('#remote .typeahead').bind('typeahead:selected', function(obj, datum) {   
+		$('.search-wrapper input').bind('typeahead:selected', function(obj, datum) {   
 			var type = _this.get('searchType');
-		    _this.sendAction('goToRoute', 'search', {queryParams: {type:type, q:datum.name}});
+
+			if( type === "user" ){
+				_this.sendAction('goToRoute', 'seller', datum.name);
+			}else{
+				_this.sendAction('goToRoute', 'search', {queryParams: {type:type, q:datum.name}});	
+			}
+		    
 		});
 
 		this.changeSearchType('tag');
