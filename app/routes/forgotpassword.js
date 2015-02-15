@@ -1,5 +1,6 @@
-import AnonRoute from './anon';
-export default AnonRoute.extend({
+import Ember from 'ember';
+import AnonMixin from '../mixins/anon';
+export default Ember.Route.extend(AnonMixin, {
 	setupController: function(controller, model){ 
 		controller.reset();
 		this._super(controller, model);

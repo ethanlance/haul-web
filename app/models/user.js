@@ -3,6 +3,7 @@ import Ember from 'ember';
 
 //User Model.
 export default DS.Model.extend({
+	username: DS.attr('string'),
 	name: DS.attr('string'),
 	slug: DS.attr('string'),
 	email: DS.attr('string'),
@@ -10,24 +11,6 @@ export default DS.Model.extend({
 	image: DS.belongsTo('image', {async:true}),
 	image_id: DS.attr('string'), 
 
-	//collection: DS.belongsTo('collection', {async:true}),
-
-	collection: function() {
-		var _this = this;
-		
-		var collection = this.store.find('user-collection', this.id)
-		.then(function(record){
-			console.log("RECORD", record.get('collection_id'));
-			return _this.store.find('collection', record.get('collection_id'))
-		})
-		.then(function(record) {
-			console.log('collection', record)
-			return record;
-		});	
-
-		return DS.PromiseObject.create({promise:collection});
-
-	}.property(),
 
 
 	getFollowingCount: DS.belongsTo('user-is-following-count', {async:true}),

@@ -20,23 +20,15 @@ export default {
 					user.set('access_token', _this.get('access_token'));
 					user.set('refresh_token', _this.get('refresh_token'));
 
+					_this.set("currentUser", user);
+					application.set('currentUser', user);
+					console.log("SESSION CURRENT USER CHANGED", user.get('name')); 
+
 					DS.RESTAdapter.reopen({
 					  headers: { 
 					    "Authorization": "Bearer " + _this.get('access_token')
 					  }
-					});
-
-					container.lookup("store:main").find('user-collection', user_id)
-					.then(function(record){
-						return container.lookup("store:main").find('collection', record.get('collection_id'))
-					})
-					.then(function(record) {
-						user.set('collection', record);	
-						_this.set("currentUser", user);
-						application.set('currentUser', user);
-						console.log("SESSION CURRENT USER CHANGED", user.get('name')); 
-						return;
-					});					
+					});			
 
 				}, function(error){
 					console.log("INITIALIZER ERROR", error);

@@ -167,8 +167,8 @@ nav {
 	min-height: 50px;
 	margin-bottom: 20px;
 	border: 1px solid transparent; 
-	border-bottom: 1px solid #ccc;
-	box-shadow: 0px 1px 1px #eee; 
+	border-bottom: 1px solid #eee;
+	//box-shadow: 0px 1px 1px #eee; 
 
 	.logo {
 		-moz-transition: all 0.2s ease-in-out;
@@ -213,13 +213,13 @@ nav {
 		display:inline;
 	}
 
-.twitter-typeahead {
-  width: 100%;
-}
-.input-group .twitter-typeahead {
-  display: table-cell !important;
-  float: left;
-}
+	.twitter-typeahead {
+	  width: 100%;
+	}
+	.input-group .twitter-typeahead {
+	  display: table-cell !important;
+	  float: left;
+	}
 
 
 	.btn-search {
@@ -252,6 +252,9 @@ nav {
 			}
 		}
 
+		.form-control {
+			box-shadow: none;
+		}
 
 		.form-control:focus {
 			box-shadow: none;
@@ -328,9 +331,9 @@ nav {
 		float: left;  
 		margin-left:5px
 	}
-.mask{
-	display:none;
-}
+	.mask{
+		display:none;
+	}
 	.btn-profile {
 		float: right;
 		margin-left:5px;
@@ -1854,6 +1857,7 @@ body.anon{
 		.btn {
 			background-color: rgba(255,255,255,0.2);
 			color: #fff;
+			border: 1px solid #fff;
 			&:hover{
 				background-color: #fff;
 				color: #000;

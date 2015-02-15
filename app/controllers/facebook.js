@@ -1,17 +1,24 @@
-import Ember from 'ember';
+// Load the SDK asynchronously
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
+import Ember from 'ember';
 import config from '../config/environment';
 var Config = config.APP;
-
-
 /* global FB */
 
-
 //FacebookController makes API Calls to Facebook
-var FacebookController = Ember.ObjectController.extend({
+export default Ember.ObjectController.extend({
 	
-
 	FB: {},
+ 
+	client_token: Config.Server.CLIENT_TOKEN,
+	host: Config.Server.USER_SERVER_HOST,
 
 	redirect: false,
 
@@ -20,7 +27,6 @@ var FacebookController = Ember.ObjectController.extend({
 
 	facebookSetup: function() {
 
-		
 		var _this = this;
 
 		function init() { 
@@ -44,7 +50,6 @@ var FacebookController = Ember.ObjectController.extend({
 
 	getFBUser: function(cb) {
 		var _this = this;
-  		//ME
 		this.get('FB').api('/me', {fields: 'first_name,last_name,email'}, function(response) { 
 			var data =  {
 				email: response.email,
@@ -71,7 +76,6 @@ var FacebookController = Ember.ObjectController.extend({
 			return FB.login(function(response){
 			  	if (response.authResponse) {
 
-
 					//Set the userId & accessToken
 			  		_this.set('userID', response.authResponse.userID);
 			  		_this.set('accessToken', response.authResponse.accessToken);
@@ -87,6 +91,19 @@ var FacebookController = Ember.ObjectController.extend({
 			  	}
 		  	}, {scope: 'email'});	
 		});
-	} 
+	},
+
+	authenticateByFB: function() {
+		var _this = this;
+		var data = {fb_user_id: this.get('userID'), fb_token: this.get('accessToken')};
+		return Ember.$.ajax({
+			url: _this.get('host') + '/auth/facebook',
+			type: 'post',
+			data: data,
+			headers: {
+				Authorization: 'Bearer client_' + _this.get('client_token')
+			},
+			dataType: 'json'
+		});
+	},
 });
-export default FacebookController;

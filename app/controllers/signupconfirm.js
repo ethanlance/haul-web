@@ -1,9 +1,13 @@
 import Ember from 'ember';
+import config from '../config/environment';
+var Config = config.APP;
 
 export default Ember.ObjectController.extend({
-	
-	//Controllers
-	needs: ['auth'],
+
+	needs: ['login'],
+
+	client_token: Config.Server.CLIENT_TOKEN,
+	host: Config.Server.USER_SERVER_HOST,
 
 	queryParams: ['ticket_id', 'user_id'],
 
@@ -20,22 +24,21 @@ export default Ember.ObjectController.extend({
 	},
 
 	confirmSignup: function(data) {
-		var authController = this.get('controllers.auth');
 		var _this = this;
 		this.set('isProcessing', true);
  
 		//Pass params email/password to it.
 		return Ember.$.ajax({
-				url: authController.host + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
+				url: this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
 				type: 'put',
 				data: data,
 				headers: {
-					Authorization: 'Bearer client_' + authController.client_token
+					Authorization: 'Bearer client_' + this.get('client_token')
 				},
 				dataType: 'json'
 		}).then(
 			function(response) {
-				return authController.setupUser(response);
+				return this.get('controllers.login').setupUser(response);
 			}
 		).then(null, function(error) {
 			console.log("Error submit confirm", error);

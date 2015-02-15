@@ -1,8 +1,10 @@
 import Ember from 'ember';
+import config from '../config/environment';
+var Config = config.APP;
 
 export default  Ember.ObjectController.extend({
-	 
-	needs: ['auth'],
+	client_token: Config.Server.CLIENT_TOKEN,
+	host: Config.Server.USER_SERVER_HOST,
 
 	queryParams: ['email'],
 	email: null,
@@ -25,7 +27,6 @@ export default  Ember.ObjectController.extend({
 		},
 
 		submit: function() { 
-			var authController = this.get('controllers.auth');
 			var _this = this;
 			var data = this.getProperties('email');
 			data['action'] = 'password-reset';
@@ -34,11 +35,11 @@ export default  Ember.ObjectController.extend({
 			//AJAX CALL - for getting the User Token back.  
 			//Pass params email/password to it.
 			return Ember.$.ajax({
-					url: authController.host + '/users/email',
+					url: _this.get('host') + '/users/email',
 					type: 'post',
 					data: data,
 					headers: {
-						Authorization: 'Bearer client_' + authController.client_token
+						Authorization: 'Bearer client_' + _this.get('client_token')
 					},
 					dataType: 'json'
 			}).then(

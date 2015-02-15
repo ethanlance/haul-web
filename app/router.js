@@ -47,10 +47,12 @@ Router.map(function(){
 	
 	this.route('signup');
 	this.route('signupconfirm', {path: "register"});
+	this.route('signupusername');
 
 	
 	this.route('settings', function(){
 		this.route('profile');
+		this.route('username');
 		this.route('password');
 	});
 

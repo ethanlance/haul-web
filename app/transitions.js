@@ -17,5 +17,12 @@ export default function(){
     this.use('toLeft', {easing:'spring'}),
     this.reverse('toRight', {easing:'spring'})
   );
+
+  this.transition(
+    this.fromRoute('seller.index'),
+    this.toRoute('product-new'),
+    this.use('toLeft'),
+    this.reverse('toRight', {duration:500})
+  );
   
 };
