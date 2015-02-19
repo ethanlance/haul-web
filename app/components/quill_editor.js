@@ -15,15 +15,16 @@ var QuillEditorComponent = Ember.Component.extend({
 
 	didInsertElement: function(){
 		var _this = this;
-		
+		var h = null;
+			
 		if( this.get('height')){
-			var h = this.get('height');
+			h = this.get('height');
 		}else{
-			var h = window.innerHeight; 
+			h = window.innerHeight; 
 		}
 
 
-h = '300px';
+		h = '300px';
 		$('#editor').css("height", h);	
 		
  		var editor = new Quill('#editor',{

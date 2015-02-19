@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-var Authsignup = DS.Model.extend(Ember.Validations.Mixin, {
+export default DS.Model.extend(Ember.Validations.Mixin, {
 
 	email: DS.attr('string'),
 
@@ -11,4 +11,3 @@ var Authsignup = DS.Model.extend(Ember.Validations.Mixin, {
 		} 
 	}
 });
-export default Authsignup;

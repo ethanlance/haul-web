@@ -5,6 +5,7 @@ var Config = config.APP;
 //Forgot Password Confirm: Form to change a user password w/ ticket_id (token)
 var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 	
+	needs: ['login'],
 	client_token: Config.Server.CLIENT_TOKEN,
 	host: Config.Server.USER_SERVER_HOST,
 
@@ -44,7 +45,7 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 					dataType: 'json'
 			}).then(
 				function(response) {
-					authController.setupUser(response);
+					_this.get('controllers.login').setupUser(response);
 				}, 
 
 				function() {

@@ -1,10 +1,7 @@
 import Ember from 'ember';
 var $ = Ember.$;
-
-
 /* global Dropzone */
-
-var ImagePickerComponent = Ember.Component.extend({
+export default Ember.Component.extend({
 
 	dropzone: null, 
  
@@ -178,7 +175,7 @@ var ImagePickerComponent = Ember.Component.extend({
 
 					if( i > retryTimes ) { 
 
-						console.log("TOO MANY TRIES, ERROR OUT")
+						console.log("TOO MANY TRIES, ERROR OUT");
 
 					}
 
@@ -198,7 +195,7 @@ var ImagePickerComponent = Ember.Component.extend({
 				} else {
 					window.clearInterval(file.progressInterval); 
 					
-					//_self.removeFile(file);
+					_self.removeFile(file);
 					_this.refreshImages(image);
 					return;
 				}
@@ -247,4 +244,3 @@ var ImagePickerComponent = Ember.Component.extend({
 		},
 	}
 });
-export default ImagePickerComponent;

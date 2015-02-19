@@ -1,7 +1,7 @@
 import Session from 'simple-auth/session';
 import Ember from 'ember';
 
-export default  Session.extend({
+export default Session.extend({
 	currentUser: function() {
 		var userId = this.get('user_id');
 		if (!Ember.isEmpty(userId)) {

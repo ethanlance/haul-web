@@ -1,9 +1,6 @@
 import Ember from 'ember';
 export default Ember.Route.extend( {
 	model: function(params) { 
-		var _this = this; 
-		
-		console.log('search params', params);
 		if( params.type === "tag" ){
 			return this.store.find('search-tag', {q:params.q});	
 		}else if( params.type === "product" ){

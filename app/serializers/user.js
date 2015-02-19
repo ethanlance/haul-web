@@ -1,6 +1,5 @@
 import DS from "ember-data";
-
-var UserSerializer =  DS.RESTSerializer.extend({
+export default DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		var data =  {
@@ -8,11 +7,16 @@ var UserSerializer =  DS.RESTSerializer.extend({
 			name: payload.data.name,
 			email: payload.data.email,
 			id: payload.data.user_id,
-			slug: payload.data.user_id,
-			getFollowingCount: payload.data.user_id,
+			
 			getLikesCount: payload.data.user_id,
-			getFollows: payload.data.user_id,
 			getLikes: payload.data.user_id,
+
+			getFollowingCount: payload.data.user_id,
+			getFollows: payload.data.user_id,
+
+			getFollowedByCount: payload.data.user_id,
+			getFollowers: payload.data.user_id,
+
 			image_id: payload.data.image_id,
 			image: payload.data.image_id
 		};
@@ -35,4 +39,3 @@ var UserSerializer =  DS.RESTSerializer.extend({
 		}
     },
 });
-export default UserSerializer;

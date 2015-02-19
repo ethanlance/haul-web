@@ -1,9 +1,8 @@
 import ApplicationAdapter from './application'; 
-
 import config from '../config/environment';
 var Haul = config.APP;
 
-var ImageAdapter = ApplicationAdapter.extend({
+export default ApplicationAdapter.extend({
 	
 	host: Haul.Server.IMAGE_SERVER_HOST,
     
@@ -31,6 +30,3 @@ var ImageAdapter = ApplicationAdapter.extend({
 		return this.ajax(url, 'GET');
 	}
 });
-export default ImageAdapter;
-
-

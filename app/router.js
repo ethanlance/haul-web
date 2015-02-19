@@ -19,24 +19,7 @@ Router.map(function(){
 		this.route('tos');
 		this.route('faq');
 		this.route('privacy');
-	});
-
-
-	this.route('not-found');
-	this.route('not-authorized');
-
-	//Profiles
-	this.resource('seller', {path: "/profile/:slug"}, function() {
-		this.route('followers');
-		this.route('follows');
-		this.route('likes');
-		this.route('products');
-
-		this.route('product', {path: "/:product_id/:product_slug"}, function() {
-			this.route('edit');
-		});
-	});
-	this.route('product-new', {path: "/new-product"});
+	}); 
 
 	//Auth
 	this.route('login');
@@ -59,8 +42,19 @@ Router.map(function(){
 	//Search
 	this.route('search');
 
-	//404
-	this.route('not-found', { path: '/*path' });
+	this.route('not-found');
+	this.route('not-authorized');
+
+	//Profiles
+	this.route('new-post');
+	this.resource('profile', {path: '/:username'}, function() {
+		this.route('followers');
+		this.route('follows');
+		this.route('likes'); 
+		this.route('post', {path: "/:id/:post_slug"}, function() {
+			this.route('edit');
+		});
+	});
 });
 
 

@@ -1,9 +1,8 @@
 import ApplicationAdapter from './application'; 
-
 import config from '../config/environment';
 var Haul = config.APP;
 
-var FollowAdapter = ApplicationAdapter.extend({
+export default ApplicationAdapter.extend({
 
 	host: Haul.Server.FOLLOW_SERVER_HOST,
 
@@ -37,4 +36,3 @@ var FollowAdapter = ApplicationAdapter.extend({
 	}	
 
 });
-export default FollowAdapter;

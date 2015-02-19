@@ -48,7 +48,7 @@ export default Ember.ObjectController.extend({
 	// Send this data to /users api and create the user.
 	// This bypasses email confirmation step.
 	createUserByEmail: function(data) {
-		var _this = this;
+		
 		//Flag:
 		data['action'] = 'email-register';
 
@@ -91,7 +91,7 @@ export default Ember.ObjectController.extend({
 			})
 
 			.then(
-		 		function onFulfill(response) {
+		 		function onFulfill() {
 					_this.set('isProcessingFacebook', false);
 				}, 
 				function onReject(error) {
@@ -102,7 +102,7 @@ export default Ember.ObjectController.extend({
 						return _this.get('controllers.facebook').authenticateByFB()
 						.then(function(response) {
 							return _this.get('controllers.login').startUserSession(response);			
-						})
+						});
 					}else{
 						console.error("Failed Signup", error);
 						_this.set('isProcessingFacebook', false);
@@ -112,7 +112,7 @@ export default Ember.ObjectController.extend({
 			)
 			.then(
 				function onNada(){},
-				function onReject(error) {
+				function onReject() {
 					_this.set('isProcessingFacebook', false);
 					_this.set('error', true);	
 				}

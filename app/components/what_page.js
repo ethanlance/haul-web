@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 	    	$(window).unbind('scroll');
 	    	this.set('watchScroll', null);
 	    }
-		console.log("WILL willDestroyElement ", this.get('page'))
+		console.log("WILL willDestroyElement ", this.get('page'));
 	    if( this.get('page') === "postEdit") {
 			$('.toolbar-footer').remove();
 	    }
@@ -41,7 +41,7 @@ export default Ember.Component.extend({
 
 		if(page === "feedPage"){
 			this.profileFeed();
-			return
+			return;
 		}
 		
 	},
@@ -52,7 +52,7 @@ export default Ember.Component.extend({
 		var toolbars = $('.toolbar-footer');
 		$('.liquid-container').after(toolbars);
 		$('.liquid-container').find('.toolbar-footer').remove();
-		console.log(toolbars)
+		console.log(toolbars);
 		// toolbars.each(function(toolbar){
 		// 	console.log("TOOLBAR", $(this))
 		// 	$('.liquid-container').before(toolbars[toolbar]);
@@ -83,7 +83,7 @@ export default Ember.Component.extend({
 
 
 		var logo = $(".logo");
-		var nav = $("nav");
+		//var nav = $("nav");
 		var fixThis = $(".profile-container");
 		var header = $(".profile-container").parent();
 		var postBackButton = $(".post-back-button");
@@ -102,18 +102,19 @@ export default Ember.Component.extend({
 				var timeout;
 				return function() {
 					var context = this, args = arguments;
-					var later = function() {
-						timeout = null;
-						if (!immediate) func.apply(context, args);
-					};
 					var callNow = immediate && !timeout;
 					clearTimeout(timeout);
-					timeout = setTimeout(later, wait);
+					timeout = setTimeout(function() {
+						timeout = null;
+						if (!immediate){
+							func.apply(context, args);
+						} 
+					}, wait);
 					if (callNow){
 						func.apply(context, args);
 					}
 				};
-			};
+			}
 
 			
 			var _this = this;
@@ -128,7 +129,7 @@ export default Ember.Component.extend({
 
 		    	
 		    	var scrollTop = $(window).scrollTop();
-		    	var navBottom = nav.height();
+		    	var navBottom = $("nav").height();
 				var fixTop = fixThis.parent().position().top - scrollTop + 50;
 
 		    	if( fixTop <= navBottom){

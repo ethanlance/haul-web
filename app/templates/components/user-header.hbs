@@ -1,30 +1,30 @@
-{{!-- SELLER PROFILE  --}}
+{{!-- PROFILE PROFILE  --}}
 <header {{bind-attr class=":profile showHeader:show:hide"}}>
 	<div class="profile-container">
 
 	<div {{action "clickBack"}} bind-attr class="post-back-button hide">
-		{{#link-to 'seller' model}}
+		{{#link-to 'profile' model}}
 			<span class="glyphicon glyphicon-arrow-left"></span>
 		{{/link-to}}
 	</div>
 
 		<span {{action "clickBack"}}>
-		{{#link-to 'seller' model}}
-			{{ make-icon icon=model.user.icon isSmall=false isCollection=true}}
+		{{#link-to 'profile' model}}
+			{{ make-icon icon=model.icon }}
 		{{/link-to}}
 		</span>
 
 
-		{{ follow-btn followObj=model.user openModal='openModal'}}
+		{{ follow-btn follow_user=model openModal='openModal'}}
 
 		<div class="info-block">
 			<h1>{{model.name}}</h1>
-			<div class="name">@{{model.user.name}}</div> 
+			<div class="name">@{{model.username}}</div> 
 		</div>
 
 		<div class="stats-block">
 
-			{{#link-to "seller" model}}
+			{{#link-to "profile" model}}
 			<div {{bind-attr class=":stats isSelected:activehack"}}>
 				<span>posts</span><br/>
 				<a>0</a>
@@ -34,24 +34,24 @@
 			</div> 
 			{{/link-to}}
 
-			{{#link-to "seller.follows" model}}
+			{{#link-to "profile.follows" model}}
 			<div class="stats">
 				<span>following</span><br/>
-				<a>{{model.user.getFollowingCount.total}}</a>
+				<a>{{model.getFollowingCount.total}}</a>
 			</div>
 			{{/link-to}}
 
-			{{#link-to "seller.followers" model}}
+			{{#link-to "profile.followers" model}}
 			<div class="stats">
 				<span>followers</span><br/>
 				<a>{{model.getFollowedByCount.total}}</a>
 			</div>
 			{{/link-to}}
 
-			{{#link-to "seller.likes" model}}
+			{{#link-to "profile.likes" model}}
 			<div class="stats">
 				<span>likes</span><br/>
-				<a>{{model.user.getLikesCount.total}}</a>
+				<a>{{model.getLikesCount.total}}</a>
 			</div>
 			{{/link-to}}
 

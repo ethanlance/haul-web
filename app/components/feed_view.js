@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ScrollableMixin from '../mixins/scrollable';
+/* global $ */
 export default Ember.Component.extend(ScrollableMixin,{
 	galleryView:false,
 	renderIsDone:false,

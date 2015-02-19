@@ -14,6 +14,8 @@ var CollectionSelectorComponent = Ember.Component.extend({
 	
 
 	start: function() {
+return;
+
 		this.makeModel(); 
 	}.on('init'),
 

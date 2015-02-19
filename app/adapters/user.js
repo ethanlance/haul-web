@@ -1,9 +1,8 @@
 import ApplicationAdapter from './application';
-
 import config from '../config/environment';
 var Haul = config.APP;
 
-var UserAdapter = ApplicationAdapter.extend({
+export default ApplicationAdapter.extend({
 	
 	host: Haul.Server.USER_SERVER_HOST,
 
@@ -28,4 +27,3 @@ var UserAdapter = ApplicationAdapter.extend({
 		}
 	},
 });
-export default UserAdapter;

@@ -1,5 +1,4 @@
 import Ember from 'ember';
-var $ = Ember.$;
 
 export default Ember.Mixin.create({
   scrollingTimeout: 300,

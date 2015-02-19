@@ -35,7 +35,7 @@ var CommentSectionComponent = Ember.Component.extend({
 	
 
 	start: function() { 
-
+return;
 		this.makeModel();
 		
 		this.loadComments();

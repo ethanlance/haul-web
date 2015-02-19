@@ -1,9 +1,8 @@
 import ApplicationAdapter from './application'; 
-
 import config from '../config/environment';
 var Haul = config.APP;
 
-var LikeAdapter = ApplicationAdapter.extend({
+export default ApplicationAdapter.extend({
 
 	host: Haul.Server.WANT_SERVER_HOST,
 
@@ -36,4 +35,3 @@ var LikeAdapter = ApplicationAdapter.extend({
 	}	
 
 });
-export default LikeAdapter;

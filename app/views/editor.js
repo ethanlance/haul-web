@@ -1,4 +1,5 @@
 import Ember from 'ember';
+/*global $*/
 export default Ember.View.extend({
 
 	showPostBinding: 'showPost',
@@ -8,7 +9,7 @@ export default Ember.View.extend({
 		if(!this.get('showPost')){
 			var toolbar = $("#toolbar");
 			toolbar.removeClass('fixed'); 
-		};
+		}
 	}.observes('showPost'),
 
 	willClearRender: function(){
@@ -24,7 +25,9 @@ export default Ember.View.extend({
 				var context = this, args = arguments;
 				var later = function() {
 					timeout = null;
-					if (!immediate) func.apply(context, args);
+					if (!immediate) {
+						func.apply(context, args);
+					}
 				};
 				var callNow = immediate && !timeout;
 				clearTimeout(timeout);
@@ -33,7 +36,7 @@ export default Ember.View.extend({
 					func.apply(context, args);
 				}
 			};
-		};
+		}
 
 		var toolbarScroll;
 		var _this = this;

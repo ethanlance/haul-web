@@ -9,7 +9,7 @@
         {{/link-to}}
 
 
-        {{#link-to 'product-new' }}
+        {{#link-to 'new-post' }}
         <button class=" btn btn-default btn-cta">
             <span class="glyphicon glyphicon-camera"></span>
             Sell
@@ -17,7 +17,7 @@
         {{/link-to}}
 
         <button type="button" class="btn btn-default">
-        {{#link-to 'seller' session.currentUser.slug}}
+        {{#link-to 'profile' session.currentUser}}
             {{ make-icon icon=session.currentUser.icon isSmall=false}} 
         {{/link-to}}
         </button>
@@ -27,7 +27,7 @@
           <span class="glyphicon glyphicon-cog"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-            <li>{{#link-to 'seller' session.currentUser.slug }}Profile{{/link-to}}</li>
+            <li>{{#link-to 'profile' session.currentUser }}Profile{{/link-to}}</li>
 
             <li class="divider"></li>
             <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>

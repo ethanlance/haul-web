@@ -1,8 +1,5 @@
 import DS from 'ember-data';
 export default  DS.RESTSerializer.extend({
-
-
-
 	extractArray: function(store, primaryType, payload) {
 
 		if( payload.data === "ok" ){ 

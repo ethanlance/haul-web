@@ -1,7 +1,5 @@
-import Ember from 'ember';
 import DS from 'ember-data';
-
-var UserFollowersListSerializer =  DS.RESTSerializer.extend({
+export default DS.RESTSerializer.extend({
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 
@@ -9,18 +7,14 @@ var UserFollowersListSerializer =  DS.RESTSerializer.extend({
 			return;
 		} 
 		
-		var user_id = null;
 		var follower_ids = [];
-
-		payload.data.map(function(result){ 
-			user_id =  result.object.id;
+		payload.data.map(function(result){
 			follower_ids.push( result.user_id );
 			return;
 		}); 
 
 		var data = {
-			id: user_id,	
-			user: user_id,
+			id: recordId,
 			followers: follower_ids
 		};
 	
@@ -28,4 +22,3 @@ var UserFollowersListSerializer =  DS.RESTSerializer.extend({
 		return this._super(store, primaryType, payload, recordId, requestType);
 	}
 });
-export default UserFollowersListSerializer;

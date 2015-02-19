@@ -1,5 +1,0 @@
-import DS from 'ember-data';
-
-export default DS.Model.extend({
-	total: DS.attr('string', {async:true})
-});

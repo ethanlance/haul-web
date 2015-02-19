@@ -1,6 +1,5 @@
 import DS from 'ember-data';
-
-var ImageSerializer =  DS.RESTSerializer.extend({
+export default DS.RESTSerializer.extend({
 
 	extractFindMany: function(store, type, payload){
 		if( payload.data.type === "image" ){
@@ -65,4 +64,3 @@ var ImageSerializer =  DS.RESTSerializer.extend({
 	},
 
 });
-export default ImageSerializer;

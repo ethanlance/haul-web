@@ -1,21 +1,20 @@
 import DS from "ember-data"; 
 import Ember from 'ember';
 
-//User Model.
 export default DS.Model.extend({
 	username: DS.attr('string'),
 	name: DS.attr('string'),
-	slug: DS.attr('string'),
 	email: DS.attr('string'),
 	facebook_user_id: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),
 	image_id: DS.attr('string'), 
 
-
-
-	getFollowingCount: DS.belongsTo('user-is-following-count', {async:true}),
+	getFollowingCount: DS.belongsTo('user-following-count', {async:true}),
 	getLikesCount: DS.belongsTo('user-likes-count', {async:true} ),
-	getFollows: DS.belongsTo('user-follows-list', {async:true}), 
+	getFollowedByCount: DS.belongsTo('user-followers-count', {async:true}),
+
+	getFollowers: DS.belongsTo('user-followers-list', {async:true}),
+	getFollows: DS.belongsTo('user-following-list', {async:true}),
 	getLikes: DS.belongsTo('user-likes-list', {async:true}), 
 
 	icon: DS.attr('string'), 
@@ -76,37 +75,5 @@ export default DS.Model.extend({
 				_this.set('icon', thumb);
 			}
 		});
-	},
-
-	getCollections: function() { 
-		var store = this.store;
-		var user_id = this.get('id');
-		
-		store.find('user-collection', {user_id: user_id});
- 
-		return store.filter('user-collection', function(result){  
-			if( result.get('user_id') === user_id ) { 
-				return result;
-			}
-		}); 
-	}.property(),
-
-	getProducts: function() { 
-		var store = this.store;
-		var user_id = this.get('id');
-
-		store.find('product-list', {user_id: user_id});
-
-		return store.filter('product-list', function(product){
-			if( product.get('user_id') === user_id ) {
-				return product;
-			}
-		});
-	}.property()
+	}
 });
-
-
-
-
-
-

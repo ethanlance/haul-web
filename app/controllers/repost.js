@@ -47,7 +47,6 @@ export default Ember.ObjectController.extend({
 	actions: {
 
 		close: function() {
-			console.log("CLOSE MODAL")
 			return this.send('closeModal');
 		},
 

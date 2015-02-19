@@ -6,19 +6,10 @@ var FollowBtnComponent = Ember.Component.extend({
 	showButton: false,
 	hideIfFollowing:false,
 	userFollows: false,
-	buttonText: 'follow',
-	followType: 'stores',
-	followIdBinding: "followObj.id",
+	buttonText: 'follow', 
 	userIdBinding: "session.currentUser.id",
 	userFollowsRecord: false,
-
-	didInsertElement: function() {
-
-
-
-		this.set('showButton', true); 
-	},
-
+ 
 
 	userFollowsChange: function() {
 		if( this.get('userFollows') ) {
@@ -32,24 +23,23 @@ var FollowBtnComponent = Ember.Component.extend({
 		}
 
 	}.observes('userFollows'),
+ 
 
-
- 	start: function(){ 		
- 		this.itemChanged();
- 	}.on('init'),
-
- 	itemChanged: function() {
+ 	didInsertElement: function() {
  
 
 		//Don't follow self.
-		if( !this.get('followObj') || this.get('followObj').get('id') === this.get('userId')){
+		if( !this.get('follow_user') || this.get('follow_user').get('id') === this.get('userId')){
 			this.set('showButton', false);
 			return;
 		}
 
-		if(!this.get('userId') || !this.get('followId') ){
+		if(!this.get('userId') || !this.get('follow_user') ){
 			return;
 		}
+
+		this.set('showButton', true); 
+
 		var _this = this;
 		var store = this.container.lookup("store:main");
 		
@@ -57,7 +47,6 @@ var FollowBtnComponent = Ember.Component.extend({
 		//currentUser follows item?
 		var key = this.followId + "-" + this.followType;
 		store.find('follow', key).then(function(record){
-			console.log("RECORD", record)
 			if(!Ember.isEmpty(record)){
 				_this.set('userFollows', true);
 				_this.set('userFollowsRecord', record);
@@ -77,7 +66,6 @@ var FollowBtnComponent = Ember.Component.extend({
 
 			//Intercept if user is anonymous:
 			if( !this.get('user_id')){
-				console.log("SEND MODAL")
 				this.sendAction('openModal', 'loginmodal', {});
 				return;
 			}
@@ -107,23 +95,13 @@ var FollowBtnComponent = Ember.Component.extend({
 					_this.set('userFollowsRecord', false);
 					_this.set('userFollows', false); 
 				}
-
-				store.find('collection-is-followed-by-count', _this.get('followId'))
+  
+				store.find('user-following-count', _this.get('userId'))
 				.then(function(r){
 					r.reload();
 				});
 
-				store.find('collection-followers-list', _this.get('followId'))
-				.then(function(r){
-					r.reload();
-				});
-
-				store.find('user-is-following-count', _this.get('userId'))
-				.then(function(r){
-					r.reload();
-				});
-
-				store.find('user-follows-list', _this.get('userId'))
+				store.find('user-following-list', _this.get('userId'))
 				.then(function(r){
 					r.reload();
 				});

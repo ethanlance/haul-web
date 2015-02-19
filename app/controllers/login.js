@@ -31,13 +31,13 @@ export default Ember.ObjectController.extend({
 		//AJAX CALL - for getting the User Token back.  
 		//Pass params email/password to it.
 		return Ember.$.ajax({
-				url: _this.get('host') + '/auth/user',
-				type: 'post',
-				data: data,
-				headers: {
-					Authorization: 'Bearer client_' + _this.get('client_token')
-				},
-				dataType: 'json'
+			url: _this.get('host') + '/auth/user',
+			type: 'post',
+			data: data,
+			headers: {
+				Authorization: 'Bearer client_' + _this.get('client_token')
+			},
+			dataType: 'json'
 		});
 	},
 
@@ -75,7 +75,7 @@ export default Ember.ObjectController.extend({
 		)
 		
 		.then(function(){
-			return _this.store.find('user', currentUserId)
+			return _this.store.find('user', currentUserId);
 		})
 		
 		.then(function(user) {			
@@ -84,7 +84,7 @@ export default Ember.ObjectController.extend({
 			if( !Ember.isEmpty(user.get('username')) ){
 				var attemptedTrans = _this.get('attemptedTransition'); 
 				if(Ember.isEmpty(attemptedTrans)){  
-					return _this.transitionToRoute("seller", user.get('username')  );
+					return _this.transitionToRoute("profile", user.get('username')  );
 				}else{
 					return _this.transitionToRoute(attemptedTrans);
 				}

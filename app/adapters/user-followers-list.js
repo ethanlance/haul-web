@@ -3,7 +3,7 @@ import ApplicationAdapter from './application';
 import config from '../config/environment';
 var Haul = config.APP;
 
-var UserFollowersListAdapter = ApplicationAdapter.extend({
+export default ApplicationAdapter.extend({
 
 	host: Haul.Server.FOLLOW_SERVER_HOST,
 
@@ -12,4 +12,3 @@ var UserFollowersListAdapter = ApplicationAdapter.extend({
 		return this.ajax(url, 'GET');
 	}
 });
-export default UserFollowersListAdapter;
