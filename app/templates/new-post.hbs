@@ -1,0 +1,252 @@
+{{header-site
+	goToRoute='goToRoute'
+	openModal='openModal'
+}}
+
+
+{{#form-for model wrapper="bs3-wrapper"}}
+	<div class="container-fluid haul-edit">
+
+
+		<div class="row">
+			<div {{bind-attr class="showUpload:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+				<h4>Start with photos</h4>
+			</div>
+
+			<div {{bind-attr class="showProduct:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}>		<h4>Tell us the details</h4>
+			</div>
+
+			<div {{bind-attr class="showPost:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+				<h4>Edit Your Post</h4>
+			</div>
+		</div>
+
+
+
+
+		<div {{bind-attr class=":slide showPost:in showPostOutLeft:outleft showPostOutRight:outright"}}> 
+
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+
+			<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
+
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+						<div class="gallery-wrapper"> 
+							<div class="gallery"> 
+								<div class="gallery-inside">
+									{{#each selectedImages}} 
+										<img {{bind-attr src=small}}> 
+									{{/each}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row text-center">
+					<div {{bind-attr class=":fade showPost:in :col-md-12 :col-sm-12 :col-xs-12"}}>
+						<h5>
+							Drag images into your post
+						</h5>
+					</div>
+				</div>  
+
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12"> 
+						<label>Post Title:</label>
+						{{input subject canShowValidationError=showErrors}} 
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 ql-editor-col">   
+						{{quill-editor content=editorialForQuill  quillChange='quillChange'}} 
+					</div>
+				</div>
+			 
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 toolbar-footer">	
+
+						
+						<button {{action 'cancel'}} class="btn btn-default btn-left">
+							cancel
+						</button>
+						
+						{{ladda-btn
+							name='post'
+							class="display-inline"
+							btnClasses='btn btn-primary btn-right ladda-button'
+							btnClick='savePost'
+							spin=isProcessing
+						}}
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+		</div>
+
+
+	 
+		<div {{bind-attr class="showUpload:hide:show :fade showUpload::in :row :image-gallery-wrapper"}}>
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+			<div class="col-md-6 col-sm-8 col-xs-12 gallery-col text-center">
+				<div class="gallery-wrapper"> 
+					<div class="gallery"> 
+						<div class="gallery-inside">
+							{{#each selectedImages}} 
+								<img {{bind-attr src=small}}> 
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+		</div> 
+
+
+
+
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		<div {{bind-attr class=":slide showUpload:in showUploadOutLeft:outleft showUploadOutRight:outright"}}> 
+
+			{{image-picker 
+				images=userImages
+				selectedImages=selectedImages
+				refresh='refresh'
+				imageClick='imageClick' 
+				imageDeleted='imageDeleted'
+				Haul=Haul
+			}} 
+		
+			<div {{bind-attr class="showUpload:show:hide :toolbar-footer"}}>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">	
+							<button {{action 'cancel'}} class="btn btn-default btn-left">
+								cancel
+							</button>
+
+
+							<button {{action "showProduct"}} 
+								{{bind-attr class="imagesAreSelected::disabled :btn :btn-primary :btn-right"}}>
+								continue
+								<span class="glyphicon glyphicon-menu-right"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+		{{!-- SHOW PRODUCT --}}
+		{{!-- SHOW PRODUCT --}}
+		{{!-- SHOW PRODUCT --}}
+		{{!-- SHOW PRODUCT --}}
+		{{!-- SHOW PRODUCT --}}
+		<div {{bind-attr class=":slide showProduct:in showProductOutLeft:outleft showProductOutRight:outright"}}>		
+			<div class="row">
+				<div class="col-md-3 col-sm-2 col-xs-12"></div>
+
+				<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12"> 
+							<label>Name this item:</label>
+							{{input product_name canShowValidationError=showErrors}} 
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12"> 
+							<label>Describe this item:</label>
+							<label class="small pull-right text-regular">(max 2000 characters)</label>
+							{{input product_description placeholder="Don't forget #hashtags!" as="text" canShowValidationError=showErrors }}
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6"> 
+							{{#input price}}
+							{{label-field price}}:
+							<div class="input-group">
+								<span class="input-group-addon">$</span>
+							  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
+							  	<br/>
+							</div>
+							{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
+							{{/input}}
+						</div>
+					
+						<div class="col-md-6 col-sm-6 col-xs-6"> 
+							<label>Quantity:</label>
+							{{input product_quantity class="input-xs" canShowValidationError=showErrors}}
+		 				</div>
+				
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-2 col-xs-12"></div>
+			</div>
+			
+			
+
+			<div {{bind-attr class="showProduct:show:hide :toolbar-footer"}}>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
+							
+							<button {{action "showUpload"}} 
+								{{bind-attr class="showImages:hide:show :btn :btn-primary :btn-left"}}>
+								<span class="glyphicon glyphicon-arrow-left"></span> back
+							</button>
+
+							<button {{action "showPost"}} 
+								{{bind-attr class=":btn :btn-primary :btn-right"}}>
+								continue
+								<span class="glyphicon glyphicon-menu-right"></span>
+							</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		<div>
+
+			{{!-- {{view Editor showPost=showPost}} --}}
+
+			
+		</div>
+	</div>
+{{/form-for}}
+
+
+

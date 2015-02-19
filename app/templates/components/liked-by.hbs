@@ -1,0 +1,10 @@
+{{#if product.getLikes }}
+	<h4 class="top-border padding-top">Liked By</h4>
+{{/if}}
+
+
+{{#with session as session}}
+	{{#each product.getLikes.users}}
+		{{profile-badge user=this session=session}}
+	{{/each}}				
+{{/with}}

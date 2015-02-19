@@ -1,0 +1,39 @@
+{{super-slides}}
+
+<span class="anon">
+<header>
+	<div class="container">
+        <div class="row">
+        	<div class="col-md-4 col-sm-2 col-xs-2"></div>
+			<div class="col-md-4 col-sm-8 col-xs-8 form-box">
+    			
+
+
+    			{{#unless error409}}
+    				{{#unless emailRegistrationRequested}}
+						<div class="form-group">
+							<h2>Signup With</h2>
+						</div>
+					{{/unless}}
+				{{/unless}}
+
+
+    			{{partial "_signup"}}
+
+
+    			<div class="or-login">
+
+    			{{#unless error409}}
+    				{{#unless emailRegistrationRequested}}
+						{{#link-to 'login'}}
+							<button type="button" class="btn btn-default btn-login">OR LOGIN</button>
+						{{/link-to}}
+					{{/unless}}
+				{{/unless}}
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-2 col-xs-2"></div>
+        </div> 
+    </div>
+</header>
+</span>

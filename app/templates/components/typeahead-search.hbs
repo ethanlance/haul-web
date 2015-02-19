@@ -1,0 +1,25 @@
+<div class="search-wrapper" {{bind-attr class=":search-wrapper toggle:expand"}}>
+  <div class="btn-search">
+    <div class="input-group">
+  	
+      <span type="button" class=" dropdown-toggle input-group-addon" data-toggle="dropdown" aria-expanded="false">{{searchSymbol}}<span class="caret"></span></span>
+      <ul class="dropdown-menu" role="menu">
+        <li {{action 'changeSearchType' 'tag'}}># hashtag</li>
+        <li {{action 'changeSearchType' 'user'}}>@ user</li>
+        <li {{action 'changeSearchType' 'post'}}>$ posts</li>
+      </ul> 
+      
+      <input placeholder="search" type="text" class="form-control  tt-query" autocomplete="off" spellcheck="false">
+  	
+      <span type="button" class=" input-group-addon">
+    		<span class="glyphicon glyphicon-search"></span>
+    	</span>
+
+    </div>
+  </div>
+</div>
+<div class="mask"></div>
+
+<button {{action 'toggle'}} type="button" class="btn btn-default btn-go-search">
+  	<span class="glyphicon glyphicon-search"></span>
+</button>

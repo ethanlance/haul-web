@@ -1,0 +1,73 @@
+
+				{{#if error409}}
+
+			    	<div class="alert">
+			    		<h2>Oops</h2>
+			    		This email is already registered.  Want to {{#link-to 'login'}}login{{/link-to}} or {{#link-to 'forgotpassword' }}recover your password{{/link-to}}?
+
+			    	</div>
+
+			    {{else}}	
+				  	
+
+					{{#if emailRegistrationRequested}}
+
+						<h2>Please check your email inbox.  
+							<small>We sent you a confirmation email.</small>
+						</h2>
+
+					{{else}}	
+
+
+
+						<div class="form-group"> 
+
+							{{ladda-btn 
+								name='FACEBOOK'
+								btnClasses='btn btn-block btn-facebook ladda-button'
+								btnClick='facebookSignup'
+								spin=isProcessingFacebook
+							}}
+ 
+					    </div> 
+
+
+
+						<div class="form-group padding-top">
+							<h4 class="">or with email</h4>
+						</div>
+
+
+						{{#if error}}
+					    	<div class="alert">Oh no! Something went wrong.</div>
+					  	{{/if}} 
+
+
+	            		{{#form-for model wrapper="bs3-wrapper"}}
+
+						  {{#if submitFailed}}
+						    <div class="alert">Oh no, something went wrong.</div>
+						  {{/if}} 
+
+						  	<div class="form-group"> 
+					      		{{input email canShowValidationError=showErrors placeholder="Type your email address"}}
+					      	</div> 
+
+							<div class="form-group">
+
+								{{ladda-btn 
+									name='SIGNUP'
+									btnClasses='btn btn-block btn-primary ladda-button'
+									btnClick='emailSignup'
+									spin=isProcessingSignup
+								}}
+
+						  	</div>
+						{{/form-for}}
+
+						
+					{{/if}}
+				{{/if}} 
+
+				<p class="toc">By signing up, you agree to Haul's {{#link-to 'haul.tos' }}Terms of Use{{/link-to}} and {{#link-to 'haul.privacy' }}Privacy Policy{{/link-to}}.</p>
+

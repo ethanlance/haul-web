@@ -1,0 +1,19 @@
+{{header-site
+	goToRoute='goToRoute'
+	openModal='openModal'}}
+
+<div class="container-fluid haul-jargon">
+	<div class="row">
+		<div class="col-md-3 col-sm-3 col-xs-12 nav-column">
+			<div class="list-group">
+			  {{#link-to 'haul.about' class="list-group-item"}}About{{/link-to}}
+			  {{#link-to 'haul.faq' class="list-group-item"}}FAQ{{/link-to}}
+			  {{#link-to 'haul.tos' class="list-group-item"}}TOS{{/link-to}}
+			  {{#link-to 'haul.privacy' class="list-group-item"}}Privacy{{/link-to}}
+			</div>
+		</div>
+		<div class="col-md-9 col-sm-9 col-xs-12">
+			{{outlet}}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,56 @@
+<div class="row padding-top comments">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		
+		{{!-- COMMENT FORM --}}
+		<div class="row" id="leaveComment">
+			<div class="col-md-12 col-sm-12 col-xs-12 ">
+			<h5>Comments</h5>
+			{{#form-for model wrapper="bs3-wrapper"}}
+				
+				{{input comment as="text" canShowValidationError=showErrors placeholder="add a comment..."}}
+				
+				<div class="text-right">
+					
+					{{ladda-btn
+						name='post comment'
+						class="display-inline"
+						btnClasses='btn btn-default ladda-button'
+						btnClick='submit'
+						spin=isProcessing
+					}}
+
+				</div>
+			{{/form-for}}
+			</div>
+		</div>
+
+
+
+		{{!-- COMMENTS --}}
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+				{{#each sortedComments }}
+
+					<div class="citation">
+						{{#link-to 'profile' user }}
+						<div class="image">
+							{{ make-icon icon=product.user.icon isSmall=true}}
+						</div>
+						<div class="name">{{product.user.name}}</div>
+						{{/link-to}}
+						<span class="small">{{ format-date created_at }}</span>
+					</div>
+
+
+					<p class="single-comment">
+						{{ break-lines comment }} 
+					</p>
+
+				{{/each}}
+
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+
+
+<div class="post">   
+	<div class="citation">
+	{{#unless-equal param1=user.id param2=product_user.id}}
+		<span class="glyphicon glyphicon-retweet"></span>
+		<div class="name">
+			{{user.name}} {{../galleryView}}
+			<span class="rehauled">rehauled</span>
+		</div>
+	{{/unless-equal}}
+
+
+		{{#link-to 'profile' user }}
+		<div class="image">
+			{{ make-icon icon=product_user.icon isSmall=true }}
+		</div>
+		<div class="name">{{product_user.name}}</div>
+		{{/link-to}}
+		
+	</div>
+
+	<div class="article">
+		 <h2>
+			{{#link-to 'profile.post' user id post_slug }}{{product.name}}{{/link-to}}
+		</h2> 
+
+		<div class="moment">{{format-date updated_at}}</div>
+		
+		<div class="product-image">
+			<div class="price">${{product_price}}</div>
+			{{#link-to 'profile.post' user this }}
+				<img class="img-responsive" {{bind-attr src=image.medium}}>
+			{{/link-to}}
+		
+
+		 	<div class="btn-wrapper">
+
+		 		<button class="btn btn-default btn-buy">
+					buy
+				</button>
+
+			 	{{like-btn post=this class="display-inline" }}
+
+			 	{{#link-to 'profile.post' user post.id post.post_slug }}
+			 		{{comment-btn linkOff='true' itemObject=this class="display-inline" }}
+			 	{{/link-to}}
+
+				
+				<button {{action 'openModal' 'repost' this}} class="btn btn-default">
+					<span class="glyphicon glyphicon-retweet"></span>
+				</button>
+			 	
+			</div>
+		</div>
+	</div> 
+</div>

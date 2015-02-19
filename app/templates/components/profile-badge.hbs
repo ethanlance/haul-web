@@ -1,0 +1,17 @@
+<div class="box-rigid text-center">
+  	<div class="text-center">
+      {{#link-to "seller" profile class="pull-left"}}  
+        {{make-icon icon=profile.user.icon isSmall=isSmall isCollection=true }}
+      {{/link-to}}
+    </div>
+    <div>
+      {{#link-to "seller" profile}}  
+        {{profile.name}}
+      {{/link-to}}
+    </div>
+
+  {{#if showFollows}}
+  	{{ follow-btn followObj=profile }} 
+  {{/if}}
+	
+</div>

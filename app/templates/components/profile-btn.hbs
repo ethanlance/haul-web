@@ -1,0 +1,52 @@
+{{#if  session.isAuthenticated }}
+
+    <div class="btn-group navbar-profile">
+    
+        {{#link-to 'home' }}
+        <button class=" btn btn-default btn-cta">
+            <span class="glyphicon glyphicon-home"></span> 
+        </button> 
+        {{/link-to}}
+
+
+        {{#link-to 'new-post' }}
+        <button class=" btn btn-default btn-cta">
+            <span class="glyphicon glyphicon-camera"></span>
+            Sell
+        </button> 
+        {{/link-to}}
+
+        <button type="button" class="btn btn-default">
+        {{#link-to 'profile' session.currentUser}}
+            {{ make-icon icon=session.currentUser.icon isSmall=false}} 
+        {{/link-to}}
+        </button>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-cog"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li>{{#link-to 'profile' session.currentUser }}Profile{{/link-to}}</li>
+
+            <li class="divider"></li>
+            <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>
+
+            <li class="divider"></li>
+            <li>{{#link-to 'haul.about'}}About {{/link-to}}</li>
+
+            <li class="divider"></li>
+            <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+        </ul>
+      </div>
+    </div>
+
+    {{else}}
+
+
+    <div class="navbar-profile">
+        {{#link-to 'signup'}}<button type="button" class="btn btn-default signup">SIGNUP</button>{{/link-to}}
+        {{#link-to 'login'}}<button type="button" class="btn btn-default">LOGIN</button>{{/link-to}}
+    </div>
+
+{{/if}}

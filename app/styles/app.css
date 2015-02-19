@@ -1,0 +1,1325 @@
+/* line 23, haul.scss */
+h1, h2, h3, h4, h5 {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 27, haul.scss */
+h4 a {
+  color: #000;
+}
+
+/* line 31, haul.scss */
+div.inline img {
+  float: left;
+}
+
+/* line 35, haul.scss */
+h2.inline {
+  float: left;
+  display: inline;
+}
+
+/* line 40, haul.scss */
+h2.inline img {
+  float: left;
+  display: inline;
+}
+
+/* line 45, haul.scss */
+label {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 49, haul.scss */
+.haul-header {
+  padding-top: 10px;
+}
+
+/* line 53, haul.scss */
+.haul-font {
+  font-family: Arvo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* line 58, haul.scss */
+.haul-font-weak {
+  font-family: Arvo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+/* line 63, haul.scss */
+.font-weak {
+  font-weight: normal;
+}
+
+
+html, body{
+  height: 100%;
+  width: 100%;
+} 
+
+/* line 72, haul.scss */
+body {
+  background-color: #ffffff;
+  background-image: none;
+  position: relative;
+  padding-top: 31px;
+  padding-bottom: 80px;
+}
+
+/* line 80, haul.scss */
+.text-regular {
+  font-weight: normal;
+  font-family: arial;
+}
+
+/* line 85, haul.scss */
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* line 92, haul.scss */
+.glyphicon.red {
+  color: red;
+}
+
+/* line 96, haul.scss */
+.media a:hover {
+  text-decoration: none;
+}
+
+/* line 100, haul.scss */
+.media-divider {
+  padding-top: 8px;
+  border-top: 1px solid #e9e9e9;
+}
+
+/* line 105, haul.scss */
+.clearfix:after {
+  content: " ";
+  /* Older browser do not support empty content */
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+/* line 114, haul.scss */
+.display-inline {
+  display: inline;
+}
+
+/* line 120, haul.scss */
+.show {
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+/* line 124, haul.scss */
+.logo-outer {
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  z-index: 2000;
+  position: absolute;
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-top: 25px;
+  width: 75px;
+  height: 55px;
+  background-color: #3a4457;
+  box-shadow: 0px 2px 2px #000;
+  font-size: 20px;
+  font-family: Arvo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  /* line 146, haul.scss */
+  .logo-outer {
+    position: absolute;
+    margin-left: 20px;
+    padding-top: 30px;
+    width: 100px;
+    height: 70px;
+    font-size: 30px;
+  }
+}
+/* line 158, haul.scss */
+.logo-outer a {
+  color: #fff;
+}
+
+/* line 162, haul.scss */
+.navbar-toggle {
+  float: left;
+  margin-left: 5px;
+}
+
+/* line 167, haul.scss */
+.thumbnail.center {
+  display: inline;
+}
+
+/* line 171, haul.scss */
+.thumbnail.small {
+  width: 100px;
+  height: 100px;
+}
+
+/* line 176, haul.scss */
+.thumbnail.profile {
+  border-radius: 4px;
+}
+
+.profile-image { 
+  width:100px;
+  height:100px;
+  background-color: #ddd;
+  border-radius: 50%; 
+  display: inline-block;
+}
+.profile-image.sm{
+  width:50px;
+  height:50px;
+}
+.profile-image.collection {
+  border-radius: 20%;
+}
+
+
+
+/* line 180, haul.scss */
+.navbar-profile {
+  /*width: 100%;*/
+  left: 0;
+  margin-right: 5px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  padding: 0px;
+}
+
+/* line 189, haul.scss */
+.navbar-profile .profile-image {
+  width: 25px;
+  height: 25px;
+}
+
+/* line 196, haul.scss */
+.navbar-profile a {
+  color: inherit;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+/* line 202, haul.scss */
+.navbar-profile a:hover {
+  text-decoration: none;
+}
+
+/* line 206, haul.scss */
+.navbar-profile .profile-name {
+  padding-left: 4px;
+}
+
+/* line 210, haul.scss */
+.navbar-right .btn-cta {
+  float: left;
+  margin-right: 10px;
+}
+
+/* line 216, haul.scss */
+.navbar-center {
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  width: 50%;
+  padding-top: 9px;
+  /*margin: auto; */
+  margin-left: 150px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  /* line 230, haul.scss */
+  .navbar-center {
+    width: 100%;
+    margin-left: 0px;
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 60px;
+  }
+}
+@media (max-width: 768px) {
+  /* line 243, haul.scss */
+  .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+}
+/* line 250, haul.scss */
+.haul-navbar {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0px 1px 10px #ddd;
+}
+
+/* line 256, haul.scss */
+.haul-navbar .navbar-right {
+  float: right;
+  position: absolute;
+  right: 10px;
+}
+
+/* line 262, haul.scss */
+.haul-navbar .navbar-right.in {
+  overflow-y: visible;
+}
+
+/* line 266, haul.scss */
+.haul-navbar .signup {
+  border: 1px solid #0192B5;
+  color: #0192B5;
+}
+
+/* line 272, haul.scss */
+.input-group-btn .btn {
+  height: 34px;
+}
+
+/* line 276, haul.scss */
+.btn-group .btn {
+  height: 34px;
+}
+
+/* line 280, haul.scss */
+.navbar {
+  margin-bottom: 40px;
+}
+
+/* line 284, haul.scss */
+.navbar-anon {
+  margin-bottom: 80px;
+}
+
+
+
+/* line 289, haul.scss */
+.profile-circular-mask {
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: #ddd;
+}
+
+/* line 303, haul.scss */
+.profile-circular-mask.collection {
+  border-radius: 20%;
+}
+
+/* line 307, haul.scss */
+.profile-circular-mask img {
+  max-width: 100%;
+}
+
+/* line 312, haul.scss */
+.profile-circular-mask span {
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  top: 30px;
+  left: 35px;
+}
+
+/* line 320, haul.scss */
+.profile-circular-mask.sm {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+/* line 326, haul.scss */
+.heading .profile-circular-mask {
+  margin-top: -10px;
+}
+
+/* line 379, haul.scss */
+.toolbar.fixed {
+  -moz-transition: position 0.2s ease-in-out;
+  -o-transition: position 0.2s ease-in-out;
+  -webkit-transition: position 0.2s ease-in-out;
+  transition: position 0.2s ease-in-out;
+  position: fixed;
+  width: 100%;
+  display: inline-block;
+  top: 50px;
+  z-index: 1029;
+}
+
+/* line 388, haul.scss */
+.toolbar-footer {
+  top: inherit;
+  bottom: 0px;
+  position: fixed;
+  display: inline;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  z-index: 1029;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  min-height: 5px;
+  border-top: #000000;
+  background: #333333;
+}
+
+@media (max-width: 768px) {
+  /* line 409, haul.scss */
+  .toolbar.fixed {
+    top: 48px;
+  }
+}
+/* line 419, haul.scss */
+.navbar-profile .profile-circular-mask {
+  width: 25px;
+  height: 25px;
+}
+
+/* line 424, haul.scss */
+.haul-buy-card {
+  min-height: 20px;
+  padding: 10px;
+  /*background-color: #f5f5f5;*/
+  border: 1px solid #eee;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* line 436, haul.scss */
+.haul-buy-card .title {
+  font-family: inherit;
+  font-weight: 500;
+  color: inherit;
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+
+/* line 445, haul.scss */
+.haul-buy-card .profile-circular-mask {
+  width: 50px;
+  height: 50px;
+}
+
+/* line 452, haul.scss */
+.haul-buy-card .media:first-child {
+  margin-top: 15px;
+}
+
+/* line 456, haul.scss */
+.haul-buy-card .haul-price {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 200%;
+  padding-top: 0px;
+}
+
+/* line 464, haul.scss */
+.haul-buy-card .button-bar {
+  margin-bottom: 15px;
+  vertical-align: middle;
+}
+
+/* line 468, haul.scss */
+.haul-buy-card .haul-counts {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 475, haul.scss */
+.media-body {
+  padding-left: 10px;
+}
+
+/* line 480, haul.scss */
+.haul-profile-header {
+  color: #000;
+}
+
+/* line 484, haul.scss */
+.haul-media-left {
+  float: left;
+  max-width: 40%;
+}
+
+/* line 489, haul.scss */
+.haul-media-left-end {
+  float: left;
+  padding: 20px 10px 10px 40px;
+  text-align: center;
+}
+
+@media (max-width: 450px) {
+  /* line 495, haul.scss */
+  .haul-media-left {
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 300px;
+    max-width: 300px;
+  }
+}
+/* line 503, haul.scss */
+.haul-grid {
+  margin: 0;
+  margin-top: 30px;
+}
+
+/* line 508, haul.scss */
+.haul-grid-li {
+  float: left;
+  padding: 10px;
+  position: relative;
+  width: 50%;
+}
+
+@media (min-width: 768px) {
+  /* line 516, haul.scss */
+  .haul-grid-li {
+    width: 33%;
+  }
+}
+@media (min-width: 992px) {
+  /* line 523, haul.scss */
+  .haul-grid-li {
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 528, haul.scss */
+  .haul-grid-li {
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 25%;
+  }
+}
+/* line 538, haul.scss */
+.haul-grid-li img {
+  width: 100%;
+  max-width: 320px;
+  max-height: 320px;
+}
+
+/* line 545, haul.scss */
+.haul-grid-li .sell {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 100%;
+  position: relative;
+  max-height: 320px;
+}
+
+/* line 555, haul.scss */
+.haul-grid-li .sell-button {
+  border: 1px dashed grey;
+  border-radius: 4px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-width: 320px;
+  max-height: 320px;
+  min-width: 100px;
+  font-color: #000;
+}
+
+/* line 567, haul.scss */
+.haul-grid-li .sell-text {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+}
+
+/* line 577, haul.scss */
+.sell-text .glyphicon {
+  padding-bottom: 10px;
+}
+
+/* line 581, haul.scss */
+.box-rigid {
+  float: left;
+  position: relative;
+}
+
+/* line 587, haul.scss */
+.box-vert-align {
+  margin-top: 25%;
+}
+
+/* line 592, haul.scss */
+.box {
+  /*border: 1px dashed grey;*/
+  float: left;
+  width: 50%;
+  margin: 0px;
+  padding-left: 10px;
+  max-height: 320px;
+}
+
+/* line 601, haul.scss */
+.box-soft {
+  background-color: #f9f9f9;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+/* line 607, haul.scss */
+.box-inside {
+  max-height: 320px;
+}
+
+@media (min-width: 768px) {
+  /* line 612, haul.scss */
+  .box {
+    width: 66%;
+    padding-top: 20px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 619, haul.scss */
+  .box {
+    width: 75%;
+    padding-top: 20px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 625, haul.scss */
+  .box {
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 75%;
+    padding-top: 20%;
+  }
+}
+/* line 635, haul.scss */
+.haul-image-picker-well {
+  margin-top: 10px;
+  padding-top: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* line 646, haul.scss */
+.haul-grid-li .info {
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  color: #000;
+  opacity: 1;
+}
+
+/* line 660, haul.scss */
+.haul-grid-li .info:hover {
+  opacity: 1;
+}
+
+/* line 664, haul.scss */
+.haul-grid-li .price {
+  /*  border: 1px solid red;*/
+  position: absolute;
+  width: auto;
+  padding: 5px 5px 5px 15px;
+  bottom: 20%;
+  background-color: #eee;
+  /*border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;*/
+  box-shadow: 0px 2px 1px #ccc;
+}
+
+/* line 676, haul.scss */
+.haul-grid .price {
+  float: right;
+  padding-left: 20px;
+}
+
+/* line 681, haul.scss */
+.haul-grid .control {
+  float: right;
+  padding-left: 20px;
+}
+
+/* line 686, haul.scss */
+.haul-grid .sold {
+  position: absolute;
+  right: 0px;
+  top: 50px;
+  background-color: orange;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 140%;
+  color: #000;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 5px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* line 705, haul.scss */
+.vcenter {
+  float: none;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+/* line 713, haul.scss */
+.margin-top {
+  margin-top: 20px;
+}
+
+/* line 717, haul.scss */
+.padding-right {
+  padding-right: 10px;
+}
+
+/* line 721, haul.scss */
+.padding-top {
+  padding-top: 20px;
+}
+
+/* line 725, haul.scss */
+.padding-bottom {
+  padding-bottom: 20px;
+}
+
+/* line 730, haul.scss */
+.btn-xs.margin-top {
+  margin-top: 5px;
+}
+
+/* line 734, haul.scss */
+.btn-fit-select {
+  padding-bottom: 12px;
+}
+
+/* line 738, haul.scss */
+.btn-no-radius {
+  border-radius: 0;
+}
+
+/* line 742, haul.scss */
+.btn-facebook {
+  color: #fff;
+  background-color: #3B5998;
+  border: none;
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+}
+
+/* line 751, haul.scss */
+.btn-facebook:hover {
+  background-color: #879ac0;
+  border: none;
+}
+
+/* line 761, haul.scss */
+.haul-grid-thumbs {
+  list-style: none;
+  float: left;
+  position: relative;
+  display: inline-block;
+  width: 20%;
+}
+
+/* line 769, haul.scss */
+.alert-wrapper {
+  position: absolute;
+  display: block;
+  top: 50px;
+  width: 100%;
+  left: 0px;
+}
+
+/* line 778, haul.scss */
+.alert-wrapper .alert {
+  border-radius: 0px;
+  background-color: rgba(242, 222, 222, 0.9);
+  padding: 5px 0px 5px 5px;
+  /*text-align:center;*/
+}
+
+/* line 785, haul.scss */
+.progress-wrapper {
+  position: absolute;
+  display: block;
+  bottom: -20px;
+  width: 100%;
+  margin-left: 0px;
+}
+
+/* line 793, haul.scss */
+.progress-wrapper .progress {
+  border-radius: 0px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* line 800, haul.scss */
+.haul-grid-thumbs:hover .delete {
+  opacity: 1;
+}
+
+/* line 804, haul.scss */
+.haul-grid-thumbs .delete {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  opacity: 0;
+}
+
+/* line 814, haul.scss */
+#haul-dropzone {
+  /*border: 1px solid blue;*/
+  min-height: 300px;
+}
+
+/* line 819, haul.scss */
+.dropzone-preview {
+  /* border: 1px solid pink;*/
+}
+
+/* line 823, haul.scss */
+.ember-view .selected img {
+  border-left: 4px solid #428bca;
+  border-right: 4px solid #428bca;
+  border-top: 4px solid #428bca;
+  border-bottom: 4px solid #428bca;
+}
+
+/* line 830, haul.scss */
+.ember-view .selected .delete {
+  opacity: 0;
+}
+
+/* line 838, haul.scss */
+.modal .danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+/* line 845, haul.scss */
+.carousel-control.left {
+  background-image: none;
+}
+
+/* line 848, haul.scss */
+.carousel-control.right {
+  background-image: none;
+}
+
+/* line 852, haul.scss */
+.slide {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+}
+
+/* line 857, haul.scss */
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  width: 100%;
+}
+
+/* line 862, haul.scss */
+.haul-thumb {
+  cursor: hand;
+  margin-bottom: 0px;
+  width: 100%;
+}
+
+/* line 868, haul.scss */
+.sortable {
+  list-style: none;
+}
+
+/* line 872, haul.scss */
+.ui-sortable {
+  padding: 0px;
+  position: relative;
+}
+
+/* line 877, haul.scss */
+.sortable li {
+  float: left;
+  width: 20%;
+  cursor: hand;
+}
+
+/* line 883, haul.scss */
+.sort-item-wrapper {
+  position: relative;
+}
+
+/* line 886, haul.scss */
+.sortable li .glyphicon {
+  display: none;
+}
+
+/* line 889, haul.scss */
+.sortable li:hover .glyphicon {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20%;
+  height: 20%;
+  margin-left: -20px;
+  margin-top: -20px;
+  font-size: 3em;
+}
+
+/* line 903, haul.scss */
+.sortable li:hover img {
+  opacity: .5;
+}
+
+/* line 908, haul.scss */
+.input-sm {
+  width: 100px;
+}
+
+/* line 912, haul.scss */
+.input-xs {
+  width: 75px;
+}
+
+/* line 916, haul.scss */
+.input-group .input-sm {
+  width: 100px;
+}
+
+/* line 920, haul.scss */
+label {
+  padding-top: 10px;
+}
+
+/* line 924, haul.scss */
+.border {
+  border: 1px solid pink;
+}
+
+/* line 928, haul.scss */
+textarea.form-control {
+  height: 200px;
+}
+
+/* line 934, haul.scss */
+.toc {
+  float: left;
+  width: 200px;
+  display: inline;
+  position: absolute;
+}
+
+@media (max-width: 992px) {
+  /* line 941, haul.scss */
+  .toc {
+    display: none;
+  }
+}
+/* line 946, haul.scss */
+.relative {
+  position: relative;
+}
+
+/* line 950, haul.scss */
+.content-toc {
+  padding-top: 60px;
+}
+
+/* line 954, haul.scss */
+.content-scroll {
+  overflow: scroll;
+  height: 120%;
+  padding-top: 60px;
+  padding-bottom: 0%;
+}
+
+/* line 961, haul.scss */
+.content-fixed-nav {
+  margin-top: 20px;
+}
+
+/* line 966, haul.scss */
+.trucate-text .hide {
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+
+/* line 970, haul.scss */
+.trucate-text .show {
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+
+/* line 975, haul.scss */
+.badge-success {
+  background-color: green;
+}
+
+/* line 979, haul.scss */
+.badge-danger {
+  background-color: red;
+}
+
+/* line 983, haul.scss */
+.alert-sm {
+  padding: 3px;
+  margin-top: 3px;
+}
+
+/* line 996, haul.scss */
+.content-fixed-nav.home {
+  margin-top: 50px;
+}
+
+/* line 1002, haul.scss */
+.home .price {
+  bottom: 40%;
+}
+
+/* line 1006, haul.scss */
+.home .thumbnail {
+  margin-bottom: 0px;
+}
+
+/* line 1010, haul.scss */
+.home .description {
+  display: block;
+  padding: 10px;
+  background-color: #eee;
+  width: 100%;
+  min-height: 60px;
+  max-height: 60px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  /* line 1022, haul.scss */
+  .btn-responsive {
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+  }
+}
+/* line 1030, haul.scss */
+.btn-responsive a {
+  color: #000;
+}
+
+/* line 1034, haul.scss */
+.btn-responsive.selected {
+  background-color: #eee;
+}
+
+/* line 1039, haul.scss */
+.btn-left {
+  float: left !important;
+  margin-right: 10px;
+}
+
+/* line 1044, haul.scss */
+.btn-right {
+  float: right !important;
+  margin-left: 10px;
+}
+
+/* line 1050, haul.scss */
+.form-list {
+  list-style: none;
+  padding-left: -10px;
+  margin-left: -30px;
+}
+
+/* line 1056, haul.scss */
+.collection-nav {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f0f1f3;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e1e4e7;
+}
+/* line 1064, haul.scss */
+.collection-nav h1 a {
+  color: black;
+}
+/* line 1068, haul.scss */
+.collection-nav h2 a {
+  color: black;
+}
+/* line 1072, haul.scss */
+.collection-nav .profile-circular-mask {
+  margin-top: -10px;
+}
+
+/* line 1081, haul.scss */
+.seller-nav {
+  background-color: #d7d8d8;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+/* line 1088, haul.scss */
+.seller-nav h1 {
+  margin-top: 10px;
+  color: white;
+}
+
+/* line 1092, haul.scss */
+.seller-nav h2 {
+  margin-top: -3px;
+  color: white;
+}
+
+/* line 1096, haul.scss */
+.seller-nav h3 {
+  margin-top: 10px;
+  color: white;
+}
+
+/* line 1100, haul.scss */
+.seller-nav h1 a {
+  color: white;
+}
+
+/* line 1104, haul.scss */
+.seller-nav h2 a {
+  color: white;
+}
+
+/* line 1108, haul.scss */
+.seller-nav .follow {
+  position: absolute;
+  right: 40px;
+  margin-left: 10px;
+  text-align: left;
+}
+
+/* line 1115, haul.scss */
+.seller-nav-footer {
+  border-bottom: 1px solid #e3e3e3;
+  margin-bottom: 20px;
+}
+
+/* line 1122, haul.scss */
+#leaveComment textarea {
+  height: 80px;
+}
+
+/* line 1126, haul.scss */
+.top-border {
+  border-top: 1px solid #e3e3e3;
+}
+
+/* line 1129, haul.scss */
+.bottom-border {
+  border-bottom: 1px solid #e3e3e3;
+}
+
+/* line 1133, haul.scss */
+.left-border {
+  border-left: 1px solid #e3e3e3;
+}
+
+/* line 1137, haul.scss */
+.image-scroll {
+  overflow: auto;
+  height: 300px;
+  padding: 10px;
+}
+
+/* line 1144, haul.scss */
+.image-scroll img {
+  width: 50%;
+  float: left !important;
+}
+
+/* line 1149, haul.scss */
+.image-scroll.fixed {
+  position: fixed;
+  display: inline;
+  top: 125px;
+  width: 300px;
+}
+
+/* line 1158, haul.scss */
+.editorial img {
+  width: 100%;
+}
+/* line 1162, haul.scss */
+.editorial .thumbnail {
+  border-radius: 0px;
+  padding: 0px;
+}
+
+/* line 1168, haul.scss */
+#editor {
+  overflow: auto;
+}
+
+/* line 1172, haul.scss */
+#editor img {
+  width: 100%;
+}
+
+/* line 1176, haul.scss */
+.editorWrapper {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  font-weight: normal;
+}
+
+/* line 1182, haul.scss */
+.ql-toolbar {
+  background-color: rgba(248, 248, 248, 0.9);
+  box-shadow: 0px 1px 1px #eee;
+}
+
+/* line 1192, haul.scss */
+.haul-toggle {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #fafafa;
+  border-top: 1px solid #e3e3e3;
+  padding-top: 5px;
+  font-weight: normal;
+}
+
+/* line 1200, haul.scss */
+.haul-toggle.fixed {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0px 1px 0px #ddd;
+}
+
+/* line 1207, haul.scss */
+.haul-toggle div {
+  color: #3A4457;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 1.0em;
+  display: inline-block;
+}
+
+/* line 1215, haul.scss */
+.haul-toggle small {
+  text-decoration: none;
+  color: black;
+  font-weight: normal;
+}
+
+/* line 1221, haul.scss */
+.haul-toggle div.here {
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* line 1227, haul.scss */
+.haul-toggle a {
+  color: inherit;
+}
+
+/* line 1231, haul.scss */
+.haul-toggle a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* line 1237, haul.scss */
+.haul-panel h3 {
+  margin-top: 0px;
+}
+/* line 1240, haul.scss */
+.haul-panel .title {
+  background-color: #ccc;
+}
+/* line 1243, haul.scss */
+.haul-panel .scroll {
+  max-height: 300px;
+  overflow: scroll;
+}
+
+
+.anon header{
+    position:absolute;
+    padding-top:100px;
+    text-align: center;
+    color: #fff;
+    background-attachment: scroll;
+    background-image: url(/assets/images/header-bg.jpg);
+    background-position: center center;
+    background-repeat: none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.anon .form-box {
+  background-color: rgba(0, 0, 0, 0.4); 
+  border-radius: 4px;
+  padding-bottom: 10px;
+}
+
+
+
+
+
+
+

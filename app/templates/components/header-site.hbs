@@ -1,0 +1,68 @@
+<nav>
+	<div class="logo">
+		{{#link-to "home"}}Haul{{/link-to}}
+	</div>
+
+	<div class="container-fluid">
+
+	{{#if  session.isAuthenticated }}
+
+		{{#link-to 'home' }}
+		<button class="btn btn-default btn-home">
+			<span class="glyphicon glyphicon-home"></span> 
+		</button> 
+		{{/link-to}}
+
+		
+		{{#link-to 'new-post' }}
+		<button class=" btn btn-default btn-sell">
+			<span class="glyphicon glyphicon-camera"></span>
+			Post
+		</button> 
+		{{/link-to}}
+		
+
+		
+
+		{{typeahead-search class="display-inline" goToRoute='goToRoute'}}
+
+
+
+	
+		<div class="btn-group btn-profile">
+			{{#link-to 'profile' session.currentUser }}
+			<button type="button" class="btn btn-default">
+				{{ make-icon icon=session.currentUser.icon isSmall=true}} 
+			</button>
+			{{/link-to}}
+		
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			  <span class="glyphicon glyphicon-cog"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-right" role="menu">
+				<li>{{#link-to 'profile' session.currentUser }}Profile{{/link-to}}</li>
+				
+				<li class="divider"></li>
+				<li>{{#link-to 'settings.profile'}}Settings{{/link-to}}</li>
+				
+	            <li class="divider"></li>
+	            <li>{{#link-to 'haul.about'}}About {{/link-to}}</li>
+
+				<li class="divider"></li>
+				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+			</ul>
+		</div>
+	
+
+	{{else}}
+
+
+		{{#link-to 'signup'}}<button type="button" class="btn btn-default btn-signup">SIGNUP</button>{{/link-to}}
+		{{#link-to 'login'}}<button type="button" class="btn btn-default btn-login">LOGIN</button>{{/link-to}}
+
+		{{#link-to 'haul.about'}}<button type="button" class="btn btn-default btn-signup">ABOUT</button>{{/link-to}}
+
+	{{/if}}
+
+	</div>
+</nav>

@@ -1,0 +1,64 @@
+{{what-page currentPage=currentPage page=thisPage }}
+
+{{!-- PAGE CONTENT --}}
+<div class="container-fluid haul-content">   
+	<div class="row">
+		<div class="col-md-3 col-sm-2 col-xs-12"></div>
+		<div class="col-md-6 col-sm-8 col-xs-12">
+
+			{{feed-view model=model galleryView=galleryView currentPos=currentPos}}
+			<div {{bind-attr class="galleryView:gallery"}}>
+			{{#each model}}
+				{{#if image}}
+					{{partial 'post'}}	
+				{{/if}}
+			{{/each}} 
+			</div>
+
+	
+			{{#unless isProfileOwner}} 
+			{{#unless model.posts }}
+				<p class="padding-top text-center font-weak">{{username}} has no posts.</p>
+			{{/unless}} 
+			{{/unless}}
+
+
+			
+			{{#if isProfileOwner}} 
+				{{#unless model.posts }} 
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12  text-center">
+						
+						<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
+						
+						{{#link-to 'new-post'}}
+						<button class="btn btn-default">
+							<span class="glyphicon glyphicon-camera"></span><br/>
+							Post Something For Sale
+						</button>
+						{{/link-to}} 
+				
+					</div>	
+				</div> 
+			{{/unless}}
+			{{/if}}
+
+
+		</div> 
+		<div class="col-md-3 col-sm-4 col-xs-12"></div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
