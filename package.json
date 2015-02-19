@@ -35,5 +35,8 @@
     "express": "^4.8.5",
     "glob": "^4.0.5",
     "liquid-fire": "^0.16.1"
+  },
+  "dependencies": {
+    "ember-cli-sass": "^3.1.0-beta.5"
   }
 }
