@@ -18,6 +18,27 @@ export default function(){
     this.reverse('toRight', {easing:'spring'})
   );
 
+  //Profile -> 
+  this.transition(
+    this.fromRoute('profile.index'),
+    this.toRoute('profile.likes'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+  this.transition(
+    this.fromRoute('profile.index'),
+    this.toRoute('profile.followers'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+  this.transition(
+    this.fromRoute('profile.index'),
+    this.toRoute('profile.follows'),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
+
   this.transition(
     this.fromRoute('profile.index'),
     this.toRoute('new-post'),

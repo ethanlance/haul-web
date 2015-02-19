@@ -11,8 +11,5 @@ export default Ember.Route.extend( {
 	setupController: function(controller, model) {
 		controller.set('model', model);
 		this._super(controller, model);
-	},
-	serialize: function(model) {
- 	   	return { username: model.username }; 
-	} 
+	}
 });
