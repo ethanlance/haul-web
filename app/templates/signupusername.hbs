@@ -6,19 +6,18 @@
         	<div class="col-md-4 col-sm-2 col-xs-2"></div>
 			<div class="col-md-4 col-sm-8 col-xs-8 form-box">
     			
-
-			     <div class="form-group">
-                    <h2>Pick a username</h2>
+                <div class="form-group">
+                    <h2>One more thing, pick a username</h2>
                 </div>
 	           
-               {{#form-for model wrapper="bs3-wrapper"}}
+                {{#form-for model wrapper="bs3-wrapper"}}
                 <div class="form-group"> 
                     {{input username canShowValidationError=showErrors placeholder=""}}
                 </div> 
                 {{/form-for}}
 
-                <div {{bind-attr class="errorShow:show:hide :errors"}}>
-                    {{errorMessage}}
+                <div {{bind-attr class="showErrorMessage:show:hide :errors :text-left"}}>
+                    <div class="alert">{{{errorMessage}}}</div>
                 </div>
 
                 <div class="form-group">

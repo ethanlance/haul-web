@@ -54,14 +54,14 @@ export default ApplicationAdapter.extend({
 	updateRecord: function(store, type, record) {
 
 		var user_id = record.get('user').get('id');
-		var post_id = record.get('id');
+		var post_id = record.get('post_id');
 
 		var data = {
             subject: record.get('subject'),
             body: "test",//record.get('body'),
             image_id: record.get('image_id'),
             product_name: record.get('product_name'),
-            product_description: record.get('product_status'),
+            product_description: record.get('product_description'),
             product_currency: record.get('product_currency'),
             product_price: record.get('product_price'),
             product_quantity: record.get('product_quantity'),
@@ -82,7 +82,7 @@ export default ApplicationAdapter.extend({
             body: record.get('body'),
             image_id: record.get('image_id'),
             product_name: record.get('product_name'),
-            product_description: record.get('product_status'),
+            product_description: record.get('product_description'),
             product_link: record.get('product_link'),
             product_currency: record.get('product_currency'),
             product_price: record.get('product_price'),

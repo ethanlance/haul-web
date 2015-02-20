@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import AnonMixin from '../mixins/anon';
-export default Ember.Route.extend(AnonMixin, {
+import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
+export default Ember.Route.extend(AnonMixin, AuthenticatedRouteMixin, {
 	controllerName: 'settings.username',
 	model: function() {
 		return this.store.createRecord('username');
 	},
 	renderTemplate: function() {
-		this.render('layouts/header_base', {
+		this.render('layouts/header_anon', {
 			into: 'application',
 			outlet: 'header'
 		});

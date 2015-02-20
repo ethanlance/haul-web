@@ -3,8 +3,9 @@ import config from '../../config/environment';
 var Haul = config.APP;
 
 export default Ember.ObjectController.extend({
-	errorShow: false,
+	showErrorMessage: false,
 	errorMessage: null,
+
 	turnOffNav:true,
 	currentUserId: 'session.currentUser.id',
 
@@ -31,9 +32,10 @@ export default Ember.ObjectController.extend({
 			function(error){
 				_this.set('isProcessing', false);	
 				_this.set('showErrors', true);
-				if( Haul.Server[error.status]){ 
-					_this.set('errorMessage', Haul.Server[error.status]);
+				if(error.status === 400){ 
+					_this.set('errorMessage', "Oops, usernames must be <ul><li>at least 3 characters long</li><li>must start with a letter</li><li>cannot have spaces</li><li>and can only contain letters and numbers</li></ul>");
 				}
+				_this.set('showErrorMessage', true);
 				console.log("Error" , error);
 			}
 		);

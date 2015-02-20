@@ -28,7 +28,7 @@
 
 
 
-	
+		{{#if session.currentUser.username }}
 		<div class="btn-group btn-profile">
 			{{#link-to 'profile' session.currentUser }}
 			<button type="button" class="btn btn-default">
@@ -52,6 +52,22 @@
 				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
 			</ul>
 		</div>
+		{{else}}
+		<div class="btn-group btn-profile">
+			{{#link-to 'signupusername' }}
+			<button type="button" class="btn btn-default">
+				{{ make-icon icon=session.currentUser.icon isSmall=true}} 
+			</button>
+			{{/link-to}}
+		
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			  <span class="glyphicon glyphicon-cog"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-right" role="menu">
+				<li>{{#link-to 'signupusername'}}Pick a username to get started...{{/link-to}}</li>
+			</ul>
+		</div>
+		{{/if}}
 	
 
 	{{else}}

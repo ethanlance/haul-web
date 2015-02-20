@@ -3,7 +3,7 @@ import DS from "ember-data";
 export default DS.Model.extend(Ember.Validations.Mixin, {
 	
 	user: DS.belongsTo('user', {async:true}),
-	post_id: DS.attr('string'),
+
 	subject: DS.attr('string'),
 	body: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),
@@ -21,18 +21,14 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 
 	product_id: DS.attr('string'),
 
-	//commentCount: DS.belongsTo('post-comment-count', {async:true}),
-
-	post_slug: function() {		
-		if(!Ember.isEmpty(this.get('subject'))){
-			return this.get('subject').toLowerCase().replace(/ /g,'-').replace(/[-]+/g, '-').replace(/[^\w-]+/g,''); 
-		}
-	}.property('subject'),
-
 	validations: { 
 		body: {
 		 	presence: true,
 		 	length: { maximum: 2000, minimum: 0 }
+		},
+		subject: {
+		 	presence: true,
+		 	length: { minimum: 2 }
 		},
 		product_name: {
 		 	presence: true,

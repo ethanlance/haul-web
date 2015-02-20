@@ -789,17 +789,15 @@ header.profile.shrink{
 				transition: all 0.2s ease-in-out;
 
 				.price {
-
+					width: 70px;
 					min-width: 70px;
 					position:absolute;
 					padding: 3px 5px 3px 5px;
-					top:50px;
-					left:-10px;
+					bottom:0px;
+					left:0px;
 					font-size: 20px;
-					color: white;
-					background-color: #3a4457;
-					border-right: 1px solid #333;
-					border-bottom: 1px solid #333;
+					color: #000000;
+					//background-color: rgba(255, 255, 255, 0.7);
 					z-index:2000;
 					transition: all 0.2s ease-in-out;
 				}
