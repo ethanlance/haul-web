@@ -4,6 +4,7 @@ export default  Ember.ObjectController.extend({
 
  	needs: ['profile'],
  	thisPage: "likesPage", 
+ 	user: false,
  	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
  	showHeaderChange: function(){ 
  		if( this.get('currentPage') === this.get('thisPage')){
@@ -19,10 +20,10 @@ export default  Ember.ObjectController.extend({
 
 		this.set('isProfileOwner', false); 
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId')) ) {
-			if (this.get('userId') === this.get('currentUserId')) {
+			if (this.get('user').get('id') === this.get('currentUserId')) {
 				this.set('isProfileOwner', true);
 			}
 		} 
-	}.observes('userId', 'currentUserId'),
+	}.observes('user', 'currentUserId'),
 
 });

@@ -16,16 +16,9 @@
 			</div>
 
 	
-			{{#unless isProfileOwner}} 
-			{{#unless model.posts }}
-				<p class="padding-top text-center font-weak">{{username}} has no posts.</p>
-			{{/unless}} 
-			{{/unless}}
-
-
 			
+		{{#unless hasPosts }}
 			{{#if isProfileOwner}} 
-				{{#unless model.posts }} 
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12  text-center">
 						
@@ -40,9 +33,10 @@
 				
 					</div>	
 				</div> 
-			{{/unless}}
+			{{else}}
+				<p class="padding-top text-center font-weak">{{user.username}} has no posts.</p>
 			{{/if}}
-
+		{{/unless}}
 
 		</div> 
 		<div class="col-md-3 col-sm-4 col-xs-12"></div>
