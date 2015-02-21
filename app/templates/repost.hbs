@@ -4,30 +4,26 @@
 		<div class="modal-content">
 			
 			<div class="modal-header">
-				<button {{action 'close'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				
+				<button {{action 'close'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				
+				<button class="btn btn-sm btn-default btn-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				  Edit Product Details
+				  <span class="glyphicon glyphicon-wrench"></span>
+				</button>		
+
 				<h4 class="modal-title" id="myModalLabel">Repost</h4>
+
 			</div>
 
 			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="gallery-wrapper"> 
-							<div class="gallery"> 
-								<div class="gallery-inside">
 
-									{{#each product_images}} 
-										<img {{bind-attr src=small}}> 
-									{{/each}}
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
 				<div {{bind-attr class="postComplete:hide:show"}}>
 					 
-					<div class="row">
+				
+				<div class="collapse" id="collapseExample">
+					<div class="row well">
 						<div class="col-md-6 col-sm-6 col-xs-6">  
 							<label>Name your item</label>
 							{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
@@ -52,15 +48,35 @@
 							{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
 						</div> 
 					</div>
+				</div>
 
 					
+ 
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
+		
 							<label>Post Title</label>
 							{{input subject canShowValidationError=showErrors}} 
 						</div>
 					</div>	
+
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="gallery-wrapper"> 
+							<div class="gallery"> 
+								<div class="gallery-inside">
+
+									{{#each product_images}} 
+										<img {{bind-attr src=small}}> 
+									{{/each}}
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">

@@ -58,7 +58,7 @@ export default ApplicationAdapter.extend({
 
 		var data = {
             subject: record.get('subject'),
-            body: "test",//record.get('body'),
+            body: record.get('body'),
             image_id: record.get('image_id'),
             product_name: record.get('product_name'),
             product_description: record.get('product_description'),

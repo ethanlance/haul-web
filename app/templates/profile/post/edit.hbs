@@ -70,7 +70,25 @@
 				</div> 
 			</div>
 			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-6"> 
+
+					<label>Quantity</label>
+					{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
+				</div>
+
+				<div class="col-md-6 col-sm-6 col-xs-6"> 
+							<label>Status</label>
+							{{view "select"
+						       contentBinding="product_status_options"
+						       selectionBinding="model.product_status"
+						       optionLabelPath="content.name"
+						       optionValuePath="content.value"
+						       class="form-control"
+						    }}
+		 		</div>
+			
 				<div class="col-md-12 col-sm-12 col-xs-12"> 
+							<label>Price</label>
 					{{#input price}}
 					<div class="input-group">
 						<span class="input-group-addon">$</span>
@@ -79,11 +97,6 @@
 					</div>
 					{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
 					{{/input}}
-				</div>
-			
-				<div class="col-md-12 col-sm-12 col-xs-12"> 
-					<label>Quantity:</label>
-					{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
  				</div>
 			</div>
 		</div> 

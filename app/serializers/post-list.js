@@ -20,6 +20,7 @@ export default DS.RESTSerializer.extend({
 			var id =  result.post_id;
 			return {
 				id: id,	
+				post_id:id,
 				updated_at: result.updated_at,
 				
 				user: result.user_id,

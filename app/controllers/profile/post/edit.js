@@ -14,7 +14,7 @@ export default Ember.ObjectController.extend({
 	
 	
 	productImagesBinding: "model.product_images",
-	
+	product_status_options: null,
 	currentUserBinding: 'Haul.currentUser',
 	currentUserIdBinding: 'Haul.currentUser.id',
 	isProcessing: false,
@@ -29,7 +29,20 @@ export default Ember.ObjectController.extend({
 
 	editorialForQuill: "",
 
+	start: function() {
+		
+		var product_status_options = Ember.ArrayController.create({
+		    content: [
+		        {status_id: 'FOR_SALE', name: 'for sale'},
+		        {status_id: 'SALE_PENDING', name: 'sale pending'},
+		        {status_id: 'SOLD', name: 'sold'},
+		        {status_id: 'NOT_FOR_SALE', name: 'not for sale'},
+				{status_id: 'PRIVATE', name: 'private'}
+		    ]
+		});
+		this.set('product_status_options', product_status_options);
 
+	}.on('init'),
 
 	setup: function() {  
 		if( !this.get('model').id ){  
@@ -40,6 +53,9 @@ export default Ember.ObjectController.extend({
 	}.observes('model'),
 
 	setUpQuill: function() {
+
+		console.log("BODY BODY", this.get('model').get('body'));
+
 		if( this.get('model').get('body') ){
 			this.set('editorialForQuill', this.get('model').get('body'));
 		}
@@ -138,7 +154,7 @@ export default Ember.ObjectController.extend({
 		model.set('product_image_ids', this.get('productImageIds')); 
 		model.set('image_id', this.get('productImageIds')[0]); 
 
-		//Trim
+		//Body
 		if( model.get('body') ) {
 			model.set('body', model.get('body').trim());
 		}
@@ -146,18 +162,36 @@ export default Ember.ObjectController.extend({
 			model.set('body', " ");
 		}
 
+		//Subject
+		model.get('subject', this.get('subject').trim());
+		if( Ember.isEmpty(model.get('subject').trim()) ){
+			model.set('subject', this.get('product_name'));
+		}
+
+		model.get('product_name', this.get('product_name').trim());
+		model.get('product_description', this.get('product_description').trim());
+		model.get('product_price', this.get('product_price').trim());
+		model.get('product_quantity', this.get('product_quantity').trim());
+		
+
+
+
+
  		//Model Validations:
 		model.validate()
 		.then(function(){
 			return model.save();
 		})
-		.then(function(record){
-			console.log("RECORD?", record);
-			return record.reload();
-		})
+		// .then(function(record){
+		// 	console.log("RECORD?", record);
+		// 	return record.reload();
+		// })
 		.then(function(record){
 			_this.set('isProcessing', false);
-			_this.transitionToRoute('profile.post', user, record.get('id'), record.get('post_slug'));
+
+console.log("BODY SAVED", record.get('body'))
+
+			_this.transitionToRoute('profile.post', user, record.get('post_id'), record.get('post_slug'));
 		}, function(error){
 			console.log("Error", error);
 			_this.set('isProcessing', false);

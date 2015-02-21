@@ -112,7 +112,12 @@ console.log("IMAGES", model.get('product_images'));
 		});
 	},
 
+	showProduct:false,
 	actions: {
+
+		showProduct:function(){
+			this.set('showProduct', true);
+		},
 
 		close: function() {
 			return this.send('closeModal');
