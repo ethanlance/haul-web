@@ -9,7 +9,7 @@
 
 
 		<div class="row">
-			<div {{bind-attr class="showUpload:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+			<div {{bind-attr class="showUpload:show:hide :fade showImagePicker:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
 				<h4>Start with photos</h4>
 			</div>
 
@@ -122,10 +122,11 @@
 				selectedImages=selectedImages
 				refresh='refresh'
 				imageClick='imageClick' 
-				imageDeleted='imageDeleted'
+				imageDelete='imageDelete'
 				Haul=Haul
+				showImagePicker=showImagePicker
 			}} 
-		
+
 			<div {{bind-attr class="showUpload:show:hide :toolbar-footer"}}>
 				<div class="container">
 					<div class="row">
@@ -196,6 +197,19 @@
 						<div class="col-md-6 col-sm-6 col-xs-6"> 
 							<label>Quantity:</label>
 							{{input product_quantity class="input-xs" canShowValidationError=showErrors}}
+		 				</div>
+
+
+					
+						<div class="col-md-6 col-sm-6 col-xs-6"> 
+							<label>Status:</label>
+							{{view "select"
+						       contentBinding="product_status_options"
+						       selectionBinding="model.product_status"
+						       optionLabelPath="content.name"
+						       optionValuePath="content.value"
+						       class="form-controll"
+						    }}
 		 				</div>
 				
 					</div>

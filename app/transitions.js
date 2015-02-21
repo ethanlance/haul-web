@@ -37,13 +37,6 @@ export default function(){
     this.use('toLeft'),
     this.reverse('toRight')
   );
-
-
-  this.transition(
-    this.fromRoute('profile.index'),
-    this.toRoute('new-post'),
-    this.use('toLeft'),
-    this.reverse('toRight', {duration:500})
-  );
+ 
   
 }

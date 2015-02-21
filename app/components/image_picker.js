@@ -11,6 +11,12 @@ export default Ember.Component.extend({
 	user_tokenBinding: 'session.currentUser.access_token',
 	store: null,
 
+	actions: {
+		imageDelete: function(event) {
+			this.sendAction('imageDelete', event);
+		}
+	},
+
 	didInsertElement: function(){
 		var _this = this; 
 
@@ -196,7 +202,7 @@ export default Ember.Component.extend({
 					window.clearInterval(file.progressInterval); 
 					
 					_self.removeFile(file);
-					_this.refreshImages(image);
+					_this.sendAction('refresh', image);
 					return;
 				}
 			});
@@ -204,43 +210,6 @@ export default Ember.Component.extend({
 
 			
 		});
-	}.observes('user_id'),
- 
-	//Send Event To Controller:
-	refreshImages: function(image) {	
+	}.observes('user_id')
 
-		console.log("REFRESH IMAGE ", image);
-
-		this.sendAction('refresh', image);	
-	},
-
-	actions: {
-
-		//This passed the image click from Haul.ImageCardComponent up to our controller. 
-		imageClick: function(event) {
-			this.sendAction('imageClick', event);
-		},
-
-		closeModal: function() {
-			this.set('errorDeleteModalStyle', 'display:none');
-		},
-
-		imageDeleteProceed: function(event) {
-
-			var image = event.get('image');
-			var image_id = image.get('id');
-			var _this = this;
-
-			image.deleteRecord();
-			
-			image.save().then(function(){
-				_this.sendAction('imageDeleted', image_id);	
-			},
-			function(){
-				//Rollback.
-				image.rollback();
-				_this.set('errorDeleteModalStyle', 'display:block');
-			});
-		},
-	}
 });

@@ -40,8 +40,8 @@ export default Ember.ObjectController.extend({
 	}.observes('model'),
 
 	setUpQuill: function() {
-		if( this.get('model').get('editorial') ){
-			this.set('editorialForQuill', this.get('model').get('editorial'));
+		if( this.get('model').get('body') ){
+			this.set('editorialForQuill', this.get('model').get('body'));
 		}
 	}.observes('model'),
 
@@ -194,7 +194,7 @@ export default Ember.ObjectController.extend({
 
 		quillChange: function(text) {
 			var model = this.get('model');
-			model.set('editorial', text);
+			model.set('body', text);
 		},
 
 		showImageModal: function(){

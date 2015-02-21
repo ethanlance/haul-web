@@ -13,7 +13,7 @@ export default Ember.ObjectController.extend({
 	showProduct: false,
 	showUpload: false,
 	imagesAreSelected: false,
-
+	product_status_options: null,
 	imageId: null,
 	productImageIds: [],
 	selectedImages: [],
@@ -66,8 +66,25 @@ export default Ember.ObjectController.extend({
 	}.observes('newState'),
 
 
+	start: function() {
+		
+		var product_status_options = Ember.ArrayController.create({
+		    content: [
+		        {status_id: 'FOR_SALE', name: 'for sale'},
+		        {status_id: 'SALE_PENDING', name: 'sale pending'},
+		        {status_id: 'SOLD', name: 'sold'},
+		        {status_id: 'NOT_FOR_SALE', name: 'not for sale'},
+				{status_id: 'PRIVATE', name: 'private'}
+		    ]
+		});
+		this.set('product_status_options', product_status_options);
+
+	}.on('init'),
+
 	setup: function() {  
 		this.set('newState', 'showUpload');
+		var _this = this;
+		Ember.run.later(function() {_this.set('showImagePicker', true)}, 500);
 	}.observes('model'),
 
 
@@ -137,6 +154,8 @@ export default Ember.ObjectController.extend({
 
 		model.set('user', user);
 
+		model.set('product_status', model.get('product_status').status_id);
+
 		model.set('product_image_ids', this.get('productImageIds')); 
 		model.set('image_id', this.get('productImageIds')[0]); 
 
@@ -153,13 +172,13 @@ export default Ember.ObjectController.extend({
 		.then(function(){
 			return model.save();
 		})
-		.then(function(record){
-			console.log("RECORD?", record);
-			return record.reload();
-		})
+		// .then(function(record){
+		// 	console.log("RECORD?", record);
+		// 	return record.reload();
+		// })
 		.then(function(record){
 			_this.set('isProcessing', false);
-			_this.transitionToRoute('profile.post', user, record.get('id'), record.get('post_slug'));
+			_this.transitionToRoute('profile.post', user, record, record.get('post_slug'));
 		}, function(error){
 			console.log("Error", error);
 			_this.set('isProcessing', false);
@@ -189,10 +208,13 @@ export default Ember.ObjectController.extend({
 			this.savePost();
 		},
 
-		//Click "imageClick" in UI
 		imageClick: function(event) {
 			var image = event.get('image');
 			this.selectImage(image);
+		},
+
+		imageDelete: function(event) {
+			this.selectImage(event);
 		},
 
 		refresh: function(image) {

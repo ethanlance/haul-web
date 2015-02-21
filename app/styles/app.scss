@@ -1,3 +1,28 @@
+
+.fade-slide-wrapper { 
+	position:relative;
+	width: 175px;
+	margin-right:auto;
+	margin-left:auto;
+	text-align: center;
+	min-height: 50px;
+}
+
+.fade-slide {
+	-webkit-transition: all .5s ease-in-out;
+       -o-transition: all .5s ease-in-out;
+          transition: all .5s ease-in-out;
+	position:absolute;
+	
+	opacity:0;
+	top:300px;	
+}
+
+.fade-slide.in {
+	opacity:1;
+	top:0px;
+}
+
 //box-shadow: 0 0 15px 5px #ffffff;
 $primary-color: #3a4457;
 $secondary-color: #596885;
