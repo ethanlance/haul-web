@@ -67,11 +67,11 @@ export default Ember.ObjectController.extend({
 	start: function() {
 
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
-		var sale 			= {name: "sold",    id: 'SOLD'};
+		var sold 			= {name: "sold",    id: 'SOLD'};
 		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
 		var product_status_options = Ember.ArrayController.create({
 		  selectedStatus: for_sale,
-		  status: [for_sale, sale, not_for_sale],
+		  status: [for_sale, sold, not_for_sale],
 		}); 
 		this.set('product_status_options', product_status_options); 
 

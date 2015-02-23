@@ -26,14 +26,6 @@ export default Ember.ObjectController.extend({
 
 	start: function() {
 		
-		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
-		var sale 			= {name: "sold",    id: 'SOLD'};
-		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
-		var product_status_options = Ember.ArrayController.create({
-		  selectedStatus: for_sale,
-		  status: [for_sale, sale, not_for_sale],
-		}); 
-		this.set('product_status_options', product_status_options); 
 
 	}.on('init'),
 
@@ -46,6 +38,27 @@ export default Ember.ObjectController.extend({
 		if( this.get('model').get('product_user').get('id') === this.get('currentUser').get('id') ){
 			this.set('canEditProduct', true);
 		}
+
+
+		var selectedStatus;
+		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
+		var sold 			= {name: "sold",    id: 'SOLD'};
+		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
+		var status = this.get('model').get('product_status');
+		
+		if(status == "NOT_FOR_SALE"){
+			selectedStatus = not_for_sale;
+		}else if(status === "SOLD"){
+			selectedStatus = sold;
+		}else{
+			selectedStatus = for_sale;
+		}
+
+		var product_status_options = Ember.ArrayController.create({
+		  selectedStatus: selectedStatus,
+		  status: [for_sale, sold, not_for_sale],
+		}); 
+		this.set('product_status_options', product_status_options); 
 
 	}.observes('model', 'currentUser'),
 
@@ -145,6 +158,10 @@ export default Ember.ObjectController.extend({
 			body = " ";
 		}
 		model.set('body', body);
+
+		//Get-Set the product status.
+		model.set('product_status', this.get('product_status_options').get('selectedStatus').id);
+			
 
  		//Model Validations:
 		model.validate()
