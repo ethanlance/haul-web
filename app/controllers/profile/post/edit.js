@@ -12,50 +12,44 @@ export default Ember.ObjectController.extend({
  		} 		
  	}.observes('currentPage'),
 	
-	
 	productImagesBinding: "model.product_images",
 	product_status_options: null,
 	currentUserBinding: 'Haul.currentUser',
-	currentUserIdBinding: 'Haul.currentUser.id',
 	isProcessing: false,
-	
-
 	imagesAreSelected: false,
-
 	showImageModal: false,
 
 	productImageIds: [],
 	selectedImages: [],
-
 	editorialForQuill: "",
+	canEditProduct: false,
 
 	start: function() {
 		
+		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
+		var sale 			= {name: "sold",    id: 'SOLD'};
+		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
 		var product_status_options = Ember.ArrayController.create({
-		    content: [
-		        {status_id: 'FOR_SALE', name: 'for sale'},
-		        {status_id: 'SALE_PENDING', name: 'sale pending'},
-		        {status_id: 'SOLD', name: 'sold'},
-		        {status_id: 'NOT_FOR_SALE', name: 'not for sale'},
-				{status_id: 'PRIVATE', name: 'private'}
-		    ]
-		});
-		this.set('product_status_options', product_status_options);
+		  selectedStatus: for_sale,
+		  status: [for_sale, sale, not_for_sale],
+		}); 
+		this.set('product_status_options', product_status_options); 
 
 	}.on('init'),
 
-	setup: function() {  
-		if( !this.get('model').id ){  
-			this.set('showImageModal', true);
-		}else{
-			this.set('newState', 'showPost');
+	setup: function() {
+		this.set('canEditProduct', false);
+		if(Ember.isEmpty(this.get('model')) || Ember.isEmpty(this.get('currentUser')) ){
+			return
+		} 
+
+		if( this.get('model').get('product_user').get('id') === this.get('currentUser').get('id') ){
+			this.set('canEditProduct', true);
 		}
-	}.observes('model'),
+
+	}.observes('model', 'currentUser'),
 
 	setUpQuill: function() {
-
-		console.log("BODY BODY", this.get('model').get('body'));
-
 		if( this.get('model').get('body') ){
 			this.set('editorialForQuill', this.get('model').get('body'));
 		}
@@ -93,6 +87,11 @@ export default Ember.ObjectController.extend({
 			this.set('imagesAreSelected', true);
 		}
  
+		//Set the images on the model.
+		var model = this.get('model');
+		model.set('product_image_ids', this.get('productImageIds')); 
+		model.set('image_id', this.get('productImageIds')[0]); 
+
 	}.observes('selectedImages.@each'),
 
 	//Preserves the drag sort order of the images.
@@ -130,67 +129,32 @@ export default Ember.ObjectController.extend({
 				}
 			});
 			this.set('selectedImages', objects);
-
-			//image.set('isSelected',false); 
-
 		//Add
 		} else {
 			selectedImages.pushObject(image);
-			//image.set('isSelected',true);
 		}
 	},
 
 	savePost: function() {
-		var _this = this;
-		var user = this.get('currentUser'); 
+		var _this = this;		
 		var model = this.get('model');
 
-		this.set('isProcessing', true);
-
-		model.set('user', user);
-
-		model.set('product_currency', 'usd');
-
-		model.set('product_image_ids', this.get('productImageIds')); 
-		model.set('image_id', this.get('productImageIds')[0]); 
-
-		//Body
-		if( model.get('body') ) {
-			model.set('body', model.get('body').trim());
+		//Trim
+		var body = model.get('body').trim();
+		if(Ember.isEmpty(body)){
+			body = " ";
 		}
-		if(Ember.isEmpty(model.get('body'))){
-			model.set('body', " ");
-		}
-
-		//Subject
-		model.get('subject', this.get('subject').trim());
-		if( Ember.isEmpty(model.get('subject').trim()) ){
-			model.set('subject', this.get('product_name'));
-		}
-
-		model.get('product_name', this.get('product_name').trim());
-		model.get('product_description', this.get('product_description').trim());
-		model.get('product_price', this.get('product_price').trim());
-		model.get('product_quantity', this.get('product_quantity').trim());
-		
-
-
-
+		model.set('body', body);
 
  		//Model Validations:
 		model.validate()
 		.then(function(){
+			_this.set('isProcessing', true);
 			return model.save();
 		})
-		// .then(function(record){
-		// 	console.log("RECORD?", record);
-		// 	return record.reload();
-		// })
 		.then(function(record){
 			_this.set('isProcessing', false);
-
-console.log("BODY SAVED", record.get('body'))
-
+			var user = _this.get('currentUser'); 
 			_this.transitionToRoute('profile.post', user, record.get('post_id'), record.get('post_slug'));
 		}, function(error){
 			console.log("Error", error);

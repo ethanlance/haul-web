@@ -1989,10 +1989,21 @@ body.anon{
 	background-color: $primary-color;	
 }
 
-
-
-
-
+.profile-badge {
+	img{
+		float:left;
+		display:inline-block;
+	}
+	a {
+		padding-left:10px;
+		padding-top:15px;
+		float:left;
+		display:inline-block;
+	}
+	.thumbnail{
+		margin-bottom:0;
+	}
+}
 
 
 

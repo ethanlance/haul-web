@@ -90,7 +90,7 @@ export default ApplicationAdapter.extend({
             product_image_ids: record.get('product_image_ids'),
             product_status: record.get('product_status'),
         };
-
+console.log("DATA", data);
 		var url = this.host + "/posts";
 		return this.ajax(url, "POST", { data: data }); 
 	}

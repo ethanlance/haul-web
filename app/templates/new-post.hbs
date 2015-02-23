@@ -23,71 +23,46 @@
 
 
 
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		{{!-- SHOW UPLOAD --}}
+		<div {{bind-attr class=":slide showUpload:in showUploadOutLeft:outleft showUploadOutRight:outright"}}> 
 
-		<div {{bind-attr class=":slide showPost:in showPostOutLeft:outleft showPostOutRight:outright"}}> 
+			{{image-picker 
+				images=userImages
+				selectedImages=selectedImages
+				refresh='refresh'
+				imageClick='imageClick' 
+				imageDelete='imageDelete'
+				Haul=Haul
+				showImagePicker=showImagePicker
+			}} 
 
-			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+			<div class="toolbar-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">	
+							<button {{action 'cancel'}} class="btn btn-default btn-left">
+								cancel
+							</button>
 
-			<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
 
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-						<div class="gallery-wrapper"> 
-							<div class="gallery"> 
-								<div class="gallery-inside">
-									{{#each selectedImages}} 
-										<img {{bind-attr src=small}}> 
-									{{/each}}
-								</div>
-							</div>
+							<button {{action "showProduct"}} 
+								{{bind-attr class="imagesAreSelected::disabled :btn :btn-primary :btn-right"}}>
+								continue
+								<span class="glyphicon glyphicon-arrow-right"></span>
+							</button>
 						</div>
 					</div>
 				</div>
-
-				<div class="row text-center">
-					<div {{bind-attr class=":fade showPost:in :col-md-12 :col-sm-12 :col-xs-12"}}>
-						<h5>
-							Drag images into your post
-						</h5>
-					</div>
-				</div>  
-
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<label>Post Title:</label>
-						{{input subject canShowValidationError=showErrors}} 
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12 ql-editor-col">   
-						{{quill-editor content=editorialForQuill  quillChange='quillChange'}} 
-					</div>
-				</div>
-			 
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12 toolbar-footer">	
-
-						
-						<button {{action 'cancel'}} class="btn btn-default btn-left">
-							cancel
-						</button>
-						
-						{{ladda-btn
-							name='post'
-							class="display-inline"
-							btnClasses='btn btn-primary btn-right ladda-button'
-							btnClick='savePost'
-							spin=isProcessing
-						}}
-
-					</div>
-				</div>
 			</div>
-			<div class="col-md-3 col-sm-2 col-xs-12"></div>
 		</div>
+
+
+
+		
 
 
 	 
@@ -110,44 +85,7 @@
 
 
 
-		{{!-- SHOW UPLOAD --}}
-		{{!-- SHOW UPLOAD --}}
-		{{!-- SHOW UPLOAD --}}
-		{{!-- SHOW UPLOAD --}}
-		{{!-- SHOW UPLOAD --}}
-		<div {{bind-attr class=":slide showUpload:in showUploadOutLeft:outleft showUploadOutRight:outright"}}> 
-
-			{{image-picker 
-				images=userImages
-				selectedImages=selectedImages
-				refresh='refresh'
-				imageClick='imageClick' 
-				imageDelete='imageDelete'
-				Haul=Haul
-				showImagePicker=showImagePicker
-			}} 
-
-			<div {{bind-attr class="showUpload:show:hide :toolbar-footer"}}>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">	
-							<button {{action 'cancel'}} class="btn btn-default btn-left">
-								cancel
-							</button>
-
-
-							<button {{action "showProduct"}} 
-								{{bind-attr class="imagesAreSelected::disabled :btn :btn-primary :btn-right"}}>
-								continue
-								<span class="glyphicon glyphicon-menu-right"></span>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+	
 
 
 
@@ -178,19 +116,19 @@
 						<div class="col-md-12 col-sm-12 col-xs-12"> 
 							<label>Describe this item:</label>
 							<label class="small pull-right text-regular">(max 2000 characters)</label>
-							{{input product_description placeholder="Don't forget #hashtags!" as="text" canShowValidationError=showErrors }}
+							{{input product_description placeholder="Size, color, condition, etc" as="text" canShowValidationError=showErrors }}
 						</div> 
 					</div>
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-xs-6"> 
 							{{#input price}}
-							{{label-field price}}:
+							{{label-field product_price}}:
 							<div class="input-group">
 								<span class="input-group-addon">$</span>
 							  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
 							  	<br/>
 							</div>
-							{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
+							{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
 							{{/input}}
 						</div>
 					
@@ -198,18 +136,18 @@
 							<label>Quantity:</label>
 							{{input product_quantity class="input-xs" canShowValidationError=showErrors}}
 		 				</div>
-
-
-					
+					</div>
+					<div class="row">
 						<div class="col-md-6 col-sm-6 col-xs-6"> 
 							<label>Status:</label>
 							{{view "select"
-						       contentBinding="product_status_options"
-						       selectionBinding="model.product_status"
-						       optionLabelPath="content.name"
-						       optionValuePath="content.value"
-						       class="form-control"
+						       content = product_status_options.status
+						       optionLabelPath = "content.name"
+						       optionValuePath = "content.id"
+						       selection = product_status_options.selectedStatus
+						       class = "form-control"
 						    }}
+						    {{#if showErrors}}<span class="has-error help-block">{{error-field product_status}}</span>{{/if}}
 		 				</div>
 				
 					</div>
@@ -225,14 +163,14 @@
 						<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
 							
 							<button {{action "showUpload"}} 
-								{{bind-attr class="showImages:hide:show :btn :btn-primary :btn-left"}}>
+								class="btn btn-primary btn-left">
 								<span class="glyphicon glyphicon-arrow-left"></span> back
 							</button>
 
 							<button {{action "showPost"}} 
 								{{bind-attr class=":btn :btn-primary :btn-right"}}>
 								continue
-								<span class="glyphicon glyphicon-menu-right"></span>
+								<span class="glyphicon glyphicon-arrow-right"></span>
 							</button>
 
 						</div>
@@ -243,22 +181,69 @@
 
 
 
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		{{!-- SHOW POST --}}
+		<div {{bind-attr class=":slide showPost:in showPostOutLeft:outleft showPostOutRight:outright"}}> 
+
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
+
+			<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
 
 
+				<div class="row text-center">
+					<div {{bind-attr class=":fade showPost:in :col-md-12 :col-sm-12 :col-xs-12"}}>
+						<h5>
+							Drag images into your post
+						</h5>
+					</div>
+				</div>  
 
-		{{!-- SHOW POST --}}
-		{{!-- SHOW POST --}}
-		{{!-- SHOW POST --}}
-		{{!-- SHOW POST --}}
-		{{!-- SHOW POST --}}
-		{{!-- SHOW POST --}}
-		{{!-- SHOW POST --}}
-		<div>
 
-			{{!-- {{view Editor showPost=showPost}} --}}
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12"> 
+						<label>Post Title:</label>
+						{{input subject canShowValidationError=showErrors}} 
+					</div>
+				</div>
 
-			
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 ql-editor-col">   
+						{{quill-editor content=editorialForQuill  quillChange='quillChange'}} 
+						{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}
+					</div>
+				</div>
+			 
+			 	<div {{bind-attr class="showPost:show:hide :toolbar-footer"}}>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12 toolbar-footer">	
+							
+							<button {{action "showProduct"}} 
+								class="btn btn-primary btn-left">
+								<span class="glyphicon glyphicon-arrow-left"></span> back
+							</button>
+							
+							<button {{action 'cancel'}} class="btn btn-default btn-left">
+								cancel
+							</button>
+							
+							{{ladda-btn
+								name='post'
+								class="display-inline"
+								btnClasses='btn btn-primary btn-right ladda-button'
+								btnClick='savePost'
+								spin=isProcessing
+							}}
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-2 col-xs-12"></div>
 		</div>
+
 	</div>
 {{/form-for}}
 

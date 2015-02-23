@@ -20,7 +20,6 @@ export default Ember.ObjectController.extend({
 
 	editorialForQuill: "",
 
-
 	state: null,
 	states:{
 		0:'showUpload', 
@@ -65,27 +64,35 @@ export default Ember.ObjectController.extend({
 
 	}.observes('newState'),
 
-
 	start: function() {
-		
+
+		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
+		var sale 			= {name: "sold",    id: 'SOLD'};
+		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
 		var product_status_options = Ember.ArrayController.create({
-		    content: [
-		        {status_id: 'FOR_SALE', name: 'for sale'},
-		        {status_id: 'SALE_PENDING', name: 'sale pending'},
-		        {status_id: 'SOLD', name: 'sold'},
-		        {status_id: 'NOT_FOR_SALE', name: 'not for sale'},
-				{status_id: 'PRIVATE', name: 'private'}
-		    ]
-		});
-		this.set('product_status_options', product_status_options);
+		  selectedStatus: for_sale,
+		  status: [for_sale, sale, not_for_sale],
+		}); 
+		this.set('product_status_options', product_status_options); 
 
 	}.on('init'),
 
 	setup: function() {  
+		
+		if( Ember.isEmpty(this.get('model')) || Ember.isEmpty(this.get('currentUser')) ){
+			return;
+		}
+
+		this.get('model').set('product_quantity', '1');
+		this.get('model').set('product_price', '0');
+		this.get('model').set('product_currency', 'USD');
+		this.get('model').set('product_status', 'FOR_SALE');
+		this.get('model').set('user', this.get('currentUser'));
+
 		this.set('newState', 'showUpload');
 		var _this = this;
 		Ember.run.later(function() {_this.set('showImagePicker', true)}, 500);
-	}.observes('model'),
+	}.observes('model', 'currentUser'),
 
 
 	//Observer: anytime our array of selected images changes, update
@@ -102,6 +109,11 @@ export default Ember.ObjectController.extend({
 		}else{
 			this.set('imagesAreSelected', true);
 		}
+
+		//Set the images on the model.
+		var model = this.get('model');
+		model.set('product_image_ids', this.get('productImageIds')); 
+		model.set('image_id', this.get('productImageIds')[0]); 
  
 	}.observes('selectedImages.@each'),
 
@@ -147,38 +159,25 @@ export default Ember.ObjectController.extend({
 
 	savePost: function() {
 		var _this = this;
-		var user = this.get('currentUser'); 
 		var model = this.get('model');
 
-		this.set('isProcessing', true);
-
-		model.set('user', user);
-
-		model.set('product_status', model.get('product_status').status_id);
-
-		model.set('product_image_ids', this.get('productImageIds')); 
-		model.set('image_id', this.get('productImageIds')[0]); 
-
 		//Trim
-		if( model.get('body') ) {
-			model.set('body', model.get('body').trim());
+		var body = model.get('body').trim();
+		if(Ember.isEmpty(body)){
+			body = " ";
 		}
-		if(Ember.isEmpty(model.get('body'))){
-			model.set('body', " ");
-		}
+		model.set('body', body);
 
  		//Model Validations:
 		model.validate()
 		.then(function(){
+			_this.set('isProcessing', true);
 			return model.save();
 		})
-		// .then(function(record){
-		// 	console.log("RECORD?", record);
-		// 	return record.reload();
-		// })
 		.then(function(record){
 			_this.set('isProcessing', false);
-			_this.transitionToRoute('profile.post', user, record, record.get('post_slug'));
+			var user = _this.get('currentUser'); 
+			_this.transitionToRoute('profile.post', user, record.get('post_id'), record.get('post_slug'));
 		}, function(error){
 			console.log("Error", error);
 			_this.set('isProcessing', false);
@@ -189,7 +188,33 @@ export default Ember.ObjectController.extend({
 	actions: {
 
 		showPost: function() {
-			this.set('newState', 'showPost');
+			
+			var _this = this;
+			var model = this.get('model');
+
+			//Get-Set the product status.
+			model.set('product_status', this.get('product_status_options').get('selectedStatus').id);
+			
+		
+			
+			//Run validations before proceeding.
+			model.validate()
+			.then(
+				function(){},
+				function(errors){
+					if( errors.get('product_name').length > 0 ||
+						errors.get('product_description').length > 0 ||
+						errors.get('product_price').length > 0 ||
+						errors.get('product_quantity').length > 0 || 
+						errors.get('product_status').length > 0 ){
+						console.log('errors', errors);
+						_this.set('showErrors', true);
+					}else{
+						console.log('forward')
+						_this.set('newState', 'showPost');
+					}
+				}
+			);
 		},
 
 		showProduct: function() {

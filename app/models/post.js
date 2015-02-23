@@ -32,7 +32,13 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 	validations: { 
 		body: {
 		 	presence: true,
-		 	length: { maximum: 2000, minimum: 0 }
+		 	length: { maximum: 12000, minimum: 0 }
+		},
+		subject: {
+		 	presence: true
+		},
+		product_status: {
+		 	presence: true
 		},
 		product_name: {
 		 	presence: true,
@@ -43,12 +49,11 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 		 	length: { maximum: 2000 }
 		},
 		product_quantity: {
-			numericality: true,
+			numericality: {greaterThan:0, onlyInteger:true},
 		 	presence: true,
-		 	length: { maximum: 100 }
 		},
 		product_price: {
-			numericality: true,
+			numericality: {greaterThan:0, onlyInteger:true},
 		 	presence: true
 		}
 	}

@@ -4,68 +4,23 @@
 {{#form-for model wrapper="bs3-wrapper"}}
 <div class="container-fluid haul-edit">
 	<div class="row">
-		<div class="col-md-8 col-sm-8 col-xs-12"> 
-			
-			<div class="gallery-wrapper collapse"> 
-				<div class="gallery"> 
-					<div class="gallery-inside">
-						
-						<button {{action 'showImageModal'}} class="btn btn-default">
-							<span class="glyphicon glyphicon-picture"></span>
-						</button>
+		
 
-						{{#each selectedImages}} 
-							<img {{bind-attr src=small}}> 
-						{{/each}}
-					</div>
-				</div>
-			</div>
-
-			<h4>Edit Your Post </h4>
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<label>Post Title:</label>
-						{{input subject canShowValidationError=showErrors}} 
-					</div>
-				</div>	
-
-
-			{{quill-editor content=editorialForQuill  quillChange='quillChange'}}			
-		</div>
-
+		{{!-- CAN EDIT PRODUCT --}}
+		{{!-- CAN EDIT PRODUCT --}}
+		{{!-- CAN EDIT PRODUCT --}}
 		<div class="col-md-4 col-sm-4 col-xs-12">
-
-	 		<h4>Edit Product</h4>
-
-	 		<div class="gallery-wrapper collapse-when-small"> 
-				<div class="gallery"> 
-					<div class="gallery-inside">
-
-						<button {{action 'showImageModal'}} class="btn btn-default">
-							<span class="glyphicon glyphicon-picture"></span>
-						</button>
-
-						{{#each selectedImages}} 
-							<img {{bind-attr src=small}}> 
-						{{/each}}
-					</div>
-				</div>
-			</div>
-
-
-		 
-
-
+		<div class="well">
+		{{#if canEditProduct}}
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">  
-					<label>Name your item</label>
+					<label>Item Name</label>
 					{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">  
-					<label>Describe your item</label>
+					<label>Item Description</label>
 					{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
 				</div> 
 			</div>
@@ -77,35 +32,118 @@
 				</div>
 
 				<div class="col-md-6 col-sm-6 col-xs-6"> 
-							<label>Status</label>
-							{{view "select"
-						       contentBinding="product_status_options"
-						       selectionBinding="model.product_status"
-						       optionLabelPath="content.name"
-						       optionValuePath="content.value"
-						       class="form-control"
-						    }}
+					<label>Status:</label>
+						{{view "select"
+					       content = product_status_options.status
+					       optionLabelPath = "content.name"
+					       optionValuePath = "content.id"
+					       selection = product_status_options.selectedStatus
+					       class = "form-control"
+					    }}
+					    {{#if showErrors}}<span class="has-error help-block">{{error-field product_status}}</span>{{/if}}
 		 		</div>
-			
+			</div>
+			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12"> 
-							<label>Price</label>
-					{{#input price}}
+					<label>Price</label>
+					{{#input product_price}}
 					<div class="input-group">
 						<span class="input-group-addon">$</span>
 					  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
 					  	<br/>
 					</div>
-					{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
+					{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
 					{{/input}}
  				</div>
 			</div>
+
+		{{else}}
+
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">  
+					<label>Seller</label>
+					<span class="profile-badge">
+						{{ make-icon icon=product_user.icon isSmall=true }}
+						{{#link-to 'profile' user }}{{product_user.username}}{{/link-to}}
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">  
+					<label>Item Name</label>
+					{{product_name}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12"> 
+
+					<label>Quantity</label>
+					{{product_quantity}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12"> 
+					<label>Status</label>
+					{{product_status_options.selectedStatus.name}}
+		 		</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12"> 
+					<label>Price</label>
+					{{product_price}}
+ 				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">  
+					<label>Description</label>
+					{{product_description}}
+				</div> 
+			</div>
+
+ 		{{/if}}
+
 		</div> 
+		</div> 
+
+
+		<div class="col-md-8 col-sm-8 col-xs-12"> 
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12"> 
+					<label>Post Title:</label>
+					{{input subject canShowValidationError=showErrors}} 
+				</div>
+			</div>	
+
+			<div class="gallery-wrapper"> 
+				<div class="gallery"> 
+					<div class="gallery-inside">
+						
+						{{#if canEditProduct}}
+						<button {{action 'showImageModal'}} class="btn btn-default">
+							<span class="glyphicon glyphicon-picture"></span>
+						</button>
+						{{/if}}
+
+						{{#each selectedImages}} 
+							<img {{bind-attr src=small}}> 
+						{{/each}}
+					</div>
+				</div>
+			</div>
+
+
+			{{quill-editor content=editorialForQuill  quillChange='quillChange'}}
+			{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}			
+		</div>
+
 	</div>
 
 	<div class="row">
 		<div {{bind-attr class=":col-md-12 :col-sm-12 :col-xs-12 :toolbar-footer"}}>	
 
-			<button {{action 'cancel'}} class="btn btn-default">
+			<button {{action 'cancel'}} class="btn btn-default btn-left">
 				cancel
 			</button>
 			
