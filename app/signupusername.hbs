@@ -15,12 +15,13 @@
                 <div class="form-group"> 
                     {{input username canShowValidationError=showErrors placeholder=""}}
                 </div> 
-                {{/form-for}}
+                
 
                 <div {{bind-attr class="errorShow:show:hide :errors"}}>
                     {{errorMessage}}
                 </div>
-
+                {{/form-for}}
+                
                 <div class="form-group">
 
                     {{ladda-btn 

@@ -1,40 +1,31 @@
-{{super-slides}}
-<span class="anon">
-<header>
-    <div class="container">
-        <div class="row">
-        	<div class="col-md-4 col-sm-2 col-xs-2"></div>
-			<div class="col-md-4 col-sm-8 col-xs-8 form-box">
-    			
+<h1>Change Username</h1> 
 
-			     <div class="form-group">
-                    <h2>Pick a username</h2>
-                </div>
-	           
-               {{#form-for model wrapper="bs3-wrapper"}}
-                <div class="form-group"> 
-                    {{input username canShowValidationError=showErrors placeholder=""}}
-                </div> 
-                {{/form-for}}
-
-                <div {{bind-attr class="errorShow:show:hide :errors"}}>
-                    {{errorMessage}}
-                </div>
-
-                <div class="form-group">
-
-                    {{ladda-btn 
-                        name='GO'
-                        btnClasses='btn btn-block btn-primary ladda-button'
-                        btnClick='btnClick'
-                        spin=isProcessing
-                    }}
-
-                </div>
-			
-			</div>
-			<div class="col-md-4 col-sm-2 col-xs-2"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+ 
+        
+       
+       {{#form-for model wrapper="bs3-wrapper"}}
+        <div >
+            {{input username canShowValidationError=showErrors placeholder=""}}
         </div> 
-    </div>
-</header>
-</span>
+        {{/form-for}}
+
+        <div {{bind-attr class="showErrorMessage:show:hide :errors"}}>
+            <span class="alert">{{{errorMessage}}}</span>
+        </div>
+
+        <div>
+
+            {{ladda-btn 
+                name='change'
+                btnClasses='btn btn-primary ladda-button btn-right'
+                btnClick='btnClick'
+                spin=isProcessing
+            }}
+
+        </div>
+		
+		
+    </div> 
+</div>

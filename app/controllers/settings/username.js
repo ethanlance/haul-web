@@ -34,6 +34,10 @@ export default Ember.ObjectController.extend({
 				_this.set('showErrors', true);
 				if(error.status === 400){ 
 					_this.set('errorMessage', "Oops, usernames must be <ul><li>at least 3 characters long</li><li>must start with a letter</li><li>cannot have spaces</li><li>and can only contain letters and numbers</li></ul>");
+				}else if(error.status === 409){ 
+					_this.set('errorMessage', "Sorry, username unavailable.");
+				}else{
+					_this.set('errorMessage', "Uhoh, there was an error.");
 				}
 				_this.set('showErrorMessage', true);
 				console.log("Error" , error);
