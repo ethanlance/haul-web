@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			
-			{{#unless model.getLikes.posts }}
+			{{#unless posts }}
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
 					{{username}} hasn't liked anything yet.
@@ -17,15 +17,15 @@
 				</p>
 			{{/unless}}
 
+ 
+			<div {{bind-attr class="galleryView:gallery"}}>
+			{{#each posts}}
+				{{#if image}}
+					{{partial 'post'}}	
+				{{/if}}
+			{{/each}}
+			</div>
 
-			{{!-- SELLER PRODUCTS --}}
-		    {{#each model.getLikes.posts}}
-		    	{{#link-to 'profile.post' user id slug }}
-		    	<div class="haul-grid-li"> 
-					<img class="thumbnail" {{bind-attr src=image.small}}>
-			 	</div>
-			 	{{/link-to}}	
-			{{/each}}  
 		</div> 
 	</div>
 </div>

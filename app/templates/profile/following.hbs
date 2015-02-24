@@ -1,0 +1,28 @@
+{{what-page currentPage=currentPage page=thisPage }}
+
+<div class="container haul-content">  
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+
+			{{#unless users }}
+				<div class="padding-top text-center font-weak">
+				{{#unless isProfileOwner}}
+					{{username}} doesn't follow anyone yet.
+				{{else}}
+					You don't follow any one yet.
+				{{/unless}}
+				</div>
+
+				<p class="text-center padding-top">
+					<span class="glyphicon glyphicon-bookmark sad-heart"></span>
+				</p>
+			{{/unless}}
+
+		    {{#each users}} 
+		    	 {{profile-badge profile=this}} 
+			{{/each}}  
+			
+			
+		</div> 
+	</div>
+</div>

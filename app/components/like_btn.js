@@ -2,49 +2,44 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-	productType: 'products',
-	productIdBinding: "product.id",
-	userIdBinding: "session.currentUser.id",
-	totalBinding: "product.likeCount.total",
+	postIdBinding: "post.post_id",
+	postKeyBinding: "post.id",
+	currentUserIdBinding: "session.currentUser.id",
+	totalBinding: "post.likesCount.total",
 	userLikes: false,
 	userLikesRecord: false,
 
-	start: function() {
-		
 
-
-		return;
-
-
-
-
-
-
-
-
-
+	didInsertElement: function() {
 		var store = this.container.lookup("store:main");
 		var _this = this;
 
 		//Skip if user is anon.
-		if(!this.get('userId')){
+		if(!this.get('currentUserId')){
 			return;
 		}
-
+		
+		_this.set('userLikes', false);
+		_this.set('userLikesRecord', false); 
+		
 		//currentUser like item?
-		store.find('like', this.get('productId')).then(function(uLike){
+		store.find('like', this.get('postId'))
+		.then(function(uLike){
 			if(!Ember.isEmpty(uLike)){
 				_this.set('userLikes', true);
-				_this.set('userLikesRecord', uLike);
+				_this.set('userLikesRecord', uLike); 
+			}else{
 			}
 		});
-	}.on('init').observes('productId'),
+	},//.on('init').observes('postId'),
+
+
 
 	actions: {
 		btnClick: function() { 
 
 			//Anon?
-			if(!this.get('userLikesRecord')){
+			if(!this.get('currentUserId')){
 				this.sendAction('loginModal');
 				return;
 			}
@@ -59,36 +54,37 @@ export default Ember.Component.extend({
 				like = false;
 			} else {
 				var data = {
-					user_id: this.get('userId'),
-					ref_id: this.get('productId'), 
-					ref_type: this.get('productType')
+					user_id: this.get('currentUserId'),
+					post_id: this.get('postId')
 				};
 				record = store.createRecord('like', data);
 				like = true;
 			}
 
-			record.save().then(function(){
-				_this.toggleProperty('userLikes');
+			record.save()
+			.then(function(result){ 
 
 				if( like ){
+					_this.set('userLikes', true);
 					_this.set('userLikesRecord', record);
 					_this.incrementProperty('total');
 				}else{
+					_this.set('userLikes', false);
 					_this.set('userLikesRecord', null);
 					_this.decrementProperty('total');
 				}
 
-				store.find('user-likes-count', _this.get('userId'))
+				store.find('user-likes-count', _this.get('currentUserId'))
 				.then(function(r){
 					r.reload();
 				});
 
-				store.find('user-likes-list', _this.get('userId'))
+				store.find('user-likes-list', _this.get('currentUserId'))
 				.then(function(r){
 					r.reload();
 				});
 
-				store.find('like-count', _this.get('productId'))
+				store.find('post-likes-count', _this.get('postId'))
 				.then(function(r){
 					r.reload();
 				});

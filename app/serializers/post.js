@@ -31,7 +31,8 @@ export default DS.RESTSerializer.extend({
             product_images: payload.data.product.image_ids,
             product_status: payload.data.product.status,
 
-			commentCount: id
+			commentCount: payload.data.post_id,
+			likesCount: payload.data.post_id
 		};
 
 		payload = {'post': data};  
@@ -65,7 +66,8 @@ export default DS.RESTSerializer.extend({
             product_images: payload.data.product.image_ids,
             product_status: payload.data.product.status,
 
-			commentCount: id
+			commentCount: payload.data.post_id,
+			likesCount: payload.data.post_id
 		};
 
 		payload = {'post': [data]};  

@@ -13,14 +13,13 @@ export default DS.RESTSerializer.extend({
 
 		id = String(payload.data.id);
 		key = id.split(':');
-		var product_id = key[1];
+		var post_id = key[1];
 		
 
-		id = user_id + ":" + product_id;
+		id = user_id + ":" + post_id;
 		var data = {
-			id: id,
-			ref_type: payload.data.type,
-			ref_id: product_id,
+			id: post_id,
+			post_id: post_id,
 			user_id: user_id
 		};
 

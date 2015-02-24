@@ -6,31 +6,26 @@ export default ApplicationAdapter.extend({
 
 	host: Haul.Server.WANT_SERVER_HOST,
 
-	find: function(store, type, id) {
-		var ref_type = 'products';
-		var ref_id = id;
+	find: function(store, type, id) { 
 		var user_id = this.get('currentUser').get('id');
 
-
-		var url = this.host + "/users/" + user_id + "/likes/" + ref_type + "/" + ref_id;		
+		var url = this.host + "/users/" + user_id + "/likes/posts/" + id;		
 		return this.ajax(url, 'GET');
 	},
 
-	createRecord: function(store, type, record) {
-		var ref_type = record.get('ref_type');
-		var ref_id = record.get('ref_id');
+	createRecord: function(store, type, record) { 
+		var post_id = record.get('post_id');
 		var user_id = record.get('user_id');
 
-		var url = this.host + "/users/" + user_id + "/likes/" + ref_type + "/" + ref_id;		
+		var url = this.host + "/users/" + user_id + "/likes/posts/" + post_id;		
 		return this.ajax(url, "PUT"); 
 	},
 
-	deleteRecord: function(store, type, record) {
-		var ref_type = 'products';
-		var ref_id = record.get('ref_id');
+	deleteRecord: function(store, type, record) { 
+		var post_id = record.get('post_id');
 		var user_id = record.get('user_id');
 
-		var url = this.host + "/users/" + user_id + "/likes/" + ref_type + "/" + ref_id;		
+		var url = this.host + "/users/" + user_id + "/likes/posts/" + post_id;		
 		return this.ajax(url, "DELETE"); 
 	}	
 

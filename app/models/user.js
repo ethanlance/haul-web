@@ -16,7 +16,7 @@ export default DS.Model.extend({
 	//getFollowing: DS.belongsTo('user-following-list', {async:true}),
 
 	getLikesCount: DS.belongsTo('user-likes-count', {async:true} ),
-	getLikes: DS.belongsTo('user-likes-list', {async:true}), 
+	//getLikes: DS.belongsTo('user-likes-list', {async:true}), 
 
 	icon: DS.attr('string'), 
 	iconChange: function() { 

@@ -17,10 +17,10 @@ export default DS.RESTSerializer.extend({
 		
 		
 		var data = payload.data.map(function(result){  
-			var id =  result.post_id;
+			var id = result.user_id + "-" + result.post_id; 
 			return {
 				id: id,	
-				post_id:id,
+				post_id:result.post_id,
 				updated_at: result.updated_at,
 				
 				user: result.user_id,
@@ -35,7 +35,8 @@ export default DS.RESTSerializer.extend({
 				product_quantity: result.product.quantity,
 				product_user: result.product.user_id,
 
-				commentCount: id
+				commentCount: result.post_id,
+				likesCount: result.post_id
 			};
 		}); 
 

@@ -7,17 +7,22 @@ export default DS.RESTSerializer.extend({
 			return;
 		} 
 
+		var user_id = null;
 		var post_id = null;
 		var post_ids = []; 
 
 		payload.data.map(function(result){ 
 
 			var id = String(result.context_id);
-			var key = id.split(':');
+			var s = id.split(':');
+			user_id = s[1];
+
 			id = String(result.id);
-			key = id.split(':');
-			post_id = key[1];
-			post_ids.push(post_id);
+			s = id.split(':');
+			post_id = s[1];
+
+			var key = user_id + "-" + post_id;
+ 			post_ids.push(key);
 			
 		});  
 
