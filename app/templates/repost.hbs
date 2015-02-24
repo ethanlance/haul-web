@@ -69,11 +69,11 @@
 						<div class="gallery-wrapper"> 
 							<div class="gallery"> 
 								<div class="gallery-inside">
-
-									{{#each product_images}} 
+								
+									{{#each repost.product_images}} 
 										<img {{bind-attr src=small}}> 
 									{{/each}}
-
+								
 								</div>
 							</div>
 						</div>
@@ -97,9 +97,9 @@
 						<h5>Repost Complete!</h5>
 						<button {{action 'close'}} class="btn btn-default">close</button>
 						
-						{{#link-to 'profile' currentUser }}
-						<button class="btn btn-default">go to my feed</button>
-						{{/link-to}}
+						
+						<button {{action 'goToFeed'}} class="btn btn-default">go to my feed</button>
+						
 					</div>
 				</div>
 	      	</div>

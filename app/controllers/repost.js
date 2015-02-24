@@ -3,9 +3,7 @@ export default Ember.ObjectController.extend({
 
 	repost: false, //the new Repost
 	model: false, //Original Post
-	postBinding:'model',
-	postIdBinding: 'model.id',
-	postUserIdBinding: 'model.user_id',
+	post: null,
 
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
@@ -14,17 +12,24 @@ export default Ember.ObjectController.extend({
 	showModal: false,
 	postComplete:false,
 
+	setup: function(){
+		var _this = this;
+		var model = this.get('model');
+		var user_id = model.get('user').get('id');
+		var post_id = model.get('post_id');
+		var key = user_id + "-" + post_id;
+		this.store.find('post', key)
+		.then(function(post){
+			_this.set('post', post);
+			_this.start();
+		});
+	}.observes('model.id'),
+
 	start: function() {
 
 		var currentUserId = this.get('currentUserId');
-		var postUserId = this.get('postUserId');
 		var post = this.get('post');
-
-		if(Ember.isEmpty(post.get('id')) ||  Ember.isEmpty(this.get('model'))){
-			console.log("Bail", this.get('model'));
-			console.log("Bail", this.get('post'));
-			return;
-		}
+		var postUserId = post.get('userId');
 
 		var repost;
 		if( currentUserId === postUserId ) {
@@ -53,15 +58,13 @@ export default Ember.ObjectController.extend({
 
 		this.set('repost', repost);
 
-	}.observes('postId'),
+	},
 
 	savePost: function() {
 		this.set('isProcessing', true);
 
 		var _this = this;
 		var repost = this.get('repost');
-
-console.log("IMAGES", repost.get('product_images'));
 
 		var productImages = repost.get('product_images').map(function(image) {
 			return image.get('id');
@@ -109,6 +112,11 @@ console.log("IMAGES", repost.get('product_images'));
 
 		showProduct:function(){
 			this.set('showProduct', true);
+		},
+
+		goToFeed: function() {
+			this.send('closeModal');
+			this.transitionToRoute('profile', this.get('currentUser'));
 		},
 
 		close: function() {

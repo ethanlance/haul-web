@@ -38,7 +38,7 @@ export default Ember.ObjectController.extend({
 				dataType: 'json'
 		}).then(
 			function(response) {
-				return this.get('controllers.login').setupUser(response);
+				return _this.get('controllers.login').startUserSession(response);
 			}
 		).then(null, function(error) {
 			console.log("Error submit confirm", error);

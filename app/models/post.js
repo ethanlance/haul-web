@@ -21,7 +21,7 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 
 	product_id: DS.attr('string'),
 
-	//commentCount: DS.belongsTo('post-comment-count', {async:true}),
+	commentCount: DS.belongsTo('post-comment-count', {async:true}),
 	likesCount: DS.belongsTo('post-likes-count', {async:true}),
 
 	post_slug: function() {		

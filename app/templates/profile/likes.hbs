@@ -7,10 +7,11 @@
 			{{#unless posts }}
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
-					{{username}} hasn't liked anything yet.
+					{{user.username}} hasn't liked anything yet.
 				{{else}}
 					You haven't liked anything yet.
-				{{/unless}}</div>
+				{{/unless}}
+				</div>
 
 				<p class="text-center">
 					<span class="glyphicon glyphicon-heart-empty sad-heart"></span>

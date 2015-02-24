@@ -7,8 +7,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		var user_id = this.modelFor('profile').get('id'); 	
 		var key = user_id + "-" + post_id;
 
-		return this.store.find('post', {user_id:user_id, post_id:post_id}).then(function(result){
-			return result.get('content')[0];
+		return this.store.find('post', key).then(function(result){
+			return result;
 		}, function() {
 			return _this.transitionTo('not-found');
 		});

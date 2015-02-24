@@ -12,7 +12,7 @@ export default DS.RESTSerializer.extend({
 		var post_ids = []; 
 
 		payload.data.map(function(result){ 
-
+console.log("RESULT", result);
 			var id = String(result.context_id);
 			var s = id.split(':');
 			user_id = s[1];

@@ -21,7 +21,10 @@ export default Ember.ArrayController.extend({
 	modelChange: function() {
 		if(!Ember.isEmpty(this.get('model'))){
 			this.set('hasPosts', true);
+		}else{
+			this.set('hasPosts', false);
 		}
+		this.showHeaderChange();
 	}.observes('model'),
 
 	isProfileOwnerChanged: function() {

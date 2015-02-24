@@ -34,7 +34,12 @@
 					</div>	
 				</div> 
 			{{else}}
-				<p class="padding-top text-center font-weak">{{user.username}} has no posts.</p>
+				<div class="padding-top text-center font-weak">
+				{{user.username}} has no posts.
+				<p class="text-center">
+					<span class="glyphicon glyphicon-flash sad-heart"></span>
+				</p>
+				</div>
 			{{/if}}
 		{{/unless}}
 
