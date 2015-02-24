@@ -1,72 +1,51 @@
 import Ember from 'ember';
-
-
 /* global Dropzone */
-
-var IconMakerComponent = Ember.Component.extend({
+export default  Ember.Component.extend({
 	
+	currentUserBinding: "session.currentUser",
+	currentUserIdBinding: "session.currentUser.id",
+	currentUserTokenBinding: "session.currentUser.access_token", 
+	currentUserIconBinding: "session.currentUser.icon",
+
 	dropzone: null, 
-	itemBinding: "item",
-	itemType: null,
-	itemIdBinding: "item.id",
-	iconBinding: "item.icon",
-	userTokenBinding: "session.currentUser.access_token",
-	userIdBinding: "session.currentUser.id",
+	newImageId: null,
 	isSuccess: false,
 	isFailed: false,
 	isProgress: false,
 	errorMessage: null,
-
-	imageBinding: "item.image.thumb", 
-
 	progressValue: null,
+
 	progressStyle: function() {
 		return "width:"+this.get('progressValue')+"px";
 	}.property('progressValue'),
 
-	/* Image has changed, update the Collection or LocalUser model now */
-	newImageId: null,
+	/* Image has changed, update the user model now */	
 	updateModel: function() {
-		this.item.set('image_id', this.get('newImageId') );
+		currentUser.set('image_id', this.get('newImageId') );
+		currentUser.save();
 	}.observes('newImageId'),
 
-	itemChanged: function() {
-
-		if( Ember.isEmpty(this.item)){
+	didInsertElement: function(){
+		
+		var _this = this; 
+		
+		if( !_this.get('currentUserId')){
 			return;
 		}
-
-		var model = String(this.item.constructor);
-		var name = model.split(':');
-        var itemType = Ember.String.camelize(name[1]);
-
-        if(itemType === "user" || itemType === "localUser"){
-        	this.set('itemType', 'users');
-        }
-        else if(itemType === "collection"){
-        	this.set('itemType', 'stores');
-        }
-
-	}.observes('itemId'),
-
-	start: function() {
-		this.itemChanged();
-	}.on('init'),
-
-	didInsertElement: function(){
-		var _this = this; 
+		
 
 		//INIT
 		 this.dropzone = new Dropzone("#dropzone", { 
 
-			url: this.Haul.Server.IMAGE_SERVER_HOST + "/" + this.itemType + "/" + this.itemId + "/images/profile",
+		 	url: this.Haul.Server.IMAGE_SERVER_HOST + "/images",
+			//url: this.Haul.Server.IMAGE_SERVER_HOST + "/users/" + _this.get('currentUserId') + "/images/profile",
 			maxFiles: 1,
 			method: "post",
-			headers: {"Authorization": "Bearer " + this.userToken},
-			params: {'user_id': this.userId},
+			headers: {"Authorization": "Bearer " + _this.get('currentUserToken')},
+			params: {'user_id': _this.get('currentUserId')},
 			paramName: "attachment",
 			dictDefaultMessage: "Drop Files Here <br/> OR <br/> Click Here To Browse Your Files",
-			previewTemplate: '<div class="profile-circular-mask text-center"><img data-dz-thumbnail  /></div><li class="haul-grid-thumbs"><div class="dz-preview dz-file-preview"><div class="dz-details"></div><div class="alert-wrapper hide"><div class="alert alert-danger" role="alert">Upload Failed</div></div><div class="delete text-right"><button data-dz-remove type="button" class="btn btn-default btn-sm btn-no-radius"><span class="glyphicon glyphicon-trash"></span></button></div></li>',
+			previewTemplate: '<div><img class="profile-image thumbnail" data-dz-thumbnail  /></div><li class="haul-grid-thumbs"><div class="dz-preview dz-file-preview"><div class="dz-details"></div><div class="alert-wrapper hide"><div class="alert alert-danger" role="alert">Upload Failed</div></div><div class="delete text-right"><button data-dz-remove type="button" class="btn btn-default btn-sm btn-no-radius"><span class="glyphicon glyphicon-trash"></span></button></div></li>',
 			previewsContainer: ".dropzone-preview",
 			thumbnailWidth: 155,
 			thumbnailHeight: 155,
@@ -165,18 +144,18 @@ var IconMakerComponent = Ember.Component.extend({
 		 	
 
 		//ERROR, figure error handling here.
-		this.dropzone.on('error', function(file) { 
+		this.dropzone.on('error', function(file, response) { 
 
 			_this.set('isSuccess', false);
 			_this.set('isProgress', false);
 			_this.set('isFailed', true);
-			
+			console.log("reponse", response);
 			var message;
-			// if( response.message.indexOf("maximum allowed") !== -1){
-			// 	message = "Sorry, your image is too large.";
-			// }else{
+			if( response.message && response.message.indexOf("maximum allowed") !== -1){
+				message = "Sorry, your image is too large.";
+			}else{
 				message = "Image upload error.";
-			//}
+			}
 
 			_this.set('errorMessage', message);
 
@@ -191,6 +170,5 @@ var IconMakerComponent = Ember.Component.extend({
 			_this.set('newImageId', response.data.image_id);
 			window.clearInterval(file.progressInterval);
 		});
-	}
+	}.observes('currentUserId')
 });
-export default IconMakerComponent;

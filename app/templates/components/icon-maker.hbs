@@ -1,14 +1,12 @@
 
 <div class="box-rigid">
 	<div class="dropzone-preview">
-		<div {{bind-attr class="isSmall:sm :profile-circular-mask isCollection:collection"}}>
-			<img {{bind-attr src=icon }}>
-		</div>
+		{{make-icon icon=currentUserIcon}}
 	</div>
 </div>
 
 <div class="box-rigid">
-	<div id="dropzone" class="box-vert-align">
+	<div id="dropzone" class="box-vert-align padding-left">
 		
 		<button id="haul-dropzone-browse" class="btn btn-default">Change Photo</button>
 		

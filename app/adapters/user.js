@@ -26,4 +26,19 @@ export default ApplicationAdapter.extend({
 			return this.ajax(url, 'GET', { data: { image_ids: ids } });
 		}
 	},
+
+	updateRecord: function(store, type, record) {
+		
+        var user_id = this.get('currentUser').id;
+
+        var data = {
+        	image_id: record.get('image_id'),
+        	firstname: record.get('firstname'),
+        	lastname: record.get('lastname')
+        }
+
+		var url = this.host + '/users/'+user_id;
+
+		return this.ajax(url, "PUT", data);
+	},
 });
