@@ -49,7 +49,7 @@ Router.map(function(){
 	this.route('new-post');
 	this.resource('profile', {path: '/:username'}, function() {
 		this.route('followers');
-		this.route('follows');
+		this.route('following');
 		this.route('likes'); 
 		this.route('post', {path: "/:id/:post_slug"}, function() {
 			this.route('edit');

@@ -15,7 +15,7 @@ export default DS.RESTSerializer.extend({
 
 		var data = {
 			id: recordId,
-			followers: follower_ids
+			users: follower_ids
 		};
 	
 		payload ={'user-followers-list': data}; 

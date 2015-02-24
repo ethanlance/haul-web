@@ -15,7 +15,7 @@
 		</span>
 
 
-		{{ follow-btn follow_user=model openModal='openModal'}}
+		{{ follow-btn followUser=model openModal='openModal'}}
 
 		<div class="info-block">
 			<h1>{{model.name}}</h1>
@@ -34,7 +34,7 @@
 			</div> 
 			{{/link-to}}
 
-			{{#link-to "profile.follows" model}}
+			{{#link-to "profile.following" model}}
 			<div class="stats">
 				<span>following</span><br/>
 				<a>{{model.getFollowingCount.total}}</a>
@@ -44,7 +44,7 @@
 			{{#link-to "profile.followers" model}}
 			<div class="stats">
 				<span>followers</span><br/>
-				<a>{{model.getFollowedByCount.total}}</a>
+				<a>{{model.getFollowersCount.total}}</a>
 			</div>
 			{{/link-to}}
 

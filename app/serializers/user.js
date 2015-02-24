@@ -12,9 +12,9 @@ export default DS.RESTSerializer.extend({
 			getLikes: payload.data.user_id,
 
 			getFollowingCount: payload.data.user_id,
-			getFollows: payload.data.user_id,
+			getFollowing: payload.data.user_id,
 
-			getFollowedByCount: payload.data.user_id,
+			getFollowersCount: payload.data.user_id,
 			getFollowers: payload.data.user_id,
 
 			image_id: payload.data.image_id,
@@ -26,6 +26,7 @@ export default DS.RESTSerializer.extend({
 		}
 
 		payload = {'user': data}; 
+		console.log("SINGLE USER", payload)
 		return this._super(store, type, payload, recordId, requestType);
 	},
 

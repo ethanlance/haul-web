@@ -1,14 +1,19 @@
 import Ember from 'ember';
-
-
-var FollowBtnComponent = Ember.Component.extend({
+export default Ember.Component.extend({
 
 	showButton: false,
 	hideIfFollowing:false,
 	userFollows: false,
 	buttonText: 'follow', 
-	userIdBinding: "session.currentUser.id",
 	userFollowsRecord: false,
+	currentUserBinding: "session.currentUser",
+	currentUserIdBinding: "session.currentUser.id",
+
+
+	followUser: null,
+	followType: 'users',
+	followIdBinding: 'followUser.id',
+	
  
 
 	userFollowsChange: function() {
@@ -26,15 +31,16 @@ var FollowBtnComponent = Ember.Component.extend({
  
 
  	didInsertElement: function() {
- 
+  
 
 		//Don't follow self.
-		if( !this.get('follow_user') || this.get('follow_user').get('id') === this.get('userId')){
+		if( this.get('followId') === this.get('currentUserId')){
 			this.set('showButton', false);
 			return;
 		}
 
-		if(!this.get('userId') || !this.get('follow_user') ){
+		if(!this.get('currentUserId') || !this.get('followUser') ){
+			this.set('showButton', false);
 			return;
 		}
 
@@ -46,7 +52,8 @@ var FollowBtnComponent = Ember.Component.extend({
 
 		//currentUser follows item?
 		var key = this.followId + "-" + this.followType;
-		store.find('follow', key).then(function(record){
+		store.find('follow', key)
+		.then(function(record){
 			if(!Ember.isEmpty(record)){
 				_this.set('userFollows', true);
 				_this.set('userFollowsRecord', record);
@@ -65,7 +72,7 @@ var FollowBtnComponent = Ember.Component.extend({
 		buttonClick: function() { 
 
 			//Intercept if user is anonymous:
-			if( !this.get('user_id')){
+			if( !this.get('currentUserId')){
 				this.sendAction('openModal', 'loginmodal', {});
 				return;
 			}
@@ -80,7 +87,7 @@ var FollowBtnComponent = Ember.Component.extend({
 				record.deleteRecord();
 				follow = false;
 			} else {
-				record = store.createRecord('follow', {user_id: this.get('userId'),ref_id: this.get('followId'), ref_type: this.get('followType')});
+				record = store.createRecord('follow', {user_id: this.get('currentUserId'),ref_id: this.get('followId'), ref_type: this.get('followType')});
 				
 				follow = true;
 			}
@@ -96,12 +103,12 @@ var FollowBtnComponent = Ember.Component.extend({
 					_this.set('userFollows', false); 
 				}
   
-				store.find('user-following-count', _this.get('userId'))
+				store.find('user-following-count', _this.get('currentUserId'))
 				.then(function(r){
 					r.reload();
 				});
 
-				store.find('user-following-list', _this.get('userId'))
+				store.find('user-following-list', _this.get('currentUserId'))
 				.then(function(r){
 					r.reload();
 				});
@@ -113,4 +120,3 @@ var FollowBtnComponent = Ember.Component.extend({
 		}
 	}
 });
-export default FollowBtnComponent;

@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 
-			{{#unless model.getFollowers.followers }}
+			{{#unless users }}
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
 					{{username}}  has no followers :(
@@ -19,10 +19,9 @@
 			{{/unless}}
 
 			{{!-- SELLER PRODUCTS --}}
-		    {{#each model.getFollowers.followers}} 
-		    	{{profile-badge profile=collection}}
-			{{/each}} 
-
+			{{#each users}} 
+		    	 {{profile-badge profile=this}} 
+			{{/each}}  
 		</div> 
 	</div>
 </div>

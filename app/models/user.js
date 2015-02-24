@@ -9,12 +9,13 @@ export default DS.Model.extend({
 	image: DS.belongsTo('image', {async:true}),
 	image_id: DS.attr('string'), 
 
-	getFollowingCount: DS.belongsTo('user-following-count', {async:true}),
-	getLikesCount: DS.belongsTo('user-likes-count', {async:true} ),
-	getFollowedByCount: DS.belongsTo('user-followers-count', {async:true}),
+	getFollowersCount: DS.belongsTo('user-followers-count', {async:true}),
+	//getFollowers: DS.belongsTo('user-followers-list', {async:true}),
 
-	getFollowers: DS.belongsTo('user-followers-list', {async:true}),
-	getFollows: DS.belongsTo('user-following-list', {async:true}),
+	getFollowingCount: DS.belongsTo('user-following-count', {async:true}),
+	//getFollowing: DS.belongsTo('user-following-list', {async:true}),
+
+	getLikesCount: DS.belongsTo('user-likes-count', {async:true} ),
 	getLikes: DS.belongsTo('user-likes-list', {async:true}), 
 
 	icon: DS.attr('string'), 

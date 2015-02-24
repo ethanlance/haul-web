@@ -17,10 +17,11 @@ export default  DS.RESTSerializer.extend({
 
 		var data = {
 			id: recordId,	
-			follows: follows_ids
+			users: follows_ids
 		};
 
 		payload = {'user-following-list': data}; 
-		return this._super(store, primaryType, payload);
+
+		return this._super(store, primaryType, payload, recordId);
 	}
 });

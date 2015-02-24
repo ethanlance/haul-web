@@ -3,6 +3,9 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp({
+	// vendorFiles: {
+	// 	'handlebars.js': null
+	// },
 	minifyJS:{'enabled':true, options:{'compress':true}}
 });
 
