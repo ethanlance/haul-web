@@ -57,7 +57,6 @@ export default Ember.ObjectController.extend({
 		});
 
 		this.set('repost', repost);
-
 	},
 
 	savePost: function() {
@@ -108,6 +107,7 @@ export default Ember.ObjectController.extend({
 	},
 
 	showProduct:false,
+	animateClose:false,
 	actions: {
 
 		showProduct:function(){
@@ -120,7 +120,8 @@ export default Ember.ObjectController.extend({
 		},
 
 		close: function() {
-			return this.send('closeModal');
+			console.log("CAUGHT, PASS ON")
+			this.set('animateClose', true);
 		},
 
 		quillChange: function(text) {
