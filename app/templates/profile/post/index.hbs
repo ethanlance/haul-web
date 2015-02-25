@@ -11,7 +11,7 @@
 			 	{{#if isProfileOwner}}
 				 	{{#link-to 'profile.post.edit' user this }}
 					<button class="btn btn-default btn-xs btn-edit-post">
-						edit
+						edit post
 					</button>
 					{{/link-to}}
 				{{/if}}
@@ -32,12 +32,12 @@
 						<span class="rehauled">reposted</span>
 					</div>
 
-					{{#link-to 'profile' repost_user }}
+					
+					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
 					<div class="image">
 						{{ make-icon icon=repost_user.icon isSmall=true }}
 					</div>
 					<div class="name">@{{repost_user.username}}</div> 
-
 					{{/link-to}}
 				</div>
 				{{/if}}
@@ -58,16 +58,7 @@
 					
 					<div class="product-image">
 
-
-						{{#if repost_user }}
-							{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-							<button class="btn btn-default btn-original-post">
-								original<br/>post
-								<span class="glyphicon glyphicon-chevron-right"></span>
-							</button>
-							{{/link-to}}
-						{{/if}}
-
+						<div class="price">${{product_price}}</div>
 
 						{{!-- BUTTONS --}}
 						{{!-- BUTTONS --}}
@@ -117,50 +108,64 @@
 		{{!-- SELLER --}}
 		<div class="col-md-4 col-sm-4 col-xs-12">
 
-			<h5 class="sidebar-header">The Seller</h5>
+			<h5 class="sidebar-header">The Seller Card	</h5>
 			<div class="sidebar">
 
 
 				<div class="seller">
-					
-					
 
-					{{#link-to 'profile' product_user}}
-						{{ make-icon icon=product_user.icon isSmall=true}}
-					{{/link-to}}
-
-					<div class="info-block">
-						<h1>{{product_user.name}}</h1>
-						<div class="username">@{{product_user.username}}</div> 
-					</div>
-		
 
 					<div class="row">
-						<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							
+							{{#link-to 'profile' product_user}}
+								{{ make-icon icon=product_user.icon isSmall=true}}
+							
 
-							{{!-- IMAGES --}}
-							<div class="product-image">
+								<div class="info-block">
+									<h1>{{product_user.name}}</h1>
+									<div class="username">@{{product_user.username}}</div> 
+								</div>
+							{{/link-to}}
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+
+							
 								{{#if product_images}}
 									{{image-carousel content=product_images}}
 								{{/if}}
-							</div>
+							
 						</div>
+					</div>
 
-						<div class="col-md-6 col-sm-6 col-xs-6">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+							<div class="name">
+								{{product_name}}
+							</div> 
+						</div>
+					</div>
 
-							<div class="price">
-								${{product_price}}
-							</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 
 							<button class="btn btn-default btn-buy">
 								buy
 							</button>
+
+							<div class="price">
+								${{product_price}}
+							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">	
-							<div class="name">
-								{{#link-to "profile.post" user this}}{{product_name}}{{/link-to}}
+							<div class="description-label">
+								Description
 							</div> 
 							{{ break-lines product_description }}
 						</div>

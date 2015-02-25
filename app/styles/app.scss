@@ -78,7 +78,7 @@ a {
 }
 
 h1, h2, h3, h4, h5 {
-	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", Helvetica,Montserrat,  Arial, sans-serif;
 	color: #3a4457;
 }
 
@@ -718,8 +718,8 @@ header.profile.shrink{
 	width: 100%;
 	min-height: 1000px;
 	margin:0px;
-	padding: 20px 30px 30px 30px;
-	background-color: #fafafa;
+	padding: 10px 30px 30px 30px;
+	background-color: #f8f8f8;
 	border-bottom: 1px solid #ccc;
 	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 
@@ -793,8 +793,7 @@ header.profile.shrink{
 		border: 1px solid #ccc;
 		padding: 15px 15px 15px 15px;
 		margin-top:15px;
-
-		max-width: 540px;
+		// /max-width: 540px;
 		text-align: left;
 
 		.btn-edit-post {
@@ -833,24 +832,53 @@ header.profile.shrink{
 				padding-bottom: 3px;
 				display:block;
 				transition: all 0.2s ease-in-out;
+				float:right;
 			}
 
 			.product-image {
 				position:relative;
 				transition: all 0.2s ease-in-out;
+	
+				.btn-wrapper{
+
+					width:100%;
+					position:absolute;
+					display:block;
+					top:20px;
+					text-align: right;
+					padding-top:1px;
+					padding-bottom:1px;
+					padding-right:2px;
+					background-color: rgba(255, 255, 255, 0.7);
+					border-bottom: 1px solid #ccc;
+
+					.glyphicon{
+						padding-left: 2px;
+					}
+
+					&.bottom{
+						top:auto;
+						bottom:0;
+					}
+				}
 
 				.price {
 					width: 70px;
 					min-width: 70px;
 					position:absolute;
 					padding: 3px 5px 3px 5px;
-					bottom:0px;
+					top:20px;
 					left:0px;
 					font-size: 20px;
-					color: #000000;
+					color: red;
 					//background-color: rgba(255, 255, 255, 0.7);
 					z-index:2000;
 					transition: all 0.2s ease-in-out;
+
+					&.bottom{
+						top:auto;
+						bottom:0;
+					}
 				}
 
 				.thumbnail{
@@ -877,32 +905,7 @@ header.profile.shrink{
 				}
 			}
 
-			.btn-original-post{
-				position: absolute;
-				border-radius: 20%;
-				top:-20px;
-				right:-30px;
-				background-color: #efefef;
-				padding:5px;
-			}
 
-			.btn-wrapper{
-
-				width:100%;
-				position:absolute;
-				display:block;
-				bottom:0;
-				text-align: right;
-				padding-top:1px;
-				padding-bottom:1px;
-				padding-right:2px;
-				background-color: rgba(255, 255, 255, 0.7);
-				border-top: 1px solid #ccc;
-
-				.glyphicon{
-					padding-left: 2px;
-				}
-			}
 
 			.btn-default {
 				display: inline;
@@ -941,8 +944,9 @@ header.profile.shrink{
 		text-align: center;
 		padding:0;
 		margin:0;
-		margin-top:-5px;
-		padding-top:5px;
+		margin-top:15px;
+		padding-top:10px;
+		padding-bottom:5px;
 		border: 1px solid #ccc;
 		border-bottom:none;
 	}
@@ -974,7 +978,7 @@ header.profile.shrink{
 			}
 
 			.price{
-				margin-top:50px;
+				margin-top:0px;
 				font-size: 20px;
 				display: inline-block;
 			}
@@ -987,8 +991,8 @@ header.profile.shrink{
 					color: #3a4457;	
 				}
 				
-				padding-top: 15px;
-				margin-bottom: 15px;
+				padding-top: 5px;
+				margin-bottom: 10px;
 				font-size: 18px;
 				border-bottom: 1px solid #eee;
 			}
@@ -1018,7 +1022,13 @@ header.profile.shrink{
 					border-bottom: 1px solid #eee;
 				}
 			}
-
+			
+			.description-label {
+				border-bottom: 1px solid #ddd;
+				padding-top:10px;
+				margin-bottom:5px;
+			}
+			
 			.product-image {
 				position:relative;
 				padding-bottom:10px;

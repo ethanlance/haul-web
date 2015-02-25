@@ -17,7 +17,7 @@
 				<span class="rehauled">reposted</span>
 			</div>
 
-			{{#link-to 'profile' repost_user.username }}
+			{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
 			<div class="image">
 				{{ make-icon icon=repost_user.icon isSmall=true }}
 			</div>
@@ -46,16 +46,18 @@
 			{{#link-to 'profile.post' user post_id post_slug }}{{subject}}{{/link-to}}
 		</h2> 
 
-		<div class="moment">{{format-date updated_at}}</div>
+		<div class="moment">posted {{format-date updated_at}}</div>
 		
 		<div class="product-image">
-			<div class="price">${{product_price}}</div>
+			
+			<div class="price bottom">${{product_price}}</div>
+
 			{{#link-to 'profile.post' user post_id post_slug }}
 				<img class="img-responsive" {{bind-attr src=image.medium}}>
 			{{/link-to}}
 		
 
-		 	<div class="btn-wrapper">
+		 	<div class="btn-wrapper bottom">
 
 		 		<button class="btn btn-default btn-buy">
 					buy

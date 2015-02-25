@@ -113,6 +113,16 @@ export default Ember.Component.extend({
 					r.reload();
 				});
 
+
+				store.find('user-followers-count', _this.get('followId'))
+				.then(function(r){
+					r.reload();
+				});
+
+				store.find('user-followers-list', _this.get('followId'))
+				.then(function(r){
+					r.reload();
+				});
 				
 			}, function(error){
 				console.log("Error", error);
