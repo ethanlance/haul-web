@@ -3,28 +3,46 @@
 <div class="post">   
 	<div class="citation">
 	
-		{{#unless-equal param1=user.id param2=product_user.id}}
-		<span class="glyphicon glyphicon-retweet"></span>
-		<div class="name">
-			{{#link-to 'profile' user }}
-				@{{user.username}}
-			{{/link-to}}
-			<span class="rehauled">reposted</span>
-		</div>
-		{{/unless-equal}}
 
+		{{!-- CITATION --}}
+		{{!-- CITATION --}}
+		{{!-- CITATION --}}
+		{{!-- CITATION --}}
+		{{#if repost_user}} 
+			<span class="glyphicon glyphicon-retweet"></span>
+			<div class="name">
+				{{#link-to 'profile' user }}
+				@{{user.username}} 
+				{{/link-to}}
+				<span class="rehauled">reposted</span>
+			</div>
 
-		{{#link-to 'profile' product_user.username }}
-		<div class="image">
-			{{ make-icon icon=product_user.icon isSmall=true }}
-		</div>
-		<div class="name">@{{product_user.username}}</div>
-		{{/link-to}}
+			{{#link-to 'profile' repost_user.username }}
+			<div class="image">
+				{{ make-icon icon=repost_user.icon isSmall=true }}
+			</div>
+			<div class="name">@{{repost_user.username}}</div> 
+
+			{{/link-to}} 
+
+		{{else}}
+ 
 		
+			{{#link-to 'profile' user }}
+			<div class="image">
+				{{ make-icon icon=user.icon isSmall=true }}
+			</div>
+			<div class="name">@{{user.username}}</div> 
+			{{/link-to}} 
+
+		{{/if}}
+
+
 	</div>
 
 	<div class="article">
-		 <h2>
+		
+		<h2>
 			{{#link-to 'profile.post' user post_id post_slug }}{{subject}}{{/link-to}}
 		</h2> 
 

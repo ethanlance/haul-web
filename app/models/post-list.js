@@ -4,12 +4,19 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 	
 	post_id: DS.attr('string'),	
 	user: DS.belongsTo('user', {async:true}),
-
+	
+	//POST
 	subject: DS.attr('string'),
 	body: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),
 	updated_at: DS.attr('string'),
-	
+
+	//REPOST aka parent post
+    repost_body: DS.attr('string'),
+    repost: DS.belongsTo('post', {async:true}),
+    repost_user: DS.belongsTo('user', {async:true}),
+
+	//PRODUCT	
 	product_user: DS.belongsTo('user', {async:true}),	 
 	product_currency: DS.attr('string'),
 	product_price: DS.attr('string'),

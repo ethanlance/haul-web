@@ -8,10 +8,13 @@ export default Ember.ObjectController.extend({
  	thisPage: "postPage", 
  	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
  	showHeaderChange: function(){ 
+
+ 		console.log("HEADER " , this.get('currentPage') +  " === " + this.get('thisPage'))
+
  		if( this.get('currentPage') === this.get('thisPage')){
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		
- 	}.observes('currentPage'),
+ 	}.observes('currentPage', 'model'),
 
 
 	currentUserIdBinding: 'Haul.currentUser.id',

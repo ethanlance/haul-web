@@ -174,9 +174,18 @@ body {
 	height: 100px;
 	border-radius: 20%;
 	display: inline-block;
+	overflow: hidden;
+	.glyphicon-user{
+		font-size:95px;
+		left: -2px;
+	}
 	&.sm {
 		width: 50px;
 		height: 50px;
+		.glyphicon-user{
+			font-size:27px;
+			left:-1px;
+		}
 	}
 }
 
@@ -344,12 +353,6 @@ nav {
 			color: #fff;
 		 	background-color: $secondary-color;
 		}
-
-
-
-
-
-
 	}
 
 	.btn-go-search{
@@ -541,6 +544,14 @@ header.profile{
 			left: 20px;
 			width: 100px;
 			height: 100px;
+
+			.glyphicon-user{
+				-moz-transition: all 0.2s ease-in-out;
+				-o-transition: all 0.2s ease-in-out;
+				-webkit-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+				font-size:95px;
+			}
 		}
 	 
 		.info-block{
@@ -652,6 +663,11 @@ header.profile.shrink{
 		left: 47px;
 		width: 40px;
 		height: 40px;
+
+		.glyphicon-user{
+			font-size:38px;
+			left:-1px;
+		}
 	}
 
 	.info-block{
@@ -758,6 +774,11 @@ header.profile.shrink{
 				width: 40px;
 				height: 40px;
 				padding:2px;
+
+				.glyphicon-user{
+					font-size:36px;
+					left:-1px;
+				}
 			}
 		}
 
@@ -940,6 +961,10 @@ header.profile.shrink{
 				padding:2px;
 				width: 60px;
 				height: 60px;
+
+				.glyphicon-user{
+					font-size:57px;
+				}
 			}
 
 			h5{

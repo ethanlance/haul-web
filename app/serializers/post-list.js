@@ -15,10 +15,10 @@ export default DS.RESTSerializer.extend({
 			return;
 		}
 		
-		
-		var data = payload.data.map(function(result){  
+		var data = null;
+		var datas = payload.data.map(function(result){  
 			var id = result.user_id + "-" + result.post_id; 
-			return {
+			data = {
 				id: id,	
 				post_id:result.post_id,
 				updated_at: result.updated_at,
@@ -38,9 +38,19 @@ export default DS.RESTSerializer.extend({
 				commentCount: result.post_id,
 				likesCount: result.post_id
 			};
+
+
+			//repost aka parent post
+			if( result.repost_id ){
+				var repostId = result.repost_user_id + "-" + result.repost_id;
+	            data.repost = repostId;
+	            data.repost_body = result.repost_body;
+	            data.repost_user = result.repost_user_id;
+			}
+			return data;
 		}); 
 
-		payload = {'post-list': data};  
+		payload = {'post-list': datas};  
 		return this._super(store, primaryType, payload);
 	}
 });
