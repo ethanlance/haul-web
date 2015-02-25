@@ -26,7 +26,7 @@ Router.map(function(){
 	this.route('logout');
 
 	this.route('forgotpassword', {path: "forgot-password"});
-	this.route('forgotpasswordconfirm', {path: "reset-password"});
+	this.route('reset-password');
 	
 	this.route('signup');
 	this.route('signupconfirm', {path: "register"});

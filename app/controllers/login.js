@@ -81,6 +81,9 @@ export default Ember.ObjectController.extend({
 		.then(function(user) {			
 			_this.get('session').set('currentUser', user);
 
+console.log("FOUND USER", user)
+console.log("FOUND USERNAME", user.get('username'))
+
 			if( !Ember.isEmpty(user.get('username')) ){
 				var attemptedTrans = _this.get('attemptedTransition'); 
 				if(Ember.isEmpty(attemptedTrans)){  

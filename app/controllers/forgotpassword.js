@@ -6,7 +6,7 @@ export default  Ember.ObjectController.extend({
 	client_token: Config.Server.CLIENT_TOKEN,
 	host: Config.Server.USER_SERVER_HOST,
 
-	queryParams: ['email'],
+	//queryParams: ['email'],
 	email: null,
 	
 	emailSent: false,

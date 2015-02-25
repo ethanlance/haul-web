@@ -45,7 +45,7 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 					dataType: 'json'
 			}).then(
 				function(response) {
-					_this.get('controllers.login').setupUser(response);
+					_this.get('controllers.login').startUserSession(response);
 				}, 
 
 				function() {
