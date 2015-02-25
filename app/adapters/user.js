@@ -39,6 +39,6 @@ export default ApplicationAdapter.extend({
 
 		var url = this.host + '/users/'+user_id;
 
-		return this.ajax(url, "PUT", data);
+		return this.ajax(url, "PUT", { data: data });
 	},
 });

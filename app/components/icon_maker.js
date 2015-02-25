@@ -21,6 +21,7 @@ export default  Ember.Component.extend({
 
 	/* Image has changed, update the user model now */	
 	updateModel: function() {
+		var currentUser = this.get('currentUser');
 		currentUser.set('image_id', this.get('newImageId') );
 		currentUser.save();
 	}.observes('newImageId'),
@@ -167,7 +168,7 @@ export default  Ember.Component.extend({
 			_this.set('isSuccess', true);
 			_this.set('isFailed', false);
 			_this.set('isProgress', false);
-			_this.set('newImageId', response.data.image_id);
+			_this.set('newImageId', response.data[0].image_id);
 			window.clearInterval(file.progressInterval);
 		});
 	}.observes('currentUserId')

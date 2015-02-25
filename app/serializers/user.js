@@ -2,6 +2,10 @@ import DS from "ember-data";
 export default DS.RESTSerializer.extend({
 
 	extractSingle: function(store, type, payload, recordId, requestType) {
+		if( payload.data === "ok" ){
+			return;
+		}
+		
 		var data =  {
 			username: payload.data.username,
 			name: payload.data.name,
@@ -26,7 +30,6 @@ export default DS.RESTSerializer.extend({
 		}
 
 		payload = {'user': data}; 
-		console.log("SINGLE USER", payload)
 		return this._super(store, type, payload, recordId, requestType);
 	},
 
