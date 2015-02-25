@@ -2,20 +2,23 @@
 
 <div class="post">   
 	<div class="citation">
-	{{#unless-equal param1=user.id param2=product_user.id}}
+	
+		{{#unless-equal param1=user.id param2=product_user.id}}
 		<span class="glyphicon glyphicon-retweet"></span>
 		<div class="name">
-			{{user.name}} {{../galleryView}}
-			<span class="rehauled">rehauled</span>
+			{{#link-to 'profile' user }}
+				@{{user.username}}
+			{{/link-to}}
+			<span class="rehauled">reposted</span>
 		</div>
-	{{/unless-equal}}
+		{{/unless-equal}}
 
 
-		{{#link-to 'profile' user }}
+		{{#link-to 'profile' product_user.username }}
 		<div class="image">
 			{{ make-icon icon=product_user.icon isSmall=true }}
 		</div>
-		<div class="name">{{product_user.name}}</div>
+		<div class="name">@{{product_user.username}}</div>
 		{{/link-to}}
 		
 	</div>

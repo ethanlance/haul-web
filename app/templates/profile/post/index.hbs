@@ -9,52 +9,46 @@
 
 				{{!-- EDIT YOUR OWN POST --}}
 			 	{{#if isProfileOwner}}
-
-				 	{{!-- EDIT --}}
 				 	{{#link-to 'profile.post.edit' user this }}
 					<button class="btn btn-default btn-xs btn-edit-post">
 						edit
 					</button>
 					{{/link-to}}
-				
-				
 				{{/if}}
 
 			
 
-				{{!-- REPOST --}}
-				{{#unless-equal param1=user.id param2=product_user.id}}
+				{{!-- CITATION --}}
+				{{!-- CITATION --}}
+				{{!-- CITATION --}}
+				{{!-- CITATION --}}
+				{{#if repost_user}}
 				<div class="citation">
 					<span class="glyphicon glyphicon-retweet"></span>
 					<div class="name">
 						{{#link-to 'profile' user }}
-						{{user.username}} 
+						@{{user.username}} 
 						{{/link-to}}
 						<span class="rehauled">reposted</span>
 					</div>
 
-					{{#link-to 'profile' user }}
+					{{#link-to 'profile' repost_user }}
 					<div class="image">
-						{{ make-icon icon=product_user.icon isSmall=true }}
+						{{ make-icon icon=repost_user.icon isSmall=true }}
 					</div>
-					<div class="name">{{product_user.username}}</div> 
+					<div class="name">@{{repost_user.username}}</div> 
 
 					{{/link-to}}
 				</div>
-				{{/unless-equal}}
+				{{/if}}
 
 				
 
-
-
-
 				{{!-- THE POST --}}
-
+				{{!-- THE POST --}}
+				{{!-- THE POST --}}
+				{{!-- THE POST --}}
 				<div class="article">
-
-
-
-					{{!-- PRODUCT NAME --}}
 					<h2>
 						{{ subject }}
 					</h2>
@@ -65,22 +59,25 @@
 					<div class="product-image">
 
 
-						{{#unless-equal param1=product_user.id param2=user.id}}
-							{{#link-to  "profile.post" user this}}
+						{{#if repost_user }}
+							{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
 							<button class="btn btn-default btn-original-post">
 								original<br/>post
 								<span class="glyphicon glyphicon-chevron-right"></span>
 							</button>
 							{{/link-to}}
-						{{/unless-equal}}
+						{{/if}}
 
 
 						{{!-- BUTTONS --}}
+						{{!-- BUTTONS --}}
+						{{!-- BUTTONS --}}
+						{{!-- BUTTONS --}}
 					 	<div class="btn-wrapper">
 
-						 	{{!-- {{like-btn product=product class="display-inline" }}
+						 	{{like-btn post=this class="display-inline" }}
 						 	
-						 	{{comment-btn itemObject=this class="display-inline" }} --}}
+						 	{{comment-btn itemObject=this class="display-inline" }}
 						 	
 						 	<button {{action 'openModal' 'repost' this}} class="btn btn-default">
 								<span class="glyphicon glyphicon-retweet"></span>

@@ -10,10 +10,12 @@ export default DS.RESTSerializer.extend({
 		}
 		
 		var id = payload.data.user_id + "-" + payload.data.post_id; 
+		
 		var data = {
 
 			id: id,	
 			
+			//post
 			post_id: payload.data.post_id,
 			user: payload.data.user_id,
 			updated_at: payload.data.updated_at,
@@ -21,6 +23,8 @@ export default DS.RESTSerializer.extend({
 			subject: payload.data.subject,
             image: payload.data.image_id,
 
+            
+            //product
             product_user: payload.data.product.user_id,
             product_name: payload.data.product.name,
             product_description: payload.data.product.description,
@@ -34,6 +38,14 @@ export default DS.RESTSerializer.extend({
 			commentCount: payload.data.post_id,
 			likesCount: payload.data.post_id
 		};
+
+		//repost aka parent post
+		if( payload.data.repost_id ){
+			var repostId = payload.data.repost_user_id + "-" + payload.data.repost_id;
+            data.repost = repostId;
+            data.repost_body = payload.data.repost_body;
+            data.repost_user =payload.data.repost_user_id;
+		}
 
 		payload = {'post': data};  
 		return this._super(store, primaryType, payload, recordId, requestType);
@@ -45,7 +57,7 @@ export default DS.RESTSerializer.extend({
 			return;
 		} 
 		
-		var id = payload.data.user_id + "-" + payload.data.post_id; 
+		var id = payload.data.user_id + "-" + payload.data.post_id;
 		var data = {
 			id: id,	
 
@@ -69,6 +81,14 @@ export default DS.RESTSerializer.extend({
 			commentCount: payload.data.post_id,
 			likesCount: payload.data.post_id
 		};
+
+		//repost aka parent post
+		if( payload.data.repost_id ){
+			var repostId = payload.data.repost_user_id + "-" + payload.data.repost_id;
+            data.repost = repostId;
+            data.repost_body = payload.data.repost_body;
+            data.repost_user =payload.data.repost_user_id;
+		}
 
 		payload = {'post': [data]};  
 		return this._super(store, primaryType, payload);
