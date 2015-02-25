@@ -1,7 +1,5 @@
 {{#if icon}}
 	<img {{bind-attr class="isSmall:sm :thumbnail :profile-image"}} {{bind-attr src=icon}}>
 {{else}}
-	<div {{bind-attr class="isSmall:sm :thumbnail :profile-image"}}>
-		<span class="glyphicon glyphicon-user"></span>
-	</div>
+	<div {{bind-attr class="isSmall:sm :thumbnail :profile-image"}}><span class="glyphicon glyphicon-user"></span></div>
 {{/if}}
