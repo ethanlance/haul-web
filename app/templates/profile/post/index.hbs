@@ -22,25 +22,29 @@
 				{{!-- CITATION --}}
 				{{!-- CITATION --}}
 				{{!-- CITATION --}}
-				{{#if repost_user}}
 				<div class="citation">
-					<span class="glyphicon glyphicon-retweet"></span>
-					<div class="name">
-						{{#link-to 'profile' user }}
-						@{{user.username}} 
-						{{/link-to}}
-						<span class="rehauled">reposted</span>
-					</div>
 
+					{{!-- TIMESTAMP --}}
+					<div class="moment">posted {{format-date updated_at}}</div>
 					
-					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-					<div class="image">
-						{{ make-icon icon=repost_user.icon isSmall=true }}
-					</div>
-					<div class="name">@{{repost_user.username}}</div> 
-					{{/link-to}}
+					{{#if repost_user}}
+						<span class="glyphicon glyphicon-retweet"></span>
+						<div class="name">
+							{{#link-to 'profile' user }}
+							@{{user.username}} 
+							{{/link-to}}
+							<span class="rehauled">reposted</span>
+						</div>
+
+						
+						{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+						<div class="image">
+							{{ make-icon icon=repost_user.icon isSmall=true }}
+						</div>
+						<div class="name">@{{repost_user.username}}</div> 
+						{{/link-to}}
+					{{/if}}
 				</div>
-				{{/if}}
 
 				
 
@@ -52,31 +56,29 @@
 					<h2>
 						{{ subject }}
 					</h2>
-
-					{{!-- TIMESTAMP --}}
-					<div class="moment">posted {{format-date updated_at}}</div>
-					
-					<div class="product-image">
-
-						<div class="price">${{product_price}}</div>
-
 						{{!-- BUTTONS --}}
 						{{!-- BUTTONS --}}
 						{{!-- BUTTONS --}}
 						{{!-- BUTTONS --}}
 					 	<div class="btn-wrapper">
 
-						 	{{like-btn post=this class="display-inline" }}
+					 		<div class="price">${{product_price}}</div>
+
+
+						 	{{like-btn post=this openModal='openModal' class="display-inline"}}
 						 	
-						 	{{comment-btn itemObject=this class="display-inline" }}
-						 	
-						 	<button {{action 'openModal' 'repost' this}} class="btn btn-default">
-								<span class="glyphicon glyphicon-retweet"></span>
-							</button>
+						 	{{comment-btn post=this class="display-inline" }}
+
+						 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
 
 						</div>
+					
+					<div class="product-image">
+
 						<img class="img-responsive" {{bind-attr src=image.medium}}/>
 					</div>
+					
+
 
 					{{!-- POSTER --}}
 					<div class="citation no-top-margin">
@@ -93,7 +95,7 @@
 						{{break-lines body}}
 					</div>
 
-				{{!-- 	{{comment-section itemObject=product contextObject=collection  class="display-inline" }} --}}
+				{{!-- 	{{comment-section openModal='openModal' itemObject=product contextObject=collection  class="display-inline" }} --}}
 				
 				</div>	
 			</div> 

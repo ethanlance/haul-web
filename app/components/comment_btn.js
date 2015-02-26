@@ -5,7 +5,7 @@ export default Ember.Component.extend(ScrolltoMixin, {
 	totalBinding: 0,//"itemObject.commentCount.total",
 	linkOff:false,
 	actions: {
-		scrollTo: function() { 
+		btnClick: function() { 
 			if(this.get('linkOff')){
 				return;
 			}

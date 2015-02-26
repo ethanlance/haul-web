@@ -120,7 +120,6 @@ export default Ember.ObjectController.extend({
 		},
 
 		close: function() {
-			console.log("CAUGHT, PASS ON")
 			this.set('animateClose', true);
 		},
 

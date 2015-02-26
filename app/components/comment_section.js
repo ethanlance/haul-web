@@ -7,6 +7,9 @@ var CommentSectionComponent = Ember.Component.extend({
 	
 	isProcessing:false,
 
+	currentUserBinding: "session.currentUser",
+	currentUserIdBinding: "session.currentUser.id",
+	
 	comments: null,
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('comments', 'commentsSorting'),
@@ -144,6 +147,12 @@ return;
 		},
 
 		submit: function() {
+
+			//Intercept if user is anonymous:
+			if( !this.get('currentUserId')){
+				this.sendAction('openModal', 'loginmodal', {});
+				return;
+			}
 
 			this.set('isProcessing', true);
 

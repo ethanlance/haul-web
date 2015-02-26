@@ -1,18 +1,14 @@
-{{modal-modal}}
-
-<div class="modal auth">
+{{#modal-modal animateClose=animateClose closeModal='closeModal'}}
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button {{action 'closeModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button {{action 'close'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h2 class="modal-title" id="myModalLabel">
 					Please Login <a class="or" {{action 'openModal' 'signupmodal'}}>or Signup</a>
 				</h2>
 			</div>
 		<div class="modal-body anon">  
-			{{partial "_login"}} 
-
- 
+			{{partial "_login"}}
 		</div>
 	</div>
-</div>
+{{/modal-modal}}

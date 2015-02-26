@@ -73,16 +73,17 @@ a {
 
 .btn-buy {
 	border-color: #333333;
-	background-color: #5bb75b;
-	color: #ffffff;
+	background-color: #eee;//$secondary-color;
+	color: green;
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
 	font-weight: bold;
-	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+	border-color: $primary-color;
 }
 
 .btn-buy:hover{
-	background-color: #51a351;
-	color: #ffffff;
+	background-color: #fff;
+	color: green;
+	border-color: $secondary-color;
 }
 
 h1, h2, h3, h4, h5 {
@@ -816,6 +817,16 @@ header.profile.shrink{
 		.citation.no-top-margin {
 			margin-top:0px;
 		}
+
+		.moment {
+				color: #bbb;
+				font-size: 12px;
+				padding-bottom: 3px;
+				display:block;
+				transition: all 0.2s ease-in-out;
+				float:right;
+				margin-top: -20px;
+			}
 		
 		.article { 	
 			transition: all 0.2s ease-in-out;
@@ -843,55 +854,52 @@ header.profile.shrink{
 				float:right;
 			}
 
-			.product-image {
-				position:relative;
-				transition: all 0.2s ease-in-out;
-	
+			
 				.btn-wrapper{
-
-					width:100%;
-					position:absolute;
-					display:block;
-					top:20px;
+					margin-top:10px;
+					width:100%; 
+					display:block; 
 					text-align: right;
 					padding-top:1px;
 					padding-bottom:1px;
 					padding-right:2px;
-					background-color: rgba(255, 255, 255, 0.7);
-					border-bottom: 1px solid #ccc;
+					background-color:$primary-color;
+					//border-bottom: 1px solid #ccc;
+					border-top-left-radius: 4px;
+					border-top-right-radius: 4px;
 
 					.glyphicon{
 						padding-left: 2px;
 					}
 
-					&.bottom{
-						top:auto;
-						bottom:0;
+					.price {
+						//width: 70px;
+						float: left;
+						display:inline-block;
+						min-width: 70px;
+						margin:0;
+						padding: 3px 5px 3px 5px;
+						font-size: 20px;
+						color: white; 
+						z-index:2000;
+					} 
+
+					&.bottom {
+						margin-top:0;
+						border-top-left-radius: 0px;
+						border-top-right-radius: 0px;
+
+
+						margin-bottom:10px;
+						border-bottom-left-radius: 4px;
+						border-bottom-right-radius: 4px;
 					}
 				}
-
-				.price {
-					//width: 70px;
-					min-width: 70px;
-					position:absolute;
-					padding: 3px 5px 3px 5px;
-					top:20px;
-					left:0px;
-					font-size: 20px;
-					color: red;
-					background-color: rgba(255, 255, 255, 1);
-					z-index:2000;
-					transition: all 0.2s ease-in-out;
-					border-bottom-left-radius: 4px;
-					border-bottom: 1px solid #ccc;
-					border-left: 1px solid #ccc;
-
-					&.bottom{
-						top:auto;
-						bottom:0;
-					}
-				}
-
+			
+			.product-image {
+				position:relative;
+				transition: all 0.2s ease-in-out;
+	
 				.thumbnail{
 					margin-bottom: 10px;
 					border-radius: 0px;

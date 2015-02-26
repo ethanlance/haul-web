@@ -38,11 +38,12 @@ export default Ember.Component.extend({
 	actions: {
 		btnClick: function() { 
 
-			//Anon?
-			if(!this.get('currentUserId')){
-				this.sendAction('loginModal');
+			//Intercept if user is anonymous:
+			if( !this.get('currentUserId')){
+				this.sendAction('openModal', 'loginmodal', {});
 				return;
 			}
+
 
 			var _this = this;
 			var record = this.get('userLikesRecord'); 
