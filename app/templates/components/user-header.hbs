@@ -2,7 +2,7 @@
 <header {{bind-attr class=":profile showHeader:show:hide"}}>
 	<div class="profile-container">
 
-	<div {{action "clickBack"}} bind-attr class="post-back-button hide">
+	<div {{action "clickBack"}} class="post-back-button hide">
 		{{#link-to 'profile' model}}
 			<span class="glyphicon glyphicon-arrow-left"></span>
 		{{/link-to}}

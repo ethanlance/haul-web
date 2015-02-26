@@ -660,7 +660,7 @@ header.profile.shrink{
 		float:left; 
 		position:relative;
 		left:20px;
-		padding:20px 0px 0px 0px;
+		padding:10px 0px 0px 0px;
 	}
 
 	.profile-image {  
@@ -919,6 +919,7 @@ header.profile.shrink{
 				display:inline;
 				float:left;
 				img{
+					width: 100%;
 					margin:auto;
 					display: table;
 					padding:10px;		
@@ -969,6 +970,7 @@ header.profile.shrink{
 		padding-bottom:5px;
 		border: 1px solid #ccc;
 		border-bottom:none;
+		background-color: #f7f8fa;
 	}
 
 	.sidebar {
@@ -976,7 +978,7 @@ header.profile.shrink{
 		border-bottom-left-radius: 4px;
 		border-bottom-right-radius: 4px;
 		padding:15px;
-		background-color: #f3f3f4;
+		background-color: #ebedf2;//#f3f3f4;
 
 		.seller{
 

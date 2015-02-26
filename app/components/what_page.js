@@ -28,6 +28,9 @@ export default Ember.Component.extend({
 		console.log("NEW CURRENT PAGE", page);
 
 
+		var postBackButton = $(".post-back-button");
+		postBackButton.removeClass('show').addClass('hide');
+
 		
 		if(page === "postEdit"){
 			this.postEdit();
@@ -86,14 +89,11 @@ export default Ember.Component.extend({
 		//var nav = $("nav");
 		var fixThis = $(".profile-container");
 		var header = $(".profile-container").parent();
-		var postBackButton = $(".post-back-button");
 		var listGridButton = $('.btn-list-grid');
 
 
 		Ember.run.later(this,function(){
 			fixThis.removeClass('fixed');
-
-			postBackButton.removeClass('show').addClass('hide');
 	    	 
 			fixThis.append(listGridButton.parent());
 		  	
