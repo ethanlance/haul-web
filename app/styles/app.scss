@@ -606,7 +606,7 @@ header.profile{
 				float: left;
 				padding-left: 0px;
 				padding-right: 15px;
-				font-size: 14px;
+				font-size: 12px;
 
 				a span {
 					font-weight: bold;
@@ -650,7 +650,7 @@ header.profile.shrink{
 	position:fixed;
 	top:50px;
 	z-index: 2001;
-	padding: 0px 0px 4px 0px;
+	padding: 10px 0px 0px 0px;
 	margin:0px;
 	width: 100%;
 	background-color: #fff;
@@ -668,7 +668,7 @@ header.profile.shrink{
 		padding:1px;
 		float:left; 
 		position:relative;
-		top: 10px;
+		top: 1px;
 		left: 47px;
 		width: 40px;
 		height: 40px;
@@ -697,7 +697,7 @@ header.profile.shrink{
 		}
 		.stats-block{
 			left:44px;
-			padding:8px 0px 8px 0px;
+			padding:8px 0px 0px 0px;
 		}
 	}
 }
@@ -837,6 +837,7 @@ header.profile.shrink{
 			h2 { 
 				display:block;
 				margin:0px;
+				margin-bottom: 10px;
 				padding:0px;
 				transition: all 0.2s ease-in-out;
 				a{
@@ -856,7 +857,7 @@ header.profile.shrink{
 
 			
 				.btn-wrapper{
-					margin-top:10px;
+					margin:0px;
 					width:100%; 
 					display:block; 
 					text-align: right;
@@ -890,7 +891,7 @@ header.profile.shrink{
 						border-top-right-radius: 0px;
 
 
-						margin-bottom:10px;
+						margin-bottom:0px;
 						border-bottom-left-radius: 4px;
 						border-bottom-right-radius: 4px;
 					}
