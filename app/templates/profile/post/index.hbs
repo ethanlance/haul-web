@@ -92,7 +92,7 @@
 
 					{{!-- EDITORIAL --}}
 					<div class="editorial">
-						{{break-lines body}}
+						{{sanitize-html body "editorial"}}
 					</div>
 
 				{{!-- 	{{comment-section openModal='openModal' itemObject=product contextObject=collection  class="display-inline" }} --}}
@@ -136,10 +136,9 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 
-							
-								{{#if product_images}}
-									{{image-carousel content=product_images}}
-								{{/if}}
+							{{#if product_images}}
+								{{image-carousel content=product_images}}
+							{{/if}}
 							
 						</div>
 					</div>
@@ -169,7 +168,7 @@
 							<div class="description-label">
 								Description
 							</div> 
-							{{ break-lines product_description }}
+							{{sanitize-html product_description "description"}}
 						</div>
 					</div>
 				</div>

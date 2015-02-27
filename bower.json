@@ -22,6 +22,8 @@
     "ember-addons.bs_for_ember": "~0.7.0",
     "ember-simple-auth": "0.7.2",
     "velocity": "~1.2.1",
-    "typeahead.js": "~0.10.5"
+    "typeahead.js": "~0.10.5",
+    "google-caja": "~5669.0.0",
+    "sanitize.js": "~1.0.0"
   }
 }

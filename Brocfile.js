@@ -32,6 +32,9 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
   destDir: 'assets'
 });
 
+app.import('bower_components/google-caja/html-css-sanitizer-bundle.js');
+// app.import('vendor/sanitize.js');
+
 app.import('bower_components/typeahead.js/dist/typeahead.bundle.js'); 
 
 app.import('bower_components/jquery/dist/jquery.js');
@@ -49,6 +52,7 @@ app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css');
 
 app.import('vendor/ember-easyform.js');
 app.import('vendor/ember-validations.js');
+
 
 
 

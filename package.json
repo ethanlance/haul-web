@@ -37,6 +37,7 @@
     "liquid-fire": "^0.16.1"
   },
   "dependencies": {
-    "ember-cli-sass": "^3.1.0-beta.5"
+    "ember-cli-sass": "^3.1.0-beta.5",
+    "ember-sanitize": "0.0.6"
   }
 }

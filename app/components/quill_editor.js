@@ -10,7 +10,7 @@ var QuillEditorComponent = Ember.Component.extend({
 	editor: null,
 
 	contentChanged: function() {
-		this.get('editor').setHTML(this.get("content"));
+		//this.get('editor').setHTML(this.get("content"));
 	}.observes('content'),
 
 	didInsertElement: function(){
