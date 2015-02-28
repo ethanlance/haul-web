@@ -20,9 +20,11 @@
 					<div {{bind-attr class=":drawer-content openDrawer:open"}}>
 					 
 						<label>Drag photos into your post</label><br/>
-					
+						
 						<div class="gallery"> 				
- 							{{view 'sortable' content=selectedImages}}
+							{{#each selectedImages}}
+								<img {{bind-attr src=small}}/>
+							{{/each}}
 						</div>
 					
 
@@ -181,7 +183,7 @@
 			</div>
 		<div class="modal-body">
 
-			{{image-picker 
+			{{#image-picker  
 				images=userImages
 				selectedImages=selectedImages
 				refresh='refresh'
@@ -190,7 +192,8 @@
 				Haul=Haul
 				doNotAnimate='true'
 			}}
-
+				{{view 'sortable' content=selectedImages}}
+			{{/image-picker}}
 
       </div>
       <div class="modal-footer">

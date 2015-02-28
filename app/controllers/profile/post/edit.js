@@ -113,7 +113,7 @@ export default Ember.ObjectController.extend({
 	    selectedImages = selectedImages.sortBy('idx');
 	    
 	    selectedImages.endPropertyChanges();
- 	    
+  
 	    this.set('selectedImages', selectedImages);
 	},
 
@@ -226,6 +226,12 @@ export default Ember.ObjectController.extend({
 
 		btnDrawer: function() {
 			this.toggleProperty('openDrawer');
+		},
+
+		updateSortOrder: function(i) {
+			console.log("UDDATE TRIGGER!")
+			this.updateSortOrder(i);
 		}
+
 	}
 });

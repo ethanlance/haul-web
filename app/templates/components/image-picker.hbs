@@ -5,7 +5,6 @@
 
 			{{#if doNotAnimate }}
 
-				
 				<button id="haul-dropzone-browse" class="btn btn-primary">
 					<span class="glyphicon glyphicon-picture"></span>
 					Browse Your Photos
@@ -31,15 +30,8 @@
 
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="upload-images dropzone-preview"> 
-				
-				{{#each selectedImages}}
-					{{image-card 
-						image=this 
-						imageDelete='imageDelete'
-						class="display-inline"}}
-				{{/each}}
-				
+			<div class="upload-images dropzone-preview">
+				{{yield}}
 			</div> 
 		</div>
 	</div>

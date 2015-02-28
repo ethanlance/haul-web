@@ -1223,10 +1223,11 @@ header.profile.shrink{
 		height:65px;
 		max-height: 65px;
 		overflow: hidden;
+		width: 216px;
 
 		-webkit-box-shadow: inset 0px -1px 35px -10px rgba(204,204,204,1);
--moz-box-shadow: inset 0px -1px 35px -10px rgba(204,204,204,1);
-box-shadow: inset 0px -1px 35px -10px rgba(204,204,204,1);
+		-moz-box-shadow: inset 0px -1px 35px -10px rgba(204,204,204,1);
+		box-shadow: inset 0px -1px 35px -10px rgba(204,204,204,1);
 
 		-moz-transition: all 0.2s ease-in-out;
 		-o-transition: all 0.2s ease-in-out;
@@ -1234,9 +1235,10 @@ box-shadow: inset 0px -1px 35px -10px rgba(204,204,204,1);
 		transition: all 0.2s ease-in-out;
 
 		&:hover{
-			height:500px;
+			height:100%;
 			max-height:500px;
 			overflow: scroll;
+			cursor: pointer;
 		}
 				
 		img, button{
@@ -1249,129 +1251,14 @@ box-shadow: inset 0px -1px 35px -10px rgba(204,204,204,1);
 			border-radius: 4px;
 			width: 50px;
 			height: 50px; 
+
 		} 
 	}
 	 
 
-	/* SORTABLE */
-	.selected-images{
-		padding-top:20px;
+	
 
-		.selected-image{
-			width:20%;
-			height: 20%;
-			max-width: 100px;
-			max-height: 100px; 
-			display:inline-block;
-			position:relative;
-
-			.thumbnail {
-				margin:0px;
-				padding:2px;
-			}
-
-			img{
-				&:hover{
-					cursor: move;
-				}
-			}
-
-			&:hover .btn-delete {
-				opacity: 1;
-			}
-			.btn-delete {
-				position: absolute;
-				right: 4px;
-				top: 4px;
-				opacity: 0;
-			}
-
-			.alert-wrapper {
-				position: absolute;
-				display: block;
-				top: 0px;
-				width: 100%;
-				left: 0px;
-				.alert {
-					border-radius: 0px;
-					background-color: rgba(242, 222, 222, 0.9);
-					padding: 5px 0px 5px 5px;
-				}
-			}
-
-			.progress-wrapper {
-				position: absolute;
-				//display: block;
-				bottom: -20px;
-				width: 100%;
-				margin-left: 0px;
-				.progress {
-					border-radius: 0px;
-					border-bottom-right-radius: 4px;
-					border-bottom-left-radius: 4px;
-				}
-			}
-		}
-	}
-
-	.upload-images{
-		padding-top:20px;
-
-		.selected-image{
-			width: 100px;
-			height: 100px; 
-			margin:2px;
-			display:inline-block;
-			position:relative;
-
-			.thumbnail {
-				margin:0px;
-				padding:2px;
-			}
-
-			img{
-				&:hover{
-					cursor: move;
-				}
-			}
-
-			&:hover .btn-delete {
-				opacity: 1;
-			}
-			.btn-delete {
-				position: absolute;
-				right: 4px;
-				top: 4px;
-				opacity: 0;
-			}
-
-			.alert-wrapper {
-				position: absolute;
-				display: block;
-				top: 0px;
-				width: 106px;
-				left: 0px;
-				.alert {
-					border-radius: 0px;
-					background-color: rgba(242, 222, 222, 0.9);
-					padding: 5px 0px 5px 5px;
-				}
-			}
-
-			.progress-wrapper {
-				position: absolute;
-				display: block;
-				bottom: -26px;
-				width: 106px;
-				margin-left: 0px;
-				.progress {
-					border-radius: 0px;
-					border-bottom-right-radius: 4px;
-					border-bottom-left-radius: 4px;
-				}
-			}
-		}
-	}
+	
 
  
 		.editorWrapper {
@@ -2114,23 +2001,78 @@ body.anon{
 	}
 }
 
+	.upload-images{
+		padding-top:20px;
 
+		ul.sortable{
+			margin:0;
+			padding:0;
+			list-style: none;
+			display:inline-block;
 
+			li{
+				display:inline-block;
+				cursor: hand;
+			}
+		} 
+			
+			&:hover .btn-delete {
+			opacity: 1;
+		}
+		.btn-delete {
+			position: absolute;
+			right: 4px;
+			top: 4px;
+			opacity: 0;
+		}
 
+		.alert-wrapper {
+			position: absolute;
+			display: block;
+			top: 0px;
+			width: 100%;
+			left: 0px;
+			.alert {
+				border-radius: 0px;
+				background-color: rgba(242, 222, 222, 0.9);
+				padding: 5px 0px 5px 5px;
+			}
+		}
 
+		.progress-wrapper {
+			position: absolute;
+			//display: block;
+			bottom: -20px;
+			width: 100%;
+			margin-left: 0px;
+			.progress {
+				border-radius: 0px;
+				border-bottom-right-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}
+		}
 
+		.image-wrapper {
+			display:inline-block;
+			position:relative;
+			width: 100px;
+			height: 100px;
+		}
+		img{
+			padding:2px; 
+			width: 100px;
+			height: 100px;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			border-radius: 4px;
 
-
-
-
-
-ul.sortable{
-	margin:0;
-	padding:0;
-	list-style: none;
-	display:inline-block;
-
-	li{
-		display:inline-block;
+			&:hover{
+				cursor: pointer;
+			}
+		}
 	}
-}
+
+
+
+
+

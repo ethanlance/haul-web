@@ -3,7 +3,7 @@ import SortableItemView from './sortable-item';
 /* global $ */
 
 export default Ember.CollectionView.extend({	
-	//contentBinding: 'controller',
+	contentBinding: 'controller',
 	tagName: 'ul',
 	classNames: ["sortable"],
 	itemViewClass: SortableItemView, 
@@ -11,7 +11,7 @@ export default Ember.CollectionView.extend({
 	didInsertElement: function(){
 		this._super();
 		var controller = this.get('controller');
-
+		var _this = this;
 		//this.set('content', this.get('images'));
 		//JQuery sortable component.
 		this.$().sortable({
@@ -23,7 +23,7 @@ export default Ember.CollectionView.extend({
 				});
 
 				//Tell the controller the new sort.
-				controller.updateSortOrder(indexes);
+				controller.updateSortOrder(indexes); 
 			}
 		}).disableSelection();
 	}
