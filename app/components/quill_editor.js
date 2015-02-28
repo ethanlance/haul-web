@@ -24,7 +24,7 @@ var QuillEditorComponent = Ember.Component.extend({
 		}
 
 
-		h = '300px';
+		h = window.innerHeight - 350;; 
 		$('#editor').css("height", h);	
 		
  		var editor = new Quill('#editor',{

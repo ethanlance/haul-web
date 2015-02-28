@@ -18,11 +18,13 @@ export default Ember.ObjectController.extend({
 	isProcessing: false,
 	imagesAreSelected: false,
 	showImageModal: false,
+	animateModal: false,
 
-	productImageIds: [],
+	
 	selectedImages: [],
 	editorialForQuill: "",
 	canEditProduct: false,
+	openDrawer: false,
 
 	start: function() {
 		
@@ -76,7 +78,7 @@ export default Ember.ObjectController.extend({
 			return;
 		}
 
-		var obj = [];
+		var obj = [];	
 		this.get('productImages').forEach(function(image){
 			obj.push(image);
 		});
@@ -90,20 +92,11 @@ export default Ember.ObjectController.extend({
 	imagesIdsChanged: function() {
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
-		});
-		this.set('productImageIds', ids); 
-
-		//Highlight the image:
-		if( this.get('productImageIds').length === 0 ) {
-			this.set('imagesAreSelected', false);
-		}else{
-			this.set('imagesAreSelected', true);
-		}
- 
+		}); 
 		//Set the images on the model.
 		var model = this.get('model');
-		model.set('product_image_ids', this.get('productImageIds')); 
-		model.set('image_id', this.get('productImageIds')[0]); 
+		model.set('product_image_ids', ids); 
+		model.set('image_id', ids[0]); 
 
 	}.observes('selectedImages.@each'),
 
@@ -116,9 +109,11 @@ export default Ember.ObjectController.extend({
 	      var index = indexes[item.get('id')];
 	      item.set('idx', index);
 	    }, selectedImages);
+	    
 	    selectedImages = selectedImages.sortBy('idx');
 	    
 	    selectedImages.endPropertyChanges();
+ 	    
 	    this.set('selectedImages', selectedImages);
 	},
 
@@ -177,6 +172,7 @@ export default Ember.ObjectController.extend({
 			console.log("Error", error);
 			_this.set('isProcessing', false);
 			_this.set('showErrors', true);
+			_this.set('openDrawer', true);
 		});
 	},
 
@@ -213,11 +209,23 @@ export default Ember.ObjectController.extend({
 		},
 
 		showImageModal: function(){
+			var _this = this;
 			this.set('showImageModal', true);
+			Ember.run.later(function(){
+				_this.set('animateModal', true);
+			},100);
 		},
 
 		closeImageModal: function(){
-			this.set('showImageModal', false);
+			var _this = this;
+			this.set('animateModal', false);
+			Ember.run.later(function(){
+				_this.set('showImageModal', false);
+			},300);
 		}, 
+
+		btnDrawer: function() {
+			this.toggleProperty('openDrawer');
+		}
 	}
 });

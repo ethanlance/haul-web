@@ -12,7 +12,7 @@ export default Ember.CollectionView.extend({
 		this._super();
 		var controller = this.get('controller');
 
-		this.set('content', this.get('images'));
+		//this.set('content', this.get('images'));
 		//JQuery sortable component.
 		this.$().sortable({
 			update: function() {

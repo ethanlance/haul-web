@@ -1,17 +1,31 @@
 <div id="haul-dropzone" class="text-center"> 
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="fade-slide-wrapper">
-			<div {{bind-attr class=":fade-slide showImagePicker:in"}}>
-			
-			<button id="haul-dropzone-browse" class="btn btn-primary">
-				<span class="glyphicon glyphicon-picture"></span>
-				Browse Your Photos
-				<br/>
-				<small>or drop them here</small>
-			</button> 
-			</div>
-			</div>
+
+
+			{{#if doNotAnimate }}
+
+				
+				<button id="haul-dropzone-browse" class="btn btn-primary">
+					<span class="glyphicon glyphicon-picture"></span>
+					Browse Your Photos
+					<br/>
+					<small>or drop them here</small>
+				</button> 
+				
+			{{else}}
+				<div class="fade-slide-wrapper">
+					<div {{bind-attr class=":fade-slide showImagePicker:in"}}>
+					
+					<button id="haul-dropzone-browse" class="btn btn-primary">
+						<span class="glyphicon glyphicon-picture"></span>
+						Browse Your Photos
+						<br/>
+						<small>or drop them here</small>
+					</button> 
+					</div>
+				</div>
+			{{/if}}
 		</div>	
 	</div>
 

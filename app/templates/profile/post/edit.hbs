@@ -9,105 +9,133 @@
 		{{!-- CAN EDIT PRODUCT --}}
 		{{!-- CAN EDIT PRODUCT --}}
 		{{!-- CAN EDIT PRODUCT --}}
-		<div class="col-md-4 col-sm-4 col-xs-12">
-		<div class="well">
-		{{#if canEditProduct}}
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">  
-					<label>Item Name</label>
-					{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">  
-					<label>Item Description</label>
-					{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
-				</div> 
-			</div>
-			<div class="row">
-				<div class="col-md-6 col-sm-6 col-xs-6"> 
+		<div class="col-md-4 col-sm-4 col-xs-2">
+			<div {{bind-attr class=":drawer openDrawer:open"}}>
+				
 
-					<label>Quantity</label>
-					{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
-				</div>
+					<button {{action 'btnDrawer'}} class="btn btn-default btn-right btn-drawer">
+						<span class="glyphicon glyphicon-menu-hamburger"></span>
+					</button>
 
-				<div class="col-md-6 col-sm-6 col-xs-6"> 
-					<label>Status:</label>
-						{{view "select"
-					       content = product_status_options.status
-					       optionLabelPath = "content.name"
-					       optionValuePath = "content.id"
-					       selection = product_status_options.selectedStatus
-					       class = "form-control"
-					    }}
-					    {{#if showErrors}}<span class="has-error help-block">{{error-field product_status}}</span>{{/if}}
-		 		</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12"> 
-					<label>Price</label>
-					{{#input product_price}}
-					<div class="input-group">
-						<span class="input-group-addon">$</span>
-					  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
-					  	<br/>
+					<div {{bind-attr class=":drawer-content openDrawer:open"}}>
+					 
+						<label>Drag photos into your post</label><br/>
+					
+						<div class="gallery"> 				
+ 							{{view 'sortable' content=selectedImages}}
+						</div>
+					
+
+					{{#if canEditProduct}}
+
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12 text-center">  
+								<button {{action 'showImageModal'}} class="btn btn-default">
+									<span class="glyphicon glyphicon-picture"></span> upload photos
+								</button>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">  
+								<label>Item Name</label>
+								{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">  
+								<label>Item Description</label>
+								{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
+							</div> 
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6"> 
+
+								<label>Quantity</label>
+								{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-6"> 
+								<label>Status:</label>
+									{{view "select"
+								       content = product_status_options.status
+								       optionLabelPath = "content.name"
+								       optionValuePath = "content.id"
+								       selection = product_status_options.selectedStatus
+								       class = "form-control"
+								    }}
+								    {{#if showErrors}}<span class="has-error help-block">{{error-field product_status}}</span>{{/if}}
+					 		</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12"> 
+								<label>Price</label>
+								{{#input product_price}}
+								<div class="input-group">
+									<span class="input-group-addon">$</span>
+								  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
+								  	<br/>
+								</div>
+								{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
+								{{/input}}
+			 				</div>
+						</div>
+
+					{{else}}
+
+
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">  
+								<label>The Seller Card</label>
+								<span class="profile-badge">
+									{{ make-icon icon=product_user.icon isSmall=true }}
+									{{#link-to 'profile' user }}{{product_user.username}}{{/link-to}}
+								</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">  
+								<label>Item Name</label><br/>
+								{{product_name}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">  
+								<label>Description</label><br/>
+								{{sanitize-html product_description "description"}}
+							</div> 
+						</div>
+
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12"> 
+
+								<label>Quantity</label>
+								{{product_quantity}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12"> 
+								<label>Price</label>
+								${{product_price}}
+			 				</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12"> 
+								<label>Status</label>
+								{{product_status_options.selectedStatus.name}}
+					 		</div>
+						</div>
+						
+
+			 		{{/if}}
+
 					</div>
-					{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
-					{{/input}}
- 				</div>
-			</div>
-
-		{{else}}
-
-
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">  
-					<label>Seller</label>
-					<span class="profile-badge">
-						{{ make-icon icon=product_user.icon isSmall=true }}
-						{{#link-to 'profile' user }}{{product_user.username}}{{/link-to}}
-					</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">  
-					<label>Item Name</label>
-					{{product_name}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12"> 
-
-					<label>Quantity</label>
-					{{product_quantity}}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12"> 
-					<label>Status</label>
-					{{product_status_options.selectedStatus.name}}
-		 		</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12"> 
-					<label>Price</label>
-					{{product_price}}
- 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">  
-					<label>Description</label>
-					{{product_description}}
-				</div> 
-			</div>
-
- 		{{/if}}
-
-		</div> 
+				
+			</div> 
 		</div> 
 
 
-		<div class="col-md-8 col-sm-8 col-xs-12"> 
+		<div class="col-md-8 col-sm-8 col-xs-10"> 
 
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12"> 
@@ -115,24 +143,6 @@
 					{{input subject canShowValidationError=showErrors}} 
 				</div>
 			</div>	
-
-			<div class="gallery-wrapper"> 
-				<div class="gallery"> 
-					<div class="gallery-inside">
-						
-						{{#if canEditProduct}}
-						<button {{action 'showImageModal'}} class="btn btn-default">
-							<span class="glyphicon glyphicon-picture"></span>
-						</button>
-						{{/if}}
-
-						{{#each selectedImages}} 
-							<img {{bind-attr src=small}}> 
-						{{/each}}
-					</div>
-				</div>
-			</div>
-
 
 			{{quill-editor content=editorialForQuill  quillChange='quillChange'}}
 			{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}			
@@ -143,7 +153,7 @@
 	<div class="row">
 		<div {{bind-attr class=":col-md-12 :col-sm-12 :col-xs-12 :toolbar-footer"}}>	
 
-			<button {{action 'cancel'}} class="btn btn-default btn-left">
+			<button {{action 'cancel'}} class="btn btn-default">
 				cancel
 			</button>
 			
@@ -162,7 +172,7 @@
  
 
 
- <div {{bind-attr class=":modal :fade showImageModal:in:out  showImageModal:show:hide"}}>
+ <div {{bind-attr class=":modal animateModal:in:out showImageModal:show:hide"}}>
 	<div class="modal-dialog text-left haul-edit">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -178,6 +188,7 @@
 				imageClick='imageClick' 
 				imageDeleted='imageDeleted'
 				Haul=Haul
+				doNotAnimate='true'
 			}}
 
 
