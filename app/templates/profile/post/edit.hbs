@@ -13,27 +13,26 @@
 			<div {{bind-attr class=":drawer openDrawer:open"}}>
 				
 
-					<button {{action 'btnDrawer'}} class="btn btn-default btn-right btn-drawer">
-						<span class="glyphicon glyphicon-menu-hamburger"></span>
-					</button>
+				<button {{action 'btnDrawer'}} class="btn btn-default btn-right btn-drawer">
+					<span class="glyphicon glyphicon-menu-hamburger"></span>
+				</button>
 
-					<div {{bind-attr class=":drawer-content openDrawer:open"}}>
-					 
-						<label>Drag photos into your post</label><br/>
-						
-						<div class="gallery"> 				
-							{{#each selectedImages}}
-								<img {{bind-attr src=small}}/>
-							{{/each}}
-						</div>
+				<div {{bind-attr class=":drawer-content openDrawer:open"}}>
+				 
+					<label>Drag photos into your post</label><br/>
 					
+					<div class="gallery"> 				
+						{{#each selectedImages}}
+							<img {{bind-attr src=small}}/>
+						{{/each}}
+					</div>
 
 					{{#if canEditProduct}}
 
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12 text-center">  
 								<button {{action 'showImageModal'}} class="btn btn-default">
-									<span class="glyphicon glyphicon-picture"></span> upload photos
+									<span class="glyphicon glyphicon-picture"></span> edit photos
 								</button>
 							</div>
 						</div>
@@ -179,7 +178,10 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button {{action 'closeImageModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Images</h4>
+				<h4 class="modal-title" id="myModalLabel">
+					Edit Images
+					<small>Drag to reorder the images</small>
+				</h4>
 			</div>
 		<div class="modal-body">
 

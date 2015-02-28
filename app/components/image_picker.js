@@ -10,13 +10,6 @@ export default Ember.Component.extend({
 	user_idBinding: 'session.currentUser.id',
 	user_tokenBinding: 'session.currentUser.access_token',
 	store: null,
- 
-
-	actions: {
-		imageDelete: function(event) {
-			this.sendAction('imageDelete', event);
-		}, 
-	},
 
 	didInsertElement: function(){
 		var _this = this; 
@@ -32,7 +25,7 @@ export default Ember.Component.extend({
 
 			url: this.Haul.Server.IMAGE_SERVER_HOST + "/images",
 			method: "post",
-			headers: {"Authorization": "Bearer " + this.user_token},
+			//headers: {"Authorization": "Bearer " + this.user_token},
 			params: {'user_id':user_id},
 			paramName: "attachment",
 			dictDefaultMessage: "Drop Files Here <br/> OR <br/> Click Here To Browse Your Files",
