@@ -2,9 +2,11 @@ import Ember from "ember";
 import DS from "ember-data";
 export default DS.Model.extend(Ember.Validations.Mixin, {
 	
+	post_id: DS.attr('string'),
+		
 	//POST
 	user: DS.belongsTo('user', {async:true}),
-	post_id: DS.attr('string'),
+
 	subject: DS.attr('string'),
 	body: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),

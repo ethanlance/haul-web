@@ -32,7 +32,7 @@ export default DS.RESTSerializer.extend({
 			commentCount: id
 		};
 
-		payload = {'repost-myself': data};  
+		payload = {'repost': data};  
 		return this._super(store, primaryType, payload, recordId, requestType);
 	},
 

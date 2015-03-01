@@ -4,11 +4,6 @@
 {{#form-for model wrapper="bs3-wrapper"}}
 <div class="container-fluid haul-edit">
 	<div class="row">
-		
-
-		{{!-- CAN EDIT PRODUCT --}}
-		{{!-- CAN EDIT PRODUCT --}}
-		{{!-- CAN EDIT PRODUCT --}}
 		<div class="col-md-4 col-sm-4 col-xs-2">
 			<div {{bind-attr class=":drawer openDrawer:open"}}>
 				
@@ -154,6 +149,12 @@
 	<div class="row">
 		<div {{bind-attr class=":col-md-12 :col-sm-12 :col-xs-12 :toolbar-footer"}}>	
 
+			<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
+				<span class="glyphicon glyphicon-trash"></span>
+				delete
+			</button>
+
+
 			<button {{action 'cancel'}} class="btn btn-default">
 				cancel
 			</button>
@@ -173,7 +174,7 @@
  
 
 
- <div {{bind-attr class=":modal animateModal:in:out showImageModal:show:hide"}}>
+<div {{bind-attr class=":modal animateImageModal:in:out showImageModal:show:hide"}}>
 	<div class="modal-dialog text-left haul-edit">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -208,5 +209,50 @@
       </div>
     </div>
   </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div {{bind-attr class=":modal animateDeleteModal:in:out showDeleteModal:show:hide"}}>
+	<div class="modal-dialog text-left haul-edit">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button {{action 'closeDeleteModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					Delete This Post?
+					<small>This cannot be undone.</small>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<button {{action 'closeDeleteModal'}} class="btn btn-warning">Cancel</button>
+				{{ladda-btn
+					name='Delete Post'
+					class="display-inline"
+					btnClasses='btn btn-danger ladda-button'
+					btnClick='deletePost'
+					spin=isProcessingDelete
+				}}
+			</div>
+		</div>
+  	</div>
 </div>
 

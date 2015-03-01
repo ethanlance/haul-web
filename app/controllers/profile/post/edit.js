@@ -16,20 +16,17 @@ export default Ember.ObjectController.extend({
 	product_status_options: null,
 	currentUserBinding: 'Haul.currentUser',
 	isProcessing: false,
+	isProcessingDelete: false,
 	imagesAreSelected: false,
 	showImageModal: false,
-	animateModal: false,
-
+	animateImageModal: false,
+	showDeleteModal: false,
+	animateDeleteModal: false,
 	
 	selectedImages: [],
 	editorialForQuill: "",
 	canEditProduct: false,
-	openDrawer: false,
-
-	start: function() {
-		
-
-	}.on('init'),
+	openDrawer: false, 
 
 	setup: function() {
 		this.set('canEditProduct', false);
@@ -40,7 +37,6 @@ export default Ember.ObjectController.extend({
 		if( this.get('model').get('product_user').get('id') === this.get('currentUser').get('id') ){
 			this.set('canEditProduct', true);
 		}
-
 
 		var selectedStatus;
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
@@ -143,6 +139,26 @@ export default Ember.ObjectController.extend({
 		}
 	},
 
+	deletePost: function() {
+		console.log("DELETE?")
+		var _this = this;		
+		var model = this.get('model');
+
+		model.deleteRecord();
+		model.save()
+		.then(function(){
+			return _this.store.find('post-list', {user_id:_this.get('currentUser').get('id')});
+		})
+		.then(function(record){
+			_this.set('isProcessingDelete', false);
+			var user = _this.get('currentUser'); 
+			_this.transitionToRoute('profile', user);
+		}, function(error){
+			console.log("Error", error);
+			_this.set('isProcessingDelete', false);
+		});
+	},
+
 	savePost: function() {
 		var _this = this;		
 		var model = this.get('model');
@@ -180,6 +196,43 @@ export default Ember.ObjectController.extend({
 
 	actions: {
 
+		deletePost: function() {
+			this.deletePost();
+		},
+
+		showDeleteModal: function(){
+			var _this = this;
+			this.set('showDeleteModal', true);
+			Ember.run.later(function(){
+				_this.set('animateDeleteModal', true);
+			},100);
+		},
+
+		closeDeleteModal: function(){
+			var _this = this;
+			this.set('animateDeleteModal', false);
+			Ember.run.later(function(){
+				_this.set('showDeleteModal', false);
+			},300);
+		}, 
+
+
+		showImageModal: function(){
+			var _this = this;
+			this.set('showImageModal', true);
+			Ember.run.later(function(){
+				_this.set('animateImageModal', true);
+			},100);
+		},
+
+		closeImageModal: function(){
+			var _this = this;
+			this.set('animateImageModal', false);
+			Ember.run.later(function(){
+				_this.set('showImageModal', false);
+			},300);
+		}, 
+
 		cancel: function() {
 			var model = this.get('model');
 			if( model.get('id')){
@@ -208,22 +261,6 @@ export default Ember.ObjectController.extend({
 			model.set('body', text);
 		},
 
-		showImageModal: function(){
-			var _this = this;
-			this.set('showImageModal', true);
-			Ember.run.later(function(){
-				_this.set('animateModal', true);
-			},100);
-		},
-
-		closeImageModal: function(){
-			var _this = this;
-			this.set('animateModal', false);
-			Ember.run.later(function(){
-				_this.set('showImageModal', false);
-			},300);
-		}, 
-
 		btnDrawer: function() {
 			this.toggleProperty('openDrawer');
 		},
@@ -232,6 +269,5 @@ export default Ember.ObjectController.extend({
 			console.log("UDDATE TRIGGER!")
 			this.updateSortOrder(i);
 		}
-
 	}
 });

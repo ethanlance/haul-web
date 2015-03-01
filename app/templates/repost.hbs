@@ -1,8 +1,6 @@
 
 {{#modal-modal animateClose=animateClose closeModal='closeModal'}}
 
-
-
 {{#form-for repost wrapper="bs3-wrapper"}}
 	<div class="modal-dialog text-left">
 		<div class="modal-content">
@@ -10,125 +8,223 @@
 			<div class="modal-header">
 				
 				<button {{action 'close'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				
-{{!-- 				<button class="btn btn-sm btn-default btn-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-				  Edit Product Details
-				  <span class="glyphicon glyphicon-wrench"></span>
-				</button>	 --}}	
 
 				<h4 class="modal-title" id="myModalLabel">Repost</h4>
 
 			</div>
 
-			<div class="modal-body">
 
-
-				<div {{bind-attr class="postComplete:hide:show"}}>
-					 
-				
-				<div class="collapse" id="collapseExample">
-					<div class="row well">
-						<div class="col-md-6 col-sm-6 col-xs-6">  
-							<label>Name your item</label>
-							{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
-
-							<label>Price:</label>
-							{{#input price}}
-							<div class="input-group">
-								<span class="input-group-addon">$</span>
-							  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
-							  	<br/>
-							</div>
-							{{#if showErrors}}<span class="has-error help-block">{{error-field price}}</span>{{/if}}
-							{{/input}}
-
-							<label>Quantity:</label>
-							{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
-
-						</div>
-
-						<div class="col-md-6 col-sm-6 col-xs-6">  
-							<label>Describe your item</label>
-							{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
-						</div> 
-					</div>
+			<div {{bind-attr class=":modal-body showSuccess:show:hide :text-center"}}>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h5>Repost Complete!</h5>
+					<button {{action 'close'}} class="btn btn-default">close</button>
+					<button {{action 'goToFeed'}} class="btn btn-default">go to my feed</button>
 				</div>
+			</div>
 
-					
- 
 
+			<div {{bind-attr class=":modal-body showRepost:show:hide"}}>				
+				<div class="container-fluid haul-edit">
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-		
-							<label>Post Title</label>
-							{{input subject canShowValidationError=showErrors}} 
-						</div>
-					</div>	
+						<div class="col-md-4 col-sm-4 col-xs-2">
+							<div {{bind-attr class=":drawer openDrawer:open"}}>
+								
+
+								<button {{action 'btnDrawer'}} class="btn btn-default btn-right btn-drawer">
+									<span class="glyphicon glyphicon-menu-hamburger"></span>
+								</button>
+
+								<div {{bind-attr class=":drawer-content openDrawer:open"}}>
+								 
+									<label>Drag photos into your post</label><br/>
+									
+									<div class="gallery"> 				
+										{{#each selectedImages}}
+											<img {{bind-attr src=small}}/>
+										{{/each}}
+									</div>
+
+								{{#if canEditProduct}}
+
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12 text-center">  
+											<button {{action 'showImageModal'}} class="btn btn-default">
+												<span class="glyphicon glyphicon-picture"></span> edit photos
+											</button>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12">  
+											<label>Item Name</label>
+											{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12">  
+											<label>Item Description</label>
+											{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
+										</div> 
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-6"> 
+
+											<label>Quantity</label>
+											{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
+										</div>
+
+										<div class="col-md-6 col-sm-6 col-xs-6"> 
+											<label>Status:</label>
+												{{view "select"
+											       content = product_status_options.status
+											       optionLabelPath = "content.name"
+											       optionValuePath = "content.id"
+											       selection = product_status_options.selectedStatus
+											       class = "form-control"
+											    }}
+											    {{#if showErrors}}<span class="has-error help-block">{{error-field product_status}}</span>{{/if}}
+								 		</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12"> 
+											<label>Price</label>
+											{{#input product_price}}
+											<div class="input-group">
+												<span class="input-group-addon">$</span>
+											  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
+											  	<br/>
+											</div>
+											{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
+											{{/input}}
+						 				</div>
+									</div>
+
+								{{else}}
 
 
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="gallery-wrapper"> 
-							<div class="gallery"> 
-								<div class="gallery-inside">
-								
-									{{#each repost.product_images}} 
-										<img {{bind-attr src=small}}> 
-									{{/each}}
-								
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12">  
+											<label>The Seller Card</label>
+											<span class="profile-badge">
+												{{ make-icon icon=product_user.icon isSmall=true }}
+												{{#link-to 'profile' user }}{{product_user.username}}{{/link-to}}
+											</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12">  
+											<label>Item Name</label><br/>
+											{{product_name}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12">  
+											<label>Description</label><br/>
+											{{sanitize-html product_description "description"}}
+										</div> 
+									</div>
+
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12"> 
+
+											<label>Quantity</label>
+											{{product_quantity}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12"> 
+											<label>Price</label>
+											${{product_price}}
+						 				</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12"> 
+											<label>Status</label>
+											{{product_status_options.selectedStatus.name}}
+								 		</div>
+									</div>
+									
+						 		{{/if}}
+
+								</div>
+							</div> 
+						</div> 
+
+
+						<div class="col-md-8 col-sm-8 col-xs-10"> 
+
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12"> 
+									<label>Post Title:</label>
+									{{input  subject canShowValidationError=showErrors}} 
+								</div>
+							</div>	
+
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12">
+
+									{{quill-editor content=editorialForQuill quillChange='quillChange'}}
+									{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}	
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
+  									{{ladda-btn
+										name='post'
+										class="display-inline"
+										btnClasses='btn btn-primary btn-right ladda-button'
+										btnClick='savePost'
+										spin=isProcessing
+									}}
+							        <button {{action 'close'}} type="button" class="btn btn-default btn-right" data-dismiss="modal">cancel</button>					
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							{{quill-editor 
-								content=editorialForQuill 
-								height='200px' 
-								quillChange='quillChange'
-							}}
-						</div>
-					</div>
-				</div>
-
-
-				<div {{bind-attr class="postComplete:show:hide :row :text-center"}}>
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<h5>Repost Complete!</h5>
-						<button {{action 'close'}} class="btn btn-default">close</button>
-						
-						
-						<button {{action 'goToFeed'}} class="btn btn-default">go to my feed</button>
-						
-					</div>
-				</div>
+				</div> 
 	      	</div>
-
-	      	<div class="modal-footer">
-		      	<div {{bind-attr class="postComplete:hide:show"}}>
-
-		      		<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-
-					        <button {{action 'close'}} type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
-					        
-					        {{ladda-btn
-								name='post'
-								class="display-inline"
-								btnClasses='btn btn-primary btn-right ladda-button'
-								btnClick='savePost'
-								spin=isProcessing
-							}}
-
-						</div>
-					</div>
-				</div>
-	    	</div>
-
 		</div>
   	</div>
 {{/form-for}}  
+
+<div {{bind-attr class=":modal animateModal:in:out showImageModal:show:hide"}}>
+	<div class="modal-dialog text-left haul-edit">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button {{action 'closeImageModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					Edit Images
+					<small>Drag to reorder the images</small>
+				</h4>
+			</div>
+		<div class="modal-body">
+
+			{{#image-picker  
+				images=userImages
+				selectedImages=selectedImages
+				refresh='refresh'
+				imageClick='imageClick' 
+				imageDeleted='imageDeleted'
+				Haul=Haul
+				doNotAnimate='true'
+			}}
+				{{view 'sortable' content=selectedImages}}
+			{{/image-picker}}
+
+      </div>
+      <div class="modal-footer">
+
+
+      	<div {{bind-attr class="postComplete:hide:show"}}>
+	        <button {{action 'closeImageModal'}} type="button" class="btn btn-default" data-dismiss="modal">done</button> 
+		</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 {{/modal-modal}}

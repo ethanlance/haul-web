@@ -30,7 +30,7 @@
 		{{!-- SHOW UPLOAD --}}
 		<div {{bind-attr class=":slide showUpload:in showUploadOutLeft:outleft showUploadOutRight:outright"}}> 
 
-			{{image-picker 
+			{{#image-picker 
 				images=userImages
 				selectedImages=selectedImages
 				refresh='refresh'
@@ -39,6 +39,8 @@
 				Haul=Haul
 				showImagePicker=showImagePicker
 			}} 
+				{{view 'sortable' content=selectedImages}}
+			{{/image-picker}}
 
 			<div class="toolbar-footer">
 				<div class="container">

@@ -25,31 +25,16 @@ export default ApplicationAdapter.extend({
         return this.ajax(url, 'GET');
     },
 
- //    deleteRecord: function(store, type, record ) {
+    deleteRecord: function(store, type, record ) {
     
- //    	record.rollback();
+    	//record.rollback();
+		var user_id = record.get('user').get('id');
+		var post_id = record.get('post_id');
+		//record.rollforward()?
 
- //      	var data = {user_id:  this.get('currentUser').id};
-	// 	var collection_id = record.get('collection').get('id');
-	// 	var product_id = record.get('product').get('id');
-	// 	var url = this.host + "/stores/" + collection_id + "/products/" + product_id;
-
-	// 	//record.rollforward()?
-
-	// 	return this.ajax(url, "DELETE", {data: data} );
-	// },    
- 
-	// updateRecord: function(store, type, record) {
-
-	// 	var data = {
-	// 		editorial: record.get('editorial'),
-	// 		user_id: this.get('currentUser').id
-	// 	};
-
-	// 	var collection_id = record.get('collection').get('id');
-	// 	var url = this.host + "/stores/" + collection_id + "/products/" + record.get('product').get('id');
-	// 	return this.ajax(url, "PUT", { data: data }); 
-	// },
+		var url = this.host + "/users/" + user_id + "/posts/" + post_id;
+		return this.ajax(url, "DELETE");
+	},
 
 	updateRecord: function(store, type, record) {
 
