@@ -9,32 +9,11 @@ var CommentSectionComponent = Ember.Component.extend({
 
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
-	
+
 	comments: null,
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('comments', 'commentsSorting'),
 
-	itemObjectBinding: "itemObject",
-	itemType: "products",
-	itemIdBinding: "itemObject.id",
-
-	contextObject: null,
-	contextType: 'collections',
-	contextIdBinding: "contextObject.id",
- 
-	userIdBinding: "session.currentUser.id",
-
-	type_map: {
-		"collections": "stores",
-		"products": "products",
-		"users": "users",
-	},
-
-	reverse_type_map: {
-		"stores": "collections",
-		"products": "products",
-		"users": "users"
-	},
 	
 
 	start: function() { 
@@ -45,7 +24,7 @@ return;
 
 		var store = this.get('targetObject.store');
 		var _this = this;
-		var comments = store.filter('product-comment', function(comment) {
+		var comments = store.filter('post-comment', function(comment) {
 
 			var itemId = comment.get('product_id');
 			var contextId = comment.get('context_id');

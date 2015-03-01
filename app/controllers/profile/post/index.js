@@ -4,6 +4,8 @@ var $ = Ember.$;
 export default Ember.ObjectController.extend({  
 
  	needs: ['profile'],
+
+ 	isRepost:false,
  
  	thisPage: "postPage", 
  	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
@@ -14,7 +16,7 @@ export default Ember.ObjectController.extend({
  		if( this.get('currentPage') === this.get('thisPage')){
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		
- 	}.observes('currentPage', 'model'),
+ 	}.observes('currentPage'),
 
 
 	currentUserIdBinding: 'Haul.currentUser.id',
@@ -27,14 +29,21 @@ export default Ember.ObjectController.extend({
 	isProfileOwner: false,
 
 	setup: function() { 
+		this.set('isProfileOwner', false);
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
-			if( this.get('userId') === this.get('currentUserId')) {
+			if( this.get('model').get('user').get('id') === this.get('currentUserId')) {
 				this.set('isProfileOwner', true);
 			}
 		}
 		this.set('url', window.location.href);
 
-	}.observes('userId', 'currentUserId', 'model.id'),
+		this.set('isRepost', false);
+		if(!Ember.isEmpty(this.get('model').get('repost_user').get('content'))){
+			console.log("OK", this.get('model').get('repost_user'));
+			this.set('isRepost', true);
+		}
+
+	}.observes('currentUserId', 'model.id'),
 
 	actions: {
 

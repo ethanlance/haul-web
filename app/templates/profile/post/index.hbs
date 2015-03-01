@@ -3,48 +3,68 @@
 <div class="container-fluid haul-content post-page">
 	<div class="row">
 		<div class="col-md-7 col-sm-7 col-xs-12 text-center">
-			<div class="post">
+			
+
+
+			{{!-- CITATION --}}
+			{{!-- CITATION --}}
+			{{!-- CITATION --}}
+			{{!-- CITATION --}}
+			{{#if isRepost}}
+			<div class="citation post-detail-citation"> 
+					<span class="glyphicon glyphicon-retweet"></span>
+					<div class="name">
+						{{#link-to 'profile' user }}
+						@{{user.username}} 
+						{{/link-to}}
+						<span class="rehauled">reposted</span>
+					</div>
+
+					
+					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+					<div class="image">
+						{{ make-icon icon=repost_user.icon isSmall=true }}
+					</div>
+					<div class="name">@{{repost_user.username}}</div> 
+					{{/link-to}}
+			</div>
+			{{/if}}
+
+			
+
+			<div {{bind-attr class=":post-cap isRepost::no-citation"}}>
+
+			 
+
+			 		<div class="price">${{product_price}}</div>
+
+
+				 	{{like-btn post=this openModal='openModal' class="display-inline"}}
+				 	
+				 	{{comment-btn post=this class="display-inline" }}
+
+				 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
+		 
+
+				
+			</div>
+
+
+			<div class="post-detail">
 
 				
 
 				{{!-- EDIT YOUR OWN POST --}}
-			 	{{#if isProfileOwner}}
+			 	{{!-- {{#if isProfileOwner}}
 				 	{{#link-to 'profile.post.edit' user this }}
 					<button class="btn btn-default btn-xs btn-edit-post">
 						edit post
 					</button>
 					{{/link-to}}
 				{{/if}}
-
+ --}}
 			
 
-				{{!-- CITATION --}}
-				{{!-- CITATION --}}
-				{{!-- CITATION --}}
-				{{!-- CITATION --}}
-				<div class="citation">
-
-					{{!-- TIMESTAMP --}}
-					<div class="moment">posted {{format-date updated_at}}</div>
-					
-					{{#if repost_user}}
-						<span class="glyphicon glyphicon-retweet"></span>
-						<div class="name">
-							{{#link-to 'profile' user }}
-							@{{user.username}} 
-							{{/link-to}}
-							<span class="rehauled">reposted</span>
-						</div>
-
-						
-						{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-						<div class="image">
-							{{ make-icon icon=repost_user.icon isSmall=true }}
-						</div>
-						<div class="name">@{{repost_user.username}}</div> 
-						{{/link-to}}
-					{{/if}}
-				</div>
 
 				
 
@@ -53,14 +73,12 @@
 				{{!-- THE POST --}}
 				{{!-- THE POST --}}
 				<div class="article">
-					<h2>
-						{{ subject }}
-					</h2>
+			
 						{{!-- BUTTONS --}}
 						{{!-- BUTTONS --}}
 						{{!-- BUTTONS --}}
 						{{!-- BUTTONS --}}
-					 	<div class="btn-wrapper">
+				{{!-- 	 	<div class="btn-wrapper">
 
 					 		<div class="price">${{product_price}}</div>
 
@@ -72,11 +90,8 @@
 						 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
 
 						</div>
+					 --}}
 					
-					<div class="product-image">
-
-						<img class="img-responsive" {{bind-attr src=image.medium}}/>
-					</div>
 					
 
 
@@ -88,14 +103,34 @@
 						</div>
 						<div class="name">{{user.username}} says</div>
 						{{/link-to}}
+
+						{{!-- TIMESTAMP --}}
+						<div class="moment">posted {{format-date updated_at}}</div>
+				
 					</div>
+
+					{{!-- <div class="product-image">
+						<img class="img-responsive" {{bind-attr src=image.medium}}/>
+					</div> --}}
+
+					<h2>
+						{{ subject }}
+
+						{{#if isProfileOwner}}
+						 	{{#link-to 'profile.post.edit' user this }}
+							<button class="btn btn-default btn-xs">
+								edit post
+							</button>
+							{{/link-to}}
+						{{/if}}
+					</h2>
 
 					{{!-- EDITORIAL --}}
 					<div class="editorial">
 						{{sanitize-html body "editorial"}}
 					</div>
 
-				{{!-- 	{{comment-section openModal='openModal' itemObject=product contextObject=collection  class="display-inline" }} --}}
+					{{comment-section openModal='openModal' post=this class="display-inline" }}
 				
 				</div>	
 			</div> 
