@@ -9,6 +9,7 @@ export default Ember.ObjectController.extend({
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
 	editorialForQuill: " ",
+	selectedImages: [],
 
 	//showModal: false,
 	showSuccess:false,
@@ -20,6 +21,10 @@ export default Ember.ObjectController.extend({
 		if(Ember.isEmpty(this.get('model')) || Ember.isEmpty(this.get('currentUser')) ){
 			return
 		} 
+
+		this.set('selectedImages', []);
+		this.set('showSuccess', false);
+		this.set('showRepost', false);
 
 		var _this = this;
 		var model = this.get('model');
@@ -111,7 +116,8 @@ export default Ember.ObjectController.extend({
 		if(!repost){
 			return;
 		}
-
+console.log("REPOST", repost);
+console.log("IMAGE", this.get('selectedImages'))
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
 		}); 

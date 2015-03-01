@@ -2,6 +2,11 @@ import { sanitize } from 'ember-sanitize/utils/sanitize';
 import Ember from 'ember';
 
 export default Ember.Handlebars.makeBoundHelper(function(html, configName, options) {
+
+  if(Ember.isEmpty(html)){
+    return new Ember.Handlebars.SafeString(html);
+  }
+
   //console.log("HTML", html);
   html = html.replace(/<div>/g, "<p>");
   html = html.replace(/<\/div>/g, "</p>");
