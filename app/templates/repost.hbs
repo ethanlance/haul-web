@@ -15,10 +15,12 @@
 
 
 			<div {{bind-attr class=":modal-body showSuccess:show:hide :text-center"}}>
-				<div class="col-md-12 col-sm-12 col-xs-12">
-					<h5>Repost Complete!</h5>
-					<button {{action 'close'}} class="btn btn-default">close</button>
-					<button {{action 'goToFeed'}} class="btn btn-default">go to my feed</button>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<h5>Repost Complete!</h5>
+						<button {{action 'close'}} class="btn btn-default">close</button>
+						<button {{action 'goToFeed'}} class="btn btn-default">go to my feed</button>
+					</div>
 				</div>
 			</div>
 
