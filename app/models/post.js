@@ -1,5 +1,6 @@
 import Ember from "ember";
 import DS from "ember-data";
+var Config = Haul;
 export default DS.Model.extend(Ember.Validations.Mixin, {
 	
 	post_id: DS.attr('string'),
@@ -39,10 +40,13 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 		}
 	}.property('subject'),
 
+	
+
 	validations: { 
 		body: {
 		 	presence: true,
-		 	length: { maximum: 12000, minimum: 0 }
+		 	length: { maximum: 12000, minimum: 0 },
+			images: {message:'Sorry, only images from the product can go in your post'},
 		},
 		subject: {
 		 	presence: true
@@ -68,3 +72,31 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 		}
 	}
 });	
+
+
+(function() {
+Ember.Validations.validators.local.Images = Ember.Validations.validators.Base.extend({
+  call: function() {
+	var hostname = "haul.io"
+	if(Config.Server.environment === "development" ){
+		hostname = "localhost:8081"
+	}
+  	var body = this.model.get(this.property);
+  	if(Ember.isEmpty(body)){return;}
+	var dom = document.createElement('div').innerHTML = body;
+	if(dom){
+		var imgs = Ember.$(dom).find('img').toArray();
+		var _this = this;
+		imgs.forEach(function(img){
+			var parser = document.createElement('a');
+			parser.href = img.src;
+			var pathParts = parser.pathname.split('/');
+			if(pathParts[1] !== "static.haul.io" && parser.hostname !== hostname) {
+				 //console.log("VALIDATION FAILS! ", img.src , parser.hostname, hostname)
+				 _this.errors.pushObject(_this.options.message);
+			}
+		});
+	}
+  }
+});
+})();

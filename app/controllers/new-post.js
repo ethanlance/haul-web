@@ -63,6 +63,9 @@ export default Ember.ObjectController.extend({
 					_this.set(s+'OurLeft', false);
 				}
 				_this.set(s, false);
+
+				var key = _s+'FadeIn'; 
+				_this.set(key, false);
 			}
 
 			window.scrollTo(0,0);

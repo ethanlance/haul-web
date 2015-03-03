@@ -19,6 +19,7 @@ module.exports = function(environment) {
       // when it is created
 
       Server: {
+        environment:environment,
         get: function(key) {
           if( this[key] ){
             return this[key];
