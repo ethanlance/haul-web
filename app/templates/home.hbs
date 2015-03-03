@@ -8,23 +8,19 @@
 		<div class="col-md-6 col-sm-8 col-xs-12">
 
 
-		{{#each model.products}}
-			{{#if product.image}}
-				{{partial 'post'}}	
-			{{/if}}
-		{{/each}} 
-		 
-
-	{{#unless isProfileOwner}} 
-	{{#unless model.products }}
-		<p class="padding-top text-center font-weak">{{user.name}} has no posts.</p>
-	{{/unless}} 
-	{{/unless}}
+	
+			{{feed-view model=model galleryView=galleryView currentPos=currentPos}}
+			<div {{bind-attr class="galleryView:gallery"}}>
+			{{#each model}}
+				{{#if image}}
+					{{partial 'post'}}	
+				{{/if}}
+			{{/each}}
+			</div>
 
 
 	
-	{{#if isProfileOwner}} 
-		{{#unless model.products }} 
+		{{#unless hasPosts }} 
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12  text-center">
 				
@@ -38,9 +34,8 @@
 				{{/link-to}} 
 		
 			</div>	
-		</div> 
-	{{/unless}}
-	{{/if}}  
+		</div>  
+		{{/unless}}
 		 
 
 		</div> 

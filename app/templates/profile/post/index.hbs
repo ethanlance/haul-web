@@ -12,61 +12,27 @@
 			{{!-- CITATION --}}
 			{{#if isRepost}}
 			<div class="citation post-detail-citation"> 
-					<span class="glyphicon glyphicon-retweet"></span>
-					<div class="name">
-						{{#link-to 'profile' user }}
-						@{{user.username}} 
-						{{/link-to}}
-						<span class="rehauled">reposted</span>
-					</div>
-
-					
-					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-					<div class="image">
-						{{ make-icon icon=repost_user.icon isSmall=true }}
-					</div>
-					<div class="name">@{{repost_user.username}}</div> 
+				<span class="glyphicon glyphicon-retweet"></span>
+				<div class="name">
+					{{#link-to 'profile' user }}
+					@{{user.username}} 
 					{{/link-to}}
+					<span class="rehauled">reposted</span>
+				</div>
+
+				
+				{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+				<div class="image">
+					{{ make-icon icon=repost_user.icon isSmall=true }}
+				</div>
+				<div class="name">@{{repost_user.username}}'s post</div>  
+				{{/link-to}}
 			</div>
 			{{/if}}
 
 			
 
-			<div {{bind-attr class=":post-cap isRepost::no-citation"}}>
-
-			 
-
-			 		<div class="price">${{product_price}}</div>
-
-
-				 	{{like-btn post=this openModal='openModal' class="display-inline"}}
-				 	
-				 	{{comment-btn post=this class="display-inline" }}
-
-				 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
-		 
-
-				
-			</div>
-
-
 			<div class="post-detail">
-
-				
-
-				{{!-- EDIT YOUR OWN POST --}}
-			 	{{!-- {{#if isProfileOwner}}
-				 	{{#link-to 'profile.post.edit' user this }}
-					<button class="btn btn-default btn-xs btn-edit-post">
-						edit post
-					</button>
-					{{/link-to}}
-				{{/if}}
- --}}
-			
-
-
-				
 
 				{{!-- THE POST --}}
 				{{!-- THE POST --}}
@@ -74,57 +40,52 @@
 				{{!-- THE POST --}}
 				<div class="article">
 			
-						{{!-- BUTTONS --}}
-						{{!-- BUTTONS --}}
-						{{!-- BUTTONS --}}
-						{{!-- BUTTONS --}}
-				{{!-- 	 	<div class="btn-wrapper">
+					<div class="btn-wrapper">
 
-					 		<div class="price">${{product_price}}</div>
+				 		<div class="price">${{product_price}}</div>
 
+					 	{{like-btn post=this openModal='openModal' class="display-inline"}}
+					 	
+					 	{{comment-btn post=this class="display-inline" }}
 
-						 	{{like-btn post=this openModal='openModal' class="display-inline"}}
-						 	
-						 	{{comment-btn post=this class="display-inline" }}
-
-						 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
-
-						</div>
-					 --}}
-					
-					
-
-
-					{{!-- POSTER --}}
-					<div class="citation no-top-margin">
-						{{#link-to 'profile' user }}
-						<div class="image">
-							{{ make-icon icon=user.icon isSmall=true}}
-						</div>
-						<div class="name">{{user.username}} says</div>
-						{{/link-to}}
-
-						{{!-- TIMESTAMP --}}
-						<div class="moment">posted {{format-date updated_at}}</div>
-				
-					</div>
-
-					{{!-- <div class="product-image">
-						<img class="img-responsive" {{bind-attr src=image.medium}}/>
-					</div> --}}
-
-					<h2>
-						{{ subject }}
+					 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
 
 						{{#if isProfileOwner}}
 						 	{{#link-to 'profile.post.edit' user this }}
-							<button class="btn btn-default btn-xs">
+							<button class="btn btn-default">
 								edit post
 							</button>
 							{{/link-to}}
 						{{/if}}
+			 
+					</div>
+
+					{{!-- POSTER --}}
+					<div class="citation">
+						{{#link-to 'profile' user }}
+						<div class="image">
+							{{ make-icon icon=user.icon isSmall=true}}
+						</div>
+						<div class="name">@{{user.username}} says
+						<div class="moment">posted {{format-date updated_at}}</div>
+
+						</div>
+						{{/link-to}}
+					</div>
+ 
+
+					<h2>
+						{{ subject }}
 					</h2>
 
+
+
+					{{#unless postHasImage}}
+					<div class="product-image">
+						<img class="img-responsive" {{bind-attr src=image.large}}/>
+					</div>
+					{{/unless}}
+ 
 					{{!-- EDITORIAL --}}
 					<div class="editorial">
 						{{sanitize-html body "editorial"}}
@@ -151,11 +112,11 @@
 
 				<div class="seller">
 
-
-					<div class="row">
+				<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
-							
-							{{#link-to 'profile' product_user}}
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									{{#link-to 'profile' product_user}}
 								{{ make-icon icon=product_user.icon isSmall=true}}
 							
 
@@ -164,7 +125,17 @@
 									<div class="username">@{{product_user.username}}</div> 
 								</div>
 							{{/link-to}}
+								</div>
 
+								<div class="col-md-6 col-sm-6 col-xs-6 text-center">
+									<div class="price">
+										${{product_price}}
+										<button class="btn btn-default btn-buy btn-lg">
+											buy
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -177,35 +148,14 @@
 							
 						</div>
 					</div>
-
+ 
 					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-							<div class="name">
-								{{product_name}}
-							</div> 
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-
-							<button class="btn btn-default btn-buy">
-								buy
-							</button>
-
-							<div class="price">
-								${{product_price}}
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">	
-							<div class="description-label">
-								Description
-							</div> 
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h3>{{product_name}}</h3>
 							{{sanitize-html product_description "description"}}
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>

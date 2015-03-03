@@ -4,11 +4,32 @@
 {{#form-for model wrapper="bs3-wrapper"}}
 <div class="container-fluid haul-edit">
 	<div class="row">
+		
+
+
+		<div class="col-md-8 col-sm-8 col-xs-10"> 
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12"> 
+					<label>Post Title</label>
+					{{input subject canShowValidationError=showErrors}} 
+				</div>
+			</div>	
+
+			{{quill-editor content=editorialForQuill  quillChange='quillChange'}}
+			{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}			
+		</div>
+
+
+
+
+
+
 		<div class="col-md-4 col-sm-4 col-xs-2">
 			<div {{bind-attr class=":drawer openDrawer:open"}}>
 				
 
-				<button {{action 'btnDrawer'}} class="btn btn-default btn-right btn-drawer">
+				<button {{action 'btnDrawer'}} class="btn btn-default btn-left btn-drawer">
 					<span class="glyphicon glyphicon-menu-hamburger"></span>
 				</button>
 
@@ -131,18 +152,7 @@
 		</div> 
 
 
-		<div class="col-md-8 col-sm-8 col-xs-10"> 
 
-			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12"> 
-					<label>Post Title:</label>
-					{{input subject canShowValidationError=showErrors}} 
-				</div>
-			</div>	
-
-			{{quill-editor content=editorialForQuill  quillChange='quillChange'}}
-			{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}			
-		</div>
 
 	</div>
 

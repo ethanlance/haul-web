@@ -1,8 +1,9 @@
 
 
 <div class="post">   
+
 	<div class="citation">
-		<div class="moment">posted {{format-date updated_at}}</div>
+		
 
 		{{!-- CITATION --}}
 		{{!-- CITATION --}}
@@ -21,7 +22,9 @@
 			<div class="image">
 				{{ make-icon icon=repost_user.icon isSmall=true }}
 			</div>
-			<div class="name">@{{repost_user.username}}</div> 
+			<div class="name">@{{repost_user.username}}
+				<div class="moment">posted {{format-date updated_at}}</div>
+			</div> 
 
 			{{/link-to}} 
 
@@ -32,11 +35,12 @@
 			<div class="image">
 				{{ make-icon icon=user.icon isSmall=true }}
 			</div>
-			<div class="name">@{{user.username}}</div> 
+			<div class="name">@{{user.username}}
+				<div class="moment">posted {{format-date updated_at}}</div>
+			</div> 
 			{{/link-to}} 
 
 		{{/if}}
-
 
 	</div>
 

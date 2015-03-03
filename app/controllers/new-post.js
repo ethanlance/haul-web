@@ -47,7 +47,13 @@ export default Ember.ObjectController.extend({
 			if(s===state){
 				_this.set(s, true);
 				_this.set(s+'OutRight', false);
-				_this.set(s+'OutLeft', false);
+				_this.set(s+'OutLeft', false); 
+				var _s = s;
+				Ember.run.later(function(){
+					var key = _s+'FadeIn'; 
+					_this.set(key, true);
+				},100);
+
 			}else{
 				if(key < newKey ){
 					_this.set(s+'OutRight', false);
@@ -191,11 +197,6 @@ export default Ember.ObjectController.extend({
 			
 			var _this = this;
 			var model = this.get('model');
-
-			//Get-Set the product status.
-			model.set('product_status', this.get('product_status_options').get('selectedStatus').id);
-			
-		
 			
 			//Run validations before proceeding.
 			model.validate()

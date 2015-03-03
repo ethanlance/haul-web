@@ -204,62 +204,17 @@ console.log("IMAGE", this.get('selectedImages'))
 			console.log("Error", error);
 			_this.set('isProcessing', false);
 			_this.set('showErrors', true);
-			_this.set('openDrawer', true);
+			_this.forceDrawerOpen();
 		});
 	},
 
-	// setUpQuill: function() {
-	// 	if( this.get('repost').get('body') ){
-	// 		this.set('editorialForQuill', this.get('repost').get('body'));
-	// 	}
-	// }.observes('repost'),
-
-	// savePost: function() {
-	// 	this.set('isProcessing', true);
-
-	// 	var _this = this;
-	// 	var repost = this.get('repost');
-
-	// 	var productImages = repost.get('product_images').map(function(image) {
-	// 		return image.get('id');
-	// 	});
-	// 	var imageId = productImages[0];
-
- // 		var body = repost.get('body').trim();
- // 		var subject = repost.get('subject').trim();
-
-	// 	if(Ember.isEmpty(repost.get('body'))){
-	// 		repost.set('body', " ");
-	// 	}
-	
-	// 	if(Ember.isEmpty(repost.get('subject'))){
-	// 		repost.set('body', post.get('subject'));
-	// 	}
-
-	// 	repost.setProperties({
-	// 		'product_image_ids': productImages,
-	// 		'image_id': imageId,
-	// 		'body': body,
-	// 		'subject': subject,
-	// 		'product_currency': 'usd'
-	// 	});
-
-	// 	repost.validate()
-	// 	.then(function(){
-	// 		return repost.save();
-	// 	})
-	// 	.then(function(){
-	// 		return _this.store.find('post-list', {user_id:_this.get('currentUserId')});
-	// 	})
-	// 	.then(function(){
-	// 		_this.set('isProcessing', false);
-	// 		_this.set('postComplete', true);
-	// 	}, function(error){
-	// 		console.log("Error", error);
-	// 		_this.set('isProcessing', false);
-	// 		_this.set('showErrors', true);
-	// 	});
-	// },
+	forceDrawerOpen: function() {
+		var _this = this;
+		this.set('openDrawer', true);
+		Ember.run.later(function(){
+			_this.set('animateDrawer', true);
+		}, 100)	
+	},
 
 	// showProduct:false,
 	animateClose:false,
@@ -309,7 +264,12 @@ console.log("IMAGE", this.get('selectedImages'))
 		}, 
 
 		btnDrawer: function() {
+			var _this = this;
 			this.toggleProperty('openDrawer');
+			Ember.run.later(function(){
+				_this.toggleProperty('animateDrawer');
+			}, 100)
+			
 		},
 
 		updateSortOrder: function(i) {

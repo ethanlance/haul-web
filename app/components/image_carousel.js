@@ -41,6 +41,10 @@ export default Ember.Component.extend({
 		}, function(error){
 			console.log("ERROR " , error);
 		}); 
+
+
+
+
 	}.on('init'),//observes('content.@each'),
 
 	actions: {
@@ -51,7 +55,7 @@ export default Ember.Component.extend({
 			this.$().carousel('next');
 		},
 		didInsertElement: function() {
-			this.$().carousel();
+			this.$().carousel('next');
 		}	
 	},
 
@@ -75,6 +79,14 @@ export default Ember.Component.extend({
 			classNames: ['item'],
 			classNameBindings: ['content.isActive:active'],
 			template: Ember.Handlebars.compile('<img {{bind-attr src="view.content.medium"}} alt=""/><div class="carousel-caption"><h4>{{view.content.title}}</h4><p>{{view.content.content}}</p></div>')
-		})
+		}),
+
+		//Start with the next slide.
+		didInsertElement: function() { 
+			var _this = this;
+			Ember.run.later(function(){
+				_this.$().carousel('next');
+			},300)
+		}
 	})
 });

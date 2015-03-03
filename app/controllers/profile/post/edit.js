@@ -64,7 +64,7 @@ export default Ember.ObjectController.extend({
 		if( this.get('model').get('body') ){
 			this.set('editorialForQuill', this.get('model').get('body'));
 		}
-	}.observes('model'),
+	}.observes('model.body'),
 
 
 	/* Get and set the products images. */
@@ -183,7 +183,7 @@ export default Ember.ObjectController.extend({
 		.then(function(record){
 			_this.set('isProcessing', false);
 			var user = _this.get('currentUser'); 
-			_this.transitionToRoute('profile.post', user, record.get('post_id'), record.get('post_slug'));
+			_this.transitionToRoute('profile.post', user, record);
 		}, function(error){
 			console.log("Error", error);
 			_this.set('isProcessing', false);

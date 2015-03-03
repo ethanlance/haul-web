@@ -6,12 +6,13 @@ export default Ember.ObjectController.extend({
  	needs: ['profile'],
 
  	isRepost:false,
+ 	postHasImage: false,
  
  	thisPage: "postPage", 
  	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
  	showHeaderChange: function(){ 
 
- 		console.log("HEADER " , this.get('currentPage') +  " === " + this.get('thisPage'))
+ 		//console.log("HEADER " , this.get('currentPage') +  " === " + this.get('thisPage'))
 
  		if( this.get('currentPage') === this.get('thisPage')){
  			this.get('controllers.profile').set('showHeader', true);	
@@ -29,6 +30,10 @@ export default Ember.ObjectController.extend({
 	isProfileOwner: false,
 
 	setup: function() { 
+
+		console.log("SOMETHING IN MODEL CHANGED", this.get('model'));
+
+
 		this.set('isProfileOwner', false);
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
 			if( this.get('model').get('user').get('id') === this.get('currentUserId')) {
@@ -43,7 +48,16 @@ export default Ember.ObjectController.extend({
 			this.set('isRepost', true);
 		}
 
-	}.observes('currentUserId', 'model.id'),
+		//Does the body have an image?
+		this.set('postHasImage', false);
+		var body = this.get('model').get('body');
+		if( body.indexOf("<img") > -1 ) {
+			this.set('postHasImage', true);
+		}
+
+		console.log("\t\t\t POST HAS IMAGE", this.get('postHasImage'))
+
+	}.observes('currentUserId', 'model.id', 'model', 'model.body'),
 
 	actions: {
 

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
-export default Ember.Route.extend(AuthenticatedRouteMixin,{
+import ResetScrollMixin from '../mixins/resetscroll';
+export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 	model: function() {
 		return this.store.createRecord('post');
 	}

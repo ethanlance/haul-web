@@ -20,21 +20,34 @@ export default DS.RESTSerializer.extend({
 			if( image.hasOwnProperty("image_id") ){
 				var data =  {
 					original: image.locations.original,
-					small: image.locations.small,
+					
 					thumb: image.locations.thumb,
+					small: image.locations.small,
+					medium: image.locations.medium,
+					large: image.locations.large,
+
 					caption: image.caption,
 					id: image.image_id,
 					created_at: image.created_at
 				};
- 
-				data.large = image.locations.large;
-				data.medium = image.locations.medium;
 				
 				datas.push(data);
 			} 
 		}); 
 
-		
+		if(!data.large){
+			if(data.medium){
+				data.large = data.medium;
+			}else if(data.small) {
+				data.large = data.small;
+			}
+		}
+
+		if(!data.medium){
+			if(data.small){
+				data.medium = data.small;
+			}
+		}
 
 		payload = {'images': datas}; 
 		return this._super(store, primaryType, payload);
@@ -48,16 +61,35 @@ export default DS.RESTSerializer.extend({
 
 		var image = payload.data;
 		var data = {
+
 			original: image.locations.original,
-			small: image.locations.small,
+
 			thumb: image.locations.thumb,
+			small: image.locations.small,
+			large: image.locations.large,
+			medium: image.locations.medium,
+			
+
 			caption: image.caption,
 			id: image.image_id,
 			created_at: image.created_at
 		};
  
-		data.large = image.locations.large;
-		data.medium = image.locations.medium;
+
+ 		if(!data.large){
+			if(data.medium){
+				data.large = data.medium;
+			}else if(data.small) {
+				data.large = data.small;
+			}
+		}
+
+		if(!data.medium){
+			if(data.small){
+				data.medium = data.small;
+			}
+		}
+
 
 		payload ={'images': data}; 
 		return this._super(store, primaryType, payload, recordId, requestType);

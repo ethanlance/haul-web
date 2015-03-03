@@ -7,17 +7,31 @@ export default Ember.ObjectController.extend({
 	isProfileOwner: true,  
 	model:false,
 
-	start: function() {
-			
+	modelChange: function() {
+		if(!Ember.isEmpty(this.get('model'))){
+			this.set('hasPosts', true);
+		}else{
+			this.set('hasPosts', false);
+		}
 		
-		
+	}.observes('model'),
 
-		if( !this.get('currentUser')){
-			return;
+	start: function() {
+		
+		console.log("HERE? " , this.get('currentUserId'))
+
+		if( this.get('currentUserId') ){
+			
+			var _this = this;
+			this.store.find('feed', {user_id:this.get('currentUserId')}).
+			then(function(feed){
+				_this.set('model', feed);
+			});
+
+			
 		}
 
-
-
+		
 	}.on('init').observes('currentUserId'), 
 
 

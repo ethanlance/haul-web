@@ -5,18 +5,19 @@
 
 
 {{#form-for model wrapper="bs3-wrapper"}}
-	<div class="container-fluid haul-edit">
+	<div class="container haul-edit">
 
 
 		<div class="row">
-			<div {{bind-attr class="showUpload:show:hide :fade showImagePicker:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+			<div {{bind-attr class=":start-with-photos showUpload:show:hide :fade showImagePicker:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
 				<h4>Start with photos</h4>
 			</div>
 
-			<div {{bind-attr class="showProduct:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}>		<h4>Tell us the details</h4>
+			<div {{bind-attr class="showProduct:show:hide :fade showProductFadeIn:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}>		
+				<h4>Tell us the details</h4>
 			</div>
 
-			<div {{bind-attr class="showPost:show:hide :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
+			<div {{bind-attr class="showPost:show:hide :fade showPostFadeIn:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
 				<h4>Edit Your Post</h4>
 			</div>
 		</div>
@@ -30,6 +31,7 @@
 		{{!-- SHOW UPLOAD --}}
 		<div {{bind-attr class=":slide showUpload:in showUploadOutLeft:outleft showUploadOutRight:outright"}}> 
 
+			<div class="upload-wrapper">
 			{{#image-picker 
 				images=userImages
 				selectedImages=selectedImages
@@ -41,6 +43,7 @@
 			}} 
 				{{view 'sortable' content=selectedImages}}
 			{{/image-picker}}
+			</div>
 
 			<div class="toolbar-footer">
 				<div class="container">
@@ -138,20 +141,6 @@
 							<label>Quantity:</label>
 							{{input product_quantity class="input-xs" canShowValidationError=showErrors}}
 		 				</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-sm-6 col-xs-6"> 
-							<label>Status:</label>
-							{{view "select"
-						       content = product_status_options.status
-						       optionLabelPath = "content.name"
-						       optionValuePath = "content.id"
-						       selection = product_status_options.selectedStatus
-						       class = "form-control"
-						    }}
-						    {{#if showErrors}}<span class="has-error help-block">{{error-field product_status}}</span>{{/if}}
-		 				</div>
-				
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-2 col-xs-12"></div>
