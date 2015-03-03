@@ -16,27 +16,48 @@ export default Ember.Component.extend({
 		}
 	}.observes('imageCount'),
 
+
+
 	start: function() { 
 		this._super.apply(this, arguments);
 		// disable the data api from boostrap
+
+
+		//console.log("CAROUSEL RELOAD")
+
 
 		//$(document).off('.data-api');	 
 		var _this = this;
 		// at least one item must have the active class, so we set the first here, and the class will be added by class binding
 		this.get('content').then(function(results) { 
 
+			//console.log("IMAGES", results);
+
 			var imageCount = 0;
+			var i = 0;
 			results.forEach(function(image){
 				if( image.get('medium') ) {
 					imageCount++;
 					_this.set('imagesFound', true);
 				}
+				Ember.set(image, 'isActive', false);
+
+				if(i==1){
+					Ember.set(image, 'isActive', true);					
+				}
+
+				i++;
 			});
-			_this.set('imageCount', imageCount);
-			var obj = Ember.get(results, 'firstObject');
-			if( obj ) {
-				Ember.set(obj, 'isActive', true);	
+
+			if( imageCount === 1) {
+				var obj = Ember.get(results, 'firstObject');
+				if( obj ) {
+					Ember.set(obj, 'isActive', true);	
+				}
 			}
+
+			_this.set('imageCount', imageCount);
+			
 			return results;
 		}, function(error){
 			console.log("ERROR " , error);
@@ -45,7 +66,7 @@ export default Ember.Component.extend({
 
 
 
-	}.on('init'),//observes('content.@each'),
+	}.on('init'),//.observes('content.@each'),
 
 	actions: {
 		previousSlide: function() {
@@ -79,14 +100,6 @@ export default Ember.Component.extend({
 			classNames: ['item'],
 			classNameBindings: ['content.isActive:active'],
 			template: Ember.Handlebars.compile('<img {{bind-attr src="view.content.medium"}} alt=""/><div class="carousel-caption"><h4>{{view.content.title}}</h4><p>{{view.content.content}}</p></div>')
-		}),
-
-		//Start with the next slide.
-		didInsertElement: function() { 
-			var _this = this;
-			Ember.run.later(function(){
-				_this.$().carousel('next');
-			},300)
-		}
+		})
 	})
 });

@@ -181,6 +181,9 @@ export default Ember.ObjectController.extend({
 			return model.save();
 		})
 		.then(function(record){
+			return record.reload();
+		})
+		.then(function(record){
 			_this.set('isProcessing', false);
 			var user = _this.get('currentUser'); 
 			_this.transitionToRoute('profile.post', user, record);
