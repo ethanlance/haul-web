@@ -28,9 +28,15 @@ app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.w
   destDir: 'fonts'
 });
 
+app.import('bower_components/lightbox/css/lightbox.css', {
+  destDir: 'assets'
+});
+
 app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
   destDir: 'assets'
 });
+
+
 
 app.import('bower_components/google-caja/html-css-sanitizer-bundle.js');
 // app.import('vendor/sanitize.js');

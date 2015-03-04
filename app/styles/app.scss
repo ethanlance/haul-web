@@ -398,6 +398,15 @@ nav {
 				border-bottom-right-radius: 0;
 			}
 		}
+		.divider{
+			margin:0;
+		}
+		.dropdown-menu > li > a {
+			display:inline-block;
+			width:100%;
+			margin:0;
+			padding:15px;
+		}
 	} 
 
 	.btn-signup {
@@ -774,7 +783,7 @@ header.profile.shrink{
 			margin:0;
 			//float:left;
 			font-size: 14px;
-			padding-right: 8px;
+			//padding-right: 8px;
 			display:inline-block;
 
 			.rehauled {
@@ -787,7 +796,7 @@ header.profile.shrink{
 			//float:left;
 			display:inline-block;
 			position: relative;
-			margin-right: 4px;
+			//margin-right: 4px;
 			width:40px;
 			height:3px;
 			.profile-image{
@@ -2330,6 +2339,77 @@ body.anon{
 	}
 }
 
+
+
+
+
+// .carousel-control.right {
+// 	border:1px solid pink;
+// 	margin-right: -55px;
+// 	width:200px;
+// 	text-align:right;
+// }
+// .carousel-control.left {
+// 	margin-left: -35px;
+// }
+
+
+.lb-prev:before {
+	content: "\e079";
+	float:left;
+	margin-left: -40px;
+}
+
+.lb-nav a.lb-prev {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	text-decoration: none;
+	background: none; 
+	padding-top: 50%; 
+	font-size: 40px;
+	width:50%; 
+	color:white;
+}
+
+
+.lb-next:before{
+	content: "\e080";
+	float:right;
+	margin-right: -40px;
+}
+
+.lb-nav a.lb-next {
+	
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	text-decoration: none;
+	background: none;
+	padding-top: 50%; 
+	font-size: 40px;
+	width:50%;
+	color:white; 
+}
+
+.lb-data .lb-caption {
+	display:none;
+	visibility: hidden;
+}
 
 
 

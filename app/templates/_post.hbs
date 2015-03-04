@@ -11,11 +11,7 @@
 		{{!-- CITATION --}}
 		{{#if repost_user}} 
 			<span class="glyphicon glyphicon-retweet"></span>
-			<span class="name">
-				{{#link-to 'profile' user }}
-				@{{user.username}} 
-				{{/link-to}}
-				<span class="rehauled">reposted</span>
+			<span class="name">{{#link-to 'profile' user }}@{{user.username}}{{/link-to}} <span class="rehauled">reposted</span>
 			</span>
 
 			

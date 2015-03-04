@@ -9,14 +9,16 @@
 
 		{{#link-to 'home' }}
 		<button class="btn btn-default btn-home">
-			<span class="glyphicon glyphicon-home"></span> 
+			{{!-- <span class="glyphicon glyphicon-home"></span>  --}}
+			<i class="fa fa-home fa-lg"></i>
 		</button> 
 		{{/link-to}}
 
 		
 		{{#link-to 'new-post' }}
 		<button class=" btn btn-default btn-sell">
-			<span class="glyphicon glyphicon-camera"></span>
+			{{!-- <span class="glyphicon glyphicon-camera"></span> --}}
+			<i class="fa fa-camera-retro fa-lg"></i>
 			Post
 		</button> 
 		{{/link-to}}
@@ -37,19 +39,20 @@
 			{{/link-to}}
 		
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			  <span class="glyphicon glyphicon-cog"></span>
+			  <i class="fa fa-cog fa-lg"></i>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right" role="menu">
-				<li>{{#link-to 'profile' session.currentUser }}Profile{{/link-to}}</li>
+				
+				<li>{{#link-to 'profile' session.currentUser }}<i class="fa fa-user"></i> Profile{{/link-to}}</li>
 				
 				<li class="divider"></li>
-				<li>{{#link-to 'settings.profile'}}Settings{{/link-to}}</li>
+				<li>{{#link-to 'settings.profile'}}<i class="fa fa-wrench"></i> Settings{{/link-to}}</li>
 				
 	            <li class="divider"></li>
-	            <li>{{#link-to 'haul.about'}}About {{/link-to}}</li>
+	            <li>{{#link-to 'haul.about'}}<i class="fa fa-compass"></i> About {{/link-to}}</li>
 
 				<li class="divider"></li>
-				<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+				<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
 			</ul>
 		</div>
 		{{else}}
