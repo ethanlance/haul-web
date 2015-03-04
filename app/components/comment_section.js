@@ -66,7 +66,7 @@ return;
 		var store = this.container.lookup('store:main');
 		//var key = this.type_map[this.contextType] + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
 	
-		var key = this.contextId + "-" + this.itemId;
+		var key = this.contextId + "_" + this.itemId;
 
 		var storeName = null;
 		if( this.contextType == "collections"){

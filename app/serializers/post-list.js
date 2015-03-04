@@ -17,7 +17,7 @@ export default DS.RESTSerializer.extend({
 		
 		var data = null;
 		var datas = payload.data.map(function(result){  
-			var id = result.user_id + "-" + result.post_id; 
+			var id = result.user_id + "_" + result.post_id; 
 			data = {
 				id: id,	
 				post_id:result.post_id,
@@ -36,13 +36,13 @@ export default DS.RESTSerializer.extend({
 				product_user: result.product.user_id,
 
 				commentCount: result.post_id,
-				likesCount: result.post_id
+				likesCount: id
 			};
 
 
 			//repost aka parent post
 			if( result.repost_id ){
-				var repostId = result.repost_user_id + "-" + result.repost_id;
+				var repostId = result.repost_user_id + "_" + result.repost_id;
 	            data.repost = repostId;
 	            data.repost_body = result.repost_body;
 	            data.repost_user = result.repost_user_id;

@@ -8,10 +8,12 @@ export default ApplicationAdapter.extend({
 	host: Haul.Server.POST_SERVER_HOST, 
 
 	find: function(store, type, key) {
-		var s = key.split('-');
+        console.log("POST KEY ", key);  
+		var s = key.split('_');
 		var user_id = s[0];
 		var post_id = s[1];
 		var url = this.host + "/users/" + user_id + "/posts/" + post_id;
+        console.log("WHOOOPS", url);
         return this.ajax(url, 'GET');
     },
 

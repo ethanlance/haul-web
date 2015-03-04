@@ -30,7 +30,7 @@ export default Ember.ObjectController.extend({
 		var model = this.get('model');
 		var user_id = model.get('user').get('id');
 		var post_id = this.get('post_id');
-		var key = user_id + "-" + post_id;
+		var key = user_id + "_" + post_id;
 		this.store.find('post', key)
 		.then(function(post){
 			_this.set('post', post);

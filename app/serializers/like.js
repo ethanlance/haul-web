@@ -6,23 +6,19 @@ export default DS.RESTSerializer.extend({
 		if( payload.data === "ok" ){
 			return;
 		} 
-
-		var id = String(payload.data.context_id);
-		var key = id.split(':');
-		var user_id = key[1];
-
-		id = String(payload.data.id);
-		key = id.split(':');
-		var post_id = key[1];
 		
+		console.log("PAYLOAD", payload);
 
-		id = user_id + ":" + post_id;
+		var id = String(payload.data.object.id);
+		var key = id.split('_');
+		var post_id = key[1];
+		 
 		var data = {
-			id: post_id,
+			id: payload.data.object.id,
 			post_id: post_id,
-			user_id: user_id
+			user_id: payload.data.user_id
 		};
-
+console.log("LIKE DATA", data);
 		payload ={'like': data}; 
 		return this._super(store, type, payload, recordId, requestType);
 	}

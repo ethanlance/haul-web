@@ -3,12 +3,13 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
 	postIdBinding: "post.post_id",
+	postUserIdBinding: "post.user.id",
 	postKeyBinding: "post.id",
 	currentUserIdBinding: "session.currentUser.id",
 	totalBinding: "post.likesCount.total",
 	userLikes: false,
 	userLikesRecord: false,
-
+	userLikeListRecord:false,
 
 	didInsertElement: function() {
 		var store = this.container.lookup("store:main");
@@ -23,8 +24,12 @@ export default Ember.Component.extend({
 		_this.set('userLikesRecord', false); 
 		
 		//currentUser like item?
-		store.find('like', this.get('postId'))
+		var key = this.get('postKey');
+		store.find('like', key)
 		.then(function(uLike){
+
+console.log("FOUND?", uLike);
+
 			if(!Ember.isEmpty(uLike)){
 				_this.set('userLikes', true);
 				_this.set('userLikesRecord', uLike); 
@@ -54,38 +59,53 @@ export default Ember.Component.extend({
 				record.deleteRecord();
 				like = false;
 			} else {
-				var data = {
-					user_id: this.get('currentUserId'),
-					post_id: this.get('postId')
+				var data = {					
+					key: this.get('postKey')
 				};
+				console.log("DAATA", data);
 				record = store.createRecord('like', data);
 				like = true;
 			}
 
 			record.save()
-			.then(function(result){ 
+			.then(function(record){ 
 
-				if( like ){
+				if( like ){ 
+					// //Like
+					// if(_this.get('userLikeListRecord')){
+					// 	_this.get('userLikeListRecord').userLike.rollBack();	
+					// }
+					
 					_this.set('userLikes', true);
 					_this.set('userLikesRecord', record);
 					_this.incrementProperty('total');
 				}else{
+
+					//Unlike
 					_this.set('userLikes', false);
 					_this.set('userLikesRecord', null);
 					_this.decrementProperty('total');
+
+					// store.filter('user-likes-list', function(userLike){
+					// 	if(userLike.get('id') === _this.get('postKey')){
+					// 		userLike.deleteRecord();
+					// 		//userLike.save();
+
+					// 		_this.set('userLikeListRecord', userLike);
+					// 	}
+
+					// })
+
 				}
+
+				store.find('user-likes-list', {user_id: _this.get('currentUserId') } );
 
 				store.find('user-likes-count', _this.get('currentUserId'))
 				.then(function(r){
 					r.reload();
 				});
 
-				store.find('user-likes-list', _this.get('currentUserId'))
-				.then(function(r){
-					r.reload();
-				});
-
-				store.find('post-likes-count', _this.get('postId'))
+				store.find('post-likes-count', _this.get('postKey'))
 				.then(function(r){
 					r.reload();
 				});

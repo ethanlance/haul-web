@@ -9,49 +9,49 @@ export default DS.RESTSerializer.extend({
 		}
     },
 
-	extractArray: function(store, primaryType, payload) {
+	// extractArray: function(store, primaryType, payload) {
 
-		if( payload.data === "ok" ){
-			return;
-		}
+	// 	if( payload.data === "ok" ){
+	// 		return;
+	// 	}
 
-		var datas = [];
-		payload.data.forEach(function(image){
-			if( image.hasOwnProperty("image_id") ){
-				var data =  {
-					original: image.locations.original,
+	// 	var datas = [];
+	// 	payload.data.forEach(function(image){
+	// 		if( image.hasOwnProperty("image_id") ){
+	// 			var data =  {
+	// 				original: image.locations.original,
 					
-					thumb: image.locations.thumb,
-					small: image.locations.small,
-					medium: image.locations.medium,
-					large: image.locations.large,
+	// 				thumb: image.locations.thumb,
+	// 				small: image.locations.small,
+	// 				medium: image.locations.medium,
+	// 				large: image.locations.large,
 
-					caption: image.caption,
-					id: image.image_id,
-					created_at: image.created_at
-				};
+	// 				caption: image.caption,
+	// 				id: image.image_id,
+	// 				created_at: image.created_at
+	// 			};
 				
-				datas.push(data);
-			} 
-		}); 
+	// 			datas.push(data);
+	// 		} 
+	// 	}); 
 
-		if(!data.large){
-			if(data.medium){
-				data.large = data.medium;
-			}else if(data.small) {
-				data.large = data.small;
-			}
-		}
+	// 	if(!data.large){
+	// 		if(data.medium){
+	// 			data.large = data.medium;
+	// 		}else if(data.small) {
+	// 			data.large = data.small;
+	// 		}
+	// 	}
 
-		if(!data.medium){
-			if(data.small){
-				data.medium = data.small;
-			}
-		}
+	// 	if(!data.medium){
+	// 		if(data.small){
+	// 			data.medium = data.small;
+	// 		}
+	// 	}
 
-		payload = {'images': datas}; 
-		return this._super(store, primaryType, payload);
-	},
+	// 	payload = {'images': datas}; 
+	// 	return this._super(store, primaryType, payload);
+	// },
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 

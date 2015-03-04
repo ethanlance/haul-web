@@ -9,7 +9,7 @@ extractArray: function(store, primaryType, payload) {
 		
 		var data = null;
 		var datas = payload.data.map(function(result){  
-			var id = result.user_id + "-" + result.post_id; 
+			var id = result.user_id + "_" + result.post_id; 
 			data = {
 				id: id,	
 				post_id:result.post_id,
@@ -34,7 +34,7 @@ extractArray: function(store, primaryType, payload) {
 
 			//repost aka parent post
 			if( result.repost_id ){
-				var repostId = result.repost_user_id + "-" + result.repost_id;
+				var repostId = result.repost_user_id + "_" + result.repost_id;
 	            data.repost = repostId;
 	            data.repost_body = result.repost_body;
 	            data.repost_user = result.repost_user_id;
