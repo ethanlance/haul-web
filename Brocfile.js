@@ -63,8 +63,8 @@ app.import('vendor/ember-validations.js');
 
 
 app.import('bower_components/quill/dist/quill.js');
-app.import('bower_components/quill/dist/quill.base.css');
-app.import('bower_components/quill/dist/quill.snow.css');
+//app.import('bower_components/quill/dist/quill.base.css');
+//app.import('bower_components/quill/dist/quill.snow.css');
 
 module.exports = app.toTree();
 
