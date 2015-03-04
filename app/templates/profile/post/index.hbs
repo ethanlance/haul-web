@@ -2,7 +2,7 @@
 
 <div class="container-fluid haul-content post-page">
 	<div class="row">
-		<div class="col-md-7 col-sm-7 col-xs-12 text-center">
+		<div class="col-md-7 col-sm-7 col-xs-12">
 			
 
 
@@ -11,28 +11,31 @@
 			{{!-- CITATION --}}
 			{{!-- CITATION --}}
 			{{#if isRepost}}
-			<div class="citation post-detail-citation"> 
-				<span class="glyphicon glyphicon-retweet"></span>
-				<div class="name">
-					{{#link-to 'profile' user }}
-					@{{user.username}} 
-					{{/link-to}}
-					<span class="rehauled">reposted</span>
-				</div>
+			<div class="post-detail-citation"> 
 
-				
-				{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-				<div class="image">
-					{{ make-icon icon=repost_user.icon isSmall=true }}
-				</div>
-				<div class="name">@{{repost_user.username}}'s post</div>  
-				{{/link-to}}
+				<span class="image">
+					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+						{{ make-icon icon=repost_user.icon isSmall=true }}
+					{{/link-to}}
+				</span>
+				<span class="name">
+					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+						@{{repost_user.username}}'s post
+					{{/link-to}}
+				</span>  
+
+				<span class="glyphicon glyphicon-retweet"></span><span class="rehauled">reposted by</span>
+				<span class="name">
+					@{{user.username}} 
+				</span>
+
+					
 			</div>
 			{{/if}}
 
 			
 
-			<div class="post-detail">
+			<div {{bind-attr class=":post-detail isRepost:is-repost"}}>
 
 				{{!-- THE POST --}}
 				{{!-- THE POST --}}
@@ -66,10 +69,8 @@
 						<div class="image">
 							{{ make-icon icon=user.icon isSmall=true}}
 						</div>
-						<div class="name">@{{user.username}} says
+						<div class="name">@{{user.username}} says</div>
 						<div class="moment">posted {{format-date updated_at}}</div>
-
-						</div>
 						{{/link-to}}
 					</div>
  

@@ -11,33 +11,36 @@
 		{{!-- CITATION --}}
 		{{#if repost_user}} 
 			<span class="glyphicon glyphicon-retweet"></span>
-			<div class="name">
+			<span class="name">
 				{{#link-to 'profile' user }}
 				@{{user.username}} 
 				{{/link-to}}
 				<span class="rehauled">reposted</span>
-			</div>
+			</span>
 
-			{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-			<div class="image">
-				{{ make-icon icon=repost_user.icon isSmall=true }}
-			</div>
-			<div class="name">@{{repost_user.username}}
-				<div class="moment">posted {{format-date updated_at}}</div>
-			</div> 
-
-			{{/link-to}} 
+			
+			<span class="image">
+				{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+					{{ make-icon icon=repost_user.icon isSmall=true }}
+				{{/link-to}}
+			</span>
+			<span class="name">
+				{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+					@{{repost_user.username}}
+				{{/link-to}}
+			</span>
+			<div class="moment">posted {{format-date updated_at}}</div>
+			
 
 		{{else}}
  
 		
 			{{#link-to 'profile' user }}
-			<div class="image">
+			<span class="image">
 				{{ make-icon icon=user.icon isSmall=true }}
-			</div>
-			<div class="name">@{{user.username}}
-				<div class="moment">posted {{format-date updated_at}}</div>
-			</div> 
+			</span>
+			<span class="name">@{{user.username}}</span> 
+			<div class="moment">posted {{format-date updated_at}}</div>
 			{{/link-to}} 
 
 		{{/if}}

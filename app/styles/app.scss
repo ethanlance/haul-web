@@ -756,8 +756,9 @@ header.profile.shrink{
 		.glyphicon-retweet {
 			padding:0;
 			margin:0;
-			float:left;
-			padding-right: 10px;
+			//float:left;
+			display:inline-block;
+			//padding-right: 10px;
 		}
 
 		.name {
@@ -766,6 +767,7 @@ header.profile.shrink{
 			//float:left;
 			font-size: 14px;
 			padding-right: 8px;
+			display:inline-block;
 
 			.rehauled {
 				font-color: #3a4457;
@@ -774,15 +776,16 @@ header.profile.shrink{
 		}
 
 		.image{
-			float:left;
+			//float:left;
+			display:inline-block;
 			position: relative;
 			margin-right: 4px;
 			width:40px;
 			height:3px;
 			.profile-image{
-				position:absolute;
+				//position:absolute;
 				margin:0;
-				margin-top: -15px;
+				margin-top: -25px;
 				margin-right: 6px;
 				margin-bottom:0; 
 				width: 40px;
@@ -958,12 +961,61 @@ header.profile.shrink{
 		background-color: #eee;
 		border-radius: 4px;
 		border: 1px solid #b7b7b7;
-		height:200px;
-		width:75%;
+		height:500px;
+		width:90%;
+		display:inline;
 		position:absolute;
 		top:5px;
 		left: -0px;
 		opacity:1 ;
+		box-shadow: 2px 3px 8px #ccc;
+
+		.glyphicon-retweet {
+			display:inline;
+			padding:0;
+			margin:0;
+			//float:left;
+			padding-right: 10px;
+		}
+
+		.name {
+			padding:0;
+			margin:0;
+			display:inline;
+			//float:left;
+			font-size: 14px;
+			padding-right: 8px;
+
+			.rehauled {
+				font-color: #3a4457;
+				font-style: italic;
+			}
+		}
+
+		.image{
+			//float:left;
+			display:inline-block;
+			position: relative;
+			margin-right: 4px;
+			width:40px;
+			height:3px;
+			.profile-image{
+				//position:absolute;
+				margin:0;
+				margin-top: -25px;
+				margin-right: 6px;
+				margin-bottom:0; 
+				width: 40px;
+				height: 40px;
+				padding:2px;
+
+				.glyphicon-user{
+					font-size:36px;
+					left:-1px;
+				}
+			}
+		}
+
 	}
 
 	.post-detail {
@@ -976,6 +1028,11 @@ header.profile.shrink{
 		text-align: left;
 		border-top-left-radius: 4px;
 		border-top-right-radius: 4px;
+
+
+		&.is-repost {
+			margin-top:60px;
+		}
 
 		.btn-edit-post {
 			position:absolute;
