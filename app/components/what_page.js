@@ -69,16 +69,16 @@ export default Ember.Component.extend({
 		var fixThis = $(".profile-container");
 		var header = $(".profile-container").parent();
 		var postBackButton = $(".post-back-button");
-		var listGridButton = $('.btn-list-grid');
+		//var listGridButton = $('.btn-list-grid');
 
 		fixThis.addClass('fixed');
 		header.addClass('shrink');
 		postBackButton.removeClass('hide').addClass('show');
 		logo.addClass('shrink');
 
-		if(listGridButton){
-			listGridButton.removeClass('show').addClass('hide');
-		}
+		// if(listGridButton){
+		// 	listGridButton.removeClass('show').addClass('hide');
+		// }
 	},
 
 	profileFeed: function() {
@@ -89,13 +89,13 @@ export default Ember.Component.extend({
 		//var nav = $("nav");
 		var fixThis = $(".profile-container");
 		var header = $(".profile-container").parent();
-		var listGridButton = $('.btn-list-grid');
+		//var listGridButton = $('.btn-list-grid');
 
 
 		Ember.run.later(this,function(){
 			fixThis.removeClass('fixed');
 	    	 
-			fixThis.append(listGridButton.parent());
+			//fixThis.append(listGridButton.parent());
 		  	
 
 			function debounce(func, wait, immediate) {
@@ -137,17 +137,17 @@ export default Ember.Component.extend({
 		        	fixThis.addClass('fixed');  
 		        	logo.addClass('shrink'); 
 		        	 header.addClass('shrink');
-		        	if(listGridButton){
-		        		listGridButton.addClass('fixed'); 
-		        	} 
+		        	// if(listGridButton){
+		        	// 	listGridButton.addClass('fixed'); 
+		        	// } 
 		        }else{
 		        	//console.log("REMOVE " + _this.isFeedPage +  "  " + fixTop + " > "+ navBottom)
 		        	fixThis.removeClass('fixed');  
 		        	logo.removeClass('shrink'); 
 		        	header.removeClass('shrink');
-		        	if(listGridButton){
-		        		listGridButton.removeClass('fixed'); 
-		        	} 
+		        	// if(listGridButton){
+		        	// 	listGridButton.removeClass('fixed'); 
+		        	// } 
 		        }
 		    
 			}, 10);

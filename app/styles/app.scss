@@ -762,17 +762,18 @@ header.profile.shrink{
 }
 
 .btn-list-grid{
-	display:none;
-	position: absolute;
-	bottom: 8px;
-	right: 15px;
-	z-index: 2;
+	float:right;
+	margin-right:15px;
+	margin-top:30px;
 	@media (max-width: 768px) {
-		bottom: 3px;
-		right: 4px;
+		margin-top: 29px;
 	}
 }
-
+.fixed {
+	.btn-list-grid{
+		margin-top:0px;
+	}
+}
 
 
 
@@ -795,6 +796,8 @@ header.profile.shrink{
 	p {
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	}
+	
+
 	
 	
 
@@ -861,9 +864,8 @@ header.profile.shrink{
 
 	.post {
 		width:100%;
-		position: relative;
+		display:inline-block;
 		background-color: #ffffff;
-		
 		margin: 0px 0px 10px 0px;
 		padding:0px;
 		text-align: left;
@@ -871,6 +873,13 @@ header.profile.shrink{
 		border: 1px solid #ccc;
 		border-bottom-left-radius: 4px;
 		border-bottom-right-radius: 4px;
+
+
+		-moz-transition: height 0.5s ease-in-out;
+	    -o-transition: height 0.5s ease-in-out;
+	    -webkit-transition: height 0.5s ease-in-out;
+	    transition: height 0.5s ease-in-out;
+
 
 		.citation {
 			margin:20px 0px 0px 0px;
@@ -933,14 +942,12 @@ header.profile.shrink{
 		}
 
 		.article { 	
-			transition: all 0.2s ease-in-out;
 			display:table;
 			margin:auto;
 	
 			h2 { 
 				padding:0px 15px 0px 15px;
 				display:block;
-				transition: all 0.2s ease-in-out;
 				a{
 					text-decoration: none;
 					color: #3a4457;
@@ -968,6 +975,43 @@ header.profile.shrink{
 			}
 		}	
 	}
+
+
+	.col-collapse {
+		display:none;
+	}
+
+	.col-wide{
+		width:100%
+	}
+
+	.galleryView{
+		display:inline;
+		&.in{
+			.post{
+				border: 0;
+				margin:0;
+				width: 200px;
+				display:inline-block;
+		
+				.btn-edit-post, .citation, .moment, .editorial, .btn-wrapper, h2{
+					display:none;
+				}
+
+				.product-image{
+					border: 1px solid #ccc;
+					padding:1px;
+					img{
+						margin-right:auto;
+						margin-left:auto;
+						min-width:0;
+						min-height:0;
+					}	
+				}
+			}
+		}
+	}
+
 
 	.post-detail-citation{
 		//margin-left: -20px;
@@ -1080,7 +1124,6 @@ header.profile.shrink{
 				margin-bottom: 10px;
 				margin-top: 0px;
 				padding:0px;
-				transition: all 0.2s ease-in-out;
 				a{
 					text-decoration: none;
 					color: #3a4457;
@@ -1169,31 +1212,8 @@ header.profile.shrink{
 		}	
 	}
 
-	.gallery{
 
-		.post{
-			width: 50%;
-			height: 50%;
-			float: left;
-			border: 0;
-			
-			.btn-edit-post, .citation, .moment, .editorial, .btn-wrapper, h2{
-				display:none;
-			}
 
-			.product-image{
-				border: 1px solid #ccc;
-				padding:1px;
-				img{
-					
-					margin-right:auto;
-					margin-left:auto;
-					min-width:0;
-					min-height:0;
-				}	
-			}
-		}
-	}	
 
 
 	.sidebar-header{

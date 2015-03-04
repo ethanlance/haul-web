@@ -5,9 +5,13 @@ export default Ember.ObjectController.extend({
  	needs: ['profile'],
  	thisPage: "followersPage", 
  	user: false,
- 	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
+ 	currentPageBinding: 'controllers.profile.currentPage',
+ 	showGridBtn:false,
+
+ 	
  	showHeaderChange: function(){  
  		if( this.get('currentPage') === this.get('thisPage')){
+ 			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		
  	}.observes('currentPage'),

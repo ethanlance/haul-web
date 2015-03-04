@@ -3,18 +3,16 @@
 {{!-- PAGE CONTENT --}}
 <div class="container-fluid haul-content">   
 	<div class="row">
-		<div class="col-md-3 col-sm-2 col-xs-12"></div>
-		<div class="col-md-6 col-sm-8 col-xs-12">
+		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:col-collapse"}}></div>
+		<div {{bind-attr class=":col-md-6 :col-sm-8 :col-xs-12 showGridView:col-wide"}}>
 
-			{{feed-view model=model galleryView=galleryView currentPos=currentPos}}
-			<div {{bind-attr class="galleryView:gallery"}}>
+			<div {{bind-attr class=":galleryView showGridView:in"}}>
 			{{#each model}}
 				{{#if image}}
 					{{partial 'post'}}	
 				{{/if}}
 			{{/each}}
 			</div>
-
 	
 			
 		{{#unless hasPosts }}
@@ -44,7 +42,7 @@
 		{{/unless}}
 
 		</div> 
-		<div class="col-md-3 col-sm-4 col-xs-12"></div>
+		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:galleryView"}}></div>
 	</div>
 </div>
 

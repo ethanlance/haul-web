@@ -10,15 +10,25 @@ export default Ember.ArrayController.extend({
 	isProfileOwner: false, 
 	isFeedPage:true,
 	currentPos:'3000px',
+	showGridViewBinding: 'controllers.profile.showGridView',
+	showGridBtn:true,
 
- 	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
+ 	currentPageBinding: 'controllers.profile.currentPage',
  	showHeaderChange: function(){  
+
+
  		if( this.get('currentPage') === this.get('thisPage')){
+			console.log("PAGE CHANGE", this.get('currentPage'))
+			console.log("HIDE BTN ", this.get('showGridBtn'))
+ 			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		
  	}.observes('currentPage'),
 
 	modelChange: function() {
+
+		this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
+
 		if(!Ember.isEmpty(this.get('model'))){
 			this.set('hasPosts', true);
 		}else{
@@ -34,5 +44,5 @@ export default Ember.ArrayController.extend({
 				this.set('isProfileOwner', true);
 			}
 		} 
-	}.observes('user', 'currentUserId'),
+	}.observes('user', 'currentUserId')
 }); 

@@ -7,10 +7,13 @@ export default  Ember.ObjectController.extend({
  	user: false,
  	content:false,
  	hasPosts:false,
+	showGridViewBinding: 'controllers.profile.showGridView',
+ 	showGridBtn:true,
 
  	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
  	showHeaderChange: function(){ 
  		if( this.get('currentPage') === this.get('thisPage')){
+ 			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		
  	}.observes('currentPage'),

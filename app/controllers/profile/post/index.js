@@ -5,16 +5,16 @@ export default Ember.ObjectController.extend({
 
  	needs: ['profile'],
 
+ 	thisPage: "postPage", 
  	isRepost:false,
  	postHasImage: false,
+	currentPageBinding: 'controllers.profile.currentPage',
+ 	showGridBtn:false,
  
- 	thisPage: "postPage", 
- 	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
+ 	
  	showHeaderChange: function(){ 
-
- 		//console.log("HEADER " , this.get('currentPage') +  " === " + this.get('thisPage'))
-
  		if( this.get('currentPage') === this.get('thisPage')){
+ 			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		
  	}.observes('currentPage'),

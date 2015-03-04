@@ -14,6 +14,7 @@
 		{{/link-to}}
 		</span>
 
+		
 
 		{{ follow-btn followUser=model openModal='openModal' }}
 
@@ -21,7 +22,7 @@
 			<h1>{{model.name}}</h1>
 			<div class="name">@{{model.username}}</div> 
 		</div>
-
+{{ grid-btn showGridBtn=showGridBtn showGridView=showGridView class="display-inline"}}
 		<div class="stats-block">
 
 			{{#link-to "profile" model}}
@@ -54,6 +55,8 @@
 				<a>{{model.getLikesCount.total}}</a>
 			</div>
 			{{/link-to}}
+			
+			
 
 			<div class="clearfix"></div>
 		</div> 

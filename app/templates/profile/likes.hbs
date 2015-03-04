@@ -2,9 +2,19 @@
 
 <div class="container-fluid haul-content">   
 	<div class="row">
-		<div class="col-md-3 col-sm-2 col-xs-12"></div>
-		<div class="col-md-6 col-sm-8 col-xs-12">
-			
+		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:col-collapse"}}></div>
+		<div {{bind-attr class=":col-md-6 :col-sm-8 :col-xs-12 showGridView:col-wide"}}>
+
+			<div {{bind-attr class=":galleryView showGridView:in"}}>
+			{{#each model}}
+				{{#if post.subject}}	
+					{{render '_post' post}}
+				{{/if}}
+			{{/each}}
+			</div>
+
+
+
 			{{#unless hasPosts }}
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
@@ -19,18 +29,8 @@
 				</p>
 			{{/unless}}
 
- 
-			<div {{bind-attr class="galleryView:gallery"}}>
-			
-			{{#each model}}
-				{{#if post.subject}}	
-					{{render '_post' post}}
-				{{/if}}
-			{{/each}}
-			</div>
-			
 
 		</div> 
-		<div class="col-md-3 col-sm-4 col-xs-12"></div>
+		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:col-collapse"}}></div>
 	</div>
 </div>
