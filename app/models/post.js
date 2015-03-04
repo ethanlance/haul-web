@@ -67,8 +67,12 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 		 	presence: true,
 		},
 		product_price: {
-			numericality: {greaterThan:0, onlyInteger:true},
-		 	presence: true
+			numericality: {
+				greaterThan:0, 
+				onlyInteger:true,
+				//messages: {notAnInteger:'Whole numbers only, no decimals, no punctuation'}
+			},
+		 	presence: true,
 		}
 	}
 });	

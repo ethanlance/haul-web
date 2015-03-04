@@ -26,7 +26,6 @@ export default Ember.ObjectController.extend({
 		.then(
 			function() { 
 				_this.set('isProcessing', false);
-				console.log("USERNAME SAVED", username);
 				_this.transitionToRoute('profile', username);		
 			},
 			function(error){

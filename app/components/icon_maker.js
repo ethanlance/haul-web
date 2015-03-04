@@ -150,7 +150,6 @@ export default  Ember.Component.extend({
 			_this.set('isSuccess', false);
 			_this.set('isProgress', false);
 			_this.set('isFailed', true);
-			console.log("reponse", response);
 			var message;
 			if( response.message && response.message.indexOf("maximum allowed") !== -1){
 				message = "Sorry, your image is too large.";

@@ -18,7 +18,7 @@ export default Ember.ObjectController.extend({
 
 	start: function() {
 		
-		console.log("HERE? " , this.get('currentUserId'))
+
 
 		if( this.get('currentUserId') ){
 			

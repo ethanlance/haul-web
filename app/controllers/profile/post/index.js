@@ -31,9 +31,6 @@ export default Ember.ObjectController.extend({
 
 	setup: function() { 
 
-		console.log("SOMETHING IN MODEL CHANGED", this.get('model'));
-
-
 		this.set('isProfileOwner', false);
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
 			if( this.get('model').get('user').get('id') === this.get('currentUserId')) {
@@ -44,7 +41,6 @@ export default Ember.ObjectController.extend({
 
 		this.set('isRepost', false);
 		if(!Ember.isEmpty(this.get('model').get('repost_user').get('content'))){
-			console.log("OK", this.get('model').get('repost_user'));
 			this.set('isRepost', true);
 		}
 
@@ -54,8 +50,6 @@ export default Ember.ObjectController.extend({
 		if( body.indexOf("<img") > -1 ) {
 			this.set('postHasImage', true);
 		}
-
-		console.log("\t\t\t POST HAS IMAGE", this.get('postHasImage'))
 
 	}.observes('currentUserId', 'model.id', 'model', 'model.body'),
 

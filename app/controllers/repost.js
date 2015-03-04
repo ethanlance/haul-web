@@ -116,13 +116,12 @@ export default Ember.ObjectController.extend({
 		if(!repost){
 			return;
 		}
-console.log("REPOST", repost);
-console.log("IMAGE", this.get('selectedImages'))
+
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
 		}); 
 		//Set the images on the repost.		
-		console.log("REPOST", repost);
+
 		repost.set('product_image_ids', ids); 
 		repost.set('image_id', ids[0]); 
 

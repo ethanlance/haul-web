@@ -29,7 +29,6 @@ export default  Ember.ObjectController.extend({
 		var _this = this;
 		var content = this.store.filter('user-likes-list', function(userLike){
 			if(userLike.get('user').get('id') === _this.get('user').get('id')){
-				console.log("YEP!")
 				return userLike;
 			}
 		});

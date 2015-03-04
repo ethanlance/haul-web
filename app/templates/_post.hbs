@@ -3,8 +3,6 @@
 <div class="post">   
 
 	<div class="citation">
-		
-
 		{{!-- CITATION --}}
 		{{!-- CITATION --}}
 		{{!-- CITATION --}}
@@ -31,13 +29,13 @@
 		{{else}}
  
 		
-			{{#link-to 'profile' user }}
+			
 			<span class="image">
-				{{ make-icon icon=user.icon isSmall=true }}
+				{{#link-to 'profile' user }}{{ make-icon icon=user.icon isSmall=true }}{{/link-to}} 
 			</span>
-			<span class="name">@{{user.username}}</span> 
-			<div class="moment">posted {{format-date updated_at}}</div>
-			{{/link-to}} 
+			<span class="name">{{#link-to 'profile' user }}@{{user.username}}{{/link-to}} </span> 
+			<div class="moment">{{#link-to 'profile' user }}posted {{format-date updated_at}}{{/link-to}} </div>
+			
 
 		{{/if}}
 
@@ -45,36 +43,31 @@
 
 	<div class="article">
 		
-
-		
 		<h2>
 			{{#link-to 'profile.post' user post_id post_slug }}{{subject}}{{/link-to}}
 		</h2> 
 
 		
 		<div class="product-image">
-			
 			{{#link-to 'profile.post' user post_id post_slug }}
 				<img class="img-responsive" {{bind-attr src=image.medium}}>
 			{{/link-to}}
-		
-
 		</div>
-		 	<div class="btn-wrapper bottom">
-
-
-
-				{{buy-btn post=this class="display-inline"}} 
-
-				{{like-btn post=this openModal='openModal' class="display-inline"}}
-
-			 	{{#link-to 'profile.post' user post_id post_slug }}
-			 		{{comment-btn linkOff='true' itemObject=this class="display-inline" }}
-			 	{{/link-to}}
-
-				
-				{{repost-btn post=this openModal='openModal' class="display-inline" }}
-			 	
-			</div>
+		 	
 	</div> 
+
+	<div class="btn-wrapper">
+
+		{{buy-btn post=this class="display-inline"}} 
+
+		{{like-btn post=this openModal='openModal' class="display-inline"}}
+
+	 	{{#link-to 'profile.post' user post_id post_slug }}
+	 		{{comment-btn linkOff='true' itemObject=this class="display-inline" }}
+	 	{{/link-to}}
+		
+		{{repost-btn post=this openModal='openModal' class="display-inline" }}
+	 	
+	</div>
+
 </div>

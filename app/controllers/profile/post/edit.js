@@ -140,7 +140,6 @@ export default Ember.ObjectController.extend({
 	},
 
 	deletePost: function() {
-		console.log("DELETE?")
 		var _this = this;		
 		var model = this.get('model');
 
@@ -271,7 +270,6 @@ export default Ember.ObjectController.extend({
 		},
 
 		updateSortOrder: function(i) {
-			console.log("UDDATE TRIGGER!")
 			this.updateSortOrder(i);
 		}
 	}

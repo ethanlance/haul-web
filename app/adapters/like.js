@@ -31,11 +31,9 @@ export default ApplicationAdapter.extend({
 		}else{
 			id = record.get('id');	
 		}
-		
-
+	
 		var url = this.host + "/users/" + current_user_id + "/likes/users_posts/" + id;
 
-		console.log("DELETE LIK", record, url);
 		return this.ajax(url, "DELETE"); 
 	}	
 

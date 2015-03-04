@@ -28,7 +28,6 @@ export default Ember.Component.extend({
 		store.find('like', key)
 		.then(function(uLike){
 
-console.log("FOUND?", uLike);
 
 			if(!Ember.isEmpty(uLike)){
 				_this.set('userLikes', true);
@@ -62,7 +61,7 @@ console.log("FOUND?", uLike);
 				var data = {					
 					key: this.get('postKey')
 				};
-				console.log("DAATA", data);
+
 				record = store.createRecord('like', data);
 				like = true;
 			}

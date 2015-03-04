@@ -7,6 +7,7 @@ export default Ember.Component.extend(ScrollableMixin,{
 	didInsertElement: function(){
 		var _this = this;
 		Ember.run.later(function(){
+			console.log("RENDER DONE")
 			_this.set('renderIsDone', true);	
 		}, 500);
 		

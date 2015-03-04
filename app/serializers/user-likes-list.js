@@ -21,7 +21,7 @@ export default DS.RESTSerializer.extend({
 			}
 			return data;
 		});
-console.log("USER_LIKE_LIST DATA", datas)
+
 		payload = {'user-likes-list': datas}; 
 		return this._super(store, primaryType, payload);
 	}
