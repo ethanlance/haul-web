@@ -115,24 +115,19 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
-									{{#link-to 'profile' product_user}}
-								{{ make-icon icon=product_user.icon isSmall=true}}
-							
+									{{#link-to 'profile' product_user}}{{ make-icon icon=product_user.icon isSmall=true}}{{/link-to}}							
 
-								<div class="info-block">
-									<h1>{{product_user.name}}</h1>
-									<div class="username">@{{product_user.username}}</div> 
-								</div>
-							{{/link-to}}
+									<div class="info-block">
+										<h1>{{#link-to 'profile' product_user}}{{product_user.name}}{{/link-to}}</h1>
+										<div class="username">{{#link-to 'profile' product_user}}@{{product_user.username}}{{/link-to}}</div> 
+									</div>
+									
 								</div>
 
 								<div class="col-md-6 col-sm-6 col-xs-6 text-center">
-									<div class="price">
-										${{product_price}}
-										<button class="btn btn-default btn-buy btn-lg">
-											buy
-										</button>
-									</div>
+									
+									{{buy-btn post=this multiline='true' class="display-inline"}} 
+									
 								</div>
 							</div>
 						</div>

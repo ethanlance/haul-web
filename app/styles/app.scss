@@ -1,4 +1,6 @@
 
+
+
 .fa-spinner{
 	color: #ccc;
 	font-size: 100px;
@@ -83,7 +85,7 @@ a {
 .btn-buy {
 	//border-color: #333333;
 	background-color: #eee;//$secondary-color;
-	color: green;
+	//color: blue;
 	//text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
 	font-weight: bold;
 	//border-color: $primary-color;
@@ -94,6 +96,43 @@ a {
 	color: green;
 	//border-color: $secondary-color;
 }
+
+
+.strikethrough{ 
+    text-decoration: line-through;
+}
+// .strikethrough:after {
+//     border-bottom: 3px solid #000;
+//     content: "";
+//     left: 0;
+//     position: absolute;
+//     right: 0;
+//     top: 50%;
+//     margin:auto;
+//     width:90%;
+// }
+
+.product-status{
+	display:inline;
+	margin-right:10px;
+
+	.ember-view{
+		display:inline;
+	}
+
+	.product-sold{
+		color: #fa4b2a;
+		font-weight: bold
+	}
+
+	.product-not-for-sale{
+		color: #fab32a;
+		font-size:12px;
+	}
+
+}
+
+
 
 h1, h2, h3, h4, h5 {
 	font-family: Helvetica, "Helvetica Neue", Montserrat,  Arial, sans-serif;
@@ -903,14 +942,26 @@ header.profile.shrink{
 					//width: 70px;
 					float: left;
 					display:inline-block;
-					min-width: 70px;
+					//min-width: 70px;
 					margin:0;
 					padding: 3px 5px 3px 5px;
 					font-size: 20px;
+					font-weight: bold;
 					color: #333; 
-					z-index:2000;
 					text-align: left;
 				} 
+
+				.product-not-for-sale {
+					padding-top:10px;
+				} 
+				.product-sold{
+					padding-top:3px;
+					font-size: 20px;
+				}
+
+				.product-not-for-sale, .product-sold, .btn-buy{
+					float:left;	
+				}
 
 				&.bottom {
 					margin-top:0;
@@ -1242,10 +1293,15 @@ header.profile.shrink{
 
 			.price{
 				margin-top:10px;
-				font-size: 20px;
+				font-size: 24px;
+				font-weight: bold;
 				//	color: #fa4b2a;
 				display: inline-block;
 			}
+				.price:after{
+					content:"\A"; 
+					white-space:pre; 
+				}
 			.btn-buy{
 				display: inline-block;
 			}
@@ -1329,8 +1385,14 @@ header.profile.shrink{
 
 
 	}
+
+
 	
 }
+
+
+
+
 
 @media (max-width: 768px) {
 	.haul-content {
@@ -2416,7 +2478,7 @@ body.anon{
 .ql-format-group{
 	.fa-bold, .fa-italic, .fa-underline, .fa-strikethrough, .fa-list, .fa-list-ul{
 		margin:4px;
-		
+
 		&:hover{
 			color:#333;
 			border: 1px solid #ddd;
@@ -2424,15 +2486,6 @@ body.anon{
 	}
 }
 
-.ql-snow.ql-toolbar .ql-format-button.ql-italic{
-	background-image:none;
-}
-.ql-snow.ql-toolbar .ql-format-button.ql-underline{
-	background-image:none;
-}
-.ql-snow.ql-toolbar .ql-format-button.ql-strike{
-	background-image:none;
-}
 
 .ql-editor {
   box-sizing: border-box;
