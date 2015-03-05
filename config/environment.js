@@ -63,7 +63,8 @@ module.exports = function(environment) {
     ENV.APP.Server.PRODUCT_SERVER_HOST = "http://localhost:8082";
     ENV.APP.Server.IMAGE_SERVER_HOST = "http://localhost:8081";
     ENV.APP.Server.USER_SERVER_HOST = "http://localhost:8080";
-    ENV.APP.Server.CLIENT_TOKEN = "5eed07b8d71cf26f6df6566cf705adaa";
+    ENV.APP.Server.CLIENT_ID = "5eed07b8d71cf26f6df6566cf705adaa";
+    ENV.APP.Server.CLIENT_TOKEN = "client_5eed07b8d71cf26f6df6566cf705adaa";
     ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
   }
 
@@ -89,7 +90,8 @@ module.exports = function(environment) {
     ENV.APP.Server.PRODUCT_SERVER_HOST = "http://localhost:8082";
     ENV.APP.Server.IMAGE_SERVER_HOST = "http://localhost:8081";
     ENV.APP.Server.USER_SERVER_HOST = "http://localhost:8080";
-    ENV.APP.Server.CLIENT_TOKEN = "5eed07b8d71cf26f6df6566cf705adaa";
+    ENV.APP.Server.CLIENT_ID = "5eed07b8d71cf26f6df6566cf705adaa";
+    ENV.APP.Server.CLIENT_TOKEN = "client_5eed07b8d71cf26f6df6566cf705adaa";
     ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
   }
 

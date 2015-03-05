@@ -197,8 +197,7 @@
 			<div class="modal-header">
 				<button {{action 'closeImageModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">
-					Edit Images
-					<small>Drag to reorder the images</small>
+					Upload, Reorder and Remove Photos
 				</h4>
 			</div>
 		<div class="modal-body">
@@ -220,6 +219,13 @@
 
 
       	<div {{bind-attr class="postComplete:hide:show"}}>
+
+      			<h4 class="pull-left">
+					
+					<small>Drag to reorder the images</small>
+				</h4>
+
+
 	        <button {{action 'closeImageModal'}} type="button" class="btn btn-default" data-dismiss="modal">done</button> 
 		</div>
 

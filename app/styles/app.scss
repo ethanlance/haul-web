@@ -68,10 +68,7 @@ $secondary-color: #596885;
 
 
 
-a {
-	color: #66757f;
-	cursor: pointer;
-}
+
 
 .btn-primary {
 	border-color: #ccc;
@@ -136,24 +133,17 @@ a {
 
 h1, h2, h3, h4, h5 {
 	font-family: Helvetica, "Helvetica Neue", Montserrat,  Arial, sans-serif;
-	color: #3a4457;
+	color: #444e55;
+	font-weight: bold;
 }
 
-h4 a {
-	color: #3a4457;
+a {
+	color: #444e55;
+	cursor: pointer;
 }
 
-div.inline img {
-	float: left;
-}
-
-h2.inline {
-	float: left;
-	display: inline;
-	img {
-		float: left;
-		display: inline;
-	}
+a:hover{
+	color: #66757f;
 }
 
 
@@ -875,10 +865,10 @@ header.profile.shrink{
 		border-bottom-right-radius: 4px;
 
 
-		-moz-transition: height 0.5s ease-in-out;
-	    -o-transition: height 0.5s ease-in-out;
-	    -webkit-transition: height 0.5s ease-in-out;
-	    transition: height 0.5s ease-in-out;
+		// -moz-transition: height 0.5s ease-in-out;
+	 //    -o-transition: height 0.5s ease-in-out;
+	 //    -webkit-transition: height 0.5s ease-in-out;
+	    
 
 
 		.citation {
@@ -901,6 +891,7 @@ header.profile.shrink{
 
 
 		.btn-wrapper{
+
 			margin:0px 0px 0px 0px;
 			padding:10px 15px 10px 15px;
 			width:100%; 
@@ -950,7 +941,6 @@ header.profile.shrink{
 				display:block;
 				a{
 					text-decoration: none;
-					color: #3a4457;
 				}
 			}
 			
@@ -982,17 +972,19 @@ header.profile.shrink{
 	}
 
 	.col-wide{
-		width:100%
+		width:100%;
 	}
 
 	.galleryView{
-		display:inline;
+		display:table;
+		margin:0;
+		padding:0;
 		&.in{
 			.post{
 				border: 0;
 				margin:0;
-				width: 200px;
-				display:inline-block;
+				display:table-cell;
+				width: 25%;
 		
 				.btn-edit-post, .citation, .moment, .editorial, .btn-wrapper, h2{
 					display:none;
@@ -1126,7 +1118,6 @@ header.profile.shrink{
 				padding:0px;
 				a{
 					text-decoration: none;
-					color: #3a4457;
 				}
 			}
  
@@ -2059,38 +2050,6 @@ textarea.form-control {
 
 
 
-
-.seller-nav {
-	background-color: #d7d8d8;
-	padding-top: 10px;
-	padding-bottom: 5px;
-	h1 {
-		margin-top: 10px;
-		color: white;
-	}
-	h2 {
-		margin-top: -3px;
-		color: white;
-	}
-	h3 {
-		margin-top: 10px;
-		color: white;
-	}
-	h1 a, h2 a {
-		color: white;
-	}
-	.follow {
-		position: absolute;
-		right: 40px;
-		margin-left: 10px;
-		text-align: left;
-	}
-}
-
-.seller-nav-footer {
-	border-bottom: 1px solid #e3e3e3;
-	margin-bottom: 20px;
-}
  
 #leaveComment textarea {
 	height: 80px;
@@ -2108,21 +2067,6 @@ textarea.form-control {
 	border-left: 1px solid #e3e3e3;
 }
 
-.image-scroll {
-	overflow: auto;
-	height: 300px;
-	padding: 10px;
-	img {
-		width: 50%;
-		float: left !important;
-	}
-	&.fixed {
-		position: fixed;
-		display: inline;
-		top: 125px;
-		width: 300px;
-	}
-}
 
 
 

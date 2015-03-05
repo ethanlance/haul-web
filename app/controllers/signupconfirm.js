@@ -33,7 +33,7 @@ export default Ember.ObjectController.extend({
 				type: 'put',
 				data: data,
 				headers: {
-					Authorization: 'Bearer client_' + this.get('client_token')
+					Authorization: 'Bearer ' + this.get('client_token')
 				},
 				dataType: 'json'
 		}).then(

@@ -1,14 +1,47 @@
 import Ember from 'ember';
-import Base from 'simple-auth/authenticators/base';
-
-var HaulAuthenticator = Base.extend({
+import SimpleAuthBase from 'simple-auth/authenticators/base';
+import config from '../config/environment';
+export default SimpleAuthBase.extend({
 
 	restore: function (data) {
+		var _this = this;
+		
 		return new Ember.RSVP.Promise(function (resolve, reject) {
 			if (!Ember.isEmpty(data.access_token)) {
 				resolve(data);
 			} else {
-				reject();
+
+				Ember.$.ajax({
+					url: config.APP.Server.USER_SERVER_HOST + '/auth/refresh',
+					type: 'post',
+					data: {client_id:config.APP.Server.CLIENT_ID},
+					headers: {
+						Authorization: 'Bearer ' + data.refresh_token
+					},
+					dataType: 'json'
+				}).then(
+
+					function(response){
+
+						_this.authenticate({
+							accessToken: response.data[0].token_id,
+							refreshToken: response.data[1].token_id, 
+							currentUserId: response.data[0].user_id
+						}).then(
+							function(){
+								data['access_token'] = response.data[0].token_id;
+								data['refresh_token'] = response.data[1].token_id;
+								return resolve(data);	
+							},
+							function(){
+								return reject();
+							}
+						);
+					},
+					function(error){
+						return reject();
+					}
+				);				
 			}
 		});
 	},
@@ -24,4 +57,3 @@ var HaulAuthenticator = Base.extend({
 		});
 	}
 });
-export default HaulAuthenticator;

@@ -35,7 +35,7 @@ export default Ember.ObjectController.extend({
 			type: 'post',
 			data: data,
 			headers: {
-				Authorization: 'Bearer client_' + _this.get('client_token')
+				Authorization: 'Bearer ' + _this.get('client_token')
 			},
 			dataType: 'json'
 		});
@@ -55,15 +55,15 @@ export default Ember.ObjectController.extend({
 		var currentUserId = response.data[0].user_id;  
 
 		//Reopen the adapters
-		DS.RESTAdapter.reopen({
-		  headers: { 
-		    "Authorization": "Bearer " + accessToken
-		  }
-		});
+		// DS.RESTAdapter.reopen({
+		//   headers: { 
+		//     "Authorization": "Bearer " + accessToken
+		//   }
+		// });
 
-		ApplicationAdapter.reopen({
-			'loginToken': accessToken
-		});
+		// ApplicationAdapter.reopen({
+		// 	'loginToken': accessToken
+		// });
 
 		//SAVE SESSION
 		return _this.get('session').authenticate('authenticator:custom', 

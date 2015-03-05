@@ -39,7 +39,7 @@ export default  Ember.ObjectController.extend({
 					type: 'post',
 					data: data,
 					headers: {
-						Authorization: 'Bearer client_' + _this.get('client_token')
+						Authorization: 'Bearer ' + _this.get('client_token')
 					},
 					dataType: 'json'
 			}).then(

@@ -15,11 +15,7 @@ export default Ember.ArrayController.extend({
 
  	currentPageBinding: 'controllers.profile.currentPage',
  	showHeaderChange: function(){  
-
-
  		if( this.get('currentPage') === this.get('thisPage')){
-			console.log("PAGE CHANGE", this.get('currentPage'))
-			console.log("HIDE BTN ", this.get('showGridBtn'))
  			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		

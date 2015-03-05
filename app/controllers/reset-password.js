@@ -40,7 +40,7 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 					type: 'put',
 					data: data,
 					headers: {
-						Authorization: 'Bearer client_' + _this.get('client_token')
+						Authorization: 'Bearer ' + _this.get('client_token')
 					},
 					dataType: 'json'
 			}).then(
