@@ -22,8 +22,8 @@ export default Ember.ObjectController.extend({
 
 	redirect: false,
 
-	accessToken: null,
-	userID: null,
+	facebook_user_id: null,
+	facebook_access_token: null,
 
 	facebookSetup: function() {
 
@@ -77,8 +77,8 @@ export default Ember.ObjectController.extend({
 			  	if (response.authResponse) {
 
 					//Set the userId & accessToken
-			  		_this.set('userID', response.authResponse.userID);
-			  		_this.set('accessToken', response.authResponse.accessToken);
+			  		_this.set('facebook_user_id', response.authResponse.userID);
+			  		_this.set('facebook_access_token', response.authResponse.accessToken);
 			  		
 			  		return _this.getFBUser(function(data){
 			  			resolve(data);
@@ -93,17 +93,17 @@ export default Ember.ObjectController.extend({
 		});
 	},
 
-	authenticateByFB: function() {
-		var _this = this;
-		var data = {fb_user_id: this.get('userID'), fb_token: this.get('accessToken')};
-		return Ember.$.ajax({
-			url: _this.get('host') + '/auth/facebook',
-			type: 'post',
-			data: data,
-			headers: {
-				Authorization: 'Bearer ' + _this.get('client_token')
-			},
-			dataType: 'json'
-		});
-	},
+	// authenticateByFB: function() {
+	// 	var _this = this;
+	// 	var data = {fb_user_id: this.get('userID'), fb_token: this.get('accessToken')};
+	// 	return Ember.$.ajax({
+	// 		url: _this.get('host') + '/auth/facebook',
+	// 		type: 'post',
+	// 		data: data,
+	// 		headers: {
+	// 			Authorization: 'Bearer ' + _this.get('client_token')
+	// 		},
+	// 		dataType: 'json'
+	// 	});
+	// },
 });

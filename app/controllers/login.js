@@ -25,22 +25,6 @@ export default Ember.ObjectController.extend({
 		this.set('isProcessingLogin', false);
 	},
 
-	authenticateByEmail: function(data) {
-		var _this = this;
-
-		//AJAX CALL - for getting the User Token back.  
-		//Pass params email/password to it.
-		return Ember.$.ajax({
-			url: _this.get('host') + '/auth/user',
-			type: 'post',
-			data: data,
-			headers: {
-				Authorization: 'Bearer ' + _this.get('client_token')
-			},
-			dataType: 'json'
-		});
-	},
-
 	/**
 		The user is now authenticated.
 		Check that the user has set a username.  
@@ -54,34 +38,11 @@ export default Ember.ObjectController.extend({
 		var refreshToken =response.data[1].token_id; 
 		var currentUserId = response.data[0].user_id;  
 
-		//Reopen the adapters
-		// DS.RESTAdapter.reopen({
-		//   headers: { 
-		//     "Authorization": "Bearer " + accessToken
-		//   }
-		// });
-
-		// ApplicationAdapter.reopen({
-		// 	'loginToken': accessToken
-		// });
-
-		//SAVE SESSION
-		return _this.get('session').authenticate('authenticator:custom', 
-			{
-				'userId':currentUserId, 
-				'accessToken':accessToken, 
-				'refreshToken':refreshToken 
-			}
-		)
-		
-		.then(function(){
-			return _this.store.find('user', currentUserId);
-		})
-		
+		_this.store.find('user', currentUserId)
 		.then(function(user) {			
 			_this.get('session').set('currentUser', user);
 
-			if( !Ember.isEmpty(user.get('username')) ){
+			if( !Ember.isEmpty(user.get('username'))){
 				var attemptedTrans = _this.get('attemptedTransition'); 
 				if(Ember.isEmpty(attemptedTrans)){  
 					return _this.transitionToRoute("profile", user.get('username')  );
@@ -94,6 +55,12 @@ export default Ember.ObjectController.extend({
 		});
 	},
 
+	authenticate: function(api, type, data) {
+		var host = this.get('host'); 
+
+		return this.get('session').authenticate('authenticator:custom',{url: api, type:type, host: host, data: data});
+	},
+
 	actions: {
 
 		//LOGIN via FB token
@@ -103,9 +70,15 @@ export default Ember.ObjectController.extend({
 		
 			this.get('controllers.facebook').triggerFacebook()
 			.then(function(){
-				return _this.get('controllers.facebook').authenticateByFB();
+				var data = { 
+					fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
+					fb_token: 	_this.get('controllers.facebook.facebook_access_token')}
+				return  _this.authenticate('/auth/facebook', 'post', data);
 			})
 			.then(function(response){
+
+				console.log("RESPONSE FROM AUTHENTICATOR", response);
+
 				return _this.startUserSession(response);
 			})
 			.then(
@@ -133,7 +106,7 @@ export default Ember.ObjectController.extend({
 	 		//Model Validations:
 			model.validate()
 			.then(function(){
-				return _this.authenticateByEmail(data);
+				return  _this.authenticate('/auth/user', 'post', data);
 			})	
 			.then(function(response){
 				return _this.startUserSession(response);

@@ -35,15 +35,19 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 			var data = this.getProperties('password');
  
 			//Pass params email/password to it.
-			return Ember.$.ajax({
-					url: _this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
-					type: 'put',
-					data: data,
-					headers: {
-						Authorization: 'Bearer ' + _this.get('client_token')
-					},
-					dataType: 'json'
-			}).then(
+			// return Ember.$.ajax({
+			// 		url: _this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
+			// 		type: 'put',
+			// 		data: data,
+			// 		headers: {
+			// 			Authorization: 'Bearer ' + _this.get('client_token')
+			// 		},
+			// 		dataType: 'json'
+			// })
+
+			var url = _this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id');
+			return _this.get('controllers.login').authenticate(url, 'put', data)
+			.then(
 				function(response) {
 					_this.get('controllers.login').startUserSession(response);
 				}, 

@@ -97,10 +97,11 @@ module.exports = function(environment) {
 
   ENV['simple-auth'] = {
     store: 'simple-auth-session-store:local-storage',
-    authorizer: 'simple-auth-authorizer:oauth2-bearer',
+    //authorizer: 'authorizer:custom',
     authenticator: 'authenticator:custom',
     authenticationRoute: 'login',
-    //routeAfterAuthentication: null,
+    routeAfterAuthentication: '/',
+    refreshAccessTokens: true
   };
   return ENV;
 };

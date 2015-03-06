@@ -1,4 +1,5 @@
-import HaulAuthenticator from '../authenticators/application';  
+// import HaulAuthenticator from '../authenticators/application';  
+//import HaulAuthorizer from '../authorizers/custom';  
 import DS from 'ember-data';  
 
 export default {
@@ -14,7 +15,8 @@ export default {
 		  }
 		});
 		
-		container.register('authenticator:custom', HaulAuthenticator); 
+		//container.register('authenticator:custom', HaulAuthenticator); 
+		//container.register('authorizer:custom', HaulAuthorizer); 
 		application.advanceReadiness();
 	}
 };

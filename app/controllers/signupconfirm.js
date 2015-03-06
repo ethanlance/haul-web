@@ -28,15 +28,32 @@ export default Ember.ObjectController.extend({
 		this.set('isProcessing', true);
  
 		//Pass params email/password to it.
-		return Ember.$.ajax({
-				url: this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
-				type: 'put',
-				data: data,
-				headers: {
-					Authorization: 'Bearer ' + this.get('client_token')
-				},
-				dataType: 'json'
-		}).then(
+
+		
+
+		// return  _this.get('session').authenticate('authenticator:custom',
+		// 		{
+		// 			type:'PUT',
+		// 			url: url,
+		// 			host: _this.get('host'),
+		// 			data: data,
+		// 		})
+
+
+		// return Ember.$.ajax({
+		// 		url: this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id'),
+		// 		type: 'put',
+		// 		data: data,
+		// 		headers: {
+		// 			Authorization: 'Bearer ' + this.get('client_token')
+		// 		},
+		// 		dataType: 'json'
+		// })
+	
+		var url = '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id');
+
+		return _this.get('controllers.login').authenticate(url, 'put', data)
+		.then(
 			function(response) {
 				return _this.get('controllers.login').startUserSession(response);
 			}

@@ -10,5 +10,5 @@ export default ApplicationRoute.extend({
 	},
 	serialize: function(model) {  
  	   	return { post_slug: model.post_slug, post_id: model.id };
-	} 
+	} 	
 });

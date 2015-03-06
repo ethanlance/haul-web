@@ -32,6 +32,7 @@ export default Ember.ObjectController.extend({
 	// This bypasses email confirmation step.
 	createUserByFB: function(data) {
 		var _this = this;
+		data.password = 'Test00000?';
 		//CREATE HAUL USER FOR FB USER:
 		return Ember.$.ajax({
 			url: _this.get('host') + '/users',
@@ -83,7 +84,10 @@ export default Ember.ObjectController.extend({
 			})
 			
 			.then(function(){
-				return _this.get('controllers.facebook').authenticateByFB();
+				var data = { 
+					fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
+					fb_token: 	_this.get('controllers.facebook.facebook_access_token')}
+				return  _this.get('controllers.login').authenticate('/auth/facebook', 'post', data);
 			})
 
 			.then(function(response){
@@ -99,7 +103,10 @@ export default Ember.ObjectController.extend({
 					//User exists already.  Try to login them in.
 					if( error.status === 409){
 						//_this.set('error409', true);
-						return _this.get('controllers.facebook').authenticateByFB()
+						var data = { 
+							fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
+							fb_token: 	_this.get('controllers.facebook.facebook_access_token')}
+						return  _this.get('controllers.login').authenticate('/auth/facebook', 'post', data)
 						.then(function(response) {
 							return _this.get('controllers.login').startUserSession(response);			
 						});

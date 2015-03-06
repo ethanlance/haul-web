@@ -1,7 +1,23 @@
 import Ember from 'ember';
-
-export default Ember.Route.extend({
+import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
+import config from '../config/environment';
+export default Ember.Route.extend(ApplicationRouteMixin,{
 	actions: {
+
+		authorizationFailed: function(error) {
+			
+			var refresh_token = this.get('session.refresh_token');
+			
+			console.log("	TRY THIS REFRESH TOKEN:", refresh_token);
+
+			var auth = this.container.lookup('authenticator:custom')
+			auth.refreshAccessToken(null, refresh_token);
+		},
+
+		sessionAuthenticationFailed: function(error) {
+			console.log("SESSION AUTHENTICATE FAILED!", error);
+		},
+
     	authenticateSession: function() {
       		this.transitionTo('signup');
     	},
