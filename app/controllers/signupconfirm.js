@@ -53,11 +53,7 @@ export default Ember.ObjectController.extend({
 		var url = '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id');
 
 		return _this.get('controllers.login').authenticate(url, 'put', data)
-		.then(
-			function(response) {
-				return _this.get('controllers.login').startUserSession(response);
-			}
-		).then(null, function(error) {
+		.then(null, function(error) {
 			console.log("Error submit confirm", error);
 			_this.set('isProcessing', false);
 			_this.set('error', true); 

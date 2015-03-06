@@ -21,7 +21,6 @@ export default Ember.ObjectController.extend({
 	host: Config.Server.USER_SERVER_HOST,
 
 	redirect: false,
-
 	facebook_user_id: null,
 	facebook_access_token: null,
 
@@ -55,8 +54,8 @@ export default Ember.ObjectController.extend({
 				email: response.email,
 				firstname: response.first_name,
 				lastname: response.last_name,
-				fb_user_id: _this.get('userID'),
-				fb_token: _this.get('accessToken')
+				fb_user_id: _this.get('facebook_user_id'),
+				fb_token: _this.get('facebook_access_token')
 			};
 			return cb(data);
 		});
@@ -73,10 +72,8 @@ export default Ember.ObjectController.extend({
 		
 		return new Ember.RSVP.Promise(function(resolve, reject) {
 
-			return FB.login(function(response){
+			FB.login(function(response){
 			  	if (response.authResponse) {
-
-					//Set the userId & accessToken
 			  		_this.set('facebook_user_id', response.authResponse.userID);
 			  		_this.set('facebook_access_token', response.authResponse.accessToken);
 			  		
@@ -84,26 +81,11 @@ export default Ember.ObjectController.extend({
 			  			resolve(data);
 			  		});
 
-
 			  	} else {
 					console.log('User cancelled login or did not fully authorize.');
 					reject();
 			  	}
 		  	}, {scope: 'email'});	
 		});
-	},
-
-	// authenticateByFB: function() {
-	// 	var _this = this;
-	// 	var data = {fb_user_id: this.get('userID'), fb_token: this.get('accessToken')};
-	// 	return Ember.$.ajax({
-	// 		url: _this.get('host') + '/auth/facebook',
-	// 		type: 'post',
-	// 		data: data,
-	// 		headers: {
-	// 			Authorization: 'Bearer ' + _this.get('client_token')
-	// 		},
-	// 		dataType: 'json'
-	// 	});
-	// },
+	}
 });

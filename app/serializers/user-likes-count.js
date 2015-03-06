@@ -8,7 +8,7 @@ export default DS.RESTSerializer.extend({
 		} 
 
 		var data = { 
-			id: payload.data.object.id,
+			id: payload.data.subject.id,
 			total: payload.data.total,	
 		};
 

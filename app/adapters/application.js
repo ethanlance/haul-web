@@ -13,8 +13,6 @@ export default DS.RESTAdapter.extend({
   			token = this.get('accessToken');
   		}
 	
-		console.log("NOW USING AUTHORIZATION BEARER " +token);
-
     	return {
       		"Authorization": 'Bearer ' + token
     	};
@@ -25,12 +23,8 @@ export default DS.RESTAdapter.extend({
 		
 		//Unauthorized!
 		if (error.status === 401) {
-
-			console.log("TRIGGER 401 ")
-			
 			var auth = this.container.lookup('simple-auth-session:main');
 			auth.trigger('authorizationFailed');
-			
 			return error;
 		} else {
 			return error;

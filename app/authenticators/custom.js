@@ -40,7 +40,7 @@ export default Base.extend({
 	@type String
 	@default '/token'
   */
-  serverTokenEndpoint: '/token',
+	serverTokenEndpoint: '/token',
 
   /**
 	The endpoint on the server the authenticator uses to revoke tokens. Only
@@ -53,7 +53,7 @@ export default Base.extend({
 	@type String
 	@default null
   */
-  serverTokenRevocationEndpoint: null,
+	serverTokenRevocationEndpoint: null,
 
   /**
 	Sets whether the authenticator automatically refreshes access tokens.
@@ -65,113 +65,66 @@ export default Base.extend({
 	@type Boolean
 	@default true
   */
-  refreshAccessTokens: true,
+	refreshAccessTokens: true,
 
   /**
 	@property _refreshTokenTimeout
 	@private
   */
-  _refreshTokenTimeout: null,
+	_refreshTokenTimeout: null,
 
   /**
 	@method init
 	@private
   */
-  init: function() {
-	this.serverTokenEndpoint           = Configuration['simple-auth'].serverTokenEndpoint;
-	this.serverTokenRevocationEndpoint = Configuration['simple-auth'].serverTokenRevocationEndpoint;
-	this.refreshAccessTokens           = Configuration['simple-auth'].refreshAccessTokens;
-  },
+	init: function() {
+		this.serverTokenEndpoint           	= Configuration['simple-auth'].serverTokenEndpoint;
+		this.serverTokenRevocationEndpoint 	= Configuration['simple-auth'].serverTokenRevocationEndpoint;
+		this.refreshAccessTokens           	= Configuration['simple-auth'].refreshAccessTokens;
+		this.clientId 						= Configuration.APP.Server.CLIENT_ID	
+		this.clientToken					= Configuration.APP.Server.CLIENT_TOKEN;
+		this.host							= Configuration.APP.Server.USER_SERVER_HOST
+	},
 
-  /**
-	Restores the session from a set of session properties; __will return a
-	resolving promise when there's a non-empty `access_token` in the `data`__
-	and a rejecting promise otherwise.
+	/**
+		Restores the session from a set of session properties; __will return a
+		resolving promise when there's a non-empty `access_token` in the `data`__
+		and a rejecting promise otherwise.
 
-	This method also schedules automatic token refreshing when there are values
-	for `refresh_token` and `expires_in` in the `data` and automatic token
-	refreshing is not disabled (see
-	[`Authenticators.OAuth2#refreshAccessTokens`](#SimpleAuth-Authenticators-OAuth2-refreshAccessTokens)).
+		This method also schedules automatic token refreshing when there are values
+		for `refresh_token` and `expires_in` in the `data` and automatic token
+		refreshing is not disabled (see
+		[`Authenticators.OAuth2#refreshAccessTokens`](#SimpleAuth-Authenticators-OAuth2-refreshAccessTokens)).
 
-	@method restore
-	@param {Object} data The data to restore the session from
-	@return {Ember.RSVP.Promise} A promise that when it resolves results in the session being authenticated
-  */
-  restore: function(data) {
+		@method restore
+		@param {Object} data The data to restore the session from
+		@return {Ember.RSVP.Promise} A promise that when it resolves results in the session being authenticated
+	*/
+	restore: function(data) {
+		var _this = this;
+		return new Ember.RSVP.Promise(function(resolve, reject) {
+			
+			var now = Math.round(new Date().getTime() /1000)
 
-  	console.log("RESTOOOOOOOORE");
-
-	var _this = this;
-	return new Ember.RSVP.Promise(function(resolve, reject) {
-	  var now = (new Date()).getTime();
-	  if (!Ember.isEmpty(data.expires_at) && data.expires_at < now) {
-		if (_this.refreshAccessTokens) {
-		  _this.refreshAccessToken(data.expires_in, data.refresh_token).then(function(data) {
-			resolve(data);
-		  }, reject);
-		} else {
-		  reject();
-		}
-	  } else {
-		if (Ember.isEmpty(data.access_token)) {
-		  reject();
-		} else {
-		  _this.scheduleAccessTokenRefresh(data.expires_in, data.expires_at, data.refresh_token);
-		  resolve(data);
-		}
-	  }
-	});
-  },
-
-  /**
-	Authenticates the session with the specified `options`; makes a `POST`
-	request to the
-	[`Authenticators.OAuth2#serverTokenEndpoint`](#SimpleAuth-Authenticators-OAuth2-serverTokenEndpoint)
-	with the passed credentials and optional scope and receives the token in
-	response (see http://tools.ietf.org/html/rfc6749#section-4.3).
-
-	__If the credentials are valid (and the optionally requested scope is
-	granted) and thus authentication succeeds, a promise that resolves with the
-	server's response is returned__, otherwise a promise that rejects with the
-	error is returned.
-
-	This method also schedules automatic token refreshing when there are values
-	for `refresh_token` and `expires_in` in the server response and automatic
-	token refreshing is not disabled (see
-	[`Authenticators.OAuth2#refreshAccessTokens`](#SimpleAuth-Authenticators-OAuth2-refreshAccessTokens)).
-
-	@method authenticate
-	@param {Object} options
-	@param {String} options.identification The resource owner username
-	@param {String} options.password The resource owner password
-	@param {String|Array} [options.scope] The scope of the access request (see [RFC 6749, section 3.3](http://tools.ietf.org/html/rfc6749#section-3.3))
-	@return {Ember.RSVP.Promise} A promise that resolves when an access token is successfully acquired from the server and rejects otherwise
-  */
-  // authenticate: function(options) {
-  //   var _this = this;
-  //   return new Ember.RSVP.Promise(function(resolve, reject) {
-  //   	console.log("AAAAAUTTTTH")
-  //     var data = { grant_type: 'password', username: options.identification, password: options.password };
-  //     if (!Ember.isEmpty(options.scope)) {
-  //       var scopesString = Ember.makeArray(options.scope).join(' ');
-  //       Ember.merge(data, { scope: scopesString });
-  //     }
-  //     _this.makeRequest(_this.serverTokenEndpoint, data).then(function(response) {
-  //       Ember.run(function() {
-  //         var expiresAt = _this.absolutizeExpirationTime(response.expires_in);
-  //         _this.scheduleAccessTokenRefresh(response.expires_in, expiresAt, response.refresh_token);
-  //         if (!Ember.isEmpty(expiresAt)) {
-  //           response = Ember.merge(response, { expires_at: expiresAt });
-  //         }
-  //         resolve(response);
-  //       });
-  //     }, function(xhr, status, error) {
-  //       Ember.run(function() {
-  //         reject(xhr.responseJSON || xhr.responseText);
-  //       });
-  //     });
-  //   });
-  // },
+			if (!Ember.isEmpty(data.expires_at) && data.expires_at < now) {
+				if (_this.refreshAccessTokens) {
+					_this.refreshAccessToken(data.expires_in, data.refresh_token)
+					.then(function(data) {
+						resolve(data);
+					}, reject);
+				} else {
+					reject();
+				}
+			} else {
+				if (Ember.isEmpty(data.access_token)) {
+			  		reject();
+				} else {
+			  		_this.scheduleAccessTokenRefresh(data.expires_in, data.expires_at, data.refresh_token);
+					resolve(data);
+				}
+			}
+		});
+	},
 
 
 	authenticate: function(options) { 
@@ -184,7 +137,6 @@ export default Base.extend({
 			if( options.type ){
 				ops.type = options.type;
 			}
-
 
 			_this.makeRequest(options.host + options.url, data, ops).then(function(response) {
 				Ember.run(function() {
@@ -216,249 +168,162 @@ export default Base.extend({
 		});
 	},
 
-  /**
-	Cancels any outstanding automatic token refreshes and returns a resolving
-	promise.
+	/**
+		Cancels any outstanding automatic token refreshes and returns a resolving
+		promise.
 
-	@method invalidate
-	@param {Object} data The data of the session to be invalidated
-	@return {Ember.RSVP.Promise} A resolving promise
-  */
-  invalidate: function(data, tryRefresh) {
+		@method invalidate
+		@param {Object} data The data of the session to be invalidated
+		@return {Ember.RSVP.Promise} A resolving promise
+	*/
+	invalidate: function(data, tryRefresh) {
 
-	var _this = this;
-	function success(resolve) {
-	  Ember.run.cancel(_this._refreshTokenTimeout);
-	  delete _this._refreshTokenTimeout;
-	  resolve();
-	}
-	return new Ember.RSVP.Promise(function(resolve, reject) {
-	  if (!Ember.isEmpty(_this.serverTokenRevocationEndpoint)) {
-		var requests = [];
-		Ember.A(['access_token', 'refresh_token']).forEach(function(tokenType) {
-		  if (!Ember.isEmpty(data[tokenType])) {
-			requests.push(_this.makeRequest(_this.serverTokenRevocationEndpoint, {
-			  token_type_hint: tokenType, token: data[tokenType]
-			}));
-		  }
+		var _this = this;
+		function success(resolve) {
+			Ember.run.cancel(_this._refreshTokenTimeout);
+			delete _this._refreshTokenTimeout;
+			resolve();
+		}
+		return new Ember.RSVP.Promise(function(resolve, reject) {
+			if (!Ember.isEmpty(_this.serverTokenRevocationEndpoint)) {
+				var requests = [];
+				Ember.A(['access_token', 'refresh_token']).forEach(function(tokenType) {
+					if (!Ember.isEmpty(data[tokenType])) {
+						requests.push(_this.makeRequest(_this.serverTokenRevocationEndpoint, {
+							token_type_hint: tokenType, token: data[tokenType]
+						}));
+					}
+				});
+				Ember.$.when.apply(Ember.$, requests).always(function(responses) {
+					success(resolve);
+				});
+	
+			} else {
+				success(resolve);
+	  		}
 		});
-		Ember.$.when.apply(Ember.$, requests).always(function(responses) {
-		  success(resolve);
+	},
+
+	  /**
+		Sends an `AJAX` request to the `url`. This will always be a _"POST"_
+		request with content type _"application/x-www-form-urlencoded"_ as
+		specified in [RFC 6749](http://tools.ietf.org/html/rfc6749).
+
+		This method is not meant to be used directly but serves as an extension
+		point to e.g. add _"Client Credentials"_ (see
+		[RFC 6749, section 2.3](http://tools.ietf.org/html/rfc6749#section-2.3)).
+
+		@method makeRequest
+		@param {Object} url The url to send the request to
+		@param {Object} data The data to send with the request, e.g. username and password or the refresh token
+		@return {Deferred object} A Deferred object (see [the jQuery docs](http://api.jquery.com/category/deferred-object/)) that is compatible to Ember.RSVP.Promise; will resolve if the request succeeds, reject otherwise
+		@protected
+	  */
+	makeRequest: function(url, data, options) {
+
+		var bearer = options.bearer;
+		if( Ember.isEmpty(bearer) ) {
+			bearer = this.get('clientToken');
+		}
+
+		var type = options.type
+		if( Ember.isEmpty(type) ) {
+			type = 'POST';
+		}
+
+		return Ember.$.ajax({
+			url:         url,
+			type:        type,
+			data:        data,
+			dataType:    'json',
+			contentType: 'application/x-www-form-urlencoded',
+			headers: {
+				Authorization: 'Bearer ' + bearer
+			},
 		});
-	  } else {
-		success(resolve);
-	  }
-	});
-  },
-
-  /**
-	Sends an `AJAX` request to the `url`. This will always be a _"POST"_
-	request with content type _"application/x-www-form-urlencoded"_ as
-	specified in [RFC 6749](http://tools.ietf.org/html/rfc6749).
-
-	This method is not meant to be used directly but serves as an extension
-	point to e.g. add _"Client Credentials"_ (see
-	[RFC 6749, section 2.3](http://tools.ietf.org/html/rfc6749#section-2.3)).
-
-	@method makeRequest
-	@param {Object} url The url to send the request to
-	@param {Object} data The data to send with the request, e.g. username and password or the refresh token
-	@return {Deferred object} A Deferred object (see [the jQuery docs](http://api.jquery.com/category/deferred-object/)) that is compatible to Ember.RSVP.Promise; will resolve if the request succeeds, reject otherwise
-	@protected
-  */
-  makeRequest: function(url, data, options) {
-
-  	var bearer = options.bearer;
-  	if( Ember.isEmpty(bearer) ) {
-  		bearer = Configuration.APP.Server.CLIENT_TOKEN;
-  	}
-
-  	var type = options.type
-  	if( Ember.isEmpty(type) ) {
-  		type = 'POST';
-  	}
-
-	return Ember.$.ajax({
-	  url:         url,
-	  type:        type,
-	  data:        data,
-	  dataType:    'json',
-	  contentType: 'application/x-www-form-urlencoded',
-		headers: {
-			Authorization: 'Bearer ' + bearer
-		},
-	});
-  },
+  	},
 
   /**
 	@method scheduleAccessTokenRefresh
 	@private
   */
-  scheduleAccessTokenRefresh: function(expiresIn, expiresAt, refreshToken) {
-	var _this = this;
+	scheduleAccessTokenRefresh: function(expiresIn, expiresAt, refreshToken) {
+		var _this = this;
 
-	if (this.refreshAccessTokens) {
-	  var now = (new Date()).getTime();
-	  if (Ember.isEmpty(expiresAt) && !Ember.isEmpty(expiresIn)) {
-		expiresAt = new Date(now + expiresIn * 1000).getTime();
-	  }
-	  var offset = (Math.floor(Math.random() * 5) + 5) * 1000;
+		if (this.refreshAccessTokens) {
+			var now = (new Date()).getTime();
+			if (Ember.isEmpty(expiresAt) && !Ember.isEmpty(expiresIn)) {
+				expiresAt = new Date(now + expiresIn * 1000).getTime();
+			}
+			var offset = (Math.floor(Math.random() * 5) + 5) * 1000;
 
-	  if (!Ember.isEmpty(refreshToken) && !Ember.isEmpty(expiresAt) && expiresAt > now - offset) {
-		Ember.run.cancel(this._refreshTokenTimeout);
-		delete this._refreshTokenTimeout;
-		if (!Ember.testing) {
-		  this._refreshTokenTimeout = Ember.run.later(this, this.refreshAccessToken, expiresIn, refreshToken, expiresAt - now - offset);
+			if (!Ember.isEmpty(refreshToken) && !Ember.isEmpty(expiresAt) && expiresAt > now - offset) {
+				Ember.run.cancel(this._refreshTokenTimeout);
+				delete this._refreshTokenTimeout;
+				if (!Ember.testing) {
+					this._refreshTokenTimeout = Ember.run.later(this, this.refreshAccessToken, expiresIn, refreshToken, expiresAt - now - offset);
+				}
+			}
 		}
-	  }
-	}
-  },
+	},
 
   /**
 	@method refreshAccessToken
 	@private
   */
-  alreadyRefreshingAccessToken: false,
-  refreshAccessToken: function(expiresIn, refreshToken) {
+	alreadyRefreshingAccessToken: false,
+	refreshAccessToken: function(expiresIn, refreshToken) {
 	
-	console.log("	REFRESH TOKENS VIA", refreshToken);
+		if( this.get('alreadyRefreshingAccessToken') ){
+			return;
+		}
 
-	if( this.get('alreadyRefreshingAccessToken') ){
-		return;
-	}
+		this.set('alreadyRefreshingAccessToken', true);
 
-	this.set('alreadyRefreshingAccessToken', true);
+		var _this = this;
+		var data  = { client_id: this.get('clientId') };
+		return new Ember.RSVP.Promise(function(resolve, reject) {
+			_this.makeRequest(_this.host + "/auth/refresh", data, {bearer:refreshToken}).then(function(response) {
+				Ember.run(function() {
+		
+					var user_id = response.data[0].user_id;
+					var access_token = response.data[0].token_id;
+					var refresh_token = response.data[1].token_id; 
+					var expiresAt = response.data[0].expiration;
 
-	var _this = this;
-	var data  = { client_id: Configuration.APP.Server.CLIENT_ID };
-	return new Ember.RSVP.Promise(function(resolve, reject) {
-	  _this.makeRequest(Configuration.APP.Server.USER_SERVER_HOST + "/auth/refresh", data, {bearer:refreshToken}).then(function(response) {
-		Ember.run(function() {
-	
-			var user_id = response.data[0].user_id;
-			var access_token = response.data[0].token_id;
-			var refresh_token = response.data[1].token_id; 
-			var expiresAt = response.data[0].expiration;
+					if( !expiresIn ){
+						var expires_in = _this.timeExpiresIn(expiresAt);
+					}
 
-			if( !expiresIn ){
-				var expires_in = _this.timeExpiresIn(expiresAt);
-			}
+					var data = {
+						access_token: access_token, 
+						refresh_token:refresh_token, 
+						user_id: user_id,
+						expires_at: expiresAt,
+						expires_in: expires_in
+					};
 
-			var data = {
-				access_token: access_token, 
-				refresh_token:refresh_token, 
-				user_id: user_id,
-				expires_at: expiresAt,
-				expires_in: expires_in
-			};
+			  		_this.scheduleAccessTokenRefresh(expiresIn, expiresAt, refresh_token);
+			  
+			  		_this.trigger('sessionDataUpdated', data);
 
-		  _this.scheduleAccessTokenRefresh(expiresIn, expiresAt, refresh_token);
-		  
-		  _this.trigger('sessionDataUpdated', data);
+			  		_this.set('alreadyRefreshingAccessToken', false);
 
-		  _this.set('alreadyRefreshingAccessToken', false);
-
-		  console.log("	FRESH NEW ACCESS TOKENS: ", data);
-
-		  resolve(data);
+					return resolve(data);
+				});
+			}, function(xhr, status, error) {
+				_this.set('alreadyRefreshingAccessToken', false);
+				Ember.Logger.warn('Access token could not be refreshed - server responded with ' + error + '.');
+				return reject();
+	  		});
 		});
-	  }, function(xhr, status, error) {
-	  	_this.set('alreadyRefreshingAccessToken', false);
-		Ember.Logger.warn('Access token could not be refreshed - server responded with ' + error + '.');
-		reject();
-	  });
-	});
   },
 
-  /**
-	@method absolutizeExpirationTime
-	@private
-  */
-  absolutizeExpirationTime: function(expiresIn) {
-	if (!Ember.isEmpty(expiresIn)) {
-	  return new Date((new Date().getTime()) + expiresIn * 1000).getTime();
-	}
-  },
 
-  timeExpiresIn: function(future_time) {
-	if (!Ember.isEmpty(future_time)) {
-		var d = future_time - Math.round(new Date().getTime() /1000);
-		return d;
+	timeExpiresIn: function(future_time) {
+		if (!Ember.isEmpty(future_time)) {
+			var d = future_time - Math.round(new Date().getTime() /1000);
+			return d;
+		}
 	}
-  }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-// import Ember from 'ember';
-// import SimpleAuthBase from 'simple-auth/authenticators/base';
-// import config from '../config/environment';
-// export default SimpleAuthBase.extend({
-
-// 	restore: function (data) {
-// 		var _this = this;
-// 		console.log("RESTORE?",data)
-// 		return new Ember.RSVP.Promise(function (resolve, reject) {
-// 			if (!Ember.isEmpty(data.access_token)) {
-// 				resolve(data);
-// 			} else {
-
-// 				Ember.$.ajax({
-// 					url: config.APP.Server.USER_SERVER_HOST + '/auth/refresh',
-// 					type: 'post',
-// 					data: {client_id:config.APP.Server.CLIENT_ID},
-// 					headers: {
-// 						Authorization: 'Bearer ' + data.refresh_token
-// 					},
-// 					dataType: 'json'
-// 				}).then(
-
-// 					function(response){
-
-// 						_this.authenticate({
-// 							accessToken: response.data[0].token_id,
-// 							refreshToken: response.data[1].token_id, 
-// 							currentUserId: response.data[0].user_id
-// 						}).then(
-// 							function(){
-// 								data['access_token'] = response.data[0].token_id;
-// 								data['refresh_token'] = response.data[1].token_id;
-// 								return resolve(data);	
-// 							},
-// 							function(){
-// 								return reject();
-// 							}
-// 						);
-// 					},
-// 					function(error){
-// 						return reject();
-// 					}
-// 				);				
-// 			}
-// 		});
-// 	},
-
-// 	authenticate: function(options) { 
-
-// 		// return Ember.RSVP.reject();
-
-
-	 
-// 		var user_id = options.userId;
-// 		var access_token = options.accessToken;
-// 		var refresh_token = options.refreshToken; 
-// 		console.log("ABOUT TO AUTHENTICATIONALIZE", options)
-// 		return new Ember.RSVP.Promise(function(resolve) {
-// 			resolve({access_token:access_token, refresh_token:refresh_token, user_id: user_id});
-// 		});
-// 	}
-// });

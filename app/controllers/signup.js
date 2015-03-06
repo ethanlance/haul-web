@@ -28,8 +28,7 @@ export default Ember.ObjectController.extend({
 	},
 
 	//createUser
-	// Send this data to /users api and create the user.
-	// This bypasses email confirmation step.
+	// Creates a user and sets the user to verified immediately
 	createUserByFB: function(data) {
 		var _this = this;
 		data.password = 'Test00000?';
@@ -45,9 +44,7 @@ export default Ember.ObjectController.extend({
 		});
 	},
 
-	//createUser
-	// Send this data to /users api and create the user.
-	// This bypasses email confirmation step.
+	//createUser who then will need to verify via a token we send them in an email.
 	createUserByEmail: function(data) {
 		
 		//Flag:
@@ -79,21 +76,17 @@ export default Ember.ObjectController.extend({
 
 			this.get('controllers.facebook').triggerFacebook()
 			
-			.then(function onFulfill(response) {
+			.then(function(response) {
 				return _this.createUserByFB(response); 
 			})
 			
-			.then(function(){
+			.then(function(response){
 				var data = { 
 					fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
 					fb_token: 	_this.get('controllers.facebook.facebook_access_token')}
 				return  _this.get('controllers.login').authenticate('/auth/facebook', 'post', data);
 			})
-
-			.then(function(response){
-				return _this.get('controllers.login').startUserSession(response);
-			})
-
+			
 			.then(
 		 		function onFulfill() {
 					_this.set('isProcessingFacebook', false);
@@ -102,14 +95,10 @@ export default Ember.ObjectController.extend({
 					
 					//User exists already.  Try to login them in.
 					if( error.status === 409){
-						//_this.set('error409', true);
 						var data = { 
 							fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
 							fb_token: 	_this.get('controllers.facebook.facebook_access_token')}
-						return  _this.get('controllers.login').authenticate('/auth/facebook', 'post', data)
-						.then(function(response) {
-							return _this.get('controllers.login').startUserSession(response);			
-						});
+						return  _this.get('controllers.login').authenticate('/auth/facebook', 'post', data);
 					}else{
 						console.error("Failed Signup", error);
 						_this.set('isProcessingFacebook', false);

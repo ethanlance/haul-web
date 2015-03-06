@@ -13,7 +13,7 @@ export default DS.RESTSerializer.extend({
 		var data = null;
 		var datas = payload.data.map(function(result){
 			
-			var id = result.object.id;
+			var id = result.subject.id;
 			data = {
 				id: id,	
 				post:id,		

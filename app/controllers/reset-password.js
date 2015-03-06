@@ -48,10 +48,7 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 			var url = _this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id');
 			return _this.get('controllers.login').authenticate(url, 'put', data)
 			.then(
-				function(response) {
-					_this.get('controllers.login').startUserSession(response);
-				}, 
-
+				function(response) {}, 
 				function() {
 					_this.set('isProcessing', false);
 					_this.set('error', true);
