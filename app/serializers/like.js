@@ -7,12 +7,12 @@ export default DS.RESTSerializer.extend({
 			return;
 		} 
 		
-		var id = String(payload.data.object.id);
+		var id = String(payload.data.subject.id);
 		var key = id.split('_');
 		var post_id = key[1];
 		 
 		var data = {
-			id: payload.data.object.id,
+			id: payload.data.subject.id,
 			post_id: post_id,
 			user_id: payload.data.user_id
 		};

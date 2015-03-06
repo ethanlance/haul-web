@@ -11,7 +11,7 @@ export default  DS.RESTSerializer.extend({
 		var follows_ids = [];
 
 		payload.data.map(function(result){ 
-			follows_ids.push( result.object.id );
+			follows_ids.push( result.subject.id );
 			return;
 		}); 
 
