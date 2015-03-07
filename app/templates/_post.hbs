@@ -34,7 +34,7 @@
 				{{#link-to 'profile' user }}{{ make-icon icon=user.icon isSmall=true }}{{/link-to}} 
 			</span>
 			<span class="name">{{#link-to 'profile' user }}@{{user.username}}{{/link-to}} </span> 
-			<div class="moment">{{#link-to 'profile' user }}posted {{format-date updated_at}}{{/link-to}} </div>
+			<div class="moment">{{#link-to 'profile' user }}posted{{/link-to}} {{format-date updated_at}}</div>
 			
 
 		{{/if}}
