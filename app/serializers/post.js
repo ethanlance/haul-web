@@ -9,11 +9,9 @@ export default DS.RESTSerializer.extend({
 			return;
 		}
 		
-		var id = payload.data.user_id + "_" + payload.data.post_id; 
-		
 		var data = {
 
-			id: id,	
+			id: payload.data.post_id,
 			
 			//post
 			post_id: payload.data.post_id,
@@ -36,7 +34,7 @@ export default DS.RESTSerializer.extend({
             product_status: payload.data.product.status,
 
 			commentCount: payload.data.post_id,
-			likesCount: id
+			likesCount: payload.data.post_id
 		};
 
 		//repost aka parent post

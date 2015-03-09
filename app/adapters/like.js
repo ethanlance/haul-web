@@ -9,7 +9,7 @@ export default ApplicationAdapter.extend({
 	//Does current_user like this post?
 	find: function(store, type, id) { 
 		var current_user_id = this.get('currentUser').get('id');
-		var url = this.host + "/users/" + current_user_id + "/likes/users_posts/" + id;		
+		var url = this.host + "/users/" + current_user_id + "/likes/posts/" + id;		
 		return this.ajax(url, 'GET');
 	},
 
@@ -18,7 +18,7 @@ export default ApplicationAdapter.extend({
 		var current_user_id = this.get('currentUser').get('id');
 		var id = record.get('key');
 
-		var url = this.host + "/users/" + current_user_id + "/likes/users_posts/" + id;		
+		var url = this.host + "/users/" + current_user_id + "/likes/posts/" + id;		
 		return this.ajax(url, "PUT"); 
 	},
 
@@ -32,7 +32,7 @@ export default ApplicationAdapter.extend({
 			id = record.get('id');	
 		}
 	
-		var url = this.host + "/users/" + current_user_id + "/likes/users_posts/" + id;
+		var url = this.host + "/users/" + current_user_id + "/likes/posts/" + id;
 
 		return this.ajax(url, "DELETE"); 
 	}	

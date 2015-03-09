@@ -17,9 +17,8 @@ export default DS.RESTSerializer.extend({
 		
 		var data = null;
 		var datas = payload.data.map(function(result){  
-			var id = result.user_id + "_" + result.post_id; 
 			data = {
-				id: id,	
+				id: result.post_id,	
 				post_id:result.post_id,
 				updated_at: result.updated_at,
 				
@@ -36,7 +35,7 @@ export default DS.RESTSerializer.extend({
 				product_user: result.product.user_id,
 
 				commentCount: result.post_id,
-				likesCount: id
+				likesCount: result.post_id
 			};
 
 
