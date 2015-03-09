@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ScrolltoMixin from '../mixins/scrollto';
 
 export default Ember.Component.extend(ScrolltoMixin, {
-	totalBinding: 0,//"itemObject.commentCount.total",
+	totalBinding: "post.commentCount.total",
 	linkOff:false,
 	actions: {
 		btnClick: function() { 

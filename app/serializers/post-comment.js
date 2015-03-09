@@ -22,13 +22,16 @@ export default DS.RESTSerializer.extend({
 				comment: record.comment,
 				created_at: record.created_at,
 				marker_id: record.marker_id,
-				post: record.post_id,
+				
+				post: record.subject.id,
 				user: record.user_id,
-				context_id: record.context.id,
-				context_type: record.context.type + 's',
+
+				post_id: record.subject.id,
+				user_id: record.user_id,
 			};
 		}); 
-		payload = {'product-comment': data};  
+
+		payload = {'post-comment': data};  
 		return this._super(store, primaryType, payload);
 	}
 });

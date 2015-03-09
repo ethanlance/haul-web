@@ -32,22 +32,19 @@
 
 
 				{{#each sortedComments }}
-
-					<div class="citation">
-						{{#link-to 'profile' user }}
-						<div class="image">
-							{{ make-icon icon=product.user.icon isSmall=true}}
-						</div>
-						<div class="name">{{product.user.name}}</div>
-						{{/link-to}}
-						<span class="small">{{ format-date created_at }}</span>
+				<div class="comment">
+					<div {{bind-attr class="canDelete:show:hide"}}>
+						<div {{action "delete" this}}class="btn btn-default btn-sm btn-delete"><span class="glyphicon glyphicon-remove"></span></div>
 					</div>
-
-
-					<p class="single-comment">
-						{{ break-lines comment }} 
-					</p>
-
+					<div class="image">
+						{{#link-to 'profile' user }}{{ make-icon icon=user.icon isSmall=true}}{{/link-to}}
+					</div>
+					<div class="single-comment">
+						<span class="name">{{#link-to 'profile' user }}{{user.name}}{{/link-to}}</span>
+						<span>{{sanitize-html comment "comment"}}</span>
+						<span class="moment">{{ format-date created_at }}</span>
+					</div>
+				</div>
 				{{/each}}
 
 			</div>

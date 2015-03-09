@@ -22,10 +22,10 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 			var _this = this;
 			var currentUserId = this.get('session.user_id');
-console.log("AUTH!  NOW TRANSITION")
+
 			this.store.find('user', currentUserId)
 			.then(function(user) {			
-				console.log("USER IS ", user);
+
 				//_this.get('session').set('currentUser', user);
 
 				if( !Ember.isEmpty(user.get('username'))){
@@ -66,6 +66,13 @@ console.log("AUTH!  NOW TRANSITION")
 
 		goToRoute: function(arg1, arg2) {
 			this.transitionTo(arg1, arg2);
-		}
+		},
+
+		goToLink: function(item, anchor) {
+            var $elem = $(anchor);
+            var $scrollTo = $('body').scrollTop($elem.offset().top);
+
+            this.transitionToRoute(item.route).then($scrollTo);  //.transitionTo is depricated
+        }
 	}
 });

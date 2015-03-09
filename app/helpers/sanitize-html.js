@@ -11,7 +11,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
   html = html.replace(/<div>/g, "<p>");
   html = html.replace(/<\/div>/g, "</p>");
   html = html.replace(/\n/g, "<br>");
-
+// console.log("HTML", html);
   if (arguments.length === 2) {
     options    = configName;
     configName = null;

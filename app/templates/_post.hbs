@@ -62,8 +62,8 @@
 
 		{{like-btn post=this openModal='openModal' class="display-inline"}}
 
-	 	{{#link-to 'profile.post' user post_id post_slug }}
-	 		{{comment-btn linkOff='true' itemObject=this class="display-inline" }}
+	 	{{#link-to 'profile.post' user post_id post_slug anchor="#leaveComment"}}
+	 		{{comment-btn linkOff='true' post=this class="display-inline" }}
 	 	{{/link-to}}
 		
 		{{repost-btn post=this openModal='openModal' class="display-inline" }}

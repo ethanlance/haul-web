@@ -2,11 +2,11 @@ import Ember from 'ember';
 import config from '../config/environment';
 var Haul = config.APP;
 
-
-var CommentSectionComponent = Ember.Component.extend({
+export default Ember.Component.extend({
 	
 	isProcessing:false,
 
+	postIdBinding: 'post.post_id',
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
 
@@ -14,10 +14,8 @@ var CommentSectionComponent = Ember.Component.extend({
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('comments', 'commentsSorting'),
 
-	
-
 	start: function() { 
-return;
+
 		this.makeModel();
 		
 		this.loadComments();
@@ -26,15 +24,12 @@ return;
 		var _this = this;
 		var comments = store.filter('post-comment', function(comment) {
 
-			var itemId = comment.get('product_id');
-			var contextId = comment.get('context_id');
+			var postId = comment.get('post_id');
 			
-			var contextType = _this.reverse_type_map[comment.get('context_type')];
-			
-			if( itemId && itemId === _this.itemId && contextId === _this.contextId && contextType === _this.contextType ){ 
+			if(!Ember.isEmpty(comment.get('id')) && (comment.get('post') && comment.get('post_id') === _this.get('postId')) ){ 
 
 				//Can this comment be deleted by the currentUser?
-				if (comment.get('user_id') === _this.get('userId')) {
+				if (comment.get('user_id') === _this.get('currentUserId')) {
 					comment.set('canDelete', true);
 				}
 
@@ -48,15 +43,15 @@ return;
 
 	makeModel: function() {
 		var store = this.container.lookup('store:main');
-		var model = store.createRecord('product-comment');
+		var model = store.createRecord('post-comment');
 		this.set('model', model);
 	},
 
 	loadComments: function() {
 		var store = this.container.lookup('store:main');
 		
-		var query = {'contextId':this.contextId, 'contextType':this.contextType, 'itemId':this.itemId};
-		store.find('product-comment', query).then(function(){
+		var query = {'postId':this.postId};
+		store.find('post-comment', query).then(function(){
 		}, function(error) {
 			console.log("ERROR", error);
 		});
@@ -64,20 +59,7 @@ return;
 
 	updateCommentCount: function(direction) {
 		var store = this.container.lookup('store:main');
-		//var key = this.type_map[this.contextType] + ':' + this.contextId + ":" + this.itemType + ":" + this.itemId;
-	
-		var key = this.contextId + "_" + this.itemId;
-
-		var storeName = null;
-		if( this.contextType == "collections"){
-			storeName = "collection-product-comment-count"
-		}
-
-		if( this.contextType == "users"){
-			storeName = "product-comment-count"
-		}
-
-		store.find(storeName, key )
+		store.find('post-comment-count', this.get('postId') )
 		.then(function(record){
 			if( direction === "up"){
 				record.incrementProperty('total');
@@ -85,8 +67,6 @@ return;
 				record.decrementProperty('total'); 
 			}
 		});
-
-
 	},
 
 	saveModel: function() {
@@ -137,10 +117,8 @@ return;
 
 			var _this = this;
 			var model = this.model;
-			model.set('user_id', this.get('userId'));
-			model.set('product_id', this.get('itemId'));
-			model.set('type', this.get('contextType'));
-			model.set('id', this.get('contextId')); 
+			model.set('user_id', this.get('currentUserId'));
+			model.set('post_id', this.get('postId'));
 
 	 		//Model Validations:
 			model.validate().then(function(){
@@ -153,4 +131,3 @@ return;
 		}
 	}
 });
-export default CommentSectionComponent;

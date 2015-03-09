@@ -1326,27 +1326,59 @@ header.profile.shrink{
 	}
 
 	.comments{
-		.citation {
-			margin-top: 10px;
 
-			.small {
+		.form-group{
+			margin-bottom:0px;
+		}
 
-			padding:0;
-			margin:0;
-			float:left;
-			font-size: 11px;
-			padding-right: 8px;
+		.ladda-button{
+			margin-bottom:20px;
+		}
+
+		.comment{
+			margin-top:10px;
+			width: 100%;
+			display:inline-block;
+			
+			.btn-delete {
+				display:none;
+				float: right;
+			}
+			&:hover .btn-delete{
+				display:inline;
+			}
+
+			.image {
+				float:left;
+				display:inline;
+				width: 55px;
+				margin:0;
+				padding:0;
+				.thumbnail{
+					padding:1px;
+				}
+			}
+			.single-comment {
+				width:80%;
+				float:left;
+				display:inline;
+				padding: 0;
+				margin: 0;
+				
+				a{
+					color: #fa4b2a;
+				}
+
+				.moment{
+					display:block; 
+					float:none;
+					margin:0;
+					padding:0;
+					font-size: 14px;
+				}
 			}
 		}
-		.single-comment {
-			padding-left: 30px;
-		}
-
-
 	}
-
-
-	
 }
 
 
