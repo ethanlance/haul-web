@@ -28,7 +28,7 @@ export default ApplicationAdapter.extend({
             product_status: record.get('product_status'),
         };
 
-		var url = this.host + "/users/" + repost_user_id + "/posts/" + repost_id;
+		var url = this.host + "/posts/" + repost_id;
 		return this.ajax(url, "POST", { data: data }); 
 	}
 });

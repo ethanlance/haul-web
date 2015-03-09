@@ -176,7 +176,11 @@ export default Ember.ObjectController.extend({
 		var repost = this.get('repost');
 
 		//Trim
-		var body = repost.get('body').trim();
+		var body = '';
+		if( repost.get('body') ){
+			body = repost.get('body').trim();	
+		}
+		
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}

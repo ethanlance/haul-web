@@ -7,17 +7,14 @@ export default ApplicationAdapter.extend({
 	
 	host: Haul.Server.POST_SERVER_HOST, 
 
-	find: function(store, type, key) {  
-		var s = key.split('_');
-		var user_id = s[0];
-		var post_id = s[1];
-		var url = this.host + "/users/" + user_id + "/posts/" + post_id;
+	find: function(store, type, id) { 
+		var url = this.host + "/posts/" + id;
 
         return this.ajax(url, 'GET');
     },
 
 	findQuery: function(store, type, query){ 
-		var url = this.host + "/users/" + query.user_id + "/posts/" + query.post_id;
+		var url = this.host + "/posts/" + query.post_id;
         return this.ajax(url, 'GET');
 	},
 
@@ -29,17 +26,17 @@ export default ApplicationAdapter.extend({
     deleteRecord: function(store, type, record ) {
     
     	//record.rollback();
-		var user_id = record.get('user').get('id');
+		//var user_id = record.get('user').get('id');
 		var post_id = record.get('post_id');
 		//record.rollforward()?
 
-		var url = this.host + "/users/" + user_id + "/posts/" + post_id;
+		var url = this.host + "/posts/" + post_id;
 		return this.ajax(url, "DELETE");
 	},
 
 	updateRecord: function(store, type, record) {
 
-		var user_id = record.get('user').get('id');
+		//var user_id = record.get('user').get('id');
 		var post_id = record.get('post_id');
 
 		var data = {
@@ -55,7 +52,7 @@ export default ApplicationAdapter.extend({
             product_status: record.get('product_status'),
         };
 
-		var url = this.host + "/users/" + user_id + "/posts/" + post_id;
+		var url = this.host + "/posts/" + post_id;
 		return this.ajax(url, "PUT", { data: data }); 
 	},
 
