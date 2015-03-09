@@ -62,7 +62,7 @@
 
 		{{like-btn post=this openModal='openModal' class="display-inline"}}
 
-	 	{{#link-to 'profile.post' user post_id post_slug anchor="#leaveComment"}}
+	 	{{#link-to 'profile.post' user post_id post_slug  (query-params anchor="comments")}}
 	 		{{comment-btn linkOff='true' post=this class="display-inline" }}
 	 	{{/link-to}}
 		

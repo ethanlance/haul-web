@@ -6,6 +6,7 @@ export default Ember.Component.extend({
 	
 	isProcessing:false,
 
+	anchorBinding: 'anchor',
 	postIdBinding: 'post.post_id',
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
@@ -13,6 +14,15 @@ export default Ember.Component.extend({
 	comments: null,
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('comments', 'commentsSorting'),
+
+    didInsertElement: function() {
+  		if(this.get('anchor')) {
+  			var top = $('#leaveComment').offset().top;
+  			$('html, body').animate({
+	        	scrollTop: top
+	    	}, 800);
+  		}
+    },
 
 	start: function() { 
 

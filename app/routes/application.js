@@ -66,13 +66,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 		goToRoute: function(arg1, arg2) {
 			this.transitionTo(arg1, arg2);
-		},
-
-		goToLink: function(item, anchor) {
-            var $elem = $(anchor);
-            var $scrollTo = $('body').scrollTop($elem.offset().top);
-
-            this.transitionToRoute(item.route).then($scrollTo);  //.transitionTo is depricated
-        }
+		}
 	}
 });

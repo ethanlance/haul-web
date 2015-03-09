@@ -11,6 +11,10 @@ export default Ember.ObjectController.extend({
 	currentPageBinding: 'controllers.profile.currentPage',
  	showGridBtn:false,
  
+ 	queryParams: {
+    	anchor: "anchor"
+  	},
+  	anchor: null,
  	
  	showHeaderChange: function(){ 
  		if( this.get('currentPage') === this.get('thisPage')){
