@@ -2,24 +2,13 @@ import DS from 'ember-data';
 export default DS.RESTSerializer.extend({ 
 
 	extractMeta: function(store, type, payload) {
-
-
-
-		// console.log("SET META", { 
-		// 		next: payload.paging.next,
-		// 		previous: payload.paging.previous,
-		// 		limit: payload.paging.limit,
-		// 		count: payload.paging.count,
-		// 	})
-
 		if (payload && payload.paging) {
 			store.setMetadataFor(type, { 
 				next: payload.paging.next,
 				previous: payload.paging.previous,
 				limit: payload.paging.limit,
 				count: payload.paging.count,
-			});  // sets the metadata for "post_list"
-			//delete payload.paging;  // keeps ember data from trying to parse "paging" as a record
+			});  
 		}
   	},
 
@@ -63,7 +52,7 @@ export default DS.RESTSerializer.extend({
 
 			//repost aka parent post
 			if( result.repost_id ){
-				var repostId = result.repost_user_id + "_" + result.repost_id;
+				var repostId = result.repost_id;
 	            data.repost = repostId;
 	            data.repost_body = result.repost_body;
 	            data.repost_user = result.repost_user_id;

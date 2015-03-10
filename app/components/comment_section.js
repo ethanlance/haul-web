@@ -22,9 +22,7 @@ export default Ember.Component.extend({
 	        	scrollTop: top
 	    	}, 800);
   		}
-    },
-
-	start: function() { 
+     
 
 		this.makeModel();
 		
@@ -49,22 +47,12 @@ export default Ember.Component.extend({
  
 		_this.set('comments', comments);
 
-	}.on('init'),
+	},
 
 	makeModel: function() {
 		var store = this.container.lookup('store:main');
 		var model = store.createRecord('post-comment');
 		this.set('model', model);
-	},
-
-	loadComments: function() {
-		var store = this.container.lookup('store:main');
-		
-		var query = {'postId':this.postId};
-		store.find('post-comment', query).then(function(){
-		}, function(error) {
-			console.log("ERROR", error);
-		});
 	},
 
 	updateCommentCount: function(direction) {
@@ -80,15 +68,19 @@ export default Ember.Component.extend({
 	},
 
 	saveModel: function() {
+		var store = this.container.lookup('store:main');
 		var model = this.get('model');
 		var _this = this; 
-		model.save().then(
-			function() {  
+		model.save()
+		.then(
+			function(record) {  
 				_this.set('isProcessing', false);
 				_this.set('errorShow', false);
 				
 				//Reload!
-				_this.loadComments();
+				//_this.loadComments();
+				store.find('post-comment', {post_id: _this.get('postId'), limit:1});
+
 				_this.makeModel();
 				_this.updateCommentCount('up');
 
@@ -101,7 +93,42 @@ export default Ember.Component.extend({
 		);
 	},
 
+
+	limit: 1,
+	hasMore: false,
+	pagedContent: null,
+	loadComments: function() {
+
+		var store = this.container.lookup('store:main');
+		
+		var _this = this;
+    	var meta = store.metadataFor("post-comment");
+    	var params = {
+			limit: this.get('limit'),
+			next: meta.next,
+			post_id: this.postId,
+		};
+		
+		return store.find('post-comment', params)
+		.then(function(results){
+			//Stop pagination if results are empty
+			var meta = store.metadataFor("post-comment");
+			if(Ember.isEmpty(results)  ||  meta.limit > meta.count){
+				_this.set('hasMore', false);
+				return false;
+			}
+			_this.set('hasMore', true);
+			return results; //return to infinite-scroll component.
+		});
+	},
+
 	actions: {
+
+    	fetchMore: function(callback) {
+    		console.log("FUUUUCK ", callback)
+			var promise = this.loadComments();		
+			//callback(promise);
+    	},
 
 		delete: function(record) {
 			var _this = this;

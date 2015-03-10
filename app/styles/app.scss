@@ -1342,8 +1342,10 @@ header.profile.shrink{
 			
 			.btn-delete {
 				display:none;
-				float: right;
+				position:absolute;
+				right: 10px;
 			}
+
 			&:hover .btn-delete{
 				display:inline;
 			}

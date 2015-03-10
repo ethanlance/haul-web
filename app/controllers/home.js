@@ -17,21 +17,13 @@ export default Ember.ObjectController.extend({
 	}.observes('model'),
 
 	start: function() {
-		
-
-
 		if( this.get('currentUserId') ){
-			
 			var _this = this;
 			this.store.find('feed', {user_id:this.get('currentUserId')}).
 			then(function(feed){
 				_this.set('model', feed);
-			});
-
-			
+			});	
 		}
-
-		
 	}.on('init').observes('currentUserId'), 
 
 

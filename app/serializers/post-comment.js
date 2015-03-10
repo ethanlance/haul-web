@@ -1,5 +1,16 @@
 import DS from 'ember-data';
 export default DS.RESTSerializer.extend({
+
+	extractMeta: function(store, type, payload) {
+		if (payload && payload.paging) {
+			store.setMetadataFor(type, { 
+				next: payload.paging.next,
+				previous: payload.paging.previous,
+				limit: payload.paging.limit,
+				count: payload.paging.count,
+			});  
+		}
+  	},
 	
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		
