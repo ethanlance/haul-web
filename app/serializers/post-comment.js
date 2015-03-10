@@ -1,22 +1,30 @@
 import DS from 'ember-data';
-export default DS.RESTSerializer.extend({
-
-	extractMeta: function(store, type, payload) {
-		if (payload && payload.paging) {
-			store.setMetadataFor(type, { 
-				next: payload.paging.next,
-				previous: payload.paging.previous,
-				limit: payload.paging.limit,
-				count: payload.paging.count,
-			});  
-		}
-  	},
+import MetaSerializer from '../mixins/meta_serializer';
+export default DS.RESTSerializer.extend( MetaSerializer,{ 
 	
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		
 		if( payload.data === "ok" ){
 			return;
 		} 
+
+		var timeInMs = Date.now();
+
+		var data = {
+			id: payload.data.comment_id,	
+			comment: payload.data.comment,
+			created_at: timeInMs,
+			marker_id: payload.data.marker_id,
+			
+			post: payload.data.subject.id,
+			user: payload.data.user_id,
+
+			post_id: payload.data.subject.id,
+			user_id: payload.data.user_id
+		};
+		
+
+		payload = {'post-comment': data};  
 
 		return this._super(store, type, payload, recordId, requestType);
 	},

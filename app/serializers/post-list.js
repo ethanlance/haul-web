@@ -1,16 +1,6 @@
 import DS from 'ember-data';
-export default DS.RESTSerializer.extend({ 
-
-	extractMeta: function(store, type, payload) {
-		if (payload && payload.paging) {
-			store.setMetadataFor(type, { 
-				next: payload.paging.next,
-				previous: payload.paging.previous,
-				limit: payload.paging.limit,
-				count: payload.paging.count,
-			});  
-		}
-  	},
+import MetaSerializer from '../mixins/meta_serializer';
+export default DS.RESTSerializer.extend( MetaSerializer,{ 
 
 	extractSingle: function(store, primaryType, payload, recordId, requestType) {
 

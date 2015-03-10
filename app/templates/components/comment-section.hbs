@@ -52,7 +52,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 
-				<button {{action 'fetchMore'}} class="btn btn-default">load more</button>
+				<button {{action 'fetchMore'}} {{bind-attr class=":btn :btn-default hasMore::disabled"}}>load more</button>
 
 			</div>
 		</div>
