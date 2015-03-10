@@ -1,11 +1,11 @@
 import ApplicationRoute from './../application';
-
-export default ApplicationRoute.extend({
-	model: function() { 
-		return this.store.find('post-list', {user_id: this.modelFor('profile').get('id')} );
-	}, 
+export default ApplicationRoute.extend( {
+	model: function() {
+		return this.store.find('post-list', {user_id: this.modelFor('profile').get('id'), limit:1} );
+	},
 	setupController: function(controller, model) {
 		controller.set('user', this.modelFor('profile'));
+		controller.set('pagedContent', model );
 		this._super(controller, model);
 	},
 	serialize: function(model) {  

@@ -9,12 +9,29 @@ export default ApplicationAdapter.extend({
 
 	find: function(store, type, id) { 
 		var url = this.host + "/posts/" + id;
-
+console.log("FIND?????")
         return this.ajax(url, 'GET');
     },
 
 	findQuery: function(store, type, query){ 
 		var url = this.host + "/posts/" + query.post_id;
+
+        var queryString = "";
+        var queryList = [];
+        if( query.next ) {
+            queryList.pust("next=" + query.next);
+        }
+        if( query.limit ) {
+            queryList.pust("limit=" + query.limit);
+        }
+        if( query.previous ) {
+            queryList.pust("previous=" + query.previous);
+        }
+
+        if(!Ember.isEmpty(queryList)) {
+            queryString = "?" + queryList.join("&");
+        }
+console.log("POST GET URL", url);
         return this.ajax(url, 'GET');
 	},
 
