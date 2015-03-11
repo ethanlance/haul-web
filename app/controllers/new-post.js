@@ -183,10 +183,16 @@ export default Ember.ObjectController.extend({
 			_this.set('isProcessing', true);
 			return model.save();
 		})
+		.then(function(){
+			return _this.store.find('post-list', {user_id:_this.get('currentUserId'), doNotPaginate:true});
+		})
+		.then(function(){
+			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
+		})
 		.then(function(record){
 			_this.set('isProcessing', false);
 			var user = _this.get('currentUser'); 
-			_this.transitionToRoute('profile.post', user, record.get('post_id'), record.get('post_slug'));
+			_this.transitionToRoute('profile.post', user, model);
 		}, function(error){
 			console.log("Error", error);
 			_this.set('isProcessing', false);

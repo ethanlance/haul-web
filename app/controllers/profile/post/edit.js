@@ -173,9 +173,6 @@ export default Ember.ObjectController.extend({
 
 		//Get-Set the product status.
 		model.set('product_status', this.get('product_status_options').get('selectedStatus').id);
-			
-
-					
 
  		//Model Validations:
 		model.validate()

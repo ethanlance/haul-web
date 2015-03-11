@@ -199,6 +199,9 @@ export default Ember.ObjectController.extend({
 		.then(function(){
 			return _this.store.find('post-list', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
+		.then(function(){
+			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
+		})
 		.then(function(record){
 			_this.set('isProcessing', false);
 			_this.set('showRepost', false);
