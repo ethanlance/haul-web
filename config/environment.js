@@ -95,6 +95,15 @@ module.exports = function(environment) {
     ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
   }
 
+  ENV.APP.paginationLimit = {
+    feed: 10,
+    posts: 1,
+    followers: 20,
+    following: 20,
+    likes: 1,
+    comments: 3
+  }
+
   ENV['simple-auth'] = {
     store: 'simple-auth-session-store:local-storage',
     authenticator: 'authenticator:custom',

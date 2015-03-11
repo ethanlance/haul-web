@@ -637,7 +637,7 @@ header.profile{
 
 		.stats-block { 
 			padding: 5px 0px 0px 130px;
-			background-color: white;
+			//background-color: white;
 			margin-top: 25px; 
 			border-top: 1px solid #ddd;
 			//border-bottom: 2px solid #E1E8ED;
@@ -704,6 +704,7 @@ header.profile.shrink{
 	margin:0px;
 	width: 100%;
 	background-color: #fff;
+	background-color: rgba(255,255,255,0.96);
 	box-shadow: 0 0 15px 5px #e9e9e9;
 
 	.post-back-button{ 

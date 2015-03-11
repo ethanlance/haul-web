@@ -1,7 +1,8 @@
 import ApplicationRoute from './../application';
-export default ApplicationRoute.extend( {
+import config from '../../config/environment';
+export default Ember.Route.extend({
 
-	limit: 10,
+	limit: config.APP.paginationLimit.posts,
 
 	model: function() {
 		var _this  = this;

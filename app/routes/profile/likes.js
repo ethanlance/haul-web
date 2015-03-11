@@ -1,19 +1,18 @@
 import Ember from 'ember';
 import ResetScrollMixin from '../../mixins/resetscroll';
+import config from '../../config/environment';
 export default Ember.Route.extend(ResetScrollMixin,{
 
-	limit: 10,
+	limit: config.APP.paginationLimit.likes,
 
 	model: function() {
 		var _this  = this;
-		console.log("LIKE ROUTE")
 		this.store.find('user-likes-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} );
 		return this.store.filter('user-likes-list', function(result){
 			if(result.get('user_id') === _this.modelFor('profile').get('id')){
-				return result	
+				return result;
 			}
 		});
-		//return this.store.find('user-likes-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} );
 	}, 
 	setupController: function(controller, model) {
 		controller.set('limit', this.get('limit'));

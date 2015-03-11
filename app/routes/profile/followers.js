@@ -1,18 +1,18 @@
 import Ember from 'ember';
 import ResetScrollMixin from '../../mixins/resetscroll';
+import config from '../../config/environment';
 export default Ember.Route.extend(ResetScrollMixin,{
 
-	limit: 10,
+	limit: config.APP.paginationLimit.followers,
 
 	model: function() { 
 		var _this  = this;
 		this.store.find('user-followers-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} );
 		return this.store.filter('user-followers-list', function(result){
 			if(result.get('user_id') === _this.modelFor('profile').get('id')){
-				return result	
+				return result;
 			}
 		});
-		//return this.store.find('user-followers-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} );
 	}, 
 	setupController: function(controller, model) {
 		controller.set('limit', this.get('limit'));
