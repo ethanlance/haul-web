@@ -5,6 +5,24 @@ export default DS.RESTAdapter.extend({
 	currentUserBinding: 'Haul.currentUser',
 	accessTokenBinding: 'Haul.currentUser.access_token',
 
+	queryBuilder: function(query, url) {
+		var queryList = [];
+        if( query.next ) {
+            queryList.push("next=" + query.next);
+        }
+        if( query.limit ) {
+            queryList.push("limit=" + query.limit);
+        }
+        if( query.previous ) {
+            queryList.push("previous=" + query.previous);
+        }
+        if(!Ember.isEmpty(queryList)) {
+            url = url + "?" + queryList.join("&");
+        }
+		
+		return url;
+	},
+
   	headers: function() {
   		var token;
   		if(Ember.isEmpty(this.get('accessToken'))){

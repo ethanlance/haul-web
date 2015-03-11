@@ -8,6 +8,7 @@ export default ApplicationAdapter.extend({
 
 	findQuery: function(store, type, query) {
 		var url = this.host + "/users/" + query.user_id + "/likes";
+		url = this.queryBuilder(query, url);
 		return this.ajax(url, 'GET');
 	}
 });

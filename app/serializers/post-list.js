@@ -21,6 +21,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 			data = {
 				id: result.post_id,	
 				post_id:result.post_id,
+				user_id: result.user_id,
 				updated_at: result.updated_at,
 				
 				user: result.user_id,

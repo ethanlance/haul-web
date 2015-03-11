@@ -6,16 +6,18 @@
 		<div {{bind-attr class=":col-md-6 :col-sm-8 :col-xs-12 showGridView:col-wide"}}>
 
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
-			{{#each model}}
+			{{#each pagedContent}}
 				{{#if post.subject}}	
 					{{render '_post' post}}
 				{{/if}}
 			{{/each}}
 			</div>
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<i class="fa fa-spinner fa-spin"></i>
+			{{/infinite-scroll}}
 
 
-
-			{{#unless hasPosts }}
+			{{#unless pagedContent }}
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
 					{{user.username}} hasn't liked anything yet.

@@ -3,7 +3,9 @@ import DS from "ember-data";
 var Config = Haul;
 export default DS.Model.extend(Ember.Validations.Mixin, {
 	
+	//Keep these as helpers.
 	post_id: DS.attr('string'),
+	user_id: DS.attr('string'),	
 		
 	//POST
 	user: DS.belongsTo('user', {async:true}),

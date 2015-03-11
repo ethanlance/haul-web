@@ -40,7 +40,7 @@ export default Em.Component.extend({
         newContent = Em.getWithDefault(response, 'content', response);
 
     this.safeSet('isFetching', false);
-    if (content) { content.pushObjects(newContent); }
+    //if (content) { content.pushObjects(newContent); }
   },
 
   fetchDidFail: function() {

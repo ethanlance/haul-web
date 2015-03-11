@@ -11,12 +11,15 @@
 	
 			
 			<div {{bind-attr class="galleryView:gallery"}}>
-			{{#each model}}
+			{{#each pagedContent}}
 				{{#if image}}
 					{{partial 'post'}}	
 				{{/if}}
 			{{/each}}
 			</div>
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<span>Loading...</span>	
+			{{/infinite-scroll}}
 
 
 	

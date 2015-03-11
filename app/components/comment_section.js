@@ -1,43 +1,77 @@
 import Ember from 'ember';
 import config from '../config/environment';
 var Haul = config.APP;
-import PaginateMixin from '../mixins/paginate_component';
+import PaginateMixin from '../mixins/paginate';
 export default Ember.Component.extend( PaginateMixin,{
 	
-	paginateMeta: {
-		limit: 10, 
-		storeName: 'post-comment',
-	},
-
+	storeName: 'post-comment',	
+	limit:10,
 	hasMoreBinding: 'paginateHasMore',
 
 	isProcessing:false,
 
 	anchorBinding: 'anchor',
 	postIdBinding: 'post.post_id',
+	userIdBinding: 'post.user_id',
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
 
 	comments: null,
 	commentsSorting: ['created_at:desc'],
-    sortedComments: Ember.computed.sort('comments', 'commentsSorting'),
+    sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
     didInsertElement: function() {
   		if(this.get('anchor')) {
-  			var top = $('#leaveComment').offset().top;
-  			$('html, body').animate({
-	        	scrollTop: top
-	    	}, 800);
+  			Ember.run.later(function(){
+  				var top = $('#leaveComment').offset().top - 100;
+	  			$('html, body').animate({
+		        	scrollTop: top
+		    	}, 800);
+		    }, 300);
   		}
 
 		this.makeModel();
 
-		//Pagination:
-		this.set('paginateFilterCheck', {post_id: this.get('postId')});
-		this.set('paginateQuery', {post_id: this.get('postId')});
-		this.set('comments', this.paginateFilter());
-		this.paginateMore();
+		//Pagination:	
+		this.set('paginateQuery', {
+			storeName: this.get('storeName'),
+			limit: this.get('limit'), 
+			post_id: this.get('postId'),
+		});
+		this.set('paginateHasMore', true);
+
+		var store = this.container.lookup('store:main'); 
+		store.setMetadataFor(this.get('storeName'), { 
+			next: '',
+			previous: '',
+			limit: '',
+			count: '',
+		});  
+
+		//Set Content.
+		var _this = this;
+		this.paginateMore()
+
+		//The Filter. 
+		var filter = store.filter('post-comment', function(result) {
+			if(result.get('post_id') === _this.get('postId')) {
+				
+				if( result.get('user_id') === _this.get('userId') ) {
+					result.set('canDelete', true);
+				}		
+				return result;
+			}
+		});
+		filter.then(function(results){
+			_this.set('pagedContent', results);	
+		})
+		
+		
 	},
+
+	userIdChanged: function() {
+
+	}.observes('userId'),
 
 	makeModel: function() {
 		var store = this.container.lookup('store:main');
@@ -68,7 +102,6 @@ export default Ember.Component.extend( PaginateMixin,{
 				_this.set('errorShow', false);
 				_this.makeModel();
 				_this.updateCommentCount('up');
-
 			},
 			function(error){ 
 				_this.set('isProcessing', false);
@@ -81,7 +114,7 @@ export default Ember.Component.extend( PaginateMixin,{
 	actions: {
 
     	fetchMore: function() {
-			this.paginateMore();
+    		this.paginateMore();
     	},
 
 		delete: function(record) {

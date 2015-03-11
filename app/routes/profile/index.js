@@ -1,11 +1,21 @@
 import ApplicationRoute from './../application';
 export default ApplicationRoute.extend( {
+
+	limit: 10,
+
 	model: function() {
-		return this.store.find('post-list', {user_id: this.modelFor('profile').get('id'), limit:1} );
+		var _this  = this;
+		this.store.find('post-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} );
+		return this.store.filter('post-list', function(result){
+			if(result.get('user_id') === _this.modelFor('profile').get('id')){
+				return result	
+			}
+		});
 	},
 	setupController: function(controller, model) {
+		controller.set('limit', this.get('limit'));
+		controller.set('pagedContent', model);
 		controller.set('user', this.modelFor('profile'));
-		controller.set('pagedContent', model );
 		this._super(controller, model);
 	},
 	serialize: function(model) {  

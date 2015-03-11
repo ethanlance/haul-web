@@ -1,12 +1,37 @@
 import Ember from 'ember'; 
-
-export default Ember.ObjectController.extend({ 
+import PaginateMixin from '../../mixins/paginate';
+export default Ember.ObjectController.extend(PaginateMixin,{ 
 
  	needs: ['profile'],
+
+ 	limit:null,
  	thisPage: "followingPage", 
  	user: false,
  	currentPageBinding: 'controllers.profile.currentPage',
 	showGridBtn:false,
+	currentUserIdBinding: 'Haul.currentUser.id',
+	userIdBinding: 'model.id',
+	isProfileOwner: false,
+
+	actions: {
+    	fetchMore: function(callback) {
+			var promise = this.paginateMore();		
+			if(callback){callback(promise)};
+    	} 
+	},
+
+	userChanged: function() {
+		
+		//Pagination:	
+		this.set('paginateQuery', {
+			storeName: 'user-following-list',
+			limit: this.get('limit'), 
+			user_id: this.get('user.id'),
+		});
+		this.set('paginateHasMore', true);
+		this.paginateMore();
+		
+	}.observes('user'),
 
  	showHeaderChange: function(){  
  		if( this.get('currentPage') === this.get('thisPage')){ 
@@ -14,10 +39,6 @@ export default Ember.ObjectController.extend({
  			this.get('controllers.profile').set('showHeader', true);	
  		} 		
  	}.observes('currentPage'),
-
-	currentUserIdBinding: 'Haul.currentUser.id',
-	userIdBinding: 'model.user.id',
-	isProfileOwner: false,
 
 	isProfileOwnerChanged: function() {
 

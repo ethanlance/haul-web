@@ -1,5 +1,6 @@
 import DS from 'ember-data';
-export default DS.RESTSerializer.extend({
+import MetaSerializer from '../mixins/meta_serializer';
+export default DS.RESTSerializer.extend( MetaSerializer,{ 
 
 	extractArray: function(store, primaryType, payload) {
 
@@ -18,6 +19,9 @@ export default DS.RESTSerializer.extend({
 				id: id,	
 				post:id,		
 				user:result.user_id,		
+
+				post_id: id,
+				user_id:result.user_id,
 			}
 			return data;
 		});

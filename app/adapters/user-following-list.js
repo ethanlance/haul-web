@@ -6,8 +6,9 @@ export default ApplicationAdapter.extend({
 
 	host: Haul.Server.FOLLOW_SERVER_HOST,
 
-	find: function(store, type, id) {
-		var url = this.host + "/users/" + id + "/follows";
+	findQuery: function(store, type, query) {
+		var url = this.host + "/users/" + query.user_id + "/follows";
+		url = this.queryBuilder(query, url);
 		return this.ajax(url, 'GET');
 	}
 });

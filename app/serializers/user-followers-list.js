@@ -1,24 +1,22 @@
 import DS from 'ember-data';
-export default DS.RESTSerializer.extend({
+import MetaSerializer from '../mixins/meta_serializer';
+export default DS.RESTSerializer.extend( MetaSerializer,{ 
 
-	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+	extractArray: function(store, primaryType, payload) {
 
 		if( payload.data === "ok" ){
 			return;
 		} 
-		
-		var follower_ids = [];
-		payload.data.map(function(result){
-			follower_ids.push( result.user_id );
-			return;
+		 
+		var datas = payload.data.map(function(result){
+			return {
+				user: result.user_id,
+				user_id: result.subject.id,
+				id: result.marker_id,
+			}
 		}); 
 
-		var data = {
-			id: recordId,
-			users: follower_ids
-		};
-	
-		payload ={'user-followers-list': data}; 
-		return this._super(store, primaryType, payload, recordId, requestType);
+		payload = {'user-followers-list': datas}; 
+		return this._super(store, primaryType, payload);
 	}
 });

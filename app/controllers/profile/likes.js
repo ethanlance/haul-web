@@ -1,14 +1,39 @@
 import Ember from 'ember';   
-
-export default  Ember.ObjectController.extend({ 
+import PaginateMixin from '../../mixins/paginate';
+export default Ember.ObjectController.extend(PaginateMixin,{ 
 
  	needs: ['profile'],
+
+ 	limit:null, 
  	thisPage: "likesPage", 
  	user: false,
- 	content:false,
- 	hasPosts:false,
 	showGridViewBinding: 'controllers.profile.showGridView',
  	showGridBtn:true,
+	currentUserIdBinding: 'Haul.currentUser.id',
+	isProfileOwner: false, 
+	
+	
+	actions: {
+    	fetchMore: function(callback) {
+			var promise = this.paginateMore();		
+			if(callback){callback(promise)};
+    	} 
+	},
+
+	userChanged: function() {
+
+		console.log("GO GET EM!!!!!!!!!")
+
+		//Pagination:	
+		this.set('paginateQuery', {
+			storeName: 'user-likes-list',
+			limit: this.get('limit'), 
+			user_id: this.get('user.id'),
+		});
+		this.set('paginateHasMore', true);
+		this.paginateMore();
+		
+	}.observes('user'),
 
  	currentPageBinding: Ember.computed.alias('controllers.profile.currentPage'),
  	showHeaderChange: function(){ 
@@ -18,29 +43,7 @@ export default  Ember.ObjectController.extend({
  		} 		
  	}.observes('currentPage'),
 
-	currentUserIdBinding: 'Haul.currentUser.id',
-	userIdBinding: 'model.user.id',
-	isProfileOwner: false,
-
-	modelChange: function() {
-		if(!Ember.isEmpty(this.get('model'))){
-			this.set('hasPosts', true);
-		}else{
-			this.set('hasPosts', false);
-		}
-
-		var _this = this;
-		var content = this.store.filter('user-likes-list', function(userLike){
-			if(userLike.get('user').get('id') === _this.get('user').get('id')){
-				return userLike;
-			}
-		});
-		this.set('content', content);
-
-	}.observes('model'),
-
 	isProfileOwnerChanged: function() {
-
 		this.set('isProfileOwner', false); 
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId')) ) {
 			if (this.get('user').get('id') === this.get('currentUserId')) {
@@ -48,5 +51,4 @@ export default  Ember.ObjectController.extend({
 			}
 		} 
 	}.observes('user', 'currentUserId'),
-
 });

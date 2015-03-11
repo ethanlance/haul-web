@@ -13,13 +13,12 @@
 				{{/if}}
 			{{/each}}
 			</div>
-
-			{{#infinite-scroll content=pagedContent hasMore=hasMore }}
-				<span>Loading...</span>	
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<i class="fa fa-spinner fa-spin"></i>
 			{{/infinite-scroll}}
 	
 			
-		{{#unless hasPosts }}
+		{{#unless pagedContent }}
 			{{#if isProfileOwner}} 
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12  text-center">

@@ -15,6 +15,8 @@ export default DS.RESTSerializer.extend({
 			
 			//post
 			post_id: payload.data.post_id,
+			user_id: payload.data.user_id,
+
 			user: payload.data.user_id,
 			updated_at: payload.data.updated_at,
 			body: payload.data.body,
@@ -60,6 +62,8 @@ export default DS.RESTSerializer.extend({
 			id: id,	
 
 			post_id: payload.data.post_id,
+			user_id: payload.data.user_id,
+
 			user: payload.data.user_id,
 			updated_at: payload.data.updated_at,
 			body: payload.data.body,
