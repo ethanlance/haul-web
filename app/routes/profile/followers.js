@@ -7,11 +7,13 @@ export default Ember.Route.extend(ResetScrollMixin,{
 
 	model: function() { 
 		var _this  = this;
-		this.store.find('user-followers-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} );
-		return this.store.filter('user-followers-list', function(result){
-			if(result.get('user_id') === _this.modelFor('profile').get('id')){
-				return result;
-			}
+		return this.store.find('user-followers-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} )
+		.then(function(){
+			return _this.store.filter('user-followers-list', function(result){
+				if(result.get('user_id') === _this.modelFor('profile').get('id')){
+					return result;
+				}
+			});
 		});
 	}, 
 	setupController: function(controller, model) {

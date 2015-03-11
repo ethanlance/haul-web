@@ -4,6 +4,19 @@
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
 
+
+			{{!-- //CONTENT --}}
+			<div {{bind-attr class=":galleryView showGridView:in"}}>
+			{{#each pagedContent}}
+				{{profile-badge profile=user}} 
+			{{/each}}
+			</div>
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<i class="fa fa-spinner fa-spin"></i>
+			{{/infinite-scroll}}
+
+
+			{{!-- //NO CONTENT CTA --}}
 			{{#unless pagedContent }}
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
@@ -18,16 +31,6 @@
 				</p>
 			{{/unless}}
 
-
-			<div {{bind-attr class=":galleryView showGridView:in"}}>
-			{{#each pagedContent}}
-				{{profile-badge profile=user}} 
-			{{/each}}
-			</div>
-			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-				<i class="fa fa-spinner fa-spin"></i>
-			{{/infinite-scroll}}
-			
 		</div> 
 	</div>
 </div>

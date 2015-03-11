@@ -6,11 +6,13 @@ export default Ember.Route.extend({
 
 	model: function() {
 		var _this  = this;
-		this.store.find('post-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} );
-		return this.store.filter('post-list', function(result){
-			if(result.get('user_id') === _this.modelFor('profile').get('id')){
-				return result	
-			}
+		return this.store.find('post-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} )
+		.then(function(){
+			return _this.store.filter('post-list', function(result){
+				if(result.get('user_id') === _this.modelFor('profile').get('id')){
+					return result	
+				}
+			});
 		});
 	},
 	setupController: function(controller, model) {

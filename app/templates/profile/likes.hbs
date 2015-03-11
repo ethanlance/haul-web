@@ -5,6 +5,8 @@
 		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:col-collapse"}}></div>
 		<div {{bind-attr class=":col-md-6 :col-sm-8 :col-xs-12 showGridView:col-wide"}}>
 
+
+			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
 			{{#each pagedContent}}
 				{{#if post.subject}}	
@@ -17,7 +19,8 @@
 			{{/infinite-scroll}}
 
 
-			{{#unless pagedContent }}
+			{{!-- //NO CONTENT CTA --}}
+			{{#unless pagedContent }} 
 				<div class="padding-top text-center font-weak">
 				{{#unless isProfileOwner}}
 					{{user.username}} hasn't liked anything yet.

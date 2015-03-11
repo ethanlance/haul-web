@@ -6,6 +6,8 @@
 		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:col-collapse"}}></div>
 		<div {{bind-attr class=":col-md-6 :col-sm-8 :col-xs-12 showGridView:col-wide"}}>
 
+
+			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
 			{{#each pagedContent}}
 				{{#if image}}
@@ -17,32 +19,33 @@
 				<i class="fa fa-spinner fa-spin"></i>
 			{{/infinite-scroll}}
 	
-			
-		{{#unless pagedContent }}
-			{{#if isProfileOwner}} 
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12  text-center">
-						
-						<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
-						
-						{{#link-to 'new-post'}}
-						<button class="btn btn-default">
-							<span class="glyphicon glyphicon-camera"></span><br/>
-							Post Something For Sale
-						</button>
-						{{/link-to}} 
-				
-					</div>	
-				</div> 
-			{{else}}
-				<div class="padding-top text-center font-weak">
-				{{user.username}} has no posts.
-				<p class="text-center">
-					<span class="glyphicon glyphicon-flash sad-heart"></span>
-				</p>
-				</div>
-			{{/if}}
-		{{/unless}}
+
+			{{!-- //NO CONTENT CTA --}}
+			{{#unless pagedContent }}
+				{{#if isProfileOwner}} 
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12  text-center">
+							
+							<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
+							
+							{{#link-to 'new-post'}}
+							<button class="btn btn-default">
+								<span class="glyphicon glyphicon-camera"></span><br/>
+								Post Something For Sale
+							</button>
+							{{/link-to}} 
+					
+						</div>	
+					</div> 
+				{{else}}
+					<div class="padding-top text-center font-weak">
+					{{user.username}} has no posts.
+					<p class="text-center">
+						<span class="glyphicon glyphicon-flash sad-heart"></span>
+					</p>
+					</div>
+				{{/if}}
+			{{/unless}}
 
 		</div> 
 		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:galleryView"}}></div>

@@ -2,6 +2,7 @@ import Ember from 'ember';
 import PaginateMixin from '../mixins/paginate';
 export default Ember.ObjectController.extend(PaginateMixin,{
 
+	loading: true,
 	limit: null,
 	storeName: 'feed',
 	currentUserIdBinding: 'Haul.currentUser.id',
@@ -18,7 +19,13 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 			user_id: this.get('currentUserId'),
 		});
 		this.set('paginateHasMore', true);
-		this.paginateMore();
+
+		var _this = this;
+		var promise = this.paginateMore()
+		.then(function(results){
+			_this.set('loading', false);
+		});
+
 		
 	}.on('init').observes('currentUserId'),
 
