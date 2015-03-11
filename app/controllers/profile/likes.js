@@ -12,18 +12,10 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	currentUserIdBinding: 'Haul.currentUser.id',
 	isProfileOwner: false, 
 	
-	
-	actions: {
-    	fetchMore: function(callback) {
-			var promise = this.paginateMore();		
-			if(callback){callback(promise)};
-    	} 
-	},
+	sorting: ['created_at:desc'],
+    sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
 	userChanged: function() {
-
-		console.log("GO GET EM!!!!!!!!!")
-
 		//Pagination:	
 		this.set('paginateQuery', {
 			storeName: 'user-likes-list',
@@ -51,4 +43,11 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 			}
 		} 
 	}.observes('user', 'currentUserId'),
+	
+	actions: {
+    	fetchMore: function(callback) {
+			var promise = this.paginateMore();		
+			if(callback){callback(promise)};
+    	} 
+	}
 });

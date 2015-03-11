@@ -13,12 +13,8 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	userIdBinding: 'model.id',
 	isProfileOwner: false,
 
-	actions: {
-    	fetchMore: function(callback) {
-			var promise = this.paginateMore();		
-			if(callback){callback(promise)};
-    	} 
-	},
+	sorting: ['created_at:desc'],
+    sortedContent: Ember.computed.sort('pagedContent', 'sorting'),
 
 	userChanged: function() {
 		
@@ -50,4 +46,10 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 		} 
 	}.observes('user', 'currentUserId'),
 
+	actions: {
+    	fetchMore: function(callback) {
+			var promise = this.paginateMore();		
+			if(callback){callback(promise)};
+    	} 
+	},
 });

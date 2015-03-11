@@ -13,17 +13,14 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 
 		var data = null;
 		var datas = payload.data.map(function(result){
-			
-			var id = result.subject.id;
-			data = {
-				id: id,	
-				post:id,		
-				user:result.user_id,		
-
-				post_id: id,
+			return {
+				id: result.subject.id,	
+				post:result.subject.id,		
+				user:result.user_id,
+				created_at: result.created_at,		
+				post_id: result.subject.id,
 				user_id:result.user_id,
 			}
-			return data;
 		});
 
 		payload = {'user-likes-list': datas}; 

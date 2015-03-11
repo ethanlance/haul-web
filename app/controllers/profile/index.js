@@ -15,13 +15,8 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	showGridViewBinding: 'controllers.profile.showGridView',
 	showGridBtn:true,
 
-	actions: {
-    	fetchMore: function(callback) {
-			var promise = this.paginateMore();		
-			if(callback){callback(promise)};
-    	} 
-	},
-	
+	sorting: ['created_at:desc'],
+    sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
  	currentPageBinding: 'controllers.profile.currentPage',
  	showHeaderChange: function(){  
@@ -56,4 +51,10 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 		} 
 	}.observes('user', 'currentUserId'),
 
+	actions: {
+    	fetchMore: function(callback) {
+			var promise = this.paginateMore();		
+			if(callback){callback(promise)};
+    	} 
+	},
 }); 

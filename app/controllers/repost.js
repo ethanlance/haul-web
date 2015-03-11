@@ -197,7 +197,7 @@ export default Ember.ObjectController.extend({
 			return repost.save();
 		})
 		.then(function(){
-			return _this.store.find('post-list', {user_id:_this.get('currentUserId')});
+			return _this.store.find('post-list', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
 		.then(function(record){
 			_this.set('isProcessing', false);

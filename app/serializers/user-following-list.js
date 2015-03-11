@@ -10,6 +10,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 
 		var datas = payload.data.map(function(result){ 
 			return {
+				created_at: result.created_at,
 				user: result.subject.id,
 				user_id: result.user_id,
 				id: result.marker_id,

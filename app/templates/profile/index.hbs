@@ -9,7 +9,7 @@
 
 			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
-			{{#each pagedContent}}
+			{{#each sortedContent}}
 				{{#if image}}
 					{{partial 'post'}}	
 				{{/if}}

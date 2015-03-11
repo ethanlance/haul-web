@@ -7,6 +7,11 @@ export default DS.RESTAdapter.extend({
 
 	queryBuilder: function(query, url) {
 		var queryList = [];
+
+		if( query.doNotPaginate){
+			return url + "?limit=1";
+		}
+
         if( query.next ) {
             queryList.push("next=" + query.next);
         }

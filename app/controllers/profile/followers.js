@@ -13,12 +13,8 @@ export default Ember.ObjectController.extend(PaginateMixin,{
  	currentUserIdBinding: 'Haul.currentUser.id',
  	currentPageBinding: 'controllers.profile.currentPage',
 	
-	actions: {
-    	fetchMore: function(callback) {
-			var promise = this.paginateMore();		
-			if(callback){callback(promise)};
-    	}
-	},
+	sorting: ['created_at:desc'],
+    sortedContent: Ember.computed.sort('pagedContent', 'sorting'),
 
 	userChanged: function() {
 		
@@ -47,5 +43,12 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 				this.set('isProfileOwner', true);
 			}
 		} 
-	}.observes('user', 'currentUserId')
+	}.observes('user', 'currentUserId'),
+
+	actions: {
+    	fetchMore: function(callback) {
+			var promise = this.paginateMore();		
+			if(callback){callback(promise)};
+    	}
+	},
 });

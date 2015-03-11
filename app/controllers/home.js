@@ -9,6 +9,9 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	currentUserBinding: 'Haul.currentUser',
 	isProfileOwner: true,  
 	model:false,
+	
+	sorting: ['created_at:desc'],
+    sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
 	userChange: function() {
 		

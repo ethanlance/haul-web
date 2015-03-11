@@ -13,6 +13,7 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 	body: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),
 	updated_at: DS.attr('string'),
+	created_at: DS.attr('string'),
 	
 	//REPOST aka parent post
     repost_body: DS.attr('string'),

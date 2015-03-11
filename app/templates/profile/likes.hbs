@@ -8,7 +8,7 @@
 
 			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
-			{{#each pagedContent}}
+			{{#each sortedContent}}
 				{{#if post.subject}}	
 					{{render '_post' post}}
 				{{/if}}

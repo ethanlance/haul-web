@@ -7,7 +7,7 @@
 
 			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
-			{{#each pagedContent}}
+			{{#each sortedContent}}
 				{{profile-badge profile=user}} 
 			{{/each}}
 			</div>
