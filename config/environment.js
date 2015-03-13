@@ -96,12 +96,12 @@ module.exports = function(environment) {
   }
 
   ENV.APP.paginationLimit = {
-    feed: 10,
-    posts: 1,
+    feed: 20,
+    posts: 20,
     followers: 20,
     following: 20,
-    likes: 1,
-    comments: 3
+    likes: 20,
+    comments: 10
   }
 
   ENV['simple-auth'] = {

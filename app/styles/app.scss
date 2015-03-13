@@ -990,8 +990,9 @@ header.profile.shrink{
 			.post{
 				border: 0;
 				margin:0;
-				display:table-cell;
+				display:inline-block;
 				width: 25%;
+				background: transparent;
 		
 				.btn-edit-post, .citation, .moment, .editorial, .btn-wrapper, h2{
 					display:none;
