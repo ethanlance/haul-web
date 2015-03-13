@@ -24,15 +24,17 @@ var QuillEditorComponent = Ember.Component.extend({
 			var el = $('#editor');
 
 			var top = el.parent().offset().top;
+			var scrollTop = $(window).scrollTop();
 			var height = window.outerHeight;
 
-			console.log("TOP ", top)
-			console.log("HEIGHT ", height)
+			// console.log("TOP ", top)
+			// console.log("HEIGHT ", height)
+			// console.log("Scrollop ", $(window).scrollTop())
 
-			h = height - top - 100;
+			h = height - (top - scrollTop) - 100;
 
-			console.log("H", h)
-			//h = window.innerHeight - 350;; 
+			//console.log("H", h)
+
 			$('#editor').css("height", h);	
 			
 	 		var editor = new Quill('#editor',{
@@ -48,8 +50,8 @@ var QuillEditorComponent = Ember.Component.extend({
 			editor.on('text-change', function() { 
 				_this.sendAction('quillChange', editor.getHTML());
 			}); 
-		}, 600);
-		
+		}, 1000);
+
 		this.contentChanged();
 	},
 
