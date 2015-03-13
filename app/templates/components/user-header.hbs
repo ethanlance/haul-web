@@ -32,7 +32,7 @@
 			{{#link-to "profile" model}}
 			<div {{bind-attr class=":stats isSelected:activehack"}}>
 				<span>posts</span><br/>
-				<a>0</a>
+				<a>{{model.getPostsCount.total}}</a>
 				<div class="highlight-wrap">
 				<div class="highlight"></div>
 				</div>

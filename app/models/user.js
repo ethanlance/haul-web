@@ -10,13 +10,9 @@ export default DS.Model.extend({
 	image_id: DS.attr('string'), 
 
 	getFollowersCount: DS.belongsTo('user-followers-count', {async:true}),
-	//getFollowers: DS.belongsTo('user-followers-list', {async:true}),
-
 	getFollowingCount: DS.belongsTo('user-following-count', {async:true}),
-	//getFollowing: DS.belongsTo('user-following-list', {async:true}),
-
 	getLikesCount: DS.belongsTo('user-likes-count', {async:true} ),
-	//getLikes: DS.belongsTo('user-likes-list', {async:true}), 
+	getPostsCount: DS.belongsTo('user-posts-count', {async:true} ),
 
 	icon: DS.attr('string'), 
 	iconChange: function() { 
