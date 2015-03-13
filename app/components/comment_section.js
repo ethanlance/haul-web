@@ -16,6 +16,7 @@ export default Ember.Component.extend( PaginateMixin,{
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
 
+	model:null,
 	comments: null,
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
@@ -54,7 +55,7 @@ export default Ember.Component.extend( PaginateMixin,{
 
 		//The Filter. 
 		var filter = store.filter('post-comment', function(result) {
-			if(result.get('post_id') === _this.get('postId')) {
+			if(result.id && (result.get('post_id') === _this.get('postId'))) {
 				
 				if( result.get('user_id') === _this.get('userId') ) {
 					result.set('canDelete', true);
@@ -68,10 +69,6 @@ export default Ember.Component.extend( PaginateMixin,{
 		
 		
 	},
-
-	userIdChanged: function() {
-
-	}.observes('userId'),
 
 	makeModel: function() {
 		var store = this.container.lookup('store:main');
@@ -91,22 +88,67 @@ export default Ember.Component.extend( PaginateMixin,{
 		});
 	},
 
+	reset: function() {
+		this.setProperties({
+			serverErrorMessage: false,
+			showServerErrors: false,
+			showClientErrors: false,
+			isProcessing: false,
+		})
+	},
+
 	saveModel: function() {
+
+		this.reset();
+
+		//Intercept if user is anonymous:
+		if( !this.get('currentUserId')){
+			this.sendAction('openModal', 'loginmodal', {});
+			return;
+		}
+		
+		var _this = this; 
 		var store = this.container.lookup('store:main');
 		var model = this.get('model');
-		var _this = this; 
-		model.save()
+		
+		model.set('user_id', this.get('currentUserId'));
+		model.set('post_id', this.get('postId'));
+
+		model.validate()
+		.then(
+			function(){
+				_this.set('isProcessing', true);
+				return model.save();
+			},
+			function(error){
+				_this.set('isProcessing', false);
+				_this.set('showClientErrors', true);
+				return;
+			}
+		)
 		.then(
 			function(record) {  
 				_this.set('isProcessing', false);
-				_this.set('errorShow', false);
+				_this.set('showServerErrors', false);
 				_this.makeModel();
 				_this.updateCommentCount('up');
 			},
 			function(error){ 
 				_this.set('isProcessing', false);
-				_this.set('errorShow', true);
-				_this.set('errorMessage', Haul.errorMessages.get(error.status));
+				_this.set('showServerErrors', true);
+
+				var message;
+				if( Haul.errorMessages[error.status] ){
+					message = Haul.errorMessages[error.status];
+				}else{
+					message = Haul.errorMessages[400];
+				}
+
+				var obj = JSON.parse(error.responseText);
+
+				message = message + "<p>" + obj.message + "</p>";
+
+				_this.set('serverErrorMessage', message);
 			}
 		);
 	},
@@ -130,28 +172,7 @@ export default Ember.Component.extend( PaginateMixin,{
 		},
 
 		submit: function() {
-
-			//Intercept if user is anonymous:
-			if( !this.get('currentUserId')){
-				this.sendAction('openModal', 'loginmodal', {});
-				return;
-			}
-
-			this.set('isProcessing', true);
-
-			var _this = this;
-			var model = this.model;
-			model.set('user_id', this.get('currentUserId'));
-			model.set('post_id', this.get('postId'));
-
-	 		//Model Validations:
-			model.validate().then(function(){
-				model.set('comment', model.get('comment').trim());
-				_this.saveModel();	
-			}, function() {
-				_this.set('isProcessing', false);
-				_this.set('showErrors', true);
-			});
+			this.saveModel();	
 		}
 	}
 });

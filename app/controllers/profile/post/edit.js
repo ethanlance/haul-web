@@ -17,18 +17,30 @@ export default Ember.ObjectController.extend({
 	productImagesBinding: "model.product_images",
 	product_status_options: null,
 	currentUserBinding: 'Haul.currentUser',
+	
 	isProcessing: false,
 	isProcessingDelete: false,
 	imagesAreSelected: false,
-	showImageModal: false,
-	animateImageModal: false,
 	showDeleteModal: false,
 	animateDeleteModal: false,
-	
 	selectedImages: [],
+	deletedImages: [],
 	editorialForQuill: "",
 	canEditProduct: false,
 	openDrawer: false, 
+
+	// reset: function() {
+	// 	this.setProperties({
+	// 		showImageUploadError: false,
+	// 		imageUploadError: "",
+	// 		selectedImages: [],
+	// 		editorialForQuill: "",
+	// 		openDrawer: false,
+	// 		showDeleteModal: false,
+	// 		isProcessing: false,
+	// 		isProcessingDelete: false,
+	// 	})
+	// },
 
 	setup: function() {
 		this.set('canEditProduct', false);
@@ -116,7 +128,23 @@ export default Ember.ObjectController.extend({
 	},
 
 
-	selectImage: function(image) {
+	removeImage: function(image, collectionName) {
+		var objects = [];
+		var collection = this.get(collectionName);
+		collection.forEach(function(result){
+			if( result.get('id') !== image.get('id')){
+				objects.push(result);
+			}
+		});
+		this.set(collectionName, objects);
+	},
+
+	addImage: function(image, collectionName) {
+		var collection = this.get(collectionName);
+		collection.pushObject(image);
+	},
+
+	toggleImageSelected: function(image) {
 		var selectedImages = this.get('selectedImages'); 
 		var found = false;
 
@@ -127,18 +155,29 @@ export default Ember.ObjectController.extend({
 			}
 		});
 
-		if( found ) { 
-			var objects = [];
-			selectedImages.forEach(function(result){
-				if( result.get('id') !== image.get('id')){
-					objects.push(result);
-				}
-			});
-			this.set('selectedImages', objects);
-		//Add
+		if (found) {
+			this.removeImage(image, 'selectedImages');
+			this.addImage(image, 'deletedImages');
 		} else {
-			selectedImages.pushObject(image);
+			this.removeImage(image, 'deletedImages');
+			this.addImage(image, 'selectedImages');
 		}
+
+		//Remove
+		// if( found ) { 
+		// 	var objects = [];
+		// 	selectedImages.forEach(function(result){
+		// 		if( result.get('id') !== image.get('id')){
+		// 			objects.push(result);
+		// 		}
+		// 	});
+		// 	this.set('selectedImages', objects);
+		// 	var deletedImages = this.get('deletedImages');
+		// 	deletedImages.pushObject(image)
+		// //Add
+		// } else {
+		// 	selectedImages.pushObject(image);
+		// }
 	},
 
 	deletePost: function() {
@@ -174,24 +213,45 @@ export default Ember.ObjectController.extend({
 		//Get-Set the product status.
 		model.set('product_status', this.get('product_status_options').get('selectedStatus').id);
 
+
  		//Model Validations:
 		model.validate()
-		.then(function(){
-			_this.set('isProcessing', true);
-			return model.save();
-		})
-		.then(function(record){
-			return record.reload();
-		})
-		.then(function(record){
-			_this.set('isProcessing', false);
-			var user = _this.get('currentUser'); 
-			_this.transitionToRoute('profile.post', user, record);
-		}, function(error){
-			console.log("Error", error);
-			_this.set('isProcessing', false);
-			_this.set('showErrors', true);
-			_this.set('openDrawer', true);
+		.then(
+			function validateSuccess(){
+				_this.set('isProcessing', true);
+				return model.save();
+			},
+			function validateError(error){
+				_this.set('isProcessing', false);
+				_this.set('showErrors', true);
+				_this.set('openDrawer', true);
+			}
+		)
+		.then(
+			function reloadModel(record){
+				return record.reload();
+			}
+		)
+		.then(
+			function serverSuccess(record){
+				_this.set('isProcessing', false);
+				var user = _this.get('currentUser'); 
+			
+				_this.transitionToRoute('profile.post', user, record);
+
+				//Clean Up, Delete images?
+				var deletedImages = _this.get('deletedImages');
+				deletedImages.forEach(function(image){ 
+					image.deleteRecord();
+					image.save();
+				});
+
+
+		}, function serverError(error){
+				console.log("Error", error);
+				_this.set('isProcessing', false);
+				_this.set('showErrors', true);
+				_this.set('openDrawer', true);
 		});
 	},
 
@@ -252,11 +312,11 @@ export default Ember.ObjectController.extend({
 		//Click "imageClick" in UI
 		imageClick: function(event) {
 			var image = event.get('image');
-			this.selectImage(image);
+			this.toggleImageSelected(image);
 		},
 
 		refresh: function(image) {
-			this.selectImage(image);			
+			this.toggleImageSelected(image);			
 		},
 
 		quillChange: function(text) {
@@ -270,6 +330,21 @@ export default Ember.ObjectController.extend({
 
 		updateSortOrder: function(i) {
 			this.updateSortOrder(i);
-		}
+		},
+
+		imageDelete: function(options) {
+			var _this = this;
+			var image = options.image;
+			var callback = options.cb;
+
+			//Do not delete image if there is only one left.
+			if( this.get('selectedImages').length <= 1 ) {
+				this.set("imageUploadError", "There must be at least one image.");
+				this.set('showImageUploadError', true);
+			}else{
+				//Toggle image from the selection.
+				this.toggleImageSelected(image);
+			}
+    	}
 	}
 });

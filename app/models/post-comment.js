@@ -15,9 +15,9 @@ export default DS.Model.extend(Ember.Validations.Mixin, {
 	marker_id: DS.attr('string'),
 	
 	validations: { 
-		comment: {
-		 	presence: true,
-		 	length: { minimum: 2, maximum: 2000 }
-		}
+		// comment: {
+		//  	presence: true,
+		//  	length: { minimum: 2, maximum: 2000 }
+		// }
 	}
 });

@@ -30,6 +30,7 @@ export default Ember.Mixin.create({
 		for (var attrname in paginateQuery) { params[attrname] = paginateQuery[attrname]; } //merge
 		delete params.storeName;
 
+		//Return promise:
 		return store.find(storeName, params)
 		.then(function(results){
 			console.log(storeName, "params " , params, " results", results);

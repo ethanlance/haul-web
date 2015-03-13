@@ -17,10 +17,10 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-
-      Server: {
+      Server:{},
+      errorMessages: {
         environment:environment,
-        get: function(key) {
+        getEror: function(key) {
           if( this[key] ){
             return this[key];
           }else{

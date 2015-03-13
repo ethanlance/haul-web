@@ -9,7 +9,7 @@ export default ApplicationAdapter.extend({
 	deleteRecord: function(store, type, record) {
 		var id = record.get('id');
 		var user_id = this.get('currentUser').id;
-		var url = this.host + '/users/' + user_id + '/images/' + id;
+		var url = this.host + '/images/' + id + "?user_id=" + user_id;
 		return this.ajax(url, "DELETE");
 	},
   

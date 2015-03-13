@@ -1,3 +1,6 @@
+.imageRemove {
+	border: 1px solid red;
+}
 
 html {
 	height: 100%;
@@ -143,7 +146,7 @@ $secondary-color: #596885;
 
 
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, label {
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #444e55;
 	font-weight: normal;
@@ -161,7 +164,8 @@ a:hover{
 
 
 label {
-	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12px;	
+	font-weight: bold;
 }
 
 .haul-header {
@@ -1512,16 +1516,37 @@ header.profile.shrink{
 	.drawer {
 		padding:10px;
 		//padding-left: 20px;
-		background-color: #eee;
-		border:1px solid #ccc;
-		border-top-right-radius: 4px;
-		border-bottom-right-radius: 4px;
-		border-top-left-radius: 4px;
-		border-bottom-left-radius: 4px;
+
 
 		.btn-drawer{
 			display:none;
 		}
+
+		.nav-tabs{
+			//border-bottom: none;
+			a {
+				border: 1px solid #ccc;
+			}
+
+			li{
+				background-color: #fff;
+			}
+
+			li.active a{
+				background-color: #eee;
+				border-bottom: none;
+			}
+		}
+		.tab-pane {
+			padding: 15px;
+				background-color: #eee;
+				border:1px solid #ccc;
+				border-top:none;
+				border-top-right-radius: 4px;
+				border-bottom-right-radius: 4px;
+				border-bottom-left-radius: 4px;
+		}
+
 
 		@media (max-width: 768px) {
 
@@ -1534,14 +1559,25 @@ header.profile.shrink{
 		    -webkit-transition: width 0.15s ease-in-out;
 		    transition: width 0.15s ease-in-out;
 
+		    background-color: #f9f9f9;
+		    border-left: 1px solid #eee;
+		    border-bottom: 1px solid #eee;
+		    border-bottom-left-radius: 4px;
+		    box-shadow: -6px 5px 20px 0px rgba(238,238,238,1);
+
 			width:75px;
-			height: 1000px;
+			height: auto;
 			overflow: hidden;
+			padding-top:20px;
+			top:-30px;
 			position:absolute;
 			right: -10px;
 			z-index: 3000;
 			
 			.drawer-content {
+
+
+
 				margin-top:50px;
 				opacity:0;
 				&.open{
@@ -1550,6 +1586,7 @@ header.profile.shrink{
 			}
 
 			&.open{
+				height:auto;
 				width:300px;
 			}
 			&.animate{
@@ -1558,6 +1595,9 @@ header.profile.shrink{
 		}
 	}
 
+	.photo-tab {
+		padding-top:20px;
+	}
  
 	.editorWrapper {
 		width:100%;

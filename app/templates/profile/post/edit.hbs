@@ -11,18 +11,25 @@
 
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12"> 
-					<h4>Catchy Title</h4>
+					<h4 class="text-center">A Catchy Title</h4>
 					{{input subject canShowValidationError=showErrors}} 
 				</div>
 			</div>	
 
-			<h4>
-				What's Amazing About This?
+
+			<h4 class="text-center">
+				Tell everyone about it
 				<small>
-					Don't forget to add #hashtags
+					<br/>Don't forget to add #hashtags.  You can even drag photos into your post.
 				</small>
 			</h4>
-
+			<div class="text-center">
+				<div class="gallery"> 				
+					{{#each selectedImages}}
+						<img {{bind-attr src=small}}/>
+					{{/each}}
+				</div>
+			</div>
 			{{quill-editor content=editorialForQuill  quillChange='quillChange' Haul=Haul}}
 			{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}			
 		</div>
@@ -34,48 +41,47 @@
 
 		<div class="col-md-4 col-sm-4 col-xs-2">
 			<div {{bind-attr class=":drawer openDrawer:open"}}>
-				
 
 				<button {{action 'btnDrawer'}} class="btn btn-default btn-left btn-drawer">
 					<span class="glyphicon glyphicon-menu-hamburger"></span>
 				</button>
 
 				<div {{bind-attr class=":drawer-content openDrawer:open"}}>
+
+
+				<ul class="nav nav-tabs" role="tablist">
+				    <li role="presentation" class="active">
+				    	<a href="#product" aria-controls="product" role="tab" data-toggle="tab">For Sale</a>
+				    </li>
+				    {{#if canEditProduct}}
+				    <li role="presentation">
+				    	<a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Edit Photos</a>
+				    </li>
+				    {{/if}}
+				</ul>
+				<div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active" id="product">
 				 
-					<label>Drag photos into your post</label><br/>
-					
-					<div class="gallery"> 				
-						{{#each selectedImages}}
-							<img {{bind-attr src=small}}/>
-						{{/each}}
-					</div>
+						
 
 					{{#if canEditProduct}}
 
 						<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12 text-center">  
-								<button {{action 'showImageModal'}} class="btn btn-default">
-									<span class="glyphicon glyphicon-picture"></span> edit photos
-								</button>
-							</div>
-						</div>
-
-						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">  
-								<label>Item Name</label>
+								<label>Name it:</label>
 								{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">  
-								<label>Item Description</label>
+								<label>Describe it:</label>
 								{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
 							</div> 
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-6"> 
 
-								<label>Quantity</label>
+								<label>Quantity:</label>
 								{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
 							</div>
 
@@ -93,7 +99,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12"> 
-								<label>Price</label>
+								<label>Price:</label>
 								{{#input product_price}}
 								<div class="input-group">
 									<span class="input-group-addon">$</span>
@@ -109,9 +115,9 @@
 
 
 						<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12">  
-								<label>The Seller Card</label>
+							<div class="col-md-12 col-sm-12 col-xs-12"> 
 								<span class="profile-badge">
+								<label>Seller</label><br/>
 									{{ make-icon icon=product_user.icon isSmall=true }}
 									{{#link-to 'profile' user }}{{product_user.username}}{{/link-to}}
 								</span>
@@ -119,42 +125,69 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">  
-								<label>Item Name</label><br/>
-								{{product_name}}
+								<p><label>Name:</label> {{product_name}}</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">  
-								<label>Description</label><br/>
-								{{sanitize-html product_description "description"}}
+								<p><label>Description:</label> {{sanitize-html product_description "description"}}</p>
 							</div> 
 						</div>
 
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12"> 
-
-								<label>Quantity</label>
-								{{product_quantity}}
+								<p><label>Quantity:</label> {{product_quantity}}</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12"> 
-								<label>Price</label>
-								${{product_price}}
+								<p><label>Price:</label> ${{product_price}}</p>
 			 				</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12"> 
-								<label>Status</label>
-								{{product_status_options.selectedStatus.name}}
+								<p><label>Status:</label> {{product_status_options.selectedStatus.name}}</p>
 					 		</div>
 						</div>
 						
 
 			 		{{/if}}
 
-					</div>
-				
+
+
+			 		</div>
+
+			 		{{#if canEditProduct}}
+    				<div role="tabpanel" class="tab-pane" id="photos">
+
+    					<div class="row">
+    						<div class="col-md-12 col-sm-12 col-xs-12">
+
+    							<h4>Manage Your Photos</br>
+    								<small>Upload, reorder (by dragging) or remove</small>
+    							</h4>
+
+    							<span {{bind-attr class="showImageUploadError:show:hide :alert"}}>{{imageUploadError}}</span>
+
+								{{#image-picker  
+									images=userImages
+									selectedImages=selectedImages
+									refresh='refresh'
+									imageClick='imageClick' 
+									imageDeleted='imageDeleted'
+									Haul=Haul
+									doNotAnimate='true'
+								}}
+									{{view 'sortable' content=selectedImages}}
+								{{/image-picker}}
+
+							</div>
+						</div>
+    				</div>
+    				{{/if}}
+
+
+				</div>
 			</div> 
 		</div> 
 
@@ -189,7 +222,7 @@
 </div>
 {{/form-for}} 
  
-
+{{!-- 
 
 <div {{bind-attr class=":modal animateImageModal:in:out showImageModal:show:hide"}}>
 	<div class="modal-dialog text-left haul-edit">
@@ -232,7 +265,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 
 
