@@ -4,10 +4,31 @@
 }}
 
 <div class="container-fluid haul-jargon">
+
+
+	
+	<div {{bind-attr class="navColumnOpen:in:out :nav-column-control :collapse"}}>
+		<button {{action 'toggleNavColumn'}} class="btn btn-default">
+			<i {{bind-attr class="navColumnOpen:hide :fa :fa-bars"}}></i>
+			<i {{bind-attr class="navColumnOpen::hide :fa :fa-chevron-left"}}></i>
+			Navigation
+		</button>
+	</div>
+	
+
 	<div class="row">
-		<div {{bind-attr class="turnOffNav:hide:show :col-md-3 :col-sm-3 :col-xs-12 :nav-column"}}>
-			<div class="list-group">
-			  {{#link-to 'settings.profile' class="list-group-item"}}Edit Profile{{/link-to}}
+		<div {{bind-attr class="navColumnOpen:in:out :col-md-3 :col-sm-3 :col-xs-6 :nav-column"}}>
+
+			<div {{bind-attr class=":nav-column-control :collapse"}}>
+				<button {{action 'toggleNavColumn'}} class="btn btn-default">
+					<i {{bind-attr class="navColumnOpen:hide :fa :fa-bars"}}></i>
+					<i {{bind-attr class="navColumnOpen::hide :fa :fa-chevron-left"}}></i>
+					Navigation
+				</button>
+			</div>
+
+			<div class="list-group" {{action 'closeNavColumn'}}>
+			  {{#link-to 'settings.profile' class="list-group-item"}}Change Icon{{/link-to}}
 			  {{#link-to 'settings.username' class="list-group-item"}}Change Username {{/link-to}}
 			  {{#link-to 'settings.password' class="list-group-item"}}Change Password {{/link-to}}
 			</div>
@@ -16,4 +37,5 @@
 			{{outlet}}
 		</div>
 	</div>
+
 </div>

@@ -2269,14 +2269,69 @@ body.anon{
 	}
 }
 
+.cta-welcome {
+	padding-top:100px;
+}
 
 
 .haul-jargon{
 	margin-top:50px;
 
-	.nav-column {
+	.nav-column-control {
+		&.in{
+			display:none;
+			visibility:hidden;
+		}
+	}
 
-		border-right: 1px solid #eee;
+	@media (max-width: 768px) {
+		.nav-column-control {
+
+			&.collapse{
+				display: inline;
+				visibility: visible;
+			}
+
+			&.in { 
+				visibility: hidden;
+			}
+
+			&.out { 
+			
+			}
+		}
+
+		.nav-column {
+			top:90px;
+			padding-top:10px;
+			border: 1px solid #eee;
+			position:absolute;
+			height: 1000px;
+			z-index: 2000;
+			background: #fff;
+			width:300px;
+
+			.nav-column-control{
+				float:right;
+				visibility: visible;
+			}
+
+			&.in { 
+				left:0px;
+			}
+
+			&.out { 
+				left: -300px;
+			}
+
+			.list-group{
+				padding-top:40px;
+			}
+
+			-webkit-transition: left .5s ease-in-out;
+	       	-o-transition: left .5s ease-in-out;
+	          transition: left .5s ease-in-out;
+		}
 	}
 }
 
@@ -2661,3 +2716,7 @@ body.anon{
   padding: 0px;
   width: 28px;
 }
+
+
+
+

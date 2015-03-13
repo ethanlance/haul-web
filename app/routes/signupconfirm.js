@@ -14,6 +14,6 @@ export default Ember.Route.extend(AnonMixin, {
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('signup_confirm');
+		this.render('signupconfirm');
 	}
 });

@@ -46,7 +46,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 		sessionAuthenticationFailed: function(error) {},
 
     	authenticateSession: function() {
-      		this.transitionTo('signup');
+      		this.transitionTo('login');
     	},
   	 	
 		openModal: function(modalName, model) {

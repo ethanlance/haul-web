@@ -3,9 +3,27 @@
 	openModal='openModal'}}
 
 <div class="container-fluid haul-jargon">
+
+	<div {{bind-attr class="navColumnOpen:in:out :nav-column-control :collapse"}}>
+		<button {{action 'toggleNavColumn'}} class="btn btn-default">
+			<i {{bind-attr class="navColumnOpen:hide :fa :fa-bars"}}></i>
+			<i {{bind-attr class="navColumnOpen::hide :fa :fa-chevron-left"}}></i>
+			Navigation
+		</button>
+	</div>
+
 	<div class="row">
-		<div class="col-md-3 col-sm-3 col-xs-12 nav-column">
-			<div class="list-group">
+		<div {{bind-attr class="navColumnOpen:in:out :col-md-3 :col-sm-3 :col-xs-6 :nav-column"}}>
+
+			<div {{bind-attr class=":nav-column-control :collapse"}}>
+				<button {{action 'toggleNavColumn'}} class="btn btn-default">
+					<i {{bind-attr class="navColumnOpen:hide :fa :fa-bars"}}></i>
+					<i {{bind-attr class="navColumnOpen::hide :fa :fa-chevron-left"}}></i>
+					Navigation
+				</button>
+			</div>
+
+			<div class="list-group" {{action 'closeNavColumn'}}>
 			  {{#link-to 'haul.about' class="list-group-item"}}About{{/link-to}}
 			  {{#link-to 'haul.faq' class="list-group-item"}}FAQ{{/link-to}}
 			  {{#link-to 'haul.tos' class="list-group-item"}}TOS{{/link-to}}

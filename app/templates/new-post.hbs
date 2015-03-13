@@ -14,11 +14,11 @@
 			</div>
 
 			<div {{bind-attr class="showProduct:show:hide :fade showProductFadeIn:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}>		
-				<h2>Tell us the details</h2>
+				<h2>Give us the details</h2>
 			</div>
 
 			<div {{bind-attr class="showPost:show:hide :fade showPostFadeIn:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
-				<h2>Edit Your Post</h2>
+				<h2>Tell everyone what's awesome about this</h2>
 			</div>
 		</div>
 
@@ -113,13 +113,13 @@
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12"> 
-							<label>Name this item:</label>
+							<label>Name it:</label>
 							{{input product_name canShowValidationError=showErrors}} 
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12"> 
-							<label>Describe this item:</label>
+							<label>Describe it:</label>
 							<label class="small pull-right text-regular">(max 2000 characters)</label>
 							{{input product_description placeholder="Size, color, condition, etc" as="text" canShowValidationError=showErrors }}
 						</div> 
@@ -127,7 +127,7 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-6 col-xs-6"> 
 							{{#input price}}
-							{{label-field product_price}}:
+							Price:
 							<div class="input-group">
 								<span class="input-group-addon">$</span>
 							  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
