@@ -8,7 +8,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 			return;
 		} 
 
-		var timeInMs = Date.now();
+		var timeInMs = Date.now() / 1000;
 
 		var data = {
 			id: payload.data.comment_id,	
