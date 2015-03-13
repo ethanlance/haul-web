@@ -1,5 +1,6 @@
 import Ember from 'ember';
-export default Ember.ObjectController.extend({
+import ErrorMixin from '../mixins/server_error';
+export default Ember.ObjectController.extend(ErrorMixin, {
  
  	needs: ['profile'],
 	
@@ -17,7 +18,7 @@ export default Ember.ObjectController.extend({
 	imageId: null,
 	productImageIds: [],
 	selectedImages: [],
-
+	errorMessageServer: "Oh no something went wrong",
 	editorialForQuill: "",
 
 	// refresh: function() {
@@ -182,7 +183,7 @@ export default Ember.ObjectController.extend({
 		var model = this.get('model');
 
 		//Trim
-		var body = model.get('body').trim();
+		var body = model.getWithDefault('body','').trim();
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}
@@ -190,38 +191,53 @@ export default Ember.ObjectController.extend({
 
  		//Model Validations:
 		model.validate()
-		.then(function(){
-			_this.set('isProcessing', true);
-			return model.save();
-		})
+		.then(
+			function validateSuccess(){
+				_this.set('isProcessing', true);
+				return model.save();
+			},
+			function validateError(error){
+				console.log("Error", error);
+				_this.set('isProcessing', false);
+				_this.set('showErrors', true);
+			}
+		)
 		.then(function(){
 			return _this.store.find('post-list', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
 		.then(function(){
 			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
-		.then(function(record){
-			_this.set('isProcessing', false);
-			var user = _this.get('currentUser'); 
-			_this.transitionToRoute('profile.post', user, model);
-		}, function(error){
-			console.log("Error", error);
-			_this.set('isProcessing', false);
-			_this.set('showErrors', true);
-		});
+		.then(
+			function serverSuccess(record){
+				_this.set('isProcessing', false);
+				var user = _this.get('currentUser'); 
+				_this.transitionToRoute('profile.post', user, model);
+			}, 
+			function serverError(error){
+				_this.set('isProcessing', false);
+				
+				//Mixin:
+				_this.handleServerError(error)
+
+			}
+		);
 	},
 
 	actions: {
 
 		showPost: function() {
-			
+			console.log('showpost')
 			var _this = this;
 			var model = this.get('model');
 			
 			//Run validations before proceeding.
 			model.validate()
 			.then(
-				function(){},
+				function(){
+					console.log('forward')
+					_this.set('newState', 'showPost');
+				},
 				function(errors){
 					if( errors.get('product_name').length > 0 ||
 						errors.get('product_description').length > 0 ||
@@ -239,10 +255,12 @@ export default Ember.ObjectController.extend({
 		},
 
 		showProduct: function() {
+			console.log('showproduct')
 			this.set('newState', 'showProduct');
 		},
 
 		showUpload: function() {
+			console.log('showphoto')
 			this.set('newState', 'showUpload');
 		},
 

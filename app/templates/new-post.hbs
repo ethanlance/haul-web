@@ -8,6 +8,11 @@
 	<div class="container haul-edit">
 
 
+
+		{{partial "_server_error"}}
+
+
+
 		<div class="row">
 			<div {{bind-attr class=":start-with-photos showUpload:show:hide :fade showUploadFadeIn:in :col-md-12 :col-sm-12 :col-xs-12 :text-center"}}> 
 				<h1>Start with photos</h1>
@@ -49,7 +54,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">	
-							<button {{action 'cancel'}} class="btn btn-default btn-left">
+							<button {{action 'cancel'}} class="btn btn-warning btn-left">
 								cancel
 							</button>
 
@@ -57,7 +62,6 @@
 							<button {{action "showProduct"}} 
 								{{bind-attr class="imagesAreSelected::disabled :btn :btn-primary :btn-right"}}>
 								continue
-								<span class="glyphicon glyphicon-arrow-right"></span>
 							</button>
 						</div>
 					</div>
@@ -154,14 +158,12 @@
 						<div class="col-md-12 col-sm-12 col-xs-12 text-center">	
 							
 							<button {{action "showUpload"}} 
-								class="btn btn-primary btn-left">
-								<span class="glyphicon glyphicon-arrow-left"></span> back
+								class="btn btn-primary btn-left"> back to photo
 							</button>
 
 							<button {{action "showPost"}} 
 								{{bind-attr class=":btn :btn-primary :btn-right"}}>
-								continue
-								<span class="glyphicon glyphicon-arrow-right"></span>
+								continue to post
 							</button>
 
 						</div>
@@ -218,11 +220,10 @@
 						<div class="col-md-12 col-sm-12 col-xs-12 toolbar-footer">	
 							
 							<button {{action "showProduct"}} 
-								class="btn btn-primary btn-left">
-								<span class="glyphicon glyphicon-arrow-left"></span> back
+								class="btn btn-primary btn-left"> back
 							</button>
 							
-							<button {{action 'cancel'}} class="btn btn-default btn-left">
+							<button {{action 'cancel'}} class="btn btn-warning btn-left">
 								cancel
 							</button>
 							
