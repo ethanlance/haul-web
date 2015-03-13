@@ -5,7 +5,7 @@ var $ = Ember.$;
 
 var QuillEditorComponent = Ember.Component.extend({
 
-	height: '300px',
+	height: '600px',
 	content: '',
 	editor: null,
 
@@ -39,21 +39,21 @@ var QuillEditorComponent = Ember.Component.extend({
 			h = height - (top - scrollTop) - 100;
 
 			$('#editor').css("height", h);	
-			
-	 		var editor = new Quill('#editor',{
-			  	modules: {
-			    	'toolbar': { container: '#toolbar' },
-			    	'link-tooltip': true 
-			  	},
-			  	theme: 'snow'
-			});
-
-			_this.set('editor', editor);
-
-			editor.on('text-change', function() { 
-				_this.sendAction('quillChange', editor.getHTML());
-			}); 
 		}, 1000);
+			
+ 		var editor = new Quill('#editor',{
+		  	modules: {
+		    	'toolbar': { container: '#toolbar' },
+		    	'link-tooltip': true 
+		  	},
+		  	theme: 'snow'
+		});
+
+		_this.set('editor', editor);
+
+		editor.on('text-change', function() { 
+			_this.sendAction('quillChange', editor.getHTML());
+		}); 
 
 		this.contentChanged();
 	},
