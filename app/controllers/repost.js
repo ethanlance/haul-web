@@ -14,7 +14,7 @@ export default Ember.ObjectController.extend({
 	//showModal: false,
 	showSuccess:false,
 	showRepost:false,
-
+	
 
  	modelChanged: function() {
 		this.set('canEditProduct', false);
