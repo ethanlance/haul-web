@@ -14,33 +14,42 @@ var QuillEditorComponent = Ember.Component.extend({
 	}.observes('content'),
 
 	didInsertElement: function(){
+		$('#editor').css("height", this.get('height'));	
+
 		var _this = this;
 		var h = null;
+
 			
-		if( this.get('height')){
-			h = this.get('height');
-		}else{
-			h = window.innerHeight; 
-		}
+		Ember.run.later(function(){
+			var el = $('#editor');
 
+			var top = el.parent().offset().top;
+			var height = window.outerHeight;
 
-		h = window.innerHeight - 350;; 
-		$('#editor').css("height", h);	
+			console.log("TOP ", top)
+			console.log("HEIGHT ", height)
+
+			h = height - top - 100;
+
+			console.log("H", h)
+			//h = window.innerHeight - 350;; 
+			$('#editor').css("height", h);	
+			
+	 		var editor = new Quill('#editor',{
+			  	modules: {
+			    	'toolbar': { container: '#toolbar' },
+			    	'link-tooltip': true 
+			  	},
+			  	theme: 'snow'
+			});
+
+			_this.set('editor', editor);
+
+			editor.on('text-change', function() { 
+				_this.sendAction('quillChange', editor.getHTML());
+			}); 
+		}, 600);
 		
- 		var editor = new Quill('#editor',{
-		  	modules: {
-		    	'toolbar': { container: '#toolbar' },
-		    	'link-tooltip': true 
-		  	},
-		  	theme: 'snow'
-		});
-
-		this.set('editor', editor);
-
-		editor.on('text-change', function() { 
-			_this.sendAction('quillChange', editor.getHTML());
-		}); 
-
 		this.contentChanged();
 	},
 
