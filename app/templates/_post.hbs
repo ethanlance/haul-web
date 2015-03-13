@@ -44,12 +44,12 @@
 	<div class="article">
 		
 		<h2>
-			{{#link-to 'profile.post' user post_id post_slug }}{{subject}}{{/link-to}}
+			{{#link-to 'profile.post' user post_id post_slug (query-params anchor="null")}}{{subject}}{{/link-to}}
 		</h2> 
 
 		
 		<div class="product-image">
-			{{#link-to 'profile.post' user post_id post_slug }}
+			{{#link-to 'profile.post' user post_id post_slug (query-params anchor="null")}}
 				<img class="img-responsive" {{bind-attr src=image.medium}}>
 			{{/link-to}}
 		</div>
