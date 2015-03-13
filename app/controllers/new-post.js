@@ -20,6 +20,12 @@ export default Ember.ObjectController.extend({
 
 	editorialForQuill: "",
 
+	// refresh: function() {
+	// 	this.setProperties({
+	// 		selectedImages: [],
+	// 	});
+	// },
+
 	state: null,
 	states:{
 		0:'showUpload', 
@@ -107,6 +113,11 @@ export default Ember.ObjectController.extend({
 	//Observer: anytime our array of selected images changes, update
 	// our list of image_ids.
 	imagesIdsChanged: function() {
+
+		if(Ember.isEmpty(this.get('selectedImages'))){
+			return; //bail
+		}
+
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
 		});
