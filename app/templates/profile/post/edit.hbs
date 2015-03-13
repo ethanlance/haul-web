@@ -42,73 +42,10 @@
 	</div>
 </div>
 {{/form-for}} 
- 
-{{!-- 
-
-<div {{bind-attr class=":modal animateImageModal:in:out showImageModal:show:hide"}}>
-	<div class="modal-dialog text-left haul-edit">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button {{action 'closeImageModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">
-					Upload, Reorder and Remove Photos
-				</h4>
-			</div>
-		<div class="modal-body">
-
-			{{#image-picker  
-				images=userImages
-				selectedImages=selectedImages
-				refresh='refresh'
-				imageClick='imageClick' 
-				imageDeleted='imageDeleted'
-				Haul=Haul
-				doNotAnimate='true'
-			}}
-				{{view 'sortable' content=selectedImages}}
-			{{/image-picker}}
-
-      </div>
-      <div class="modal-footer">
-
-
-      	<div {{bind-attr class="postComplete:hide:show"}}>
-
-      			<h4 class="pull-left">
-					
-					<small>Drag to reorder the images</small>
-				</h4>
-
-
-	        <button {{action 'closeImageModal'}} type="button" class="btn btn-default" data-dismiss="modal">done</button> 
-		</div>
-
-      </div>
-    </div>
-  </div>
-</div> --}}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{{!-- //DELETE POST MODAL --}}
 <div {{bind-attr class=":modal animateDeleteModal:in:out showDeleteModal:show:hide"}}>
 	<div class="modal-dialog sm text-left haul-edit">
 		<div class="modal-content">
