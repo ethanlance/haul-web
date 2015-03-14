@@ -14,6 +14,10 @@ export default Ember.ObjectController.extend(PaginateMixin,{
     sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
 	userChange: function() {
+
+		if( Ember.isEmpty(this.get('currentUserId'))) {
+			return;
+		}
 		
 		//Pagination:	
 		this.set('paginateQuery', {

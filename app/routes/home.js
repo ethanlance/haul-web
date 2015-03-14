@@ -10,9 +10,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 		var _this = this;
 		return this.store.filter('feed', function(result){
 			if( _this.get('session') && _this.get('session.user_id')) {
-				if(result.get('user_id') === _this.get('session.user_id') ){
+				//if(result.get('user_id') === _this.get('session.user_id') ){
 					return result	
-				}
+				//}
 			}
 		});
 	},
