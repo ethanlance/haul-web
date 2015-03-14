@@ -9,10 +9,20 @@ export default  DS.RESTSerializer.extend({
  		var data = [];
 		data = payload.data.map(function(result){ 
 			return {
-				id: result.name,	
-				name: result.name,
-				price: result.price,
-				image: result.image_id
+				id: result.post_id,
+				post_id: result.post_id,
+
+				subject: result.subject,
+				image: result.image_id,	
+				
+				product_currency: result.product_currency,
+				product_price: result.product_price,
+				product_status: result.product_status,
+				product_name: result.product_name,
+
+				update_at: result.update_at,
+				comments_total: result.comments_total,
+				likes_total: result.likes_total,
 			};
 		});
 

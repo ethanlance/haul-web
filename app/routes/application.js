@@ -64,8 +64,19 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 			});
 		},
 
-		goToRoute: function(arg1, arg2) {
-			this.transitionTo(arg1, arg2);
+		goToRoute: function(arg1, arg2, arg3) {
+
+			console.log("POST? " , arg3)
+
+			if( arg3 ){
+				this.transitionTo(arg1, arg2, arg3);
+			}else if(arg2){
+				this.transitionTo(arg1, arg2);
+			}else{
+				this.transitionTo(arg1);
+			}
+
+			
 		}
 	}
 });

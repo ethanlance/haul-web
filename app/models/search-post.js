@@ -1,6 +1,18 @@
 import DS from 'ember-data';
 export default DS.Model.extend({
-	name: DS.attr( 'string' ),
+	
+	post_id: DS.attr('string'),
+
+	subject: DS.attr( 'string' ),
 	image: DS.belongsTo('image', {async:true}),	
-	price: DS.attr( 'string' )
+	
+	product_currency: DS.attr('string'),
+	product_price: DS.attr('string'),
+	product_status: DS.attr('string'),
+	product_name: DS.attr('string'),
+
+	update_at: DS.attr('string'),
+	comments_total: DS.attr('string'),
+	likes_total: DS.attr('string'),
+
 });

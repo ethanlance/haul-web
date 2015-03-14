@@ -16,7 +16,7 @@ export default ApplicationAdapter.extend({
 	},
  
 	findQuery: function(store, type, query) {
-        var url = this.host + "/search/tags/" + query.q + "/products";
+        var url = this.host + "/search/tags/" + query.q + "/posts";
         return this.ajax(url, 'GET');
     },
 });
