@@ -334,6 +334,8 @@ nav {
 		margin-left: 5px;
 		display: inline-block;	
 		width:200px; 
+
+		cursor: pointer;	
 		
 		.input-group-addon {
 			background-color: #fff;
@@ -376,6 +378,7 @@ nav {
 
 		.tt-query,
 		.tt-hint {
+			width:300px;
 		    outline: none;
 		}
 
@@ -388,32 +391,94 @@ nav {
 		    left: -30px;
 		}
 
-
 		.tt-dropdown-menu {
-			position:absolute;
-			left: -30px;
-		  width: 200px;
-		  margin-top: 0px;
-		  //padding: 8px 0;
-		  background-color: #fff;
-		  border: 1px solid #ccc;
-		  border: 1px solid rgba(0, 0, 0, 0.2);
-		  -webkit-border-radius: 8px;
-		     -moz-border-radius: 8px;
-		          border-radius: 8px;
-		  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-		     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+			padding:0;
+			margin:0;
+		  	width:339px; 
+		  	border-radius: none;
+		  	background-color: #fff;
+		  	border: 1px solid #ccc;
+		  	-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+		     	-moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
 		          box-shadow: 0 5px 10px rgba(0,0,0,.2);
 		}
 
+		
+
+		.tt-dataset-search { 
+			border-radius: none;
+		  	width:339px;
+			text-align: left;
+			//border: 1px solid pink;
+			display:inline-block;
+			margin:0;
+			padding:0;
+
+			.tt-dataset-row {
+				//border: 1px solid pink;
+				position:relative;
+				//display:inline;
+				min-height: 30px;
+			
+				.tt-search-image {
+					position: relative;
+					display:inline-block;
+					
+					height: 50px;
+					width:50px;
+					margin:0;
+					padding:0;
+					//border: 1px solid pink;
+					img { 				
+						position:absolute;
+						top:10px;
+						left:5px;
+						margin:0;
+						padding:0;
+						width: 40px;
+						height: 40px;
+					}	
+				}
+				.tt-search-result {		
+					position:absolute;
+					top:5px;
+					//left:55px;
+					//border: 1px solid pink;	
+					width:190px; 
+					margin:0;
+					padding:5px 5px 5px 5px;
+					display:inline-block;
+				}
+
+				.tt-search-meta {		
+					position:absolute;
+					top:5px;
+					left:250px;
+					//border: 1px solid pink;
+					width:80px;
+					margin:0;
+					padding:5px 5px 5px 5px;
+					display:inline-block;
+					//float:right;
+					color: #ccc;
+				}
+			}
+		}
+
 		.tt-suggestion {
-		    padding: 3px 20px;
-		    //font-size: 18px;
-		    // /line-height: 24px;
+			margin:0;
+			padding:0;  
 		    cursor: pointer;
+		    border-bottom: 1px solid #eee;
+		}
+
+		.tt-suggestion:last-child {
+			border:none;
 		}
 
 		.tt-suggestion.tt-cursor {
+			margin:0;
+			padding:0;
 			color: #fff;
 		 	background-color: $secondary-color;
 		}
@@ -520,14 +585,19 @@ nav {
 			border:0px;
 			padding: 10px;
 			text-align: center; 
+			width: auto;
 
-			input{
-				width:250px; 
-				//border: 1px solid #ccc;
-				//border-radius:4px;
-			}
-			.btn-default{ 
-				//display:none;
+			.input-group{
+				margin-left:auto;
+				margin-right:auto;
+				width:250px;  
+			} 
+
+
+			.tt-query,
+			.tt-hint {
+				//width:200px;
+			    outline: none;
 			}
 
 		  	-webkit-transition: all .15s linear;

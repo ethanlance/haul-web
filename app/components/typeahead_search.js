@@ -37,31 +37,71 @@ export default Ember.Component.extend({
        		},
        		filter: function(response) {
        			var data = response.data.map(function(result){
-       				result.searchSymbol = _this.get('searchSymbol');
 
-
-
+       				//Image:
+       				var image;
        				if( result.facebook_user_id ) {
-       					result.image = "https://graph.facebook.com/" + result.facebook_user_id + "/picture?width=20";
+       					image = "https://graph.facebook.com/" + result.facebook_user_id + "/picture?width=20";
        				}else if( result.image_id) {
-       					result.image = "http://static.haul.io/images/local/"+result.image_id+"/thumb";
+       					image = "http://static.haul.io/images/local/"+result.image_id+"/thumb";
        				}
 
+       				
 
-       				if( _this.get('searchSymbol') == "$" ) {
+
+       				if( result.type === "search_tag") {
+       					var tag_total = result.total;
+       					var total = "";
+       					if( tag_total === 1) {
+       						total = "1 post";
+       					}else{
+       						total = tag_total + " post";
+       					}
+
+       					return { 
+       						name: result.name,  
+       						total: total
+       					}
+
+
+
+       				}else if( result.type === "search_user") {
+
+       					var follows_total = result.follows_total;
+       					var total = "";
+       					if( follows_total === 1) {
+       						total = "1 follower";
+       					}else{
+       						total = follows_total + " followers";
+       					}
+
+       					return { 
+       						name: result.name,  
+       						total: total,
+       						image: image,
+       					}
+
+
+
+       				}else if( result.type === "search_post") {
 
        					var user_id = result.post_id.split("_")[0];
+
+						var total = result.likes_total + ' <span class="glyphicon glyphicon-heart"></span> '
+						+ result.comments_total + ' <span class="glyphicon glyphicon-comment"></span>';
+
+						
        					return {
        						user_id: user_id,
        						post_id: result.post_id,
        						name: result.subject,
-       						image: result.image,
-       						price: result.product_price,
-       						comment_total: result.comment_total,
-       						likes_total: result.likes_total
+       						total: total,
+       						image: 	image,
        					}
-       				} 
- 
+
+       				}
+
+       				result.searchSymbol = _this.get('searchSymbol');
 
        				return result;
        			});
@@ -94,12 +134,17 @@ export default Ember.Component.extend({
 		  	suggestion: Handlebars.compile(
 		  		[
 
-	'<p class="text-left">',
-		'{{#if image}}<img width="20px" src="{{image}}">{{/if}}',
-		'<strong>{{searchSymbol}}{{name}}</strong>',
-		'{{#if likes_total}} <span class="glyphicon glyphicon-heart pull-right"></span>{{likes_total}}{{/if}}',
-		'{{#if comments_total}} <span class="glyphicon glyphicon-comment pull-right"></span>{{comments_total}}{{/if}}',
-	'</p>'
+	
+		'<div class="tt-dataset-row">{{#if image}}<div class="tt-search-image">',
+			'<img src="{{image}}">',
+		'</div>{{/if}}',
+		'<div class="tt-search-result">',
+			'{{searchSymbol}}{{name}}',
+		'</div>',
+		'<div class="tt-search-meta">',
+			'{{#if total}} {{{total}}}{{/if}}',
+		'</div></div>',
+	
 
 		  		].join('\n'))
 		  }
@@ -111,7 +156,7 @@ export default Ember.Component.extend({
 			var store = _this.container.lookup('store:main'); 
 
 
-
+			//Post Search
 			if( type === "post" ){
 				console.log("POST");
 
@@ -129,9 +174,12 @@ export default Ember.Component.extend({
 				})
 
 
-
+			//User Search
 			}else if( type === "user" ){
 				_this.sendAction('goToRoute', 'profile', data.username);
+
+
+			//Hash Tag Search
 			}else{
 				_this.sendAction('goToRoute', 'search', {queryParams: {type:type, q:data.name}});	
 			}
