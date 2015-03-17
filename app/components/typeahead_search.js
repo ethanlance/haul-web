@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 	searchSymbols: {
 		'tag':'#',
 		'user':'@',
-		'post':'$',
+		'post':'<span class="glyphicon glyphicon-search"></span>',
 	},
 
 	toggle: false,
@@ -77,6 +77,7 @@ export default Ember.Component.extend({
 
        					return { 
        						name: result.name,  
+       						username: result.username,
        						total: total,
        						image: image,
        					}
@@ -124,30 +125,29 @@ export default Ember.Component.extend({
 		 
 		search.initialize();
 
+		_this.set('search', search);
+
 		 
 		$('.search-wrapper input').typeahead(null, {
-		  name: 'search', 
-		  highlight: true,
-		  displayKey: 'name',
-		  source: search.ttAdapter(),
-		  templates: {
-		  	suggestion: Handlebars.compile(
-		  		[
+			name: 'search', 
+			highlight: true,
+			displayKey: 'name',
+			source: search.ttAdapter(),
+			templates: {
+		  		suggestion: Handlebars.compile([
 
-	
-		'<div class="tt-dataset-row">{{#if image}}<div class="tt-search-image">',
-			'<img src="{{image}}">',
-		'</div>{{/if}}',
-		'<div class="tt-search-result">',
-			'{{searchSymbol}}{{name}}',
-		'</div>',
-		'<div class="tt-search-meta">',
-			'{{#if total}} {{{total}}}{{/if}}',
-		'</div></div>',
-	
+					'<div class="tt-dataset-row">{{#if image}}<div class="tt-search-image">',
+						'<img src="{{image}}">',
+					'</div>{{/if}}',
+					'<div class="tt-search-result">',
+						'{{searchSymbol}}{{name}}',
+					'</div>',
+					'<div class="tt-search-meta">',
+						'{{#if total}} {{{total}}}{{/if}}',
+					'</div></div>',
 
 		  		].join('\n'))
-		  }
+			}
 		});
 
 		//EVENTS
@@ -176,6 +176,7 @@ export default Ember.Component.extend({
 
 			//User Search
 			}else if( type === "user" ){
+				console.log("username ", data.username	)
 				_this.sendAction('goToRoute', 'profile', data.username);
 
 
@@ -186,12 +187,17 @@ export default Ember.Component.extend({
 		    
 		});
 
-		this.changeSearchType('tag');
+		//this.changeSearchType('tag');
 	},
 
 	changeSearchType: function(arg) {
 		this.set('searchType', arg); 
 		this.set('searchSymbol', this.get('searchSymbols')[arg]);
+		
+		var input = $('input.form-control.tt-query.tt-input');
+		var theVal = input.val();
+		input.typeahead('val', '')
+		input.focus().typeahead('val',theVal).focus(); 
 	},
 
 	actions: {

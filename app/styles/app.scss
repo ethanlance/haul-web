@@ -1,3 +1,10 @@
+//box-shadow: 0 0 15px 5px #ffffff;
+$primary-color: #3a4457;
+$secondary-color: #596885;
+$radius: 2px;
+
+
+
 .imageRemove {
 	border: 1px solid red;
 }
@@ -52,9 +59,7 @@ body {
 	top:0px;
 }
 
-//box-shadow: 0 0 15px 5px #ffffff;
-$primary-color: #3a4457;
-$secondary-color: #596885;
+
 
 .modal{
 	display:inline;
@@ -93,7 +98,9 @@ $secondary-color: #596885;
 } 
 
 
-
+.btn {
+	border-radius: $radius;
+}
 
 
 .btn-primary {
@@ -292,8 +299,8 @@ nav {
 		box-shadow: 0px 2px 2px #000; 
 		font-family: Arvo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 		font-weight: bold;
-		border-bottom-right-radius: 4px;
-		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: $radius;
+		border-bottom-left-radius: $radius;
 		a {
 			color: #fff;
 		}
@@ -340,6 +347,19 @@ nav {
 		.input-group-addon {
 			background-color: #fff;
 			max-height:20px;
+			font-size: 22px;
+			padding:0 10px 0 5px;
+			margin:0;
+
+			.glyphicon-search {
+				font-size: 18px; 
+			}
+		}
+
+		.dropdown-menu { 
+			.symbol{
+				font-size: 20px;
+			}
 		}
 		
 		input {
@@ -349,7 +369,8 @@ nav {
 			//width: 100%;
 			border-radius: 0px; 
 			border-left: none;
-			border-right: none;
+			border-top-right-radius: $radius;
+			border-bottom-right-radius:  $radius;
 			&:focus{
 				border: 1px solid #ccc;
 				border-left: none;
@@ -949,8 +970,8 @@ header.profile.shrink{
 		text-align: left;
 
 		border: 1px solid #ccc;
-		border-bottom-left-radius: 4px;
-		border-bottom-right-radius: 4px;
+		border-bottom-left-radius: $radius;
+		border-bottom-right-radius: $radius;
 
 
 		// -moz-transition: height 0.5s ease-in-out;
@@ -1100,7 +1121,7 @@ header.profile.shrink{
 
 		padding: 20px 15px 15px 15px;
 		background-color: #eee;
-		border-radius: 4px;
+		border-radius: $radius;
 		border: 1px solid #b7b7b7;
 		height:500px;
 		width:90%;
@@ -1167,8 +1188,8 @@ header.profile.shrink{
 		padding: 5px 15px 10px 15px;
 		margin-top:15px;
 		text-align: left;
-		border-top-left-radius: 4px;
-		border-top-right-radius: 4px;
+		border-top-left-radius: $radius;
+		border-top-right-radius: $radius;
 
 
 		&.is-repost {
@@ -1242,8 +1263,8 @@ header.profile.shrink{
 
 
 					margin-bottom:0px;
-					border-bottom-left-radius: 4px;
-					border-bottom-right-radius: 4px;
+					border-bottom-left-radius: $radius;
+					border-bottom-right-radius: $radius;
 				}
 			}
 			
@@ -1306,15 +1327,15 @@ header.profile.shrink{
 		border: 1px solid #ccc;
 		border-bottom:none;
 		background-color: #f7f8fa;
-		border-top-right-radius: 4px;
-		border-top-left-radius: 4px;
+		border-top-right-radius: $radius;
+		border-top-left-radius: $radius;
 		box-shadow: 2px 3px 8px #ccc;
 	}
 
 	.sidebar {
 		border: 1px solid #ccc;
-		border-bottom-left-radius: 4px;
-		border-bottom-right-radius: 4px;
+		border-bottom-left-radius: $radius;
+		border-bottom-right-radius: $radius;
 		padding:15px;
 		background-color: #ebedf2;//#f3f3f4;
 
@@ -1585,7 +1606,7 @@ header.profile.shrink{
 		 	padding: 2px;
 			background-color: #fff;
 			border: 1px solid #ddd;
-			border-radius: 4px;
+			border-radius: $radius;
 			width: 50px;
 			height: 50px; 
 
@@ -1624,9 +1645,9 @@ header.profile.shrink{
 			background-color: #eee;
 			border:1px solid #ccc;
 			border-top:none;
-			border-top-right-radius: 4px;
-			border-bottom-right-radius: 4px;
-			border-bottom-left-radius: 4px;
+			border-top-right-radius: $radius;
+			border-bottom-right-radius: $radius;
+			border-bottom-left-radius: $radius;
 		}
 
 
@@ -1644,7 +1665,7 @@ header.profile.shrink{
 		    background-color: #f9f9f9;
 		    border-left: 1px solid #eee;
 		    border-bottom: 1px solid #eee;
-		    border-bottom-left-radius: 4px;
+		    border-bottom-left-radius: $radius;
 		    box-shadow: -6px 5px 20px 0px rgba(238,238,238,1);
 
 			width:65px;
@@ -1803,7 +1824,7 @@ header.profile.shrink{
 				 	line-height: 1.42857143;
 					background-color: #fff;
 					border: 1px solid #ddd;
-					border-radius: 4px;
+					border-radius: $radius;
 					width: 50px;
 					height: 50px; 
 					min-height: 0;
@@ -1915,7 +1936,7 @@ header.profile.shrink{
 	}
 	.sell-button {
 		border: 1px dashed grey;
-		border-radius: 4px;
+		border-radius: $radius;
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -2016,8 +2037,8 @@ header.profile.shrink{
 		padding: 10px;
 		padding-left: 20px;
 		padding-right: 5px;
-		border-top-left-radius: 4px;
-		border-bottom-left-radius: 4px;
+		border-top-left-radius: $radius;
+		border-bottom-left-radius: $radius;
 	}
 }
 
@@ -2280,7 +2301,7 @@ body.anon{
 	}
 	.form-box	 {
 		background-color: rgba(0, 0, 0, 0.8);
-		border-radius: 4px;
+		border-radius: $radius;
 		padding-bottom: 10px;
 
 		.toc {
@@ -2500,8 +2521,8 @@ body.anon{
 		margin-left: 0px;
 		.progress {
 			border-radius: 0px;
-			border-bottom-right-radius: 4px;
-			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: $radius;
+			border-bottom-left-radius: $radius;
 		}
 	}
 
@@ -2517,7 +2538,7 @@ body.anon{
 		height: 100px;
 		background-color: #fff;
 		border: 1px solid #ddd;
-		border-radius: 4px;
+		border-radius: $radius;
 
 		&:hover{
 			cursor: pointer;
