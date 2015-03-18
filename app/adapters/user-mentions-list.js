@@ -11,4 +11,6 @@ export default ApplicationAdapter.extend({
 		url = this.queryBuilder(query, url);
 		return this.ajax(url, 'GET');
 	}
+
+	
 });
