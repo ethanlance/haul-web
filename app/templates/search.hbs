@@ -3,7 +3,7 @@
 <div class="container-fluid haul-content">
 	<div class="row">
 	 	<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-	    	<h1>Search</h1>
+	    	<h1 {{bind-attr class="showResults:show:hide"}}>{{{typeText}}}  <b>{{queryText}}</b></h1>
 	    </div> 
 	</div>
   
@@ -20,14 +20,18 @@
 
 		{{!-- //CONTENT --}}
 		<div {{bind-attr class="galleryView:gallery"}}>
-		{{#each model}}
-			
+		
+		 	
 
+		{{#if currentTypeIsHashtag }}
+		 	{{#each sortedContent}}
+		 		<ul class="search-hashtag">
+		 			<li {{action 'clickHashtag' this}}><span class="search-hashtag-tag">#{{name}}</span> <span class="search-hashtag-total">{{total}} posts</span></li>
+		 		</ul>
+			{{/each}}
 
-
-
-
-
+		{{else}}
+		 	{{#each sortedContent}}
 			<div class="post">   
 				<div class="article">
 					
@@ -44,14 +48,10 @@
 					 	
 				</div> 
 			</div>
+			{{/each}}
+		{{/if}}
 
-
-
-
-
-
-
-		{{/each}}
+ 
 		</div>
 		{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 			<span>Loading...</span>	

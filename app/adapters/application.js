@@ -9,8 +9,19 @@ export default DS.RESTAdapter.extend({
 		var queryList = [];
 
 		if( query.doNotPaginate){
-			return url + "?limit=1";
+
+			url = url + "?limit=1";
+
+			if(query.query) {
+				url + "&"+query.query;
+			}
+
+			return url;
 		}
+
+        if( query.query ) {
+            queryList.push(query.query);
+        }
 
         if( query.next ) {
             queryList.push("next=" + query.next);
@@ -20,6 +31,9 @@ export default DS.RESTAdapter.extend({
         }
         if( query.previous ) {
             queryList.push("previous=" + query.previous);
+        }
+        if( query.offset ) {
+            queryList.push("offset=" + query.offset);
         }
         if(!Ember.isEmpty(queryList)) {
             url = url + "?" + queryList.join("&");

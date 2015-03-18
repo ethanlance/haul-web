@@ -7,127 +7,138 @@ var Haul = config.APP;
 
 export default Ember.Component.extend({
 
+	limit: config.APP.paginationLimit.typeahead_search,
+	toggle: false,
+	user: false,
+	post: false,
+	query: '',
 	searchType: 'tag',
 	searchSymbol: '#',
+	user_tokenBinding: 'session.currentUser.access_token',
 	searchSymbols: {
 		'tag':'#',
 		'user':'@',
 		'post':'<span class="glyphicon glyphicon-search"></span>',
 	},
 
-	toggle: false,
-
-	user: false,
-	post: false,
-
-	user_tokenBinding: 'session.currentUser.access_token',
-
 	didInsertElement: function() {
 		var _this = this;
 		
 		var search = new Bloodhound({
-		  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-		  queryTokenizer: Bloodhound.tokenizers.whitespace,
-		  remote: {
-		  	url:Haul.Server.SEARCH_SERVER_HOST,
-		  	ajax: {
-            	beforeSend: function(jqXHR) {
-               		jqXHR.setRequestHeader('Authorization', 'Bearer ' + _this.user_token);
-           		}
-       		},
-       		filter: function(response) {
-       			var data = response.data.map(function(result){
+			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url:Haul.Server.SEARCH_SERVER_HOST,
+				ajax: {
+					beforeSend: function(jqXHR) {
+               			jqXHR.setRequestHeader('Authorization', 'Bearer ' + _this.user_token);
+           			}
+       			},
+       			
+       			//Which api endpoint:
+	       		replace: function(url,query){ 
+	       			_this.set('query', query);
 
-       				//Image:
-       				var image;
-       				if( result.facebook_user_id ) {
-       					image = "https://graph.facebook.com/" + result.facebook_user_id + "/picture?width=20";
-       				}else if( result.image_id) {
-       					image = "http://static.haul.io/images/local/"+result.image_id+"/thumb";
-       				}
+	       			var type;
+	       			if( _this.get('searchType') === "tag"){
+	       				type = 'tags';
+	       			}else if( _this.get('searchType') === "user"){
+	       				type = 'users';
+	       			}else if( _this.get('searchType') === "post"){
+	       				type = 'posts';
+	       			}
 
-       				
+	       			url = Haul.Server.SEARCH_SERVER_HOST + '/search/' + type + '?query=' + query+ "&limit=" + _this.get('limit');
+	       			return url;
+	       		},
 
+	       		//Process the results:
+	       		filter: function(response) {
+	       			var data = response.data.map(function(result){
 
-       				if( result.type === "search_tag") {
-       					var tag_total = result.total;
-       					var total = "";
-       					if( tag_total === 1) {
-       						total = "1 post";
-       					}else{
-       						total = tag_total + " post";
-       					}
+	       				var total;
+	       				var type = result.type;
 
-       					return { 
-       						name: result.name,  
-       						total: total
-       					}
+	       				//Image:
+	       				var image;
+	       				if( result.facebook_user_id ) {
+	       					image = "https://graph.facebook.com/" + result.facebook_user_id + "/picture?width=20";
+	       				}else if( result.image_id) {
+	       					image = "http://static.haul.io/images/local/"+result.image_id+"/thumb";
+	       				}
+ 	
+	       				if( type === "search_tag") {
+	       					var tag_total = result.total;
+	       					total = "";
+	       					if( tag_total === 1) {
+	       						total = "1 post";
+	       					}else{
+	       						total = tag_total + " post";
+	       					}
 
+	       					return { 
+	       						name: 	result.name, 
+	       						image: 	false, 
+	       						total: 	total
+	       					};
+ 
+	       				}else if( type === "search_user") {
 
+	       					var follows_total = result.follows_total;
+	       					total = "";
+	       					if( follows_total === 1) {
+	       						total = "1 follower";
+	       					}else{
+	       						total = follows_total + " followers";
+	       					}
 
-       				}else if( result.type === "search_user") {
+	       					return { 
+	       						username: result.username,
+	       						
+	       						name: 	result.name,
+	       						image: 	image,
+	       						total: 	total,
+	       					};
+ 
+	       				}else if( type === "search_post") {
 
-       					var follows_total = result.follows_total;
-       					var total = "";
-       					if( follows_total === 1) {
-       						total = "1 follower";
-       					}else{
-       						total = follows_total + " followers";
-       					}
+	       					var user_id = result.post_id.split("_")[0];
 
-       					return { 
-       						name: result.name,  
-       						username: result.username,
-       						total: total,
-       						image: image,
-       					}
+							total = result.likes_total + ' <span class="glyphicon glyphicon-heart"></span> ' + result.comments_total + ' <span class="glyphicon glyphicon-comment"></span>';
 
+	       					return {
+	       						user_id: user_id,
+	       						post_id: result.post_id,
 
+	       						name: 	result.subject,
+	       						image: 	image,
+	       						total: 	total,
+	       					};
 
-       				}else if( result.type === "search_post") {
+	       				}
 
-       					var user_id = result.post_id.split("_")[0];
+	       				result.searchSymbol = _this.get('searchSymbol');
 
-						var total = result.likes_total + ' <span class="glyphicon glyphicon-heart"></span> '
-						+ result.comments_total + ' <span class="glyphicon glyphicon-comment"></span>';
+	       				return result;
+	       			});
+					
+					//Load More Suggestion:
+					if( data.length > 0 ) {
+						data.push({
+							last:true,
+							name:_this.get('query'),
+						});
+					}
 
-						
-       					return {
-       						user_id: user_id,
-       						post_id: result.post_id,
-       						name: result.subject,
-       						total: total,
-       						image: 	image,
-       					}
-
-       				}
-
-       				result.searchSymbol = _this.get('searchSymbol');
-
-       				return result;
-       			});
-
-       			return data;
-       		},
-       		replace: function(url,query){ 
-       			if( _this.get('searchType') === "tag"){
-       				url = '/search/tags?query=' + query;
-       			}else if( _this.get('searchType') === "user"){
-       				url = '/search/users?query=' + query;
-       			}else if( _this.get('searchType') === "post"){
-       				url = '/search/posts?query=' + query;
-       			}
-       			url = Haul.Server.SEARCH_SERVER_HOST + url;
-       			return url;
-       		}
-		  }
+	       			return data;
+	       		},
+		  	}
 		});
-		 
+		
+		//Fire it up. 
 		search.initialize();
-
-		_this.set('search', search);
-
-		 
+ 
+		//Setup
 		$('.search-wrapper input').typeahead(null, {
 			name: 'search', 
 			highlight: true,
@@ -136,6 +147,9 @@ export default Ember.Component.extend({
 			templates: {
 		  		suggestion: Handlebars.compile([
 
+		  			'{{#if last}}',
+		  			'<div class="tt-more-results">more results</div>',
+		  			'{{else}}',
 					'<div class="tt-dataset-row">{{#if image}}<div class="tt-search-image">',
 						'<img src="{{image}}">',
 					'</div>{{/if}}',
@@ -146,43 +160,54 @@ export default Ember.Component.extend({
 						'{{#if total}} {{{total}}}{{/if}}',
 					'</div></div>',
 
-		  		].join('\n'))
+					'{{/if}}',
+
+		  		].join('\n')),
 			}
 		});
 
-		//EVENTS
+		//On click of result.
 		$('.search-wrapper input').bind('typeahead:selected', function(obj, data) {   
 			var type = _this.get('searchType');
 			var store = _this.container.lookup('store:main'); 
+			var qt;
+			if( !Ember.isEmpty(data.last) ){
+
+				if( type === "tag" ) {
+
+					qt =  "hashtag_" + data.name;
+					_this.sendAction('goToRoute', 'search', {queryParams: {q:qt}});	
+					
+				} else {
+
+					qt = type + "_" + data.name;
+					_this.sendAction('goToRoute', 'search', {queryParams: {q:qt}});	
+				}
 
 
-			//Post Search
-			if( type === "post" ){
-				console.log("POST");
 
+			//Post Search	
+			}else if( type === "post" ){
 				store.find('user', data.user_id)	
 				.then(function(user){
 					_this.set('user', user);
-					return store.find('post', data.post_id)
+					return store.find('post', data.post_id);
 				})
 				.then(function(post){
 					_this.set('post', post);
-
-					console.log("SEARCH? POST" , post);
-
 					_this.sendAction('goToRoute', 'profile.post', _this.get('user'), post);	
-				})
+				});
 
 
 			//User Search
 			}else if( type === "user" ){
-				console.log("username ", data.username	)
 				_this.sendAction('goToRoute', 'profile', data.username);
 
 
-			//Hash Tag Search
+			//Hashtag Search
 			}else{
-				_this.sendAction('goToRoute', 'search', {queryParams: {type:type, q:data.name}});	
+				qt = type + "_" + data.name;
+				_this.sendAction('goToRoute', 'search', {queryParams: {q:qt}});	
 			}
 		    
 		});
@@ -196,7 +221,7 @@ export default Ember.Component.extend({
 		
 		var input = $('input.form-control.tt-query.tt-input');
 		var theVal = input.val();
-		input.typeahead('val', '')
+		input.typeahead('val', '');
 		input.focus().typeahead('val',theVal).focus(); 
 	},
 

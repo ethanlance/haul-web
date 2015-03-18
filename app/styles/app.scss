@@ -1,6 +1,7 @@
 //box-shadow: 0 0 15px 5px #ffffff;
 $primary-color: #3a4457;
 $secondary-color: #596885;
+$terthiary-color: #7a869d;
 $radius: 2px;
 
 
@@ -373,8 +374,9 @@ nav {
 			border-bottom-right-radius:  $radius;
 			&:focus{
 				border: 1px solid #ccc;
-				border-left: none;
-				border-right: none;
+				border-left: none; 
+				border-top-right-radius: $radius;
+				border-bottom-right-radius:  $radius;
 			}
 		}
 
@@ -396,6 +398,17 @@ nav {
 
 		}
 
+		.tt-more-results{
+			text-align: center;
+			//background-color: #eee;
+			color: #333;
+			font-size: 16px;
+			padding:5px;
+
+			&:hover{
+				color: white;
+			}
+		}
 
 		.tt-query,
 		.tt-hint {
@@ -2817,6 +2830,52 @@ body.anon{
   padding: 0px;
   width: 28px;
 }
+
+
+
+
+.search-hashtag { 
+	list-style: none; 
+	margin:0;
+	padding:0;
+
+	li {
+		margin: 0;
+		padding: 20px;
+		background-color: $secondary-color;
+		color: white;
+		font-weight: normal;
+		cursor: pointer;
+		border-bottom: 1px solid #ccc;
+		font-size: 16px;
+		&:hover{
+			background-color: $terthiary-color;
+		}	
+
+		.search-hashtag-tag {
+
+			font-size: 26px;
+
+		}
+
+		.search-hashtag-total {
+			font-size: 20px;
+			float:right;
+			color: #ccc;
+		}	 
+	} 
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

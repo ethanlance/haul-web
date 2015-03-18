@@ -1,5 +1,6 @@
 import DS from 'ember-data';
-export default  DS.RESTSerializer.extend({
+import MetaSerializer from '../mixins/meta_serializer';
+export default DS.RESTSerializer.extend( MetaSerializer,{ 
 	extractArray: function(store, primaryType, payload) {
 
 		if( payload.data === "ok" ){ 

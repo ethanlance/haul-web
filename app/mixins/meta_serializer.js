@@ -7,6 +7,7 @@ export default Ember.Mixin.create({
 				previous: payload.paging.previous,
 				limit: payload.paging.limit,
 				count: payload.paging.count,
+				offset: payload.paging.offset,
 			});  
 		}
   	}

@@ -4,19 +4,10 @@ var Haul = config.APP;
 
 export default ApplicationAdapter.extend({
 	
-	host: Haul.Server.SEARCH_SERVER_HOST,
-
-	findAll: function() {
-		//console.log("FUCK");
-	},
-
-
-	findMany: function() {
-		//console.log("FUCK");
-	},
- 
+	host: Haul.Server.SEARCH_SERVER_HOST, 
 	findQuery: function(store, type, query) {
         var url = this.host + "/search/tags/" + query.q + "/posts";
+        url = this.queryBuilder(query, url);
         return this.ajax(url, 'GET');
     },
 });

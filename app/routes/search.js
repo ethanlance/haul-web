@@ -1,14 +1,15 @@
 import Ember from 'ember';
 export default Ember.Route.extend( {
-	model: function(params) { 
-		if( params.type === "tag" ){
-			return this.store.find('search-tag', {q:params.q});	
-		}else if( params.type === "posts" ){
-			return this.store.find('search-post', {q:params.q});	
-		}else if( params.type === "user" ){
-			return this.store.find('search-user', {q:params.q});	
-		}else{
-			return ;
-		}
-	}
+	// model: function(params) { 
+	// 	if( params.type === "tag" ){
+	// 		console.log("BOOM", params)
+	// 		return this.store.find('search-tag', {q:params.q});	
+	// 	}else if( params.type === "post" ){
+	// 		return this.store.find('search-post', {q:params.q});	
+	// 	}else if( params.type === "user" ){
+	// 		return this.store.find('search-user', {q:params.q});	
+	// 	}else{
+	// 		return ;
+	// 	}
+	// }
 });

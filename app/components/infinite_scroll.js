@@ -21,8 +21,8 @@ export default Em.Component.extend({
     $window.off('scroll.' + this.elementId);
   }.on('willDestroyElement'),
 
-  didScroll: function() { 
-    if (!this.get('isFetching') && this.get('hasMore') && this.isNearBottom()) {
+  didScroll: function() {  
+    if (!this.get('isFetching') && this.get('hasMore') && this.isNearBottom()) { 
       this.safeSet('isFetching', true); 
       this.sendAction('action', bind(this, this.handleFetch));
     }

@@ -101,7 +101,9 @@ module.exports = function(environment) {
     followers: 20,
     following: 20,
     likes: 20,
-    comments: 10
+    comments: 10,
+    search: 20,
+    typeahead_search: 5
   }
 
   ENV['simple-auth'] = {

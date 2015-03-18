@@ -8,16 +8,16 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 		}
  		
  		var data = [];
+		var user_id;
 		data = payload.data.map(function(result){ 
 			return {
-				id: result.name,	
+				id: result.name,
 				name: result.name,
-				price: result.price,
-				image: result.image_id
+				total: result.total,
 			};
 		});
 
-		payload = {'search-user': data}; 
+		payload = {'search-hashtag': data}; 
 		return this._super(store, primaryType, payload);
 	},
 });

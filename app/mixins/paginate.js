@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
 
 
 	paginateMore: function() {
-
+ 
 		var _this = this;
 		var paginateQuery = this.get('paginateQuery'); 
 		
@@ -20,8 +20,16 @@ export default Ember.Mixin.create({
 		var storeName = paginateQuery.storeName;
 		var store = this.container.lookup('store:main');
     	var meta = store.metadataFor(storeName);
+    	console.log("META", storeName, meta);
+
+    	var offset = 0;
+    	if( !Ember.isEmpty(meta.offset) ) {
+    		offset = meta.offset + 1;
+    	}
+
     	var params = {
 			next: meta.next,
+			offset: offset,
 		};
 
 		var pagedContent = this.get('pagedContent');
