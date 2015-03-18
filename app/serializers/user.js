@@ -16,6 +16,7 @@ export default DS.RESTSerializer.extend({
 			getFollowingCount: payload.data.user_id,
 			getFollowersCount: payload.data.user_id,
 			getPostsCount: payload.data.user_id,
+			getMentionsCount: payload.data.user_id,
 
 			image_id: payload.data.image_id,
 			image: payload.data.image_id

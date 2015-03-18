@@ -13,6 +13,7 @@ export default DS.Model.extend({
 	getFollowingCount: DS.belongsTo('user-following-count', {async:true}),
 	getLikesCount: DS.belongsTo('user-likes-count', {async:true} ),
 	getPostsCount: DS.belongsTo('user-posts-count', {async:true} ),
+	getMentionsCount: DS.belongsTo('user-mentions-count', {async:true} ),
 
 	icon: DS.attr('string'), 
 	iconChange: function() { 

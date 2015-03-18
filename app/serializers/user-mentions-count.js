@@ -5,14 +5,14 @@ export default DS.RESTSerializer.extend({
 
 		if( payload.data === "ok" ){
 			return;
-		} 
-
+		}  
+		
 		var data = { 
 			id: recordId,
 			total: payload.data.total,	
 		};
 
-		payload ={'user-following-count': data}; 
+		payload ={'user-mentions-count': data}; 
 		return this._super(store, type, payload, recordId, requestType);
 	}
 });
