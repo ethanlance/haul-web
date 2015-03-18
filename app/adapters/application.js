@@ -3,7 +3,6 @@ import config from '../config/environment';
 export default DS.RESTAdapter.extend({
 	
 	currentUserBinding: 'Haul.currentUser',
-	accessTokenBinding: 'Haul.currentUser.access_token',
 
 	queryBuilder: function(query, url) {
 		var queryList = [];
@@ -43,11 +42,10 @@ export default DS.RESTAdapter.extend({
 	},
 
   	headers: function() {
-  		var token;
-  		if(Ember.isEmpty(this.get('accessToken'))){
+  		
+  		var token = this.get('session.access_token');
+  		if(Ember.isEmpty(token)){
   			token = config.APP.Server.CLIENT_TOKEN;
-  		}else{
-  			token = this.get('accessToken');
   		}
 	
     	return {

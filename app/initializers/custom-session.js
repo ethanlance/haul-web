@@ -4,7 +4,7 @@ import Session from "simple-auth/session";
  
 export default {  
 	name: "custom-session",
-	before: "authentication", 
+	after: "environment", 
 	initialize: function(container, application) { 
 
 		application.set('currentUser', null);

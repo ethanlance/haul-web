@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import ENV from '../config/environment';
 export default {
 	name:   'environment',
-	before: 'authentication',
+	before: 'custom-session',
   
 	initialize: function(container, application) {
 		application.deferReadiness(); 

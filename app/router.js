@@ -34,6 +34,7 @@ Router.map(function(){
 
 	
 	this.route('settings', function(){
+		this.route('mentions');
 		this.route('profile');
 		this.route('username');
 		this.route('password');

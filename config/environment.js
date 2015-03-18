@@ -103,7 +103,8 @@ module.exports = function(environment) {
     likes: 20,
     comments: 10,
     search: 20,
-    typeahead_search: 5
+    typeahead_search: 5,
+    mentions: 2
   }
 
   ENV['simple-auth'] = {

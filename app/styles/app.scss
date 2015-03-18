@@ -515,6 +515,10 @@ nav {
 			padding:0;
 			color: #fff;
 		 	background-color: $secondary-color;
+
+			.tt-more-results {
+				color: white;
+			}
 		}
 	}
 
@@ -1448,7 +1452,12 @@ header.profile.shrink{
 		}
 	}
 
-	.comments{
+	
+}
+
+
+
+.comments{
 
 		.form-group{
 			margin-bottom:0px;
@@ -1504,11 +1513,6 @@ header.profile.shrink{
 			}
 		}
 	}
-}
-
-
-
-
 
 @media (max-width: 768px) {
 	.haul-content {
