@@ -28,7 +28,7 @@
 
 						<br/>
 						
-						<span>{{sanitize-html comment "comment"}}</span>
+						<span class="comment-string">{{sanitize-html comment "comment"}}</span>
 						
 						<span class="moment">{{ format-date created_at }}</span>
 
@@ -37,7 +37,7 @@
 							{{make-icon icon=subject.image.small isSmall=true}}
 						</div>
 						<div class="single-comment padding-top">
-							Go to post to respond:<br/>
+							Go to the post to respond:<br/>
 						 	{{#link-to 'profile.post' subject.user subject  (query-params anchor="comments")}}{{subject.subject}}{{/link-to}}
 						</div>
 					</div>

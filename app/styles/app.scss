@@ -1499,11 +1499,17 @@ header.profile.shrink{
 				// padding: 0;
 				// margin: 0;
 				
-				a{
+				a {
 					color: #fa4b2a;
 				}
 
-				.moment{
+				.comment-string {
+					a {
+						color: $secondary-color;
+					}
+				}
+
+				.moment {
 					display:block; 
 					float:none;
 					margin:0;

@@ -17,6 +17,5 @@ export default DS.Model.extend({
 		if( type === "posts" ) {
 			return this.store.find('post', id);
 		}
-	}.property(),
-
+	}.property()
 });

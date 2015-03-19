@@ -43,7 +43,7 @@
 					</div>
 					<div class="single-comment">
 						<span class="name">{{#link-to 'profile' user }}{{user.name}}{{/link-to}}</span>
-						<span>{{sanitize-html comment "comment"}}</span>
+						<span class="comment-string">{{sanitize-html comment "comment"}}</span>
 						<span class="moment">{{ format-date created_at }}</span>
 					</div>
 				</div>
