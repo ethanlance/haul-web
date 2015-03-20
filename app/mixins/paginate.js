@@ -20,7 +20,6 @@ export default Ember.Mixin.create({
 		var storeName = paginateQuery.storeName;
 		var store = this.container.lookup('store:main');
     	var meta = store.metadataFor(storeName);
-    	console.log("META", storeName, meta);
 
     	var offset = 0;
     	if( !Ember.isEmpty(meta.offset) ) {
@@ -41,7 +40,6 @@ export default Ember.Mixin.create({
 		//Return promise:
 		return store.find(storeName, params)
 		.then(function(results){
-			console.log("RESULTS", results)
 			//Check if more to paginate.
 			var meta = store.metadataFor(storeName);
 			if(Ember.isEmpty(results)  || (meta.limit > meta.count) ){

@@ -1,3 +1,4 @@
+
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
@@ -21,7 +22,8 @@ var app = new EmberApp({
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
-
+app.import('bower_components/jquery/dist/jquery.js');
+app.import('bower_components/underscore/underscore.js'); 
 app.import('bower_components/bootstrap/dist/js/bootstrap.js'); 
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
@@ -41,8 +43,11 @@ app.import('bower_components/google-caja/html-css-sanitizer-bundle.js');
 // app.import('vendor/sanitize.js');
 
 app.import('bower_components/typeahead.js/dist/typeahead.bundle.js'); 
+app.import('vendor/jquery.elastic.source.js');
+app.import('vendor/jquery.mentionsInput.js');
+app.import('vendor/jquery.mentionsInput.css');
 
-app.import('bower_components/jquery/dist/jquery.js');
+
 app.import('bower_components/jquery-ui/jquery-ui.js');
 
 app.import('bower_components/velocity/velocity.js');
@@ -57,13 +62,7 @@ app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css');
 
 app.import('vendor/ember-easyform.js');
 app.import('vendor/ember-validations.js');
-
-
-
-
 app.import('bower_components/quill/dist/quill.js');
-//app.import('bower_components/quill/dist/quill.base.css');
-//app.import('bower_components/quill/dist/quill.snow.css');
 
 module.exports = app.toTree();
 

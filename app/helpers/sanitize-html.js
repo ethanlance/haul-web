@@ -7,11 +7,6 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 		return new Ember.Handlebars.SafeString(html);
   	}
 
-  	//console.log("HTML", html);
-  	html = html.replace(/<div>/g, "<p>");
-  	html = html.replace(/<\/div>/g, "</p>");
-  	html = html.replace(/\n/g, "<br>");
-	// console.log("HTML", html);
   	if (arguments.length === 2) {
 		options    = configName;
 		configName = null;
@@ -24,19 +19,21 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 		var config    = container.lookup("sanitizer:"+configName);
   	}
 
+    html = html.replace(/<div>/g, "<p>");
+    html = html.replace(/<\/div>/g, "</p>");
+    html = html.replace(/\n/g, "<br>");
+
   	var sanitized = sanitize(html, config);
 
-  
+    //Mentions @username
 	var words = sanitized.split(" ");
   	var match, username;
   	var wordHash = [];
   	words.forEach(function(word){
 		match = word.match(/^@.*[^\s]$|^[^@].*,$/);
 		if( match) {
-			console.log("MATCHES", match);  
 			username = word.split('@')[1];
 			word = "<a href='/"+username+"'>" + word + "</a>";
-
 		}
 
 		wordHash.push(word);

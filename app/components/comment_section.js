@@ -22,6 +22,9 @@ export default Ember.Component.extend( PaginateMixin,{
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
     didInsertElement: function() {
+
+    	this.startMentions();
+
   		if(this.get('anchor')) {
   			Ember.run.later(function(){
   				var top = $('#leaveComment').offset().top - 100;
@@ -67,6 +70,33 @@ export default Ember.Component.extend( PaginateMixin,{
 			_this.set('pagedContent', results);	
 		})
 		
+		
+	},
+
+	startMentions: function() {
+		var _this = this;
+		var box = $(".commentbox textarea");
+		
+		$(box).mentionsInput({ 
+	  		elastic: true,
+	    	onDataRequest:function (mode, query, callback) {
+	      		var data = [
+			        { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:7, name:'kenneth@auchenberg.dk', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:8, name:'Pete Awesome Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+			        { id:9, name:'Kenneth Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
+	      		];
+
+	      		data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+
+	      		callback.call(this, data);
+	    	}
+	  	});
 		
 	},
 
