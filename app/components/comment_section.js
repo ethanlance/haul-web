@@ -76,27 +76,62 @@ export default Ember.Component.extend( PaginateMixin,{
 	startMentions: function() {
 		var _this = this;
 		var box = $(".commentbox textarea");
+
+		//Get this people this user follows.
+		var usernames = [];
+		var store = this.container.lookup('store:main');
+		store.find('user-following-list', {user_id: this.get('currentUserId'), limit:20} )
+		.then(function(results) {
+
+			return results.map(function(result){
+				console.log("FIND", result.get('user.id'))
+				return store.find('user', result.get('user.id'))
+					.then(function(user){
+						console.log("FOUND", user);
+						usernames.push({
+							name: user.get('username'),
+							avatar: user.get('icon'),
+							id: user.get('id'),
+						});
+					})
+			});
+		})
+
+		.then(function(){
+			console.log("USERNAMES", usernames);
+			$(box).mentionsInput({ 
+		  		elastic: true,
+		    	onDataRequest:function (mode, query, callback) {
+		      		var data = usernames,
+
+		      		data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+
+		      		callback.call(this, data);
+		    	}
+		  	});
+		});
+
 		
-		$(box).mentionsInput({ 
-	  		elastic: true,
-	    	onDataRequest:function (mode, query, callback) {
-	      		var data = [
-			        { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:7, name:'kenneth@auchenberg.dk', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:8, name:'Pete Awesome Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-			        { id:9, name:'Kenneth Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
-	      		];
+		// $(box).mentionsInput({ 
+	 //  		elastic: true,
+	 //    	onDataRequest:function (mode, query, callback) {
+	 //      		var data = [
+		// 	        { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:7, name:'kenneth@auchenberg.dk', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:8, name:'Pete Awesome Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+		// 	        { id:9, name:'Kenneth Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
+	 //      		];
 
-	      		data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+	 //      		data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 
-	      		callback.call(this, data);
-	    	}
-	  	});
+	 //      		callback.call(this, data);
+	 //    	}
+	 //  	});
 		
 	},
 
