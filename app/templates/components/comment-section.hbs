@@ -6,7 +6,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 ">
 			<h4>Comments</h4>
 			{{#form-for model wrapper="bs3-wrapper"}}
-				
+
 				{{input comment as="text" canShowValidationError='true' placeholder="add a comment..." class="commentbox"}}
 				
 	    		<div {{bind-attr class="showServerErrors:show:hide :alert"}}>{{{serverErrorMessage}}}</div>

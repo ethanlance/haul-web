@@ -18,6 +18,7 @@ export default Ember.Component.extend( PaginateMixin,{
 
 	model:null,
 	comments: null,
+	comment_box:null,
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
@@ -76,6 +77,7 @@ export default Ember.Component.extend( PaginateMixin,{
 	startMentions: function() {
 		var _this = this;
 		var box = $(".commentbox textarea");
+		this.set('comment_box', box);
 
 		//Get this people this user follows.
 		var usernames = [];
@@ -84,27 +86,41 @@ export default Ember.Component.extend( PaginateMixin,{
 		.then(function(results) {
 
 			return results.map(function(result){
-				console.log("FIND", result.get('user.id'))
 				return store.find('user', result.get('user.id'))
 					.then(function(user){
-						console.log("FOUND", user);
 						usernames.push({
 							name: user.get('username'),
+							name2: user.get('name'),
 							avatar: user.get('icon'),
 							id: user.get('id'),
+							type: 'users',
 						});
 					})
 			});
 		})
 
 		.then(function(){
-			console.log("USERNAMES", usernames);
+			
 			$(box).mentionsInput({ 
 		  		elastic: true,
+		  		templates: {
+					wrapper                    : _.template('<div class="mentions-input-box"></div>'),
+					autocompleteList           : _.template('<div class="mentions-autocomplete-list"></div>'),
+					autocompleteListItem       : _.template('<li data-ref-id="<%= id %>" data-ref-type="<%= type %>" data-display="<%= display %>">@<%= content %></li>'),
+					autocompleteListItemAvatar : _.template('<img src="<%= avatar %>" />'),
+					autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
+					mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
+					mentionItemSyntax          : _.template('@<%= value %>'),
+					mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>')
+				},
 		    	onDataRequest:function (mode, query, callback) {
 		      		var data = usernames,
 
-		      		data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+		      		data = _.filter(data, 
+		      			function(item) { 
+		      				return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 ||  item.name2.toLowerCase().indexOf(query.toLowerCase()) > -1
+		      			}
+		      		);
 
 		      		callback.call(this, data);
 		    	}
@@ -112,26 +128,7 @@ export default Ember.Component.extend( PaginateMixin,{
 		});
 
 		
-		// $(box).mentionsInput({ 
-	 //  		elastic: true,
-	 //    	onDataRequest:function (mode, query, callback) {
-	 //      		var data = [
-		// 	        { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:7, name:'kenneth@auchenberg.dk', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:8, name:'Pete Awesome Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-		// 	        { id:9, name:'Kenneth Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
-	 //      		];
 
-	 //      		data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
-
-	 //      		callback.call(this, data);
-	 //    	}
-	 //  	});
 		
 	},
 
@@ -139,6 +136,7 @@ export default Ember.Component.extend( PaginateMixin,{
 		var store = this.container.lookup('store:main');
 		var model = store.createRecord('post-comment');
 		this.set('model', model);
+		this.reset();
 	},
 
 	updateCommentCount: function(direction) {
@@ -159,12 +157,12 @@ export default Ember.Component.extend( PaginateMixin,{
 			showServerErrors: false,
 			showClientErrors: false,
 			isProcessing: false,
-		})
+		});
 	},
 
 	saveModel: function() {
 
-		this.reset();
+		//this.reset();
 
 		//Intercept if user is anonymous:
 		if( !this.get('currentUserId')){
@@ -175,6 +173,13 @@ export default Ember.Component.extend( PaginateMixin,{
 		var _this = this; 
 		var store = this.container.lookup('store:main');
 		var model = this.get('model');
+
+		//Get the comment text from the .data() method that the 
+		//jquery mentions script uses.
+
+		var data = this.get('comment_box').data();
+
+		model.set('comment', data.messageText);
 		
 		model.set('user_id', this.get('currentUserId'));
 		model.set('post_id', this.get('postId'));
@@ -197,6 +202,9 @@ export default Ember.Component.extend( PaginateMixin,{
 				_this.set('showServerErrors', false);
 				_this.makeModel();
 				_this.updateCommentCount('up');
+
+				_this.get('comment_box').mentionsInput('reset');
+				
 			},
 			function(error){ 
 				_this.set('isProcessing', false);
@@ -237,6 +245,7 @@ export default Ember.Component.extend( PaginateMixin,{
 		},
 
 		submit: function() {
+			console.log("BTN CLIC?") 
 			this.saveModel();	
 		}
 	}
