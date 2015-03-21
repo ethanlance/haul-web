@@ -34,17 +34,21 @@ Router.map(function(){
 
 	
 	this.route('settings', function(){
-		this.route('mentions');
 		this.route('profile');
 		this.route('username');
 		this.route('password');
 	});
+
 
 	//Search
 	this.route('search');
 
 	this.route('not-found');
 	this.route('not-authorized');
+
+	
+	//mentions
+	this.route('mentions');
 
 	//Profiles
 	this.route('new-post');
