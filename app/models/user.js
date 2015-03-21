@@ -16,6 +16,20 @@ export default DS.Model.extend({
 	getMentionsCount: DS.belongsTo('user-mentions-count', {async:true} ),
 	getUnreadMentionsCount: DS.belongsTo('user-mentions-unread-count', {async:true} ),
 
+	hastUnreadMentions: function() {
+
+		return this.store.find('user-mentions-unread-count', this.get('id'))
+		.then(function(result) {
+			var total = result.get('total');
+			if(total > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+
+	}.property().volatile(),
+
 	icon: DS.attr('string'), 
 	iconChange: function() { 
 		Ember.run.once(this, 'iconChangeSync');
