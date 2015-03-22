@@ -7,6 +7,8 @@ var LaddaBtnComponent = Ember.Component.extend({
 
 	laddaBtn: null,
 
+	btnClickObj: null,
+
 	spin: false,
 
 	elementId: null,

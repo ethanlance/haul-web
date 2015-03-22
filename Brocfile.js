@@ -63,6 +63,7 @@ app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css');
 app.import('vendor/ember-easyform.js');
 app.import('vendor/ember-validations.js');
 app.import('bower_components/quill/dist/quill.js');
+app.import('vendor/quill.css');
 
 module.exports = app.toTree();
 
