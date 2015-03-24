@@ -16,6 +16,7 @@ Router.map(function(){
 
 	this.route('haul', function(){
 		this.route('about');
+		this.route('tips');
 		this.route('tos');
 		this.route('faq');
 		this.route('privacy');
