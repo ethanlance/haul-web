@@ -1,38 +1,50 @@
 import Ember from 'ember';
 import ErrorMixin from '../mixins/server_error';
 export default Ember.ObjectController.extend(ErrorMixin, {
- 
- 	needs: ['profile'],
 	
-	productImages: null,
-	
+	//Current user object.
 	currentUserBinding: 'Haul.currentUser',
 	
+	//Current user id.
 	currentUserIdBinding: 'Haul.currentUser.id',
 	
+	//Are we proccesing a submission.
 	isProcessing: false,
-	
-	postSubmitFailed: false,
 
-	imagesAreSelected: false,
+	//Have images been selected?
+	imagesAreSelected: Ember.computed.gte('productImageIds.length', 1),
 
+	//Ready to edit product section?
 	disableProductForm: Ember.computed.not('imagesAreSelected'),
 	
+	//Ready to edit post section?
 	disablePostForm: true,
 	
 	product_status_options: null,
 	
-	imageId: null,
-	
+	//Selected image ids
 	productImageIds: [],
 	
+	//Selected image objects
 	selectedImages: [],
 	
-	errorMessageServer: "Oh no something went wrong",
-	
+	//Default value of the quill text editor.
 	editorialForQuill: "",
 
+	//Has product name been entered?
+	hasProductName: Ember.computed.notEmpty('model.product_name'),
 
+	//Has product description been entered?
+	hasProductDescription: Ember.computed.notEmpty('model.product_description'),
+
+	//Has product price been entered?
+	hasProductPrice: Ember.computed.notEmpty('model.product_price'),
+
+	//Has product quanity been entered?
+	hasProductQuantity: Ember.computed.notEmpty('model.product_quantity'),
+
+	//Is product filled out and ready for validation?
+	productReadyForValidation: Ember.computed.and('hasProductName', 'hasProductDescription', 'hasProductPrice', 'hasProductQuantity'),
 
 	//Prepopulate the post.subject with the value of post.product_name
 	prevProductName: '',
@@ -47,28 +59,20 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	}.observes('model.product_name'),
 
 
-	//Observe the product for completeness:
+	//Observe the product for completeness, and triggers validation on the product
+	//before the user can advance to the post section.
 	productChanged: function() {
-		var product_name = this.get('model.product_name');
-		var product_description = this.get('model.product_description');
-		var product_price = this.get('model.product_price');
-		var product_quantity = this.get('model.product_quantity');
 
-		if( 
-			!Ember.isEmpty(product_name) &&
-			!Ember.isEmpty(product_description) &&
-			!Ember.isEmpty(product_price) &&
-			!Ember.isEmpty(product_quantity)
-		){
+		if( this.get('productReadyForValidation') ){
 			
 			var _this = this;
 			var model = this.get('model');
 			model.validate()
 			.then(
-				function(){
+				function valid(){
 					_this.set('disablePostForm', false);
 				},
-				function(errors){
+				function invalid(errors){
 					if( errors.get('product_name').length > 0 ||
 						errors.get('product_description').length > 0 ||
 						errors.get('product_price').length > 0 ||
@@ -85,8 +89,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			this.set('disablePostForm', true);
 		}
 
-	}.observes('model.product_name', 'model.product_description', 'model.product_price', 'model.product_quantity'),
-
+	}.observes('productReadyForValidation'),
 
 
 	start: function() {
@@ -100,30 +103,30 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
 		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
-		var product_status_options = Ember.ArrayController.create({
+		this.set('product_status_options', Ember.ArrayController.create({
 		  selectedStatus: for_sale,
 		  status: [for_sale, sold, not_for_sale],
-		}); 
-		this.set('product_status_options', product_status_options); 
+		})); 
 
 	}.on('init'),
 
 	setup: function() {  
 		
-		if( Ember.isEmpty(this.get('model')) || Ember.isEmpty(this.get('currentUser')) ){
+		if( Ember.isEmpty(this.get('currentUser')) ){
 			return;
 		}
 
-		this.get('model').set('product_quantity', '1');
-		this.get('model').set('product_price', '0');
-		this.get('model').set('product_currency', 'USD');
-		this.get('model').set('product_status', 'FOR_SALE');
-		this.get('model').set('user', this.get('currentUser'));
-
-		this.set('newState', 'showUpload');
-		var _this = this;
-		Ember.run.later(function() {_this.set('showImagePicker', true)}, 500);
-	}.observes('model', 'currentUser'),
+		this.get('model').setProperties(
+			{
+				'product_quantity':'1',
+				'product_price':'0',
+				'product_currency':'USD',
+				'product_status': 'FOR_SALE',
+				'user': this.get('currentUser')
+			}
+		);
+		
+	}.observes('currentUser'),
 
 
 	//Observer: anytime our array of selected images changes, update
@@ -138,13 +141,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return image.get('id');
 		});
 		this.set('productImageIds', ids); 
-
-		//Highlight the image:
-		if( this.get('productImageIds').length === 0 ) {
-			this.set('imagesAreSelected', false);
-		}else{
-			this.set('imagesAreSelected', true);
-		}
 
 		//Set the images on the model.
 		var model = this.get('model');
@@ -211,10 +207,16 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return model.save();
 		})
 		.then(function(postRecord){
+
+			//Handle to the saved post.
 			_this.set('postRecord', postRecord);
+
+			//Reload user's post-list
 			return _this.store.find('post-list', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
 		.then(function(){
+
+			//Reload user's feed list
 			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
 		.then(
