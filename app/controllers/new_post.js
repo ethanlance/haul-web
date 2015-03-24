@@ -246,7 +246,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		cancel: function() {
-			this.transitionToRoute('profile', this.get('currentUser'));
+			this.set('animateClose', true);
+			//this.transitionToRoute('profile', this.get('currentUser'));
 		},
 	
 		savePost: function() { 

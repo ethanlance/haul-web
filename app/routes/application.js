@@ -50,6 +50,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
     	},
   	 	
 		openModal: function(modalName, model) {
+			Ember.$('body').addClass('modal-open');
 			this.controllerFor(modalName).set('model', model);
 			return this.render(modalName, {
 				into: 'application',
@@ -58,7 +59,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 		},
 	    
 	    closeModal: function() {
-
+	    	Ember.$('body').removeClass('modal-open');
 			return this.disconnectOutlet({
 				outlet: 'modal',
 				parentView: 'application'
