@@ -58,10 +58,12 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 		},
 	    
 	    closeModal: function() {
+
 			return this.disconnectOutlet({
 				outlet: 'modal',
 				parentView: 'application'
 			});
+
 		},
 
 		goToRoute: function(arg1, arg2, arg3) {

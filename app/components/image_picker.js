@@ -11,6 +11,11 @@ export default Ember.Component.extend({
 	user_tokenBinding: 'session.currentUser.access_token',
 	store: null,
 
+	start: function() {
+ Dropzone.autoDiscover = false;
+ console.log(" Dropzone.autoDiscover = false;", Dropzone.autoDiscover)
+	}.on("init"),
+
 	didInsertElement: function(){
 		var _this = this; 
 
@@ -19,9 +24,16 @@ export default Ember.Component.extend({
 		}
 		var user_id = this.get('user_id');
 		this.set('store', this.container.lookup("store:main"));
-		
-		//INIT
-		 this.dropzone = new Dropzone("#haul-dropzone", { 
+
+		var el = this.$().find('.poop');
+
+
+		var className = 'drop' + Math.random().toString( 36 ).substr( 2 )
+		$(el).addClass(className);
+
+		console.log("EL ", $(el) )
+
+		this.dropzone = new Dropzone('.'+className, { 
 
 			url: this.Haul.Server.IMAGE_SERVER_HOST + "/images",
 			method: "post",

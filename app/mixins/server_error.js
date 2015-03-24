@@ -18,6 +18,10 @@ export default Ember.Mixin.create({
 
 	handleServerError: function( error ) {
 		console.log("Error", error);
+
+		if( !error.hasOwnProperty('status')) {
+			return;
+		}
 		
 		var message;
 		if( this.ENV.errorMessages[error.status] ){

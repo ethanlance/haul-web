@@ -8,5 +8,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 	setupController: function(controller, model) {
 		controller.set('selectedImages',[]);
 		this._super(controller, model);
-	}
+	},
+	renderTemplate: function() {    
+    	this.render({
+      		into: 'application',
+      		outlet: 'modal'
+    	});    
+  	},
+  	deactivate: function() {
+    	this.render('empty', {
+      		into: 'application',
+      		outlet: 'modal'
+    	});
+  	}
 });

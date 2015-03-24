@@ -1,38 +1,20 @@
-<div id="haul-dropzone"> 
+
+<div class="poop"> 
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-
-
-			{{#if doNotAnimate }}
-
-				<button id="haul-dropzone-browse" class="btn btn-primary">
-					<span class="glyphicon glyphicon-picture"></span>
-					Browse Your Photos
-					<br/>
-					<small>or drop them here</small>
-				</button> 
-				
-			{{else}}
-				<div class="fade-slide-wrapper">
-					<div {{bind-attr class=":fade-slide showImagePicker:in"}}>
-					
-					<button id="haul-dropzone-browse" class="btn btn-primary">
-						<span class="glyphicon glyphicon-picture"></span>
-						Browse Your Photos
-						<br/>
-						<small>or drop them here</small>
-					</button> 
-					</div>
-				</div>
-			{{/if}}
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<button id="haul-dropzone-browse" class="btn btn-default">
+				<span class="glyphicon glyphicon-picture"></span>
+				Browse Your Photos
+				<small>or drop them here</small>
+			</button>
 		</div>	
 	</div>
 
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="upload-images dropzone-preview text-center">
+			<div class="upload-images dropzone-preview">
 				{{yield}}
 			</div> 
 		</div>
 	</div>
-</div>
+</div> 

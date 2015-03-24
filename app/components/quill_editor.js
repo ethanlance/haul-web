@@ -5,7 +5,7 @@ var $ = Ember.$;
 
 var QuillEditorComponent = Ember.Component.extend({
 
-	height: '600px',
+	height: false,
 	content: '',
 	editor: null,
 
@@ -22,21 +22,30 @@ var QuillEditorComponent = Ember.Component.extend({
 		//RESIZE:
 		$( window ).resize(function() {
 			var el = $('#editor');
-			var top = el.parent().offset().top;
-			var scrollTop = $(window).scrollTop();
-			var height = window.outerHeight;
-			h = height - (top - scrollTop) - 100;
+			
+			if( _this.get('height')) {
+				h = _this.get('height');
+			} else {
+				var top = el.parent().offset().top;
+				var scrollTop = $(window).scrollTop();
+				var height = window.outerHeight;
+				h = height - (top - scrollTop) - 100;
+			}
+
 			$('#editor').css("height", h);	
 		});
 			
 		Ember.run.later(function(){
-			var el = $('#editor');
+			var el = $('#editor');	
 
-			var top = el.parent().offset().top;
-			var scrollTop = $(window).scrollTop();
-			var height = window.outerHeight;
-
-			h = height - (top - scrollTop) - 100;
+			if( _this.get('height')) {
+				h = _this.get('height');
+			} else {
+				var top = el.parent().offset().top;
+				var scrollTop = $(window).scrollTop();
+				var height = window.outerHeight;
+				h = height - (top - scrollTop) - 100;
+			}
 
 			$('#editor').css("height", h);	
 		}, 1000);

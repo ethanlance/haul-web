@@ -7,80 +7,95 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	productImages: null,
 	
 	currentUserBinding: 'Haul.currentUser',
+	
 	currentUserIdBinding: 'Haul.currentUser.id',
+	
 	isProcessing: false,
 	
-	showPost: false,
-	showProduct: false,
-	showUpload: false,
+	postSubmitFailed: false,
+
 	imagesAreSelected: false,
+
+	disableProductForm: Ember.computed.not('imagesAreSelected'),
+	
+	disablePostForm: true,
+	
 	product_status_options: null,
+	
 	imageId: null,
+	
 	productImageIds: [],
+	
 	selectedImages: [],
+	
 	errorMessageServer: "Oh no something went wrong",
+	
 	editorialForQuill: "",
 
-	// refresh: function() {
-	// 	this.setProperties({
-	// 		selectedImages: [],
-	// 	});
-	// },
 
-	state: null,
-	states:{
-		0:'showUpload', 
-		1:'showProduct', 
-		2:'showPost'
-	},
 
-	findState: function() {
-
-		var _this = this;
-		var state = this.get('newState'); 
-
-		var states = this.get('states');
-
-		var newKey = null;
-		for(var key  in states) {
-			if(states[key]===state){
-				newKey = key;
-			}
+	//Prepopulate the post.subject with the value of post.product_name
+	prevProductName: '',
+	subjectChanged: function() {
+		var prevProductName = this.get('prevProductName');
+		var product_name = this.get('model.product_name');
+		var subject =	this.get('model.subject');
+		if( (Ember.isEmpty(subject) && !Ember.isEmpty(product_name))  ||  prevProductName === subject ) {
+			this.get('model').set('subject', product_name);
 		}
+		this.set('prevProductName', product_name);
+	}.observes('model.product_name'),
 
-		for(key  in states) {
-			var s = states[key];
+
+	//Observe the product for completeness:
+	productChanged: function() {
+		var product_name = this.get('model.product_name');
+		var product_description = this.get('model.product_description');
+		var product_price = this.get('model.product_price');
+		var product_quantity = this.get('model.product_quantity');
+
+		if( 
+			!Ember.isEmpty(product_name) &&
+			!Ember.isEmpty(product_description) &&
+			!Ember.isEmpty(product_price) &&
+			!Ember.isEmpty(product_quantity)
+		){
 			
-			if(s===state){
-				_this.set(s, true);
-				_this.set(s+'OutRight', false);
-				_this.set(s+'OutLeft', false); 
-				var _s = s;
-				Ember.run.later(function(){
-					var key = _s+'FadeIn'; 
-					_this.set(key, true);
-				},100);
-
-			}else{
-				if(key < newKey ){
-					_this.set(s+'OutRight', false);
-					_this.set(s+'OutLeft', true);
-				}else{
-					_this.set(s+'OutRight', true);
-					_this.set(s+'OurLeft', false);
+			var _this = this;
+			var model = this.get('model');
+			model.validate()
+			.then(
+				function(){
+					_this.set('disablePostForm', false);
+				},
+				function(errors){
+					if( errors.get('product_name').length > 0 ||
+						errors.get('product_description').length > 0 ||
+						errors.get('product_price').length > 0 ||
+						errors.get('product_quantity').length > 0 || 
+						errors.get('product_status').length > 0 ){
+							_this.set('showErrors', true);
+							_this.set('disablePostForm', true);
+					}else{
+						_this.set('disablePostForm', false);
+					}
 				}
-				_this.set(s, false);
-
-				var key = _s+'FadeIn'; 
-				_this.set(key, false);
-			}
-
-			window.scrollTo(0,0);
+			);
+		} else {
+			this.set('disablePostForm', true);
 		}
 
-	}.observes('newState'),
+	}.observes('model.product_name', 'model.product_description', 'model.product_price', 'model.product_quantity'),
+
+
 
 	start: function() {
+
+		var _this = this;
+		this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
+		.then(function(image){
+			_this.selectImage(image);
+		});
 
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
@@ -179,6 +194,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	},
 
 	savePost: function() {
+		this.set('isProcessing', true);
 		var _this = this;
 		var model = this.get('model');
 
@@ -191,77 +207,42 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
  		//Model Validations:
 		model.validate()
-		.then(
-			function validateSuccess(){
-				_this.set('isProcessing', true);
-				return model.save();
-			},
-			function validateError(error){
-				console.log("Error", error);
-				_this.set('isProcessing', false);
-				_this.set('showErrors', true);
-			}
-		)
 		.then(function(){
+			return model.save();
+		})
+		.then(function(postRecord){
+			_this.set('postRecord', postRecord);
 			return _this.store.find('post-list', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
 		.then(function(){
 			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
 		.then(
-			function serverSuccess(record){
-				_this.set('isProcessing', false);
-				var user = _this.get('currentUser'); 
-				_this.transitionToRoute('profile.post', user, model);
+			function success(record){
+				var user = _this.get('currentUser');
+
+				_this.transitionToRoute('profile.post', user, _this.get('postRecord'))
+				.then(function() {
+					_this.set('isProcessing', false);
+					_this.set('animateClose', true);
+				});
 			}, 
-			function serverError(error){
-				_this.set('isProcessing', false);
-				
+			function fail(error){
+
 				//Mixin:
 				_this.handleServerError(error)
 
+				_this.set('showErrors', true);
+				_this.set('isProcessing', false);
 			}
 		);
 	},
 
+	animateClose:false,
 	actions: {
 
-		showPost: function() {
-			console.log('showpost')
-			var _this = this;
-			var model = this.get('model');
-			
-			//Run validations before proceeding.
-			model.validate()
-			.then(
-				function(){
-					console.log('forward')
-					_this.set('newState', 'showPost');
-				},
-				function(errors){
-					if( errors.get('product_name').length > 0 ||
-						errors.get('product_description').length > 0 ||
-						errors.get('product_price').length > 0 ||
-						errors.get('product_quantity').length > 0 || 
-						errors.get('product_status').length > 0 ){
-						console.log('errors', errors);
-						_this.set('showErrors', true);
-					}else{
-						console.log('forward')
-						_this.set('newState', 'showPost');
-					}
-				}
-			);
-		},
-
-		showProduct: function() {
-			console.log('showproduct')
-			this.set('newState', 'showProduct');
-		},
-
-		showUpload: function() {
-			console.log('showphoto')
-			this.set('newState', 'showUpload');
+		close: function() {
+			this.set('animateClose', true);
 		},
 
 		cancel: function() {
