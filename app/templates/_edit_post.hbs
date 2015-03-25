@@ -1,24 +1,12 @@
 
+
+	{{input subject canShowValidationError=showErrors placeholder="A Catchy Title..."}} 
 	
 
-<h4 class="text-center">
-	Tell everyone about it
-	<small>
-		<br/>Don't forget to add #hashtags.  You can even drag photos into your post.
-	</small>
-</h4>
 
-<div class="text-center">
-	<div class="gallery"> 				
-		{{#each selectedImages}}
-			<img {{bind-attr src=small}}/>
-		{{/each}}
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12 col-sm-12 col-xs-12"> 
-		{{input subject canShowValidationError=showErrors placeholder="A Catchy Title..."}} 
-	</div>
-</div>
-{{quill-editor content=editorialForQuill  quillChange='quillChange' Haul=Haul}}
-{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}			
+	{{quill-editor content=editorialForQuill selectedImages=selectedImages  quillChange='quillChange' Haul=Haul}}
+
+
+	<small class='pull-left'>Drag images into your post.</small>
+	<small class='pull-right'>Don't forget to add #hashtags</small>
+	{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}			

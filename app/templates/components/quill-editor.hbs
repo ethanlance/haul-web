@@ -1,29 +1,45 @@
-<div class="editorWrapper">
-	<div id="toolbar" class="ql-toolbar ql-snow">
-		<div class="toolbar-btns">
-			<span class="ql-format-group">
-				<i title="Bold" class="ql-format-button ql-bold fa fa-bold fa-lg"></i>
-				<span class="ql-format-separator"></span>
-				<span title="Italic" class="ql-format-button ql-italic fa fa-italic fa-lg"></span>
-				<span class="ql-format-separator"></span>
-				<span title="Underline" class="ql-format-button ql-underline fa fa-underline fa-lg"></span>
-				<span class="ql-format-separator"></span>
-				<span title="Strikethrough" class="ql-format-button ql-strike fa fa-strikethrough fa-lg"></span>
-			</span>
+<div {{bind-attr class="hasGallery:editor-and-gallery border"}}>
 
-			<span class="ql-format-group">
-				<span title="List" class="ql-format-button ql-list fa fa-list fa-lg"></span>
-				<span class="ql-format-separator"></span>
-				<span title="Bullet" class="ql-format-button ql-bullet fa fa-list-ul fa-lg"></span>
-				<span class="ql-format-separator"></span>
-
-				{{!-- <span title="Link" class="ql-format-button ql-link"></span>  --}}
-
-			</span>
+{{#if hasGallery}}
+	<div id="gallery" class="editor-gallery"> 
+		<i {{action 'toggleGallery'}} class="fa fa-picture-o fa-lg"></i>
+		<div {{bind-attr class="galleryOpen:show:hide"}}>			
+			{{#each selectedImages}}
+				<img {{bind-attr src=small}}/>
+			{{/each}}
 		</div>
+	</div>
+{{/if}}
+
+	<div class="editorWrapper">
+		<div id="toolbar" class="ql-toolbar ql-snow">
+			<div class="toolbar-btns">
+				<span class="ql-format-group">
+					{{#if hasGallery}}<span class="ql-format-separator"></span>{{/if}}
+					<i title="Bold" class="ql-format-button ql-bold fa fa-bold fa-lg"></i>
+					<span class="ql-format-separator"></span>
+					<span title="Italic" class="ql-format-button ql-italic fa fa-italic fa-lg"></span>
+					<span class="ql-format-separator"></span>
+					<span title="Underline" class="ql-format-button ql-underline fa fa-underline fa-lg"></span>
+					<span class="ql-format-separator"></span>
+					<span title="Strikethrough" class="ql-format-button ql-strike fa fa-strikethrough fa-lg"></span>
+				</span>
+
+				<span class="ql-format-group">
+					<span title="List" class="ql-format-button ql-list fa fa-list fa-lg"></span>
+					<span class="ql-format-separator"></span>
+					<span title="Bullet" class="ql-format-button ql-bullet fa fa-list-ul fa-lg"></span>
+					<span class="ql-format-separator"></span>
+
+					{{!-- <span title="Link" class="ql-format-button ql-link"></span>  --}}
+
+				</span>
+			</div>
+
+		</div>
+	 
+		<div id="editor">{{sanitize-html content "editorial"}}</div>
 
 	</div>
- 
-	<div id="editor">{{sanitize-html content "editorial"}}</div>
 
-</div>
+</div>	
