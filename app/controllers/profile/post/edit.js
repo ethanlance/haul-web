@@ -296,19 +296,12 @@ export default Ember.ObjectController.extend({
 			},300);
 		}, 
 
-		close: function() {
+		closeModal: function() { 
 			var _this = this;
 			var model = this.get('model'); 
 			this.set('animateClose', true);
 			this.transitionToRoute('profile.post', model.get('user'), model); 
-		},
-
-		cancel: function() {
-			var _this = this;
-			var model = this.get('model'); 
-			this.set('animateClose', true);
-			this.transitionToRoute('profile.post', model.get('user'), model); 
-		},
+		}, 
 
 		savePost: function() { 
 			this.savePost();

@@ -2,7 +2,7 @@
 <div {{bind-attr class=":modal-dialog showSuccess:sm :text-left"}}>
 	<div class="modal-content">
 		<div class="modal-header">
-			<button {{action 'close'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<button {{action 'closeModal'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h1 class="modal-title" id="myModalLabel">
 				<span class="glyphicon glyphicon-edit"></span> Edit Your Post
 			</h1>
@@ -37,19 +37,19 @@
 						<span class="glyphicon glyphicon-trash"></span>
 						delete
 					</button>
-
-
-					<button {{action 'cancel'}} class="btn btn-default btn-right">
-						cancel
-					</button>
 					
 					{{ladda-btn
-						name='post'
+						name='save post'
 						class="display-inline"
 						btnClasses='btn btn-primary btn-right ladda-button'
 						btnClick='savePost'
 						spin=isProcessing
 					}}
+
+
+					<button {{action 'closeModal'}} class="btn btn-default btn-right">
+						cancel
+					</button>
 
 				</div> 
 				<div class="col-md-4 col-sm-4 col-xs-2"></div>
