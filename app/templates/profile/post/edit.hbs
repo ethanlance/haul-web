@@ -1,72 +1,89 @@
-
-{{what-page currentPage=currentPage page=thisPage}}
-
-{{#form-for model wrapper="bs3-wrapper"}}
-<div class="container-fluid haul-edit">
-	<div class="row">
-		<div class="col-md-8 col-sm-8 col-xs-10"> 
-
-			{{!-- //POST --}}
-			{{partial "_edit_post"}}
-
+{{#modal-modal animateClose=animateClose closeModal='closeModal'}}
+<div {{bind-attr class=":modal-dialog showSuccess:sm :text-left"}}>
+	<div class="modal-content">
+		<div class="modal-header">
+			<button {{action 'close'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h1 class="modal-title" id="myModalLabel">
+				<span class="glyphicon glyphicon-edit"></span> Edit Your Post
+			</h1>
 		</div>
-		<div class="col-md-4 col-sm-4 col-xs-2"> 
 
-			{{!-- //PRODUCT --}}
-			{{partial "_edit_product"}}
+
+
+		{{#form-for model wrapper="bs3-wrapper"}}
+		<div class="container-fluid haul-edit">
+			<div class="row">
+				<div class="col-md-8 col-sm-8 col-xs-10"> 
+
+					{{!-- //POST --}}
+					{{partial "_edit_post"}}
+
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-2"> 
+
+					{{!-- //PRODUCT --}}
+					{{partial "_edit_product"}}
+				</div>
+			</div>
+				
+			{{!-- Toolbar --}}
+			{{!-- Toolbar --}}
+			{{!-- Toolbar --}}
+			{{!-- Toolbar --}} 
+			<div class="row">
+				<div class="col-md-8 col-sm-8 col-xs-10 footer"> 
+
+					<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
+						<span class="glyphicon glyphicon-trash"></span>
+						delete
+					</button>
+
+
+					<button {{action 'cancel'}} class="btn btn-default btn-right">
+						cancel
+					</button>
+					
+					{{ladda-btn
+						name='post'
+						class="display-inline"
+						btnClasses='btn btn-primary btn-right ladda-button'
+						btnClick='savePost'
+						spin=isProcessing
+					}}
+
+				</div> 
+				<div class="col-md-4 col-sm-4 col-xs-2"></div>
+			</div> 
 		</div>
-	</div>
-
-	<div class="row">
-		<div {{bind-attr class=":col-md-12 :col-sm-12 :col-xs-12 :toolbar-footer"}}>	
-
-			<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
-				<span class="glyphicon glyphicon-trash"></span>
-				delete
-			</button>
+		{{/form-for}} 
 
 
-			<button {{action 'cancel'}} class="btn btn-default">
-				cancel
-			</button>
-			
-			{{ladda-btn
-				name='post'
-				class="display-inline"
-				btnClasses='btn btn-primary  ladda-button'
-				btnClick='savePost'
-				spin=isProcessing
-			}}
 
-		</div> 
+		{{!-- //DELETE POST MODAL --}}
+		<div {{bind-attr class=":modal animateDeleteModal:in:out showDeleteModal:show:hide"}}>
+			<div class="modal-dialog sm text-left haul-edit">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button {{action 'closeDeleteModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">
+							Delete This Post?
+							<small>This cannot be undone.</small>
+						</h4>
+					</div>
+					<div class="modal-body">
+						<button {{action 'closeDeleteModal'}} class="btn btn-warning">Cancel</button>
+						{{ladda-btn
+							name='Delete Post'
+							class="display-inline"
+							btnClasses='btn btn-danger ladda-button'
+							btnClick='deletePost'
+							spin=isProcessingDelete
+						}}
+					</div>
+				</div>
+		  	</div>
+		</div>
+
 	</div>
 </div>
-{{/form-for}} 
-
-
-
-{{!-- //DELETE POST MODAL --}}
-<div {{bind-attr class=":modal animateDeleteModal:in:out showDeleteModal:show:hide"}}>
-	<div class="modal-dialog sm text-left haul-edit">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button {{action 'closeDeleteModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">
-					Delete This Post?
-					<small>This cannot be undone.</small>
-				</h4>
-			</div>
-			<div class="modal-body">
-				<button {{action 'closeDeleteModal'}} class="btn btn-warning">Cancel</button>
-				{{ladda-btn
-					name='Delete Post'
-					class="display-inline"
-					btnClasses='btn btn-danger ladda-button'
-					btnClick='deletePost'
-					spin=isProcessingDelete
-				}}
-			</div>
-		</div>
-  	</div>
-</div>
-
+{{/modal-modal}}

@@ -13,5 +13,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 
 	model: function() { 
 		return this.modelFor('profile.post');
-	}
+	},
+	
+	renderTemplate: function() {    
+    	this.render({
+      		into: 'application',
+      		outlet: 'modal'
+    	});    
+  	}
 }); 

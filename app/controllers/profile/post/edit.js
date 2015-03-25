@@ -236,7 +236,7 @@ export default Ember.ObjectController.extend({
 			function serverSuccess(record){
 				_this.set('isProcessing', false);
 				var user = _this.get('currentUser'); 
-			
+			_this.set('animateClose', true);
 				_this.transitionToRoute('profile.post', user, record);
 
 				//Clean Up, Delete images?
@@ -296,13 +296,18 @@ export default Ember.ObjectController.extend({
 			},300);
 		}, 
 
+		close: function() {
+			var _this = this;
+			var model = this.get('model'); 
+			this.set('animateClose', true);
+			this.transitionToRoute('profile.post', model.get('user'), model); 
+		},
+
 		cancel: function() {
-			var model = this.get('model');
-			if( model.get('id')){
-				this.transitionToRoute('profile.post', model.get('user'), model);
-			}else{
-				this.transitionToRoute('profile', model.get('user'));
-			}
+			var _this = this;
+			var model = this.get('model'); 
+			this.set('animateClose', true);
+			this.transitionToRoute('profile.post', model.get('user'), model); 
 		},
 
 		savePost: function() { 

@@ -1,6 +1,4 @@
 {{#modal-modal animateClose=animateClose closeModal='closeModal'}}
-
-{{#form-for model wrapper="bs3-wrapper"}}
 	<div {{bind-attr class=":modal-dialog showSuccess:sm :text-left"}}>
 		<div class="modal-content">
 			
@@ -11,6 +9,7 @@
 			</div>
 			
 
+			{{#form-for model wrapper="bs3-wrapper"}}
 			<div class="container haul-edit haul-new-post">
 
 
@@ -250,9 +249,8 @@ new flux capacitor
 					</div>
 				</div>
 			</div>
+			{{/form-for}}
 			 
 		</div>
 	</div>
-{{/form-for}}
-
 {{/modal-modal}}

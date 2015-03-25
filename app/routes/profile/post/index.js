@@ -3,5 +3,5 @@ import ResetScrollMixin from '../../../mixins/resetscroll';
 export default Ember.Route.extend(ResetScrollMixin, {
 	model: function() { 
 		return this.modelFor('profile.post');
-	}
+	},
 });

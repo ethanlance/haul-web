@@ -3,16 +3,23 @@ export default Ember.ObjectController.extend({
 	postIdBinding: 'model.id',
 
 	repost: false, //the new Repost
+
 	model: false, //Original Post
+	
+	//rename the original model to 'post' object.
 	post: 'model',
 
 	currentUserBinding: "session.currentUser",
+	
 	currentUserIdBinding: "session.currentUser.id",
+	
 	editorialForQuill: " ",
+	
 	selectedImages: [],
 
 	//showModal: false,
 	showSuccess:false,
+	
 	showRepost:false,
 	
 
@@ -219,7 +226,7 @@ export default Ember.ObjectController.extend({
 		this.set('openDrawer', true);
 		Ember.run.later(function(){
 			_this.set('animateDrawer', true);
-		}, 100)	
+		}, 100);
 	},
 
 	// showProduct:false,

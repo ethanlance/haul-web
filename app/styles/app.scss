@@ -1729,45 +1729,45 @@ header.profile.shrink{
 // 	padding-top: 100px;
 // }
 
-.modal .haul-edit{
-	padding-top:0px;
-	padding-bottom:0px;
+// .modal .haul-edit{
+// 	padding-top:0px;
+// 	padding-bottom:0px;
 
-	label {
-		padding:0;
-	}
-}
+// 	label {
+// 		padding:0;
+// 	}
+// }
 
-.toolbar-footer {
-	position: fixed;
-	bottom:0;
-	left:0;
-	max-height: 50px;
-	width: 100%;
-	margin: 20px 0px 0px 0px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-right: 10px;
-	padding-left: 10px;
-	min-height: 5px;
-	border-top: #ddd;
-	background: #333;
-	border-top: 1px solid white;
-	box-shadow: inset 0 1px 1px #000;
-	text-align: right;
+// .toolbar-footer {
+// 	//position: fixed;
+// 	bottom:0;
+// 	left:0;
+// 	max-height: 50px;
+// 	width: 100%;
+// 	margin: 20px 0px 0px 0px;
+// 	padding-top: 10px;
+// 	padding-bottom: 10px;
+// 	padding-right: 10px;
+// 	padding-left: 10px;
+// 	min-height: 5px;
+// 	border-top: #ddd;
+// 	background: #333;
+// 	border-top: 1px solid white;
+// 	box-shadow: inset 0 1px 1px #000;
+// 	text-align: right;
 
-	.btn-primary {
-		border-color: #ec6952;
-		background-color: #ec6952;
-		color: #fff;
-	}
+// 	.btn-primary {
+// 		border-color: #ec6952;
+// 		background-color: #ec6952;
+// 		color: #fff;
+// 	}
 
-	.btn-default {
-		border-color: #ec6952;
-		background-color: #ec6952;
-		color: #fff;
-	}
-}
+// 	.btn-default {
+// 		border-color: #ec6952;
+// 		background-color: #ec6952;
+// 		color: #fff;
+// 	}
+// }
 
 .input-group-btn .btn, .btn-group .btn {
 	height: 34px;
@@ -2442,7 +2442,9 @@ body.anon{
 	}
 }
 
-
+.footer {
+	padding: 15px;
+}
 
 
 // NEW POST STYLES
@@ -2452,6 +2454,10 @@ body.anon{
 	margin:0;
 	padding-right: 0;
 	padding-left: 0;
+
+	pre{
+		margin-right: 10px;
+	}
 
 	.number {
 		font-size: 100px;
@@ -2497,13 +2503,15 @@ body.anon{
 	}
 
 }
+
+
 	
 	.editor-and-gallery{
 		width:100%;
 		display:inline;
 		float:left;
 		margin:0;
-		padding:0;
+		padding:1px;
 		
 		.editor-gallery {
 			width:10%;
@@ -2531,8 +2539,15 @@ body.anon{
 
 			img {
 				width:100%;
-				margin-bottom:2px;
+				padding: 2px;
+				border: 1px solid #ccc;
+				margin-bottom:4px;
 				cursor:pointer;
+				opacity: .8;
+
+				&:hover{
+					opacity: 1;
+				}
 			}
 
 			img:first-child{
