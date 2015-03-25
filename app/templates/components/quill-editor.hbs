@@ -2,8 +2,10 @@
 
 {{#if hasGallery}}
 	<div id="gallery" class="editor-gallery"> 
-		<i {{action 'toggleGallery'}} class="fa fa-picture-o fa-lg"></i>
-		<div {{bind-attr class="galleryOpen:show:hide"}}>			
+		<div class="editor-gallery-icon">
+			<i {{action 'toggleGallery'}} class="fa fa-picture-o fa-lg"></i>
+		</div>
+		<div {{bind-attr class="galleryOpen::invisible"}}>			
 			{{#each selectedImages}}
 				<img {{bind-attr src=small}}/>
 			{{/each}}
@@ -15,7 +17,6 @@
 		<div id="toolbar" class="ql-toolbar ql-snow">
 			<div class="toolbar-btns">
 				<span class="ql-format-group">
-					{{#if hasGallery}}<span class="ql-format-separator"></span>{{/if}}
 					<i title="Bold" class="ql-format-button ql-bold fa fa-bold fa-lg"></i>
 					<span class="ql-format-separator"></span>
 					<span title="Italic" class="ql-format-button ql-italic fa fa-italic fa-lg"></span>
