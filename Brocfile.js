@@ -7,7 +7,8 @@ var app = new EmberApp({
 	// vendorFiles: {
 	// 	'handlebars.js': null
 	// },
-	minifyJS:{'enabled':true, options:{'compress':true}}
+	//minifyJS:{'enabled':true, options:{'compress':true}}
+	sourcemaps: ['js']
 });
 
 // Use `app.import` to add additional libraries to the generated
@@ -39,8 +40,8 @@ app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
 });
 
 
-app.import('bower_components/google-caja/html-css-sanitizer-bundle.js');
-// app.import('vendor/sanitize.js');
+app.import('bower_components/ember/ember-template-compiler.js');
+
 
 app.import('bower_components/typeahead.js/dist/typeahead.bundle.js'); 
 app.import('vendor/jquery.elastic.source.js');
@@ -50,7 +51,6 @@ app.import('vendor/jquery.mentionsInput.css');
 
 app.import('bower_components/jquery-ui/jquery-ui.js');
 
-app.import('bower_components/velocity/velocity.js');
 app.import('bower_components/moment/moment.js');
 app.import('bower_components/dropzone/downloads/dropzone.js');
 
@@ -60,7 +60,7 @@ app.import('bower_components/ladda-bootstrap/dist/spin.js');
 app.import('bower_components/ladda-bootstrap/dist/ladda.js');
 app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css'); 
 
-app.import('vendor/ember-easyform.js');
+// app.import('vendor/ember-easyform.js');
 app.import('vendor/ember-validations.js');
 app.import('bower_components/quill/dist/quill.js');
 app.import('vendor/quill.css');

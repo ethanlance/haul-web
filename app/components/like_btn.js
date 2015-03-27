@@ -22,7 +22,7 @@ export default Ember.Component.extend({
 		
 		_this.set('userLikes', false);
 		_this.set('userLikesRecord', false); 
-		
+
 		//currentUser like item?
 		var key = this.get('postKey');
 		store.find('like', key)

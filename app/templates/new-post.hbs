@@ -9,7 +9,7 @@
 			</div>
 			
 
-			{{#form-for model wrapper="bs3-wrapper"}}
+			{{#form-wrapper}}
 			<div class="container haul-edit haul-new-post">
 
 
@@ -43,7 +43,7 @@
 										refresh='refresh'
 										imageClick='imageClick' 
 										imageDelete='imageDelete'
-										Haul=Haul
+										
 										showImagePicker=showImagePicker
 									}} 
 										{{view 'sortable' content=selectedImages}}
@@ -166,8 +166,8 @@ new flux capacitor
 									<div class="gallery-wrapper"> 
 										<div class="gallery"> 
 											<div class="gallery-inside">
-												{{#each selectedImages}} 
-													<img {{bind-attr src=small}}> 
+												{{#each image in selectedImages}} 
+													<img {{bind-attr src=image.small}}> 
 												{{/each}}
 											</div>
 										</div>
@@ -249,7 +249,7 @@ new flux capacitor
 					</div>
 				</div>
 			</div>
-			{{/form-for}}
+			{{/form-wrapper}}
 			 
 		</div>
 	</div>

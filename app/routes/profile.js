@@ -5,12 +5,15 @@ export default Ember.Route.extend({
 		var _this = this; 
 		return this.store.find('user', params.username).then(function(result){ 
 			return result;
-		}, function() {
+		}, function(error) {
 			return _this.transitionTo('not-found');
 		});
 	},
 	setupController: function(controller, model) {
 		controller.set('model', model);
 		this._super(controller, model);
-	}
+	}, 
+	serialize: function(model) {  
+  		return { username: model.username };
+  	}	
 });

@@ -17,7 +17,7 @@
         {{/link-to}}
 
         <button type="button" class="btn btn-default">
-        {{#link-to 'profile' session.currentUser}}
+        {{#link-to 'profile' session.currentUser.username}}
             {{ make-icon icon=session.currentUser.icon isSmall=false}} 
         {{/link-to}}
         </button>
@@ -27,7 +27,7 @@
           <span class="glyphicon glyphicon-cog"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-            <li>{{#link-to 'profile' session.currentUser }}Profile{{/link-to}}</li>
+            <li>{{#link-to 'profile' session.currentUser.username }}Profile{{/link-to}}</li>
 
             <li class="divider"></li>
             <li>{{#link-to 'settings'}}Settings{{/link-to}}</li>

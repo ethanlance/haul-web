@@ -4,7 +4,7 @@
 
 
 {{#with session as session}}
-	{{#each product.getLikes.users}}
-		{{profile-badge user=this session=session}}
+	{{#each item in product.getLikes.users}}
+		{{profile-badge user=item session=session}}
 	{{/each}}				
 {{/with}}

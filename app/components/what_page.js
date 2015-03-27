@@ -38,7 +38,10 @@ export default Ember.Component.extend({
 		}
 
 		if(page === "postPage"){
-			this.postPage();	
+			var _this = this;
+			//Ember.run.later(function(){
+			_this.postPage();	
+		//},0);
 			return;
 		}
 
@@ -49,32 +52,38 @@ export default Ember.Component.extend({
 		
 	},
 
-	postEdit: function() {
-		this.set('showHeader', false);
+	// postEdit: function() {
+	// 	this.set('showHeader', false);
 
-		var toolbars = $('.toolbar-footer');
-		$('.liquid-container').after(toolbars);
-		$('.liquid-container').find('.toolbar-footer').remove();
-		//console.log(toolbars);
-		// toolbars.each(function(toolbar){
-		// 	console.log("TOOLBAR", $(this))
-		// 	$('.liquid-container').before(toolbars[toolbar]);
-		// });
-	},
+	// 	var toolbars = $('.toolbar-footer');
+	// 	$('.liquid-container').after(toolbars);
+	// 	$('.liquid-container').find('.toolbar-footer').remove();
+	// 	//console.log(toolbars);
+	// 	// toolbars.each(function(toolbar){
+	// 	// 	console.log("TOOLBAR", $(this))
+	// 	// 	$('.liquid-container').before(toolbars[toolbar]);
+	// 	// });
+	// },
 
 	postPage: function() {
+
+		console.log("POST PAGE")
 		this.set('showHeader', true);	
 		var logo = $(".logo");
 		var nav = $("nav");
 		var fixThis = $(".profile-container");
+		var header = $("header.profile");
 		var header = $(".profile-container").parent();
 		var postBackButton = $(".post-back-button");
 		//var listGridButton = $('.btn-list-grid');
-
-		fixThis.addClass('fixed');
-		header.addClass('shrink');
-		postBackButton.removeClass('hide').addClass('show');
+ 
 		logo.addClass('shrink');
+		fixThis.addClass('fixed');
+		postBackButton.removeClass('hide').addClass('show');
+
+		Ember.run.later(function(){
+			header.addClass('shrink');
+		},1)
 
 		// if(listGridButton){
 		// 	listGridButton.removeClass('show').addClass('hide');
@@ -144,6 +153,7 @@ export default Ember.Component.extend({
 		        	//console.log("REMOVE " + _this.isFeedPage +  "  " + fixTop + " > "+ navBottom)
 		        	fixThis.removeClass('fixed');  
 		        	logo.removeClass('shrink'); 
+		        	console.log("ReMOVE CLASS SHRINK?")
 		        	header.removeClass('shrink');
 		        	// if(listGridButton){
 		        	// 	listGridButton.removeClass('fixed'); 

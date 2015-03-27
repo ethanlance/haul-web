@@ -22,7 +22,7 @@
 		<h4>or with your <br/>email & password</h4>
 	</div>
 
-	{{#form-for model wrapper="bs3-wrapper"}}
+	{{#form-wrapper}}
 
 	  {{#if error}}
 	    <div class="alert">Invalid username or password.</div>
@@ -51,8 +51,8 @@
 	  	</div>
 
 	  	<div class="text-right">
-	  		<span class="muted">{{#link-to "forgotpassword"}}Forgot Password?{{/link-to}}</span>
+	  		<span class="muted"><a href="/forgot-password">Forgot Password?</a></span>
 	  	</div>
 
-	{{/form-for}} 
+	{{/form-wrapper}} 
 			

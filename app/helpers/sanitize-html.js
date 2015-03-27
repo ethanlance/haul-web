@@ -33,7 +33,9 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 		match = word.match(/^@.*[^\s]$|^[^@].*,$/);
 		if( match) {
 			username = word.split('@')[1];
-			word = "<a href='/"+username+"'>" + word + "</a>";
+      if( username !== 'undefined' && username !== undefined ){
+			   word = "<a href='/"+username+"'>" + word + "</a>";
+      }
 		}
 
 		wordHash.push(word);

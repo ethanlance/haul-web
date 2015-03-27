@@ -24,29 +24,29 @@
 					
 
 					{{!-- //CONTENT --}}					
-					{{#each sortedContent}}
-					<div {{bind-attr class=":row :comment read:read"}}>
+					{{#each post in sortedContent}}
+					<div {{bind-attr class=":row :comment post.read:read"}}>
 						<div class="col-md-10 col-sm-10 col-xs-9">
 
-							Re: {{#link-to 'profile.post' subject.user subject  (query-params anchor="comments")}}{{subject.subject}}{{/link-to}}	
+							Re: {{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}{{post.subject.subject}}{{/link-to}}	
 
 							<div class="image">
-								{{make-icon icon=subject.image.small isSmall=true}}
+								{{make-icon icon=post.subject.image.small isSmall=true}}
 							</div>
 							<div class="single-comment">
 								
 								<div class="image padding-top">
-									{{#link-to 'profile' user }}{{ make-icon icon=user.icon isSmall=true}}{{/link-to}}
+									{{#link-to 'profile' user.username }}{{ make-icon icon=post.user.icon isSmall=true}}{{/link-to}}
 								</div>
 								<div class="single-comment padding-top">
 									
-									<span class="name">{{#link-to 'profile' user }}{{user.name}}{{/link-to}}</span> said:
+									<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span> said:
 
 									<br/>
 									
-									<span class="comment-string">{{sanitize-html comment "comment"}}</span>
+									<span class="comment-string">{{sanitize-html post.comment "comment"}}</span>
 									
-									<span class="moment">{{ format-date created_at }}</span>
+									<span class="moment">{{ format-date post.created_at }}</span>
 								</div>
 
 							</div>
@@ -55,18 +55,18 @@
 
 						<div class="col-md-2 col-sm-2 col-xs-3"> 
 
-							{{#unless read}}
+							{{#unless post.read}}
 								{{ladda-btn
 									name='Mark Read'
 									class="display-inline"
 									btnClasses='btn btn-default btn-sm btn-right  ladda-button'
 									btnClick='markRead'
-									btnClickObj=this
-									spin=isProcessing
+									btnClickObj=post
+									spin='false'
 								}}
 							{{/unless}}
 
-							{{#link-to 'profile.post' subject.user subject  (query-params anchor="comments")}}	
+							{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}	
 								<button class="btn btn-default btn-sm btn-right margin-top">Reply</button> 
 							{{/link-to}}
 
@@ -79,7 +79,7 @@
 					{{/infinite-scroll}}
 					
 
-					</div>
+					 
 				</div>
 			</div>
 		</div>

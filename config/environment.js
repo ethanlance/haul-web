@@ -3,7 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'haul',
-    podModulePrefix: 'app/pods',
+   
     environment: environment,
     baseURL: '/',
     locationType: 'history',

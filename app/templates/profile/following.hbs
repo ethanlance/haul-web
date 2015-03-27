@@ -6,8 +6,8 @@
 
 
 			{{!-- //CONTENT --}}
-			{{#each sortedContent}}
-				{{profile-badge profile=user}} 
+			{{#each item in sortedContent}}
+				{{profile-badge profile=item.user}} 
 			{{/each}}
 			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 				<i class="fa fa-spinner fa-spin"></i>

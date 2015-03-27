@@ -23,9 +23,6 @@ var QuillEditorComponent = Ember.Component.extend({
 		}
 	},
 
-	contentChanged: function() {
-		//this.get('editor').setHTML(this.get("content"));
-	}.observes('content'),
 
 	didInsertElement: function(){
 		$('#editor').css("height", this.get('height'));	
@@ -70,7 +67,6 @@ var QuillEditorComponent = Ember.Component.extend({
 			$('#editor').css("height", h);	
 
 			if( _this.get('hasGallery')){
-				console.log("THE HEIGHT", $('#toolbar').height())
 				$('#gallery').css("height", h + $('#toolbar').height() +5);
 			}
 		}, 1000);
@@ -88,8 +84,6 @@ var QuillEditorComponent = Ember.Component.extend({
 		editor.on('text-change', function() { 
 			_this.sendAction('quillChange', editor.getHTML());
 		}); 
-
-		this.contentChanged();
 	},
 
 

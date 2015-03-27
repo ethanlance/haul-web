@@ -9,21 +9,21 @@
 		{{!-- CITATION --}}
 		{{#if repost_user}} 
 			<span class="glyphicon glyphicon-retweet"></span>
-			<span class="name">{{#link-to 'profile' user }}@{{user.username}}{{/link-to}} <span class="rehauled">reposted</span>
+			<span class="name">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}} <span class="rehauled">reposted</span>
 			</span>
 
 			
 			<span class="image">
-				{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-					{{ make-icon icon=repost_user.icon isSmall=true }}
+				{{#link-to  "profile.post" item.repost_user item.repost.post_id item.repost.post_slug}}
+					{{ make-icon icon=item.repost_user.icon isSmall=true }}
 				{{/link-to}}
 			</span>
 			<span class="name">
-				{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
+				{{#link-to  "profile.post" item.repost_user item.repost.post_id item.repost.post_slug}}
 					@{{repost_user.username}}
 				{{/link-to}}
 			</span>
-			<div class="moment">posted {{format-date updated_at}}</div>
+			<div class="moment">posted {{format-date item.updated_at}}</div>
 			
 
 		{{else}}
@@ -31,10 +31,10 @@
 		
 			
 			<span class="image">
-				{{#link-to 'profile' user }}{{ make-icon icon=user.icon isSmall=true }}{{/link-to}} 
+				{{#link-to 'profile' user.username }}{{ make-icon icon=item.user.icon isSmall=true }}{{/link-to}} 
 			</span>
-			<span class="name">{{#link-to 'profile' user }}@{{user.username}}{{/link-to}} </span> 
-			<div class="moment">posted {{format-date updated_at}}</div>
+			<span class="name">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}} </span> 
+			<div class="moment">posted {{format-date item.updated_at}}</div>
 			
 
 		{{/if}}
@@ -44,13 +44,13 @@
 	<div class="article">
 		
 		<h2>
-			{{#link-to 'profile.post' user post_id post_slug (query-params anchor="null")}}{{subject}}{{/link-to}}
+			{{#link-to 'profile.post' item.user.username item.post_id item.post_slug (query-params anchor="null")}}{{subject}}{{/link-to}}
 		</h2> 
 
 		
 		<div class="product-image">
-			{{#link-to 'profile.post' user post_id post_slug (query-params anchor="null")}}
-				<img class="img-responsive" {{bind-attr src=image.large}}>
+			{{#link-to 'profile.post' item.user.username item.post_id item.post_slug (query-params anchor="null")}}
+				<img class="img-responsive" {{bind-attr src=item.image.large}}>
 			{{/link-to}}
 		</div>
 		 	
@@ -58,15 +58,15 @@
 
 	<div class="btn-wrapper">
 
-		{{buy-btn post=this class="display-inline"}} 
+		{{buy-btn post=item class="display-inline"}} 
 
-		{{like-btn post=this openModal='openModal' class="display-inline"}}
+		{{like-btn post=item openModal='openModal' class="display-inline"}}
 
-	 	{{#link-to 'profile.post' user post_id post_slug  (query-params anchor="comments")}}
-	 		{{comment-btn linkOff='true' post=this class="display-inline" }}
+	 	{{#link-to 'profile.post' item.user.username item.post_id item.post_slug  (query-params anchor="comments")}}
+	 		{{comment-btn linkOff='true' post=item class="display-inline" }}
 	 	{{/link-to}}
 		
-		{{repost-btn post=this openModal='openModal' class="display-inline" }}
+		{{repost-btn post=item openModal='openModal' class="display-inline" }}
 	 	
 	</div>
 

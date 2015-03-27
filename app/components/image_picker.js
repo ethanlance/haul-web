@@ -12,8 +12,9 @@ export default Ember.Component.extend({
 	store: null,
 
 	start: function() {
- Dropzone.autoDiscover = false;
- console.log(" Dropzone.autoDiscover = false;", Dropzone.autoDiscover)
+ 		
+ 		Dropzone.autoDiscover = false;
+ 
 	}.on("init"),
 
 	didInsertElement: function(){
@@ -27,15 +28,12 @@ export default Ember.Component.extend({
 
 		var el = this.$().find('.poop');
 
-
 		var className = 'drop' + Math.random().toString( 36 ).substr( 2 )
 		$(el).addClass(className);
 
-		console.log("EL ", $(el) )
-
 		this.dropzone = new Dropzone('.'+className, { 
 
-			url: this.Haul.Server.IMAGE_SERVER_HOST + "/images",
+			url: this.ENV.Server.IMAGE_SERVER_HOST + "/images",
 			method: "post",
 			headers: {"Authorization": "Bearer " + this.user_token},
 			params: {'user_id':user_id},

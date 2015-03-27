@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from '../config/environment';
-var Haul = config.APP;
+
 /*global Bloodhound*/
 /*global Handlebars*/
 /*global $*/
@@ -24,11 +24,13 @@ export default Ember.Component.extend({
 	didInsertElement: function() {
 		var _this = this;
 		
+		
+
 		var search = new Bloodhound({
 			datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url:Haul.Server.SEARCH_SERVER_HOST,
+				url:this.ENV.Server.SEARCH_SERVER_HOST,
 				ajax: {
 					beforeSend: function(jqXHR) {
                			jqXHR.setRequestHeader('Authorization', 'Bearer ' + _this.user_token);
@@ -48,7 +50,7 @@ export default Ember.Component.extend({
 	       				type = 'posts';
 	       			}
 
-	       			url = Haul.Server.SEARCH_SERVER_HOST + '/search/' + type + '?query=' + query+ "&limit=" + _this.get('limit');
+	       			url = _this.ENV.Server.SEARCH_SERVER_HOST + '/search/' + type + '?query=' + query+ "&limit=" + _this.get('limit');
 	       			return url;
 	       		},
 
@@ -145,24 +147,48 @@ export default Ember.Component.extend({
 			displayKey: 'name',
 			source: search.ttAdapter(),
 			templates: {
-		  		suggestion: Handlebars.compile([
+				suggestion: function( s ) {
+					console.log("SUGGESTION", s);	
+					var str = "";
+					if( s.last ) {
+		  				str += '<div class="tt-more-results">more results</div>';
+		  			} else {
+						str += '<div class="tt-dataset-row">';
+						if( s.image ){
+							str += '<div class="tt-search-image">';
+								str += '<img src="'+ s.image +'">';
+							str += '</div>';
+						}
+						str += '<div class="tt-search-result">';
+							str += _this.get('searchSymbol') + ' ' + s.name;
+						str += '</div>';
+						str += '<div class="tt-search-meta">';
+							if( s.total ){ 
+								str += s.total;
+							}
+						str += '</div></div>';
+					}
 
-		  			'{{#if last}}',
-		  			'<div class="tt-more-results">more results</div>',
-		  			'{{else}}',
-					'<div class="tt-dataset-row">{{#if image}}<div class="tt-search-image">',
-						'<img src="{{image}}">',
-					'</div>{{/if}}',
-					'<div class="tt-search-result">',
-						'{{searchSymbol}}{{name}}',
-					'</div>',
-					'<div class="tt-search-meta">',
-						'{{#if total}} {{{total}}}{{/if}}',
-					'</div></div>',
+					return str;
+				}
+		  	// 	suggestion: function(s){return Ember.Handlebars.compile([
 
-					'{{/if}}',
+		  	// 		'{{#if last}}',
+		  	// 		'<div class="tt-more-results">more results</div>',
+		  	// 		'{{else}}',
+					// '<div class="tt-dataset-row">{{#if image}}<div class="tt-search-image">',
+					// 	'<img src="{{image}}">',
+					// '</div>{{/if}}',
+					// '<div class="tt-search-result">',
+					// 	'{{searchSymbol}}{{s.name}}',
+					// '</div>',
+					// '<div class="tt-search-meta">',
+					// 	'{{#if total}} {{{total}}}{{/if}}',
+					// '</div></div>',
 
-		  		].join('\n')),
+					// '{{/if}}',
+
+		  	// 	].join('\n'))},
 			}
 		});
 
@@ -212,7 +238,7 @@ export default Ember.Component.extend({
 		    
 		});
 
-		//this.changeSearchType('tag');
+		this.changeSearchType('tag');
 	},
 
 	changeSearchType: function(arg) {

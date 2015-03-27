@@ -1,15 +1,15 @@
 {{!-- PROFILE PROFILE  --}}
-<header {{bind-attr class=":profile showHeader:show:hide"}}>
+<header {{bind-attr class=":profile showHeader:show:hide "}}>
 	<div class="profile-container">
 
 	<div {{action "clickBack"}} class="post-back-button hide">
-		{{#link-to 'profile' model}}
+		{{#link-to 'profile' model.username}}
 			<span class="glyphicon glyphicon-arrow-left"></span>
 		{{/link-to}}
 	</div>
 
 		<span {{action "clickBack"}}>
-		{{#link-to 'profile' model}}
+		{{#link-to 'profile' model.username}}
 			{{ make-icon icon=model.icon }}
 		{{/link-to}}
 		</span>

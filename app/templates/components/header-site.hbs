@@ -53,7 +53,7 @@
 			{{/link-to}}
 
 			{{!-- //Profile Button --}}
-			{{#link-to 'profile' session.currentUser }}
+			{{#link-to 'profile' session.currentUser.username }}
 			<button type="button" class="btn btn-default btn-icon">
 				{{ make-icon icon=session.currentUser.icon isSmall=true}} 
 			</button>
@@ -66,7 +66,7 @@
 			</button>
 			<ul class="dropdown-menu dropdown-menu-right" role="menu">
 				
-				<li>{{#link-to 'profile' session.currentUser }}<i class="fa fa-user"></i> Profile{{/link-to}}</li>
+				<li>{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-user"></i> Profile{{/link-to}}</li>
 				
 				<li class="divider"></li>
 				<li>{{#link-to 'settings.profile'}}<i class="fa fa-wrench"></i> Settings{{/link-to}}</li>

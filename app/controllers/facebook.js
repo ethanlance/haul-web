@@ -1,11 +1,23 @@
 // Load the SDK asynchronously
-(function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+	// (function(d, s, id){
+	//     var js, fjs = d.getElementsByTagName(s)[0];
+	//     if (d.getElementById(id)) {return;}
+	//     js = d.createElement(s); js.id = id;
+	//     js.src = "//connect.facebook.net/en_US/sdk.js";
+	//     fjs.parentNode.insertBefore(js, fjs);
+	//   }(document, 'script', 'facebook-jssdk'));
+
+var js;
+js = document.createElement('script');
+$(js).attr({
+	id: 'facebook-jssdk',
+	async: true,
+		src: "//connect.facebook.net/en_US/all.js"
+	}
+);
+$('head').append(js);
+
+
 
 import Ember from 'ember';
 import config from '../config/environment';
@@ -25,6 +37,8 @@ export default Ember.ObjectController.extend({
 	facebook_access_token: null,
 
 	facebookSetup: function() {
+
+
 
 		var _this = this;
 

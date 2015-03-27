@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from '../config/environment';
-var Haul = config.APP;
+
 import PaginateMixin from '../mixins/paginate';
 export default Ember.Component.extend( PaginateMixin,{
 	
@@ -211,10 +211,10 @@ export default Ember.Component.extend( PaginateMixin,{
 				_this.set('showServerErrors', true);
 
 				var message;
-				if( Haul.errorMessages[error.status] ){
-					message = Haul.errorMessages[error.status];
+				if( _this.ENV.errorMessages[error.status] ){
+					message = _this.ENV.errorMessages[error.status];
 				}else{
-					message = Haul.errorMessages[400];
+					message = _this.ENV.errorMessages[400];
 				}
 
 				var obj = JSON.parse(error.responseText);

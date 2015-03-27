@@ -1,5 +1,5 @@
 <h1>Change Username
-    <br/><small>Make it cool.</smalL>
+    <br/><small>Make it cool.</small>
 </h1> 
 
 <div class="row">
@@ -7,11 +7,11 @@
  
         
        
-       {{#form-for model wrapper="bs3-wrapper"}}
+       {{#form-wrapper}}
         <div >
             {{input username canShowValidationError=showErrors placeholder=""}}
         </div> 
-        {{/form-for}}
+        {{/form-wrapper}}
 
         <div {{bind-attr class="showErrorMessage:show:hide :errors"}}>
             <span class="alert">{{{errorMessage}}}</span>

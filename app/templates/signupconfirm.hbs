@@ -16,7 +16,7 @@
 					<div class="alert">Oops, that did not work out.</div>
 				{{/if}}
  	
-				{{#form-for model wrapper="bs3-wrapper"}}
+				{{#form-wrapper}}
 	 			<div class="form-group">	
 			      		{{input ticket_id as="hidden"}}
 			      		{{input user_id as="hidden"}}
@@ -53,7 +53,7 @@
 						}}
 				  	</div>
 
-				{{/form-for}} 
+				{{/form-wrapper}} 
 			</div>
 			<div class="col-md-4 col-sm-2 col-xs-2"></div>
         </div>

@@ -6,8 +6,8 @@
 			<i {{action 'toggleGallery'}} class="fa fa-picture-o fa-lg"></i>
 		</div>
 		<div {{bind-attr class="galleryOpen::invisible"}}>			
-			{{#each selectedImages}}
-				<img {{bind-attr src=small}}/>
+			{{#each image in selectedImages}}
+				<img {{bind-attr src=image.small}}/>
 			{{/each}}
 		</div>
 	</div>
@@ -40,6 +40,7 @@
 		</div>
 	 
 		<div id="editor">{{sanitize-html content "editorial"}}</div>
+
 
 	</div>
 

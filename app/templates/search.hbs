@@ -24,25 +24,25 @@
 		 	
 
 		{{#if currentTypeIsHashtag }}
-		 	{{#each sortedContent}}
+		 	{{#each item in sortedContent}}
 		 		<ul class="search-hashtag">
-		 			<li {{action 'clickHashtag' this}}><span class="search-hashtag-tag">#{{name}}</span> <span class="search-hashtag-total">{{total}} posts</span></li>
+		 			<li {{action 'clickHashtag' item}}><span class="search-hashtag-tag">#{{item.name}}</span> <span class="search-hashtag-total">{{item.total}} posts</span></li>
 		 		</ul>
 			{{/each}}
 
 		{{else}}
-		 	{{#each sortedContent}}
+		 	{{#each item in sortedContent}}
 			<div class="post">   
 				<div class="article">
 					
 					<h2>
-						{{#link-to 'profile.post' user post (query-params anchor="null")}}{{subject}}{{/link-to}}
+						{{#link-to 'profile.post' item.user.username item.post (query-params anchor="null")}}{{item.subject}}{{/link-to}}
 					</h2> 
 
 					
 					<div class="product-image">
-						{{#link-to 'profile.post' user post (query-params anchor="null")}}
-							<img class="img-responsive" {{bind-attr src=image.medium}}>
+						{{#link-to 'profile.post' item.user.username item.post (query-params anchor="null")}}
+							<img class="img-responsive" {{bind-attr src=item.image.medium}}>
 						{{/link-to}}
 					</div>
 					 	

@@ -15,7 +15,6 @@ export default Ember.Component.extend({
 			_this.set('showModal', true);
 		}, 100);
 
-		console.log("START ESC")
 		Ember.$(document).on('keyup', Ember.run.bind(this, this.esc_close));
 	},
 

@@ -38,7 +38,7 @@ export default  Ember.Component.extend({
 		//INIT
 		 this.dropzone = new Dropzone("#dropzone", { 
 
-		 	url: this.Haul.Server.IMAGE_SERVER_HOST + "/images",
+		 	url: this.ENV.Server.IMAGE_SERVER_HOST + "/images",
 			//url: this.Haul.Server.IMAGE_SERVER_HOST + "/users/" + _this.get('currentUserId') + "/images/profile",
 			maxFiles: 1,
 			method: "post",

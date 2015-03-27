@@ -9,8 +9,8 @@
 
 			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
-			{{#each sortedContent}}
-				{{#if image}}
+			{{#each item in sortedContent}}
+				{{#if item.image}}
 					{{partial 'post'}}	
 				{{/if}}
 			{{/each}}

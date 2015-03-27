@@ -16,7 +16,7 @@
 
 		{{!-- //CONTENT --}}
 		<div {{bind-attr class="galleryView:gallery"}}>
-		{{#each sortedContent}}
+		{{#each item in sortedContent}}
 			{{partial 'post'}}	
 		{{/each}}
 		</div>

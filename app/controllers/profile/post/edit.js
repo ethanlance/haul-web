@@ -74,11 +74,7 @@ export default Ember.ObjectController.extend({
 
 	}.observes('model', 'currentUser'),
 
-	setUpQuill: function() {
-		if( this.get('model').get('body') ){
-			this.set('editorialForQuill', this.get('model').get('body'));
-		}
-	}.observes('model.body'),
+
 
 
 	/* Get and set the products images. */
@@ -204,7 +200,7 @@ export default Ember.ObjectController.extend({
 		var model = this.get('model');
 
 		//Trim
-		var body = model.get('body').trim();
+		var body = this.get('editorialForQuill').trim();
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}
@@ -317,9 +313,8 @@ export default Ember.ObjectController.extend({
 			this.toggleImageSelected(image);			
 		},
 
-		quillChange: function(text) {
-			var model = this.get('model');
-			model.set('body', text);
+		quillChange: function(text) { 
+			this.set('editorialForQuill', text);
 		},
 
 		btnDrawer: function() {
