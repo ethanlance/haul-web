@@ -8,10 +8,12 @@
 
 			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
-			{{#each item in sortedContent}}
-				{{#if item.post.subject}}	
-					{{render '_post' item.post}}
-				{{/if}}
+			{{#each like in sortedContent}}
+				{{#with like.post as item }}
+					
+					{{render '_post' item}}
+				
+				{{/with}}
 			{{/each}}
 			</div>
 			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}

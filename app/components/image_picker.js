@@ -11,14 +11,14 @@ export default Ember.Component.extend({
 	user_tokenBinding: 'session.currentUser.access_token',
 	store: null,
 
-	start: function() {
+	// start: function() {
  		
- 		Dropzone.autoDiscover = false;
+ // 		Dropzone.autoDiscover = false;
  
-	}.on("init"),
+	// }.on("init"),
 
 	didInsertElement: function(){
-		var _this = this; 
+		var _this = this;  
 
 		if(!this.get('user_id')){
 			return;

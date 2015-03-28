@@ -50,7 +50,11 @@
 		
 		<div class="product-image">
 			{{#link-to 'profile.post' item.user.username item.post_id item.post_slug (query-params anchor="null")}}
+				{{#if item.image }}
 				<img class="img-responsive" {{bind-attr src=item.image.large}}>
+				{{else}}
+				<img class="img-responsive" src="/assets/images/blank-thumb.png">
+				{{/if}}
 			{{/link-to}}
 		</div>
 		 	
