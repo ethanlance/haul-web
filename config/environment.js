@@ -73,7 +73,6 @@ module.exports = function(environment) {
     ENV.APP.Server.FOLLOW_SERVER_HOST = "http://localhost:8085";
     ENV.APP.Server.WANT_SERVER_HOST = "http://localhost:8084";
     ENV.APP.Server.POST_SERVER_HOST = "http://localhost:8083";
-    ENV.APP.Server.PRODUCT_SERVER_HOST = "http://localhost:8082";
     ENV.APP.Server.IMAGE_SERVER_HOST = "http://localhost:8081";
     ENV.APP.Server.USER_SERVER_HOST = "http://localhost:8080";
     ENV.APP.Server.CLIENT_ID = "5eed07b8d71cf26f6df6566cf705adaa";
@@ -94,15 +93,14 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.Server.FEED_SERVER_HOST = "http://localhost:8089";
-    ENV.APP.Server.SEARCH_SERVER_HOST = "http://localhost:8087";
-    ENV.APP.Server.COMMENT_SERVER_HOST = "http://localhost:8086";
-    ENV.APP.Server.FOLLOW_SERVER_HOST = "http://localhost:8085";
-    ENV.APP.Server.WANT_SERVER_HOST = "http://localhost:8084";
-    ENV.APP.Server.POST_SERVER_HOST = "http://localhost:8083";
-    ENV.APP.Server.PRODUCT_SERVER_HOST = "http://localhost:8082";
-    ENV.APP.Server.IMAGE_SERVER_HOST = "http://localhost:8081";
-    ENV.APP.Server.USER_SERVER_HOST = "http://localhost:8080";
+    ENV.APP.Server.FEED_SERVER_HOST = "https://feed.haul.io";
+    ENV.APP.Server.SEARCH_SERVER_HOST = "https://search.haul.io";
+    ENV.APP.Server.COMMENT_SERVER_HOST = "https://comment.haul.io";
+    ENV.APP.Server.FOLLOW_SERVER_HOST = "https://follow.haul.io";
+    ENV.APP.Server.WANT_SERVER_HOST = "https://want.haul.io";
+    ENV.APP.Server.POST_SERVER_HOST = "https://post.haul.io";
+    ENV.APP.Server.IMAGE_SERVER_HOST = "https://image.haul.io";
+    ENV.APP.Server.USER_SERVER_HOST = "https://user.haul.io";
     ENV.APP.Server.CLIENT_ID = "5eed07b8d71cf26f6df6566cf705adaa";
     ENV.APP.Server.CLIENT_TOKEN = "client_5eed07b8d71cf26f6df6566cf705adaa";
     ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
