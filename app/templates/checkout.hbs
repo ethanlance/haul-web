@@ -1,0 +1,20 @@
+{{header-site goToRoute='goToRoute'}}
+
+
+{{!-- PAGE CONTENT --}}
+<div class="container-fluid haul-content">   
+	<div class="row">
+		<div class="col-md-3 col-sm-2 col-xs-12"></div>
+		<div class="col-md-6 col-sm-8 col-xs-12">
+
+
+			<form id="checkout" method="post" action="/checkout">
+				{{braintree-dropin token=braintreeClientToken action='submit'}}
+				<div id="dropin"></div>
+				<input type="submit" value="Pay $10">
+			</form>
+
+		</div>
+		<div class="col-md-3 col-sm-2 col-xs-12"></div>
+	</div>
+</div>	

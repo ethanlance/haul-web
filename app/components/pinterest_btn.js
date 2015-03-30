@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var PinterestBtnComponent = Ember.Component.extend({
+export default Ember.Component.extend({
 	tagName: 'a',
 	attributeBindings: [
 		'data-pin-do', 
@@ -9,6 +9,10 @@ var PinterestBtnComponent = Ember.Component.extend({
 	],
 	imageBinding: 'image',
 	href: "",
+
+	didInsertElement: function() {
+		this.set('url', window.location.href);	
+	},
 	
 	ready: function() { 
 		var href = "https://www.pinterest.com/pin/create/button/?url=" + this.get('url') +
@@ -17,4 +21,3 @@ var PinterestBtnComponent = Ember.Component.extend({
 		this.set('href', href);
 	}.observes('image')
 });
-export default PinterestBtnComponent;

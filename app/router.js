@@ -51,6 +51,8 @@ Router.map(function(){
 	//mentions
 	this.route('mentions');
 
+	this.route('checkout');	
+
 	//Profiles
 	this.route('new-post');
 	this.resource('profile', {path: '/:username'}, function() {

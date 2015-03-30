@@ -1,7 +1,7 @@
 import Ember from 'ember';
 var $ = Ember.$;
 
-var TwitterBtnComponent = Ember.Component.extend({
+export default Ember.Component.extend({
   tagName: 'a',
   classNames: 'twitter-share-button',
   attributeBindings: [
@@ -12,12 +12,14 @@ var TwitterBtnComponent = Ember.Component.extend({
     'data-count'
   ],
 
+
+
   didInsertElement: function() {
-    if( window.twtrr ) {
+    
       window.twttr.widgets.load();
       $('iframe.twitter-share-button').css('width', '78px');
-    }
+    
+      this.set('data-url', window.location.href);  
   }
 
 });
-export default TwitterBtnComponent;

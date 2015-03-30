@@ -7,15 +7,7 @@
 	//     fjs.parentNode.insertBefore(js, fjs);
 	//   }(document, 'script', 'facebook-jssdk'));
 
-var js;
-js = document.createElement('script');
-$(js).attr({
-	id: 'facebook-jssdk',
-	async: true,
-		src: "//connect.facebook.net/en_US/all.js"
-	}
-);
-$('head').append(js);
+
 
 
 

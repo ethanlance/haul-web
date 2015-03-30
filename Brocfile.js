@@ -8,7 +8,13 @@ var app = new EmberApp({
 	// 	'handlebars.js': null
 	// },
 	//minifyJS:{'enabled':true, options:{'compress':true}}
-	sourcemaps: ['js']
+	sourcemaps: ['js'],
+
+	inlineContent: {
+		'braintree' : {file: 'public/assets/scripts/braintree.js'},
+		'twitter' 	: {file: 'public/assets/scripts/twitter.js'},
+		'facebook' 	: {file: 'public/assets/scripts/facebook.js'}
+	}
 });
 
 // Use `app.import` to add additional libraries to the generated
