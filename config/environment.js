@@ -18,11 +18,19 @@ module.exports = function(environment) {
 
     },
 
-    // contentSecurityPolicy: {
-    //   'script-src': "'self' https://js.braintreegateway.com https://client-analytics.sandbox.braintreegateway.com",
-    //   'frame-src': "'self' https://assets.braintreegateway.com",
-    //   'style-src': "'self' 'unsafe-inline'"
-    // }
+    contentSecurityPolicyHeader: 'Content-Security-Policy',
+    
+
+  contentSecurityPolicy: {
+      'default-src': "'none' ",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' js.braintreegateway.com platform.twitter.com connect.facebook.net",
+      'font-src': "'self'",
+      'connect-src': "'self' localhost:8080 localhost:8081 localhost:8082 localhost:8083 localhost:8084 localhost:8085 localhost:8086 localhost:8087 localhost:8088 localhost:8089 ",
+      'img-src': "* data:",
+      'style-src': "'self' 'unsafe-inline' https://js.braintreegateway.com https://client-analytics.sandbox.braintreegateway.com",
+      'media-src': "'self'",
+      'frame-src': "'self' https://assets.braintreegateway.com *.facebook.com",
+    },
 
     APP: {
       // Here you can pass flags/options to your application instance
