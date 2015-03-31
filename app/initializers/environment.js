@@ -13,7 +13,8 @@ export default {
     	application.inject('component', 'ENV', 'environment:main');
     	application.inject('application', 'ENV', 'environment:main');
     	application.inject('adapter', 'ENV', 'environment:main');
-console.log("INJACULATED")
+    	application.inject('model', 'ENV', 'environment:main');
+
 		application.advanceReadiness();
 	}
 };
