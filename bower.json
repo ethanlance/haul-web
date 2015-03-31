@@ -23,9 +23,9 @@
     "ember-simple-auth": "0.7.3",
     "underscore": "~1.8.2",
     "lodash": "~3.5.0",
-    "dropzone": "~3.12.0"
-  },
-  "devDependencies": {
-    "typeahead.js": "~0.10.5"
+    "dropzone": "~3.12.0",
+    "font-awesome": "~4.3.0",
+    "typeahead.js": "~0.10.5",
+    "bootstrap-sass-official": "~3.3.4"
   }
 }
