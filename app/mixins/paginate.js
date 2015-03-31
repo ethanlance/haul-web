@@ -10,14 +10,20 @@ export default Ember.Mixin.create({
  
 		var _this = this;
 		var paginateQuery = this.get('paginateQuery'); 
+
 		
 		if(!this.get('paginateHasMore')){
 			console.log("DO NOT PAGINATE ANYMORE.  YOU ARE DONE!")
 			return;
 		}
 		
-		
+
 		var storeName = paginateQuery.storeName;
+		if( !storeName ) {
+			return new Promise(function(resolve, reject) { reject() });
+		}
+		console.log("BAMN ", paginateQuery);
+
 		var store = this.container.lookup('store:main');
     	var meta = store.metadataFor(storeName);
 

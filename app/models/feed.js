@@ -1,6 +1,6 @@
 import Ember from "ember";
 import DS from "ember-data";
-export default DS.Model.extend(Ember.Validations.Mixin, {
+export default DS.Model.extend({
 		
 	//Helpers, keep.
 	post_id: DS.attr('string'),
