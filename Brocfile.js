@@ -46,10 +46,10 @@ app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
-  destDir: 'fonts'
+  destDir: 'assets/fonts'
 });
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
-  destDir: 'fonts'
+  destDir: 'assets/fonts'
 });
 
 app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
