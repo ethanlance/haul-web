@@ -5,8 +5,8 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	loading: true,
 	limit: null,
 	storeName: 'user-mentions-list',
-	currentUserIdBinding: 'Haul.currentUser.id',
-	currentUserBinding: 'Haul.currentUser',
+	currentUserIdBinding: 'session.currentUser.id',
+	currentUserBinding: 'session.currentUser',
 	model:false,
 	
 	sorting: ['created_at:desc'],

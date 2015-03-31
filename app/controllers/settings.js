@@ -1,8 +1,8 @@
 import Ember from 'ember';
 	
 export default Ember.ObjectController.extend({
-	currentUserBinding: 'Haul.currentUser',
-	currentUserIdBinding: 'Haul.currentUser.id',
+	currentUserBinding: 'session.currentUser',
+	currentUserIdBinding: 'session.currentUser.id',
 	user: null,
 	navColumnOpen: false,
 	setup: function() { 

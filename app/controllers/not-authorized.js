@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 var NotAuthorizedController = Ember.ObjectController.extend({
-	currentUserBinding: 'Haul.currentUser',
+	currentUserBinding: 'session.currentUser',
 }); 
 export default NotAuthorizedController;

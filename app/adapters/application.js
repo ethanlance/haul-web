@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import config from '../config/environment';
 export default DS.RESTAdapter.extend({
 	
-	currentUserBinding: 'Haul.currentUser',
+	currentUserBinding: 'session.currentUser',
 
 	queryBuilder: function(query, url) {
 		var queryList = [];

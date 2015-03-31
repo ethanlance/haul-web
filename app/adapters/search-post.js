@@ -1,14 +1,13 @@
 import ApplicationAdapter from './application'; 
 
-import config from '../config/environment';
-var Haul = config.APP;
-
 export default ApplicationAdapter.extend({
 	
-	host: Haul.Server.SEARCH_SERVER_HOST,
+	host: function(){
+		return this.ENV.Server.SEARCH_SERVER_HOST;	
+	}.property(), 
  
 	findQuery: function(store, type, query) {
-        var url = this.host + "/search/posts";
+        var url = this.get('host') + "/search/posts";
         query['query'] = "query=" + query.q; 
         url = this.queryBuilder(query, url);
         return this.ajax(url, 'GET');

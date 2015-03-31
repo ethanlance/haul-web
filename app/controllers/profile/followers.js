@@ -10,7 +10,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
  	showGridBtn:false,
  	isProfileOwner: false,
 
- 	currentUserIdBinding: 'Haul.currentUser.id',
+ 	currentUserIdBinding: 'session.currentUser.id',
  	currentPageBinding: 'controllers.profile.currentPage',
 	
 	sorting: ['created_at:desc'],

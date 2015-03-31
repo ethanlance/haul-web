@@ -1,14 +1,17 @@
 import ApplicationAdapter from './application';
 
-import config from '../config/environment';
-var Haul = config.APP;
-
 export default ApplicationAdapter.extend({
 	
-	host: Haul.Server.USER_SERVER_HOST,
+	host: function(){
+		return this.ENV.Server.USER_SERVER_HOST;	
+	}.property(), 
 
 	find: function(store, type, id) {
-		var url = this.host + "/users/" + id;
+
+		console.log("FIND USER", this.get('host'));
+		console.log("FIND USER", this.get('host'));
+
+		var url = this.get('host') + "/users/" + id;
         return this.ajax(url, 'GET');
     },
 
@@ -18,7 +21,7 @@ export default ApplicationAdapter.extend({
 
         var user_id = this.get('currentUser').id;
         
-		var url = this.host + '/users/'+user_id+'/username/'+username;
+		var url = this.get('host') + '/users/'+user_id+'/username/'+username;
 
 		return this.ajax(url, "PUT");
 	},
@@ -29,7 +32,7 @@ export default ApplicationAdapter.extend({
 
         var user_id = this.get('currentUser').id;
         
-		var url = this.host + '/users/'+user_id+'/username/'+username;
+		var url = this.get('host') + '/users/'+user_id+'/username/'+username;
 
 		return this.ajax(url, "PUT");
 	},

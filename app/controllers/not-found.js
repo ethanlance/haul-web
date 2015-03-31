@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 	var NotFoundController = Ember.ObjectController.extend({
-		currentUserBinding: 'Haul.currentUser',
+		currentUserBinding: 'session.currentUser',
 	}); 	
 	export default NotFoundController;

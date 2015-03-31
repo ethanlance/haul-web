@@ -1,13 +1,13 @@
 import ApplicationAdapter from './application'; 
-import config from '../config/environment';
-var Haul = config.APP;
 
 export default ApplicationAdapter.extend({
 
-	host: Haul.Server.WANT_SERVER_HOST,
+	host: function(){
+		return this.ENV.Server.WANT_SERVER_HOST;	
+	}.property(), 
 
 	find: function(store, type, id) {
-		var url = this.host + "/likes/products/" + id;
+		var url = this.get('host') + "/likes/products/" + id;
 		return this.ajax(url, 'GET');
 	}
 });

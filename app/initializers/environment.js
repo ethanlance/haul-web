@@ -12,7 +12,8 @@ export default {
     	application.inject('controller', 'ENV', 'environment:main');
     	application.inject('component', 'ENV', 'environment:main');
     	application.inject('application', 'ENV', 'environment:main');
-
+    	application.inject('adapter', 'ENV', 'environment:main');
+console.log("INJACULATED")
 		application.advanceReadiness();
 	}
 };

@@ -1,11 +1,10 @@
 import ApplicationAdapter from './application'; 
 
-import config from '../config/environment';
-var Haul = config.APP;
-
 export default ApplicationAdapter.extend({
 	
-	host: Haul.Server.POST_SERVER_HOST, 
+	host: function(){
+        return this.ENV.Server.POST_SERVER_HOST;    
+    }.property(), 
 
 	createRecord: function(store, type, record) {
 
@@ -28,7 +27,7 @@ export default ApplicationAdapter.extend({
             product_status: record.get('product_status'),
         };
 
-		var url = this.host + "/posts/" + repost_id;
+		var url = this.get('host') + "/posts/" + repost_id;
 		return this.ajax(url, "POST", { data: data }); 
 	}
 });

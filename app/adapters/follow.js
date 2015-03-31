@@ -1,10 +1,10 @@
 import ApplicationAdapter from './application'; 
-import config from '../config/environment';
-var Haul = config.APP;
 
 export default ApplicationAdapter.extend({
 
-	host: Haul.Server.FOLLOW_SERVER_HOST,
+	host: function(){
+		return this.ENV.Server.FOLLOW_SERVER_HOST;	
+	}.property(), 
 
 	find: function(store, type, id) {
 		id = String(id);
@@ -13,7 +13,7 @@ export default ApplicationAdapter.extend({
 		var ref_type = key[1];
 		var user_id = this.get('currentUser').get('id');
 
-		var url = this.host + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
+		var url = this.get('host') + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
 		return this.ajax(url, 'GET');
 	},
 
@@ -22,7 +22,7 @@ export default ApplicationAdapter.extend({
 		var ref_id = record.get('ref_id');
 		var user_id = record.get('user_id');
 
-		var url = this.host + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
+		var url = this.get('host') + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
 		return this.ajax(url, "PUT"); 
 	},
 
@@ -31,7 +31,7 @@ export default ApplicationAdapter.extend({
 		var ref_id = record.get('ref_id');
 		var user_id = record.get('user_id');
 
-		var url = this.host + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
+		var url = this.get('host') + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
 		return this.ajax(url, "DELETE"); 
 	}	
 

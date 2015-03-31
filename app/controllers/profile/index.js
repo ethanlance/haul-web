@@ -8,7 +8,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
  	limit:null,
  	thisPage: "feedPage",
  	user: false,
-	currentUserIdBinding: 'Haul.currentUser.id',
+	currentUserIdBinding: 'session.currentUser.id',
 	isProfileOwner: false, 
 	isFeedPage:true,
 	currentPos:'3000px',

@@ -24,7 +24,7 @@ export default Ember.ObjectController.extend({
  	}.observes('currentPage'),
 
 
-	currentUserIdBinding: 'Haul.currentUser.id',
+	currentUserIdBinding: 'session.currentUser.id',
 	collectionsBinding: "collections.collections",
 	userIdBinding: 'model.user.id',
 	watchScroll:null,

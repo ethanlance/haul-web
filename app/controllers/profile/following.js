@@ -9,7 +9,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
  	user: false,
  	currentPageBinding: 'controllers.profile.currentPage',
 	showGridBtn:false,
-	currentUserIdBinding: 'Haul.currentUser.id',
+	currentUserIdBinding: 'session.currentUser.id',
 	userIdBinding: 'model.id',
 	isProfileOwner: false,
 

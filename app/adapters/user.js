@@ -1,28 +1,28 @@
 import ApplicationAdapter from './application';
-import config from '../config/environment';
-var Haul = config.APP;
 
 export default ApplicationAdapter.extend({
 	
-	host: Haul.Server.USER_SERVER_HOST,
+	host: function(){
+		return this.ENV.Server.USER_SERVER_HOST;	
+	}.property(), 
 
-	find: function(store, type, id) {
-		var url = this.host + "/users/" + id;
+	find: function(store, type, id) { 
+		var url = this.get('host') + "/users/" + id;
         return this.ajax(url, 'GET');
     },
 
 	findQuery: function(store, type, query) {  
-        var url = this.host + "/users/" + query.id;
+        var url = this.get('host') + "/users/" + query.id;
         return this.ajax(url, 'GET');
     },   
 
     findMany: function(store, type, ids) { 
     	var url;
 		if( ids.length < 2 ){
-			url = this.host + "/users/" + ids[0];
+			url = this.get('host') + "/users/" + ids[0];
 			return this.ajax(url, 'GET');
 		}else{	
-			url = this.host + "/users";
+			url = this.get('host') + "/users";
 			return this.ajax(url, 'GET', { data: { image_ids: ids } });
 		}
 	},
@@ -37,7 +37,7 @@ export default ApplicationAdapter.extend({
         	lastname: record.get('lastname')
         }
 
-		var url = this.host + '/users/'+user_id;
+		var url = this.get('host') + '/users/'+user_id;
 
 		return this.ajax(url, "PUT", { data: data });
 	},

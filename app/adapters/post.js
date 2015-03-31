@@ -1,24 +1,23 @@
 import ApplicationAdapter from './application'; 
 
-import config from '../config/environment';
-var Haul = config.APP;
-
 export default ApplicationAdapter.extend({
 	
-	host: Haul.Server.POST_SERVER_HOST, 
+	host: function(){
+        return this.ENV.Server.POST_SERVER_HOST;    
+    }.property(), 
 
 	find: function(store, type, id) { 
-		var url = this.host + "/posts/" + id;
+		var url = this.get('host') + "/posts/" + id;
         return this.ajax(url, 'GET');
     },
 
 	findQuery: function(store, type, query){ 
-		var url = this.host + "/posts/" + query.post_id;
+		var url = this.get('host') + "/posts/" + query.post_id;
         return this.ajax(url, 'GET');
 	},
 
 	findMany: function(store, type, args) {
-		var url = this.host + "/users/" + args.user_id + "/posts";
+		var url = this.get('host') + "/users/" + args.user_id + "/posts";
         return this.ajax(url, 'GET');
     },
 
@@ -29,7 +28,7 @@ export default ApplicationAdapter.extend({
 		var post_id = record.get('post_id');
 		//record.rollforward()?
 
-		var url = this.host + "/posts/" + post_id;
+		var url = this.get('host') + "/posts/" + post_id;
 		return this.ajax(url, "DELETE");
 	},
 
@@ -51,7 +50,7 @@ export default ApplicationAdapter.extend({
             product_status: record.get('product_status'),
         };
 
-		var url = this.host + "/posts/" + post_id;
+		var url = this.get('host') + "/posts/" + post_id;
 		return this.ajax(url, "PUT", { data: data }); 
 	},
 
@@ -73,7 +72,7 @@ export default ApplicationAdapter.extend({
             product_status: record.get('product_status'),
         };
 
-		var url = this.host + "/posts";
+		var url = this.get('host') + "/posts";
 		return this.ajax(url, "POST", { data: data }); 
 	}
 });

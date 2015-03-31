@@ -16,7 +16,7 @@ export default Ember.ObjectController.extend({
 	
 	productImagesBinding: "model.product_images",
 	product_status_options: null,
-	currentUserBinding: 'Haul.currentUser',
+	currentUserBinding: 'session.currentUser',
 	
 	isProcessing: false,
 	isProcessingDelete: false,

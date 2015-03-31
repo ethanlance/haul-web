@@ -3,10 +3,10 @@ import ErrorMixin from '../mixins/server_error';
 export default Ember.ObjectController.extend(ErrorMixin, {
 	
 	//Current user object.
-	currentUserBinding: 'Haul.currentUser',
+	currentUserBinding: 'session.currentUser',
 	
 	//Current user id.
-	currentUserIdBinding: 'Haul.currentUser.id',
+	currentUserIdBinding: 'session.currentUser.id',
 	
 	//Are we proccesing a submission.
 	isProcessing: false,

@@ -5,8 +5,8 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	loading: true,
 	limit: null,
 	storeName: 'feed',
-	currentUserIdBinding: 'Haul.currentUser.id',
-	currentUserBinding: 'Haul.currentUser',
+	currentUserIdBinding: 'session.currentUser.id',
+	currentUserBinding: 'session.currentUser',
 	isProfileOwner: true,  
 	model:false,
 	
