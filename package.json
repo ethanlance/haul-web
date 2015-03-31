@@ -17,7 +17,7 @@
   },
   "author": "",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "broccoli-asset-rev": "^2.0.2",
     "broccoli-static-compiler": "0.2.1",
     "ember-cli": "^0.2.0",
@@ -39,9 +39,7 @@
     "ember-easy-form-extensions": "0.2.6",
     "ember-export-application-global": "^1.0.2",
     "express": "^4.8.5",
-    "glob": "^5.0.1"
-  },
-  "dependencies": {
+    "glob": "^5.0.1",
     "ember-cli-font-awesome": "0.0.9",
     "ember-cli-lightbox": "^0.2.0",
     "ember-sanitize": "0.0.6"
