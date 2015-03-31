@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-export default DS.Model.extend(Ember.Validations.Mixin, {
+import EmberValidations from 'ember-validations';
+export default DS.Model.extend(EmberValidations.Mixin, {
 
 	email: DS.attr('string'),
 	password: DS.attr('string'),

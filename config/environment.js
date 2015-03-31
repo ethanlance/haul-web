@@ -18,19 +18,7 @@ module.exports = function(environment) {
 
     },
 
-    contentSecurityPolicyHeader: 'Content-Security-Policy',
-    
 
-  contentSecurityPolicy: {
-      'default-src': "'none' ",
-      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' js.braintreegateway.com platform.twitter.com connect.facebook.net",
-      'font-src': "'self'",
-      'connect-src': "'self' localhost:8080 localhost:8081 localhost:8082 localhost:8083 localhost:8084 localhost:8085 localhost:8086 localhost:8087 localhost:8088 localhost:8089 ",
-      'img-src': "* data:",
-      'style-src': "'self' 'unsafe-inline' https://js.braintreegateway.com https://client-analytics.sandbox.braintreegateway.com",
-      'media-src': "'self'",
-      'frame-src': "'self' https://assets.braintreegateway.com *.facebook.com",
-    },
 
     APP: {
       // Here you can pass flags/options to your application instance
@@ -52,17 +40,6 @@ module.exports = function(environment) {
       }
     }
   };
-
-  // ENV.contentSecurityPolicy = {
-  //   'default-src': "'self' https://s-static.ak.facebook.com",
-  //   'frame-src': "'self' https://s-static.ak.facebook.com http://s-static.ak.facebook.com",
-  //   'script-src': "'self' 'unsafe-eval' http://fonts.googleapis.com https://s-static.ak.facebook.com http://connect.facebook.net https://platform.twitter.com ", // Allow scripts from https://cdn.mxpnl.com
-  //   'font-src': "'self' http://fonts.gstatic.com http://fonts.googleapis.com", // Allow fonts to be loaded from http://fonts.gstatic.com
-  //   'connect-src': "'self' https://s-static.ak.facebook.com http://connect.facebook.net https://platform.twitter.com http://localhost", // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
-  //   'img-src': "'self'",
-  //   'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com http://connect.facebook.net https://platform.twitter.com http://localhost", // Allow inline styles and loaded CSS from http://fonts.googleapis.com 
-  //   'media-src': "'self'"
-  // }
 
   if (environment === 'development') {
 
