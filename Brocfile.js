@@ -12,7 +12,8 @@ var app = new EmberApp({
 	storeConfigInMeta: false,
 
 	fingerprint: {
-		prepend: 'https://s3.amazonaws.com/static.haul.io/'
+		prepend: 'https://s3.amazonaws.com/static.haul.io/',
+		extensions: [ 'js', 'css', 'png', 'jpg', 'gif', 'eot', 'svg', 'ttf', 'woff' ]
 	},
 
 	sourcemaps: ['js'],
@@ -37,6 +38,12 @@ var app = new EmberApp({
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
+
+
+
+
+
+
 app.import('bower_components/jquery/dist/jquery.js');
 
 app.import('bower_components/underscore/underscore.js'); 
@@ -84,7 +91,7 @@ app.import('bower_components/quill/dist/quill.js');
 
 app.import('vendor/quill.css');
 
-app.import("bower_components/font-awesome/css/font-awesome.css");
+
 app.import("bower_components/font-awesome/fonts/fontawesome-webfont.eot", { destDir: "assets/fonts" });
 app.import("bower_components/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "assets/fonts" });
 app.import("bower_components/font-awesome/fonts/fontawesome-webfont.ttf", { destDir: "assets/fonts" });
@@ -92,4 +99,32 @@ app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff", { des
 app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "assets/fonts" });
 app.import("bower_components/font-awesome/fonts/FontAwesome.otf", { destDir: "assets/fonts" });
 
+
+
+var path = require('path'),
+    fs = require('fs');
+var lightboxPath = path.join(app.bowerDirectory, 'font-awesome');
+var lightboxCssContent = fs.readFileSync(path.join(lightboxPath, 'css', 'font-awesome.css'),'utf8');
+lightboxCssContent = lightboxCssContent.replace(/\.\.\/fonts\//g, 'fonts/');
+lightboxCssContent = lightboxCssContent.replace(/\?(.+?)\'/g, '\'');
+fs.writeFileSync(path.join(lightboxPath, 'css', 'font-awesome.processed.css'), lightboxCssContent);
+app.import(path.join(lightboxPath, 'css', 'font-awesome.processed.css'));
+
+
 module.exports = app.toTree();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

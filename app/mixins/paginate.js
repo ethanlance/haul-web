@@ -22,7 +22,7 @@ export default Ember.Mixin.create({
 		if( !storeName ) {
 			return new Promise(function(resolve, reject) { reject() });
 		}
-		console.log("BAMN ", paginateQuery);
+	
 
 		var store = this.container.lookup('store:main');
     	var meta = store.metadataFor(storeName);
