@@ -7,11 +7,11 @@
  
         
        
-       {{#form-wrapper}}
+       {{#form-for model}}
         <div >
             {{input username canShowValidationError=showErrors placeholder=""}}
         </div> 
-        {{/form-wrapper}}
+        {{/form-for}}
 
         <div {{bind-attr class="showErrorMessage:show:hide :errors"}}>
             <span class="alert">{{{errorMessage}}}</span>

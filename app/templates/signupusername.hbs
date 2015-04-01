@@ -10,11 +10,11 @@
                     <h2>One more thing, <br/>pick a username</h2>
                 </div>
 	           
-                {{#form-wrapper}}
+                {{#form-for model}}
                 <div class="form-group"> 
                     {{input username canShowValidationError=showErrors placeholder=""}}
                 </div> 
-                {{/form-wrapper}}
+                {{/form-for}}
 
                 <div {{bind-attr class="showErrorMessage:show:hide :errors :text-left"}}>
                     <div class="alert">{{{errorMessage}}}</div>

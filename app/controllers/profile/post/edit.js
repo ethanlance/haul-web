@@ -72,6 +72,8 @@ export default Ember.ObjectController.extend({
 		}); 
 		this.set('product_status_options', product_status_options); 
 
+		this.set('editorialForQuill', this.get('model.body'));
+
 	}.observes('model', 'currentUser'),
 
 
@@ -201,6 +203,9 @@ export default Ember.ObjectController.extend({
 
 		//Trim
 		var body = this.get('editorialForQuill').trim();
+
+		console.log("body", body);
+
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}
@@ -216,23 +221,22 @@ export default Ember.ObjectController.extend({
 			function validateSuccess(){
 				_this.set('isProcessing', true);
 				return model.save();
-			},
-			function validateError(error){
-				_this.set('isProcessing', false);
-				_this.set('showErrors', true);
-				_this.set('openDrawer', true);
 			}
 		)
 		.then(
-			function reloadModel(record){
+			function reloadModel(record){		
 				return record.reload();
 			}
 		)
 		.then(
 			function serverSuccess(record){
+				
 				_this.set('isProcessing', false);
+				
 				var user = _this.get('currentUser'); 
-			_this.set('animateClose', true);
+				
+				_this.set('animateClose', true);
+				
 				_this.transitionToRoute('profile.post', user, record);
 
 				//Clean Up, Delete images?

@@ -5,7 +5,7 @@
 		<div class="row" id="leaveComment">
 			<div class="col-md-12 col-sm-12 col-xs-12 ">
 			<h4>Comments</h4>
-			{{#form-wrapper}}
+			{{#form-for model}}
 
 				{{input comment as="text" canShowValidationError='true' placeholder="add a comment..." class="commentbox"}}
 				
@@ -22,7 +22,7 @@
 					}}
 
 				</div>
-			{{/form-wrapper}}
+			{{/form-for}}
 			</div>
 		</div>
 

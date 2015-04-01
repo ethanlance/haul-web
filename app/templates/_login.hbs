@@ -22,7 +22,7 @@
 		<h4>or with your <br/>email & password</h4>
 	</div>
 
-	{{#form-wrapper}}
+	{{#form-for model}}
 
 	  {{#if error}}
 	    <div class="alert">Invalid username or password.</div>
@@ -54,5 +54,5 @@
 	  		<span class="muted"><a href="/forgot-password">Forgot Password?</a></span>
 	  	</div>
 
-	{{/form-wrapper}} 
+	{{/form-for}} 
 			

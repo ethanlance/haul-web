@@ -137,11 +137,6 @@ Ember.Handlebars.registerHelper('form-for', function(object, options) {
   }
   options.data.keywords.formForModelPath = object;
 
-  console.log("HERE",Ember.Handlebars.helpers.view);
-  console.log("object ", object);
-  console.log("options ", options);
-  console.log("this ", this);
-
   return EasyFormShims.viewHelper(this, Ember.EasyForm.Form, options);
 });
 
