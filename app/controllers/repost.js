@@ -1,5 +1,6 @@
 import Ember from 'ember';
-export default Ember.ObjectController.extend({
+import ErrorMixin from '../mixins/server_error';
+export default Ember.ObjectController.extend(ErrorMixin, {
 	postIdBinding: 'model.id',
 
 	repost: false, //the new Repost
@@ -7,7 +8,7 @@ export default Ember.ObjectController.extend({
 	model: false, //Original Post
 	
 	//rename the original model to 'post' object.
-	post: 'model',
+	postBinding: 'model',
 
 	currentUserBinding: "session.currentUser",
 	
@@ -23,9 +24,10 @@ export default Ember.ObjectController.extend({
 	showRepost:false,
 	
 
- 	modelChanged: function() {
+	// The post model has been sent to this controller.  Now make a repost clone model of it.
+ 	postReady: function() {
 		this.set('canEditProduct', false);
-		if(Ember.isEmpty(this.get('model')) || Ember.isEmpty(this.get('currentUser')) ){
+		if(Ember.isEmpty(this.get('post')) || Ember.isEmpty(this.get('currentUser')) ){
 			return
 		} 
 
@@ -33,20 +35,8 @@ export default Ember.ObjectController.extend({
 		this.set('showSuccess', false);
 		this.set('showRepost', false);
 
-		var _this = this;
-		var model = this.get('model');
-		var user_id = model.get('user').get('id');
-		var post_id = this.get('post_id');
-		var key = user_id + "_" + post_id;
-		this.store.find('post', key)
-		.then(function(post){
-			_this.set('post', post);
-			_this.cloneMode();
-		});
-	}.observes('model', 'currentUser'),
+		
 
-
-	cloneMode: function() {
 
 		var currentUserId = this.get('currentUser').get('id');
 		var post = this.get('post');
@@ -85,11 +75,11 @@ export default Ember.ObjectController.extend({
 		//Switch model.
 		this.set('showRepost', true);
 		this.setup();
-	},
+	}.observes('post', 'currentUser'),
 
 	setup: function() {
 		this.set('canEditProduct', false);
-		if( this.get('model').get('product_user') && this.get('model').get('product_user').get('id') === this.get('currentUser').get('id') ){
+		if( this.get('post').get('product_user') && this.get('post').get('product_user').get('id') === this.get('currentUser').get('id') ){
 			this.set('canEditProduct', true);
 		}
 
@@ -97,7 +87,7 @@ export default Ember.ObjectController.extend({
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
 		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
-		var status = this.get('model').get('product_status');
+		var status = this.get('post').get('product_status');
 		
 		if(status === "NOT_FOR_SALE"){
 			selectedStatus = not_for_sale;
@@ -113,7 +103,7 @@ export default Ember.ObjectController.extend({
 		}); 
 		this.set('product_status_options', product_status_options); 
 
-	}.observes('model', 'currentUser'),
+	},
 
 	//Observer: anytime our array of selected images changes, update
 	// our list of image_ids.
@@ -183,10 +173,9 @@ export default Ember.ObjectController.extend({
 		var repost = this.get('repost');
 
 		//Trim
-		var body = '';
-		if( repost.get('body') ){
-			body = repost.get('body').trim();	
-		}
+		
+		var body = this.get('editorialForQuill').trim();
+		
 		
 		if(Ember.isEmpty(body)){
 			body = " ";
@@ -216,6 +205,8 @@ export default Ember.ObjectController.extend({
 		}, function(error){
 			console.log("Error", error);
 			_this.set('isProcessing', false);
+			//Mixin:
+				_this.handleServerError(error)
 			_this.set('showErrors', true);
 			_this.forceDrawerOpen();
 		});
@@ -256,8 +247,8 @@ export default Ember.ObjectController.extend({
 			this.selectImage(image);			
 		},
 
-		quillChange: function(text) {
-			this.get('repost').set('body', text);
+		quillChange: function(text) { 
+			this.set('editorialForQuill', text);
 		},
 
 		showImageModal: function(){

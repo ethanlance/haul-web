@@ -1,5 +1,6 @@
 import Ember from 'ember';
-export default Ember.ObjectController.extend({
+import ErrorMixin from '../../../mixins/server_error';
+export default Ember.ObjectController.extend(ErrorMixin, {
  
  	needs: ['profile'],
 
@@ -204,8 +205,6 @@ export default Ember.ObjectController.extend({
 		//Trim
 		var body = this.get('editorialForQuill').trim();
 
-		console.log("body", body);
-
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}
@@ -250,6 +249,8 @@ export default Ember.ObjectController.extend({
 		}, function serverError(error){
 				console.log("Error", error);
 				_this.set('isProcessing', false);
+				//Mixin:
+				_this.handleServerError(error)
 				_this.set('showErrors', true);
 				_this.set('openDrawer', true);
 		});

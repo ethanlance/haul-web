@@ -56,7 +56,7 @@
 						       selection = product_status_options.selectedStatus
 						       class = "form-control"
 						    }}
-						    {{#if showErrors}}<span class="has-error help-block">{{error-field product_status}}</span>{{/if}}
+						    {{#if showErrors}}{{error-field product_status}}{{/if}}
 			 		</div>
 				</div>
 				<div class="row">
@@ -68,7 +68,7 @@
 						  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
 						  	<br/>
 						</div>
-						{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
+						{{#if showErrors}}{{error-field product_price}}{{/if}}
 						{{/input}}
 	 				</div>
 				</div>
