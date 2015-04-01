@@ -32,12 +32,8 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center cta-welcome">
 				
 				<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
-				
-				{{#link-to 'new-post'}}
-				<button class="btn btn-default">
-					<i class="fa fa-camera-retro fa-lg"></i> Post Something For Sale
-				</button>
-				{{/link-to}} 
+
+				{{new-post-btn openModal='openModal' btn-text='Post Something For Sale' class="display-inline"}}
 		
 			</div>	
 		</div>  
