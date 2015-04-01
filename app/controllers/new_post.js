@@ -32,19 +32,19 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	editorialForQuill: "",
 
 	//Has product name been entered?
-	hasProductName: Ember.computed.notEmpty('model.product_name'),
+	//hasProductName: Ember.computed.notEmpty('model.product_name'),
 
 	//Has product description been entered?
-	hasProductDescription: Ember.computed.notEmpty('model.product_description'),
+	//hasProductDescription: Ember.computed.notEmpty('model.product_description'),
 
 	//Has product price been entered?
-	hasProductPrice: Ember.computed.notEmpty('model.product_price'),
+	//hasProductPrice: Ember.computed.notEmpty('model.product_price'),
 
 	//Has product quanity been entered?
-	hasProductQuantity: Ember.computed.notEmpty('model.product_quantity'),
+	//hasProductQuantity: Ember.computed.notEmpty('model.product_quantity'),
 
 	//Is product filled out and ready for validation?
-	productReadyForValidation: Ember.computed.and('hasProductName', 'hasProductDescription', 'hasProductPrice', 'hasProductQuantity'),
+	//productReadyForValidation: Ember.computed.and('hasProductName', 'hasProductDescription', 'hasProductPrice', 'hasProductQuantity'),
 
 	//Prepopulate the post.subject with the value of post.product_name
 	prevProductName: '',
@@ -58,13 +58,25 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('prevProductName', product_name);
 	}.observes('model.product_name'),
 
+	modelChanged: function() {
+
+		if( !Ember.isEmpty(this.get('model.product_name')) &&
+			!Ember.isEmpty(this.get('model.product_description')) &&
+			!Ember.isEmpty(this.get('model.product_price')) &&
+			!Ember.isEmpty(this.get('model.product_quantity')) 
+		){
+			this.set('productReadyForValidation', true);
+		} else {
+			this.set('productReadyForValidation', false);
+		}
+		
+	}.observes('model.product_name','model.product_description','model.product_price','model.product_quantity'),
 
 	//Observe the product for completeness, and triggers validation on the product
 	//before the user can advance to the post section.
 	productChanged: function() {
 
 		if( this.get('productReadyForValidation') ){
-			
 			var _this = this;
 			var model = this.get('model');
 			model.validate()
@@ -86,6 +98,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				}
 			);
 		} else {
+			console.log("NOPPE")
 			this.set('disablePostForm', true);
 		}
 

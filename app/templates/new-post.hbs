@@ -9,7 +9,7 @@
 			</div>
 			
 
-			{{#form-wrapper}}
+			{{#form-for model}}
 			<div class="container haul-edit haul-new-post">
 
 
@@ -93,14 +93,14 @@
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12"> 
 									<label>Name it:</label>
-									{{input product_name canShowValidationError=showErrors disabled=disableProductForm}} 
+									{{input model.product_name canShowValidationError=showErrors }} 
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12"> 
 									<label>Describe it:</label>
 									<label class="small pull-right">(max 2000 characters)</label>
-									{{input product_description placeholder="Size, color, condition, etc" as="text" canShowValidationError=showErrors disabled=disableProductForm}}
+									{{input model.product_description placeholder="Size, color, condition, etc" as="text" canShowValidationError=showErrors }}
 								</div> 
 							</div>
 							<div class="row">
@@ -109,16 +109,16 @@
 									<label>Price:</label>
 									<div class="input-group">
 										<span class="input-group-addon">$</span>
-									  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors disabled=disableProductForm}}
+									  	{{input-field model.product_price class="form-control input-sm" canShowValidationError=showErrors }}
 									  	<br/>
 									</div>
-									{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
+									{{#if showErrors}}<span class="has-error help-block">{{error-field model.product_price}}</span>{{/if}}
 									{{/input}}
 								</div>
 							
 								<div class="col-md-6 col-sm-6 col-xs-6"> 
 									<label>Quantity:</label>
-									{{input product_quantity class="input-xs" canShowValidationError=showErrors disabled=disableProductForm}}
+									{{input model.product_quantity class="input-xs" canShowValidationError=showErrors }}
 				 				</div>
 							</div>
 						</div>
@@ -178,8 +178,8 @@ new flux capacitor
 
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12">
-									{{input subject canShowValidationError=showErrors disabled=disablePostForm	}} 
-									{{quill-editor content=editorialForQuill height="400px" quillChange='quillChange' disabled=disablePostForm}} 
+									{{input model.subject canShowValidationError=showErrors 	}} 
+									{{quill-editor content=editorialForQuill height="400px" quillChange='quillChange' }} 
 									<small class='pull-right'>Don't forget to add #hashtags</small>
 									{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}
 								</div>
@@ -249,7 +249,7 @@ new flux capacitor
 					</div>
 				</div>
 			</div>
-			{{/form-wrapper}}
+			{{/form-for}}
 			 
 		</div>
 	</div>

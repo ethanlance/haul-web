@@ -50,7 +50,7 @@ app.import('bower_components/underscore/underscore.js');
 
 app.import('bower_components/bootstrap/dist/js/bootstrap.js'); 
 
-app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+
 
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
   destDir: 'assets/fonts'
@@ -59,9 +59,9 @@ app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.w
   destDir: 'assets/fonts'
 });
 
-app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
-  destDir: 'assets'
-});
+// app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
+//   destDir: 'assets'
+// });
 
 app.import('bower_components/ember/ember-template-compiler.js');
 
@@ -85,7 +85,8 @@ app.import('bower_components/ladda-bootstrap/dist/ladda.js');
 
 app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css'); 
 
-//app.import('vendor/ember-validations.js');
+app.import('vendor/ember-easyform.js');
+app.import('vendor/ember-validations.js');
 
 app.import('bower_components/quill/dist/quill.js');
 
@@ -109,6 +110,16 @@ lightboxCssContent = lightboxCssContent.replace(/\.\.\/fonts\//g, 'fonts/');
 lightboxCssContent = lightboxCssContent.replace(/\?(.+?)\'/g, '\'');
 fs.writeFileSync(path.join(lightboxPath, 'css', 'font-awesome.processed.css'), lightboxCssContent);
 app.import(path.join(lightboxPath, 'css', 'font-awesome.processed.css'));
+
+
+
+var lightboxPath = path.join(app.bowerDirectory, 'bootstrap');
+var lightboxCssContent = fs.readFileSync(path.join(lightboxPath, 'dist/css', 'bootstrap.css'),'utf8');
+lightboxCssContent = lightboxCssContent.replace(/\.\.\/fonts\//g, 'fonts/');
+lightboxCssContent = lightboxCssContent.replace(/\?(.+?)\'/g, '\'');
+fs.writeFileSync(path.join(lightboxPath, 'dist/css', 'bootstrap.processed.css'), lightboxCssContent);
+app.import(path.join(lightboxPath, 'dist/css', 'bootstrap.processed.css'));
+
 
 
 module.exports = app.toTree();
