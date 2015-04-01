@@ -4,6 +4,7 @@ import ScrolltoMixin from '../mixins/scrollto';
 export default Ember.Component.extend(ScrolltoMixin, {
 	post:null,
 	currentUserIdBinding: "session.currentUser.id",
+	postIdBinding: "post.id",
 	actions: {
 		btnClick: function() {
 
@@ -13,7 +14,12 @@ export default Ember.Component.extend(ScrolltoMixin, {
 				return;
 			}
 
-			this.sendAction('openModal', 'repost', this.get('post'));			
+			var _this = this;
+			var store = this.container.lookup('store:main'); 
+			store.find('post', this.get('postId') ).then(function(post){
+				_this.sendAction('openModal', 'repost', post);				
+			});
+
 		}
 	}
 });
