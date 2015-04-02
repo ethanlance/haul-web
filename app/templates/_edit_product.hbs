@@ -29,22 +29,21 @@
 						<h4>Give us the details<br>
 							<small>What is it? Color, size, condition, etc.</small>
 						</h4>
-
-						<label>Name it:</label>
-						{{input product_name placeholder="Item name" canShowValidationError=showErrors}} 
+ 
+						{{input product_name placeholder="Item name" label="Name it:"}} 
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">  
-						<label>Describe it:</label>
-						{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" canShowValidationError=showErrors }}
+						
+						{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" label='Describe it:' }}
 					</div> 
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-6"> 
 
-						<label>Quantity:</label>
-						{{input product_quantity class="input-xs" placeholder="quantity" canShowValidationError=showErrors}}
+						
+						{{input product_quantity class="input-xs" placeholder="quantity" label='Quantity:'}}
 					</div>
 
 					<div class="col-md-6 col-sm-6 col-xs-6"> 
@@ -65,10 +64,10 @@
 						{{#input product_price}}
 						<div class="input-group">
 							<span class="input-group-addon">$</span>
-						  	{{input-field product_price class="form-control input-sm" canShowValidationError=showErrors}}
+						  	{{input-field product_price class="form-control input-sm"}}
 						  	<br/>
 						</div>
-						{{#if showErrors}}{{error-field product_price}}{{/if}}
+						{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
 						{{/input}}
 	 				</div>
 				</div>
