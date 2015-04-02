@@ -54,7 +54,7 @@ Router.map(function(){
 	this.route('checkout');	
 
 	//Profiles
-	this.route('new-post');
+	//this.route('new-post');
 	this.resource('profile', {path: '/:username'}, function() {
 		this.route('followers');
 		this.route('following');

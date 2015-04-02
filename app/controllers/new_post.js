@@ -31,87 +31,33 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	//Default value of the quill text editor.
 	editorialForQuill: "",
 
+	showErrors: false,
+
 	//Has product name been entered?
-	//hasProductName: Ember.computed.notEmpty('model.product_name'),
+	hasProductName: Ember.computed.notEmpty('model.product_name'),
+
 
 	//Has product description been entered?
-	//hasProductDescription: Ember.computed.notEmpty('model.product_description'),
+	hasProductDescription: Ember.computed.notEmpty('model.product_description'),
 
 	//Has product price been entered?
-	//hasProductPrice: Ember.computed.notEmpty('model.product_price'),
+	hasProductPrice: Ember.computed.notEmpty('model.product_price'),
 
 	//Has product quanity been entered?
-	//hasProductQuantity: Ember.computed.notEmpty('model.product_quantity'),
+	hasProductQuantity: Ember.computed.notEmpty('model.product_quantity'),
 
 	//Is product filled out and ready for validation?
-	//productReadyForValidation: Ember.computed.and('hasProductName', 'hasProductDescription', 'hasProductPrice', 'hasProductQuantity'),
-
-	//Prepopulate the post.subject with the value of post.product_name
-	prevProductName: '',
-	subjectChanged: function() {
-		var prevProductName = this.get('prevProductName');
-		var product_name = this.get('model.product_name');
-		var subject =	this.get('model.subject');
-		if( (Ember.isEmpty(subject) && !Ember.isEmpty(product_name))  ||  prevProductName === subject ) {
-			this.get('model').set('subject', product_name);
-		}
-		this.set('prevProductName', product_name);
-	}.observes('model.product_name'),
-
-	modelChanged: function() {
-
-		if( !Ember.isEmpty(this.get('model.product_name')) &&
-			!Ember.isEmpty(this.get('model.product_description')) &&
-			!Ember.isEmpty(this.get('model.product_price')) &&
-			!Ember.isEmpty(this.get('model.product_quantity')) 
-		){
-			this.set('productReadyForValidation', true);
-		} else {
-			this.set('productReadyForValidation', false);
-		}
-		
-	}.observes('model.product_name','model.product_description','model.product_price','model.product_quantity'),
-
-	//Observe the product for completeness, and triggers validation on the product
-	//before the user can advance to the post section.
-	productChanged: function() {
-
-		if( this.get('productReadyForValidation') ){
-			var _this = this;
-			var model = this.get('model');
-			model.validate()
-			.then(
-				function valid(){
-					_this.set('disablePostForm', false);
-				},
-				function invalid(errors){
-					if( errors.get('product_name').length > 0 ||
-						errors.get('product_description').length > 0 ||
-						errors.get('product_price').length > 0 ||
-						errors.get('product_quantity').length > 0 || 
-						errors.get('product_status').length > 0 ){
-							_this.set('showErrors', true);
-							_this.set('disablePostForm', true);
-					}else{
-						_this.set('disablePostForm', false);
-					}
-				}
-			);
-		} else {
-			console.log("NOPPE")
-			this.set('disablePostForm', true);
-		}
-
-	}.observes('productReadyForValidation'),
-
+	productReadyForValidation: Ember.computed.and('hasProductName', 'hasProductDescription', 'hasProductPrice'),
 
 	start: function() {
+		
+		this.get('productReadyForValidation');
 
-		// var _this = this;
-		// this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
-		// .then(function(image){
-		// 	_this.selectImage(image);
-		// });
+		var _this = this;
+		this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
+		.then(function(image){
+			_this.selectImage(image);
+		});
 
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
@@ -139,7 +85,55 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			}
 		);
 		
-	}.observes('currentUser'),
+	}.observes('currentUser', 'model'),
+
+
+	//Prepopulate the post.subject with the value of post.product_name
+	prevProductName: '',
+	subjectChanged: function() {
+		var prevProductName = this.get('prevProductName');
+		var product_name = this.get('model.product_name');
+		var subject =	this.get('model.subject');
+		if( (Ember.isEmpty(subject) && !Ember.isEmpty(product_name))  ||  prevProductName === subject ) {
+			this.get('model').set('subject', product_name);
+		}
+		this.set('prevProductName', product_name);
+	}.observes('model.product_name'),
+
+
+	//Observe the product for completeness, and triggers validation on the product
+	//before the user can advance to the post section.
+	isProductReady: function() {
+		if( this.get('productReadyForValidation') ){
+			var _this = this;
+			var model = this.get('model');
+			model.validate()
+			.then(
+				function valid(){
+					_this.set('disablePostForm', false);
+					_this.set('showErrors', false);
+				},
+				function invalid(errors){
+					console.log("ERRORS", errors)
+					if( errors.get('product_name').length > 0 ||
+						errors.get('product_description').length > 0 ||
+						errors.get('product_price').length > 0 ||
+						errors.get('product_quantity').length > 0 || 
+						errors.get('product_status').length > 0 ){
+							_this.set('showErrors', true);
+					}else{
+						_this.set('disablePostForm', false);
+						_this.set('showErrors', false);
+					}
+				}
+			);
+		} else {
+			this.set('disablePostForm', true);
+		}
+
+	}.observes('model.product_name', 'model.product_description', 'model.product_quantity', 'model.product_price'),
+
+
 
 
 	//Observer: anytime our array of selected images changes, update

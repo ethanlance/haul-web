@@ -92,15 +92,13 @@
 
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12"> 
-									<label>Name it:</label>
-									{{input model.product_name canShowValidationError=showErrors }} 
+									{{input product_name  label="Name it:" }} 
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12"> 
-									<label>Describe it:</label>
+								<div class="col-md-12 col-sm-12 col-xs-12">  
 									<label class="small pull-right">(max 2000 characters)</label>
-									{{input model.product_description placeholder="Size, color, condition, etc" as="text" canShowValidationError=showErrors }}
+									{{input product_description placeholder="Size, color, condition, etc" as="text" label="Describe it:" }}
 								</div> 
 							</div>
 							<div class="row">
@@ -109,16 +107,16 @@
 									<label>Price:</label>
 									<div class="input-group">
 										<span class="input-group-addon">$</span>
-									  	{{input-field model.product_price class="form-control input-sm" canShowValidationError=showErrors }}
+									  	{{input-field product_price class="form-control input-sm"}}
 									  	<br/>
 									</div>
-									{{#if showErrors}}<span class="has-error help-block">{{error-field model.product_price}}</span>{{/if}}
+									{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
 									{{/input}}
 								</div>
 							
 								<div class="col-md-6 col-sm-6 col-xs-6"> 
-									<label>Quantity:</label>
-									{{input model.product_quantity class="input-xs" canShowValidationError=showErrors }}
+									
+									{{input product_quantity class="input-xs" label="Quantity:" }}
 				 				</div>
 							</div>
 						</div>
@@ -178,7 +176,7 @@ new flux capacitor
 
 							<div class="row">
 								<div class="col-md-12 col-sm-12 col-xs-12">
-									{{input model.subject canShowValidationError=showErrors 	}} 
+									{{input subject label=" "}} 
 									{{quill-editor content=editorialForQuill height="400px" quillChange='quillChange' }} 
 									<small class='pull-right'>Don't forget to add #hashtags</small>
 									{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}

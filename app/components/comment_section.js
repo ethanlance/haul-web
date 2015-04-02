@@ -114,6 +114,7 @@ export default Ember.Component.extend( PaginateMixin,{
 					mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>')
 				},
 		    	onDataRequest:function (mode, query, callback) {
+
 		      		var data = usernames,
 
 		      		data = _.filter(data, 
@@ -125,11 +126,7 @@ export default Ember.Component.extend( PaginateMixin,{
 		      		callback.call(this, data);
 		    	}
 		  	});
-		});
-
-		
-
-		
+		});		
 	},
 
 	makeModel: function() {
