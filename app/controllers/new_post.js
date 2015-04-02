@@ -53,11 +53,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		
 		this.get('productReadyForValidation');
 
-		var _this = this;
-		this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
-		.then(function(image){
-			_this.selectImage(image);
-		});
+		// var _this = this;
+		// this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
+		// .then(function(image){
+		// 	_this.selectImage(image);
+		// });
 
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
