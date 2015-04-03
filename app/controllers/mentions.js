@@ -75,7 +75,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
 				},
 
-				function error(error){
+				function failure(error){
 					console.log("ERROR", error);
 				}
 			);
