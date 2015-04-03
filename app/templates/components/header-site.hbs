@@ -39,7 +39,7 @@
 			<button type="button" class="btn btn-default btn-messages">
 				<i class="fa fa-envelope-o fa-lg"></i>
 				{{#if session.currentUser.hastUnreadMentions}}
-					<span class="badge pull-right">{{session.currentUser.getUnreadMentionsCount.total}}</span>
+					{{mention-count}}
 				{{/if}}
 			</button>
 			{{/link-to}}

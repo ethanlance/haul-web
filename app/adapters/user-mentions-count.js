@@ -10,4 +10,4 @@ export default ApplicationAdapter.extend({
 		var url = this.get('host') + "/users/" + id + "/comments/total";  
 		return this.ajax(url, 'GET');
 	}
-});
+});	
