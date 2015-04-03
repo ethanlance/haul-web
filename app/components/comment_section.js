@@ -22,8 +22,43 @@ export default Ember.Component.extend( PaginateMixin,{
 	commentsSorting: ['created_at:desc'],
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
+    pollInterval: 3000,
+
+	
+	schedulePoll: function(f) {
+    	var _this = this;
+    	return Ember.run.later(this, function(){
+    		f.apply(this);
+    	}, _this.ENV.pollingTime.comments );
+    },
+
+    onPoll: function() {
+    	var _this = this;
+    	var store = this.container.lookup('store:main');
+    	store.find('post-comment', {post_id: _this.get('postId')})
+    	.then(function() {
+    		_this.set('runPoll', _this.schedulePoll(_this.get('onPoll')));
+		});
+    },
+
+    stopPoll: function() {
+    	Ember.run.cancel(this.get('runPoll'));
+    },
+
+    startPoll: function() {
+    	this.set('runPoll', this.schedulePoll(this.get('onPoll')));
+    },
+
+
+    willDestroyElement: function() {
+    	this.stopPoll();
+    },
+
     didInsertElement: function() {
 
+    	
+    	this.startPoll();
+    	
     	this.startMentions();
 
   		if(this.get('anchor')) {
@@ -54,10 +89,10 @@ export default Ember.Component.extend( PaginateMixin,{
 		});  
 
 		//Set Content.
-		var _this = this;
 		this.paginateMore()
 
 		//The Filter. 
+		var _this = this;
 		var filter = store.filter('post-comment', function(result) {
 			if(result.id && (result.get('post_id') === _this.get('postId'))) {
 				
@@ -69,9 +104,7 @@ export default Ember.Component.extend( PaginateMixin,{
 		});
 		filter.then(function(results){
 			_this.set('pagedContent', results);	
-		})
-		
-		
+		});
 	},
 
 	startMentions: function() {
