@@ -99,8 +99,8 @@ module.exports = function(environment) {
   }
 
   ENV.APP.pollingTime = {
-      comments: 500,
-      mention_count: 5000
+      comments: 15000,
+      mention_count: 15000
   }
 
   ENV.APP.paginationLimit = {
