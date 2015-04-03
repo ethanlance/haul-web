@@ -554,6 +554,11 @@ Ember.EasyForm.Label = Ember.EasyForm.BaseView.extend({
   attributeBindings: ['for'],
   classNameBindings: ['wrapperConfig.labelClass'],
   labelText: function() {
+
+    if( this.get('text') === 'false' ){
+      return '';
+    }
+
     return this.get('text') || Ember.EasyForm.humanize(this.get('property'));
   }.property('text', 'property'),
   templateName: Ember.computed.oneWay('wrapperConfig.labelTemplate')
