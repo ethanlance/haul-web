@@ -1,28 +1,30 @@
 
-<div class="pull-left padding-right">
-{{pinterest-btn
-	
+{{!-- {{pinterest-btn
+	classes="pull-left padding-right"
 	image=post.image.large
 	description=post.subject
 	data-pin-do="buttonPin"
     data-pin-config="beside"
-}}
-</div> 
+}} --}}
 
-<div class="pull-left padding-right">
+
+
 {{facebook-btn
-	
+	classNames="pull-left padding-right"
 	data-layout="button_count"
 }}
-</div> 
 
-<div class="pull-left padding-right">
-{{twitter-btn
-	
-	data-text=post.subject
-	data-size=large
-	data-hashtags="haul"
-	data-count="right"
+
+{{tumblr-btn
+	classes="pull-left padding-right"
+	data-layout="button_count"
 }}
-</div>
-	
+ 
+
+{{twitter-btn
+	classNames="pull-left padding-right"
+	text=post.subject
+	size=large
+	hashtags="haul"
+	count="right"
+}}

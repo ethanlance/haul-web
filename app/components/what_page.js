@@ -66,8 +66,6 @@ export default Ember.Component.extend({
 	// },
 
 	postPage: function() {
-
-		console.log("POST PAGE")
 		this.set('showHeader', true);	
 		var logo = $(".logo");
 		var nav = $("nav");

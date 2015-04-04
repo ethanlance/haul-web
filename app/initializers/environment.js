@@ -14,6 +14,7 @@ export default {
     	application.inject('application', 'ENV', 'environment:main');
     	application.inject('adapter', 'ENV', 'environment:main');
     	application.inject('model', 'ENV', 'environment:main');
+    	application.inject('service', 'ENV', 'environment:main');
 
 		application.advanceReadiness();
 	}

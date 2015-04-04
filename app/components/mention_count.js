@@ -33,7 +33,6 @@ export default Ember.Component.extend({
     },
 
     totalChanged: function() {
-        console.log("TOTAL CHANGE");
         this.flash();
     }.observes('total'),
 

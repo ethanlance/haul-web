@@ -18,12 +18,12 @@ var app = new EmberApp({
 
 	sourcemaps: ['js'],
 
-	inlineContent: {
-		//'braintree' : {file: 'public/assets/scripts/braintree.js'},
-		'twitter' 	: {file: 'public/assets/scripts/twitter.js'},
-		'facebook' 	: {file: 'public/assets/scripts/facebook.js'},
-		//'pinterest' : {file: 'public/assets/scripts/pinterest.js'}
-	}
+	// inlineContent: {
+	// 	//'braintree' : {file: 'public/assets/scripts/braintree.js'},
+	// 	'twitter' 	: {file: 'public/assets/scripts/twitter.js'},
+	// 	'facebook' 	: {file: 'public/assets/scripts/facebook.js'},
+	// 	//'pinterest' : {file: 'public/assets/scripts/pinterest.js'}
+	// }
 });
 
 // Use `app.import` to add additional libraries to the generated

@@ -1,31 +1,41 @@
 import Ember from 'ember';
-var $ = Ember.$;
 
 export default Ember.Component.extend({
-  	tagName: 'a',
-  	classNames: 'twitter-share-button',
-  	attributeBindings: [
-		'data-size', 
-		'data-url', 
-		'data-text', 
-		'data-hashtags',
-		'data-count'
-  	],
+	
 
+	tagName: 'div', 
+  
+	// Defaults to current url
+  	url: null, 
+  
+  	text: null, 
+  
+  	via: null, 
+  
+  	related: null, 
+  
+  	hashtags: null, 
+  
+  	count: 'none', 
 
 
 	didInsertElement: function() {
-		this.set('data-url', window.location.href);
+		var _this = this;
+		this.socialApiClient.load().then(function(twttr) {
+	  	if (_this._state !== 'inDOM') { return; }
+	  		_this.twttr = twttr;
+	  		_this.trigger('twitterLoaded');
+		});
+  	},
 
-		function loadTwitter() {
-			if( window.twttr ){
-		  		window.twttr.widgets.load();
-		  		$('iframe.twitter-share-button').css('width', '78px');    
-		  		clearInterval(tInterval);
-			}
-		}
-
-	  	var tInterval = setInterval(function(){ loadTwitter() }, 500);
-		  
-	}
+  	createTwitterShareButton: Ember.on('twitterLoaded', function() {
+	
+		this.twttr.widgets.createShareButton(
+			this.get('url'),
+			this.get('element'), {
+				count: this.get('count'),
+				text: this.get('text')
+	  		}).then(function (/*el*/) {
+	  	});
+  	})
 });

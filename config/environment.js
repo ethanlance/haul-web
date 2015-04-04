@@ -69,7 +69,7 @@ module.exports = function(environment) {
 
 		ENV.APP.pollingTime = {
 			comments: 10000,
-			mention_count: 1000
+			mention_count: 10000
 		}
 	}
 
