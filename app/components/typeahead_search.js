@@ -141,7 +141,7 @@ export default Ember.Component.extend({
 		search.initialize();
  
 		//Setup
-		$('.search-wrapper input').typeahead(null, {
+		$('.btn-search input').typeahead(null, {
 			name: 'search', 
 			highlight: true,
 			displayKey: 'name',
@@ -193,7 +193,7 @@ export default Ember.Component.extend({
 		});
 
 		//On click of result.
-		$('.search-wrapper input').bind('typeahead:selected', function(obj, data) {   
+		$('.btn-search input').bind('typeahead:selected', function(obj, data) {   
 			var type = _this.get('searchType');
 			var store = _this.container.lookup('store:main'); 
 			var qt;

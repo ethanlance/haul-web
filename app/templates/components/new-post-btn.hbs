@@ -1,5 +1,5 @@
-<button {{action 'btnClick'}} class="btn btn-default btn-sell">
-	<i class="fa fa-camera-retro fa-lg"></i>
-	{{btn-text}}
-</button>
-
+{{#if iconOnly}}
+<i {{action 'btnClick'}} class="fa fa-camera fa-2x"></i>
+{{else}}
+<button {{action 'btnClick'}} class="nav-add-post">{{btn-text}}</button>
+{{/if}}

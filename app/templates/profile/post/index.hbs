@@ -1,54 +1,21 @@
-{{what-page currentPage=currentPage page=thisPage}}
+<div class="container-fluid">
 
-<div class="container-fluid haul-content post-page">
-	<div class="row haul-content-row">
-		<div class="col-md-7 col-sm-7 col-xs-12">
+<div class="haul-wrapper ">
+
+	<div class="haul-content">
+
+		<div class="col-left">
 			
+			<div class="product-post">
+				
+				<div class="moment">{{format-date updated_at}}</div>
 
+				<h1 class="subject">{{ subject }}</h1>
 
-			{{!-- CITATION --}}
-			{{!-- CITATION --}}
-			{{!-- CITATION --}}
-			{{!-- CITATION --}}
-			{{#if isRepost}}
-			<div class="post-detail-citation"> 
-
-				<span class="image">
-					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-						{{ make-icon icon=repost_user.icon isSmall=true }}
-					{{/link-to}}
-				</span>
-				<span class="name">
-					{{#link-to  "profile.post" repost_user repost.post_id repost.post_slug}}
-						@{{repost_user.username}}'s post
-					{{/link-to}}
-				</span>  
-
-				<span class="glyphicon glyphicon-retweet"></span><span class="rehauled">reposted by</span>
-				<span class="name">
-					@{{user.username}} 
-				</span>
-
-					
-			</div>
-			{{/if}}
-
-			
-
-			<div {{bind-attr class=":post-detail isRepost:is-repost"}}>
-
-				{{!-- THE POST --}}
-				{{!-- THE POST --}}
-				{{!-- THE POST --}}
-				{{!-- THE POST --}}
-				<div class="article">
-			
-					<div class="btn-wrapper">
-
-				 		{{!-- <div class="price">${{product_price}}</div> --}}
-
-					 	{{like-btn post=this openModal='openModal' class="display-inline"}}
-					 	
+				<div class="social-buttons">
+					<div class="internal-social-buttons">
+						{{like-btn post=this openModal='openModal' class="display-inline"}}
+						 	
 					 	{{comment-btn post=this class="display-inline" }}
 
 					 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
@@ -60,103 +27,73 @@
 							</button>
 							{{/link-to}}
 						{{/if}}
-			 
 					</div>
 
-					{{!-- POSTER --}}
-					<div class="citation">
-						{{#link-to 'profile' user.username }}
-						<div class="image">
-							{{ make-icon icon=user.icon isSmall=true}}
-						</div>
-						<div class="name">@{{user.username}} says</div>
-						<div class="moment">posted {{format-date updated_at}}</div>
-						{{/link-to}}
+					<div class="external-social-buttons">
+						{{social-btns post=this}}
 					</div>
- 
-
-					<h2>
-						{{ subject }}
-					</h2>
-
-
-
-					{{#unless postHasImage}}
-					<div class="product-image">
-						<img class="img-responsive" {{bind-attr src=image.large}}/>
-					</div>
-					{{/unless}}
- 
-					{{!-- EDITORIAL --}}
-					<div class="editorial">
-						{{sanitize-html body "editorial"}}
-					</div>
-
-					{{comment-section openModal='openModal' post=this anchor=anchor class="display-inline" }}
-				
-				</div>	
-			</div> 
-		</div> 
-
-
-
-
-
-
-
-		{{!-- SELLER --}}
-		<div class="col-md-4 col-sm-4 col-xs-12">
-
-			<h3 class="sidebar-header">For Sale</h3>
-			<div class="sidebar">
-				<div class="seller">
-
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<div class="row">
-								<div class="col-md-6 col-sm-6 col-xs-6">
-									{{#link-to 'profile' product_user.username}}{{ make-icon icon=product_user.icon isSmall=true}}{{/link-to}}							
-
-									<div class="info-block">
-										<h1>{{#link-to 'profile' product_user.username}}{{product_user.name}}{{/link-to}}</h1>
-										<div class="username">{{#link-to 'profile' product_user.username}}@{{product_user.username}}{{/link-to}}</div> 
-									</div>
-									
-								</div>
-
-								<div class="col-md-6 col-sm-6 col-xs-6 text-center">
-									
-									{{buy-btn post=this multiline='true' class="display-inline"}} 
-									
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-
-							{{#if product_images}}
-								{{image-carousel content=product_images}}
-							{{/if}}
-							
-							{{social-btns post=this}}
-
-						</div>
-					</div>
- 
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							<h3>{{product_name}}</h3>
-							{{sanitize-html product_description "description"}}
-						</div>
-					</div>
-					
 				</div>
+
+				{{!-- EDITORIAL --}}
+				<div class="editorial">
+					{{#unless postHasImage}}
+						<img {{bind-attr src=image.large}}/>
+					{{/unless}}
+
+					{{sanitize-html body "editorial"}}
+				</div>
+
+
+				{{comment-section openModal='openModal' post=this anchor=anchor class="display-inline" }}
+
 			</div>
+
 		</div>
 
+		<div class="col-right">
+			
+			<div class="product-card">
+				<div class="product-card-cap">
+					For Sale
+				</div>
 
-		<div class="col-md-1 col-sm-1 col-xs-12"></div>
+				<h2>{{product_name}}</h2>
+
+
+				<div class="profile-pod">
+					<img class="profile-image" {{bind-attr src=product_user.icon}}>
+
+					<div class="profile-name">
+						<span class="name">{{product_user.name}}</span>
+						<span class="username">@{{product_user.username}}</span>
+					</div>
+				</div>
+
+				<div class="price">
+					${{product_price}}
+				</div>
+
+				<button class="btn-buy">
+					BUY THIS
+				</button>
+
+
+				{{#if product_images}}
+					{{image-carousel content=product_images}}
+				{{/if}}
+
+				<div class="description">
+					{{sanitize-html product_description "description"}}
+				</div>
+
+				{{#link-to "profile.post" product_user.username product_post.post_id product_post.subject}}
+				<div class="link-to-post">Read Post <i class="fa fa-angle-double-right"></i></div>
+				{{/link-to}}
+			</div>
+
+		</div>
+
 	</div>
+
+</div>
 </div>

@@ -1,28 +1,43 @@
-<div class="row padding-top comments">
+
+<div class="row padding-top comments-section">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		
+		<div class="comment-section-nav">
+			<span class="comment-count">{{totalComments}} Comments</span>
+			<span class="likes-count">{{totalLikes}} Likes</span>
+		</div>
+
+
 		{{!-- COMMENT FORM --}}
-		<div class="row" id="leaveComment">
-			<div class="col-md-12 col-sm-12 col-xs-12 ">
-			<h4>Comments</h4>
+		<div class="row comment-box" id="leaveComment">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+			
+			
 			{{#form-for model}}
 
-				{{input comment as="text" placeholder="add a comment..." class="commentbox"  label="false"}}
+				<img class="profile-image" {{bind-attr src=session.currentUser.icon}}>
 				
-	    		<div {{bind-attr class="showServerErrors:show:hide :alert"}}>{{{serverErrorMessage}}}</div>
-	  			
-				<div class="text-right">
-					
+				<div {{bind-attr class=" showSubmitCommentButton:visible:invisible"}}>
+						
 					{{ladda-btn
 						name='post comment'
 						class="display-inline"
-						btnClasses='btn btn-default ladda-button'
+						btnClasses='btn btn-default ladda-button comment-submit'
 						btnClick='submit'
 						spin=isProcessing
 					}}
 
 				</div>
+
+				<div class="comment-input">
+					{{input comment as="text" placeholder="Write a comment..." class="commentbox"  label="false"   }}
+					
+		    		<div {{bind-attr class="showServerErrors:show:hide :alert"}}>{{{serverErrorMessage}}}</div> 
+				</div>
 			{{/form-for}}
+
+	
+			
 			</div>
 		</div>
 
@@ -34,17 +49,20 @@
 
 
 				{{#each item in sortedComments }}
-				<div class="comment">
-					<div {{bind-attr class="canDelete:show:hide"}}>
-						<div {{action "delete" item}}class="btn btn-default btn-sm btn-delete"><span class="glyphicon glyphicon-remove"></span></div>
-					</div>
-					<div class="image">
-						{{#link-to 'profile' item.user.username }}{{ make-icon icon=item.user.icon isSmall=true}}{{/link-to}}
-					</div>
-					<div class="single-comment">
+				<div class="comment-section-row">
+						
+					<button {{action "delete" item}} {{bind-attr class=":btn :btn-default :btn-sm :btn-delete canDelete:show:hide"}}>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+					
+					
+					{{#link-to 'profile' item.user.username }}<img class="profile-image" {{bind-attr src=item.user.icon}}>{{/link-to}}
+
+					<div class="comment-section-comment">
 						<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.name}}{{/link-to}}</span>
-						<span class="comment-string">{{sanitize-html item.comment "comment"}}</span>
-						<span class="moment">{{ format-date item.created_at }}</span>
+						<span class="username">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}}</span>
+						<div class="moment">{{ format-date item.created_at }}</div>
+						<div class="comment">{{sanitize-html item.comment "comment"}}</div>
 					</div>
 				</div>
 				{{/each}}
@@ -54,7 +72,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 
-				<button {{action 'fetchMore'}} {{bind-attr class=":btn :btn-default hasMore::disabled"}}>load more</button>
+				<button {{action 'fetchMore'}} {{bind-attr class=":btn :btn-default :load-more-btn hasMore::disabled"}}>LOAD MORE</button>
 
 			</div>
 		</div>

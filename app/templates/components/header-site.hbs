@@ -1,69 +1,67 @@
+{{#if session.isAuthenticated }}
 <nav>
-	<div class="logo">
-		{{#link-to "home"}}Haul{{/link-to}}
-	</div>
-
-	<div class="container-fluid">
-
-	{{#if  session.isAuthenticated }}
-
-{{!-- 		{{#link-to 'home' }}
-		<button class="btn btn-default btn-home"> 
-			<i class="fa fa-home fa-lg"></i>
-		</button> 
-		{{/link-to}} --}}
-
-		{{new-post-btn openModal='openModal' btn-text="New Post" class="display-inline"}}
-
+	<div class="nav">
 		
-		{{!-- {{#link-to 'new-post' }}
-		<button class=" btn btn-default btn-sell">
-			<span class="glyphicon glyphicon-camera"></span>
-			<i class="fa fa-camera-retro fa-lg"></i>
-			Post
-		</button> 
-		{{/link-to}} --}}
+		<div class="logo">
+			{{#link-to "home"}}HAUL{{/link-to}}
+		</div>
+
+
+		{{!-- When browser is collapsed --}}
+		<div class="nav-link-wrapper-collapse">
+ 
+ 
+				{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-home fa-2x"></i>{{/link-to}}
+			 
+ 
+				{{#link-to 'mentions' }}
+					<i class="fa fa-envelope-o fa-2x"></i>
+					{{#if session.currentUser.hastUnreadMentions}}
+						{{mention-count}}
+					{{/if}}
+				{{/link-to}}
+		 
+ 
+				<i {{action 'toggle'}} class="fa fa-search fa-2x"></i> 
+
+			{{new-post-btn openModal='openModal' btn-text="ADD A NEW POST" iconOnly='true' class="display-inline"}}
+
+		</div>	
 		
 
-		
 
-		{{typeahead-search class="display-inline" goToRoute='goToRoute'}}
+		{{!-- When browser is NOT collapsed --}}
+		<div class="nav-link-wrapper">
+			<div class="nav-link home">
+				{{#link-to 'home' }}HOME{{/link-to}}
+			</div>	
 
+			<div class="nav-link">
+				{{#link-to 'profile' search }}DISCOVER{{/link-to}}
+			</div>	
 
+			<div class="nav-link">
+				{{#link-to 'profile' session.currentUser.username }}MY POSTS{{/link-to}}
+			</div>	
 
-		{{#if session.currentUser.username }}
-		<div class="btn-group btn-profile">
+			<div class="nav-link">
+				{{#link-to 'mentions' }}
+					{{#if session.currentUser.hastUnreadMentions}}
+						{{mention-count}}
+					{{/if}}MENTIONS
+				{{/link-to}}
+			</div>	
 
-			{{!-- //Messages --}}
-			{{#link-to 'mentions' }}
-			<button type="button" class="btn btn-default btn-messages">
-				<i class="fa fa-envelope-o fa-lg"></i>
-				{{#if session.currentUser.hastUnreadMentions}}
-					{{mention-count}}
-				{{/if}}
-			</button>
-			{{/link-to}}
-
-
-
-			{{#link-to 'home' }}
-			<button class="btn btn-default btn-home"> 
-				<i class="fa fa-home fa-lg"></i>
-			</button> 
-			{{/link-to}}
-
-			{{!-- //Profile Button --}}
-			{{#link-to 'profile' session.currentUser.username }}
-			<button type="button" class="btn btn-default btn-icon">
-				{{ make-icon icon=session.currentUser.icon isSmall=true}} 
-			</button>
-			{{/link-to}}
+			<div {{action 'toggle'}} class="nav-link">
+				<i class="fa fa-search"></i> SEARCH
+			</div>	
+		</div>	
 
 
-			{{!-- //Setting Dropdown Button --}}
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			  <i class="fa fa-cog fa-lg"></i>
-			</button>
+		<div class="nav-profile">
+			
+			{{#link-to 'profile' session.currentUser.username }}<img {{bind-attr src=session.currentUser.icon}}>{{/link-to}}
+			
 			<ul class="dropdown-menu dropdown-menu-right" role="menu">
 				
 				<li>{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-user"></i> Profile{{/link-to}}</li>
@@ -77,28 +75,33 @@
 				<li class="divider"></li>
 				<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
 			</ul>
-		</div>
-		{{else}}
-		<div class="btn-group btn-profile">
-			{{#link-to 'signupusername' }}
-			<button type="button" class="btn btn-default">
-				{{ make-icon icon=session.currentUser.icon isSmall=true}} 
-			</button>
-			{{/link-to}}
-		
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			  <span class="glyphicon glyphicon-cog"></span>
-			</button>
-			<ul class="dropdown-menu dropdown-menu-right" role="menu">
-				<li>{{#link-to 'signupusername'}}Pick a username to get started...{{/link-to}}</li>
-				<li class="divider"></li>
-				<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
-			</ul>
-		</div>
-		{{/if}}
-	
 
-	{{else}}
+		</div>
+
+		{{new-post-btn openModal='openModal' btn-text="ADD A NEW POST" class="display-inline collapse"}}
+
+	</div>
+</nav>
+
+{{else}}
+
+<nav>
+	<div class="nav">
+		
+		<div class="logo">
+			{{#link-to "home"}}HAUL{{/link-to}}
+		</div>
+		
+		<div class="nav-link-wrapper">
+
+			<div class="nav-link">
+				{{#link-to 'profile' search }}DISCOVER{{/link-to}}
+			</div>	
+
+			<div class="nav-link">
+				<i class="fa fa-search"></i> SEARCH
+			</div>	
+		</div>	
 
 
 		{{#link-to 'signup'}}<button type="button" class="btn btn-default btn-signup">SIGNUP</button>{{/link-to}}
@@ -106,7 +109,10 @@
 
 		{{#link-to 'haul.about'}}<button type="button" class="btn btn-default btn-signup">ABOUT</button>{{/link-to}}
 
-	{{/if}}
-
 	</div>
 </nav>
+{{/if}}
+
+<div {{bind-attr class=":search toggle:expand"}}>
+	{{typeahead-search  goToRoute='goToRoute'}}
+</div>

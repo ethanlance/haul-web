@@ -1,7 +1,7 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
 	tagName: 'span',
-	classNames: 'badge pull-right',
+	classNames: 'nav-link-badge',
 	totalBinding: 'session.currentUser.getUnreadMentionsCount.total',
 
 	schedulePoll: function(f) {

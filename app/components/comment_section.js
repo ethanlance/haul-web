@@ -16,6 +16,10 @@ export default Ember.Component.extend( PaginateMixin,{
 	currentUserBinding: "session.currentUser",
 	currentUserIdBinding: "session.currentUser.id",
 
+	totalLikesBinding: "post.likesCount.total",
+	totalCommentsBinding: "post.commentCount.total",
+	showSubmitCommentButton: false,
+
 	model:null,
 	comments: null,
 	comment_box:null,
@@ -105,6 +109,18 @@ export default Ember.Component.extend( PaginateMixin,{
 		filter.then(function(results){
 			_this.set('pagedContent', results);	
 		});
+
+
+		Ember.$(this.get('element')).find('textarea').keypress(function(e){
+
+			$(e.currentTarget).css('outline', 0);
+
+			if( e.currentTarget.value ){
+				_this.set('showSubmitCommentButton', true);
+			}else{
+				_this.set('showSubmitCommentButton', false);
+			}
+		})
 	},
 
 	startMentions: function() {
@@ -189,7 +205,7 @@ export default Ember.Component.extend( PaginateMixin,{
 			isProcessing: false,
 		});
 	},
-
+ 
 	saveModel: function() {
 
 		//this.reset();
@@ -199,7 +215,8 @@ export default Ember.Component.extend( PaginateMixin,{
 			this.sendAction('openModal', 'loginmodal', {});
 			return;
 		}
-		
+
+
 		var _this = this; 
 		var store = this.container.lookup('store:main');
 		var model = this.get('model');
@@ -234,6 +251,8 @@ export default Ember.Component.extend( PaginateMixin,{
 				_this.updateCommentCount('up');
 
 				_this.get('comment_box').mentionsInput('reset');
+
+				_this.set('showSubmitCommentButton', false);
 				
 			},
 			function(error){ 
@@ -275,7 +294,6 @@ export default Ember.Component.extend( PaginateMixin,{
 		},
 
 		submit: function() {
-			console.log("BTN CLIC?") 
 			this.saveModel();	
 		}
 	}

@@ -1,5 +1,4 @@
-<button type="button" class="btn btn-default" 
-	{{ action 'btnClick'}} >
+<button type="button" class="btn btn-default" {{ action 'btnClick'}} >
+	<i {{bind-attr class=":fa :fa-heart userLikes:red"}}></i> 
 	{{ total }}
-	<span {{bind-attr class=":glyphicon :glyphicon-heart userLikes:red"}}></span>
 </button>	

@@ -30,6 +30,11 @@ export default Ember.Component.extend({
       		_this.$().html('<div class="fb-share-button" ' + attrs.join(' ') +'></div>');
 
       		FB.XFBML.parse(_this.get('element'));
+
+      		// Ember.run.later(function(){
+      		// 	console.log("$('.fb-share-button span')", $('.fb-share-button').find('span'));
+      		// 	$('.fb-share-button').find('span').css('margin-top', '-30px');
+      		// }, 300);
     	});
 		
 	},
