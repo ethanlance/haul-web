@@ -1,35 +1,37 @@
 
 
-<div class="container haul-content">  
-	<div class="row">
-		<div class="col-md-3 col-sm-3 col-xs-12"></div>
-		<div class="col-md-6 col-sm-6 col-xs-12 padding-top">
+<div class="container">  
+	<div class="haul-content">
+		<div class="row">
+			<div class="col-md-3 col-sm-3 col-xs-12"></div>
+			<div class="col-md-6 col-sm-6 col-xs-12 padding-top">
 
 
-			{{!-- //CONTENT --}}
-			{{#each item in sortedContent}}
-				{{profile-badge profile=item.user}} 
-			{{/each}}
-			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-				<i class="fa fa-spinner fa-spin"></i>
-			{{/infinite-scroll}}
+				{{!-- //CONTENT --}}
+				{{#each item in sortedContent}}
+					{{profile-badge profile=item.user}} 
+				{{/each}}
+				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+					<i class="fa fa-spinner fa-spin"></i>
+				{{/infinite-scroll}}
 
 
-			{{!-- //NO CONTENT CTA --}}
-			{{#unless pagedContent }}
-				<div class="padding-top text-center font-weak">
-				{{#unless isProfileOwner}}
-					{{user.username}}  has no followers :(
-				{{else}}
-					You have no followers :(
-				{{/unless}} 
-				</div>
+				{{!-- //NO CONTENT CTA --}}
+				{{#unless pagedContent }}
+					<div class="padding-top text-center font-weak">
+					{{#unless isProfileOwner}}
+						{{user.username}}  has no followers :(
+					{{else}}
+						You have no followers :(
+					{{/unless}} 
+					</div>
 
-				<p class="text-center padding-top">
-					<span class="glyphicon glyphicon-bookmark sad-heart"></span>
-				</p>
-			{{/unless}}
-		</div> 
-		<div class="col-md-3 col-sm-3 col-xs-12"></div>	
+					<p class="text-center padding-top">
+						<span class="glyphicon glyphicon-bookmark sad-heart"></span>
+					</p>
+				{{/unless}}
+			</div> 
+			<div class="col-md-3 col-sm-3 col-xs-12"></div>	
+		</div>
 	</div>
 </div>

@@ -1,88 +1,34 @@
 {{header-site goToRoute='goToRoute'}}
 
-<div class="container-fluid haul-content no-section-nav">  
-	<div class="row">
-		<div class="col-md-1 col-sm-1 col-xs-12"></div>
-		<div class="col-md-10 col-sm-10 col-xs-12">
+<div class="container-fluid">
+	<div class="haul-content">  
+		<div class="row">
+			<div class="col-md-1 col-sm-1 col-xs-12"></div>
+			<div class="col-md-10 col-sm-10 col-xs-12">
 
 				<h1>@Mentions</h1>
 
 
+				{{#each post in sortedContent}}
 
+					<div class="mention-owner">
+						{{#link-to 'profile' post.user.username }}<img class="profile-image" {{bind-attr src=post.user.icon}}>{{/link-to}}
 
-					{{!-- //LOADING CONTENT --}}
-					{{#if loading }}
-						{{partial '_spinner'}}
-					{{/if}}
-
-
-
-			<div {{bind-attr class="loading:hide:show :mentions"}}>
-
-
-				<div class="comments">
-					
-
-					{{!-- //CONTENT --}}					
-					{{#each post in sortedContent}}
-					<div {{bind-attr class=":row :comment post.read:read"}}>
-						<div class="col-md-10 col-sm-10 col-xs-9">
-
-							Re: {{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}{{post.subject.subject}}{{/link-to}}	
-
-							<div class="image">
-								{{make-icon icon=post.subject.image.small isSmall=true}}
-							</div>
-							<div class="single-comment">
-								
-								<div class="image padding-top">
-									{{#link-to 'profile' user.username }}{{ make-icon icon=post.user.icon isSmall=true}}{{/link-to}}
-								</div>
-								<div class="single-comment padding-top">
-									
-									<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span> said:
-
-									<br/>
-									
-									<span class="comment-string">{{sanitize-html post.comment "comment"}}</span>
-									
-									<span class="moment">{{ format-date post.created_at }}</span>
-								</div>
-
-							</div>
+						<div class="post-owner-details">
+							<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span>
+							<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
+							<div class="moment">{{ format-date post.created_at }}</div> 
+							<span class="comment">{{sanitize-html post.comment "comment"}}<span class="reply">
+						{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}REPLY{{/link-to}}
+					</span></span>
 						</div>
-
-
-						<div class="col-md-2 col-sm-2 col-xs-3"> 
-
-							{{#unless post.read}}
-								{{ladda-btn
-									name='Mark Read'
-									class="display-inline"
-									btnClasses='btn btn-default btn-sm btn-right  ladda-button'
-									btnClick='markRead'
-									btnClickObj=post
-									spin='false'
-								}}
-							{{/unless}}
-
-							{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}	
-								<button class="btn btn-default btn-sm btn-right margin-top">Reply</button> 
-							{{/link-to}}
-
-						</div>
-
-					</div>
-					{{/each}}
-					{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-						<span>Loading...</span>	
-					{{/infinite-scroll}}
-					
-
-					 
-				</div>
+					</div> 
+				{{/each}}
+				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+					<span>Loading...</span>	
+				{{/infinite-scroll}}
 			</div>
+			<div class="col-md-1 col-sm-1 col-xs-12"></div>
 		</div>
-		<div class="col-md-1 col-sm-1 col-xs-12"></div>
 	</div>
 </div>
