@@ -1,0 +1,141 @@
+
+.haul-wrapper {
+	width: 100%;  
+	margin:0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto; 
+	text-align: center;
+}
+
+
+.haul-content {
+	margin:0;
+	padding:0;
+	display: inline-block;
+	width: 100%;
+	max-width: $haul-max-width;
+	text-align: left;
+	//border:1px solid teal;
+
+	.col-left {
+		margin:0;
+		padding:0;		
+		padding-top: 30px;
+		width: 65%;
+		max-width: 690px;
+		float:left;
+		display:inline-block;
+
+		@media (max-width: 990px) {
+			padding-right: 20px;
+		}
+
+		//Collapse Right Col
+		@media (max-width: 750px) {
+			width: 100%;
+		}
+	}
+
+	.col-right { 
+		margin:0;
+		padding:0; 
+		padding-top: 30px;
+		width: 35%;
+		min-height: 200px;
+		max-width: 310px;
+		float:right;
+		display:block;
+		overflow: none !important;
+		//border:1px solid green;
+
+		//Collapse Right Col
+		@media (max-width: 750px) {
+			padding-top:50px;
+			width: 100%;
+			float:none;
+			display:table;
+			margin:auto; 
+		}
+	}
+
+}
+
+
+
+
+
+.haul-wrapper2 {
+	width: 100%;  
+	margin:0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto; 
+	text-align: center;
+	//background-color: #EDEEE8;
+}
+
+.haul-content2 {
+
+	position:relative;
+	
+	margin:0;
+	padding:0;
+
+	display: inline-block;
+	width: 100%;
+	max-width: $haul-max-width;
+	text-align: left;	
+
+	.col-left2 {
+		background-color: #F5F6F1;
+		margin:0;
+		padding:0;		
+		padding-top: 30px;
+		width: 65%;
+		max-width: 690px;
+		float:left;
+		display:inline-block;
+
+		@media (max-width: 990px) {
+			padding-right: 20px;
+		}
+
+		//Collapse Right Col
+		@media (max-width: 750px) {
+			width: 100%;
+		} 
+	}
+
+	.col-right2 {
+		top:160;
+		right:0;
+		position: fixed;
+		z-index: 3000;
+
+
+		margin:0;
+		padding:0; 
+		width: 31%;
+		min-height: 200px;
+		//max-width: 310px; 
+
+		height: 100%;
+
+		// float:right;
+		// display:block;
+		overflow: none !important;
+		//border:1px solid green;
+
+		background-color: #EDEEE8;
+
+		//Collapse Right Col
+		@media (max-width: 750px) {
+			padding-top:50px;
+			width: 100%;
+			float:none;
+			display:table;
+			margin:auto; 
+		}
+	}
+}

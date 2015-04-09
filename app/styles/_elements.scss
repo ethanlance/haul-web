@@ -1,0 +1,47 @@
+.profile-image {
+	padding:1px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	//display: inline-block;
+	overflow: hidden;
+	.glyphicon-user{
+		font-size:95px;
+		left: -2px;
+	}
+	&.sm {
+		width: 50px;
+		height: 50px;
+		.glyphicon-user{
+			font-size:27px;
+			left:-1px;
+		}
+	}
+}
+
+
+.cta-welcome {
+	padding-top:100px;
+}
+
+
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+	background-color: $primary-color;	
+}
+
+.profile-badge {
+	img{
+		float:left;
+		display:inline-block;
+	}
+	a {
+		padding-left:10px;
+		padding-top:15px;
+		float:left;
+		display:inline-block;
+	}
+	.thumbnail{
+		margin-bottom:0;
+	}
+}

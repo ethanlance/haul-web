@@ -1,0 +1,108 @@
+
+//Header Nav For Profile.
+/* Basic header for a user. */
+header.profile{
+	width: 100%;
+	text-align: center;
+	background-color: #ffffff; 
+	
+	//top:80;
+	//left:0;
+	//position: fixed;
+	z-index: 3000;
+
+	margin:0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	//height: 120px;
+	min-height:120px;
+	//max-height:120px; 
+}
+
+.profile-container{
+	padding:0px;
+	margin:0px; 
+	padding-top: 30px; 
+
+	width:100%;
+	max-width: $haul-max-width;
+	display: inline-block;
+		
+
+
+	.profile-image {
+		padding:0;
+		margin:0;
+		float: left;
+		border-radius: 50%;
+		width: 60px;
+		height: 60px;
+	}
+
+	.profile-name {
+
+		float:left;
+		font-family: "LATO";
+		text-align: left;
+		padding-left: 20px;
+		padding-top: 10px;
+
+		.name{
+			font-size: 20px;
+			text-transform: uppercase;
+			display:block;
+			color: #000000;
+		}
+
+		.username{
+			font-size: 12px;
+			text-transform: lowercase;
+			display:block;
+			color: #8E8E8E;
+			margin-top: -6px;
+		}
+	}
+
+	.btn-follow {
+		margin-top: 1px;
+		float: right;
+		background-color: inherit;
+		border: 1px solid #dfdfdf;
+		color: #BABABA;
+		padding: 10px 20px 10px 20px; 
+		font-size: 14px;
+		text-transform: uppercase;
+	}
+
+	.stats {
+		@media (max-width: 750px) {
+			display:inline-block;
+			padding-top:15px;
+			padding-bottom:20px;
+		}
+	}
+
+	.stat-btn {
+		padding-left: 30px;
+		float:right;
+		text-transform: uppercase;
+		text-align: center;
+		color: #BABABA;
+
+		.total{ 
+			min-height:22px;
+			font-size:16px;
+			display:block;
+		}
+
+		.title {
+			font-size: 12px;
+			display:block;
+		}
+
+		a {
+			text-decoration: none;
+		}
+	}
+}

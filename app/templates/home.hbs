@@ -1,47 +1,63 @@
+<div class="container-fluid">
 
+<div class="haul-wrapper2">
 
+	<div class="haul-content2">
 
-{{!-- PAGE CONTENT --}}
-<div class="container-fluid haul-content">   
-	<div class="row">
-		<div class="col-md-3 col-sm-2 col-xs-12"></div>
-		<div class="col-md-6 col-sm-8 col-xs-12">
-	
-
-		{{!-- //LOADING CONTENT --}}
-		{{#if loading }}
-			{{partial '_spinner'}}
-		{{/if}}
+		<div class="col-left2"> 
 
 
 		{{!-- //CONTENT --}}
-		<div {{bind-attr class="galleryView:gallery"}}>
-		{{#each item in sortedContent}}
-			{{partial 'post'}}	
+		<div {{bind-attr class=":galleryView showGridView:in"}}>
+		{{#each post in sortedContent}}
+			{{#if post.image}}
+				{{partial 'post'}}	
+			{{/if}}
 		{{/each}}
 		</div>
 		{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-			<span>Loading...</span>	
+			<i class="fa fa-spinner fa-spin"></i>
 		{{/infinite-scroll}}
 
 
 		{{!-- //NO CONTENT CTA --}}
-		{{#unless loading }} 
-		{{#unless pagedContent }} 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12 text-center cta-welcome">
+		{{#unless pagedContent }}
+			{{#if isProfileOwner}} 
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 text-center cta-welcome">
+						
+						<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
+						
+						{{new-post-btn openModal='openModal' btn-text='Post Something For Sale' class="display-inline"}}
 				
-				<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
-
-				{{new-post-btn openModal='openModal' btn-text='Post Something For Sale' class="display-inline"}}
-		
-			</div>	
-		</div>  
+					</div>	
+				</div> 
+			{{else}}
+				<div class="padding-top text-center font-weak">
+				{{user.username}} has no posts.
+				<p class="text-center">
+					<span class="glyphicon glyphicon-flash sad-heart"></span>
+				</p>
+				</div>
+			{{/if}}
 		{{/unless}}
-		{{/unless}}
-		 
 
-		</div> 
-		<div class="col-md-3 col-sm-4 col-xs-12"></div>
-	</div>
+
+ 
+		</div>
+
+		<div class="col-right2 grey">
+			<div class="message-center">
+
+				<h2>MENTIONS</h2>
+
+				{{mention-pod}}
+
+			</div>
+		</div>
+	</div> 
 </div>
+ </div>
+
+
+ 

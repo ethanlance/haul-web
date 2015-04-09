@@ -1,0 +1,82 @@
+// MENTIONS
+.mentions {
+	width:100%;
+	display:inline-block;
+	text-align: left;
+	border: none;
+	
+	.comment{
+		width:100%;
+		margin: 0;
+		padding: 0;
+		padding-top:20px;
+		padding-bottom:20px;
+		//border-bottom: 1px solid #ccc;
+		border:none;
+		background-color: #ffffff;
+
+	}
+
+	.comment.read {
+		background-color: #ebebeb;
+	}
+}
+
+.more a{
+	color: $primary-color;
+	font-size: 10px;
+	font-family: LATO;	
+}
+ 
+.reply a{
+	color: $primary-color;
+	font-size: 10px;
+	font-family: LATO;
+}
+
+.mention-owner {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #cccccc;
+
+	.profile-image{
+		padding:0;
+		margin:0;
+		float: left;
+		border-radius: 50%;
+		width: 22px;
+		height: 22px;
+		margin-right: 10px;
+	}
+
+	.post-owner-details {
+		float:none;  
+		overflow:hidden;
+		display:block;
+
+		.name a{
+			font-family: LATO;
+			font-size: 12px;
+			color: $primary-color;
+			text-transform: uppercase;
+		}
+		.username a{
+			font-family: LATO;
+			font-size: 12px;
+			color: #cccccc;
+			text-transform: lowercase;
+		}
+		.moment{ 
+			font-family: LATO;
+			font-size: 12px;
+			color: #cccccc;
+			text-transform: lowercase;
+		}
+		.comment{ 
+			margin-top: 10px;
+			font-family: TIMES;
+			font-size: 14px;
+			color: #333333;
+		}
+	}
+}

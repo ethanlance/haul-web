@@ -1,0 +1,23 @@
+
+{{#each post in pagedContent}}
+
+	<div class="mention-owner">
+		{{#link-to 'profile' post.user.username }}<img class="profile-image" {{bind-attr src=post.user.icon}}>{{/link-to}}
+
+		<div class="post-owner-details">
+			<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span>
+			<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
+			<div class="moment">{{ format-date post.created_at }}</div> 
+			<span class="comment">{{sanitize-html post.comment "comment"}}<span class="reply">
+		{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}REPLY{{/link-to}}
+	</span></span>
+		</div>
+	</div>
+
+	
+
+	
+
+{{/each}}
+
+<span class="more">{{#link-to 'mentions'}}MORE{{/link-to}}</span>

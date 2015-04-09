@@ -1,77 +1,90 @@
+<div class="product-post">
 
+	<div class="post-owner">
+		{{#link-to 'profile' post.user.username }}<img class="profile-image" {{bind-attr src=post.user.icon}}>{{/link-to}}
 
-<div class="post">   
-
-	<div class="citation">
-		{{!-- CITATION --}}
-		{{!-- CITATION --}}
-		{{!-- CITATION --}}
-		{{!-- CITATION --}}
-		{{#if repost_user}} 
-			<span class="glyphicon glyphicon-retweet"></span>
-			<span class="name">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}} <span class="rehauled">reposted</span>
-			</span>
-
-			
-			<span class="image">
-				{{#link-to  "profile.post" item.repost_user item.repost.post_id item.repost.post_slug}}
-					{{ make-icon icon=item.repost_user.icon isSmall=true }}
-				{{/link-to}}
-			</span>
-			<span class="name">
-				{{#link-to  "profile.post" item.repost_user item.repost.post_id item.repost.post_slug}}
-					@{{repost_user.username}}
-				{{/link-to}}
-			</span>
-			<div class="moment">posted {{format-date item.updated_at}}</div>
-			
-
-		{{else}}
- 
-		
-			
-			<span class="image">
-				{{#link-to 'profile' user.username }}{{ make-icon icon=item.user.icon isSmall=true }}{{/link-to}} 
-			</span>
-			<span class="name">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}} </span> 
-			<div class="moment">posted {{format-date item.updated_at}}</div>
-			
-
-		{{/if}}
-
-	</div>
-
-	<div class="article">
-		
-		<h2>
-			{{#link-to 'profile.post' item.user.username item.post_id item.post_slug (query-params anchor="null")}}{{subject}}{{/link-to}}
-		</h2> 
-
-		
-		<div class="product-image">
-			{{#link-to 'profile.post' item.user.username item.post_id item.post_slug (query-params anchor="null")}}
-				{{#if item.image }}
-				<img class="img-responsive" {{bind-attr src=item.image.large}}>
-				{{else}}
-				<img class="img-responsive" src="/assets/images/blank-thumb.png">
-				{{/if}}
-			{{/link-to}}
+		<div class="post-owner-details">
+			<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span>
+			<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
+			<div class="moment">{{ format-date post.created_at }}</div> 
 		</div>
-		 	
-	</div> 
-
-	<div class="btn-wrapper">
-
-		{{buy-btn post=item class="display-inline"}} 
-
-		{{like-btn post=item openModal='openModal' class="display-inline"}}
-
-	 	{{#link-to 'profile.post' item.user.username item.post_id item.post_slug  (query-params anchor="comments")}}
-	 		{{comment-btn linkOff='true' post=item class="display-inline" }}
-	 	{{/link-to}}
-		
-		{{repost-btn post=item openModal='openModal' class="display-inline" }}
-	 	
 	</div>
+
+					 
+
+	<h1 class="subject">{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}</h1>
+
+
+
+	{{!-- //REPOST --}}
+	{{#if post.repost_id}}
+	<div class="repost-citations">
+		<i class="fa fa-retweet"></i>
+		<img class="profile-image" {{bind-attr src=post.repost_user.icon}}>
+		<span class="name">{{post.repost_user.name}}'s </span>
+		<span class="title"> original post
+			{{#link-to 'profile.post'
+				post.repost.user.username 
+				post.repost.post_id 
+				post.repost.subject}}{{post.repost.subject}}{{/link-to}}
+		</span>
+	</div>
+	{{/if}}
+
+
+
+
+	<div class="social-buttons">
+		<div class="internal-social-buttons">
+			{{like-btn post=post openModal='openModal' class="display-inline"}}
+			 	
+		 	{{comment-btn post=post class="display-inline" }}
+
+		 	{{repost-btn post=post openModal='openModal' class="display-inline"}}
+		</div>
+
+		<div class="external-social-buttons">
+			{{social-btns post=post}}
+		</div>
+	</div>
+
+	{{!-- EDITORIAL --}}
+	<div class="editorial">
+		{{#unless postHasImage}}
+			{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}<img {{bind-attr src=post.image.large}}/>{{/link-to}}
+		{{/unless}}
+	</div>
+
+	<div class="product-feed-post-card">
+		<div class="card-details-box">
+			
+			<h3>{{post.subject}}</h3>
+
+			<div class="profile-pod">
+				<img class="profile-image" {{bind-attr src=post.product_user.icon}}>
+
+				<div class="profile-name">
+					<span class="name">{{post.product_user.name}}</span>
+					<span class="username">@{{post.product_user.username}}</span>
+				</div>
+			</div>
+			
+			<div class="price">
+				${{post.product_price}}
+			</div>
+
+			<button class="btn-buy">
+				BUY THIS
+			</button>
+
+		</div>
+		{{!-- <div class="card-image-box">
+			<div class="card-image-mask">
+				<img {{bind-attr src=post.image.thumb}}/>
+			</div>
+			<div class="count">4 photos</div>
+		</div> --}}
+	</div>
+
 
 </div>

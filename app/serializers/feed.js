@@ -37,8 +37,8 @@ extractArray: function(store, primaryType, payload) {
 
 			//repost aka parent post
 			if( result.repost_id ){
-				var repostId = result.repost_id;
-	            data.repost = repostId;
+				data.repost_id = result.repost_id;
+	            data.repost = result.repost_id;
 	            data.repost_body = result.repost_body;
 	            data.repost_user = result.repost_user_id;
 			}
