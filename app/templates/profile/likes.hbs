@@ -1,17 +1,17 @@
-{{what-page currentPage=currentPage page=thisPage }}
+
 
 <div class="container-fluid haul-content">   
 	<div class="row">
-		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:col-collapse"}}></div>
-		<div {{bind-attr class=":col-md-6 :col-sm-8 :col-xs-12 showGridView:col-wide"}}>
+		<div class="col-md-3 col-sm-3 col-xs-12"></div>
+		<div class="col-md-6 col-sm-6 col-xs-12 padding-top">
 
 
 			{{!-- //CONTENT --}}
 			<div {{bind-attr class=":galleryView showGridView:in"}}>
 			{{#each like in sortedContent}}
-				{{#with like.post as item }}
+				{{#with like.post as post }}
 					
-					{{render '_post' item}}
+					{{render '_feed_post' post}}
 				
 				{{/with}}
 			{{/each}}
@@ -38,6 +38,6 @@
 
 
 		</div> 
-		<div {{bind-attr class=":col-md-3 :col-sm-2 :col-xs-12 showGridView:col-collapse"}}></div>
+		<div class="col-md-3 col-sm-3 col-xs-12"></div>	
 	</div>
 </div>

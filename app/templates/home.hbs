@@ -11,7 +11,7 @@
 		<div {{bind-attr class=":galleryView showGridView:in"}}>
 		{{#each post in sortedContent}}
 			{{#if post.image}}
-				{{partial 'post'}}	
+				{{partial 'feed_post'}}	
 			{{/if}}
 		{{/each}}
 		</div>

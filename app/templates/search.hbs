@@ -2,7 +2,8 @@
 
 <div class="container-fluid haul-content">
 	<div class="row">
-	 	<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+	 	<div class="col-md-12 col-sm-12 col-xs-12">
+	 		<h1 {{bind-attr class="showResults:hide:show"}}>Discover</h1>
 	    	<h1 {{bind-attr class="showResults:show:hide"}}>{{{typeText}}}  <b>{{queryText}}</b></h1>
 	    </div> 
 	</div>
@@ -12,7 +13,7 @@
 		<div class="col-md-6 col-sm-8 col-xs-12">
 
 
-{{!-- //LOADING CONTENT --}}
+		{{!-- //LOADING CONTENT --}}
 		{{#if loading }}
 			{{partial '_spinner'}}
 		{{/if}}
