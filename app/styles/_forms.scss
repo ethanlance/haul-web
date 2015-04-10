@@ -199,74 +199,6 @@ textarea.form-control {
 	}
 }
 
-.editor-and-gallery{
-	width:100%;
-	display:inline;
-	float:left;
-	margin:0;
-	padding:1px;
-	padding-top: 15px;
-	.editor-gallery {
-
-		width:10%;
-		float:left;
-		display:inline-block;
-		max-height: none;
-		height: 400px;
-		overflow: scroll;
-		background-color: #f8f8f8;
-		border-top: 1px solid #ddd;
-		border-left: 1px solid #ddd;
-		border-right: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-		text-align:center;
-
-		.fa-picture-o { 
-			margin-top:10px;
-			margin-bottom:9px;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		.editor-gallery-icon{
-			border-bottom: 1px solid #ccc;
-		}
-
-		img {
-			width:100%;
-			padding: 2px;
-			border: 1px solid #ccc;
-			margin-bottom:4px;
-			cursor:pointer;
-			opacity: .8;
-
-			&:hover{
-				opacity: 1;
-			}
-		}
-
-		img:first-child{
-		}
-
-		.invisible {
-			visibility: hidden;
-		}
-	}
-
-	.editorWrapper {
-		width:90%;
-		float:left;
-		display:inline-block;
-		border-left:none;
-	}
-	#toolbar{
-		border-left: none;
-		border-right: none;
-	}
-	#editor {
-		padding-left: 15px;
-	}
-}
-
 .error{
   padding: 2px 4px;
   font-size: 90%;
@@ -518,4 +450,82 @@ textarea.form-control {
 
 .footer {
 	padding: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+.editor-and-gallery{
+	width:100%;
+	display:block;
+	float:left;
+	margin:0;
+	padding:1px;
+	padding-top: 15px;
+	
+	.editor-gallery {
+		width:10%;
+		float:left;
+		display:inline-block;
+		
+		max-height: none;
+		height: 400px;
+		overflow: scroll;
+		background-color: #f8f8f8;
+		border-top: 1px solid #ddd;
+		border-left: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		text-align:center;
+
+		.fa-picture-o { 
+			margin-top:10px;
+			margin-bottom:9px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+		.editor-gallery-icon{
+			border-bottom: 1px solid #ccc;
+		}
+
+		img {
+			width:100%;
+			padding: 2px;
+			border: 1px solid #ccc;
+			margin-bottom:4px;
+			cursor:pointer;
+			opacity: .8;
+
+			&:hover{
+				opacity: 1;
+			}
+		}
+
+		img:first-child{
+		}
+
+		.invisible {
+			visibility: hidden;
+		}
+	}
+
+	.editorWrapper {
+		width:90%;
+		float:right;
+		display:inline-block;
+		border-left:none;
+	}
+	#toolbar{
+		border-left: none;
+		border-right: none;
+	}
+	#editor {
+		padding-left: 15px;
+	}
 }
