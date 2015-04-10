@@ -1,13 +1,20 @@
-<nav>
-    <div class="logo">
-        {{#link-to "home"}}Haul{{/link-to}}
-    </div>
 
-    <div class="container-fluid">
-        {{#link-to 'signup'}}<button type="button" class="btn btn-default btn-signup">SIGNUP</button>{{/link-to}}
-        
-        {{#link-to 'login'}}<button type="button" class="btn btn-default btn-login">LOGIN</button>{{/link-to}}
 
-        {{#link-to 'haul.about'}}<button type="button" class="btn btn-default btn-signup">ABOUT</button>{{/link-to}}
-    </div>
+<nav class="anon">
+	<div class="nav">
+		
+		<div class="logo">
+			{{#link-to "home"}}HAUL{{/link-to}}
+		</div>
+		
+
+
+
+		{{#link-to 'signup'}}<button type="button" class="btn btn-default btn-signup">SIGNUP</button>{{/link-to}}
+		{{#link-to 'login'}}<button type="button" class="btn btn-default btn-login">LOGIN</button>{{/link-to}}
+
+		{{#link-to 'haul.about'}}<button type="button" class="btn btn-default btn-signup">ABOUT</button>{{/link-to}}
+
+	</div>
 </nav>
+

@@ -139,3 +139,15 @@ nav {
 		}
 	}
 }
+
+nav.anon {
+	button {
+		float: right;
+		margin-right:20px;
+		margin-top:10px;
+	}
+
+	.nav-link-wrapper {
+		padding-left: 100px;
+	}
+}
