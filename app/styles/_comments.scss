@@ -54,16 +54,16 @@
 		}
 
 		.comment-input {
-
-			//width: 80%;
+  
+			width: 400px; 
 			float:none;
-			display:block;
-			overflow: hidden;
-			//min-height:120px;
+			display:inline-block; 
 
-			textarea {
-				//padding:0;
-				//margin:0;
+			.mentions-input-box{ 
+				background-color: transparent;
+			}
+
+			textarea { 
 				padding-top: 20px;
 				padding-left: 20px;
 				border: 0;
@@ -73,13 +73,14 @@
 				outline: 0 none;
 				outline-style:none;
 				box-shadow:none;
-				border-color:transparent;
+				border-color:transparent; 
 			}
 
 		}
 
 		.comment-submit {
 			float:right;
+			display:block;
 			margin:0;
 			margin-right: -30px;
 			margin-top:30px;

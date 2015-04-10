@@ -17,23 +17,27 @@
 
 				<img class="profile-image" {{bind-attr src=session.currentUser.icon}}>
 				
-				<div {{bind-attr class=" showSubmitCommentButton:visible:invisible"}}>
-						
-					{{ladda-btn
-						name='post comment'
-						class="display-inline"
-						btnClasses='btn btn-default ladda-button comment-submit'
-						btnClick='submit'
-						spin=isProcessing
-					}}
 
-				</div>
 
 				<div class="comment-input">
 					{{input comment as="text" placeholder="Write a comment..." class="commentbox"  label="false"   }}
 					
 		    		<div {{bind-attr class="showServerErrors:show:hide :alert"}}>{{{serverErrorMessage}}}</div> 
 				</div>
+
+
+				<div {{bind-attr class=":comment-submit showSubmitCommentButton:visible:invisible"}}>
+						
+					{{ladda-btn
+						name='post comment'
+						class="display-inline"
+						btnClasses='btn btn-default ladda-button '
+						btnClick='submit'
+						spin=isProcessing
+					}}
+
+				</div>
+				
 			{{/form-for}}
 
 	
