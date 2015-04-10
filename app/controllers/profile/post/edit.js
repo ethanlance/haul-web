@@ -30,18 +30,29 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	canEditProduct: false,
 	openDrawer: false, 
 
-	// reset: function() {
-	// 	this.setProperties({
-	// 		showImageUploadError: false,
-	// 		imageUploadError: "",
-	// 		selectedImages: [],
-	// 		editorialForQuill: "",
-	// 		openDrawer: false,
-	// 		showDeleteModal: false,
-	// 		isProcessing: false,
-	// 		isProcessingDelete: false,
-	// 	})
-	// },
+	prevModelId: false,
+	currentModelId: false,
+
+	currentModelIdChanged: function() {
+		if( this.get('prevModelId') && this.get('prevModelId') !== this.get('currentModelId')  ){
+			this.reset();
+		}
+
+		this.set('prevModelId', this.get('currentModelId'));
+	}.observes('currentModelId'),
+
+	reset: function() {
+		this.setProperties({
+			showImageUploadError: false,
+			imageUploadError: "",
+			selectedImages: [],
+			editorialForQuill: "",
+			openDrawer: false,
+			showDeleteModal: false,
+			isProcessing: false,
+			isProcessingDelete: false,
+		})
+	},
 
 	setup: function() {
 		this.set('canEditProduct', false);
@@ -74,6 +85,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('product_status_options', product_status_options); 
 
 		this.set('editorialForQuill', this.get('model.body'));
+
+		this.set('currentModelId', this.get('model.id'));
 
 	}.observes('model', 'currentUser'),
 
@@ -182,11 +195,19 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	deletePost: function() {
 		var _this = this;		
 		var model = this.get('model');
+		var id = this.get('model.id');
 
 		model.deleteRecord();
 		model.save()
 		.then(function(){
 			return _this.store.find('post-list', {user_id:_this.get('currentUser').get('id')});
+		})
+		.then(function() {
+			//Find this post in the list.
+			console.log("GO FIND ", id)
+			var record = _this.store.getById('post-list', id);
+			console.log('found ', record);
+			_this.store.unloadRecord(record);
 		})
 		.then(function(record){
 			_this.set('isProcessingDelete', false);
