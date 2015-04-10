@@ -1,28 +1,35 @@
 .search { 
 
-	-moz-transition: all 0.2s ease-in-out;
-	-o-transition: all 0.2s ease-in-out;
-	-webkit-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
+	-moz-transition: top 0.2s ease-in-out;
+	-o-transition: top 0.2s ease-in-out;
+	-webkit-transition: top 0.2s ease-in-out;
+	transition: top 0.2s ease-in-out;
 
 
 	width: 100%;
 	text-align: center;
-	height: 0px;
-	display: none;
+	height: 80px;
+	
 
 	margin:0;
 	padding: 0;
+	padding-top:20px;
 	margin-left: auto;
 	margin-right: auto;
+ 	
+	display: inline-block;
+ 	position: fixed;
+ 	top:-30px;
+ 	left:0;
+ 	right:0;
 
-	border: 1px solid pink;
-
+ 	background-color: white;
+	border-bottom: 1px solid #EAEAEA; 
  
 } 
-.search.expand {
-	height: 50px;
-	display:inline;
+.search.expand {  
+	top: 60px;  
+	z-index: 3000;
 }
 
 .twitter-typeahead {
