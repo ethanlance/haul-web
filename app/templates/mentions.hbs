@@ -1,12 +1,27 @@
 {{header-site goToRoute='goToRoute'}}
 
+
+<header class="profile">
+<div class="container-fluid">	
+	<div class="profile-container">
+
+
+		<h1>Mentions</h1>
+
+
+
+	</div>
+</div>
+</header>
+
+
 <div class="container-fluid">
 	<div class="haul-content">  
 		<div class="row">
-			<div class="col-md-1 col-sm-1 col-xs-12"></div>
-			<div class="col-md-10 col-sm-10 col-xs-12">
+			<div class="col-md-2 col-sm-2 col-xs-12"></div>
+			<div class="col-md-8 col-sm-8 col-xs-12  padding-top">
 
-				<h1>@Mentions</h1>
+				
 
 
 				{{#each post in sortedContent}}
@@ -28,7 +43,7 @@
 					<span>Loading...</span>	
 				{{/infinite-scroll}}
 			</div>
-			<div class="col-md-1 col-sm-1 col-xs-12"></div>
+			<div class="col-md-2 col-sm-2 col-xs-12"></div>
 		</div>
 	</div>
 </div>

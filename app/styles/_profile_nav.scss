@@ -29,7 +29,9 @@ header.profile{
 	max-width: $haul-max-width;
 	display: inline-block;
 		
-
+	h1 {
+		float:left;
+	}
 
 	.profile-image {
 		padding:0;
