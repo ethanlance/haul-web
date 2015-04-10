@@ -29,7 +29,7 @@
 } 
 .search.expand {  
 	top: 60px;  
-	z-index: 3000;
+	z-index: $z-index-search;
 }
 
 .twitter-typeahead {
