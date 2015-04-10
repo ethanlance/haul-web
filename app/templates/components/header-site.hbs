@@ -91,14 +91,35 @@
 		<div class="logo">
 			{{#link-to "home"}}HAUL{{/link-to}}
 		</div>
+
+		{{!-- When browser is collapsed --}}
+		<div class="nav-link-wrapper-collapse">
+ 
+ 
+				{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-home fa-2x"></i>{{/link-to}}
+			 
+ 
+				{{#link-to 'mentions' }}
+					<i class="fa fa-envelope-o fa-2x"></i>
+					{{#if session.currentUser.hastUnreadMentions}}
+						{{mention-count}}
+					{{/if}}
+				{{/link-to}}
+		 
+ 
+				<i {{action 'toggle'}} class="fa fa-search fa-2x"></i> 
+
+			{{new-post-btn openModal='openModal' btn-text="ADD A NEW POST" iconOnly='true' class="display-inline"}}
+
+		</div>	
 		
-		<div class="nav-link-wrapper">
-
+		{{!-- When browser is NOT collapsed --}}
+		<div class="nav-link-wrapper"> 
 			<div class="nav-link">
-				{{#link-to 'profile' search }}DISCOVER{{/link-to}}
-			</div>	
+				{{#link-to 'search' }}DISCOVER{{/link-to}}
+			</div>	 
 
-			<div class="nav-link">
+			<div {{action 'toggle'}} class="nav-link">
 				<i class="fa fa-search"></i> SEARCH
 			</div>	
 		</div>	
