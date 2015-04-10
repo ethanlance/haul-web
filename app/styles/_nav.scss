@@ -131,6 +131,7 @@ nav {
 
 		&:hover{
 			.dropdown-menu{
+				z-index: 3000px;
 				display:inline;
 				top:45px;
 				right: 10px;
