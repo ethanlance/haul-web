@@ -125,6 +125,7 @@ nav {
 		float: right;
 		margin-top: 18px;
 		padding-left: 20px;
+		position:relative;
 
 		@media (max-width: 750px) {
 			padding-right: 20px;
@@ -137,10 +138,11 @@ nav {
 
 		&:hover{
 			.dropdown-menu{
+				margin-top:-5px;
 				z-index: $z-index-profile-dropdown;
 				display:inline;
-				top:45px;
-				right: 10px;
+				top:35px;
+				//right: 10px;
 				max-width: 300px;
 			}
 		}
