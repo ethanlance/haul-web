@@ -1,0 +1,25 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal'}}
+<div class="modal-dialog sm text-left">
+	<div class="modal-content">		
+		<div class="modal-header">
+			<button {{action 'close'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h1 class="modal-title" id="myModalLabel">
+				Ooops
+			</h1>
+		</div>
+
+
+		<div>
+			<div class="container-fluid haul-edit">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12 alert"> 
+						{{message}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+ 
+	</div>
+</div>
+{{/modal-modal}}

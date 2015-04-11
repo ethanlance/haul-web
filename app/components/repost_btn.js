@@ -16,9 +16,16 @@ export default Ember.Component.extend(ScrolltoMixin, {
 
 			var _this = this;
 			var store = this.container.lookup('store:main'); 
-			store.find('post', this.get('postId') ).then(function(post){
-				_this.sendAction('openModal', 'repost', post);				
-			});
+
+			store.find('post', this.get('postId') )
+			.then(
+				function foundPost(post){
+					_this.sendAction('openModal', 'repost', post);				
+				},
+				function failedFind(error){
+					_this.sendAction('openModal', 'errorhandler', error);
+				}
+			);
 
 		}
 	}

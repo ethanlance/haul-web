@@ -62,6 +62,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			'repost_id': post.get('post_id'),
 			'repost_user_id': post.get('user').get('id'),	
 		});
+
+		repost.set('body', '');
+		var model = this.get('model');
+		model.set('body', '');
 		
  		//Clone Post:
 		this.set('repost', repost);
@@ -181,7 +185,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			body = " ";
 		}
 		repost.set('body', body);
-
+ 
 		//Get-Set the product status.
 		repost.set('product_status', this.get('product_status_options').get('selectedStatus').id);
 			
