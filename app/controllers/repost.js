@@ -282,6 +282,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		updateSortOrder: function(i) {
 			this.updateSortOrder(i);
-		} 
+		},
+
+
+    	descriptionChange: function(text) { 
+			var model = this.get('repost');
+			model.set('product_description', text);	
+		}
 	}
 });

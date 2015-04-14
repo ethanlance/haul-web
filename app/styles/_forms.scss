@@ -1,4 +1,17 @@
+.form-control {
+	border-radius: 0;
+	box-shadow: none;
+	border: 1px solid #ccc;
+}
 
+#editor{
+	-moz-transition: height 0.2s ease-in-out;
+	-o-transition: height 0.2s ease-in-out;
+	-webkit-transition: height 0.2s ease-in-out;
+	transition: height 0.2s ease-in-out;
+
+	height: 100px; 
+}
 
 //FORM HELPERS
 .input-sm {
@@ -39,6 +52,7 @@ textarea.form-control {
 .upload-images{
 	padding-top:20px;
 	padding-left:15px;
+	margin-bottom: 20px;
 
 	ul.sortable{
 		margin:0;
@@ -461,41 +475,26 @@ textarea.form-control {
 
 
 
-.editor-and-gallery{
-	width:100%;
-	display:block;
-	float:left;
-	margin:0;
-	padding:1px;
-	padding-top: 15px;
+ 
 	
 	.editor-gallery {
-		width:10%;
+		width:100%;
+		height: 70px;
 		float:left;
-		display:inline-block;
-		
-		max-height: none;
-		height: 400px;
+		display:inline-block; 
 		overflow: scroll;
-		background-color: #f8f8f8;
-		border-top: 1px solid #ddd;
-		border-left: 1px solid #ddd;
-		border-right: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
-		text-align:center;
+		///background-color: #f8f8f8;
+		//border-top: 1px solid #ddd;
+		border: 0;
+		border-bottom: 1px solid #ccc;
 
-		.fa-picture-o { 
-			margin-top:10px;
-			margin-bottom:9px;
-			margin-left:auto;
-			margin-right:auto;
-		}
-		.editor-gallery-icon{
-			border-bottom: 1px solid #ccc;
-		}
-
+		padding-left: 10px;
+		padding-top: 5px;
+		
+ 
 		img {
-			width:100%;
+			width:60px;
+			height:60px;
 			padding: 2px;
 			border: 1px solid #ccc;
 			margin-bottom:4px;
@@ -505,27 +504,116 @@ textarea.form-control {
 			&:hover{
 				opacity: 1;
 			}
-		}
-
-		img:first-child{
-		}
-
-		.invisible {
-			visibility: hidden;
-		}
+		}  
 	}
 
-	.editorWrapper {
-		width:90%;
-		float:right;
-		display:inline-block;
-		border-left:none;
+ 
+ 
+
+
+
+.btn-next {
+	background-color: #6FD014;
+	color: #ffffff;
+	border: none;
+	display:inline-block;
+	padding:10px;
+	padding-right: 40px;
+	padding-left: 40px;
+	margin-left: 60px;
+}
+
+.btn-post {
+	background-color: #6FD014;
+	color: #ffffff;
+	border: none;
+	display:inline-block;
+	padding:10px;
+	padding-right: 20px;
+	padding-left: 20px;
+	margin-left: 40px;
+}
+
+.btn-cancel { 
+	font-family: Lato;
+	color: #cccccc;
+	border: none;
+	display:inline-block;
+	padding-top:5px;
+}
+
+
+.edit-wrapper {
+
+	width: 100%;
+
+	h2 {
+		font-size: 24px;
+		font-family: Arvo;
+		color: #333333;
 	}
-	#toolbar{
-		border-left: none;
-		border-right: none;
+
+	.has-error, .help-block, .alert, .error {
+		color: red;
 	}
-	#editor {
-		padding-left: 15px;
+
+	.ql-toolbar {
+		//border-bottom: 1px solid #ccc;
 	}
+
+	.ql-container {
+		text-align: left;
+		border: 1px solid #ccc;
+
+		img {
+			width: 50%;
+			height: 50%;
+			display:block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+
+	input {
+		display:inline;
+	}
+
+	.post-subject {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+
+	.edit-footer {
+		width: 100%;
+		padding-top: 30px;
+		padding-bottom: 20px;
+	}
+
+	.edit-row {
+		width: 100%;
+		padding-top: 10px;
+		padding-bottom: 20px;
+		
+		&.border{
+			border: 0;
+			border-top: 1px solid #ccc;
+		}
+	}
+
+	.edit-col {		
+		padding: 15px;
+		max-width: 670px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+}
+
+.image-drop {
+	cursor: pointer;
+	width: 100%;
+	padding-top:30px;
+	padding-bottom: 30px;
+	color: #ccc;
+	font-size: 16px;
 }

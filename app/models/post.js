@@ -10,6 +10,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	//POST
 	user: DS.belongsTo('user', {async:true}),
 
+	tags: DS.attr('string'),
 	subject: DS.attr('string'),
 	body: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),

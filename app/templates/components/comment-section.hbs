@@ -66,7 +66,7 @@
 						<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.name}}{{/link-to}}</span>
 						<span class="username">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}}</span>
 						<div class="moment">{{ format-date item.created_at }}</div>
-						<div class="comment">{{sanitize-html item.comment "comment"}}</div>
+						<div class="comment">{{sanitizehtml-andtag item.comment "comment"}}</div>
 					</div>
 				</div>
 				{{/each}}

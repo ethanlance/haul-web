@@ -1,18 +1,4 @@
-<div {{bind-attr class="hasGallery:editor-and-gallery border"}}>
-
-{{#if hasGallery}}
-	<div id="gallery" class="editor-gallery"> 
-		<div class="editor-gallery-icon">
-			<i {{action 'toggleGallery'}} class="fa fa-picture-o fa-lg"></i>
-		</div>
-		<div {{bind-attr class="galleryOpen::invisible"}}>			
-			{{#each image in selectedImages}}
-				<img {{bind-attr src=image.small}}/>
-			{{/each}}
-		</div>
-	</div>
-{{/if}}
-
+ 
 	<div class="editorWrapper">
 		<div id="toolbar" class="ql-toolbar ql-snow">
 			<div class="toolbar-btns">
@@ -36,12 +22,19 @@
 
 				</span>
 			</div>
-
 		</div>
+
+
+
+	{{#if hasGallery}}
+		<div id="gallery" class="editor-gallery">   		
+			{{#each image in selectedImages}}
+				<img {{bind-attr src=image.thumb}}/>
+			{{/each}} 
+		</div>
+	{{/if}}
+
 	 
-		<div id="editor">{{sanitize-html content "editorial"}}</div>
-
-
+		<div id="editor">{{sanitize-html content "editorial" }}</div>
 	</div>
-
-</div>	
+ 

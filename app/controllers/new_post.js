@@ -14,12 +14,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	//Have images been selected?
 	imagesAreSelected: Ember.computed.gte('productImageIds.length', 1),
 
-	//Ready to edit product section?
-	disableProductForm: Ember.computed.not('imagesAreSelected'),
-	
-	//Ready to edit post section?
-	disablePostForm: true,
-	
 	product_status_options: null,
 	
 	//Selected image ids
@@ -33,31 +27,25 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	showErrors: false,
 
-	//Has product name been entered?
-	hasProductName: Ember.computed.notEmpty('model.product_name'),
+	stepOne: true,
 
+	stepTwo: false,
 
-	//Has product description been entered?
-	hasProductDescription: Ember.computed.notEmpty('model.product_description'),
+	scrollToTop: false,
 
-	//Has product price been entered?
-	hasProductPrice: Ember.computed.notEmpty('model.product_price'),
+	triggerEditorResize: false,
 
-	//Has product quanity been entered?
-	hasProductQuantity: Ember.computed.notEmpty('model.product_quantity'),
+	stepTwoChanged: function() {
+		this.set('scrollToTop', true);
+		this.doTagInjection();
 
-	//Is product filled out and ready for validation?
-	productReadyForValidation: Ember.computed.and('hasProductName', 'hasProductDescription', 'hasProductPrice'),
-
+		var _this = this;
+		Ember.run.later(function(){
+			_this.set('triggerEditorResize', true);
+		}, 300);
+	}.observes('stepTwo'),
+	
 	start: function() {
-		
-		this.get('productReadyForValidation');
-
-		// var _this = this;
-		// this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
-		// .then(function(image){
-		// 	_this.selectImage(image);
-		// });
 
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
@@ -75,15 +63,24 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return;
 		}
 
+		this.set('stepOne', true);
+		this.set('stepTwo', false);
+		this.set('selectedImages', []);
+
 		this.get('model').setProperties(
 			{
 				'product_quantity':'1',
-				'product_price':'0',
 				'product_currency':'USD',
 				'product_status': 'FOR_SALE',
 				'user': this.get('currentUser')
 			}
 		);
+
+		var _this = this;
+		this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
+		.then(function(image){
+			_this.selectImage(image);
+		});
 		
 	}.observes('currentUser', 'model'),
 
@@ -100,38 +97,56 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('prevProductName', product_name);
 	}.observes('model.product_name'),
 
+	showErrorsChanged: function() {
+		if(this.get('showErrors')){
+			this.set('showErrorBar', true);
+
+			var _this = this;
+			Ember.run.later(function() {
+				_this.set('showErrorBar', false);
+			}, 1000);
+
+		}
+	}.observes('showErrors'),
 
 	//Observe the product for completeness, and triggers validation on the product
 	//before the user can advance to the post section.
-	isProductReady: function() {
-		if( this.get('productReadyForValidation') ){
-			var _this = this;
-			var model = this.get('model');
-			model.validate()
-			.then(
-				function valid(){
-					_this.set('disablePostForm', false);
-					_this.set('showErrors', false);
-				},
-				function invalid(errors){
-					console.log("ERRORS", errors)
-					if( errors.get('product_name').length > 0 ||
-						errors.get('product_description').length > 0 ||
-						errors.get('product_price').length > 0 ||
-						errors.get('product_quantity').length > 0 || 
-						errors.get('product_status').length > 0 ){
-							_this.set('showErrors', true);
-					}else{
-						_this.set('disablePostForm', false);
-						_this.set('showErrors', false);
-					}
-				}
-			);
-		} else {
-			this.set('disablePostForm', true);
+	validateProduct: function() {
+		
+		if( Ember.isEmpty(this.get('selectedImages')) ) {
+			this.set('showImageError', true);
+			this.set('showErrors', true); 
+			return;
 		}
 
-	}.observes('model.product_name', 'model.product_description', 'model.product_quantity', 'model.product_price'),
+
+		var _this = this;
+		var model = this.get('model');
+		model.validate()
+		.then(
+			function valid(){
+				_this.set('stepOne', false);
+				_this.set('stepTwo', true);
+				_this.set('showErrors', false);
+			},
+			function invalid(errors){
+
+
+				if( errors.get('product_name').length > 0 ||
+					errors.get('product_description').length > 0 ||
+					errors.get('product_price').length > 0 ||
+					errors.get('product_quantity').length > 0 || 
+					errors.get('product_status').length > 0 ){
+						_this.set('showErrors', true);
+				}else{
+					_this.set('stepOne', false);
+					_this.set('stepTwo', true);
+					_this.set('showErrors', false);
+				}
+			}
+		);
+		
+	},
 
 
 
@@ -144,6 +159,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return; //bail
 		}
 
+		this.set('showImageError', false);
+
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
 		});
@@ -153,8 +170,52 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var model = this.get('model');
 		model.set('product_image_ids', this.get('productImageIds')); 
 		model.set('image_id', this.get('productImageIds')[0]); 
- 
+
+
+		//If the post body has no content, then add the main image as content.
+		var model = this.get('model');
+		var body = model.get('body');
+		
+		if( Ember.isEmpty(body) ){
+			var image = this.get('selectedImages')[0];
+			
+			this.set('setEditorImgSrc', image.get('small') );
+		}
+
 	}.observes('selectedImages.@each'),
+
+
+	doTagInjection: function() {
+
+		var model = this.get('model');
+		var body = model.get('body');
+		var tags = model.get('tags');
+		
+		if( !Ember.isEmpty(tags) ){
+
+			tags = tags.split(",");
+
+			var str = "";
+			tags.forEach(function(tag){
+				tag = tag.trim();
+
+				var tagW = tag.split(" ");
+				if(tagW.length > 1) {
+					tag = "";
+					for(var i=0; i<tagW.length; i++){
+						tag = tag+tagW[i];
+					}
+				}
+
+				if( tag ) {
+					str += "#" + tag + " ";
+				}
+			});
+
+			this.set('setEditorText', str);			 
+		}
+
+	},
 
 	//Preserves the drag sort order of the images.
 	updateSortOrder: function(indexes) { 
@@ -230,10 +291,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			function success(record){
 				var user = _this.get('currentUser');
 
+				_this.set('animateClose', true);
+
 				_this.transitionToRoute('profile.post', user, _this.get('postRecord'))
 				.then(function() {
 					_this.set('isProcessing', false);
-					_this.set('animateClose', true);
 				});
 			}, 
 			function fail(error){
@@ -248,7 +310,16 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	},
 
 	animateClose:false,
-	actions: {
+	actions: { 
+
+		back: function() {
+			this.set('stepOne', true);
+			this.set('stepTwo', false);
+		},
+
+		next: function() {
+			this.validateProduct();
+		},
 
 		close: function() {
 			this.set('animateClose', true);
@@ -279,6 +350,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		quillChange: function(text) {
 			var model = this.get('model');
 			model.set('body', text);
+		},
+
+		descriptionChange: function(text) { 
+			var model = this.get('model');
+			model.set('product_description', text);	
 		}
 	}
 });

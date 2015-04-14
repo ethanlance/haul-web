@@ -110,13 +110,17 @@ body.modal-open {
 	  	&.sm { 
 	  		width:400px;
 	  	}
+
+	  	&.lg{
+	  		width: 100%;
+	  	}
    	}
 }
 
 
 .modal.in { 
 	.modal-dialog{
-		margin-top: 60px;
+		margin-top: 59px;
 		opacity: 1; 
 
 
@@ -212,9 +216,17 @@ body.modal-open {
 
 //FONTS & GENERAL TEXT MARKUP
 h1, h2, h3, h4, h5, label {
-	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
-	color: #444e55;
+	font-family: Arvo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #333;
 	font-weight: normal;
+
+	small {
+		display: block;
+		font-family: lato;
+		color: #cccccc;
+		font-size: 16px;
+		padding-top:10px;
+	}
 }
 
 a {
@@ -282,6 +294,10 @@ a:hover{
 	margin-top: 20px;
 }
 
+.margin-bottom {
+	margin-bottom: 20px;
+}
+
 .padding-right {
 	padding-right: 10px;
 }
@@ -308,4 +324,22 @@ a:hover{
 
 .left-border {
 	border-left: 1px solid #e3e3e3;
+}
+
+
+.dashed {
+	border: 1px dashed #cccccc;
+}
+
+
+
+.errorBar {
+	width: 100%;
+	background-color: pink;
+	border-bottom: 1px solid red;
+	color: red;
+	padding: 10px;
+	position: fixed;
+	top:59px;
+	z-index: 30000;
 }

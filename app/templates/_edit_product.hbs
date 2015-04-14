@@ -35,14 +35,16 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">  
-						
-						{{input product_description placeholder="Gives us the details. Size, color, condition, etc." as="text" label='Describe it:' }}
+						<label>Describe it:</label>
+						{{description-input descriptionChange='descriptionChange' rollupValue=product_description}}
+
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_description}}</span>
+						{{/if}}
 					</div> 
 				</div>
 				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-6"> 
-
-						
+					<div class="col-md-6 col-sm-6 col-xs-6">  
 						{{input product_quantity class="input-xs" placeholder="quantity" label='Quantity:'}}
 					</div>
 

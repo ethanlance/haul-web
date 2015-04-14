@@ -11,6 +11,8 @@ var LaddaBtnComponent = Ember.Component.extend({
 
 	spin: false,
 
+	dataSpinnerColor: 'black',
+
 	elementId: null,
 
 	btnClasses: null,

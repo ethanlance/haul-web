@@ -364,6 +364,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				//Toggle image from the selection.
 				this.toggleImageSelected(image);
 			}
-    	}
+    	},
+
+    	descriptionChange: function(text) { 
+			var model = this.get('model');
+			model.set('product_description', text);	
+		}
 	}
 });

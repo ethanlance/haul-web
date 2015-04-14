@@ -36,7 +36,7 @@
 							<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span>
 							<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
 							<div class="moment">{{ format-date post.created_at }}</div> 
-							<span class="comment">{{sanitize-html post.comment "comment"}}<span class="reply">
+							<span class="comment">{{sanitizehtml-andtag post.comment "comment"}}<span class="reply">
 						{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}REPLY{{/link-to}}
 					</span></span>
 						</div>

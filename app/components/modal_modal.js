@@ -4,6 +4,14 @@ export default Ember.Component.extend({
 	showModal: false,
 	
 	animateClose: false,
+
+	scrollToTop: false,
+
+	doScrollTop: function() {
+		if( this.get('scrollToTop')) {
+			$('.modal').scrollTop(0);
+		}
+	}.observes('scrollToTop'),
 	
 	didInsertElement: function(){   
 		

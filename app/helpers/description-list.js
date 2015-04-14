@@ -25,5 +25,19 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 
 	var sanitized = sanitize(html, config);
 
-	return new Ember.Handlebars.SafeString(sanitized);
+
+	//Special Case, Probably make new helper... 
+	var str = "";
+	var list = sanitized.split('¶');
+	list.forEach(function(item){
+		item = item.trim();
+		if( item ) {
+			str += "<li>" + item + "</li>";
+		}
+	});
+
+	str = "<ul>" + str + "</ul>";
+
+	return new Ember.Handlebars.SafeString(str);
+ 
 });

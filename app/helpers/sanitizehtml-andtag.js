@@ -25,5 +25,35 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 
 	var sanitized = sanitize(html, config);
 
+
+	//Mentions @username
+	var words = sanitized.split(" ");
+	var match, username, hashtag;
+	var wordHash = [];
+	words.forEach(function(word){
+		console.log("WORD", word);
+		//MENTIONS
+		match = word.match(/^@.*[^\s]$|^[^@].*,$/);
+		if( match) {
+			username = word.split('@')[1];
+	  		if( username !== 'undefined' && username !== undefined ){
+			   word = "<a href='/"+username+"'>" + word + "</a> ";
+	  		}
+		}
+
+		//HASHTAGS
+		match = word.match(/^\#.*[^\s]$|^[^@].*,$/);
+		if( match) {
+			hashtag = word.split('#')[1];
+	  		if( hashtag !== 'undefined' && hashtag !== undefined ){
+			   word = "<a href='/search?q=tag_"+hashtag+"'>#" + hashtag + "</a> ";
+	  		}
+		}
+
+		wordHash.push(word);
+	});
+
+	var sanitized = wordHash.join(" ");	
+
 	return new Ember.Handlebars.SafeString(sanitized);
 });

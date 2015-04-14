@@ -40,7 +40,7 @@
 							<img {{bind-attr src=image.large}}/>
 						{{/unless}}
 
-						{{sanitize-html body "editorial"}}
+						{{sanitizehtml-andtag body "editorial"}}
 					</div>
 
 
@@ -83,7 +83,7 @@
 					{{/if}}
 
 					<div class="description">
-						{{sanitize-html product_description "description"}}
+						{{description-list product_description "description"}}
 					</div>
 
 				{{!-- 	{{#link-to "profile.post" product_user.username product_post.post_id product_post.subject}}

@@ -1,254 +1,189 @@
-{{#modal-modal animateClose=animateClose closeModal='closeModal'}}
-	<div {{bind-attr class=":modal-dialog showSuccess:sm :text-left"}}>
-		<div class="modal-content">
-			
-			<div class="modal-header">
-				
-				<button {{action 'close'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h1 class="modal-title" id="myModalLabel">Create a posting</h1>
-			</div>
-			
 
-			{{#form-for model}}
-			<div class="container haul-edit haul-new-post">
+<div {{bind-attr class=":fade showErrorBar:in:out :errorBar"}}>
+ 	<strong>Oops,</strong> please correct errors on the page.
+</div>
 
 
-				{{!-- GENERAL CATCHALL SERVER ERROR --}}
-				{{partial "_server_error"}}
+
+{{#modal-modal animateClose=animateClose closeModal='closeModal' scrollToTop=scrollToTop}}
+<div {{bind-attr class=":modal-dialog showSuccess:sm:lg :text-left"}}>
+	<div class="modal-content">
+
+
+	<div class="text-center edit-wrapper">
 
 
 
 
-				{{!-- SHOW UPLOAD --}}
-				{{!-- SHOW UPLOAD --}}
-				{{!-- SHOW UPLOAD --}}
-				{{!-- SHOW UPLOAD --}}
-				{{!-- SHOW UPLOAD --}}
-				<div {{bind-attr class=":new-post-uploads"}}> 
-					<div class="row">
-						<div class="col-md-3 col-sm-2 col-xs-12">
-								
-								<span class="number">1</span>
+	{{#form-for model}}
 
-						</div>
-						<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
+		<div {{bind-attr class="stepOne:show:hide"}}>
+			<div class="edit-row">
+				<div class="edit-col">
 
+					<h2>Post something to sell</h2>
 
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12">
-									<h2>Start with photos</h2>
-									{{#image-picker 
-										images=userImages
-										selectedImages=selectedImages
-										refresh='refresh'
-										imageClick='imageClick' 
-										imageDelete='imageDelete'
-										
-										showImagePicker=showImagePicker
-									}} 
-										{{view 'sortable' content=selectedImages}}
-									{{/image-picker}}
-								</div>
-							
+					{{#image-picker 
+						images=userImages
+						selectedImages=selectedImages
+						refresh='refresh'
+						imageClick='imageClick' 
+						imageDelete='imageDelete'
+						
+						showImagePicker=showImagePicker
+					}} 
+						{{view 'sortable' content=selectedImages}}
+					{{/image-picker}}
 
+					{{#if showImageError}}
+						<span class="has-error help-block">A product needs at least one image</span>
+					{{/if}}
 
-								{{!-- <div class="col-md-6 col-sm-6 col-xs-6">
-									<h2>Or a link</h2>
-									<input placeholder="http://..." type="text" class="form-control">
-								</div> --}}
-
-							</div>	
-						</div>
-						<div class="col-md-3 col-sm-2 col-xs-12"></div>
-					</div>
-				</div>
-
-
-
-
-			
-
-
-
-
-
-
-
-
-
-				{{!-- SHOW PRODUCT --}}
-				{{!-- SHOW PRODUCT --}}
-				{{!-- SHOW PRODUCT --}}
-				{{!-- SHOW PRODUCT --}}
-				{{!-- SHOW PRODUCT --}}
-				<div {{bind-attr class=":new-post-product disableProductForm:disable"}}>		
-
-					<div class="row">
-						<div class="col-md-3 col-sm-2 col-xs-12">
-							<span class="number">2</span>
-						</div>
-						<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
-							<h2>Give us the details</h2>
-
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12"> 
-									{{input product_name  label="Name it:" }} 
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12">  
-									<label class="small pull-right">(max 2000 characters)</label>
-									{{input product_description placeholder="Size, color, condition, etc" as="text" label="Describe it:" }}
-								</div> 
-							</div>
-							<div class="row">
-								<div class="col-md-6 col-sm-6 col-xs-6"> 
-									{{#input price}}
-									<label>Price:</label>
-									<div class="input-group">
-										<span class="input-group-addon">$</span>
-									  	{{input-field product_price class="form-control input-sm"}}
-									  	<br/>
-									</div>
-									{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
-									{{/input}}
-								</div>
-							
-								<div class="col-md-6 col-sm-6 col-xs-6"> 
-									
-									{{input product_quantity class="input-xs" label="Quantity:" }}
-				 				</div>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-2 col-xs-12">
-							<div class="describe">
-
-								Describe the item as best you can in a list.  Use new lines.
-								<br>
-								<br>
-								<small>example:
-<pre>
-year 1987,
-silver aluminium,
-good condition,
-five speed,
-new flux capacitor
-</pre>
-								</small>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
-				{{!-- SHOW POST --}}
-				{{!-- SHOW POST --}}
-				{{!-- SHOW POST --}}
-				{{!-- SHOW POST --}}
-				{{!-- SHOW POST --}}
-				<div {{bind-attr class=":new-post-post disablePostForm:disable"}}>
-					<div class="row">
-						<div class="col-md-3 col-sm-2 col-xs-12">
-							
-							<span class="number">3</span>
-						</div>
-						<div class="col-md-6 col-sm-8 col-xs-12 form-fields">
-
-
-							<h2>Write about this item <small>(optional)</small></h2>
-
-
-							<div {{bind-attr class="imagesAreSelected:show:hide :row"}}>
-								<div {{bind-attr class=":col-md-12 :col-sm-12 :col-xs-12"}}>
-									<div class="gallery-wrapper"> 
-										<div class="gallery"> 
-											<div class="gallery-inside">
-												{{#each image in selectedImages}} 
-													<img {{bind-attr src=image.small}}> 
-												{{/each}}
-											</div>
-										</div>
-									</div> 
-									<small>Drag images into your post</small>
-								</div>
-							</div>  
-
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12">
-									{{input subject label=" "}} 
-									{{quill-editor content=editorialForQuill height="400px" quillChange='quillChange' }} 
-									<small class='pull-right'>Don't forget to add #hashtags</small>
-									{{#if showErrors}}<span class="has-error help-block">{{error-field body}}</span>{{/if}}
-								</div>
-							</div> 
-						</div>
-						<div class="col-md-3 col-sm-2 col-xs-12">
-							<div class="describe">
-
-								Optionally, here's where you really promote your item.
-								<br/>
-								<br/>
-
-								So wax poetic, write a story, tell us what makes this item special!
-								<br/>
-								<br/>
-
-								But don't stress, you can leave this blank.  Maybe someone will repost your post and write something for you.
-								<br/>
-								<br/>
-
-
-								At the very least add #hashtags to your post
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-				{{!-- There Are Errors --}}
-				{{!-- There Are Errors --}}
-				{{!-- There Are Errors --}}
-				<div {{bind-attr class=":row showErrors:show:hide"}}>
-					<div class="col-md-3 col-sm-2 col-xs-12"></div>
-					<div class="col-md-6 col-sm-8 col-xs-12">
-						<div class="alert alert-danger" role="alert">
-							<button {{action 'closeServerError' }} type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> 	Please correct the errors above and try again.
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-2 col-xs-12"></div>
-				</div>
-
-
-				{{!-- Toolbar --}}
-				{{!-- Toolbar --}}
-				{{!-- Toolbar --}}
-				{{!-- Toolbar --}}
-				<div class="footer">
-					<div class="row">
-						<div class="col-md-3 col-sm-2 col-xs-12"></div>
-						<div class="col-md-6 col-sm-8 col-xs-12">	
-							
-							{{ladda-btn
-								name='save & post live'
-								class="display-inline"
-								btnClasses='btn btn-default btn-right ladda-button'
-								btnClick='savePost'
-								spin=isProcessing
-							}}
-
-							<button {{action 'cancel'}} class="btn btn-warning btn-right">
-								cancel
-							</button>
-
-						</div>
-						<div class="col-md-3 col-sm-2 col-xs-12"></div>
-					</div>
 				</div>
 			</div>
-			{{/form-for}}
-			 
+
+			
+
+			<div class="edit-row border">		
+				<div class="edit-col">
+					<h2>What is this?
+						<small>Name this product. For example "1968 Aston Martin"</small>
+					</h2> 
+
+					{{input-field product_name class="form-control"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_name}}</span>
+						{{/if}}
+
+				</div>
+			</div>
+
+
+
+			<div class="edit-row border">
+				<div class="edit-col">
+					<h2>What are the specs?
+						<small>Add one fact per line. For example "Color: silver"</small>
+					</h2>
+
+					{{description-input descriptionChange='descriptionChange'}}
+
+					{{#if showErrors}}
+						<span class="has-error help-block">{{error-field product_description}}</span>
+					{{/if}}
+
+				</div>
+			</div>
+
+
+
+			<div class="edit-row border">
+				<div class="edit-col">
+					<h2>How much?</h2>	
+
+					{{#input price}}
+						$ {{input-field product_price placeholder="0" class="form-control input-sm"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_price}}</span>
+						{{/if}}
+					{{/input}}	
+
+
+					<h2>Shipping &amp; handling?
+						<small>We only support flat rates for now, example "$5"</small>
+					</h2>
+
+					$ <input class="form-control input-sm" type="text">
+
+
+				</div>
+			</div>
+
+
+
+
+			<div class="edit-row border">
+				<div class="edit-col">
+
+					<h2>Tag it
+						<small>Tags will help promote your product. Separate multiple tags with a comma.</small>
+					</h2>
+					
+					{{input-field tags class="form-control"}}
+
+				</div>
+			</div>
+
+
+			<div class="edit-footer">
+				<div class="edit-col">			
+					<button {{action 'next'}} class="btn-next">NEXT</button>
+
+
+					<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+						Cancel
+					</span>
+
+				</div>
+			</div>
 		</div>
+
+
+		<div {{bind-attr class="stepTwo:show:hide"}}>
+
+			<div class="edit-row">
+				<div class="edit-col">
+
+					<h2>Next, write a post about this.
+
+						<small>Just skip this section if you are happy with the blog post
+						we've created for you below.</small>
+
+					</h2>
+
+					{{input subject label="false" class="post-subject" }} 
+
+					{{quill-editor 
+						setEditorImgSrc=setEditorImgSrc
+						setEditorText=setEditorText 
+						content=editorialForQuill 
+						quillChange='quillChange' 
+						triggerResize=triggerEditorResize
+					}} 
+
+				</div>
+			</div>
+
+			<div class="edit-footer">
+				<div class="edit-col">			
+
+					<span {{action 'back'}} class="btn btn-cancel btn-left">
+						Back
+					</span>
+
+					{{ladda-btn
+						name='SAVE PRODUCT'
+						class="display-inline"
+						btnClasses='btn-post ladda-button'
+						btnClick='savePost'
+						dataSpinnerColor="white"
+						spin=isProcessing
+					}}
+					
+					<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+						Cancel
+					</span>
+
+				</div>
+			</div>
+		</div>
+
+	{{/form-for}}
 	</div>
-{{/modal-modal}}
+
+
+	</div>
+</div>
+{{/modal-modal}}		
+				 
+		
