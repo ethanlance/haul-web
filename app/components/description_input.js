@@ -59,14 +59,14 @@ export default Ember.Component.extend({
 		this.get('inputs').pushObject(input);
 
 		if( this.get('currentInput')) { 
-			Ember.$(this.get('currentInput')).off('keydown');
+			Ember.$(this.get('currentInput')).off('keyup');
 		} 
 
 		this.set('currentInput', input)
 
-		Ember.$(this.get('currentInput')).on('keydown', Ember.run.bind(this, this.inputEntered));
+		Ember.$(this.get('currentInput')).on('keyup', Ember.run.bind(this, this.inputEntered));
 
-		Ember.$(this.get('currentInput')).on('keyup', Ember.run.bind(this, this.sendInputValues));
+		Ember.$(this.get('currentInput')).on('blur', Ember.run.bind(this, this.sendInputValues));
 	},
 
 	inputEntered: function(e) {
