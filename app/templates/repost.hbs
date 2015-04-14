@@ -35,15 +35,20 @@
 						{{partial "_edit_post"}}
 
 						<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
-									{{ladda-btn
-									name='post'
+							<div class="col-md-12 col-sm-12 col-xs-12 padding-top text-center">
+		
+
+
+								{{ladda-btn
+									name='SAVE POST'
 									class="display-inline"
-									btnClasses='btn btn-primary btn-right ladda-button'
+									btnClasses='btn-post ladda-button'
 									btnClick='savePost'
+									dataSpinnerColor="white"
 									spin=isProcessing
 								}}
-						        <button {{action 'close'}} type="button" class="btn btn-default btn-right" data-dismiss="modal">cancel</button>					
+
+						        <button {{action 'close'}} type="button" class="btn btn-cancel btn-right" data-dismiss="modal">Cancel</button>					
 							</div>
 						</div>
 					</div>

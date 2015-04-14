@@ -31,24 +31,25 @@
 			{{!-- Toolbar --}}
 			{{!-- Toolbar --}} 
 			<div class="row">
-				<div class="col-md-8 col-sm-8 col-xs-10 footer"> 
+				<div class="col-md-8 col-sm-8 col-xs-10 text-center"> 
 
 					<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
 						<span class="glyphicon glyphicon-trash"></span>
-						delete
+						Delete
 					</button>
 					
 					{{ladda-btn
-						name='save post'
+						name='SAVE POST'
 						class="display-inline"
-						btnClasses='btn btn-primary btn-right ladda-button'
+						btnClasses='btn-post ladda-button'
 						btnClick='savePost'
+						dataSpinnerColor="white"
 						spin=isProcessing
 					}}
 
 
-					<button {{action 'closeModal'}} class="btn btn-default btn-right">
-						cancel
+					<button {{action 'closeModal'}} class="btn btn-cancel btn-right">
+						Cancel
 					</button>
 
 				</div> 
