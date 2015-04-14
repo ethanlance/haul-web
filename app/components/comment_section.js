@@ -245,7 +245,7 @@ export default Ember.Component.extend( PaginateMixin,{
 		)
 		.then(
 			function(record) {  
-				return;
+			
 				_this.set('isProcessing', false);
 				_this.set('showServerErrors', false);
 				_this.makeModel();
