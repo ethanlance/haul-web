@@ -51,9 +51,9 @@
 					</h2> 
 
 					{{input-field product_name class="form-control"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_name}}</span>
-						{{/if}}
+					{{#if showErrors}}
+						<span class="has-error help-block">{{error-field product_name}}</span>
+					{{/if}}
 
 				</div>
 			</div>
@@ -81,20 +81,26 @@
 				<div class="edit-col">
 					<h2>How much?</h2>	
 
-					{{#input price}}
+					{{!-- {{#input price}}
 						$ {{input-field product_price placeholder="0" class="form-control input-sm"}}
 						{{#if showErrors}}
 							<span class="has-error help-block">{{error-field product_price}}</span>
 						{{/if}}
-					{{/input}}	
+					{{/input}} --}}	
 
+					{{input-field product_price label="false" class="form-control input-sm"}}
+					{{#if showErrors}}
+						<span class="has-error help-block">{{error-field product_price}}</span>
+					{{/if}}
 
 					<h2>Shipping &amp; handling?
 						<small>We only support flat rates for now, example "$5"</small>
 					</h2>
 
-					$ <input class="form-control input-sm" type="text">
-
+					{{input-field product_shipping label="false" class="form-control input-sm"}}
+					{{#if showErrors}}
+						<span class="has-error help-block">{{error-field product_shipping}}</span>
+					{{/if}}
 
 				</div>
 			</div>

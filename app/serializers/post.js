@@ -31,6 +31,7 @@ export default DS.RESTSerializer.extend({
             product_link: payload.data.product.link,
             product_currency: payload.data.product.currency,
             product_price: payload.data.product.price,
+            product_shipping: payload.data.product.shipping,
             product_quantity: payload.data.product.quantity,
             product_images: payload.data.product.image_ids,
             product_status: payload.data.product.status,

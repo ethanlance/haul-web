@@ -61,7 +61,7 @@
 			 		</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
+					<div class="col-md-6 col-sm-6 col-xs-6">  
 						<label>Price:</label>
 						{{#input product_price}}
 						<div class="input-group">
@@ -71,6 +71,21 @@
 						</div>
 						{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
 						{{/input}}
+	 				</div>
+
+
+	 				<div class="col-md-6 col-sm-6 col-xs-6">  
+
+						<label>Shipping:</label>
+						{{#input product_shipping}}
+						<div class="input-group">
+							<span class="input-group-addon">$</span>
+						  	{{input-field product_shipping class="form-control input-sm"}}
+						  	<br/>
+						</div>
+						{{#if showErrors}}<span class="has-error help-block">{{error-field product_shipping}}</span>{{/if}}
+						{{/input}}
+
 	 				</div>
 				</div>
 

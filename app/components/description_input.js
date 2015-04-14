@@ -71,7 +71,7 @@ export default Ember.Component.extend({
 
 	inputEntered: function(e) {
 		var s = e.currentTarget.value;
-		if( s.length > 2 ) {
+		if( s.length >= 1 ) {
 			this.createNewInput();
 		}
 	}
