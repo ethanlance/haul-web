@@ -15,6 +15,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	currentUserIdBinding: "session.currentUser.id",
 	
 	editorialForQuill: " ",
+
+	editorialForBody: "",
 	
 	selectedImages: [],
 
@@ -34,9 +36,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('selectedImages', []);
 		this.set('showSuccess', false);
 		this.set('showRepost', false);
-
-		
-
 
 		var currentUserId = this.get('currentUser').get('id');
 		var post = this.get('post');
@@ -176,11 +175,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var _this = this;		
 		var repost = this.get('repost');
 
-		//Trim
 		
-		var body = this.get('editorialForQuill').trim();
-		
-		
+		var body = this.get('editorialForBody').trim();		
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}
@@ -207,7 +203,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			_this.set('showRepost', false);
 			_this.set('showSuccess', true);
 		}, function(error){
-			console.log("Error", error);
+			//console.log("Error", error);
 			_this.set('isProcessing', false);
 			//Mixin:
 				_this.handleServerError(error)
@@ -238,6 +234,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		savePost: function() { 
+			this.set('isProcessing', true);
+			this.set('requestEditorContents', true);
+		},
+
+		quillChange: function(text) { 
+			this.set('editorialForBody', text); 
 			this.savePost();
 		},
 
@@ -249,11 +251,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		refresh: function(image) {
 			this.selectImage(image);			
-		},
-
-		quillChange: function(text) { 
-			this.set('editorialForQuill', text);
-		},
+		}, 
 
 		showImageModal: function(){
 			var _this = this;

@@ -40,7 +40,11 @@
 							<img {{bind-attr src=image.large}}/>
 						{{/unless}}
 
-						{{sanitizehtml-andtag body "editorial"}}
+						{{sanitizehtml-andtag 
+							body 
+							"editorial" 
+							ENV
+						}}
 					</div>
 
 

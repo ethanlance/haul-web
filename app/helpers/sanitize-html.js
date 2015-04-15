@@ -1,7 +1,8 @@
 import { sanitize } from 'ember-sanitize/utils/sanitize';
 import Ember from 'ember';
+import TransformMixin from '../mixins/transform';
 
-export default Ember.Handlebars.makeBoundHelper(function(html, configName, options) {
+export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, options) {
 
 	if(Ember.isEmpty(html)){
 		return new Ember.Handlebars.SafeString(html);
@@ -24,6 +25,10 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 	html = html.replace(/\n/g, "<br>");
 
 	var sanitized = sanitize(html, config);
+
+	//Transform our Haul [code] into elements.
+	TransformMixin.mixins[0].properties.ENV = ENV;
+	sanitized = TransformMixin.mixins[0].properties.markupToHTML(sanitized);
 
 	return new Ember.Handlebars.SafeString(sanitized);
 });

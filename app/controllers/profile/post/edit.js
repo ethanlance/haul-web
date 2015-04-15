@@ -4,6 +4,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
  
  	needs: ['profile'],
 
+ 	requestEditorContents: false,
+
  	thisPage: "postEdit",
  	currentPageBinding: 'controllers.profile.currentPage',
  	showGridBtn:false,
@@ -27,6 +29,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	selectedImages: [],
 	deletedImages: [],
 	editorialForQuill: "",
+	editorialForBody: "",
 	canEditProduct: false,
 	openDrawer: false, 
 
@@ -70,7 +73,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
 		var status = this.get('model').get('product_status');
 		
-		if(status == "NOT_FOR_SALE"){
+		if(status === "NOT_FOR_SALE"){
 			selectedStatus = not_for_sale;
 		}else if(status === "SOLD"){
 			selectedStatus = sold;
@@ -223,8 +226,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var _this = this;		
 		var model = this.get('model');
 
-		//Trim
-		var body = this.get('editorialForQuill').trim();
+		
+ 
+		var body = this.get('editorialForBody').trim();
 
 		if(Ember.isEmpty(body)){
 			body = " ";
@@ -239,7 +243,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		model.validate()
 		.then(
 			function validateSuccess(){
-				_this.set('isProcessing', true);
 				return model.save();
 			}
 		)
@@ -326,6 +329,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		}, 
 
 		savePost: function() { 
+			this.set('isProcessing', true);
+			this.set('requestEditorContents', true);
+		},
+
+		quillChange: function(text) { 
+			this.set('editorialForBody', text); 
 			this.savePost();
 		},
 
@@ -339,9 +348,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			this.toggleImageSelected(image);			
 		},
 
-		quillChange: function(text) { 
-			this.set('editorialForQuill', text);
-		},
 
 		btnDrawer: function() {
 			this.toggleProperty('openDrawer');

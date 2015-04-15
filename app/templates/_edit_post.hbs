@@ -1,7 +1,12 @@
 	{{input subject placeholder="A Catchy Title..." label="false"}} 
 	
 
-	{{quill-editor content=body selectedImages=selectedImages quillChange='quillChange'}}
+	{{quill-editor 
+		content=body 
+		selectedImages=selectedImages 
+		requestContents=requestEditorContents 
+		quillChange='quillChange'
+	}}
 
 
 	<small class='pull-left'>Drag images into your post.</small>

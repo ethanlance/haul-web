@@ -25,6 +25,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	//Default value of the quill text editor.
 	editorialForQuill: "",
 
+	editorialForBody: "",
+
 	showErrors: false,
 
 	stepOne: true,
@@ -66,6 +68,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('stepOne', true);
 		this.set('stepTwo', false);
 		this.set('selectedImages', []);
+		this.set('showErrors', false);
 
 		this.get('model').setProperties(
 			{
@@ -76,11 +79,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			}
 		);
 
-		var _this = this;
-		this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
-		.then(function(image){
-			_this.selectImage(image);
-		});
+		// var _this = this;
+		// this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
+		// .then(function(image){
+		// 	_this.selectImage(image);
+		// });
 		
 	}.observes('currentUser', 'model'),
 
@@ -177,13 +180,17 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var body = model.get('body');
 		
 		if( Ember.isEmpty(body) ){
-			var image = this.get('selectedImages')[0];
-			
-			this.set('setEditorImgSrc', image.get('small') );
+			this.doImageInjection();
 		}
 
 	}.observes('selectedImages.@each'),
 
+	doImageInjection: function() {
+
+		var image = this.get('selectedImages')[0];	
+		this.set('setEditorImgSrc', image.get('small') );
+
+	},
 
 	doTagInjection: function() {
 
@@ -263,7 +270,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var model = this.get('model');
 
 		//Trim
-		var body = model.getWithDefault('body','').trim();
+		var body = this.get('editorialForBody').trim();
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}
@@ -331,6 +338,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 	
 		savePost: function() { 
+			this.set('isProcessing', true);
+			this.set('requestEditorContents', true);
+		},
+
+		quillChange: function(text) { 
+			this.set('editorialForBody', text); 
 			this.savePost();
 		},
 
@@ -345,12 +358,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		refresh: function(image) {
 			this.selectImage(image);			
-		},
-
-		quillChange: function(text) {
-			var model = this.get('model');
-			model.set('body', text);
-		},
+		}, 
 
 		descriptionChange: function(text) { 
 			var model = this.get('model');

@@ -52,7 +52,7 @@ export default Ember.ObjectController.extend({
 		//Does the body have an image?
 		this.set('postHasImage', false);
 		var body = this.get('model').get('body');
-		if( body.indexOf("<img") > -1 ) {
+		if( body.indexOf("[img") > -1 ) {
 			this.set('postHasImage', true);
 		}
 

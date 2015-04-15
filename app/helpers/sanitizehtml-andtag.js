@@ -1,7 +1,12 @@
 import { sanitize } from 'ember-sanitize/utils/sanitize';
 import Ember from 'ember';
+import TransformMixin from '../mixins/transform';
 
-export default Ember.Handlebars.makeBoundHelper(function(html, configName, options) {
+export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, options) {
+
+
+
+	
 
 	if(Ember.isEmpty(html)){
 		return new Ember.Handlebars.SafeString(html);
@@ -31,7 +36,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 	var match, username, hashtag;
 	var wordHash = [];
 	words.forEach(function(word){
-		console.log("WORD", word);
+		//console.log("WORD", word);
 		//MENTIONS
 		match = word.match(/^@.*[^\s]$|^[^@].*,$/);
 		if( match) {
@@ -42,7 +47,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 		}
 
 		//HASHTAGS
-		match = word.match(/^\#.*[^\s]$|^[^@].*,$/);
+		match = word.match(/^\#.*[^\s]$|^[^#].*,$/);
 		if( match) {
 			hashtag = word.split('#')[1];
 	  		if( hashtag !== 'undefined' && hashtag !== undefined ){
@@ -54,6 +59,11 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, optio
 	});
 
 	var sanitized = wordHash.join(" ");	
+
+	//Transform our Haul [code] into elements.
+	TransformMixin.mixins[0].properties.ENV = ENV;
+	sanitized = TransformMixin.mixins[0].properties.markupToHTML(sanitized);
+
 
 	return new Ember.Handlebars.SafeString(sanitized);
 });

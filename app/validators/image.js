@@ -23,7 +23,11 @@ export default Base.extend({
 				
 				var pathParts = parser.pathname.split('/');
 
-				if(pathParts[1] !== path && parser.hostname !== hostname) {
+				//Only check if the src is not empty.
+				//IMG with an empty src are already validated into our format of 
+				//<img id="ba889760-e2fb-11e4-97cb-e9f9f11ac303">
+
+				if(pathParts.length > 2 && pathParts[1] !== path && parser.hostname !== hostname) {
 				 	
 				 	_this.errors.pushObject(_this.options.message);
 

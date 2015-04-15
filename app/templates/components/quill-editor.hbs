@@ -29,12 +29,15 @@
 	{{#if hasGallery}}
 		<div id="gallery" class="editor-gallery">   		
 			{{#each image in selectedImages}}
-				<img {{bind-attr src=image.thumb}}/>
+				<img
+					{{bind-attr src=image.thumb}} 
+					{{bind-attr id=image.id}} 
+					draggable='true'  />
 			{{/each}} 
 		</div>
 	{{/if}}
 
 	 
-		<div id="editor">{{sanitize-html content "editorial" }}</div>
+		<div id="editor">{{sanitize-html content "editorial" ENV}}</div>
 	</div>
  

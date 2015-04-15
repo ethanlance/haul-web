@@ -5,8 +5,12 @@ export default Ember.Component.extend({
 	classNames: ['carousel', 'slide'],
 	
 	singleImage: true,
+
 	imagesFound: false,
+
 	imageCount:0,
+
+	imageSizeName: 'small',
 
 	imageCountChanged: function() {
 		if(this.get('imageCount') > 1 ){
@@ -35,7 +39,8 @@ export default Ember.Component.extend({
 
 			var imageCount = 0;
 			var i = 0;
-			results.forEach(function(image){
+			results.forEach(function(image){ 
+
 				if( image.get('medium') ) {
 					imageCount++;
 					_this.set('imagesFound', true);
@@ -99,7 +104,7 @@ export default Ember.Component.extend({
 		itemViewClass: Ember.View.extend({
 			classNames: ['item'],
 			classNameBindings: ['content.isActive:active'],
-			template: Ember.Handlebars.compile('{{#light-box href=view.content.large data-lightbox="test" data-title="title" inlineImage=false}}<img {{bind-attr src="view.content.medium"}} alt=""/>{{/light-box}}<div class="carousel-caption"><h4>{{view.content.title}}</h4><p>{{view.content.content}}</p></div>')
+			template: Ember.Handlebars.compile('{{#light-box href=view.content.large data-lightbox="test" data-title="title" inlineImage=false}}<img {{bind-attr src="view.content.small"}} alt=""/>{{/light-box}}<div class="carousel-caption"><h4>{{view.content.title}}</h4><p>{{view.content.content}}</p></div>')
 		})
 	})
 });
