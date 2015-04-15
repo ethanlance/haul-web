@@ -53,8 +53,8 @@
 			<div class="col-right">
 				
 				<div class="product-card">
-					<div class="product-card-cap">
-						For Sale
+					<div {{bind-attr class=":product-card-cap isForSale::sold"}}>
+						{{statusText}}
 					</div>
 
 					<h2>{{product_name}}</h2>

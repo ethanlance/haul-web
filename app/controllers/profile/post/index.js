@@ -4,6 +4,7 @@ var $ = Ember.$;
 export default Ember.ObjectController.extend({  
 
  	needs: ['profile'],
+ 	statusText: "FOR SALE",
 
  	thisPage: "postPage", 
  	isRepost:false,
@@ -55,45 +56,17 @@ export default Ember.ObjectController.extend({
 			this.set('postHasImage', true);
 		}
 
-	}.observes('currentUserId', 'model.id', 'model', 'model.body'),
-
-	actions: {
-
-		//Click "delete" in UI
-		delete: function() {
-			$('#deleteModal').modal('show');
-		},
-
-		deleteCancel: function() {
-			$('#deleteModal').modal('hide');
-		},
-
-		deleteProceed: function() {
-			$('#deleteModal').modal('hide');
-			var _this = this;
-			var user = this.get('currentUser');
-			var product = this.model;
-			var product_id = product.get('id');
-			product.deleteRecord();
-			
-			product.save().then(
-				function() { 
-
-					//Delete from product-list model also;
-					var store = _this.store;
-					var pl = store.getById('product_list', product_id);
-					if(pl){
-						 store.deleteRecord(pl);
-						 store.unloadRecord(pl);
-					}
-
-					_this.transitionToRoute('seller', user.get('slug'));
-				},
-				function(error){
-					console.log("Error" , error);
-				}
-			);
+		var product_status = this.get('model.product_status');
+		this.set('isForSale', false);
+		if( product_status == 'FOR_SALE' ) {
+			this.set('isForSale', true);
+			this.set('statusText', "FOR SALE");
+		}else if( product_status === "SOLD") {
+			this.set('statusText', "SOLD!");
+		}else{
+			this.set('statusText', "Not For Sale.");
 		}
 
-	}
+
+	}.observes('currentUserId', 'model.id', 'model', 'model.body', 'model.product_status'),
 });
