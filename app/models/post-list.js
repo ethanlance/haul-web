@@ -42,6 +42,10 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	}.property('subject'),
 
 
+	product_status_text: function() {
+		return this.get('product_status').replace("_"," ");
+	}.property('product_status'),	
+
 	validations: { 
 		name: {
 		 	presence: true,

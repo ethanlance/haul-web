@@ -22,6 +22,12 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 
 	product_id: DS.attr('string'),
 
+	post_slug: function() {		
+		if(!Ember.isEmpty(this.get('subject'))){
+			return this.get('subject').toLowerCase().replace(/ /g,'-').replace(/[-]+/g, '-').replace(/[^\w-]+/g,''); 
+		}
+	}.property('subject'),
+
 	validations: { 
 		body: {
 		 	//presence: true,

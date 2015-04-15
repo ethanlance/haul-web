@@ -40,7 +40,8 @@
 			{{#if currentTypeIsHashtag }}
 			 	{{#each item in sortedContent}}
 			 		<ul class="search-hashtag">
-			 			<li {{action 'clickHashtag' item}}><span class="search-hashtag-tag">#{{item.name}}</span> <span class="search-hashtag-total">{{item.total}} posts</span></li>
+			 			<li {{action 'clickHashtag' item}}>
+			 				<span class="search-hashtag-tag">#{{item.name}}</span> <span class="search-hashtag-total">{{item.total}} posts</span></li>
 			 		</ul>
 				{{/each}}
 
@@ -49,20 +50,24 @@
 
 			 	<div class="product-post">
 
-			 		<h1 class="subject">{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}{{ post.user.username }}{{/link-to}}</h1>
+			 		<h1 class="subject">
+			 			{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}
+			 		</h1>
 
 			 		<div class="editorial"> 
-						{{#link-to 'profile.post' post.user.username post.id post.subject (query-params anchor="null")}}<img {{bind-attr src=post.image.large}}/>{{/link-to}} 
+						{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}<img {{bind-attr src=post.image.large}}/>{{/link-to}} 
 					</div>
 
 					<div class="product-feed-post-card">
 						<div class="card-details-box">
 							
-							<h3>{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}{{post.subject}}{{/link-to}}</h3>
+							<h3>{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}{{post.product_name}}{{/link-to}}</h3>
 							
 							<div class="price">
 								${{post.product_price}}
+								<small>{{post.product_status_text}}</small>
 							</div>
+
 
 						</div> 
 					</div>

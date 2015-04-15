@@ -90,7 +90,7 @@ export default Ember.Component.extend(TransformMixin, {
 		var delta = editor.getContents();
 		var change = false;
 
-		//console.log("DELTA", delta);
+		
 
 		delta.ops.forEach(function(operation, index){ 
 			if( operation.hasOwnProperty("attributes") && operation.attributes.hasOwnProperty('image') ){
@@ -142,15 +142,6 @@ export default Ember.Component.extend(TransformMixin, {
     			_this.convertImages();
 			}, 1000);
 		});
-
-
-		// editor.on('text-change', function() { 
- 
-		// 	var html = editor.getHTML();
-		// 	//console.log("html ", html);
-
-		// 	_this.sendAction('quillChange', html);
-		// }); 
 	},
 
 
@@ -167,7 +158,7 @@ export default Ember.Component.extend(TransformMixin, {
 	requestContentsChanged: function() {
 		 
 		var html = this.transformImagesForSaving();
-console.log("HTML", html);
+
 		this.sendAction('quillChange', html);
 
 	}.observes('requestContents'),

@@ -38,6 +38,10 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	commentCount: DS.belongsTo('post-comment-count', {async:true}),
 	likesCount: DS.belongsTo('post-likes-count', {async:true}),
 
+	product_status_text: function() {
+		return this.get('product_status').replace("_"," ");
+	}.property('product_status'),	
+
 	post_slug: function() {		
 		if(!Ember.isEmpty(this.get('subject'))){
 			return this.get('subject').toLowerCase().replace(/ /g,'-').replace(/[-]+/g, '-').replace(/[^\w-]+/g,''); 
