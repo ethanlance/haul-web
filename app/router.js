@@ -4,21 +4,10 @@ import config from './config/environment';
 var Router = Ember.Router.extend({
   	location: config.locationType,
 
-  	// action: {
-		didTransition: function(infos) {
-	    	//this._super(infos);
-
-	    	var _this = this;
-console.log("BOOM?")
-	    	//Ember.run.next(function() {
-	      		// the meta module will now go trough the routes and look for data
-	      		console.log("TRIGGER NEW META.")
-	      		_this.meta.trigger('reloadDataFromRoutes');
-	    	//});
-
-	    	return true;
-	  	}
-	// }
+	didTransition: function(infos) {
+    	this.meta.trigger('reloadDataFromRoutes');
+    	return true;
+  	}
 });
 
 

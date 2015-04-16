@@ -43,6 +43,8 @@ module.exports = function(environment) {
 
 	if (environment === 'development') {
 
+		ENV.APP.baseDomain = "http://localhost:4200";
+
 		ENV.APP.validateImageHost = 'localhost:8081';
 		ENV.APP.validateImagePath = "static.haul.io";
 
@@ -86,6 +88,8 @@ module.exports = function(environment) {
 	}
 
 	if (environment === 'production') {
+
+		ENV.APP.baseDomain = "https://alpha.haul.io";
 		
 		ENV.APP.validateImageHost = 'haul.io';
 		ENV.APP.validateImagePath = "static.haul.io";

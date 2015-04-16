@@ -3,9 +3,21 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 import config from '../config/environment';
 export default Ember.Route.extend(ApplicationRouteMixin,{
 
+	metaFBAPPID: function() {
+		return this.ENV.Server.FACEBOOK_APP_ID;
+	}.property(),
+
+	metaOgSitename: "Haul.io",
+
 	metaTitle: "Welcome to Haul",
 
   	metaDescription: "Buy, sell and find things that matter.",
+
+  	metaOgImage: "none",
+
+	metaOgUrl: function() {
+		return window.location.href;
+	}.property().volatile(),
 
 	actions: {
 

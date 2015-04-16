@@ -48,6 +48,10 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		}
 	}.property('subject'),
 
+	make_url: function() {
+		return this.ENV.baseDomain + "/" + this.get('user.username') + "/" + this.get('post_id') + "/" + this.get('post_slug');
+	},
+
 	validateImagePath: function() {
 		return this.ENV.validateImagePath;
 	}.property(),
