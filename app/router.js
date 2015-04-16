@@ -2,7 +2,23 @@ import Ember from 'ember';
 import config from './config/environment';
 
 var Router = Ember.Router.extend({
-  location: config.locationType
+  	location: config.locationType,
+
+  	// action: {
+		didTransition: function(infos) {
+	    	//this._super(infos);
+
+	    	var _this = this;
+console.log("BOOM?")
+	    	//Ember.run.next(function() {
+	      		// the meta module will now go trough the routes and look for data
+	      		console.log("TRIGGER NEW META.")
+	      		_this.meta.trigger('reloadDataFromRoutes');
+	    	//});
+
+	    	return true;
+	  	}
+	// }
 });
 
 
@@ -65,5 +81,16 @@ Router.map(function(){
 	});
 });
 
+
+
+ 
+
+// as you can see, there is a App.meta object that handles all the action
+// you can even set title and description directly if you want to!
+// App.meta.set('title', 'New Site Title');
+// App.meta.set('description', 'Somethign changed, so I update my meta data.');
+
+// // you can as well ask for all the tags that were set by calling
+// App.meta.get('summary');
 
 export default Router;

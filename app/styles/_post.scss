@@ -282,7 +282,14 @@
 		color: #565759;
 
 		img {
-			width: 100%;
+			//width: 100%;
+			padding:0;
+			margin:0;
+			margin-left:auto;
+			margin-right:auto;
+			display:block;
+			margin-bottom: 20px;
+			background-color: #eee;
 		}
 
 		a {

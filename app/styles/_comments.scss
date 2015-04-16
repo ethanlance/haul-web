@@ -1,6 +1,8 @@
 
 .comments-section {
 
+
+
 	margin-top: 70px;
 
 	.comment-section-nav {
@@ -134,6 +136,12 @@
 				text-transform: lowercase;
 			}
 			.comment{ 
+
+				a {
+					color: $primary-color;
+					text-decoration: underline;
+				}
+				
 				margin-top: 10px;
 				font-family: TIMES;
 				font-size: 18px;

@@ -2,6 +2,11 @@ import Ember from 'ember';
 import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 import config from '../config/environment';
 export default Ember.Route.extend(ApplicationRouteMixin,{
+
+	metaTitle: "Welcome to Haul",
+
+  	metaDescription: "Buy, sell and find things that matter.",
+
 	actions: {
 
 		/*
