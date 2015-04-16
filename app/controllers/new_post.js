@@ -215,7 +215,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				}
 
 				if( tag ) {
-					str += "#" + tag + " ";
+					str += " #" + tag + " ";
 				}
 			});
 

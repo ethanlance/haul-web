@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
 		  			var src_medium = this.ENV.Server.IMAGE_SERVER_HOST +"/images/" + image_id + "/medium";
 		  			var src_small = this.ENV.Server.IMAGE_SERVER_HOST +"/images/" + image_id + "/small";
 		  		
-		  			var img = "<img lowsrc='"+src_small+"' src='"+src_large+"' onError='this.onerror=null;this.src=\""+ src_medium +"\";'>";
+		  			var img = "<img lowsrc='"+src_small+"' src='"+src_medium+"' onError='this.onerror=null;this.src=\""+ src_small +"\";'>";
 
 		  			html = html.replace(code, img);
 

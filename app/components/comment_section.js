@@ -100,9 +100,11 @@ export default Ember.Component.extend( PaginateMixin,{
 		var filter = store.filter('post-comment', function(result) {
 			if(result.id && (result.get('post_id') === _this.get('postId'))) {
 				
-				if( result.get('user_id') === _this.get('userId') ) {
+				if( result.get('user_id') === _this.get('currentUserId') ) {
 					result.set('canDelete', true);
 				}		
+				console.log(result.get('user_id') , _this.get('currentUserId'))
+				console.log("RESULT", result);
 				return result;
 			}
 		});

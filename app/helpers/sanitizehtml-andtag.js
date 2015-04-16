@@ -47,7 +47,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 		}
 
 		//HASHTAGS
-		match = word.match(/^\#.*[^\s]$|^[^#].*,$/);
+		match = word.match(/^\#.*[^\s]$|^[^\#].*,$/);
 		if( match) {
 			hashtag = word.split('#')[1];
 	  		if( hashtag !== 'undefined' && hashtag !== undefined ){

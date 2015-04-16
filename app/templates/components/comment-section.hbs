@@ -55,7 +55,7 @@
 				{{#each item in sortedComments }}
 				<div class="comment-section-row">
 						
-					<button {{action "delete" item}} {{bind-attr class=":btn :btn-default :btn-sm :btn-delete canDelete:show:hide"}}>
+					<button {{action "delete" item}} {{bind-attr class=":btn :btn-default :btn-sm :btn-delete item.canDelete:show:hide"}}>
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 					
