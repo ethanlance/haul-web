@@ -141,6 +141,9 @@
 			float:none;
 			display:table;
 			margin:auto; 
+			z-index: 0;
+			height: auto;
+			position: relative;
 		}
 	}
 }
