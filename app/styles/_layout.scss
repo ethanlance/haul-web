@@ -8,9 +8,14 @@
 	text-align: center;
 }
 
+.container {
+	max-width: $haul-max-width;
+}
 
 .haul-content {
 	margin:0;
+	margin-left:auto;
+	margin-right:auto;
 	padding:0;
 	display: inline-block;
 	width: 100%;

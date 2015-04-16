@@ -102,9 +102,7 @@ export default Ember.Component.extend( PaginateMixin,{
 				
 				if( result.get('user_id') === _this.get('currentUserId') ) {
 					result.set('canDelete', true);
-				}		
-				console.log(result.get('user_id') , _this.get('currentUserId'))
-				console.log("RESULT", result);
+				}		 
 				return result;
 			}
 		});
