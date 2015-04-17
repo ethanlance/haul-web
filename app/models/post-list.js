@@ -21,6 +21,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
     repost_body: DS.attr('string'),
     repost: DS.belongsTo('post', {async:true}),
     repost_user: DS.belongsTo('user', {async:true}),
+    repost_id: DS.attr('string'),
 
 	//PRODUCT	
 	product_user: DS.belongsTo('user', {async:true}),	 

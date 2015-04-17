@@ -42,10 +42,10 @@ export default DS.RESTSerializer.extend({
 
 		//repost aka parent post
 		if( payload.data.repost_id ){
-			var repostId = payload.data.repost_id;
-            data.repost = repostId;
+			data.repost_id = payload.data.repost_id;
+            data.repost = payload.data.repost_id;
             data.repost_body = payload.data.repost_body;
-            data.repost_user =payload.data.repost_user_id;
+            data.repost_user = payload.data.repost_user_id;
 		}
 
 		payload = {'post': data};  

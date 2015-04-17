@@ -1,26 +1,26 @@
-	<div class="edit-row">
-		<div class="edit-col">
+<div class="edit-row">
+	<div class="edit-col">
 
-			<h2>Edit your post
+		<h2>Edit your post
 
-				<small>Tell a us story.</small>
+			<small>Tell a us story.</small>
 
-			</h2>
+		</h2>
 
-			{{input subject label="false" class="post-subject" }} 
+		{{input subject label="false" class="post-subject" }} 
 
-			{{quill-editor 
-				setEditorImgSrc=setEditorImgSrc
-				setEditorText=setEditorText 
-				content=body
-				quillChange='quillChange' 
-				requestContents=requestEditorContents
-				selectedImages=selectedImages
-				triggerResize=triggerEditorResize
-			}} 
+		{{quill-editor 
+			setEditorImgSrc=setEditorImgSrc
+			setEditorText=setEditorText 
+			content=body
+			quillChange='quillChange' 
+			requestContents=requestEditorContents
+			selectedImages=selectedImages
+			triggerResize=triggerEditorResize
+		}} 
 
-		</div>
-	</div>	
+	</div>
+</div>	
 
 
 	

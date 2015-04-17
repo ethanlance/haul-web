@@ -18,6 +18,11 @@ nav {
 
 	margin:0;
 	padding: 0;
+
+	@media (max-width: 999px) {
+		padding-left:  15px;
+		padding-right: 15px;
+	}
 	margin-left: auto;
 	margin-right: auto;
 
@@ -30,7 +35,7 @@ nav {
 	color: $nav-color;
 
 	.collapse{
-		@media (max-width: 750px) {
+		@media (max-width: 810px) {
 			display:none;
 		}
 	}
@@ -58,6 +63,10 @@ nav {
 			&:hover{
 				text-decoration: none;	
 			}
+		}
+
+		&.rehaul {
+			width: 140px;
 		}
 	}
 	.nav-link-wrapper {
@@ -162,8 +171,22 @@ nav.anon {
 	}
 }
 
-.modal-content {
+.modal-dialog {
 	nav {
 		position: relative;
+		padding-left:15px;
+		padding-right: 15px;
 	}
+
+	&.lg{
+		nav {
+			padding:0;
+			@media (max-width: 750px) {
+				padding-left:15px;
+				padding-right: 15px;
+			}
+		}
+	}
+
+
 }

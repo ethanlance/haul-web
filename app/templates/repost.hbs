@@ -1,18 +1,12 @@
 {{#modal-modal animateClose=animateClose closeModal='closeModal'}}
 <div {{bind-attr class=":modal-dialog showSuccess:sm :text-left"}}>
-	<div class="modal-content">		
-		<div class="modal-header">
-			<button {{action 'close'}} type="button" class="close btn-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h1 class="modal-title" id="myModalLabel">
-				<span class="glyphicon glyphicon-retweet"></span> Repost
-			</h1>
-		</div>
+	<div class="modal-content">	
 
-
-		<div {{bind-attr class="showSuccess:show:hide :text-center"}}>
-			<div class="container-fluid haul-edit">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
+		{{!-- SUCCESS MESSAGE --}}
+		<div {{bind-attr class="showSuccess:show:hide"}}>
+			<div class="text-center edit-wrapper">
+				<div class="edit-row">
+					<div class="edit-col">
 						<h5>Repost Complete!</h5>
 						<button {{action 'close'}} class="btn btn-default">close</button>
 						<button {{action 'goToFeed'}} class="btn btn-default">go to my feed</button>
@@ -22,48 +16,71 @@
 		</div>
 
 
-		<div {{bind-attr class="showRepost:show:hide"}}>	
 
-			{{#form-for repost}}			
-			<div class="container-fluid haul-edit">
-				<div class="row">
+		{{!-- REPOST FORM VIEW --}}
+		<div {{bind-attr class="showSuccess:hide:show"}}>
+			<nav>
+				<div class="nav">
+					<div class="logo rehaul">REHAUL</div>
+					<button {{action 'cancel'}} class="nav-add-post">CANCEL</button>
+				</div>
+			</nav>
+
+			{{partial "_modal_error_alert"}}
+
+			<div class="text-center edit-wrapper">
+
+				{{#form-for model}}
 					
 
-					{{!-- //POST --}}
-					<div class="col-md-8 col-sm-8 col-xs-10"> 
+					<div class="edit-row">
+						<div class="edit-col">
 
-						{{partial "_edit_post"}}
+							<h2>Rehaul this post
 
-						<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12 padding-top text-center">
-		
+								<small>You can write an awesome blog about this, or just post 
+								what you see below.
+								</small>
 
+							</h2>
 
-								{{ladda-btn
-									name='SAVE POST'
-									class="display-inline"
-									btnClasses='btn-post ladda-button'
-									btnClick='savePost'
-									dataSpinnerColor="white"
-									spin=isProcessing
-								}}
+							{{input subject label="false" class="post-subject" }} 
 
-						        <button {{action 'close'}} type="button" class="btn btn-cancel btn-right" data-dismiss="modal">Cancel</button>					
-							</div>
+							{{quill-editor 
+								content=repostBody
+								quillChange='quillChange' 
+								requestContents=requestEditorContents
+								selectedImages=selectedImages
+								triggerResize=triggerEditorResize
+							}} 
+
 						</div>
-					</div>
+					</div>	
 
-					<div class="col-md-4 col-sm-4 col-xs-2"> 
-						{{!-- <h3>Product Card</h3> --}}
-						{{!-- //PRODUCT --}}
-						{{partial "_edit_product"}}
+
+
+				{{/form-for}} 
+
+				<div class="edit-footer">
+					<div class="edit-col">			
+
+						<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
+							Delete Post
+						</button>
+
+
+						<button {{action 'savePost'}} class="btn-next">SAVE POST</button>
+
+
+						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+							Cancel
+						</span>
 
 					</div>
 				</div>
-			</div> 
-			{{/form-for}}
 
-      	</div>
+			</div>	
+		</div>
 	</div>
 </div>
 {{/modal-modal}}
