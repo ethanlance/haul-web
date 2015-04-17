@@ -26,7 +26,7 @@ export default Ember.Component.extend({
 				str += val + key
 			}
 		});
-		
+		console.log("SENDING THIS", str);
 		this.sendAction('descriptionChange', str);
 	},
 

@@ -1,195 +1,181 @@
-
-<div {{bind-attr class=":fade showErrorBar:in:out :errorBar"}}>
- 	<strong>Oops,</strong> please correct errors on the page.
-</div>
-
-
-
 {{#modal-modal animateClose=animateClose closeModal='closeModal' scrollToTop=scrollToTop}}
 <div {{bind-attr class=":modal-dialog showSuccess:sm:lg :text-left"}}>
 	<div class="modal-content">
 
+		{{partial "_modal_nav"}}
 
-	<div class="text-center edit-wrapper">
+		{{partial "_modal_error_alert"}}
+
+		
+		<div class="text-center edit-wrapper">
 
 
 
 
-	{{#form-for model}}
+			{{#form-for model}}
+			<div {{bind-attr class="stepOne:show:hide"}}>
+				<div class="edit-row">
+					<div class="edit-col">
 
-		<div {{bind-attr class="stepOne:show:hide"}}>
-			<div class="edit-row">
-				<div class="edit-col">
+						<h2>Post something to sell</h2>
 
-					<h2>Post something to sell</h2>
+						{{#image-picker 
+							images=userImages
+							selectedImages=selectedImages
+							refresh='refresh'
+							imageClick='imageClick' 
+							imageDelete='imageDelete'
+							
+							showImagePicker=showImagePicker
+						}} 
+							{{view 'sortable' content=selectedImages}}
+						{{/image-picker}}
 
-					{{#image-picker 
-						images=userImages
-						selectedImages=selectedImages
-						refresh='refresh'
-						imageClick='imageClick' 
-						imageDelete='imageDelete'
-						
-						showImagePicker=showImagePicker
-					}} 
-						{{view 'sortable' content=selectedImages}}
-					{{/image-picker}}
+						{{#if showImageError}}
+							<span class="has-error help-block">A product needs at least one image</span>
+						{{/if}}
 
-					{{#if showImageError}}
-						<span class="has-error help-block">A product needs at least one image</span>
-					{{/if}}
-
+					</div>
 				</div>
-			</div>
 
-			
+				
 
-			<div class="edit-row border">		
-				<div class="edit-col">
-					<h2>What is this?
-						<small>Name this product. For example "1968 Aston Martin"</small>
-					</h2> 
+				<div class="edit-row border">		
+					<div class="edit-col">
+						<h2>What is this?
+							<small>Name this product. For example "1968 Aston Martin"</small>
+						</h2> 
 
-					{{input-field product_name class="form-control"}}
-					{{#if showErrors}}
-						<span class="has-error help-block">{{error-field product_name}}</span>
-					{{/if}}
+						{{input-field product_name class="form-control"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_name}}</span>
+						{{/if}}
 
+					</div>
 				</div>
-			</div>
 
 
 
-			<div class="edit-row border">
-				<div class="edit-col">
-					<h2>What are the specs?
-						<small>Add one fact per line. For example "Color: silver"</small>
-					</h2>
+				<div class="edit-row border">
+					<div class="edit-col">
+						<h2>What are the specs?
+							<small>Add one fact per line. For example "Color: silver"</small>
+						</h2>
 
-					{{description-input descriptionChange='descriptionChange'}}
+						{{description-input descriptionChange='descriptionChange'}}
 
-					{{#if showErrors}}
-						<span class="has-error help-block">{{error-field product_description}}</span>
-					{{/if}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_description}}</span>
+						{{/if}}
 
+					</div>
 				</div>
-			</div>
 
 
 
-			<div class="edit-row border">
-				<div class="edit-col">
-					<h2>How much?</h2>	
+				<div class="edit-row border">
+					<div class="edit-col">
+						<h2>How much?</h2>	
 
-					{{!-- {{#input price}}
-						$ {{input-field product_price placeholder="0" class="form-control input-sm"}}
+						{{input-field product_price label="false" class="form-control input-sm"}}
 						{{#if showErrors}}
 							<span class="has-error help-block">{{error-field product_price}}</span>
 						{{/if}}
-					{{/input}} --}}	
 
-					{{input-field product_price label="false" class="form-control input-sm"}}
-					{{#if showErrors}}
-						<span class="has-error help-block">{{error-field product_price}}</span>
-					{{/if}}
+						<h2>Shipping &amp; handling?
+							<small>We only support flat rates for now, example "$5"</small>
+						</h2>
 
-					<h2>Shipping &amp; handling?
-						<small>We only support flat rates for now, example "$5"</small>
-					</h2>
+						{{input-field product_shipping label="false" class="form-control input-sm"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_shipping}}</span>
+						{{/if}}
 
-					{{input-field product_shipping label="false" class="form-control input-sm"}}
-					{{#if showErrors}}
-						<span class="has-error help-block">{{error-field product_shipping}}</span>
-					{{/if}}
+					</div>
+				</div>
 
+
+
+
+				<div class="edit-row border">
+					<div class="edit-col">
+
+						<h2>Tag it
+							<small>Tags will help promote your product. Separate multiple tags with a comma.</small>
+						</h2>
+						
+						{{input-field tags class="form-control"}}
+
+					</div>
+				</div>
+
+
+				<div class="edit-footer">
+					<div class="edit-col">			
+						<button {{action 'next'}} class="btn-next">NEXT</button>
+
+
+						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+							Cancel
+						</span>
+
+					</div>
 				</div>
 			</div>
 
 
+			<div {{bind-attr class="stepTwo:show:hide"}}>
 
+				<div class="edit-row">
+					<div class="edit-col">
 
-			<div class="edit-row border">
-				<div class="edit-col">
+						<h2>Next, write a post about this.
 
-					<h2>Tag it
-						<small>Tags will help promote your product. Separate multiple tags with a comma.</small>
-					</h2>
-					
-					{{input-field tags class="form-control"}}
+							<small>Just skip this section if you are happy with the blog post
+							we've created for you below.</small>
 
+						</h2>
+
+						{{input subject label="false" class="post-subject" }} 
+
+						{{quill-editor 
+							setEditorImgSrc=setEditorImgSrc
+							setEditorText=setEditorText 
+							content=editorialForQuill 
+							quillChange='quillChange' 
+							requestContents=requestEditorContents
+							selectedImages=selectedImages
+							triggerResize=triggerEditorResize
+						}} 
+
+					</div>
+				</div>
+
+				<div class="edit-footer">
+					<div class="edit-col">			
+
+						<span {{action 'back'}} class="btn btn-cancel btn-left">
+							Back
+						</span>
+
+						{{ladda-btn
+							name='SAVE PRODUCT'
+							class="display-inline"
+							btnClasses='btn-post ladda-button'
+							btnClick='savePost'
+							dataSpinnerColor="white"
+							spin=isProcessing
+						}}
+						
+						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+							Cancel
+						</span>
+
+					</div>
 				</div>
 			</div>
-
-
-			<div class="edit-footer">
-				<div class="edit-col">			
-					<button {{action 'next'}} class="btn-next">NEXT</button>
-
-
-					<span {{action 'cancel'}} class="btn btn-cancel btn-right">
-						Cancel
-					</span>
-
-				</div>
-			</div>
+			{{/form-for}}
 		</div>
-
-
-		<div {{bind-attr class="stepTwo:show:hide"}}>
-
-			<div class="edit-row">
-				<div class="edit-col">
-
-					<h2>Next, write a post about this.
-
-						<small>Just skip this section if you are happy with the blog post
-						we've created for you below.</small>
-
-					</h2>
-
-					{{input subject label="false" class="post-subject" }} 
-
-					{{quill-editor 
-						setEditorImgSrc=setEditorImgSrc
-						setEditorText=setEditorText 
-						content=editorialForQuill 
-						quillChange='quillChange' 
-						requestContents=requestEditorContents
-						selectedImages=selectedImages
-						triggerResize=triggerEditorResize
-					}} 
-
-				</div>
-			</div>
-
-			<div class="edit-footer">
-				<div class="edit-col">			
-
-					<span {{action 'back'}} class="btn btn-cancel btn-left">
-						Back
-					</span>
-
-					{{ladda-btn
-						name='SAVE PRODUCT'
-						class="display-inline"
-						btnClasses='btn-post ladda-button'
-						btnClick='savePost'
-						dataSpinnerColor="white"
-						spin=isProcessing
-					}}
-					
-					<span {{action 'cancel'}} class="btn btn-cancel btn-right">
-						Cancel
-					</span>
-
-				</div>
-			</div>
-		</div>
-
-	{{/form-for}}
-	</div>
-
-
 	</div>
 </div>
 {{/modal-modal}}		

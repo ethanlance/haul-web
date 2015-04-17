@@ -1,16 +1,26 @@
-	{{input subject placeholder="A Catchy Title..." label="false"}} 
+	<div class="edit-row">
+		<div class="edit-col">
+
+			<h2>Edit your post
+
+				<small>Tell a us story.</small>
+
+			</h2>
+
+			{{input subject label="false" class="post-subject" }} 
+
+			{{quill-editor 
+				setEditorImgSrc=setEditorImgSrc
+				setEditorText=setEditorText 
+				content=body
+				quillChange='quillChange' 
+				requestContents=requestEditorContents
+				selectedImages=selectedImages
+				triggerResize=triggerEditorResize
+			}} 
+
+		</div>
+	</div>	
+
+
 	
-
-	{{quill-editor 
-		content=body 
-		selectedImages=selectedImages 
-		requestContents=requestEditorContents 
-		quillChange='quillChange'
-	}}
-
-
-	<small class='pull-left'>Drag images into your post.</small>
-
-	<small class='pull-right'>Don't forget to add #hashtags</small>
-
-	{{#if showErrors}}{{error-field body}}{{/if}}			

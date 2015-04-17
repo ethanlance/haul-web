@@ -1,55 +1,97 @@
-{{!-- //PRODUCT --}}
+<div class="edit-row">
+					<div class="edit-col">
 
-<div {{bind-attr class=":drawer openDrawer:open"}}>
+						<h2>Post something to sell</h2>
 
-	<button {{action 'btnDrawer'}} class="btn btn-default btn-left btn-drawer">
-		<span class="glyphicon glyphicon-menu-hamburger"></span>
-	</button>
+						{{#image-picker 
+							images=userImages
+							selectedImages=selectedImages
+							refresh='refresh'
+							imageClick='imageClick' 
+							imageDelete='imageDelete'
+							
+							showImagePicker=showImagePicker
+						}} 
+							{{view 'sortable' content=selectedImages}}
+						{{/image-picker}}
 
-	<div {{bind-attr class=":drawer-content openDrawer:open"}}>
+						{{#if showImageError}}
+							<span class="has-error help-block">A product needs at least one image</span>
+						{{/if}}
 
-		<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active">
-		    	<a href="#product" aria-controls="product" role="tab" data-toggle="tab">For Sale</a>
-		    </li>
-		    {{#if canEditProduct}}
-		    <li role="presentation">
-		    	<a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Edit Photos</a>
-		    </li>
-		    {{/if}}
-		</ul>
-		<div class="tab-content">
-		    <div role="tabpanel" class="tab-pane active" id="product">
-		 
-			{{#if canEditProduct}}
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-
-						<h4>Give us the details<br>
-							<small>What is it? Color, size, condition, etc.</small>
-						</h4>
- 
-						{{input product_name placeholder="Item name" label="Name it:"}} 
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">  
-						<label>Describe it:</label>
-						{{description-input descriptionChange='descriptionChange' rollupValue=product_description}}
+
+				
+
+				<div class="edit-row border">		
+					<div class="edit-col">
+						<h2>What is this?
+							<small>Name this product. For example "1968 Aston Martin"</small>
+						</h2> 
+
+						{{input-field product_name class="form-control"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_name}}</span>
+						{{/if}}
+
+					</div>
+				</div>
+
+
+
+				<div class="edit-row border">
+					<div class="edit-col">
+						<h2>What are the specs?
+							<small>Add one fact per line. For example "Color: silver"</small>
+						</h2>
+
+						{{description-input rollupValue=product_description descriptionChange='descriptionChange'}}
 
 						{{#if showErrors}}
 							<span class="has-error help-block">{{error-field product_description}}</span>
 						{{/if}}
-					</div> 
+
+					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-6">  
-						{{input product_quantity class="input-xs" placeholder="quantity" label='Quantity:'}}
+
+
+
+				<div class="edit-row border">
+					<div class="edit-col">
+						<h2>How much?</h2>	
+
+						{{input-field product_price label="false" class="form-control input-sm"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_price}}</span>
+						{{/if}}
+
+						<h2>Shipping &amp; handling?
+							<small>We only support flat rates for now, example "$5"</small>
+						</h2>
+
+						{{input-field product_shipping label="false" class="form-control input-sm"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_shipping}}</span>
+						{{/if}}
+
+					</div>
+				</div>
+
+				<div class="edit-row border">
+					<div class="edit-col">
+					
+					<div class="row">	
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<h2>Change Quantity</h2>
+
+						{{input product_quantity class="" placeholder="quantity" label="false"}}
 					</div>
 
-					<div class="col-md-6 col-sm-6 col-xs-6"> 
-						<label>Status:</label>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+
+						<h2>Change status</h2>	
+					
 							{{view "select"
 						       content = product_status_options.status
 						       optionLabelPath = "content.name"
@@ -58,117 +100,23 @@
 						       class = "form-control"
 						    }}
 						    {{#if showErrors}}{{error-field product_status}}{{/if}}
-			 		</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-12 col-xs-12">  
-						<label>Price:</label>
-						{{#input product_price}}
-						<div class="input-group">
-							<span class="input-group-addon">$</span>
-						  	{{input-field product_price class="form-control input-sm"}}
-						  	<br/>
 						</div>
-						{{#if showErrors}}<span class="has-error help-block">{{error-field product_price}}</span>{{/if}}
-						{{/input}}
-	 				</div>
-
-
-	 				<div class="col-md-6 col-sm-12 col-xs-12">  
-
-						<label>Shipping:</label>
-						{{#input product_shipping}}
-						<div class="input-group">
-							<span class="input-group-addon">$</span>
-						  	{{input-field product_shipping class="form-control input-sm"}}
-						  	<br/>
 						</div>
-						{{#if showErrors}}<span class="has-error help-block">{{error-field product_shipping}}</span>{{/if}}
-						{{/input}}
-
-	 				</div>
-				</div>
-
-			{{else}}
-
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<span class="profile-badge">
-						<label>Seller</label><br/>
-							{{ make-icon icon=product_user.icon isSmall=true }}
-							{{#link-to 'profile' user.username }}{{product_user.username}}{{/link-to}}
-						</span>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">  
-						<p><label>Name:</label> {{product_name}}</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">  
-						<p><label>Description:</label> 
-						{{sanitize-html product_description "description" ENV}}</p>
-					</div> 
-				</div>
 
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<p><label>Quantity:</label> {{product_quantity}}</p>
+
+				{{!-- <div class="edit-row border">
+					<div class="edit-col">
+
+						<h2>Tag it
+							<small>Tags will help promote your product. Separate multiple tags with a comma.</small>
+						</h2>
+						
+						{{input-field tags class="form-control"}}
+
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<p><label>Price:</label> ${{product_price}}</p>
-	 				</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12"> 
-						<p><label>Status:</label> {{product_status_options.selectedStatus.name}}</p>
-			 		</div>
-				</div>
+				</div> --}}
+
+
 				
-
-	 		{{/if}}
-
-
-
-	 		</div>
-
-	 		{{#if canEditProduct}}
-			<div role="tabpanel" class="tab-pane" id="photos">
-
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-
-						<h4>Manage Your Photos<br>
-							<small>Upload, reorder (by dragging) or remove</small>
-						</h4>
-
-						<span {{bind-attr class="showImageUploadError:show:hide :alert"}}>{{imageUploadError}}</span>
-
-						{{#image-picker  
-							images=userImages
-							selectedImages=selectedImages
-							refresh='refresh'
-							imageClick='imageClick' 
-							imageDeleted='imageDeleted'
-							
-							doNotAnimate='true'
-						}}
-							{{view 'sortable' content=selectedImages}}
-						{{/image-picker}}
-
-					</div>
-				</div>
-			</div>
-			{{/if}}
-
-			{{#if canEditProduct}}
-				<small class="pull-right">Only you can edit this product card</small>
-			{{/if}}
-
-		</div>
-	</div>
-</div> 

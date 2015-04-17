@@ -17,18 +17,12 @@ export default Ember.ObjectController.extend({
   	},
   	anchor: null,
  	
- 	showHeaderChange: function(){ 
- 		if( this.get('currentPage') === this.get('thisPage')){
- 			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
- 			this.get('controllers.profile').set('showHeader', true);	
- 		} 		
- 	}.observes('currentPage'),
-
-
 	currentUserIdBinding: 'session.currentUser.id',
-	collectionsBinding: "collections.collections",
+	
 	userIdBinding: 'model.user.id',
+	
 	watchScroll:null,
+	
 	url: "", 
 	
 	//Is currentUser viewing his own page?
@@ -37,11 +31,28 @@ export default Ember.ObjectController.extend({
 	setup: function() { 
 
 		this.set('isProfileOwner', false);
+
+		this.set('isProductOwner', false);
+
+		//Can this user edit this post?
 		if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
 			if( this.get('model').get('user').get('id') === this.get('currentUserId')) {
 				this.set('isProfileOwner', true);
+
+
+				//Ok, can the user edit this product?
+				if( this.get('session').isAuthenticated && !Ember.isEmpty(this.get('currentUserId'))  ){
+					if( this.get('model').get('product_user').get('id') === this.get('currentUserId')) {
+						this.set('isProductOwner', true);
+					}
+				}
 			}
 		}
+
+		
+		
+
+
 		this.set('url', window.location.href);
 
 		this.set('isRepost', false);

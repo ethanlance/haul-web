@@ -121,13 +121,17 @@ body.modal-open {
 
 .modal.in { 
 	.modal-dialog{
-		margin-top: 59px;
+		//margin-top: 59px;
+		margin-top: 0;
 		opacity: 1; 
 
 
 	  	&.sm {
 	  		margin-top:10%; 
 	  	}
+
+
+	  
 	}
 } 
 

@@ -65,7 +65,8 @@ Router.map(function(){
 		this.route('following');
 		this.route('likes'); 
 		this.route('post', {path: "/:id/:post_slug"}, function() {
-			this.route('edit');
+			this.route('edit_post');
+			this.route('edit_product');
 		});
 	});
 });

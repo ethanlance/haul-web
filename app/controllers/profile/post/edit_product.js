@@ -6,16 +6,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
  	requestEditorContents: false,
 
- 	thisPage: "postEdit",
- 	currentPageBinding: 'controllers.profile.currentPage',
- 	showGridBtn:false,
 
- 	showHeaderChange: function(){  
- 		if( this.get('currentPage') === this.get('thisPage')){
- 			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
- 			this.get('controllers.profile').set('showHeader', false);	
- 		} 		
- 	}.observes('currentPage'),
+ 	currentPageBinding: 'controllers.profile.currentPage',
+
+
 	
 	productImagesBinding: "model.product_images",
 	product_status_options: null,
@@ -28,10 +22,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	animateDeleteModal: false,
 	selectedImages: [],
 	deletedImages: [],
-	editorialForQuill: "",
-	editorialForBody: "",
-	canEditProduct: false,
-	openDrawer: false, 
+	
+	
+
+	animateClose:false,
 
 	prevModelId: false,
 	currentModelId: false,
@@ -49,8 +43,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			showImageUploadError: false,
 			imageUploadError: "",
 			selectedImages: [],
-			editorialForQuill: "",
-			openDrawer: false,
 			showDeleteModal: false,
 			isProcessing: false,
 			isProcessingDelete: false,
@@ -63,8 +55,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return
 		} 
 
-		if( this.get('model').get('product_user').get('id') === this.get('currentUser').get('id') ){
-			this.set('canEditProduct', true);
+		//Safety Check.  Is current user the owner of this product?
+		if( this.get('model').get('product_user').get('id') !== this.get('currentUser').get('id') ){
+			console.log("ERROR, not the owner");
+			return;
 		}
 
 		var selectedStatus;
@@ -87,7 +81,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		}); 
 		this.set('product_status_options', product_status_options); 
 
-		this.set('editorialForQuill', this.get('model.body'));
+		
 
 		this.set('currentModelId', this.get('model.id'));
 
@@ -195,45 +189,14 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		// }
 	},
 
-	deletePost: function() {
-		var _this = this;		
-		var model = this.get('model');
-		var id = this.get('model.id');
+	
 
-		model.deleteRecord();
-		model.save()
-		.then(function(){
-			return _this.store.find('post-list', {user_id:_this.get('currentUser').get('id')});
-		})
-		.then(function() {
-			//Find this post in the list.
-			console.log("GO FIND ", id)
-			var record = _this.store.getById('post-list', id);
-			console.log('found ', record);
-			_this.store.unloadRecord(record);
-		})
-		.then(function(record){
-			_this.set('isProcessingDelete', false);
-			var user = _this.get('currentUser'); 
-			_this.transitionToRoute('profile', user);
-		}, function(error){
-			console.log("Error", error);
-			_this.set('isProcessingDelete', false);
-		});
-	},
-
-	savePost: function() {
+	saveProduct: function() {
 		var _this = this;		
 		var model = this.get('model');
 
-		
+		this.set('isProcessing', true);
  
-		var body = this.get('editorialForBody').trim();
-
-		if(Ember.isEmpty(body)){
-			body = " ";
-		}
-		model.set('body', body);
 
 		//Get-Set the product status.
 		model.set('product_status', this.get('product_status_options').get('selectedStatus').id);
@@ -282,44 +245,17 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 
 
+
 	actions: {
 
-		deletePost: function() {
-			this.deletePost();
+		close: function() {
+			this.set('animateClose', true);
 		},
 
-		showDeleteModal: function(){
-			var _this = this;
-			this.set('showDeleteModal', true);
-			Ember.run.later(function(){
-				_this.set('animateDeleteModal', true);
-			},100);
+		cancel: function() {
+			this.set('animateClose', true);
+			//this.transitionToRoute('profile', this.get('currentUser'));
 		},
-
-		closeDeleteModal: function(){
-			var _this = this;
-			this.set('animateDeleteModal', false);
-			Ember.run.later(function(){
-				_this.set('showDeleteModal', false);
-			},300);
-		}, 
-
-
-		showImageModal: function(){
-			var _this = this;
-			this.set('showImageModal', true);
-			Ember.run.later(function(){
-				_this.set('animateImageModal', true);
-			},100);
-		},
-
-		closeImageModal: function(){
-			var _this = this;
-			this.set('animateImageModal', false);
-			Ember.run.later(function(){
-				_this.set('showImageModal', false);
-			},300);
-		}, 
 
 		closeModal: function() { 
 			var _this = this;
@@ -328,15 +264,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			this.transitionToRoute('profile.post', model.get('user.username'), model); 
 		}, 
 
-		savePost: function() { 
-			this.set('isProcessing', true);
-			this.set('requestEditorContents', true);
+		saveProduct: function() { 
+			this.saveProduct();
 		},
 
-		quillChange: function(text) { 
-			this.set('editorialForBody', text); 
-			this.savePost();
-		},
 
 		//Click "imageClick" in UI
 		imageClick: function(event) {
@@ -346,11 +277,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		refresh: function(image) {
 			this.toggleImageSelected(image);			
-		},
-
-
-		btnDrawer: function() {
-			this.toggleProperty('openDrawer');
 		},
 
 		updateSortOrder: function(i) {

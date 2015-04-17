@@ -21,9 +21,9 @@
 						 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
 
 							{{#if isProfileOwner}}
-							 	{{#link-to 'profile.post.edit' user.username this }}
+							 	{{#link-to 'profile.post.edit_post' user.username this }}
 								<button class="btn btn-default">
-									edit post
+									Edit Your Post
 								</button>
 								{{/link-to}}
 							{{/if}}
@@ -61,6 +61,16 @@
 						{{statusText}}
 					</div>
 
+
+
+					{{#if isProductOwner }}
+						{{#link-to 'profile.post.edit_product' user.username this }}
+						<button class="btn btn-default btn-edit">
+							Edit Your Product
+						</button>
+						{{/link-to}}
+					{{/if}}
+
 					<h2>{{product_name}}</h2>
 
 
@@ -80,7 +90,6 @@
 					<button class="btn-buy">
 						BUY THIS
 					</button>
-
 
 					{{#if product_images}}
 						{{image-carousel content=product_images}}

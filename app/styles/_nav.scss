@@ -52,6 +52,7 @@ nav {
 		font-family: Arvo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 		text-align: center;
 		background-color: $logo-background-color; 
+		color: $logo-color;
 		a {
 			color: $logo-color;
 			&:hover{
@@ -158,5 +159,11 @@ nav.anon {
 
 	.nav-link-wrapper {
 		padding-left: 100px;
+	}
+}
+
+.modal-content {
+	nav {
+		position: relative;
 	}
 }

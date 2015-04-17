@@ -1,0 +1,63 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal' scrollToTop=scrollToTop}}
+<div {{bind-attr class=":modal-dialog showSuccess:sm:lg :text-left"}}>
+	<div class="modal-content">
+
+		{{partial "_modal_nav"}}
+
+		{{partial "_modal_error_alert"}}
+
+		<div class="text-center edit-wrapper">
+
+			{{#form-for model}}
+				{{partial "_edit_post"}}
+			{{/form-for}} 
+
+			<div class="edit-footer">
+				<div class="edit-col">			
+
+					<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
+						Delete Post
+					</button>
+
+
+					<button {{action 'savePost'}} class="btn-next">SAVE POST</button>
+
+
+					<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+						Cancel
+					</span>
+
+				</div>
+			</div>
+
+		</div>
+
+
+		{{!-- //DELETE POST MODAL --}}
+		<div {{bind-attr class=":modal animateDeleteModal:in:out showDeleteModal:show:hide"}}>
+			<div class="modal-dialog sm text-left haul-edit">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button {{action 'closeDeleteModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">
+							Delete This Post?
+							<small>This cannot be undone.</small>
+						</h4>
+					</div>
+					<div class="modal-body">
+						<button {{action 'closeDeleteModal'}} class="btn btn-warning">Cancel</button>
+						{{ladda-btn
+							name='Delete Post'
+							class="display-inline"
+							btnClasses='btn btn-danger ladda-button'
+							btnClick='deletePost'
+							spin=isProcessingDelete
+						}}
+					</div>
+				</div>
+		  	</div>
+		</div>
+
+	</div>
+</div>
+{{/modal-modal}}
