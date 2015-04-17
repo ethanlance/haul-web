@@ -5,11 +5,11 @@
 	<div class="profile-container">
 
 
-		<img class="profile-image" {{bind-attr src=model.icon}}>
+		{{#link-to 'profile' model}}<img class="profile-image" {{bind-attr src=model.icon}}>{{/link-to}}
 
 
 		<div class="profile-name">
-			<span class="name">{{model.name}}</span>
+			{{#link-to 'profile' model}}<span class="name">{{model.name}}</span>{{/link-to}}
 			<span class="username">@{{model.username}}</span>
 		</div>
 
