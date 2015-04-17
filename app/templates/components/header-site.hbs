@@ -14,12 +14,12 @@
 				{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-home fa-2x"></i>{{/link-to}}
 			 
  
-				{{#link-to 'mentions' }}
-					<i class="fa fa-envelope-o fa-2x"></i>
+				
+					{{#link-to 'mentions' }}<i class="fa fa-envelope-o fa-2x"></i>{{/link-to}}
 					{{#if session.currentUser.hastUnreadMentions}}
 						{{mention-count}}
 					{{/if}}
-				{{/link-to}}
+				
 		 
  
 				<i {{action 'toggle'}} class="fa fa-search fa-2x"></i> 

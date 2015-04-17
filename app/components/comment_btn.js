@@ -3,10 +3,10 @@ import ScrolltoMixin from '../mixins/scrollto';
 
 export default Ember.Component.extend(ScrolltoMixin, {
 	totalBinding: "post.commentCount.total",
-	linkOff:false,
+	gotolink:false,
 	actions: {
 		btnClick: function() { 
-			if(this.get('linkOff')){
+			if(this.get('gotolink')){
 				return;
 			}
 			this.scrollTo('#leaveComment', 200);
