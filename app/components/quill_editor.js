@@ -22,6 +22,8 @@ export default Ember.Component.extend(TransformMixin, {
 
 	editor: null,
 
+	minHeight: 400,
+
 	triggerResize: false,
 
 	requestContents: false,
@@ -77,6 +79,10 @@ export default Ember.Component.extend(TransformMixin, {
 			var scrollTop = $(window).scrollTop();
 			var height = window.outerHeight;
 			h = height - (top - scrollTop) - this.get('variance');
+		}
+
+		if( h < this.get('minHeight') ) {
+			h = this.get('minHeight');
 		}
 
 		$('#editor').css("height", h);	 
