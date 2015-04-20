@@ -19,7 +19,7 @@
  	
 	display: inline-block;
  	position: fixed;
- 	top:-30px;
+ 	top:-80px;
  	left:0;
  	right:0;
 
@@ -30,6 +30,10 @@
 .search.expand {  
 	top: 60px;  
 	z-index: $z-index-search;
+
+	@media (max-width: 400px) {
+		top: 40px;
+	}
 }
 
 .twitter-typeahead {
@@ -51,6 +55,7 @@
 	cursor: pointer;	
 	
 	.input-group-addon {
+		border-radius: 0;
 		background-color: #fff;
 		max-height:20px;
 		font-size: 22px;

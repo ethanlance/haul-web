@@ -1,5 +1,15 @@
+
+
 a.no-decoration:hover{
 	text-decoration: none;
+}
+
+i.fa {
+	cursor: pointer;
+}
+
+a, button {
+	cursor: pointer;
 }
 
 .middle-page {
@@ -41,6 +51,11 @@ body {
 	background-image: none;
 	position: relative;
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;	
+
+	@media (max-width: 400px) {
+		padding-top:40px;
+	}
+
 }
 body.modal-open {
     overflow: hidden;

@@ -85,6 +85,8 @@ app.import('bower_components/ladda-bootstrap/dist/ladda.js');
 
 app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css'); 
 
+app.import('bower_components/fastclick/lib/fastclick.js'); 
+
 app.import('vendor/ember-easyform.js');
 app.import('vendor/ember-validations.js');
 

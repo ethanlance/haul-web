@@ -110,6 +110,11 @@
 		@media (max-width: 750px) {
 			width: 100%;
 		} 
+
+		//iphone
+		@media (max-width: 400px) {
+			margin-bottom: 30px;
+		}
 	}
 
 	.col-right2 {
@@ -144,6 +149,11 @@
 			z-index: 0;
 			height: auto;
 			position: relative;
+		}
+
+		//iphone
+		@media (max-width: 400px) {
+			margin-top: 30px;
 		}
 	}
 }

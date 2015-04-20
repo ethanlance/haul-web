@@ -26,5 +26,8 @@
     "font-awesome": "~4.3.0",
     "typeahead.js": "~0.10.5",
     "bootstrap-sass-official": "~3.3.4"
+  },
+  "devDependencies": {
+    "fastclick": "~1.0.6"
   }
 }

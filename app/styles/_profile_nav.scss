@@ -40,6 +40,11 @@ header.profile{
 		border-radius: 50%;
 		width: 60px;
 		height: 60px;
+
+		@media (max-width: 400px) {
+			width:30px;
+			height:30px;
+		}
 	}
 
 	.profile-name {
@@ -63,6 +68,10 @@ header.profile{
 			display:block;
 			color: #8E8E8E;
 			margin-top: -6px;
+		}
+
+		@media (max-width: 400px) {
+			padding-top:0;
 		}
 	}
 
@@ -106,5 +115,33 @@ header.profile{
 		a {
 			text-decoration: none;
 		}
+
+		@media (max-width: 400px) {
+
+			float:left;
+			display: inline-block;
+			padding-left:0;
+			padding-right:10px;
+
+			.total{
+				min-height: 0;
+				font-size: .7em;
+			}
+			.title{
+				font-size: .7em;
+			}
+
+		}
 	}
+
 }
+
+
+
+
+
+
+
+
+
+

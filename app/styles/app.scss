@@ -5,10 +5,15 @@ $secondary-color: #F64D4A;
 $terthiary-color: #7a869d;
 $radius: 2px;
 
+
 $haul-max-width: 1000px;
 
+@media (max-width: 400px) {
+	$haul-max-width: 100%;
+}
 
-$logo-width: 110px;
+
+
 $logo-background-color: #F76664;
 $logo-color: #ffffff;
 
