@@ -6,6 +6,7 @@ export default {
   	initialize: function(container, application){
 		
 		application.inject('controller', 'socialApiClient', 'service:facebook-api-client');  		
+		
 		application.inject('component:facebook-btn', 'socialApiClient', 'service:facebook-api-client');
 		
 		application.inject('component:twitter-btn', 'socialApiClient', 'service:twitter-api-client');

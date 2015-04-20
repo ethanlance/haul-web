@@ -74,7 +74,27 @@ export default Ember.ObjectController.extend({
 
 			var _this = this;
 
-			this.get('controllers.facebook').triggerFacebook()
+			return this.socialApiClient.load()
+			.then(function(FB){
+			
+				return new Ember.RSVP.Promise(function(resolve, reject) {
+
+					FB.login(function(response){
+					  	if (response.authResponse) {
+					  		_this.get('controllers.facebook').set('facebook_user_id', response.authResponse.userID);
+					  		_this.get('controllers.facebook').set('facebook_access_token', response.authResponse.accessToken);
+					  		
+					  		return _this.get('controllers.facebook').getFBUser(function(data){
+					  			resolve(data);
+					  		});
+
+					  	} else {
+							console.log('User cancelled login or did not fully authorize.');
+							reject();
+					  	}
+				  	}, {scope: 'email'});	
+				});
+			})
 			
 			.then(function(response) {
 				return _this.createUserByFB(response); 
