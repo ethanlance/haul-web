@@ -77,13 +77,17 @@ header.profile{
 
 	.btn-follow {
 		margin-top: 1px;
-		float: right;
 		background-color: inherit;
 		border: 1px solid #dfdfdf;
 		color: #BABABA;
 		padding: 10px 20px 10px 20px; 
 		font-size: 14px;
 		text-transform: uppercase;
+
+		@media (max-width: 400px) {
+			padding: 5px 10px;
+			font-size: 12px;
+		}
 	}
 
 	.stats {

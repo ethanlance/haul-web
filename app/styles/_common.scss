@@ -52,6 +52,8 @@ i.fa {
 html {
 	height: 100%;
 	width: 100%;
+
+
 }
 
 body {
@@ -64,11 +66,16 @@ body {
 	position: relative;
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;	
 
+	overflow-x: hidden;
+
 	@media (max-width: 400px) {
 		padding-top:40px;
 	}
-
 }
+
+html, body { height: 100%; width: 100%}
+
+
 body.modal-open {
     overflow: hidden;
 }

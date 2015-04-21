@@ -1,3 +1,21 @@
+.btn-buy {
+	float:right;
+	width: 90px;
+	background-color: #6FD014;
+	color: #ffffff;
+	border: none;
+	display:inline-block;
+	padding-top:5px;
+	height:35px;
+	font-family: LATO;
+
+	@media (max-width: 400px) {
+		padding-top:3px;
+		font-size: 12px;
+	}
+}
+
+
 .repost-citations {
 	border: 1px solid #cccccc;
 	background-color: #ffffff;
@@ -146,19 +164,6 @@
 			font-weight: bold;
 		}
 
-		.btn-buy {
-			float:right;
-			//margin-right: 170px;
-			width: 90px;
-			background-color: #6FD014;
-			color: #ffffff;
-			border: none;
-			display:inline-block;
-			padding-top:5px;
-			height:35px;
-			font-family: LATO;
-
-		}
 	}
 
 	.card-image-box {
@@ -384,17 +389,6 @@
 		width:100px;
 		display:inline-block;
 		font-weight: bold;
-	}
-
-	.btn-buy {
-		float:right;
-		width: 90px;
-		background-color: #6FD014;
-		color: #ffffff;
-		border: none;
-		display:inline-block;
-		padding-top:5px;
-		height:35px;
 	}
 
 
