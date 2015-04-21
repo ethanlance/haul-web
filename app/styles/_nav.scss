@@ -191,10 +191,9 @@ nav {
 
 		&:hover{
 			.dropdown-menu{
-				margin-top:-5px;
 				z-index: $z-index-profile-dropdown;
 				display:inline;
-				top:35px;
+				top:20px;
 				//right: 10px;
 				max-width: 300px;
 			}
