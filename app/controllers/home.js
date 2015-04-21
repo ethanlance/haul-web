@@ -18,7 +18,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 		if( Ember.isEmpty(this.get('currentUserId'))) {
 			return;
 		}
-console.log("FLABOOM")		
+
 		//Pagination:	
 		this.set('paginateQuery', {
 			storeName: this.get('storeName'),

@@ -23,7 +23,7 @@ export default {
 						_this.set("currentUser", user);
 						application.set('currentUser', user);
 					
-						console.log("SESSION CURRENT USER CHANGED", user.get('name') , _this.get('access_token') ); 
+						//console.log("SESSION CURRENT USER CHANGED", user.get('name') , _this.get('access_token') ); 
 
 					}, function(error){
 						console.log("INITIALIZER ERROR", error);
