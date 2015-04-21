@@ -300,7 +300,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 				_this.set('animateClose', true);
 
-				_this.transitionToRoute('profile.post', user, _this.get('postRecord'))
+				_this.transitionToRoute('profile.post', user.get('username'), _this.get('postRecord'))
 				.then(function() {
 					_this.set('isProcessing', false);
 				});
@@ -334,7 +334,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		cancel: function() {
 			this.set('animateClose', true);
-			//this.transitionToRoute('profile', this.get('currentUser'));
 		},
 	
 		savePost: function() { 

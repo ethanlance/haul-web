@@ -13,13 +13,14 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 
 		var data = null;
 		var datas = payload.data.map(function(result){
+			var id = result.user_id + result.subject.id;
 			return {
-				id: result.subject.id,	
+				id: id,
 				post:result.subject.id,		
 				user:result.user_id,
 				created_at: result.created_at,		
 				post_id: result.subject.id,
-				user_id:result.user_id,
+				user_id: result.user_id,
 			}
 		});
 
