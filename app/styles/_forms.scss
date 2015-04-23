@@ -555,6 +555,14 @@ button.btn-cancel{
 	padding-left: 20px;
 }
 
+.has-error, .help-block, .alert, .error {
+	color: red;
+}
+
+.help-block:empty{
+	display:none;
+}
+
 .edit-wrapper {
 
 	width: 100%;
@@ -565,9 +573,7 @@ button.btn-cancel{
 		color: #333333;
 	}
 
-	.has-error, .help-block, .alert, .error {
-		color: red;
-	}
+
 
 	.ql-toolbar {
 		//border-bottom: 1px solid #ccc;

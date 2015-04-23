@@ -26,7 +26,7 @@
 	margin-left:auto;
 	margin-right:auto;
 	padding:0;
-	display: inline-block;
+	//display: inline-block;
 	width: 100%;
 	max-width: $haul-max-width;
 	@media (max-width: 400px) {
@@ -284,8 +284,6 @@ label:empty[for="nav-trigger"] {
 .nav-trigger:checked ~ .haul-col-content {
   left: 200px;
 }
-
-
 
 
 

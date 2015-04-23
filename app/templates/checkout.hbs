@@ -1,20 +1,70 @@
 {{header-site goToRoute='goToRoute'}}
 
 
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+
 {{!-- PAGE CONTENT --}}
-<div class="container-fluid haul-content">   
+<div class="container haul-content">   
 	<div class="row">
-		<div class="col-md-3 col-sm-2 col-xs-12"></div>
+		<div class="col-md-3 col-sm-2 col-xs-12">
+			<h1></h1>
+			<div class="product-card">
+				<div {{bind-attr class=":product-card-cap isForSale::sold"}}>
+					{{statusText}}
+				</div>
+
+				<h2>{{product_name}}</h2>
+
+
+				<div class="profile-pod">
+					<img class="profile-image" {{bind-attr src=product_user.icon}}>
+
+					<div class="profile-name">
+						<span class="name">{{product_user.name}}</span>
+						<span class="username">@{{product_user.username}}</span>
+					</div>
+				</div>
+
+				<div class="price">
+					${{product_price}}
+				</div>
+
+				{{#if product_images}}
+					{{image-carousel content=product_images}}
+				{{/if}}
+
+				<div class="description">
+					{{description-list product_description "description"}}
+				</div>
+			</div>
+
+
+		</div>
 		<div class="col-md-6 col-sm-8 col-xs-12">
+			<h1>Buy It!</h1>
 
 
+			<h3>Please confirm</h3>
+			{{buyer-form}}
+
+
+			<h3>Address</h3>
+			{{address-form}}
+
+
+			<h3>Credit Card</h3>
 			<form id="checkout" method="post" action="/checkout">
 				{{braintree-dropin token=braintreeClientToken action='submit'}}
 				<div id="dropin"></div>
-				<input type="submit" value="Pay $10">
+				<button class='btn btn-default btn-right' type="submit" value="Pay $10">Send Payment</button>
 			</form>
 
 		</div>
 		<div class="col-md-3 col-sm-2 col-xs-12"></div>
 	</div>
+</div>	
+</div>	
+</div>	
 </div>	

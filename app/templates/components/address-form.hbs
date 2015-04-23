@@ -1,0 +1,22 @@
+			{{!-- CREATE BUYER --}}
+			{{#form-for buyer}}
+				{{input-field buyer.firstname class="form-control"}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field buyer.firstname}}</span>
+				{{/if}}
+
+				{{input-field buyer.lastname class="form-control"}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field buyer.lastname}}</span>
+				{{/if}}
+
+				{{input-field buyer.email class="form-control"}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field buyer.email}}</span>
+				{{/if}}
+
+				{{input-field buyer.phone class="form-control"}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field buyer.phone}}</span>
+				{{/if}}
+			{{/form-for}}

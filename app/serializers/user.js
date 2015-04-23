@@ -9,6 +9,8 @@ export default DS.RESTSerializer.extend({
 		var data =  {
 			username: payload.data.username,
 			name: payload.data.name,
+			firstname: payload.data.firstname,
+			lastname: payload.data.lastname,
 			email: payload.data.email,
 			id: payload.data.user_id,
 			

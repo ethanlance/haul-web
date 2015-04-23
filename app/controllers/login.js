@@ -65,9 +65,9 @@ export default Ember.ObjectController.extend({
 						reject();
 				  	}
 			  	}, {scope: 'email'});	
-			});
-		})
-		.then(function(response){
+				});
+			})
+			.then(function(response){
 				var data = { 
 					fb_user_id: response.fb_user_id, 
 					fb_token: 	response.fb_token
@@ -86,28 +86,6 @@ export default Ember.ObjectController.extend({
 				}
 			);
 
-
-
-		
-			// this.get('controllers.facebook').triggerFacebook()
-			// .then(function(response){
-			// 	var data = { 
-			// 		fb_user_id: response.fb_user_id, 
-			// 		fb_token: 	response.fb_token
-			// 	}
-			// 	return  _this.authenticate('/auth/facebook', 'post', data);
-			// })
-			// .then(
-		 // 		function onFulfill(response) {
-			// 		_this.set('isProcessingFacebook', false);
-			// 		return console.log("Success!", response); 
-			// 	}, 
-			// 	function onReject(error) {
-			// 		_this.set('error404', true);
-			// 		_this.set('isProcessingFacebook', false);
-			// 		console.error("Failed!", error);
-			// 	}
-			// );
 		},
 
 		//LOGIN via email, password

@@ -12,20 +12,20 @@
 
 					<h1 class="subject">{{ subject }}</h1>
 
-	{{!-- //REPOST --}}
-	{{#if repost_id}}
-	<div class="repost-citations">
-		<i class="fa fa-retweet"></i>
-		<img class="profile-image" {{bind-attr src=repost_user.icon}}>
-		<span class="name">{{repost_user.name}}'s </span>
-		<span class="title"> original post
-			{{#link-to 'profile.post'
-				repost.user.username 
-				repost.post_id 
-				repost.post_slug}}{{repost.subject}}{{/link-to}}
-		</span>
-	</div>
-	{{/if}}
+					{{!-- //REPOST --}}
+					{{#if repost_id}}
+					<div class="repost-citations">
+						<i class="fa fa-retweet"></i>
+						<img class="profile-image" {{bind-attr src=repost_user.icon}}>
+						<span class="name">{{repost_user.name}}'s </span>
+						<span class="title"> original post
+							{{#link-to 'profile.post'
+								repost.user.username 
+								repost.post_id 
+								repost.post_slug}}{{repost.subject}}{{/link-to}}
+						</span>
+					</div>
+					{{/if}}
 
 					<div class="social-buttons">
 						<div class="internal-social-buttons">
@@ -102,9 +102,11 @@
 						${{product_price}}
 					</div>
 
+					{{#link-to 'checkout' post_id}}
 					<button class="btn-buy">
 						BUY THIS
 					</button>
+					{{/link-to}}
 
 					{{#if product_images}}
 						{{image-carousel content=product_images}}

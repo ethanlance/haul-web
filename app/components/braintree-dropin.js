@@ -1,25 +1,23 @@
-/**
-  https://developers.braintreepayments.com/javascript+node/start/hello-client
-**/
+/* global braintree */
 
-import Ember from 'ember';
+import Em from 'ember';
 
-export default Ember.Component.extend({
-  action: 'processBraintreeNonce',
-  token: null,
+export default Em.Component.extend({
+	action: 'processBraintreeNonce',
+	token: null,
 
-  _setup: function() {
-    var handler = Em.run.bind(this, this._handler),
-        token = this.get('token');
-console.log("TOKEN", token);
-    braintree.setup(token, 'dropin', {
-      container: 'dropin',
-      paymentMethodNonceReceived: handler
-    });
-  }.on('didInsertElement'),
+	_setup: function() {
+		var handler = Em.run.bind(this, this._handler),
+				token = this.get('token');
 
-  _handler: function(event, nonce) {
-    this.sendAction('action', nonce);
-    return false;
-  }
+		braintree.setup(token, 'dropin', {
+			container: this.elementId,
+			paymentMethodNonceReceived: handler
+		});
+	}.on('didInsertElement'),
+
+	_handler: function(event, nonce) {
+		this.sendAction('action', nonce);
+		return false;
+	}
 });

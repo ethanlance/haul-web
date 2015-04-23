@@ -56,7 +56,7 @@ Router.map(function(){
 	//mentions
 	this.route('mentions');
 
-	this.route('checkout');	
+	this.route('checkout', {path: "/buy/:id"});	
 
 	//Profiles
 	//this.route('new-post');
@@ -69,18 +69,9 @@ Router.map(function(){
 			this.route('edit_product');
 		});
 	});
+
+
+	this.route('not-found', {path: '/*wildcard'});
 });
-
-
-
- 
-
-// as you can see, there is a App.meta object that handles all the action
-// you can even set title and description directly if you want to!
-// App.meta.set('title', 'New Site Title');
-// App.meta.set('description', 'Somethign changed, so I update my meta data.');
-
-// // you can as well ask for all the tags that were set by calling
-// App.meta.get('summary');
 
 export default Router;

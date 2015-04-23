@@ -1,0 +1,31 @@
+{{!-- CREATE BUYER --}}
+{{#form-for model}}
+	{{input-field model.firstname class="form-control" placeholder='firstname'}}
+	{{#if showErrors}}
+		<span class="has-error help-block">{{error-field firstname}}</span>
+	{{/if}}
+
+	{{input-field model.lastname class="form-control" placeholder='last name'}}
+	{{#if showErrors}}
+		<span class="has-error help-block">{{error-field lastname}}</span>
+	{{/if}}
+
+	{{input-field model.email class="form-control" placeholder='email'}}
+	{{#if showErrors}}
+		<span class="has-error help-block">{{error-field email}}</span>
+	{{/if}}
+
+	{{input-field model.phone class="form-control" placeholder="phone number"}}
+	{{#if showErrors}}
+		<span class="has-error help-block">{{error-field phone}}</span>
+	{{/if}}
+
+	{{ladda-btn
+		name='save'
+		class="display-inline"
+		btnClasses='btn btn-default ladda-button btn-right'
+		btnClick='submit'
+		spin=isProcessing
+	}}
+
+{{/form-for}}

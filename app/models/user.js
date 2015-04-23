@@ -4,6 +4,8 @@ import Ember from 'ember';
 export default DS.Model.extend({
 	username: DS.attr('string'),
 	name: DS.attr('string'),
+	firstname: DS.attr('string'),
+	lastname: DS.attr('string'),
 	email: DS.attr('string'),
 	facebook_user_id: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),

@@ -4,13 +4,15 @@ var $ = Ember.$;
 export default Ember.ObjectController.extend({  
 
  	needs: ['profile'],
+
  	statusText: "FOR SALE",
 
- 	thisPage: "postPage", 
  	isRepost:false,
+
  	postHasImage: false,
+	
 	currentPageBinding: 'controllers.profile.currentPage',
- 	showGridBtn:false,
+
  
  	queryParams: {
     	anchor: "anchor"
@@ -50,8 +52,6 @@ export default Ember.ObjectController.extend({
 		}
 
 		
-		
-
 
 		this.set('url', window.location.href);
 
