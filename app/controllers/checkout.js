@@ -6,27 +6,18 @@ export default Ember.ObjectController.extend({
 
 	currentUserBinding: 'session.currentUser',
 
-	makeToken: function() {
+	braintree_url: function() {
+		console.log("BOOM?", this.ENV.BT_MERCHANT_ID);
 
-		var user_id = this.get('currentUser').id;
-		var host = this.ENV.Server.PROSPER_SERVER_HOST;
-		var url = host + "/buyers/" + user_id + "/tokens";
-		var type = "GET";
-		var bearer = this.get('currentUser').get('access_token');
-console.log('bear', bearer)
-		return Ember.$.ajax({
-			url:         url,
-			type:        type,
-			dataType:    'json',
-			contentType: 'application/x-www-form-urlencoded',
-			headers: {
-				Authorization: 'Bearer ' + bearer
-			},
-		});
+		var braintree_merchant_id = this.ENV.BT_MERCHANT_ID
+		var url = "https://www.braintreegateway.com/merchants/"+ braintree_merchant_id +"/verified";
 
-	},
+		return url;
+	}.property(),
 
 	modelChanged: function() {
+
+
 
 		// //User braintee token:
 		// this.makeToken()

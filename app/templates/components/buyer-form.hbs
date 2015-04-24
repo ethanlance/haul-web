@@ -1,31 +1,45 @@
 {{!-- CREATE BUYER --}}
-{{#form-for model}}
-	{{input-field model.firstname class="form-control" placeholder='firstname'}}
-	{{#if showErrors}}
-		<span class="has-error help-block">{{error-field firstname}}</span>
-	{{/if}}
+<div {{bind-attr class="showForm:hide:show"}}>
+	<h3>Your Details</h3>
+	{{model.first_name}} {{model.last_name}}
+</div>
 
-	{{input-field model.lastname class="form-control" placeholder='last name'}}
-	{{#if showErrors}}
-		<span class="has-error help-block">{{error-field lastname}}</span>
-	{{/if}}
+<div {{bind-attr class="showForm:show:hide"}}>
 
-	{{input-field model.email class="form-control" placeholder='email'}}
-	{{#if showErrors}}
-		<span class="has-error help-block">{{error-field email}}</span>
-	{{/if}}
+	<h3>Your Details
+		<small>
+			For your security we require the following info.  We promise not to do anything evil with it.
+		</small>
+	</h3>
 
-	{{input-field model.phone class="form-control" placeholder="phone number"}}
-	{{#if showErrors}}
-		<span class="has-error help-block">{{error-field phone}}</span>
-	{{/if}}
+	{{#form-for model}}
+		{{input-field model.firstname class="form-control" placeholder='firstname'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field firstname}}</span>
+		{{/if}}
 
-	{{ladda-btn
-		name='save'
-		class="display-inline"
-		btnClasses='btn btn-default ladda-button btn-right'
-		btnClick='submit'
-		spin=isProcessing
-	}}
+		{{input-field model.lastname class="form-control" placeholder='last name'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field lastname}}</span>
+		{{/if}}
 
-{{/form-for}}
+		{{input-field model.email class="form-control" placeholder='email'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field email}}</span>
+		{{/if}}
+
+		{{input-field model.phone class="form-control" placeholder="phone number"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field phone}}</span>
+		{{/if}}
+
+		{{ladda-btn
+			name=buttonText
+			class="display-inline"
+			btnClasses='btn btn-default ladda-button btn-right'
+			btnClick='submit'
+			spin=isProcessing
+		}}
+
+	{{/form-for}}
+</div>

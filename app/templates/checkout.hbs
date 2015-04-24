@@ -46,20 +46,40 @@
 			<h1>Buy It!</h1>
 
 
-			<h3>Please confirm</h3>
-			{{buyer-form}}
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+					{{buyer-form}}
+						
+				</div>
+			</div>
 
 
-			<h3>Address</h3>
-			{{address-form}}
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					
+					{{buyer-address}}
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h3>Credit Card</h3>
+
+					<a {{bind-attr href=braintree_url}} target="_blank">
+					  <img src="https://s3.amazonaws.com/braintree-badges/braintree-badge-wide-dark.png" width="280px" height ="44px" border="0"/>
+					</a>
 
 
-			<h3>Credit Card</h3>
-			<form id="checkout" method="post" action="/checkout">
-				{{braintree-dropin token=braintreeClientToken action='submit'}}
-				<div id="dropin"></div>
-				<button class='btn btn-default btn-right' type="submit" value="Pay $10">Send Payment</button>
-			</form>
+					<form id="checkout" method="post" action="/checkout">
+						{{braintree-dropin token=braintreeClientToken action='submit'}}
+						<div id="dropin"></div>
+						<button class='btn btn-default btn-right' type="submit" value="Pay $10">Send Payment</button>
+					</form>
+				</div>
+			</div>
+
 
 		</div>
 		<div class="col-md-3 col-sm-2 col-xs-12"></div>

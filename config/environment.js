@@ -26,6 +26,10 @@ module.exports = function(environment) {
 		APP: {
 			// Here you can pass flags/options to your application instance
 			// when it is created
+
+			BT_MERCHANT_ID: '68fqcmrnqzxs6cck',
+
+
 			Server:{},
 			errorMessages: {
 				environment:environment,

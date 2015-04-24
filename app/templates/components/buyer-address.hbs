@@ -1,0 +1,129 @@
+
+
+
+<div {{bind-attr class="showList:show:hide"}}>
+	<h3>Select an address</h3>
+	<ul>
+	{{#each address in addresses}}
+		<li>
+
+			<input type="checkbox"  {{action 'selectThisAddressId' address.id}}> 
+			{{address.address}}
+			<button {{action 'showEditAddress' address.id}} class="btn btn-default btn-sm">edit</button>
+			<button {{action 'showRemoveAddress' address.id}} class="btn btn-default btn-sm">remove</button>
+			
+		</li>
+	{{/each}}
+	</ul>
+	<button {{action 'showCreateNewAddress' }} class="btn btn-default btn-right">add new</button>
+</div>
+
+
+
+
+
+<div {{bind-attr class="showDelete:show:hide"}}>
+	<h3>Remove this address?</h3>
+	<p>
+		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
+		{{selectedAddress.address}}<br/>
+		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>
+		<button {{action 'doRemoveAddress' selectedAddress }} class="btn btn-default btn-right">yes, remove</button>
+		<button {{action 'showAddressList' }} class="btn btn-default btn-right">cancel</button>
+	</p>
+</div>
+
+
+
+
+<div {{bind-attr class="showAddress:show:hide"}}>
+	<h3>Selected address</h3>
+	<p>
+		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
+		{{selectedAddress.address}}<br/>
+		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>
+		<button {{action 'showAddressList' }} class="btn btn-default btn-right">pick a differet address</button>
+	</p>
+</div>
+
+
+
+
+
+
+
+<div {{bind-attr class="showForm:show:hide"}}>
+
+
+	{{#if model}}
+		<h3>Create Address</h3>
+	{{else}}
+		<h3>Edit Address</h3>
+	{{/if}}
+
+
+	{{#form-for model}}
+
+		{{input-field model.label class="form-control" placeholder="address nickname (ie. home, work)"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field label}}</span>
+		{{/if}}
+
+		{{input-field model.company class="form-control" placeholder="company - optional"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field  company}}</span>
+		{{/if}}
+
+		{{input-field model.firstname class="form-control" placeholder="first name"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field firstname}}</span>
+		{{/if}}
+
+		{{input-field model.lastname class="form-control" placeholder="last name"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field lastname}}</span>
+		{{/if}}
+
+		{{input-field model.address class="form-control" placeholder="address"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field address}}</span>
+		{{/if}}
+
+		{{input-field model.city class="form-control" placeholder="city"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field city}}</span>
+		{{/if}}
+
+		{{view "select"
+	       content = state_options.states
+	       optionLabelPath = "content.name"
+	       optionValuePath = "content.abreviation"
+	       selection = state_options.selectedState
+	       prompt="state"
+	       class = "form-control"
+	    }}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field state}}</span>
+		{{/if}}
+
+		{{input-field model.postal_code class="form-control" placeholder="zip code"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field postal_code}}</span>
+		{{/if}}
+
+		{{partial "_server_error"}}
+
+		{{#if hasAddressList }}
+		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right">cancel</button>
+		{{/if}}
+
+		{{ladda-btn
+			name=buttonText
+			class="display-inline"
+			btnClasses='btn btn-default ladda-button btn-right'
+			btnClick='doSubmitAddressForm'
+			spin=isProcessing
+		}}
+
+	{{/form-for}}
+</div>

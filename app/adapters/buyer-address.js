@@ -6,8 +6,9 @@ export default ApplicationAdapter.extend({
 		return this.ENV.Server.PROSPER_SERVER_HOST;	
 	}.property(), 
 
-	findQuery: function(store, type, query) { 
-		var url = this.get('host') + "/buyers/" + query.user_id + "/addresses/" + query.address_id;
+	find: function(store, type, id) { 
+		var user_id = this.get('currentUser').id;
+		var url = this.get('host') + "/buyers/" + user_id + "/addresses/" + id;
         return this.ajax(url, 'GET');
     },
 
@@ -18,12 +19,18 @@ export default ApplicationAdapter.extend({
 		var data = {
 			firstname: record.get('firstname'),
 			lastname: record.get('lastname'),
-			label: record.get('label'),
 			address: record.get('address'),
 			city: record.get('city'),
 			state: record.get('state'),
 			postal_code: record.get('postal_code'),
-			company: record.get('company'),
+		};
+
+		if(!Ember.isEmpty(record.get('label'))) {
+			data['label'] = record.get('label');
+		}
+
+		if(!Ember.isEmpty(record.get('company'))) {
+			data['company'] = record.get('company');
 		}
 
 		var url = this.get('host') + "/buyers/" + user_id + "/addresses";
@@ -38,12 +45,19 @@ export default ApplicationAdapter.extend({
 		var data = {
 			firstname: record.get('firstname'),
 			lastname: record.get('lastname'),
-			label: record.get('label'),
 			address: record.get('address'),
 			city: record.get('city'),
 			state: record.get('state'),
 			postal_code: record.get('postal_code'),
-			company: record.get('company'),
+		}
+
+
+		if(!Ember.isEmpty(record.get('label'))) {
+			data['label'] = record.get('label');
+		}
+
+		if(!Ember.isEmpty(record.get('company'))) {
+			data['company'] = record.get('company');
 		}
 
 		var url = this.get('host') + '/buyers/' + user_id + "/addresses/" + address_id;

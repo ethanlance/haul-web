@@ -1,6 +1,7 @@
 import DS from "ember-data";
 export default DS.RESTSerializer.extend({
 
+
 	extractSingle: function(store, type, payload, recordId, requestType) {
 		if( payload.data === "ok" ){
 			return;
@@ -13,6 +14,7 @@ export default DS.RESTSerializer.extend({
 			lastname: payload.data.lastname,
 			address: payload.data.address,
 			state: payload.data.state,
+			city: payload.data.city,
 			postal_code: payload.data.postal_code,
 			label: payload.data.label,
 			company: payload.data.company

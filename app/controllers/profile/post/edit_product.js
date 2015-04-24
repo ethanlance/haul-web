@@ -6,25 +6,28 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
  	requestEditorContents: false,
 
-
  	currentPageBinding: 'controllers.profile.currentPage',
 
-
-	
 	productImagesBinding: "model.product_images",
+	
 	product_status_options: null,
+	
 	currentUserBinding: 'session.currentUser',
 	
 	isProcessing: false,
+
 	isProcessingDelete: false,
+	
 	imagesAreSelected: false,
+	
 	showDeleteModal: false,
+	
 	animateDeleteModal: false,
+	
 	selectedImages: [],
+	
 	deletedImages: [],
 	
-	
-
 	animateClose:false,
 
 	prevModelId: false,

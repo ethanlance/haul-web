@@ -15,6 +15,7 @@ export default DS.RESTSerializer.extend({
 				firstname: result.firstname,
 				lastname: result.lastname,
 				address: result.address,
+				city: result.city,
 				state: result.state,
 				postal_code: result.postal_code,
 				label: result.label,

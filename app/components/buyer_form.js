@@ -3,7 +3,9 @@ export default Ember.Component.extend({
 
 	currentUserBinding: "session.currentUser",
 
-	
+	buttonText: 'update',
+
+	showForm: true, 
 
 	//Get Buyer.
 	getBuyer: function() {
@@ -22,6 +24,8 @@ export default Ember.Component.extend({
 				//buyer exists.
 				_this.set('model', record);
 
+				_this.set('showForm', false);
+
 			},
 			function failure(error){
 
@@ -34,6 +38,8 @@ export default Ember.Component.extend({
 				buyer.set('email', user.get('email'));
 
 				_this.set('model', buyer);
+
+				_this.set('showForm', true);
 
 			}	
 		);
@@ -56,6 +62,7 @@ export default Ember.Component.extend({
 			function success(results){
 				console.log("SUCCESS", results);
 				_this.set('isProcessing', false);
+				_this.set('showForm', false);
 			},
 			function failed(error){
 				_this.set('isProcessing', false);
