@@ -17,10 +17,11 @@
 
 
 .repost-citations {
-	border: 1px solid #cccccc;
-	background-color: #ffffff;
+	border: 0px solid #cccccc;
+	background-color: transparent;
 	margin-bottom: 15px;
 	padding: 5px 15px 5px 15px;
+	color: #F76664;
 
 	.profile-image{
 		width: 30px;
@@ -36,7 +37,6 @@
 		font-family: LATO;
 		font-size: 14px;
 		font-weight: lighter;
-		color: #cccccc;
 	}
 
 	.title a {
@@ -211,7 +211,7 @@
 	h1.subject {
 		font-family: Arvo;
 		font-weight: normal;
-		font-size: 40px;
+		font-size: 26px;
 		margin-top: 4px;
 	}
 

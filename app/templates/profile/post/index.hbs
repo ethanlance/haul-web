@@ -27,6 +27,20 @@
 					</div>
 					{{/if}}
 
+					
+
+					{{!-- EDITORIAL --}}
+					<div class="editorial">
+						{{#unless postHasImage}}
+							<img {{bind-attr src=image.large}}/>
+						{{/unless}}
+
+						{{sanitizehtml-andtag 
+							body 
+							"editorial" 
+							ENV
+						}}
+					</div>
 					<div class="social-buttons">
 						<div class="internal-social-buttons">
 							{{like-btn post=this openModal='openModal' class="display-inline"}}
@@ -47,19 +61,6 @@
 						<div class="external-social-buttons">
 							{{social-btns post=this}}
 						</div>
-					</div>
-
-					{{!-- EDITORIAL --}}
-					<div class="editorial">
-						{{#unless postHasImage}}
-							<img {{bind-attr src=image.large}}/>
-						{{/unless}}
-
-						{{sanitizehtml-andtag 
-							body 
-							"editorial" 
-							ENV
-						}}
 					</div>
 
 
