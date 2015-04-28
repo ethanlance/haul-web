@@ -1,13 +1,18 @@
+<div {{bind-attr class="show_loading:show:hide"}}>
+	{{partial '_spinner'}}
+</div>
+
 {{!-- CREATE BUYER --}}
-<div {{bind-attr class="showForm:hide:show"}}>
+<div {{bind-attr class="show_buyer:show:hide"}}>
 	<h3>Your Details</h3>
 	<p>
 		{{model.firstname}} {{model.lastname}}<br/>
 		{{model.phone}}
 	</p>
+	<button {{action 'showEdit'}} class='btn btn-default btn-right'>edit</button>
 </div>
 
-<div {{bind-attr class="showForm:show:hide"}}>
+<div {{bind-attr class="show_form:show:hide"}}>
 
 	<h3>Your Details
 		<small>
@@ -31,7 +36,11 @@
 			<span class="has-error help-block">{{error-field email}}</span>
 		{{/if}}
 
-		{{input-field model.phone class="form-control" placeholder="phone number"}}
+		{{input-mask class='form-control'
+			valueOut=model.phone
+			valueIn=model.phone
+			mask='999-999-9999'
+			placeholder='phone 555-555-5555'}}
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field phone}}</span>
 		{{/if}}
@@ -40,7 +49,7 @@
 			name=buttonText
 			class="display-inline"
 			btnClasses='btn btn-default ladda-button btn-right'
-			btnClick='submit'
+			btnClick='doSubmit'
 			spin=isProcessing
 		}}
 

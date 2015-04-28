@@ -7,7 +7,18 @@ export default Ember.Component.extend({
 
 	buttonText: 'update',
 
-	showForm: true, 
+	show_form: false,
+
+	show_seller: false,
+
+	show_loading: true,
+
+	showChanged: function() {
+		this.set('show_loading', false);
+		this.set('show_form', false);
+		this.set('show_buyer', false);
+		this.set('show_'+this.get('show'), true);
+	}.observes('show'),
 
 	//Get Buyer.
 	getBuyer: function() {
@@ -26,7 +37,7 @@ export default Ember.Component.extend({
 				//buyer exists.
 				_this.set('model', record);
 
-				_this.set('showForm', false);
+				_this.set('show', 'buyer');
 
 			},
 			function failure(error){
@@ -41,11 +52,11 @@ export default Ember.Component.extend({
 
 				_this.set('model', buyer);
 
-				_this.set('showForm', true);
+				_this.set('show', 'form');
 
 			}	
 		);
-	}.observes('currentUserId'),
+	}.on('didInsertElement').observes('currentUserId'),
 
 
 	saveBuyer: function() {
@@ -65,7 +76,8 @@ export default Ember.Component.extend({
 				console.log("SUCCESS", results);
 				_this.set('isProcessing', false);
 				_this.set('model', model);
-				_this.set('showForm', false);
+				
+				_this.set('show', 'buyer');
 			},
 			function failed(error){
 				_this.set('isProcessing', false);
@@ -78,9 +90,13 @@ export default Ember.Component.extend({
 
 	actions: {
 
-		submit: function() {
+		doSubmit: function() {
 			this.saveBuyer();
-		}
+		},
+
+		showEdit: function() {
+			this.set('show', 'form');
+		},
 	}
 
 });
