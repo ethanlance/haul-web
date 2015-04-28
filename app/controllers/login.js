@@ -16,7 +16,6 @@ export default Ember.ObjectController.extend({
 	isProcessingLogin: false,
 
 	start: function() {
-		console.log("STARTUP FB?")
 		this.socialApiClient.load()
 	}.on('init'),
 
@@ -41,30 +40,25 @@ export default Ember.ObjectController.extend({
 			var _this = this;
 
 
-
-
-
-		var _this = this;
-
-		return this.socialApiClient.load()
-		.then(function(FB){
+			return this.socialApiClient.load()
+			.then(function(FB){
 		
-			return new Ember.RSVP.Promise(function(resolve, reject) {
+				return new Ember.RSVP.Promise(function(resolve, reject) {
 
-				FB.login(function(response){
-				  	if (response.authResponse) {
-				  		_this.get('controllers.facebook').set('facebook_user_id', response.authResponse.userID);
-				  		_this.get('controllers.facebook').set('facebook_access_token', response.authResponse.accessToken);
-				  		
-				  		return _this.get('controllers.facebook').getFBUser(function(data){
-				  			resolve(data);
-				  		});
+					FB.login(function(response){
+					  	if (response.authResponse) {
+					  		_this.get('controllers.facebook').set('facebook_user_id', response.authResponse.userID);
+					  		_this.get('controllers.facebook').set('facebook_access_token', response.authResponse.accessToken);
+					  		
+					  		return _this.get('controllers.facebook').getFBUser(function(data){
+					  			resolve(data);
+					  		});
 
-				  	} else {
-						console.log('User cancelled login or did not fully authorize.');
-						reject();
-				  	}
-			  	}, {scope: 'email'});	
+					  	} else {
+							console.log('User cancelled login or did not fully authorize.');
+							reject();
+					  	}
+				  	}, {scope: 'email'});	
 				});
 			})
 			.then(function(response){

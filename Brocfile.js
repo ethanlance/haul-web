@@ -75,6 +75,8 @@ app.import('vendor/jquery.mentionsInput.css');
 
 app.import('bower_components/jquery-ui/jquery-ui.js');
 
+app.import('bower_components/jquery.inputmask/dist/jquery.inputmask.bundle.js');
+
 app.import('bower_components/moment/moment.js');
 
 app.import('bower_components/dropzone/downloads/dropzone.js');

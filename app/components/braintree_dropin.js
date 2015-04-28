@@ -45,7 +45,7 @@ export default Em.Component.extend({
 	_setup: function() {
 
 		var token = this.get('token');
-console.log('toKen', token);
+
 		if( Ember.isEmpty( token ) ){
 			return;
 		}

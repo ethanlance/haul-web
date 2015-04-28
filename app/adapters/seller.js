@@ -13,16 +13,16 @@ export default ApplicationAdapter.extend({
 
 	createRecord: function(store, type, record) {
 
-		var data = {
-			user_id: record.get('user_id'),
-			firstname: record.get('firstname'),
-			lastname: record.get('lastname'),
-			email: record.get('email'),
-			phone: record.get('phone'),
-			company: record.get('company')
-		}
+		var data = {};
+		record.eachAttribute(function(key, attribute) {
+			if(!Ember.isEmpty(record.get(key))   && key !== "user_id") {
 
-		var url = this.get('host') + "/buyers";
+				data[key] = record.get(key);					
+
+			}
+		});
+
+		var url = this.get('host') + "/sellers";
 		return this.ajax(url, "POST", { data: data }); 
 	},
 
@@ -30,16 +30,16 @@ export default ApplicationAdapter.extend({
 
 		var user_id = record.get('user_id');
 		
-		var data = {
-			user_id: record.get('user_id'),
-			firstname: record.get('firstname'),
-			lastname: record.get('lastname'),
-			email: record.get('email'),
-			phone: record.get('phone'),
-			company: record.get('company')
-		}
+		var data = {};
+		record.eachAttribute(function(key, attribute) {
+			if(!Ember.isEmpty(record.get(key)) && key !== "user_id") {
+				
+				data[key] = record.get(key);	 
+			}
+		});
 
-		var url = this.get('host') + '/buyers/' + user_id;
+
+		var url = this.get('host') + '/sellers/' + user_id;
 
 		return this.ajax(url, "PUT", { data: data });
 	},
@@ -51,7 +51,7 @@ export default ApplicationAdapter.extend({
 		var user_id = record.get('user_id');
 		//record.rollforward()?
 
-		var url = this.get('host') + "/buyers/" + user_id;
+		var url = this.get('host') + "/sellers/" + user_id;
 		return this.ajax(url, "DELETE");
 	},
 });

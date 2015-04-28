@@ -1,7 +1,10 @@
 {{!-- CREATE BUYER --}}
 <div {{bind-attr class="showForm:hide:show"}}>
 	<h3>Your Details</h3>
-	{{model.first_name}} {{model.last_name}}
+	<p>
+		{{model.firstname}} {{model.lastname}}<br/>
+		{{model.phone}}
+	</p>
 </div>
 
 <div {{bind-attr class="showForm:show:hide"}}>

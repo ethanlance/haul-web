@@ -25,7 +25,8 @@
     "dropzone": "~3.12.0",
     "font-awesome": "~4.3.0",
     "typeahead.js": "~0.10.5",
-    "bootstrap-sass-official": "~3.3.4"
+    "bootstrap-sass-official": "~3.3.4",
+    "jquery.inputmask": "~3.1.62"
   },
   "devDependencies": {
     "fastclick": "~1.0.6"

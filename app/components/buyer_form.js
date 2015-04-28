@@ -3,6 +3,8 @@ export default Ember.Component.extend({
 
 	currentUserBinding: "session.currentUser",
 
+	currentUserIdBinding: "session.currentUser.id",
+
 	buttonText: 'update',
 
 	showForm: true, 
@@ -10,7 +12,7 @@ export default Ember.Component.extend({
 	//Get Buyer.
 	getBuyer: function() {
 
-		if(Ember.isEmpty(this.get('currentUser')) ) {
+		if(Ember.isEmpty(this.get('currentUserId')) ) {
 			return;
 		}
 
@@ -43,7 +45,7 @@ export default Ember.Component.extend({
 
 			}	
 		);
-	}.observes('currentUser.id'),
+	}.observes('currentUserId'),
 
 
 	saveBuyer: function() {
@@ -62,6 +64,7 @@ export default Ember.Component.extend({
 			function success(results){
 				console.log("SUCCESS", results);
 				_this.set('isProcessing', false);
+				_this.set('model', model);
 				_this.set('showForm', false);
 			},
 			function failed(error){
@@ -72,10 +75,6 @@ export default Ember.Component.extend({
 
 	},
 
-
-	didInsertElement: function() {
-		this.getBuyer();
-	},
 
 	actions: {
 
