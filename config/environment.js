@@ -8,8 +8,11 @@ module.exports = function(environment) {
 		modulePrefix: 'haul',
 	 
 		environment: environment,
+
 		baseURL: '/',
+
 		locationType: 'history',
+		
 		EmberENV: {
 			FEATURES: {
 				// Here you can enable experimental features on an ember canary build

@@ -12,7 +12,7 @@
 			
 			<li><label>Email:</label> {{model.email}}</li>
 		
-			<li><label>Phone:</label> {{model.phone}}</li>
+			<li><label>Phone:</label> {{phone-helper model.phone}}</li>
 		
 
 			<li><label>Address:</label>
@@ -27,16 +27,16 @@
 		<h4>For security</h4>
 
 		<ul>
-			<li><label>DOB:</label> {{model.dob}}</li>
+			<li><label>DOB:</label> {{dob-helper model.dob}}</li>
 		</ul>
 
 
 		<h4>How we send you money.</h4>
 
 		<ul>
-			<li><label>Routing number:</label>{{model.routing_number}}</li>
+			<li><label>Routing number:</label> {{model.routing_number}}</li>
 
-			<li><label>Account number:</label>{{model.account_number}}</li>	
+			<li><label>Account number:</label> {{model.account_number}}</li>	
 		</ul>
 
 
@@ -45,11 +45,11 @@
 
 		{{#if business_tax_id}}
 			<ul>
-				<li><label>Business legal name:</label>{{model.business_legal_name}}</li>
+				<li><label>Business legal name:</label> {{model.business_legal_name}}</li>
 
-				<li><label>Busiess common name:</label>{{model.business_name}}</li>
+				<li><label>Busiess common name:</label> {{model.business_name}}</li>
 
-				<li><label>Tax Id:</label>{{model.business_tax_id}}</li>
+				<li><label>Tax Id:</label> {{model.business_tax_id}}</li>
 
 
 				<li><label>Business address:</label>

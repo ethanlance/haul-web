@@ -16,7 +16,7 @@
 
 		<div class="stats">
 
-			{{#link-to "profile.likes" model}}
+			{{#link-to "profile.likes" model.username}}
 			<div class="stat-btn">
 				<span class="total">{{model.getLikesCount.total}}</span>
 				<span class="title">likes</span>

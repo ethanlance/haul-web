@@ -7,7 +7,7 @@
 	<h3>Your Details</h3>
 	<p>
 		{{model.firstname}} {{model.lastname}}<br/>
-		{{model.phone}}
+		{{phone-helper model.phone}}
 	</p>
 	<button {{action 'showEdit'}} class='btn btn-default btn-right'>edit</button>
 </div>

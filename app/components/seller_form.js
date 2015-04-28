@@ -40,7 +40,7 @@ export default Ember.Component.extend(ErrorMixin, {
 				//Seller exists.
 				_this.set('model', record);
 
-				_this.set('show', 'form');
+				_this.set('show', 'seller');
 
 			},
 			function failure(error){
