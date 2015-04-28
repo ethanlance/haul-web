@@ -60,7 +60,7 @@ export default Ember.Component.extend(ErrorMixin, {
 
 			}	
 		);
-	}.observes('currentUserId'),
+	}.on('didInsertElement').observes('currentUserId'),
 
 	createModel: function() {
 

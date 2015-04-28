@@ -44,6 +44,7 @@ Router.map(function(){
 		this.route('username');
 		this.route('password');
 		this.route('seller');
+		this.route('buyer');
 	});
 
 
