@@ -1,54 +1,45 @@
 import Ember from 'ember';
 import ErrorMixin from '../mixins/server_error';
 export default Ember.ObjectController.extend(ErrorMixin, {
-	
-	postIdBinding: 'model.id',
-
-	//the new Repost
-	repost: false, 
 
 	//Original Post
-	model: false, 
-	
-	//rename the original model to 'post' object.
-	postBinding: 'model',
+	model: null, 
 
 	currentUserBinding: "session.currentUser",
 	
 	currentUserIdBinding: "session.currentUser.id",
-	
-	editorialForQuill: " ",
 
 	editorialForBody: "",
 	
-	selectedImages: [],
+	selectedImages: [], 
 
-	setEditorImgSrc: false,
+	requestEditorContents: false,
 
-	//showModal: false,
 	showSuccess:false,
 	
 	showRepost:false,
 
 	repostBody: "",
 
+	started: false,
+
 	// The post model has been sent to this controller.  Now make a repost clone model of it.
- 	postReady: function() {
-		this.set('canEditProduct', false);
-		if(Ember.isEmpty(this.get('post')) || Ember.isEmpty(this.get('currentUser')) ){
+ 	modelReady: function() {
+
+		if( this.get('started') || Ember.isEmpty(this.get('model').get('id')) || Ember.isEmpty(this.get('currentUser').get('id')) ){
 			return
 		} 
+		this.set('started', true); 
 
 		this.set('selectedImages', []);
 		this.set('showSuccess', false);
 		this.set('showRepost', false);
 
 		var currentUserId = this.get('currentUser').get('id');
-		var post = this.get('post');
+		var post = this.get('model');
 		var postUserId = post.get('userId');
 
-		var repost;
-		repost = this.store.createRecord('repost');
+		var repost = this.store.createRecord('repost');
 
 		//First clone the post model and call it repost.
 		repost.setProperties(post.getProperties(
@@ -63,40 +54,42 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		));
 		repost.setProperties({
 			'id': null,
+			'body': "",
 			'user_id': currentUserId,
 			'repost_id': post.get('post_id'),
 			'repost_user_id': post.get('user').get('id'),	
 		});
 
-		repost.set('body', '');
-		var model = this.get('model');
-		model.set('body', '');
-		
- 		//Clone Post:
-		this.set('repost', repost);
-
+ 		
 		var obj = [];	
-		this.get('post').get('product_images').forEach(function(image){
+		post.get('product_images').forEach(function(image){
 			obj.push(image);
 		});
 		this.set('selectedImages', obj);
+
+
+		this.makeRepostBody();
+
+
+		//Override the previous model.
+		this.set('model', repost);
+		this.imagesIdsChanged();
 	
 		//Switch model.
 		this.set('showRepost', true);
 
-		this.makeRepostBody();
 
-	}.observes('post', 'currentUser'),
+	}.observes('model', 'currentUser'),
+
+
 
 	makeRepostBody: function() {
 
 		var image = this.get('selectedImages')[0];
 
-		var text = "[img " + image.get('id') + "]";
-
+		var text = "[img " + image.id + "]";
 
 		this.set('repostBody', text);
-
 
 	},
 	
@@ -105,36 +98,47 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	//Observer: anytime our array of selected images changes, update
 	// our list of image_ids.
 	imagesIdsChanged: function() {
-			
-		var repost = this.get('repost');
-		if(!repost){
-			return;
-		}
 
 		var ids = this.get('selectedImages').map(function(image) {
-			return image.get('id');
+			return image.id;
 		}); 
 		//Set the images on the repost.		
+console.log("BOOOM", ids);
+		var model = this.get('model');
+		model.set('product_image_ids', ids); 
+		model.set('image_id', ids[0]); 
 
-		repost.set('product_image_ids', ids); 
-		repost.set('image_id', ids[0]); 
-
-	}.observes('selectedImages.@each'),
+	},
 
 
 
 
 	savePost: function() {
 		var _this = this;		
-		var repost = this.get('repost');
+		var repost = this.get('model');
 
-		
+	
 		var body = this.get('editorialForBody').trim();		
 
 		if(Ember.isEmpty(body)){
 			body = " ";
 		}
 		repost.set('body', body);		
+
+console.log('repost', repost.get('user_id'));		
+
+			
+            console.log('repost', repost.get('subject'))
+            console.log('repost', repost.get('body'))
+            console.log('repost', repost.get('image_id'))
+            console.log('repost', repost.get('product_name'))
+            console.log('repost', repost.get('product_description'))
+            console.log('repost', repost.get('product_currency'))
+            console.log('repost', repost.get('product_price'))
+            console.log('repost', repost.get('product_quantity'))
+            console.log('repost', repost.get('product_image_ids'))
+            console.log('repost', repost.get('product_status'))
+
 
  		//Model Validations:
 		repost.validate()
@@ -157,7 +161,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			_this.set('showSuccess', true);
 
 		}, function(error){
-			
+			console.log("FAILED", error);
 			_this.set('isProcessing', false);
 			
 			_this.handleServerError(error)
@@ -190,7 +194,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		quillChange: function(text) { 
-			this.set('editorialForBody', text); 
+			this.set('editorialForBody', text);
 			this.savePost();
 		}
 	}

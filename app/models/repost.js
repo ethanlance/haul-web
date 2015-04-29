@@ -37,23 +37,6 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		subject: {
 		 	presence: true,
 		 	length: { minimum: 2 }
-		},
-		product_name: {
-		 	presence: true,
-		 	length: { minimum: 2 }
-		},
-		product_description: {
-		 	presence: true,
-		 	length: { maximum: 2000 }
-		},
-		product_quantity: {
-			numericality: true,
-		 	presence: true,
-		 	length: { maximum: 100 }
-		},
-		product_price: {
-			numericality: true,
-		 	presence: true
 		}
 	}
 });	
