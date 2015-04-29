@@ -16,14 +16,15 @@ header.profile{
 	margin-left: auto;
 	margin-right: auto;
 	//height: 120px;
-	min-height:120px;
+	min-height:80px;
 	//max-height:120px; 
+	border-bottom: 1px dashed #eee;
 }
 
 .profile-container{
 	padding:0px;
 	margin:0px; 
-	padding-top: 30px; 
+	padding-top: 10px; 
 
 	width:100%;
 	max-width: $haul-max-width;
@@ -50,24 +51,25 @@ header.profile{
 	.profile-name {
 
 		float:left;
-		font-family: "LATO";
+		font-family: "LATO-Bold";
 		text-align: left;
 		padding-left: 20px;
 		padding-top: 10px;
 
 		.name{
-			font-size: 20px;
+			font-size: 18px;
 			text-transform: uppercase;
 			display:block;
-			color: #000000;
+			color: #333;
 		}
 
 		.username{
-			font-size: 12px;
+			font-family: "LATO";
+			font-size: 11px;
 			text-transform: lowercase;
 			display:block;
-			color: #8E8E8E;
-			margin-top: -6px;
+			color: #7e7e7e;
+			margin-top: -4px;
 		}
 
 		@media (max-width: 400px) {
@@ -76,12 +78,13 @@ header.profile{
 	}
 
 	.btn-follow {
+		font-family: "LATO";
 		margin-top: 1px;
 		background-color: inherit;
-		border: 1px solid #dfdfdf;
-		color: #BABABA;
+		border: 1px solid #ddd;
+		color: #7e7e7e;
 		padding: 10px 20px 10px 20px; 
-		font-size: 14px;
+		font-size: 10px;
 		text-transform: uppercase;
 
 		@media (max-width: 400px) {
@@ -94,25 +97,28 @@ header.profile{
 		@media (max-width: 750px) {
 			display:inline-block;
 			padding-top:15px;
-			padding-bottom:20px;
+			//padding-bottom:20px;
 		}
 	}
 
 	.stat-btn {
 		padding-left: 30px;
+		padding-top: 10px;
 		float:right;
 		text-transform: uppercase;
 		text-align: center;
-		color: #BABABA;
+		color: #7e7e7e;
 
 		.total{ 
+			font-family: "LATO-Bold";
 			min-height:22px;
-			font-size:16px;
+			font-size:14px;
 			display:block;
 		}
 
 		.title {
-			font-size: 12px;
+			font-family: "LATO";
+			font-size: 10px;
 			display:block;
 		}
 
