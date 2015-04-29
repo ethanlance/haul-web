@@ -7,7 +7,7 @@
 
 	.comment-section-nav {
 		font-family: Arvo;
-		font-size: 20px;
+		font-size: 16px;
 		width: 100%;
 		padding-bottom: 30px;
 
@@ -31,7 +31,7 @@
 	}
 
 	.btn-default {
-		font-family: LATO;
+		font-family: 'LATO';
 		text-transform: uppercase;
 	}
 
@@ -75,7 +75,7 @@
 				padding-left: 20px;
 				border: 0;
 				background-color: $primary-background-color;
-				font-size: 18px; 
+				font-size: 16px; 
 				height: 80px;
 				outline: 0 none;
 				outline-style:none;
@@ -97,7 +97,7 @@
 	.comment-section-row{ 
 		display: inline-block;
 		width: 100%;
-		border-top: 1px solid #cccccc;
+		border-top: 1px dashed #cdcdcd;
 		padding-top: 20px;
 		margin-top: 30px;
 
@@ -123,20 +123,20 @@
 			display:block;
 
 			.name a{
-				font-family: LATO;
-				font-size: 14px;
+				font-family: 'LATO-BOLD';
+				font-size: 11px;
 				color: $primary-color;
 				text-transform: uppercase;
 			}
 			.username a{
-				font-family: LATO;
-				font-size: 14px;
+				font-family: 'LATO';
+				font-size: 11px;
 				color: #cccccc;
 				text-transform: lowercase;
 			}
 			.moment{ 
-				font-family: LATO;
-				font-size: 14px;
+				font-family: 'LATO';
+				font-size: 11px;
 				color: #cccccc;
 				text-transform: lowercase;
 			}
@@ -148,9 +148,9 @@
 				}
 				
 				margin-top: 10px;
-				font-family: TIMES;
-				font-size: 18px;
-				color: #333333;
+				font-family: 'CHARTER-ROMAN' Georgia, Times, serif;
+				font-size: 16px;
+				color: #555;
 			}
 		}
 	}
