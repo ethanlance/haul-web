@@ -43,7 +43,21 @@
 
 
 		</div>
+
+		{{!-- PRODUCT IS NOT FOR SALE --}}
+		<div {{bind-attr class="isForSale:hide:show"}}>
+			<div class="col-md-6 col-sm-8 col-xs-12">
+				<h3>Whoops, this is {{statusText}}</h3>
+				<p>{{#link-to 'profile.post'  user.username post_id post_slug class="editorial"}}
+				<i class="fa fa-angle-double-left"></i> Back to the post{{/link-to}}</p>
+			</div>
+		</div>
+
+
+		{{!-- PRODUCT IS FOR SALE --}}
+		<div {{bind-attr class="isForSale:show:hide"}}>
 		<div class="col-md-6 col-sm-8 col-xs-12">
+
 
 			<div class="row section">
 				<div class="col-md-12 col-sm-12 col-xs-12">
@@ -85,6 +99,9 @@
 			</div>
 
 		</div>
+		</div>
+
+
 		<div class="col-md-3 col-sm-2 col-xs-12"></div>
 	</div>
 </div>	

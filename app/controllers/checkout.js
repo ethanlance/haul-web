@@ -117,7 +117,7 @@ export default Ember.ObjectController.extend({
 			this.set('statusText', "Not For Sale.");
 		}
 
-	}.observes('model'),
+	}.observes('model', 'model.product_status'),
 
 	actions: {
 
