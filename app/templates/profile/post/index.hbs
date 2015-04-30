@@ -103,11 +103,7 @@
 						${{product_price}}
 					</div>
 
-					{{#link-to 'checkout' post_id}}
-					<button class="btn-buy">
-						BUY THIS
-					</button>
-					{{/link-to}}
+					{{buy-btn post=this class="display-inline" }}
 
 					{{#if product_images}}
 						{{image-carousel content=product_images}}
