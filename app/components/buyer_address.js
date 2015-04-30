@@ -36,8 +36,8 @@ export default Ember.Component.extend(ErrorMixin, {
 			return;
 		}
 
-		this.displayAddressList();
-		
+		this.displayAddressList(true);
+
 	}.observes('currentUserId'),
 
 	resetSelectedAddress: function() {
@@ -60,7 +60,7 @@ export default Ember.Component.extend(ErrorMixin, {
 	}.observes('show'),
 
 
-	displayAddressList: function() {
+	displayAddressList: function(start) {
 		var _this = this;
 		var promise = this.getAddressList();
 
@@ -80,6 +80,10 @@ export default Ember.Component.extend(ErrorMixin, {
 						_this.createModel(result);
 					});
 					
+					if(start) {
+						_this.displayAddress(addresses.get('firstObject.id'));
+					}
+
 					_this.set('show', 'showList');	
 				}
 
