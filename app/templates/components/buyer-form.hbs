@@ -4,12 +4,13 @@
 
 {{!-- CREATE BUYER --}}
 <div {{bind-attr class="show_buyer:show:hide"}}>
-	<h3>Your Details</h3>
+	<h3>Your Details
+	<button {{action 'showEdit'}} class='btn btn-default btn-xs'>edit</button>
+	</h3>
 	<p>
 		{{model.firstname}} {{model.lastname}}<br/>
 		{{phone-helper model.phone}}
 	</p>
-	<button {{action 'showEdit'}} class='btn btn-default btn-right'>edit</button>
 </div>
 
 <div {{bind-attr class="show_form:show:hide"}}>

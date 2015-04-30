@@ -6,7 +6,7 @@
 <div class="col-md-12">
 
 {{!-- PAGE CONTENT --}}
-<div class="container haul-content">   
+<div class="container haul-content haul-checkout">   
 	<div class="row">
 		<div class="col-md-3 col-sm-2 col-xs-12">
 			<h1></h1>
@@ -46,45 +46,44 @@
 			<h1>Buy It!</h1>
 
 
-			<div class="row">
+			<div class="row section">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 
-					{{buyer-form}}
+					{{buyer-form selected_buyer_id='selected_buyer_id'}}
 
 				</div>
 			</div>
 
 
-			<div class="row">
+			<div class="row section">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					
-					{{buyer-address}}
+					{{buyer-address selected_address_id='selected_address_id'}}
 
 				</div>
 			</div>
+
+			<div class="row section">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+					{{payment-form 
+						buyerId=buyerId
+						token=braintreeClientToken 
+						payment_nonce='payment_nonce'}}
+
+				</div>
+			</div>
+
 
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<h3>Credit Card</h3>
 
-					<p>
-					<a {{bind-attr href=braintree_url}} target="_blank">
-					  <img src="https://s3.amazonaws.com/braintree-badges/braintree-badge-wide-dark.png" width="280px" height ="44px" border="0"/>
-					</a>
-					</p>
+					<h3 {{bind-attr class="showTransactionButton::disabled"}}>Final Step</h3>
 
+					<button {{action 'doSubmitTransaction'}} {{bind-attr class="showTransactionButton::disabled :btn :btn-default"}}>Process Payment ${{model.product_price}}</button>
 
-					<form id="checkout" method="post" action="/checkout">
-						
-						{{braintree-dropin token=braintreeClientToken }}
-						
-						<div id="dropin"></div>
-						
-						<button class='btn btn-default btn-right' type="submit" value="Pay $10">Send Payment</button>
-					</form>
 				</div>
 			</div>
-
 
 		</div>
 		<div class="col-md-3 col-sm-2 col-xs-12"></div>

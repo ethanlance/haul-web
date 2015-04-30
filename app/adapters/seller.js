@@ -15,7 +15,7 @@ export default ApplicationAdapter.extend({
 
 		var data = {};
 		record.eachAttribute(function(key, attribute) {
-			if(!Ember.isEmpty(record.get(key))   && key !== "user_id") {
+			if(!Ember.isEmpty(record.get(key)) ) {
 
 				data[key] = record.get(key);					
 

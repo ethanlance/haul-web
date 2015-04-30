@@ -13,6 +13,11 @@ export default Em.Component.extend({
 	//Get the buyer token from the haul api.
 	makeToken: function() {
 
+		//buyerId must exist for us to continue
+		if(!this.get('buyerId')) {
+			return;
+		}
+
 		var _this = this;
 		var user_id = this.get('currentUser').id;
 		var host = this.ENV.Server.PROSPER_SERVER_HOST;
@@ -40,7 +45,7 @@ export default Em.Component.extend({
 			}
 		);
 
-	}.on('didInsertElement'),
+	}.observes('buyerId'),
 
 	_setup: function() {
 
@@ -51,16 +56,24 @@ export default Em.Component.extend({
 		}
 
 		var handler = Em.run.bind(this, this._handler);
-				
+				console.log("ELEMENR?", this.elementId);
 
 		braintree.setup(token, 'dropin', {
 			container: this.elementId,
 			paymentMethodNonceReceived: handler
 		});
+
 	}.observes('token'),
 
 	_handler: function(event, nonce) {
-		this.sendAction('action', nonce);
+
+		console.log("HANDLER", nonce);
+
+		this.sendAction('payment_nonce', nonce);
+
+		//
+
+
 		return false;
 	}
 });

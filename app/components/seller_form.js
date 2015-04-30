@@ -14,6 +14,8 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	show_loading: true,
 
+	model: null,
+
 	dob: null,
 
 	showChanged: function() {
@@ -46,12 +48,13 @@ export default Ember.Component.extend(ErrorMixin, {
 			function failure(error){
 
 				//Seller does not exist.
-				var seller = store.createRecord('seller');
-				seller.set('id', user.get('id'));
-				seller.set('user_id', user.get('id'));
-				seller.set('firstname', user.get('firstname'));
-				seller.set('lastname', user.get('lastname'));
-				seller.set('email', user.get('email'));
+				var seller = store.createRecord('seller',{
+					id: userId,
+					user_id: userId,
+					firstname: user.get('firstname'),
+					lastname: user.get('lastname'),
+					email: user.get('email'),
+				});
 
 				_this.set('model', seller);
 
@@ -62,7 +65,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		);
 	}.on('didInsertElement').observes('currentUserId'),
 
-	createModel: function() {
+	modelReady: function() {
 
 		var model = this.get('model');
 
@@ -101,7 +104,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		}); 
 		this.set('business_state_options', business_state_options);
 
-	}.observes('model'),
+	}.observes('model.id'),
 
 	saveSeller: function() {
 
@@ -109,7 +112,6 @@ export default Ember.Component.extend(ErrorMixin, {
 		var model = this.get('model');
 
 		try {
-			model.set('user_id', this.get('currentUser').id);
 			model.set('state', this.get('state_options').get('selectedState').abbreviation);
 		}catch(e){
 			
@@ -131,7 +133,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		}catch(e){
 			
 		}
-
+console.log("HERE? ", model.get('user_id'))
 		model.validate()
 		.then(
 			function(){

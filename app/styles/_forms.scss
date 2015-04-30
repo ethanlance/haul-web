@@ -1,3 +1,42 @@
+.haul-checkout{
+
+	h3.disabled {
+		color: #ccc;
+	}
+
+	button.disabled {
+		color: #ccc;
+	}
+
+	input[type=checkbox] {
+		margin-right:5px
+	}
+
+	input, select {
+		margin-bottom:20px;
+	}
+
+	ul {
+		padding:0;
+	}
+
+	li {
+		list-style: none;
+
+		label{
+			font-weight: normal;
+			cursor: pointer;
+		}
+	}
+
+	.section{
+		padding-bottom: 10px;
+		border-bottom: 1px solid #eee;	
+	}
+	
+}
+
+
 .form-control {
 	border-radius: 0;
 	box-shadow: none;

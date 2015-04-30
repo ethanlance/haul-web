@@ -8,7 +8,7 @@ export default ApplicationAdapter.extend({
 
 	find: function(store, type, id) { 
 		var user_id = this.get('currentUser').id;
-		var url = this.get('host') + "/buyers/" + user_id + "/addresses/" + id;
+		var url = this.get('host') + "/users/" + user_id + "/addresses/" + id;
         return this.ajax(url, 'GET');
     },
 
@@ -33,7 +33,7 @@ export default ApplicationAdapter.extend({
 			data['company'] = record.get('company');
 		}
 
-		var url = this.get('host') + "/buyers/" + user_id + "/addresses";
+		var url = this.get('host') + "/users/" + user_id + "/addresses";
 		return this.ajax(url, "POST", { data: data }); 
 	},
 
@@ -60,7 +60,7 @@ export default ApplicationAdapter.extend({
 			data['company'] = record.get('company');
 		}
 
-		var url = this.get('host') + '/buyers/' + user_id + "/addresses/" + address_id;
+		var url = this.get('host') + '/users/' + user_id + "/addresses/" + address_id;
 
 		return this.ajax(url, "PUT", { data: data });
 	},
@@ -70,7 +70,7 @@ export default ApplicationAdapter.extend({
 		var user_id = record.get('user_id');
 		var address_id = record.get('id');
 
-		var url = this.get('host') + '/buyers/' + user_id + "/addresses/" + address_id;
+		var url = this.get('host') + '/users/' + user_id + "/addresses/" + address_id;
 		return this.ajax(url, "DELETE");
 	},
 });

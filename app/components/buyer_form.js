@@ -20,6 +20,8 @@ export default Ember.Component.extend({
 		this.set('show_'+this.get('show'), true);
 	}.observes('show'),
 
+	
+
 	//Get Buyer.
 	getBuyer: function() {
 
@@ -38,6 +40,8 @@ export default Ember.Component.extend({
 				_this.set('model', record);
 
 				_this.set('show', 'buyer');
+
+				_this.sendAction('selected_buyer_id', record.get('id'));
 
 			},
 			function failure(error){
@@ -67,17 +71,17 @@ export default Ember.Component.extend({
 		model.validate()
 		.then(
 			function(){
-				console.log("SAVE", model);
 				return model.save();
 			}
 		)
 		.then(
-			function success(results){
-				console.log("SUCCESS", results);
+			function success(record){
 				_this.set('isProcessing', false);
 				_this.set('model', model);
 				
 				_this.set('show', 'buyer');
+
+				_this.sendAction('selected_buyer_id', record.get('id'));
 			},
 			function failed(error){
 				_this.set('isProcessing', false);

@@ -4,6 +4,8 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	currentUserBinding: "session.currentUser",
 
+	currentUserIdBinding: "session.currentUser.id",
+
 	buttonText: 'save',
 
 	showForm: false,
@@ -21,6 +23,12 @@ export default Ember.Component.extend(ErrorMixin, {
 	hasAddressList: Ember.computed.notEmpty('addresses'),
 
 	show: null,
+
+	selectedAddressChanged: function() {
+		if( !Ember.isEmpty(this.get('selectedAddress'))) {
+			this.sendAction('selected_address_id', this.get('selectedAddress.id'));
+		}
+	}.observes('selectedAddress'),
 
 	didInsertElement: function() {
 		this.displayAddressList();
@@ -41,7 +49,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		this.set('showForm', false);
 		this.set('showAddress', false);
 		this.set('showDelete', false);
-		console.log("SHOW", show);
+		
 		this.set(show, true);	
 	}.observes('show'),
 
@@ -142,21 +150,21 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	getAddressList: function() {
 
-		if(Ember.isEmpty(this.get('currentUser')) ) {
+		if(Ember.isEmpty(this.get('currentUserId')) ) {
 			return;
 		}
 
 		var _this = this;
 		var store = this.container.lookup("store:main");
-		var user = this.get('currentUser');
+		var userId = this.get('currentUserId');
 
-		return store.find('buyer-address-list', {user_id: user.id} )
+		return store.find('buyer-address-list', {user_id: userId} )
 		.then(function(addresses){
 			_this.set('addresses', addresses);
 			return addresses;
 		});
 
-	}.observes('currentUser.id'),
+	}.observes('currentUserId'),
 
 	createModel: function(model) {
 

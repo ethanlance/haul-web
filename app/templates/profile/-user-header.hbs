@@ -1,0 +1,56 @@
+
+{{!-- PROFILE PROFILE  --}}
+<header class="profile">
+<div class="container-fluid">	
+	<div class="profile-container">
+
+
+		{{#link-to 'profile' model}}<img class="profile-image" {{bind-attr src=model.icon}}>{{/link-to}}
+
+
+		<div class="profile-name">
+			{{#link-to 'profile' model}}<span class="name">{{model.name}}</span>{{/link-to}}
+			<span class="username">@{{model.username}}</span>
+		</div>
+
+
+		<div class="stats">
+
+			{{#link-to "profile.likes" model.username}}
+			<div class="stat-btn">
+				<span class="total">{{model.getLikesCount.total}}</span>
+				<span class="title">likes</span>
+			</div>
+			{{/link-to}}
+
+			{{#link-to "profile.followers" model}}
+			<div class="stat-btn">
+				<span class="total">{{model.getFollowersCount.total}}</span>
+				<span class="title">followers</span>
+			</div>
+			{{/link-to}}
+
+			{{#link-to "profile.following" model}}
+			<div class="stat-btn">
+				<span class="total">{{model.getFollowingCount.total}}</span>
+				<span class="title">following</span>
+			</div>
+			{{/link-to}}
+
+			{{#link-to "profile" model}}
+			<div class="stat-btn">
+				<span class="total">{{model.getPostsCount.total}}</span>
+				<span class="title">posts</span> 
+			</div> 
+			{{/link-to}}
+		
+			<div class="stat-btn">
+				{{ follow-btn followUser=model openModal='openModal' }}
+			</div>
+			
+
+		</div>
+	
+	</div>
+</div>
+</header>

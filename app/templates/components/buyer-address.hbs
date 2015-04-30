@@ -2,20 +2,25 @@
 
 
 <div {{bind-attr class="showList:show:hide"}}>
-	<h3>Select an address</h3>
+	<h3>Select an address
+		<button {{action 'showCreateNewAddress' }} class="btn btn-default btn-xs">add new</button>
+	</h3> 
+	
 	<ul>
 	{{#each address in addresses}}
 		<li>
+			<label>
+				<input type="checkbox"  {{action 'selectThisAddressId' address.id}}> 
+				{{address.address}}
+			</label>
 
-			<input type="checkbox"  {{action 'selectThisAddressId' address.id}}> 
-			{{address.address}}
-			<button {{action 'showEditAddress' address.id}} class="btn btn-default btn-sm">edit</button>
-			<button {{action 'showRemoveAddress' address.id}} class="btn btn-default btn-sm">remove</button>
+			<button {{action 'showEditAddress' address.id}} class="btn btn-default btn-xs">edit</button>
+			<button {{action 'showRemoveAddress' address.id}} class="btn btn-default btn-xs">remove</button>
 			
 		</li>
 	{{/each}}
 	</ul>
-	<button {{action 'showCreateNewAddress' }} class="btn btn-default btn-right">add new</button>
+	
 </div>
 
 
@@ -37,12 +42,14 @@
 
 
 <div {{bind-attr class="showAddress:show:hide"}}>
-	<h3>Selected address</h3>
+	<h3>Selected address
+		<button {{action 'showAddressList' }} class="btn btn-default btn-xs ">pick a differet address</button>
+	</h3>
+
 	<p>
 		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
 		{{selectedAddress.address}}<br/>
 		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>
-		<button {{action 'showAddressList' }} class="btn btn-default btn-right">pick a differet address</button>
 	</p>
 </div>
 
