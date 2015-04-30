@@ -139,6 +139,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 					errors.get('product_description').length > 0 ||
 					errors.get('product_price').length > 0 ||
 					errors.get('product_quantity').length > 0 || 
+					errors.get('product_shipping').length > 0 || 
 					errors.get('product_status').length > 0 ){
 						_this.set('showErrors', true);
 				}else{
@@ -300,10 +301,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 				_this.set('animateClose', true);
 
-				_this.transitionToRoute('profile.post', user.get('username'), _this.get('postRecord'))
-				.then(function() {
-					_this.set('isProcessing', false);
-				});
+				_this.set('isProcessing', false);
+				
+				_this.transitionToRoute('profile.post', user.get('username'), _this.get('postRecord'));
+				
 			}, 
 			function fail(error){
 
@@ -311,6 +312,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				_this.handleServerError(error)
 
 				_this.set('showErrors', true);
+
 				_this.set('isProcessing', false);
 			}
 		);

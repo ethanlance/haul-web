@@ -11,10 +11,10 @@
 		<li>
 			<label>
 				<input type="checkbox"  {{action 'selectThisAddressId' address.id}}> 
-				{{address.address}}
+				{{#if address.label}}{{address.label}}, {{/if}}{{address.address}}
 			</label>
 
-			<button {{action 'showEditAddress' address.id}} class="btn btn-default btn-xs">edit</button>
+			{{!-- <button {{action 'showEditAddress' address.id}} class="btn btn-default btn-xs">edit</button> --}}
 			<button {{action 'showRemoveAddress' address.id}} class="btn btn-default btn-xs">remove</button>
 			
 		</li>
@@ -30,6 +30,7 @@
 <div {{bind-attr class="showDelete:show:hide"}}>
 	<h3>Remove this address?</h3>
 	<p>
+		{{#if selectedAddress.label}}{{selectedAddress.label}}<br/>{{/if}}
 		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
 		{{selectedAddress.address}}<br/>
 		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>
@@ -47,6 +48,7 @@
 	</h3>
 
 	<p>
+		{{#if selectedAddress.label}}{{selectedAddress.label}}<br/>{{/if}}
 		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
 		{{selectedAddress.address}}<br/>
 		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>

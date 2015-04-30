@@ -46,6 +46,7 @@ Router.map(function(){
 		this.route('seller');
 		this.route('buyer');
 		this.route('address');
+		this.route('transactions');
 	});
 
 

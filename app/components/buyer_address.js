@@ -46,7 +46,7 @@ export default Ember.Component.extend(ErrorMixin, {
 
 		this.getAddressList();
 
-		_this.set('show', 'showList');
+		this.set('show', 'showList');
 	},
 
 	showChanged: function() {
