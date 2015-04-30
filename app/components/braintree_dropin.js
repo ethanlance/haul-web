@@ -56,7 +56,6 @@ export default Em.Component.extend({
 		}
 
 		var handler = Em.run.bind(this, this._handler);
-				console.log("ELEMENR?", this.elementId);
 
 		braintree.setup(token, 'dropin', {
 			container: this.elementId,
@@ -70,9 +69,6 @@ export default Em.Component.extend({
 		console.log("HANDLER", nonce);
 
 		this.sendAction('payment_nonce', nonce);
-
-		//
-
 
 		return false;
 	}

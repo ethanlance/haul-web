@@ -33,8 +33,8 @@
 		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
 		{{selectedAddress.address}}<br/>
 		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>
-		<button {{action 'doRemoveAddress' selectedAddress }} class="btn btn-default btn-right">yes, remove</button>
-		<button {{action 'showAddressList' }} class="btn btn-default btn-right">cancel</button>
+		<button {{action 'doRemoveAddress' selectedAddress }} class="btn btn-default btn-right btn-xs">yes, remove</button>
+		<button {{action 'showAddressList' }} class="btn btn-default btn-right btn-xs">cancel</button>
 	</p>
 </div>
 
@@ -121,13 +121,13 @@
 		{{partial "_server_error"}}
 
 		{{#if hasAddressList }}
-		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right">cancel</button>
+		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right btn-xs">cancel</button>
 		{{/if}}
 
 		{{ladda-btn
 			name=buttonText
 			class="display-inline"
-			btnClasses='btn btn-default ladda-button btn-right'
+			btnClasses='btn btn-default ladda-button btn-right btn-xs'
 			btnClick='doSubmitAddressForm'
 			spin=isProcessing
 		}}

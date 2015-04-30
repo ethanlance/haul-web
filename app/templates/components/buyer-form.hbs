@@ -49,10 +49,12 @@
 		{{ladda-btn
 			name=buttonText
 			class="display-inline"
-			btnClasses='btn btn-default ladda-button btn-right'
+			btnClasses='btn btn-default ladda-button btn-right btn-xs'
 			btnClick='doSubmit'
 			spin=isProcessing
 		}}
 
+		<button {{action 'doCancel'}} class='btn btn-default btn-xs btn-right'>cancel</button>
+		
 	{{/form-for}}
 </div>

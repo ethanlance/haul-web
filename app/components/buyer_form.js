@@ -94,6 +94,10 @@ export default Ember.Component.extend({
 
 	actions: {
 
+		doCancel: function() {
+			this.set('show', 'buyer');
+		},
+
 		doSubmit: function() {
 			this.saveBuyer();
 		},

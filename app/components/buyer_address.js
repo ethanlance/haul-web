@@ -31,8 +31,14 @@ export default Ember.Component.extend(ErrorMixin, {
 	}.observes('selectedAddress'),
 
 	didInsertElement: function() {
+		
+		if(Ember.isEmpty(this.get('currentUserId')) ) {
+			return;
+		}
+
 		this.displayAddressList();
-	},
+		
+	}.observes('currentUserId'),
 
 	resetSelectedAddress: function() {
 
@@ -149,10 +155,6 @@ export default Ember.Component.extend(ErrorMixin, {
 	},
 
 	getAddressList: function() {
-
-		if(Ember.isEmpty(this.get('currentUserId')) ) {
-			return;
-		}
 
 		var _this = this;
 		var store = this.container.lookup("store:main");
