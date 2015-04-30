@@ -15,8 +15,8 @@
 					{{statusText}}
 				</div>
 
+				{{#link-to 'profile.post' user.username post_id post_slug}}
 				<h2>{{product_name}}</h2>
-
 
 				<div class="profile-pod">
 					<img class="profile-image" {{bind-attr src=product_user.icon}}>
@@ -26,6 +26,7 @@
 						<span class="username">@{{product_user.username}}</span>
 					</div>
 				</div>
+				{{/link-to}}
 
 				<div class="price">
 					${{product_price}}
