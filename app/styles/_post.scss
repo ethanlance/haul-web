@@ -7,7 +7,8 @@
 	display:inline-block;
 	padding-top:5px;
 	height:35px;
-	font-family: 'LATO-BOLD';
+	font-family: $primary-font;
+	font-weight: 600;
 	font-size: 13px;
 
 	@media (max-width: 400px) {
@@ -30,18 +31,19 @@
 	}
 
 	.name {
-		font-family: 'LATO-BOLD';
-		font-size: 13px;
+		font-family: $primary-font;
+		font-weight: 400;
+		font-size: 12px;
 	}
 
 	.title {
-		font-family: 'LATO';
-		font-size: 13px;
+		font-family: $primary-font;
+		font-size: 12px;
 		
 	}
 
 	.title a {
-		font-weight: normal;
+		font-weight: 600;
 		color: $primary-color;
 	}
 }
@@ -49,6 +51,7 @@
 
 .post-owner {
 	margin-bottom: 20px;
+
 
 	.profile-image{
 		padding:0;
@@ -65,28 +68,35 @@
 		overflow:hidden;
 		display:block;
 
+
 		.name a{
-			font-family: 'LATO-BOLD';
-			font-size: 13px;
+			font-family: $primary-font;
+			font-weight: 600;
+			font-size: 12px;
+			color: #333;
+			//text-transform: uppercase;
+		}
+		.name a:hover {
 			color: $primary-color;
-			text-transform: uppercase;
 		}
 		.username a{
-			font-family: 'LATO';
-			font-size: 12px;
+			font-family: $primary-font;
+			font-size: 11px;
+			font-weight: 100;
 			color: #999;
+			font-style: italic;
 			text-transform: lowercase;
 		}
 		.moment{ 
-			font-family: 'LATO';
-			font-size: 11px;
+			font-family: $primary-font;
+			font-size: 10px;
 			color: #cccccc;
 			text-transform: lowercase;
 		}
 		.comment{ 
 			margin-top: 10px;
-			font-family: TIMES;
-			font-size: 18px;
+			font-family: $primary-font;
+			font-size: 13px;
 			color: #333333;
 		}
 	}
@@ -111,7 +121,7 @@
 		width: 100%;
 
 		h3 {
-			font-family: 'ARVO';
+			font-family: $primary-font;
 			font-size: 18px;
 		}
 
@@ -135,25 +145,27 @@
 			.profile-name {
 
 				float:left;
-				font-family: 'LATO';
+				font-family: $primary-font;
 				text-align: left;
 				padding-left: 10px;
 				padding-top: 0px;
 
 				.name{
-					font-family: 'LATO-BOLD';
+					font-weight: 600;
 					font-size: 11px;
-					text-transform: uppercase;
+					//text-transform: uppercase;
 					display:block;
-					color: #555;
+					color: #333;
 				}
 
 				.username{
 					font-size: 11px;
+					font-weight: 300;
 					text-transform: lowercase;
+					font-style: italic;
 					display:block;
-					color: #8E8E8E;
-					margin-top: -4px;
+					color: #999;
+					margin-top: -2px;
 				}
 			}
 		}
@@ -190,7 +202,7 @@
 			display:block;
 			color: #cccccc;
 			font-size: 12px;
-			font-family: 'LATO';
+			font-family: $primary-font;
 		}
 	}
 
@@ -199,18 +211,23 @@
 .product-post {
 	margin:0;
 	padding:0;
-	//font-family: Times;
+
+	a:hover {
+			color: $primary-color;
+		}
+	
 
 	.moment {
-		font-family: "LATO";
+		font-family: $primary-font;
 		text-align:left;
 		font-size: 11px;
 		color: #8E8E8E;
 	}
 
 	h1.subject {
-		font-family: Arvo;
-		font-weight: 800;
+		font-family: $primary-font;
+		font-weight: 100;
+		color: #333;
 		font-size: 26px;
 		margin-top: 4px;
 	}
@@ -220,7 +237,7 @@
 
 		.internal-social-buttons{
 			font-weight: bold;
-			font-family: "LATO";
+			font-family: $primary-font;
 			font-size: 16px; 
 			float:left;
 			width: 300px;
@@ -282,8 +299,9 @@
 	.editorial {
 		margin-top:10px;
 		display: block; 
-		font-family: 'CHARTER-ROMAN', Georgia, Times;
-		font-size: 16px;
+		font-family: $primary-font;
+		font-weight: 400;
+		font-size: 14px;
 		color: #555555;
 		line-height: 1.7;
 		margin-bottom: 40px;
@@ -345,8 +363,9 @@
 	}
 
 	h2 {
-		font-family: Arvo;
-		font-size: 18px;
+		font-family: $primary-font;
+		font-weight: 300;
+		font-size: 16px;
 	}
 
 	.profile-pod {
@@ -362,32 +381,34 @@
 			margin:0;
 			float: left;
 			border-radius: 50%;
-			width: 30px;
-			height: 30px;
+			width: 28px;
+			height: 28px;
 		}
 
 		.profile-name {
 
 			float:left;
-			font-family: "LATO-Bold";
+			font-family: $primary-font;
 			text-align: left;
 			padding-left: 10px;
 			padding-top: 0px;
 
 			.name{
 				font-size: 11px;
-				text-transform: uppercase;
+				font-weight: 600;
+				//text-transform: uppercase;
 				display:block;
 				color: #000;
 			}
 
 			.username{
-				font-family: 'LATO';
+				font-weight: 300;
+				font-style: italic;
 				font-size: 11px;
 				text-transform: lowercase;
 				display:block;
-				color: #8E8E8E;
-				margin-top: -2px;
+				color: #999;
+				margin-top: 0px;
 			}
 		}
 	}
@@ -426,8 +447,8 @@
 	.description {
 		margin:0;
 		padding:0;
-		font-family: 'LATO';
-		font-size: 13px;
+		font-family: $primary-font;
+		font-size: 12px;
 		margin-top:20px;
 
 		ul {

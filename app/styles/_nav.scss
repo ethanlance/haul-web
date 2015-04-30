@@ -32,7 +32,7 @@ nav {
 
 	text-align: center;
 
-	font-family: 'Lato';
+	font-family: $primary-font;
 	font-size: $nav-font-size;
 	color: $nav-color;
 
@@ -80,10 +80,10 @@ nav {
 
 	.logo { 
 		float:left;
-		padding-top: 10px; 
-		width: 110px;
-		font-size: 28px;
-		font-family: Arvo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+		padding-top: 22px;
+		width: 90px;
+		font-size: 18px;
+		font-family: 'Arvo', "Helvetica Neue", Helvetica, Arial, sans-serif;
 		font-weight: 800;
 		text-align: center;
 		background-color: $logo-background-color; 
@@ -112,7 +112,7 @@ nav {
 		}
 	}
 	.nav-link-wrapper {
-		font-family: "LATO";
+		font-family: $primary-font;
 		margin-top: 23px;
 		float:left;
 		display:inline;
@@ -149,6 +149,7 @@ nav {
 	}
 
 	.nav-link {
+		font-family: $primary-font;
 		display:inline;
 		padding:0;
 		margin:0;
@@ -174,6 +175,7 @@ nav {
 	}
 
 	.nav-add-post {
+		font-family: $primary-font;
 		font-size: 11px;
 		color: #7e7e7e;
 		float:right;
