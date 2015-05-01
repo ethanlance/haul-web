@@ -36,50 +36,7 @@ export default Ember.ObjectController.extend({
 	}.property(),
 
 
-	getPaymentId: function(paymentNonce) {
-
-		var _this = this;
-
-		var bearer = this.get('currentUser.access_token');
-
-		var data = {'payment_method_nonce':paymentNonce};
-
-		var user_id = this.get('currentUser.id');
-
-		var host = this.ENV.Server.PROSPER_SERVER_HOST;
-
-		var url = host + '/buyers/'+ user_id +'/payments';
-		
-		var promise = Ember.$.ajax({
-			url:         url,
-			type:        "PUT",
-			data:        data,
-			dataType:    'json',
-			contentType: 'application/x-www-form-urlencoded',
-			headers: {
-				Authorization: 'Bearer ' + bearer
-			},
-		});
-
-		promise.then(
-			function success(response){
-				console.log("SUCCESS", response);
-
-				_this.set('paymentId', response.data.payment_id);
-
-			},	
-
-			function failed(error){
-				console.log("FAILED", error);
-			}
-		);
-
-	},
-
-
 	saveTransaction: function() {
-
-		console.log("TRANSACTION");
 
 		var transaction = this.store.createRecord('transaction', {
 			user_id: this.get('buyerId'),
@@ -125,9 +82,8 @@ export default Ember.ObjectController.extend({
 			this.saveTransaction();
 		},
 
-		payment_nonce: function(nonce) {
-			console.log("NONCE", nonce);
-			this.getPaymentId(nonce);
+		selected_payment_id: function(id) {
+			this.set('paymentId', id);
 		},
 
 		selected_address_id: function(id) {

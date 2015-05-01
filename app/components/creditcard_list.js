@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ErrorMixin from '../mixins/server_error';
+/* Global braintree */
 export default Ember.Component.extend(ErrorMixin, {
 
 	braintreeClientTokenBinding: 'this.ENV.braintreeClientToken',
@@ -28,7 +29,7 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	selectedCardChanged: function() {
 		if( !Ember.isEmpty(this.get('selectedCard'))) {
-			this.sendAction('selected_card_id', this.get('selectedCard.id'));
+			this.sendAction('selected_payment_id', this.get('selectedCard.id'));
 		}
 	}.observes('selectedCard'),
 
@@ -97,8 +98,6 @@ export default Ember.Component.extend(ErrorMixin, {
 	displayCard: function(id) {
 
 		var _this = this;
-
-		var user_id = this.get('currentUser').id;
 
 		var promise = this.getCardById( id );
 		promise.then(
@@ -225,30 +224,17 @@ export default Ember.Component.extend(ErrorMixin, {
 
 
 
-
-
-
-
-
-
-
-
 	tokenReady: function() {
 
 		if(Ember.isEmpty(this.get('token'))){
 			return;
 		}
-
-		var token = this.get('token');
-
-		var _this = this;
+		
 		var store = this.container.lookup("store:main");
 
 		var model = store.createRecord('payment-method');
 
-
 		this.set('model', model);
-
 
 	}.observes('token'),
 
@@ -293,14 +279,17 @@ export default Ember.Component.extend(ErrorMixin, {
 		var model = this.get('model');
 		var token = this.get('token');
 
-		model.validate()
+		
 
-		//Get the nonce from braintree:
+		
+		model.validate()
 		.then(
+
+			//Get the nonce from braintree:
 			function(){
 
-
 				return new Ember.RSVP.Promise(function(resolve, reject) {
+					
 					var client = new braintree.api.Client({clientToken: token});
 
 					var data = {
@@ -308,22 +297,22 @@ export default Ember.Component.extend(ErrorMixin, {
 						expirationDate: model.get('expiration'),
 						cvv: model.get('cvv'),
 						postal_code: model.get('postal_code'),
-					}
+					};
 
 					client.tokenizeCard(data, function (err, nonce) {
-					  // Send nonce to your server
+					  
+					  	if(err) {
+					  		reject(err);
+					  	}
 
-					  resolve(nonce);
-
+					  	resolve(nonce);
 					});
 				});
-
 				
 			}
 		)
-
-		//save the nonce to Haul
 		.then(
+			//save the nonce to Haul
 			function(paymentNonce) {
 				var bearer = _this.get('currentUser.access_token');
 
@@ -349,7 +338,6 @@ export default Ember.Component.extend(ErrorMixin, {
 				});
 			}
 		)
-
 		.then(
 			function success(results){
 				console.log("SUCCESS", results);
@@ -360,7 +348,7 @@ export default Ember.Component.extend(ErrorMixin, {
 			function failed(error){
 				_this.set('isProcessing', false);
 				_this.set('showErrors', true);
-				_this.handleServerError(error)
+				_this.handleServerError(error);
 			}
 		);
 	},
@@ -384,7 +372,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		},
 
 		showCreateNewCard: function() {
-			this.displayCreateNewCard()
+			this.displayCreateNewCard();
 		},
 
 		showEditCard: function(id) {

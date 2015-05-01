@@ -15,9 +15,9 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	
 
 	validations: { 
-		// name: {
-		//  	presence: true
-		// },
+		name: {
+		 	presence: true
+		},
 		number: {
 		 	presence: true
 		},

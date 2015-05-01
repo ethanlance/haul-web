@@ -95,8 +95,6 @@ export default Ember.Component.extend(ErrorMixin, {
 
 		var _this = this;
 
-		var user_id = this.get('currentUser').id;
-
 		var promise = this.getAddressById( id );
 		promise.then(
 			function success(result){
@@ -104,7 +102,6 @@ export default Ember.Component.extend(ErrorMixin, {
 				_this.set('show', 'showAddress');
 			}
 		);
-
 		
 	},
 
@@ -268,7 +265,7 @@ export default Ember.Component.extend(ErrorMixin, {
 			function failed(error){
 				_this.set('isProcessing', false);
 				_this.set('showErrors', true);
-				_this.handleServerError(error)
+				_this.handleServerError(error);
 			}
 		);
 
@@ -295,7 +292,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		},
 
 		showCreateNewAddress: function() {
-			this.displayCreateNewAddress()
+			this.displayCreateNewAddress();
 		},
 
 		showEditAddress: function(id) {
@@ -550,7 +547,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		        "name": "Wyoming",
 		        "abbreviation": "WY"
 		    }
-		]
+		];
 	}.property(),
 
 });
