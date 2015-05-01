@@ -17,9 +17,15 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	showCard: false,
 
+	showLoading: true,
+
+	showNeedsbuyer: false,
+
 	showDelete: false,
 
 	selectedCard: null,
+
+	hasBuyer: null,
 
 	cards: null,
 
@@ -27,21 +33,81 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	show: null,
 
-	selectedCardChanged: function() {
-		if( !Ember.isEmpty(this.get('selectedCard'))) {
-			this.sendAction('selected_payment_id', this.get('selectedCard.id'));
+	showListChanged: function() {
+		if(this.get('showList')){
+			this.set('selectedCard', null);
 		}
-	}.observes('selectedCard'),
+	}.observes('showList'),
 
-	didInsertElement: function() {
-		
+	startDoesUserHaveBuyerAccount: function() {
+
 		if(Ember.isEmpty(this.get('currentUserId')) ) {
 			return;
 		}
 
-		this.displayCardList(true);
+		if( this.get('buyer_id') ) {
+			this.set('hasBuyer', true); 
+			this.displayCardList(true);
+		}
 
-	}.observes('currentUserId'),
+		var _this = this;
+		var store = this.container.lookup("store:main");
+		var user = this.get('currentUser');
+		var model = store.createRecord('payment-method');
+
+		store.find('buyer', user.id).then(
+			function success(record){
+
+
+				var user_id = _this.get('currentUser').id;
+				var host = _this.ENV.Server.PROSPER_SERVER_HOST;
+				var url = host + "/buyers/" + user_id + "/tokens";
+				var type = "GET";
+				var bearer = _this.get('currentUser').get('access_token');
+
+				var promise = Ember.$.ajax({
+					url:         url,
+					type:        type,
+					dataType:    'json',
+					contentType: 'application/x-www-form-urlencoded',
+					headers: {
+						Authorization: 'Bearer ' + bearer
+					},
+				});
+
+				promise.then(
+					function success(result) {
+						
+						_this.set('token', result.data.value);
+
+						_this.set('hasBuyer', true);
+
+						_this.set('model', model);
+						
+						_this.displayCardList(true); 
+						
+
+					},
+					function failed(error){
+						console.log("ERROR", error);
+					}
+				);
+			},
+			function failure(error){
+				_this.set('hasBuyer', false);
+				_this.set('show', 'showNeedsbuyer');  
+			}	
+		);
+	}.on('didInsertElement').observes('currentUserId', 'buyer_id'),
+
+	selectedCardChanged: function() {
+		if( !Ember.isEmpty(this.get('selectedCard'))) {
+			this.set('selected_payment_id', this.get('selectedCard.id'));
+		}else{ 
+			this.set('selected_payment_id', null);
+		}
+	}.observes('selectedCard'),
+
 
 	resetSelectedCard: function() {
 
@@ -58,6 +124,8 @@ export default Ember.Component.extend(ErrorMixin, {
 		this.set('showForm', false);
 		this.set('showCard', false);
 		this.set('showDelete', false);
+		this.set('showLoading', false);
+		this.set('showNeedsbuyer', false);
 		
 		this.set(show, true);	
 	}.observes('show'),
@@ -69,6 +137,8 @@ export default Ember.Component.extend(ErrorMixin, {
 
 		promise.then(
 			function success(cards){
+
+				_this.set('selectedCard', null);
 
 				if( Ember.isEmpty(cards) ){
 					_this.createModel();
@@ -224,62 +294,11 @@ export default Ember.Component.extend(ErrorMixin, {
 
 
 
-	tokenReady: function() {
-
-		if(Ember.isEmpty(this.get('token'))){
-			return;
-		}
-		
-		var store = this.container.lookup("store:main");
-
-		var model = store.createRecord('payment-method');
-
-		this.set('model', model);
-
-	}.observes('token'),
-
-	makeToken: function() {
-
-		//buyerId must exist for us to continue
-		if(!this.get('currentUserId')) {
-			return;
-		}
-
-		var _this = this;
-		var user_id = this.get('currentUser').id;
-		var host = this.ENV.Server.PROSPER_SERVER_HOST;
-		var url = host + "/buyers/" + user_id + "/tokens";
-		var type = "GET";
-		var bearer = this.get('currentUser').get('access_token');
-
-		var promise = Ember.$.ajax({
-			url:         url,
-			type:        type,
-			dataType:    'json',
-			contentType: 'application/x-www-form-urlencoded',
-			headers: {
-				Authorization: 'Bearer ' + bearer
-			},
-		});
-
-		promise.then(
-			function success(result) {
-				_this.set('token', result.data.value);
-			},
-			function failed(error){
-				console.log("ERROR", error);
-			}
-		);
-
-	}.observes('currentUserId'),
-
 	saveCard: function() {
 
 		var _this = this;
 		var model = this.get('model');
 		var token = this.get('token');
-
-		
 
 		
 		model.validate()

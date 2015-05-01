@@ -20,13 +20,23 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	addresses: null,
 
+	selected_address_id: null,
+
 	hasAddressList: Ember.computed.notEmpty('addresses'),
 
 	show: null,
 
+	showListChanged: function() {
+		if(this.get('showList')){
+			this.set('selectedAddress', null);
+		}
+	}.observes('showList'),
+
 	selectedAddressChanged: function() {
 		if( !Ember.isEmpty(this.get('selectedAddress'))) {
-			this.sendAction('selected_address_id', this.get('selectedAddress.id'));
+			this.set('selected_address_id', this.get('selectedAddress.id'));
+		}else{ 
+			this.set('selected_address_id', null);
 		}
 	}.observes('selectedAddress'),
 

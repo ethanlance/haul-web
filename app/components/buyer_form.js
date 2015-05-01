@@ -13,6 +13,8 @@ export default Ember.Component.extend({
 
 	show_loading: true,
 
+	selected_buyer_id: null,
+
 	showChanged: function() {
 		this.set('show_loading', false);
 		this.set('show_form', false);
@@ -41,7 +43,7 @@ export default Ember.Component.extend({
 
 				_this.set('show', 'buyer');
 
-				_this.sendAction('selected_buyer_id', record.get('id'));
+				_this.set('selected_buyer_id', record.get('id'));
 
 			},
 			function failure(error){
@@ -81,7 +83,7 @@ export default Ember.Component.extend({
 				
 				_this.set('show', 'buyer');
 
-				_this.sendAction('selected_buyer_id', record.get('id'));
+				_this.set('selected_buyer_id', record.get('id'));
 			},
 			function failed(error){
 				_this.set('isProcessing', false);

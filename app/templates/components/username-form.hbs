@@ -1,0 +1,31 @@
+        
+<div {{bind-attr class="showForm:show:hide"}}>
+    {{#form-for model}}
+    <div >
+        {{input-field model.username class="form-control" placeholder="" label="false" enter='btnClick'}}
+    </div> 
+    {{/form-for}}
+
+    <div {{bind-attr class="showErrorMessage:show:hide :errors"}}>
+        <span class="alert">{{{errorMessage}}}</span>
+    </div>
+
+    <div>
+
+        {{ladda-btn 
+            name='change'
+            btnClasses='btn btn-primary ladda-button btn-right'
+            btnClick='saveForm'
+            spin=isProcessing
+        }}
+
+    </div>
+</div>    
+
+
+
+
+<div {{bind-attr class="showForm:hide:show"}}>
+    <h4>Congrats! {{session.currentUser.username}} is your new username</h4>
+    <button {{action 'showForm'}} class="btn btn-default btn-xs">Change again</button>
+</div>

@@ -2,8 +2,6 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 
-	
-
 	currentUserBinding: 'session.currentUser',
 
 	currentUserIdBinding: 'session.currentUser.id',
@@ -56,8 +54,6 @@ export default Ember.ObjectController.extend({
 				console.log("Error", error);
 			}
 		)
-
-
 	},
 
 
@@ -80,18 +76,6 @@ export default Ember.ObjectController.extend({
 
 		doSubmitTransaction: function() {
 			this.saveTransaction();
-		},
-
-		selected_payment_id: function(id) {
-			this.set('paymentId', id);
-		},
-
-		selected_address_id: function(id) {
-			this.set('addressId', id);
-		},
-
-		selected_buyer_id: function(id) {
-			this.set('buyerId', id);
 		}
 	}
 

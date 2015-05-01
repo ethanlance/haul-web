@@ -4,5 +4,14 @@
 
 
 <p>
-{{creditcard-list}}
+	{{creditcard-list 
+		hasBuyer=hasBuyer 
+		buyer_id=selected_buyer_id
+	}}
+
+	{{#unless hasBuyer }}
+		{{buyer-form 
+			selected_buyer_id=selected_buyer_id
+		}}
+	{{/unless}}
 </p>

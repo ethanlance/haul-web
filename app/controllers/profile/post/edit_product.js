@@ -240,7 +240,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				console.log("Error", error);
 				_this.set('isProcessing', false);
 				//Mixin:
-				_this.handleServerError(error)
+				_this.handleServerError(error);
 				_this.set('showErrors', true);
 				_this.set('openDrawer', true);
 		});

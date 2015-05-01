@@ -5,6 +5,10 @@ export default Ember.ObjectController.extend({
 	currentUserIdBinding: 'session.currentUser.id',
 	user: null,
 	navColumnOpen: false,
+
+	
+
+
 	setup: function() { 
 		var _this = this;
 		this.store.find('user', this.get('currentUser').get('id')).then(function(user){
@@ -12,13 +16,5 @@ export default Ember.ObjectController.extend({
 		});
 	}.observes('currentUser'),
 
-	actions: {
-		toggleNavColumn: function() {
-			this.set('navColumnOpen', !this.get('navColumnOpen'));
-		},
 
-		closeNavColumn: function() {
-			this.set('navColumnOpen', false);
-		}
-	}
 }); 

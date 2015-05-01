@@ -1,3 +1,13 @@
+<div {{bind-attr class="showLoading:show:hide"}}>
+	{{partial '_spinner'}}
+</div>
+
+<div {{bind-attr class="showNeedsbuyer:show:hide"}}>
+	<h3>Please save your buyer account before entering credit cards</h3>
+
+</div>
+
+
 
 <div {{bind-attr class="showList:show:hide :haul-checkout"}}>
 	<h3>Select a card
@@ -9,7 +19,8 @@
 		<li>
 			<label>
 				<input type="checkbox"  {{action 'selectThisCardId' card.id}}> 
-				{{card.number}} <img height="20px" {{bind-attr src=card.card_image_url}}>
+				<img height="20px" {{bind-attr src=card.card_image_url}}> 
+				{{card.card_type}} ending in {{card.number}} 
 			</label>
 
 			{{!-- <button {{action 'showEditAddress' address.id}} class="btn btn-default btn-xs">edit</button> --}}
@@ -29,7 +40,8 @@
 <div {{bind-attr class="showDelete:show:hide"}}>
 	<h3>Remove this card?</h3>
 	<p>
-		{{selectedCard.number}} <img height="20px" {{bind-attr src=selectedCard.card_image_url}}>
+		<img height="20px" {{bind-attr src=selectedCard.card_image_url}}> 
+			{{selectedCard.card_type}} ending in {{selectedCard.number}} 
 
 		<button {{action 'doRemoveCard' selectedCard }} class="btn btn-default btn-right btn-xs">yes, remove</button>
 		<button {{action 'showCardList' }} class="btn btn-default btn-right btn-xs">cancel</button>
@@ -45,7 +57,8 @@
 	</h3>
 
 	<p>
-		 {{selectedCard.number}} <img height="20px" {{bind-attr src=selectedCard.card_image_url}}>
+		<img height="20px" {{bind-attr src=selectedCard.card_image_url}}>	 
+			{{selectedCard.card_type}} ending in {{selectedCard.number}}
 	</p>
 </div>
 
@@ -54,7 +67,9 @@
 <div {{bind-attr class="showForm:show:hide"}}>
 	
 <form id="checkout" {{action "submit" model on="submit"}}>  
-
+		
+		<h3>Credit Card</h3>
+		
 		{{input-field model.name class="form-control"  data-braintree-name="cardholder_name" placeholder='name on card'}}
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field name}}</span>

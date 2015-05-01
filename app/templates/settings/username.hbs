@@ -3,25 +3,6 @@
 </h1> 
 
 
-       {{#form-for model}}
-        <div >
-            {{input username placeholder="" label="false"}}
-        </div> 
-        {{/form-for}}
-
-        <div {{bind-attr class="showErrorMessage:show:hide :errors"}}>
-            <span class="alert">{{{errorMessage}}}</span>
-        </div>
-
-        <div>
-
-            {{ladda-btn 
-                name='change'
-                btnClasses='btn btn-primary ladda-button btn-right'
-                btnClick='btnClick'
-                spin=isProcessing
-            }}
-
-        </div>
+ {{username-form}}    
 		
 		  
