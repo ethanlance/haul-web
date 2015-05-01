@@ -47,6 +47,7 @@ Router.map(function(){
 		this.route('buyer');
 		this.route('address');
 		this.route('transactions');
+		this.route('creditcards');
 	});
 
 

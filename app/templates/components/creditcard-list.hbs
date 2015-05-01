@@ -1,0 +1,102 @@
+
+<div {{bind-attr class="showList:show:hide :haul-checkout"}}>
+	<h3>Select a card
+		<button {{action 'showCreateNewCard' }} class="btn btn-default btn-xs">add new</button>
+	</h3> 
+	
+	<ul>
+	{{#each card in cards}}
+		<li>
+			<label>
+				<input type="checkbox"  {{action 'selectThisCardId' card.id}}> 
+				{{card.number}} <img height="20px" {{bind-attr src=card.card_image_url}}>
+			</label>
+
+			{{!-- <button {{action 'showEditAddress' address.id}} class="btn btn-default btn-xs">edit</button> --}}
+			<button {{action 'showRemoveCard' card.id}} class="btn btn-default btn-xs">remove</button>
+			
+		</li>
+	{{/each}}
+	</ul>
+	
+</div>
+
+
+
+
+
+
+<div {{bind-attr class="showDelete:show:hide"}}>
+	<h3>Remove this card?</h3>
+	<p>
+		{{selectedCard.number}} <img height="20px" {{bind-attr src=selectedCard.card_image_url}}>
+
+		<button {{action 'doRemoveCard' selectedCard }} class="btn btn-default btn-right btn-xs">yes, remove</button>
+		<button {{action 'showCardList' }} class="btn btn-default btn-right btn-xs">cancel</button>
+	</p>
+
+</div>	
+
+
+
+<div {{bind-attr class="showCard:show:hide"}}>
+	<h3>Selected card
+		<button {{action 'showCardList' }} class="btn btn-default btn-xs ">pick a differet card</button>
+	</h3>
+
+	<p>
+		 {{selectedCard.number}} <img height="20px" {{bind-attr src=selectedCard.card_image_url}}>
+	</p>
+</div>
+
+
+
+<div {{bind-attr class="showForm:show:hide"}}>
+	
+<form id="checkout" {{action "submit" model on="submit"}}>  
+
+		{{input-field model.name class="form-control"  data-braintree-name="cardholder_name" placeholder='name on card'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field name}}</span>
+		{{/if}}
+
+		{{input-field model.number class="form-control"  data-braintree-name="number" placeholder='card number'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field number}}</span>
+		{{/if}}
+
+		{{input-field model.expiration class="form-control" data-braintree-name="expiration_date" placeholder='expiration'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field expiration}}</span>
+		{{/if}}
+
+
+		{{input-field model.cvv class="form-control" data-braintree-name="cvv" placeholder='cvv'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field cvv}}</span>
+		{{/if}}
+
+
+		{{input-field model.postal_code class="form-control" data-braintree-name="postal_code" placeholder='zip code'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field postal_code}}</span>
+		{{/if}}
+
+		{{partial "_server_error"}}
+
+
+		{{ladda-btn
+			name='save'
+			class="display-inline"
+			btnClasses='btn btn-default ladda-button btn-right btn-xs'
+			btnClick='doSubmitCardForm'
+			spin=isProcessing
+		}}
+
+		{{#if hasCardList }}
+		<button {{action 'doCancelCardForm' }} class="btn btn-default btn-right btn-xs">cancel</button>
+		{{/if}}
+
+</form>
+
+</div>

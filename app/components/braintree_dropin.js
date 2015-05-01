@@ -8,6 +8,8 @@ export default Em.Component.extend({
 
 	action: 'processBraintreeNonce',
 
+	//braintreeClientTokenBinding: 'this.ENV.braintreeClientToken',
+
 	token: null,
 
 	//Get the buyer token from the haul api.
@@ -54,12 +56,22 @@ export default Em.Component.extend({
 		if( Ember.isEmpty( token ) ){
 			return;
 		}
-
+console.log("WHAM")
 		var handler = Em.run.bind(this, this._handler);
 
-		braintree.setup(token, 'dropin', {
-			container: this.elementId,
-			paymentMethodNonceReceived: handler
+		// braintree.setup(token, 'custom', {
+		// 	id: 'checkout',
+		// 	paymentMethodNonceReceived: handler
+		// });
+
+
+
+
+		this.$('#checkout').on('submit', function(e){
+			console.log("BRAINTREE:", e);
+			alert('braintree');
+			e.preventDefault();
+			return false;
 		});
 
 	}.observes('token'),
@@ -67,8 +79,8 @@ export default Em.Component.extend({
 	_handler: function(event, nonce) {
 
 		console.log("HANDLER", nonce);
-
-		this.sendAction('payment_nonce', nonce);
+alert("HADNLER?")
+		this.sendAction('payment_nonce_set', nonce);
 
 		return false;
 	}

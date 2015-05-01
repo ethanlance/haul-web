@@ -91,8 +91,8 @@ module.exports = function(environment) {
 		ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
 
 		ENV.APP.pollingTime = {
-			comments: 60000,
-			mention_count: 60000
+			comments: 600000,
+			mention_count: 600000
 		}
 	}
 

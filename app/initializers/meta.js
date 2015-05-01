@@ -9,7 +9,7 @@ export default {
 		// helper function to get tag from dom
 
 
-
+		
 		var _getTag = function(tagname, property, value) {
 			var tags = document.head.getElementsByTagName(tagname),
 				tag,
