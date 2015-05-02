@@ -292,7 +292,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		);
 	},
 
-
+unmask: false,
 
 	saveCard: function() {
 
@@ -300,7 +300,9 @@ export default Ember.Component.extend(ErrorMixin, {
 		var model = this.get('model');
 		var token = this.get('token');
 
-		
+		//Clean:
+		model.set('number', model.get('number').replace(/-/g,""));
+
 		model.validate()
 		.then(
 
@@ -312,10 +314,15 @@ export default Ember.Component.extend(ErrorMixin, {
 					var client = new braintree.api.Client({clientToken: token});
 
 					var data = {
+
 						number: model.get('number'), 
+
 						expirationDate: model.get('expiration'),
+
 						cvv: model.get('cvv'),
+
 						postal_code: model.get('postal_code'),
+
 					};
 
 					client.tokenizeCard(data, function (err, nonce) {

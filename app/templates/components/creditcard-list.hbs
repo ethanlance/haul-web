@@ -75,21 +75,37 @@
 			<span class="has-error help-block">{{error-field name}}</span>
 		{{/if}}
 
-		{{input-field model.number class="form-control"  data-braintree-name="number" placeholder='card number'}}
+		{{input-mask class='form-control'
+			value=model.number
+			mask='9999 9999 9999 9999'
+			placeholder='card number 5555 5555 5555 5555'}}
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field number}}</span>
 		{{/if}}
 
-		{{input-field model.expiration class="form-control" data-braintree-name="expiration_date" placeholder='expiration'}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field expiration}}</span>
-		{{/if}}
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+			
+
+				{{input-mask class='form-control input-xs'
+					value=model.expiration
+					mask='99/99'
+					placeholder='expires'}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field expiration}}</span>
+				{{/if}}
 
 
-		{{input-field model.cvv class="form-control" data-braintree-name="cvv" placeholder='cvv'}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field cvv}}</span>
-		{{/if}}
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+
+				{{input-field model.cvv class="form-control input-xs" data-braintree-name="cvv" placeholder='cvv'}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field cvv}}</span>
+				{{/if}}
+
+			</div>
+		</div>
 
 
 		{{input-field model.postal_code class="form-control" data-braintree-name="postal_code" placeholder='zip code'}}
