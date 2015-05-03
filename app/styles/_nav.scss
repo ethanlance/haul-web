@@ -156,10 +156,16 @@ nav {
 		margin-top: -50px;
 		margin-right: 20px;
 		cursor:pointer;
+		transition: all 0.2s ease;
 
-		a, a:hover{
+		a {
 			text-decoration: none;
 			color: $nav-color;
+			transition: all 0.2s ease;
+		}
+
+		a:hover {
+			color: $primary-color;
 		}
 
 		.nav-link-badge {

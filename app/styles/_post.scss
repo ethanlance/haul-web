@@ -10,11 +10,16 @@
 	font-family: $primary-font;
 	font-weight: 600;
 	font-size: 13px;
+	transition: background-color 0.2s ease;
 
 	@media (max-width: 400px) {
 		padding-top:3px;
 		font-size: 12px;
 	}
+}
+
+.btn-buy:hover {
+	background-color:#5dad12;
 }
 
 
@@ -34,17 +39,25 @@
 		font-family: $primary-font;
 		font-weight: 400;
 		font-size: 12px;
+		transition: font-color 0.2s ease;
 	}
 
 	.title {
 		font-family: $primary-font;
 		font-size: 12px;
+		transition: font-color 0.2s ease;
 		
 	}
 
 	.title a {
 		font-weight: 600;
 		color: $primary-color;
+		transition: all 0.2s ease;
+	}
+
+	.title a:hover {
+		border-bottom: 1px dashed;
+		text-decoration: none;
 	}
 }
 
@@ -67,6 +80,7 @@
 		float:none;  
 		overflow:hidden;
 		display:block;
+		transition: all 0.2s ease;
 
 
 		.name a{
@@ -74,10 +88,12 @@
 			font-weight: 600;
 			font-size: 12px;
 			color: #333;
+			transition: all 0.2s ease;
 			//text-transform: uppercase;
 		}
 		.name a:hover {
 			color: $primary-color;
+			text-decoration: none;
 		}
 		.username a{
 			font-family: $primary-font;
@@ -212,6 +228,11 @@
 	margin:0;
 	padding:0;
 
+	a {
+		transition: all 0.2s ease;
+		text-decoration: none;
+	}
+
 	a:hover {
 			color: $primary-color;
 		}
@@ -238,15 +259,18 @@
 		.internal-social-buttons{
 			font-weight: bold;
 			font-family: $primary-font;
-			font-size: 16px; 
+			font-size: 12px; 
 			float:left;
 			width: 300px;
 
 			button {
 				background-color: #fafafa;
-				padding:2px 8px 2px 8px;
-				color: #565759;
+				padding:3px 8px 3px 8px;
+				color: #555;
+				font-size: 12px;
+				border-color: #dedede;
 			}
+
 
 			.fa{
 				padding-right:5px;
@@ -305,6 +329,7 @@
 		color: #555555;
 		line-height: 1.7;
 		margin-bottom: 40px;
+		transition: all 0.2s ease;
 
 		img {
 			//width: 100%;
@@ -324,6 +349,7 @@
 		a {
 			color: $primary-color;
 			text-decoration: underline;
+			transition: all 0.2s ease;
 		}
 
 	}
@@ -336,11 +362,16 @@
 	padding-left: 15px;
 	padding-right: 15px;
 
+	a {text-decoration: none;}
+	a:hover {text-decoration: none;}
+
 	.btn-edit {
 		display:block;
 		margin-left:auto;
 		margin-right: auto;
+		transition: all 0.2s ease;
 	}
+
 
 	.product-card-cap {
 		background-color: $primary-color;

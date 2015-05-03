@@ -64,6 +64,17 @@ header.profile{
 			color: #333;
 		}
 
+		a { 
+			text-decoration: none;
+			transition: all 0.2s ease;
+		}
+
+		a:hover {
+			color: $primary-color;
+			text-decoration: none;
+
+		}
+
 		.username{
 			font-size: 11px;
 			font-weight: 300;
@@ -110,6 +121,11 @@ header.profile{
 		//text-transform: uppercase;
 		text-align: center;
 		color: #7e7e7e;
+		transition: all 0.2s ease;
+
+		a:hover {
+			color: $primary-color;
+		}
 
 		.total{ 
 			font-family: $primary-font;
@@ -120,6 +136,10 @@ header.profile{
 			color:#999;
 		}
 
+		.total:hover {
+			color: $primary-color;
+		}
+
 		.title {
 			font-family: $primary-font;
 			font-size: 10px;
@@ -128,8 +148,12 @@ header.profile{
 			font-weight: 300;
 		}
 
+		.title:hover {
+			color: $primary-color;
+		}
+
 		a {
-			text-decoration: none;
+		//	text-decoration: none;
 		}
 
 		@media (max-width: 400px) {
