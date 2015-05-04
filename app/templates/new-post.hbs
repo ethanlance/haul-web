@@ -17,7 +17,7 @@
 				<div class="edit-row">
 					<div class="edit-col">
 
-						<h2>Post something to sell</h2>
+						<h2>Post something to sell.</h2>
 
 						{{#image-picker 
 							images=userImages
@@ -59,7 +59,7 @@
 				<div class="edit-row border">
 					<div class="edit-col">
 						<h2>What are the specs?
-							<small>Add one fact per line. For example "Color: silver"</small>
+							<small>Add one simple fact per line. For example "Color: Silver"</small>
 						</h2>
 
 						{{description-input descriptionChange='descriptionChange'}}
@@ -75,17 +75,23 @@
 
 				<div class="edit-row border">
 					<div class="edit-col">
-						<h2>How much?</h2>	
+						<h2>How much do you want to sell this for?</h2>	
 
 						{{input-field product_price label="false" class="form-control input-sm"}}
 						{{#if showErrors}}
 							<span class="has-error help-block">{{error-field product_price}}</span>
 						{{/if}}
+					</div>
+				</div>
 
-						<h2>Shipping &amp; handling?
-							<small>We only support flat rates for now, example "$5"</small>
+
+
+
+				<div class="edit-row border">
+					<div class="edit-col">
+						<h2>Add shipping &amp; handling?
+							<small>We only support flat rates for now. For example "$5"</small>
 						</h2>
-
 						{{input-field product_shipping label="false" class="form-control input-sm"}}
 						{{#if showErrors}}
 							<span class="has-error help-block">{{error-field product_shipping}}</span>
@@ -100,8 +106,8 @@
 				<div class="edit-row border">
 					<div class="edit-col">
 
-						<h2>Tag it
-							<small>Tags will help promote your product. Separate multiple tags with a comma.</small>
+						<h2>Tag it.
+							<small>Adding tags will help promote your product. Separate multiple tags with a comma. For example "car, sportscar"</small>
 						</h2>
 						
 						{{input-field tags class="form-control"}}

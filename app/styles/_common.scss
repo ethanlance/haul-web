@@ -376,7 +376,11 @@ a.editorial {
 
 
 .dashed {
-	border: 1px dashed #cccccc;
+	border: 2px dashed #cccccc;
+}
+
+.dashed:hover {
+	border: 2px dashed $primary-color;
 }
 
 
