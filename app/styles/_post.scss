@@ -348,8 +348,13 @@
 
 		a {
 			color: $primary-color;
-			text-decoration: underline;
+			text-decoration: none;
 			transition: all 0.2s ease;
+		}
+
+		a:hover {
+				border-bottom: 1px dashed $primary-color;
+				text-decoration: none;
 		}
 
 	}

@@ -166,7 +166,11 @@
 
 				a {
 					color: $primary-color;
-					text-decoration: underline;
+					text-decoration: none;
+				}
+				a:hover {
+					border-bottom: 1px dashed $primary-color;
+					text-decoration: none;
 				}
 				
 				margin-top: 4px;
