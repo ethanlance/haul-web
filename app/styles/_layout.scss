@@ -10,7 +10,8 @@
 
 .container {
 	position:relative;
-	max-width: $haul-max-width;
+
+	width: $haul-max-width;
 
 	@media (max-width: 810px) {
 		max-width: 100%;

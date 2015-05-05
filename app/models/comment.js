@@ -5,13 +5,16 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	
 	comment: DS.attr('string'),
 
-	post_id: DS.attr('string'),
-	post: DS.belongsTo('post', {async: true}),
+	object_type: DS.attr('string'),
 
+	object_id: DS.attr('string'),
+	
 	user_id: DS.attr('string'),
+
 	user: DS.belongsTo('user', {async: true}),
 	
 	created_at: DS.attr('string'),
+		
 	marker_id: DS.attr('string'),
 	
 	validations: { 

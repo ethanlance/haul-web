@@ -62,9 +62,24 @@
 							{{social-btns post=this}}
 						</div>
 					</div>
+					
+					<div class="row padding-top comments-section">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							
+							<div class="comment-section-nav">
+								<span class="comment-count">{{totalComments}} Comments</span>
+								<span class="likes-count">{{totalLikes}} Likes</span>
+							</div>
 
+							{{comment-section 
+								openModal='openModal' 
+								objectId=this.id
+								objectType="posts"
+								anchor=anchor 
+								class="display-inline" }}
+						</div>
+					</div>
 
-					{{comment-section openModal='openModal' post=this anchor=anchor class="display-inline" }}
 
 				</div>
 

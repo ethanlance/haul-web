@@ -8,19 +8,25 @@ export default ApplicationAdapter.extend({
 	}.property(), 
 
 	findQuery: function(store, type, query) {
-		var url = this.get('host') + "/posts/" + query.post_id + "/comments";
+		var url = this.get('host') + "/"+ query.object_type +"/" + query.object_id + "/comments";
 		url = this.queryBuilder(query, url);
 		return this.ajax(url, 'GET');
 	},
 
 	createRecord: function(store, type, record) {		
 		var data = { 'comment':record.get('comment') };
-		var url = this.get('host') + '/users/'+ record.get('user_id') +'/comments/posts/' + record.get('post_id');
+		var id = record.get('object_id');
+		var type = record.get('object_type');
+		var user_id = record.get('user_id');
+		var url = this.get('host') + '/users/'+ user_id +'/comments/'+ type +'/' + id;
 		return this.ajax(url, "POST", {data: data}); 
 	},
 
 	deleteRecord: function(store, type, record) {
-		var url = this.get('host') + '/users/'+ record.get('user_id') +'/comments/' + record.get('id');
+		var id = record.get('object_id');
+		var type = record.get('object_type');
+		var user_id = record.get('user_id');
+		var url = this.get('host') + '/users/'+ user_id +'/comments/' + id;
 		return this.ajax(url, "DELETE"); 
 	}	
 

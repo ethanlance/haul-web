@@ -76,7 +76,22 @@
 </div>
 
 
-
+{{!-- COMMENTS --}}
+{{!-- COMMENTS --}}
+<div class="row padding-top comments-section">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+							
+		<div class="comment-section-nav">
+			<h3 class="comment-count">Message with the seller, {{model.seller.name}}</h3>
+		</div>
+		{{comment-section 
+			openModal='openModal' 
+			objectId=model.id 
+			objectType='transactions'
+			anchor=anchor 
+			class="display-inline" }}
+	</div>
+</div>
 
 
 

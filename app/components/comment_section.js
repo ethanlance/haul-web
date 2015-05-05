@@ -3,27 +3,35 @@ import config from '../config/environment';
 
 import PaginateMixin from '../mixins/paginate';
 export default Ember.Component.extend( PaginateMixin,{
-	
-	storeName: 'post-comment',	
+
+	objectId: false,
+
+	//ie. 'post', 'transaction', etc.
+	objectType: false,
+	 
+	currentUserIdBinding: "session.currentUser.id",
+
 	limit:10,
+
 	hasMoreBinding: 'paginateHasMore',
 
 	isProcessing:false,
 
 	anchorBinding: 'anchor',
-	postIdBinding: 'post.post_id',
-	userIdBinding: 'post.user_id',
-	currentUserBinding: "session.currentUser",
-	currentUserIdBinding: "session.currentUser.id",
 
-	totalLikesBinding: "post.likesCount.total",
-	totalCommentsBinding: "post.commentCount.total",
+
+	storeName: 'comment',	
+
 	showSubmitCommentButton: false,
 
 	model:null,
+
 	comments: null,
+	
 	comment_box:null,
+	
 	commentsSorting: ['created_at:desc'],
+    
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
     pollInterval: 3000,
@@ -39,7 +47,10 @@ export default Ember.Component.extend( PaginateMixin,{
     onPoll: function() {
     	var _this = this;
     	var store = this.container.lookup('store:main');
-    	store.find('post-comment', {post_id: _this.get('postId')})
+    	store.find('comment', {
+    		object_id: _this.get('objectId'),
+    		object_type: _this.get('objectType')
+    	})
     	.then(function() {
     		_this.set('runPoll', _this.schedulePoll(_this.get('onPoll')));
 		});
@@ -80,7 +91,8 @@ export default Ember.Component.extend( PaginateMixin,{
 		this.set('paginateQuery', {
 			storeName: this.get('storeName'),
 			limit: this.get('limit'), 
-			post_id: this.get('postId'),
+			object_id: this.get('objectId'),
+			object_type: this.get('objectType'),
 		});
 		this.set('paginateHasMore', true);
 
@@ -97,8 +109,8 @@ export default Ember.Component.extend( PaginateMixin,{
 
 		//The Filter. 
 		var _this = this;
-		var filter = store.filter('post-comment', function(result) {
-			if(result.id && (result.get('post_id') === _this.get('postId'))) {
+		var filter = store.filter('comment', function(result) {
+			if(result.id && (result.get('object_id') === _this.get('objectId'))) {
 				
 				if( result.get('user_id') === _this.get('currentUserId') ) {
 					result.set('canDelete', true);
@@ -180,14 +192,15 @@ export default Ember.Component.extend( PaginateMixin,{
 
 	makeModel: function() {
 		var store = this.container.lookup('store:main');
-		var model = store.createRecord('post-comment');
+		var model = store.createRecord('comment');
 		this.set('model', model);
 		this.reset();
 	},
 
 	updateCommentCount: function(direction) {
 		var store = this.container.lookup('store:main');
-		store.find('post-comment-count', this.get('postId') )
+		var key = this.get('objectId') + "-" + this.get('objecType')
+		store.find('comment-count', key )
 		.then(function(record){
 			if( direction === "up"){
 				record.incrementProperty('total');
@@ -229,7 +242,10 @@ export default Ember.Component.extend( PaginateMixin,{
 		model.set('comment', data.messageText);
 		
 		model.set('user_id', this.get('currentUserId'));
-		model.set('post_id', this.get('postId'));
+		
+		model.set('object_id', this.get('objectId'));
+		
+		model.set('object_type', this.get('objectType'));
 
 		model.validate()
 		.then(

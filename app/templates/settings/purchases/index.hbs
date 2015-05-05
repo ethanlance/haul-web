@@ -24,6 +24,17 @@
 
 </div>	
 
+{{!-- //NO CONTENT CTA --}}
+{{#unless pagedContent }}
+	<div class="padding-top text-center font-weak">
+		You have made no purchases, yet.
+	</div>
+
+	<p class="text-center padding-top">
+		<span class="glyphicon glyphicon-usd sad-heart"></span>
+	</p>
+{{/unless}}
+
 
 {{#each transaction in pagedContent}}
 {{#link-to 'settings.purchases.purchase' transaction.id }}
@@ -58,4 +69,7 @@
 </div>	
 {{/link-to}}
 {{/each}}
+{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+	<i class="fa fa-spinner fa-spin"></i>
+{{/infinite-scroll}}
 </div>

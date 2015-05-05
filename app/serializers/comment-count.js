@@ -13,7 +13,7 @@ export default  DS.RESTSerializer.extend({
 			total: payload.data.total,	
 		};
 
-		payload ={'post-comment-count': data}; 
+		payload ={'comment-count': data}; 
 		return this._super(store, type, payload, recordId, requestType);
 	}
 });

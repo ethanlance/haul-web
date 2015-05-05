@@ -16,15 +16,16 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 			created_at: timeInMs,
 			marker_id: payload.data.marker_id,
 			
-			post: payload.data.subject.id,
+			
 			user: payload.data.user_id,
 
-			post_id: payload.data.subject.id,
+			object_id: payload.data.subject.id,
+			object_type: payload.data.subject.type,
 			user_id: payload.data.user_id
 		};
 		
 
-		payload = {'post-comment': data};  
+		payload = {'comment': data};  
 
 		return this._super(store, type, payload, recordId, requestType);
 	},
@@ -42,15 +43,18 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 				created_at: record.created_at,
 				marker_id: record.marker_id,
 				
-				post: record.subject.id,
+				
 				user: record.user_id,
 
-				post_id: record.subject.id,
+				object_id: record.subject.id,
+				object_type: record.subject.type,
+
+
 				user_id: record.user_id,
 			};
 		}); 
 
-		payload = {'post-comment': data};  
+		payload = {'comment': data};  
 		return this._super(store, primaryType, payload);
 	}
 });

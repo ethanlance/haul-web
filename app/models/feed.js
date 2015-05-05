@@ -34,7 +34,7 @@ export default DS.Model.extend({
 
 	product_id: DS.attr('string'),
 
-	commentCount: DS.belongsTo('post-comment-count', {async:true}),
+	commentCount: DS.belongsTo('comment-count', {async:true}),
 	likesCount: DS.belongsTo('post-likes-count', {async:true}),
 
 	post_slug: function() {		

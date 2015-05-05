@@ -13,7 +13,10 @@ export default Ember.ObjectController.extend({
 	
 	currentPageBinding: 'controllers.profile.currentPage',
 
- 
+ 	totalLikesBinding: "model.likesCount.total",
+
+	totalCommentsBinding: "model.commentCount.total",
+
  	queryParams: {
     	anchor: "anchor"
   	},

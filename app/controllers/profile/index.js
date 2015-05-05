@@ -5,17 +5,27 @@ export default Ember.ObjectController.extend(PaginateMixin,{
  	needs: ['profile'],
 
  	storeName: 'post-list',
+
  	limit:null,
+
  	thisPage: "feedPage",
+
  	user: false,
+
 	currentUserIdBinding: 'session.currentUser.id',
+
 	isProfileOwner: false, 
+
 	isFeedPage:true,
+
 	currentPos:'3000px',
+
 	showGridViewBinding: 'controllers.profile.showGridView',
+
 	showGridBtn:true,
 
 	sorting: ['created_at:desc'],
+
     sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
  	currentPageBinding: 'controllers.profile.currentPage',

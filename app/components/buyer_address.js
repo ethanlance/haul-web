@@ -22,6 +22,8 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	selected_address_id: null,
 
+	statesReady: false,
+
 	hasAddressList: Ember.computed.notEmpty('addresses'),
 
 	show: null,
@@ -178,7 +180,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		});
 
 	}.observes('currentUserId'),
-statesReady: false,
+
 	createModel: function(model) {
 
 		
