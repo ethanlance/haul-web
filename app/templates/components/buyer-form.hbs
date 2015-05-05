@@ -4,9 +4,9 @@
 
 {{!-- CREATE BUYER --}}
 <div {{bind-attr class="show_buyer:show:hide"}}>
-	<h3>Your Details
+	<h1>Your contact information.
 	<button {{action 'showEdit'}} class='btn btn-default btn-xs'>edit</button>
-	</h3>
+	</h1>
 	<p>
 		{{model.firstname}} {{model.lastname}}<br/>
 		{{phone-helper model.phone}}
@@ -15,11 +15,11 @@
 
 <div {{bind-attr class="show_form:show:hide"}}>
 
-	<h3>Your Details
+	<h1 class="subject">Your contact information.
 		<small>
-			For your security we require the following info.  We promise not to do anything evil with it.
+			For your security we require the following info.  We promise not to do anything nefarious with it.
 		</small>
-	</h3>
+	</h1>
 
 	{{#form-for model}}
 		{{input-field model.firstname class="form-control" placeholder='firstname'}}
