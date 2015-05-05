@@ -6,8 +6,9 @@
 	margin-top: 70px;
 
 	.comment-section-nav {
-		font-family: Arvo;
-		font-size: 16px;
+		font-family: $primary-font;
+		font-size: 13px;
+		font-weight: 400;
 		width: 100%;
 		padding-bottom: 30px;
 
@@ -26,13 +27,25 @@
 			min-height: 1px;
 			padding-bottom: 10px;
 			padding-left: 70px;
-			border-bottom: 1px solid #cccccc;
+			border-bottom: 1px solid #dedede;
 		}
 	}
 
 	.btn-default {
-		font-family: 'LATO';
+		font-family: $primary-font;
+		background-color: $primary-color;
+		font-size: 11px;
+		font-weight:500;
+		color: #fff;
+		border: 0;
+		padding: 10px 20px 10px 20px; 
+		border-radius: 0;
 		text-transform: uppercase;
+	}
+
+	.btn-default:hover {
+		background-color: $primary-color-hover;
+		
 	}
 
 	.load-more-btn {
@@ -50,8 +63,8 @@
 			margin:0;
 			float: left;
 			border-radius: 50%;
-			width: 70px;
-			height: 70px;
+			width: 40px;
+			height: 40px;
 			margin-right: 0px;
 		}
 
@@ -71,12 +84,12 @@
 			}
 
 			textarea { 
-				padding-top: 20px;
+				padding-top: 10px;
 				padding-left: 20px;
 				border: 0;
 				background-color: $primary-background-color;
-				font-size: 16px; 
-				height: 80px;
+				font-size: 14px; 
+				height: 60px;
 				outline: 0 none;
 				outline-style:none;
 				box-shadow:none;
@@ -90,7 +103,7 @@
 			display:block;
 			margin:0;
 			margin-right: -30px;
-			margin-top:30px;
+			margin-top:20px;
 		}
 	}
 
@@ -98,13 +111,20 @@
 		display: inline-block;
 		width: 100%;
 		border-top: 1px dashed #cdcdcd;
-		padding-top: 20px;
-		margin-top: 30px;
+		padding-top: 10px;
+		margin-top: 10px;
 
 
 
 		.btn-delete{
 			float:right;
+			background-color: transparent;
+			border: 0;
+			color: #ccc;
+		}
+
+		.btn-delete:hover {
+			color: $primary-color;
 		}
 
 		.profile-image{
@@ -112,8 +132,8 @@
 			margin:0;
 			float: left;
 			border-radius: 50%;
-			width: 50px;
-			height: 50px;
+			width: 40px;
+			height: 40px;
 			margin-right: 30px;
 		}
 
@@ -123,20 +143,22 @@
 			display:block;
 
 			.name a{
-				font-family: 'LATO-BOLD';
-				font-size: 11px;
-				color: $primary-color;
-				text-transform: uppercase;
+				font-family: $primary-font;
+				font-weight: 600;
+				font-size: 12px;
+				color: #333
+				//text-transform: uppercase;
 			}
 			.username a{
-				font-family: 'LATO';
+				font-family: $primary-font;
+				font-style: italic;
 				font-size: 11px;
-				color: #cccccc;
+				color: #999;
 				text-transform: lowercase;
 			}
 			.moment{ 
-				font-family: 'LATO';
-				font-size: 11px;
+				font-family: $primary-font;
+				font-size: 10px;
 				color: #cccccc;
 				text-transform: lowercase;
 			}
@@ -144,13 +166,18 @@
 
 				a {
 					color: $primary-color;
-					text-decoration: underline;
+					text-decoration: none;
+				}
+				a:hover {
+					border-bottom: 1px dashed $primary-color;
+					text-decoration: none;
 				}
 				
-				margin-top: 10px;
-				font-family: 'CHARTER-ROMAN' Georgia, Times, serif;
-				font-size: 16px;
+				margin-top: 4px;
+				font-family: $primary-font;
+				font-size: 14px;
 				color: #555;
+				line-height: 1.7;
 			}
 		}
 	}

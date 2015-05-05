@@ -2,9 +2,9 @@
 
 
 <div {{bind-attr class="showList:show:hide :haul-checkout"}}>
-	<h3>Select an address
+	<h1 class="subject">Select an address.
 		<button {{action 'showCreateNewAddress' }} class="btn btn-default btn-xs">add new</button>
-	</h3> 
+	</h1> 
 	
 	<ul>
 	{{#each address in addresses}}
@@ -43,7 +43,7 @@
 
 
 <div {{bind-attr class="showAddress:show:hide"}}>
-	<h3>Selected address
+	<h3>Selected address.
 		<button {{action 'showAddressList' }} class="btn btn-default btn-xs ">pick a differet address</button>
 	</h3>
 
@@ -65,9 +65,9 @@
 
 
 	{{#if model}}
-		<h3>Create Address</h3>
+		<h3>Create address</h3>
 	{{else}}
-		<h3>Edit Address</h3>
+		<h3>Edit address</h3>
 	{{/if}}
 
 
