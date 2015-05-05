@@ -11,26 +11,19 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 		var data = null;
 		var datas = payload.data.map(function(result){  
 			data = {
-				id: result.post_id,	
-				post_id:result.post_id,
-				user_id: result.user_id,
-				updated_at: result.updated_at,
+				id: result.transaction_id,	
+
+				buyer_user_id: result.buyer_user_id,
 				created_at: result.created_at,
-				
-				user: result.user_id,
-				body: result.body,
-				subject: result.subject,
-				image: result.image_id,
-
-				product_currency: result.product.currency,				
-				product_price: result.product.price,
-				product_name: result.product.name,
-				product_status: result.product.status,
-				product_quantity: result.product.quantity,
-				product_user: result.product.user_id,
-
-				commentCount: result.post_id,
-				likesCount: result.post_id
+				post_id: result.post_id,
+				product_id: result.product_id,
+				image: result.product_image_id,
+				product_name: result.product_name,
+				product_price: result.product_price,
+				product_user_id: result.product_user_id,
+				shipping_status: result.shipping_status,
+				transaction_id: result.transaction_id, 
+				updated_at: result.updated_at,
 			};
 
 
@@ -38,7 +31,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 			return data;
 		}); 
 
-		payload = {'post-list': datas};  
+		payload = {'transaction-list': datas};  
 		return this._super(store, primaryType, payload);
 	}
 });

@@ -1,0 +1,61 @@
+<div class="transactions">
+<h1>
+	Your Purchases
+</h1>
+
+
+<div class="row header">
+
+	<div class="col-md-4 col-sm-4 col-xs-4">
+		<label>Item Name</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Product Price</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Shipping Status</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Purchase Date</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Last Updated</label>
+	</div> 
+
+</div>	
+
+
+{{#each transaction in pagedContent}}
+{{#link-to 'settings.purchases.purchase' transaction.id }}
+<div class="row transaction-list">
+
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		
+		
+	      <img class="media-object image-responsive" {{bind-attr src=transaction.image.thumb}}>
+	    
+
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		
+			{{transaction.product_name}}
+		
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		${{transaction.product_price}}
+	</div>
+
+	<div {{bind-attr class=":col-md-2 :col-sm-2 :col-xs-2 purchase.statusCanceled:cancel"}}>
+		{{transaction.shipping_status}}
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		{{ format-date transaction.created_at }}
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		{{ format-date transaction.updated_at }}
+	</div> 
+
+</div>	
+{{/link-to}}
+{{/each}}
+</div>

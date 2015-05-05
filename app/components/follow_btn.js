@@ -108,10 +108,7 @@ export default Ember.Component.extend({
 					r.reload();
 				});
 
-				store.find('user-following-list', _this.get('currentUserId'))
-				.then(function(r){
-					r.reload();
-				});
+				store.find('user-following-list', {user_id:_this.get('currentUserId')});
 
 
 				store.find('user-followers-count', _this.get('followId'))
@@ -119,10 +116,7 @@ export default Ember.Component.extend({
 					r.reload();
 				});
 
-				store.find('user-followers-list', _this.get('followId'))
-				.then(function(r){
-					r.reload();
-				});
+				store.find('user-followers-list', {user_id:_this.get('followId')});
 				
 			}, function(error){
 				console.log("Error", error);

@@ -224,12 +224,7 @@
   	margin:0;
   	z-index: 1;
 
-  	float:none;
-  	display:inline-block;
-
-	min-width:66%;
-	max-width: 66%;
-	width:66%;
+	overflow: hidden;
 
 	@media (max-width: 810px) {
   		top: 0;

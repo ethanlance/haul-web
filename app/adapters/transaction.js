@@ -6,10 +6,14 @@ export default ApplicationAdapter.extend({
 		return this.ENV.Server.PROSPER_SERVER_HOST;	
 	}.property(), 
 
-	// find: function(store, type, id) { 
-	// 	var url = this.get('host') + "/buyers/" + id;
- //        return this.ajax(url, 'GET');
- //    },
+	find: function(store, type, id) { 
+		
+		var user_id = this.get('session.user_id');
+
+		var url = this.get('host') + "/users/" + user_id + "/transactions/" + id;
+
+        return this.ajax(url, 'GET');
+    },
 
 	createRecord: function(store, type, record) {
 
@@ -21,7 +25,7 @@ export default ApplicationAdapter.extend({
 			product_user_id: record.get('product_user_id'),
 			product_id: record.get('product_id')
 		}
-console.log("TRANSACTION", data)
+
 		var url = this.get('host') + "/transactions";
 		return this.ajax(url, "POST", { data: data }); 
 	},
@@ -42,14 +46,13 @@ console.log("TRANSACTION", data)
 	// 	return this.ajax(url, "PUT", { data: data });
 	// },
 
- //    deleteRecord: function(store, type, record ) {
+    deleteRecord: function(store, type, record ) {
     
- //    	//record.rollback();
-	// 	//var user_id = record.get('user').get('id');
-	// 	var user_id = record.get('user_id');
-	// 	//record.rollforward()?
+		var user_id = this.get('session.user_id');
 
-	// 	var url = this.get('host') + "/buyers/" + user_id;
-	// 	return this.ajax(url, "DELETE");
-	// },
+		var id = record.get('id');
+	
+		var url = this.get('host') + "/users/" + user_id + "/transactions/" + id;
+		return this.ajax(url, "DELETE");
+	},
 });

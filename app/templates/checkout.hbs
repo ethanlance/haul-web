@@ -90,7 +90,12 @@
 
 					<h3 {{bind-attr class="showTransactionButton::disabled"}}>Final Step</h3>
 
+					
+					{{partial "_server_error"}}
+
 					<button {{action 'doSubmitTransaction'}} {{bind-attr class="showTransactionButton::disabled :btn :btn-default"}}>Process Payment ${{model.product_price}}</button>
+
+
 
 				</div>
 			</div>

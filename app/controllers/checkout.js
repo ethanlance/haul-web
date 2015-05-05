@@ -1,6 +1,6 @@
 import Ember from 'ember';
-
-export default Ember.ObjectController.extend({
+import ErrorMixin from '../mixins/server_error';
+export default Ember.ObjectController.extend(ErrorMixin, {
 
 	currentUserBinding: 'session.currentUser',
 
@@ -36,6 +36,8 @@ export default Ember.ObjectController.extend({
 
 	saveTransaction: function() {
 
+		var _this = this;
+
 		var transaction = this.store.createRecord('transaction', {
 			user_id: this.get('buyerId'),
 			address_id: this.get('addressId'),
@@ -49,9 +51,14 @@ export default Ember.ObjectController.extend({
 		.then(
 			function success(record) {
 				console.log('Save', record);
+
+				_this.transitionToRoute('settings.purchases.purchase', record.get('transaction_id'));
+
 			},
 			function failed(error) {
 				console.log("Error", error);
+				_this.set('showErrors', true);
+				_this.handleServerError(error);
 			}
 		)
 	},

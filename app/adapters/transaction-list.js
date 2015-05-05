@@ -7,7 +7,7 @@ export default ApplicationAdapter.extend({
 	}.property(), 
 
 	findQuery: function(store, type, query) {
-        var url = this.get('host') + "/users/" + query.user_id + "/transactions?context=buyer";
+        var url = this.get('host') + "/"+ query.context +"/" + query.user_id + "/transactions";
         url = this.queryBuilder(query, url);
         return this.ajax(url, 'GET');
     }

@@ -1,23 +1,21 @@
 import Ember from 'ember';
-import PaginateMixin from '../mixins/paginate';
+import PaginateMixin from '../../../mixins/paginate';
 export default Ember.ObjectController.extend(PaginateMixin,{
+
+	currentUserBinding: "session.currentUser",
+
+	currentUserIdBinding: "session.currentUser.id",
 
 	loading: true,
 
 	limit: null,
 	
-	storeName: 'feed',
-	
-	currentUserIdBinding: 'session.currentUser.id',
-	
-	currentUserBinding: 'session.currentUser',
-	
-	isProfileOwner: true,  
+	storeName: 'transaction-list',
 
-	model:false,
-	
+	transactions: null,
+
 	sorting: ['created_at:desc'],
-	
+
     sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
 	userChange: function() {
@@ -31,17 +29,19 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 			storeName: this.get('storeName'),
 			limit: this.get('limit'), 
 			user_id: this.get('currentUserId'),
+			context: "sellers"
 		});
 		this.set('paginateHasMore', true);
 
 		var _this = this;
 		var promise = this.paginateMore()
 		.then(function(results){
+
 			_this.set('loading', false);
 		});
 
 		
-	}.on('init').observes('currentUserId'),
+	}.on('init').observes('currentUserId'),	
 
 	actions: {
     	fetchMore: function(callback) {
@@ -49,4 +49,4 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 			if(callback){callback(promise)};
     	} 
 	}
-}); 
+});
