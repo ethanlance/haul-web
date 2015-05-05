@@ -6,6 +6,8 @@ export default Ember.Route.extend( {
 	image: null,
 
 	metaTitle: function() {
+
+		if( Ember.isEmpty(this.get('post'))){ return; }
 		
 		var post = this.get('post');
 
@@ -16,6 +18,8 @@ export default Ember.Route.extend( {
 	}.property('post'),
 
   	metaDescription: function() {
+
+  		if( Ember.isEmpty(this.get('post'))){ return; }
 		
 		var post = this.get('post');
 
@@ -26,6 +30,9 @@ export default Ember.Route.extend( {
 	}.property('post'),
 
 	metaOgImage: function() {
+
+		if( Ember.isEmpty(this.get('post'))){ return; }
+
 		var _this = this;
 		
 		var image_id = this.get('post').get('image').get('id');
@@ -47,8 +54,9 @@ export default Ember.Route.extend( {
  
  			return result;
 
-		}, function() {
-			return _this.transitionTo('not-found');
+		}, function(err) {
+			return null;
+
 		});
  	}
 });
