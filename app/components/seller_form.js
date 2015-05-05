@@ -64,7 +64,7 @@ export default Ember.Component.extend(ErrorMixin, {
 			}	
 		);
 	}.on('didInsertElement').observes('currentUserId'),
-
+statesReady: false,
 	modelReady: function() {
 
 		var model = this.get('model');
@@ -103,7 +103,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		  states: states_list,
 		}); 
 		this.set('business_state_options', business_state_options);
-
+this.set('statesReady', true);
 	}.observes('model.id'),
 
 	saveSeller: function() {

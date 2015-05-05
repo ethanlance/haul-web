@@ -28,9 +28,9 @@
 
 				<div {{bind-attr class=":comment-submit showSubmitCommentButton:visible:invisible"}}>
 						
-					{{ladda-btn class="primary"
+					{{ladda-btn 
+						class="primary display-inline"
 						name='Post Comment'
-						class="display-inline"
 						btnClasses='btn btn-default ladda-button '
 						btnClick='submit'
 						spin=isProcessing

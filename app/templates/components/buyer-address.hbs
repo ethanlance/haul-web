@@ -103,16 +103,18 @@
 			<span class="has-error help-block">{{error-field city}}</span>
 		{{/if}}
 
+		{{#if statesReady}}
 		{{view "select"
 	       content = state_options.states
 	       optionLabelPath = "content.name"
-	       optionValuePath = "content.abreviation"
+	       optionValuePath = "content.abbreviation"
 	       selection = state_options.selectedState
 	       prompt="state"
 	       class = "form-control"
 	    }}
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field state}}</span>
+		{{/if}}
 		{{/if}}
 
 		{{input-field model.postal_code class="form-control" placeholder="zip code"}}

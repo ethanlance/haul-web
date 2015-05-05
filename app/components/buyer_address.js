@@ -178,7 +178,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		});
 
 	}.observes('currentUserId'),
-
+statesReady: false,
 	createModel: function(model) {
 
 		
@@ -205,6 +205,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		}); 
 		this.set('state_options', state_options);
 
+		this.set('statesReady', true);
 
 		this.set('model', model);
 

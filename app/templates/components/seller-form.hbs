@@ -119,17 +119,18 @@
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field city}}</span>
 		{{/if}}
-
+{{#if statesReady}}
 		{{view "select"
 	       content = state_options.states
 	       optionLabelPath = "content.name"
-	       optionValuePath = "content.abreviation"
+	       optionValuePath = "content.abbreviation"
 	       selection = state_options.selectedState
 	       prompt="state"
 	       class = "form-control"
 	    }}
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field state}}</span>
+		{{/if}}
 		{{/if}}
 
 		{{input-field model.postal_code class="form-control" placeholder="zip code"}}
@@ -182,11 +183,11 @@
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field business_city}}</span>
 		{{/if}}
-
+{{#if statesReady}}
 		{{view "select"
 	       content = business_state_options.states
 	       optionLabelPath = "content.name"
-	       optionValuePath = "content.abreviation"
+	       optionValuePath = "content.abbreviation"
 	       selection = business_state_options.selectedBusinessState
 	       prompt="state"
 	       class = "form-control"
@@ -194,7 +195,7 @@
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field business_state}}</span>
 		{{/if}}
-
+{{/if}}
 		{{input-field model.business_postal_code class="form-control" placeholder="zip code"}}
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field business_postal_code}}</span>
