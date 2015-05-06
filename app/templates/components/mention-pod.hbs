@@ -1,4 +1,26 @@
 
+	{{#if needsSellerAccount }} 
+	<div class="mention-owner mention-alert">
+		{{#link-to 'profile' post.user.username }}
+		<span class="profile-image haul-icon" {{bind-attr src=post.user.icon}}></span>
+		{{/link-to}}
+
+		<div class="post-owner-details">
+			<span class="name">HaulBot</span>
+			<span class="username">@haulbot</span>
+			<div class="moment">now</div> 
+			<span class="comment">
+				{{#link-to 'settings.seller'}}
+					<strong><i class="fa fa-exclamation-circle"></i> Whoop, setup your seller account.</strong>  Your items can't be purchased until you do! 
+					<i class="fa fa-arrow-right"></i>
+				{{/link-to}}
+			</span>
+		</div>
+	</div>
+	{{/if}}
+
+
+
 {{#each post in pagedContent}}
 
 	<div class="mention-owner">
@@ -16,4 +38,6 @@
 
 {{/each}}
 
+{{#if pagedContent}}
 <span class="more">{{#link-to 'mentions'}}MORE{{/link-to}}</span>
+{{/if}}

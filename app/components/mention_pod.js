@@ -3,27 +3,19 @@ import config from '../config/environment';
 
 import PaginateMixin from '../mixins/paginate';
 export default Ember.Component.extend( PaginateMixin,{
+
+    currentUserIdBinding: "session.currentUser.id",
     
+    needsSellerAccount: false,
+
     storeName: 'user-mentions-list',  
+    
     limit:5,
+
     hasMoreBinding: 'paginateHasMore',
 
-    isProcessing:false,
-
-    anchorBinding: 'anchor',
-    postIdBinding: 'post.post_id',
-    userIdBinding: 'post.user_id',
-    currentUserBinding: "session.currentUser",
-    currentUserIdBinding: "session.currentUser.id",
-
-    totalLikesBinding: "post.likesCount.total",
-    totalCommentsBinding: "post.commentCount.total",
-    showSubmitCommentButton: false,
-
-    model:null,
-    comments: null,
-    comment_box:null,
     commentsSorting: ['created_at:desc'],
+    
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
     pollInterval: 3000,
@@ -58,16 +50,46 @@ export default Ember.Component.extend( PaginateMixin,{
         this.stopPoll();
     },
 
-    didInsertElement: function() {
 
+
+    doesUserNeedSellerAccount: function() {
+        var _this = this;
+        var store = this.container.lookup("store:main");
+
+        var userId = this.get('currentUserId');
+
+        store.find('seller', userId).then(
+            function success(record){
+
+                //Seller exists.
+                //do nothing.
+                if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
+                    _this.set('needsSellerAccount', true);
+                }
+
+            },
+            function failure(error){
+                
+                //Seller does not exist.
+                _this.set('needsSellerAccount', true);
+                
+
+            }   
+        );
+    },
+
+    getMentions: function() {
+        
         var _this = this;
         
-        //this.startPoll();
-        
         var store = this.container.lookup('store:main'); 
+        
         var storeName = this.get('storeName');
 
-        var filter = store.find(storeName, {user_id: this.get('session.user_id'), limit:this.get('limit')} )
+        var filter = store.find(storeName, {
+            user_id: this.get('currentUserId'), 
+            limit:this.get('limit')
+        })
         .then(function(){
             return store.filter(storeName, function(result){
                 return result;
@@ -75,8 +97,22 @@ export default Ember.Component.extend( PaginateMixin,{
         });
 
         filter.then(function(results){
-            _this.set('pagedContent', results); 
+            _this.set('pagedContent', results.get('content').splice(0, _this.get('limit'))); 
         });
     },
+
+
+    didInsertElement: function() {
+        if(!this.get('currentUserId')){ return; }
+
+        //Check if user has a seller account.
+        this.doesUserNeedSellerAccount();
+                
+        //Get last X mentions.
+        this.getMentions();
+
+        this.startPoll();
+   
+    }.observes('currentUserId'),
 
 });
