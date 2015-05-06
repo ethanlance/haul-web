@@ -15,5 +15,12 @@ export default Ember.Route.extend({
 	}, 
 	serialize: function(model) {  
   		return { username: model.username };
-  	}	
+  	},
+  	renderTemplate: function() {
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('profile');
+	},
 });

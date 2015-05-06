@@ -1,3 +1,125 @@
-{{header-site
-	goToRoute='goToRoute'
-	openModal='openModal'}}
+{{#if session.isAuthenticated }}
+<nav>
+	<div class="nav">
+		
+		<div class="logo">
+			{{#link-to "home"}}HAUL{{/link-to}}
+		</div>
+
+
+		{{!-- When browser is collapsed --}}
+		<div class="nav-link-wrapper-collapse">
+ 
+ 
+				{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-home fa-2x"></i>{{/link-to}}
+			 
+ 
+				
+					{{#link-to 'mentions' }}<i class="fa fa-envelope-o fa-2x"></i>{{/link-to}}
+					{{#if session.currentUser.hastUnreadMentions}}
+						{{mention-count}}
+					{{/if}}
+				
+		 
+ 
+				<i {{action 'toggleSearch'}} class="fa fa-search fa-2x"></i> 
+
+			{{new-post-btn openModal='openModal' btn-text="ADD A NEW POST" iconOnly='true' class="display-inline"}}
+
+		</div>	
+		
+
+
+		{{!-- When browser is NOT collapsed --}}
+		<div class="nav-link-wrapper">
+			<div class="nav-link home">
+				{{#link-to 'home' }}HOME{{/link-to}}
+			</div>	
+
+			<div class="nav-link">
+				{{#link-to 'search' }}DISCOVER{{/link-to}}
+			</div>	
+
+			<div class="nav-link">
+				{{#link-to 'profile' session.currentUser.username }}MY POSTS{{/link-to}}
+			</div>	
+
+			<div class="nav-link">
+				{{#link-to 'mentions' }}
+					{{#if session.currentUser.hastUnreadMentions}}
+						{{mention-count}}
+					{{/if}}MENTIONS
+				{{/link-to}}
+			</div>	
+
+			<div {{action 'toggleSearch'}} class="nav-link needsclick">
+				<i class="fa fa-search"></i> SEARCH
+			</div>	
+		</div>	
+
+
+		<div class="nav-profile">
+			
+			<img {{bind-attr src=session.currentUser.icon}}>
+			
+			<ul class="dropdown-menu dropdown-menu-right" role="menu">
+				
+				<li>{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-user"></i> Profile{{/link-to}}</li>
+				
+				<li class="divider"></li>
+				<li>{{#link-to 'settings.profile'}}<i class="fa fa-wrench"></i> Settings{{/link-to}}</li>
+				
+	            <li class="divider"></li>
+	            <li>{{#link-to 'haul.about'}}<i class="fa fa-compass"></i> About {{/link-to}}</li>
+
+				<li class="divider"></li>
+				<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
+			</ul>
+
+		</div>
+
+		{{new-post-btn openModal='openModal' btn-text="ADD A NEW POST" class="display-inline collapse"}}
+
+	</div>
+</nav>
+
+{{else}}
+
+<nav class="anon">
+	<div class="nav">
+		
+		<div class="logo">
+			{{#link-to "home"}}HAUL{{/link-to}}
+		</div>
+
+		{{!-- When browser is collapsed --}}
+		<div class="nav-link-wrapper-collapse">
+
+			<i {{action 'toggleSearch'}} class="fa fa-search fa-2x"></i> 
+ 
+		</div>	
+		
+		{{!-- When browser is NOT collapsed --}}
+		<div class="nav-link-wrapper"> 
+			<div class="nav-link">
+				{{#link-to 'search' }}DISCOVER{{/link-to}}
+			</div>	 
+
+			<div {{action 'toggleSearch'}} class="nav-link">
+				<i class="fa fa-search"></i> SEARCH
+			</div>	
+		</div>	
+
+
+		{{#link-to 'signup'}}<button type="button" class="btn btn-default btn-signup">SIGNUP</button>{{/link-to}}
+		{{#link-to 'login'}}<button type="button" class="btn btn-default btn-login">LOGIN</button>{{/link-to}}
+
+		{{#link-to 'haul.about'}}<button type="button" class="btn btn-default btn-signup">ABOUT</button>{{/link-to}}
+
+	</div>
+</nav>
+{{/if}}
+
+<div id="searchDropDown" class="search">
+	{{typeahead-search  goToRoute='goToRoute'}}
+</div>

@@ -21,6 +21,18 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 	actions: {
 
+		
+		toggleSearch: function() {
+			console.log("CAUGHT IT?")
+			
+			if($("#searchDropDown").hasClass('expand')){
+				$("#searchDropDown").removeClass('expand')
+			}else{
+				$("#searchDropDown").addClass('expand')
+			}
+		}, 
+		
+
 		/*
 			Application Adapter has triggered the 'authorizationFailed' action.
 			We catch it here and tell the authenticator to attempt a token refresh.

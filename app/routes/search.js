@@ -12,4 +12,11 @@ export default Ember.Route.extend( {
 	// 		return ;
 	// 	}
 	// }
+	renderTemplate: function() {
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('search');
+	},
 });
