@@ -1,93 +1,97 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
-
-	showButton: false,
-	hideIfFollowing:false,
+	
 	userFollows: false,
-	buttonText: 'follow', 
+	
+	buttonText: Ember.computed('userFollows', function() {
+		if( this.get('userFollows') ) {
+			return "following";
+		} else {
+			return "follow";
+		}
+	}), 
+	
 	userFollowsRecord: false,
+	
 	currentUserBinding: "session.currentUser",
+	
 	currentUserIdBinding: "session.currentUser.id",
 
-
 	followUser: null,
-	followType: 'users',
-	followIdBinding: 'followUser.id',
 	
- 
+	followType: 'users',
+	
+	followIdBinding: 'followUser.id',
 
-	userFollowsChange: function() {
-		if( this.get('userFollows') ) {
-			this.set('buttonText', 'following');
-		} else {
-			this.set('buttonText', 'follow');
+	followKey: Ember.computed('followId', 'followType', function() {
+		return this.get('followId') + "-" + this.get('followType');
+	}),
+	
+
+	currentUserNotEmpty: Ember.computed.notEmpty('currentUserId'),
+
+	followUserNotEmpty: Ember.computed.notEmpty('followId'),
+
+	idsAreReady: Ember.computed.and('followUserNotEmpty', 'currentUserNotEmpty'),
+
+	notFollowingSelf: Ember.computed("currentUserId", "followId", function() {
+		if( this.get('currentUserId') === this.get('followId') ){
+			return false;
+		}else{
+			return true;
 		}
+	}),
 
-		if( this.get('hideIfFollowing') === true ) {
-			this.set('showButton', false);
-		}
+	readyToStart: Ember.computed.and('notFollowingSelf', 'idsAreReady'),
 
-	}.observes('userFollows'),
- 
+	showButton: Ember.computed.bool('readyToStart'),
 
- 	didInsertElement: function() {
-  
+ 	startComponent: function() {
 
-		//Don't follow self.
-		if( this.get('followId') === this.get('currentUserId')){
-			this.set('showButton', false);
+		if( !this.get('readyToStart') ){
 			return;
 		}
-
-		if(!this.get('currentUserId') || !this.get('followUser') ){
-			this.set('showButton', false);
-			return;
-		}
-
-		this.set('showButton', true); 
 
 		var _this = this;
+		
 		var store = this.container.lookup("store:main");
 		
+		var key = this.get('followKey');
 
-		//currentUser follows item?
-		var key = this.followId + "-" + this.followType;
 		store.find('follow', key)
 		.then(function(record){
 			if(!Ember.isEmpty(record)){
 				_this.set('userFollows', true);
 				_this.set('userFollowsRecord', record);
 			}
-		}, function() {
+		}, function(error) {
 			_this.set('userFollowsRecord', false);
 			_this.set('userFollows', false);
 		});
 		
-	}.observes('followId', 'userId'),
-
-	
+	}.on('didInsertElement').observes('readyToStart'),
 
 	actions: {	
 
 		buttonClick: function() { 
 
-			//Intercept if user is anonymous:
-			if( !this.get('currentUserId')){
-				this.sendAction('openModal', 'loginmodal', {});
-				return;
-			}
-
-
 			var _this = this;
+
 			var record = this.get('userFollowsRecord'); 
+
 			var store = this.container.lookup("store:main");
+
 			var follow;
 			
 			if( record ){
 				record.deleteRecord();
 				follow = false;
 			} else {
-				record = store.createRecord('follow', {user_id: this.get('currentUserId'),ref_id: this.get('followId'), ref_type: this.get('followType')});
+				record = store.createRecord('follow', {
+					user_id: this.get('currentUserId'),
+					ref_id: this.get('followId'), 
+					ref_type: this.get('followType')
+				});
 				
 				follow = true;
 			}

@@ -14,6 +14,7 @@ export default ApplicationAdapter.extend({
 		var user_id = this.get('currentUser').get('id');
 
 		var url = this.get('host') + "/users/" + user_id + "/follows/" + ref_type + "/" + ref_id;		
+		
 		return this.ajax(url, 'GET');
 	},
 
