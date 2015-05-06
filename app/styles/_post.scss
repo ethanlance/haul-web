@@ -202,7 +202,9 @@
 		height: 160px; 
 		padding-top: 30px;
 		background-color: #F5F6F1;
-		text-align: center; 
+		text-align: center;
+
+
 
 		.card-image-mask{ 
 			width: 140px;
@@ -212,6 +214,11 @@
 			img {
 				width: 140px;
 			}
+			  -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease
 		}
 
 		.count {
@@ -334,16 +341,25 @@
 		img {
 			//width: 100%;
 			max-width:100%;
-			padding:0;
+			padding:0px;
 			margin:0;
 			margin-left:auto;
 			margin-right:auto;
 			display:block;
 			margin-bottom: 40px;
 			margin-top:40px;
-			background-color: #eee;
+			background-color: #fff;
 			border: 8px solid #fff;
 			box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
+			  -webkit-transition: all 1s ease;
+     		-moz-transition: all 1s ease;
+       		-o-transition: all 1s ease;
+      		-ms-transition: all 1s ease;
+         	 transition: all 1s ease
+		}
+
+		img:hover {
+			-webkit-filter:  brightness(120%);
 		}
 
 		a {
