@@ -21,5 +21,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 		controller.set('pagedContent', model);
 		this._super(controller, model);
 	},
+	renderTemplate: function() {
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('home');
+	},
 
 }); 
