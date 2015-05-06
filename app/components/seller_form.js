@@ -18,6 +18,8 @@ export default Ember.Component.extend(ErrorMixin, {
 
 	dob: null,
 
+	statesReady: false,
+
 	showChanged: function() {
 		this.set('show_loading', false);
 		this.set('show_form', false);
@@ -64,7 +66,7 @@ export default Ember.Component.extend(ErrorMixin, {
 			}	
 		);
 	}.on('didInsertElement').observes('currentUserId'),
-statesReady: false,
+
 	modelReady: function() {
 
 		var model = this.get('model');
