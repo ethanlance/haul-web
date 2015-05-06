@@ -55,6 +55,7 @@ header.profile{
 		text-align: left;
 		padding-left: 10px;
 		padding-top: 0px;
+		transition: all 0.2s ease;
 
 		.name{
 			font-size: 16px;
@@ -92,19 +93,28 @@ header.profile{
 
 	.btn-follow {
 		font-family: $primary-font;
-		margin-top: 1px;
-		background-color: inherit;
-		border: 1px solid #ddd;
 		color: #7e7e7e;
-		padding: 10px 20px 10px 20px; 
-		font-size: 10px;
+		margin-top: 0px; 
+		background-color: inherit;
+		border: 1px solid #dfdfdf;
+		padding: 10px 20px 10px 20px;
+		font-size: 11px;
+		transition: all 0.2s ease;
 		text-transform: uppercase;
 
-		@media (max-width: 400px) {
-			padding: 5px 10px;
-			font-size: 12px;
+	@media (max-width: 400px) {
+		padding: 5px 10px;
+		margin-top:0px;
 		}
+
 	}
+
+	.btn-follow:hover {
+	border: 1px solid $primary-color;
+	color: $primary-color;
+}
+
+
 
 	.stats {
 		@media (max-width: 750px) {
