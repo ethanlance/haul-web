@@ -137,14 +137,6 @@
 			<span class="has-error help-block">{{error-field account_number}}</span>
 		{{/if}}	
 
-		<div class="text-left">
-			{{input-field model.tos_accepted as="checkbox" }} 
-			<small>I accept the Haul.io Terms of Service</small>
-			{{#if showErrors}}
-				<span class="has-error help-block">{{error-field tos_accepted}}</span>
-			{{/if}}
-		</div>
-
 
 
 		<h3>
@@ -210,37 +202,45 @@
 		
 		<h3>For security</h3>
 
+ 		<div class="text-left">
 
-		<div class="row">
+			<label>Date of Birth {{dateValue}}</label><br/>
+			{{input-mask class="form-control input-sm"
+	  			value=dob_formated
+	  			mask='mm/dd/yyyy'
+	  			placeholder='MM/DD/YYYY'}}
+
+
+			{{!-- {{input-field model.dob class="form-control" placeholder="date of birth"}} --}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field dob}}</span>
+			{{/if}}
 
 		
-			<div class="col-md-6 col-sm-6 col-xs-12">
+			<label>Last 4 Digits of Social Security #</label><br/>
+			{{input-mask class='form-control input-sm'
+				value=model.ssn
+				mask='9999'
+				placeholder='5555'}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field ssn}}</span>
+			{{/if}} 
 
-				<label>Date of Birth {{dateValue}}</label><br/>
-				{{input-mask class="form-control input-sm"
-		  			value=dob_formated
-		  			mask='mm/dd/yyyy'
-		  			placeholder='MM/DD/YYYY'}}
 
-
-				{{!-- {{input-field model.dob class="form-control" placeholder="date of birth"}} --}}
-				{{#if showErrors}}
-					<span class="has-error help-block">{{error-field dob}}</span>
-				{{/if}}
-
-			</div>
-			<div class="col-md-6 col-sm-6 col-xs-12">
-			
-				<label>Last 4 Digits of Social Security #</label><br/>
-				{{input-mask class='form-control input-sm'
-					value=model.ssn
-					mask='9999'
-					placeholder='5555'}}
-				{{#if showErrors}}
-					<span class="has-error help-block">{{error-field ssn}}</span>
-				{{/if}}
-			</div>
+		
+			{{input-field model.tos_accepted as="checkbox" }} 
+			<small>I accept the Haul.io Terms of Service</small>
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field tos_accepted}}</span>
+			{{/if}}
 		</div>
+
+
+
+
+
+
+
 
 		{{partial "_server_error"}}
 
@@ -248,6 +248,7 @@
 		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right">cancel</button>
 		{{/if}}
 
+		<div class="text-center">
 		{{ladda-btn
 			name='save & prosper'
 			class="display-inline"
@@ -255,6 +256,7 @@
 			btnClick='doSubmit'
 			spin=isProcessing
 		}}
+		</div>	
 
 	{{/form-for}}
 </div>

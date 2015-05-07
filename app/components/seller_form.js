@@ -41,10 +41,16 @@ export default Ember.Component.extend(ErrorMixin, {
 		store.find('seller', userId).then(
 			function success(record){
 
-				//Seller exists.
-				_this.set('model', record);
+				if( Ember.isEmpty(record) || record.get('isDirty')) {
+					_this.set('show', 'form');	
+				}else{
+					//Seller exists.
+					_this.set('model', record);
 
-				_this.set('show', 'seller');
+					_this.set('show', 'seller');	
+				}
+
+				
 
 			},
 			function failure(error){
