@@ -1,31 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  scrollingTimeout: 300,
-  currentPosBinding: 'currentPos',
+  scrollingTimeout: 100,
   bindScrolling: function() {
     var self = this,
     onScroll = function() {
       Ember.run.debounce(self, self.runScrolled, self.scrollingTimeout);
     };
 
-    //Ember.$(document).on('touchmove.scrollable', onScroll);
+    Ember.$(document).on('touchmove.scrollable', onScroll);
     Ember.$(window).on('scroll.scrollable', onScroll);
   }.on('didInsertElement'),
 
   unbindScrolling: function() {
-    Ember.$(window).off('scroll.scrollable');
-    Ember.$(document).off('scroll.scrollable');
+    Ember.$(window).off('.scrollable');
+    Ember.$(document).off('.scrollable');
   }.on('willDestroyElement'),
 
-  preservePos: function() { 
-    var preservePos = this.getWithDefault('currentPos', 0);
-    Ember.run.later(this, function(){
-      Ember.$(window).scrollTop(preservePos);
-    }, 300);
+  preservePos: function() {
+    Ember.$(window).scrollTop(this.getWithDefault('controller.currentPos', 0));
   }.on('didInsertElement'),
 
   runScrolled: function() {
-    this.set('currentPos', Ember.$(window).scrollTop());
+    var position = Ember.$(document).height() - Ember.$(window).scrollTop();
+    var viewportHeight = document.documentElement.clientHeight;
+    this.set('controller.currentPos', Ember.$(window).scrollTop());
   }
 });

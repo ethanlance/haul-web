@@ -20,6 +20,8 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	
     sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
+    currentScrollPos: 0,
+
 	userChange: function() {
 
 		if( Ember.isEmpty(this.get('currentUserId'))) {

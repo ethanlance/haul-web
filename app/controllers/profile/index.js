@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import PaginateMixin from '../../mixins/paginate';
 export default Ember.ObjectController.extend(PaginateMixin,{
-	
- 	needs: ['profile'],
+		
+	currentScrollPos: 0,
 
  	storeName: 'post-list',
 
@@ -18,28 +18,12 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
 	isFeedPage:true,
 
-	currentPos:'3000px',
-
-	showGridViewBinding: 'controllers.profile.showGridView',
-
-	showGridBtn:true,
-
 	sorting: ['created_at:desc'],
 
     sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
- 	currentPageBinding: 'controllers.profile.currentPage',
- 	showHeaderChange: function(){  
- 		if( this.get('currentPage') === this.get('thisPage')){
- 			this.set('controllers.profile.showGridBtn', this.get('showGridBtn'));
- 			this.get('controllers.profile').set('showHeader', true);	
- 		} 		
- 	}.observes('currentPage'),
 
 	userChanged: function() {
-
-		this.set('controllers.profile.showGridBtn', this.get('showGridBtn')); 
-		this.showHeaderChange();
 
 		//Pagination:	
 		this.set('paginateQuery', {

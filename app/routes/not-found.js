@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import AnonMixin from '../mixins/anon';
-export default Ember.Route.extend(AnonMixin, {
+import ResetScrollMixin from '../mixins/resetscroll';
+export default Ember.Route.extend(AnonMixin, ResetScrollMixin, {
 	renderTemplate: function() {
 		this.render('layouts/header_base', {
 			into: 'application',
