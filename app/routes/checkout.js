@@ -37,7 +37,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
  			return result;
 
 		}, function() {
-			return _this.transitionTo('not-found');
+			return _this.transitionTo('not_found');
 		});
  	},
 	renderTemplate: function() {

@@ -30,7 +30,7 @@ export default Ember.Route.extend( {
  			return _this.get('transaction');
 			
 		}, function() {
-			return _this.transitionTo('not-found');
+			return _this.transitionTo('not_found');
 		});
  	}
 });

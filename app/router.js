@@ -62,8 +62,8 @@ Router.map(function(){
 	//Search
 	this.route('search');
 
-	this.route('not-found');
-	this.route('not-authorized');
+	this.route('not_found');
+	this.route('not_authorized');
 
 	
 	//mentions
@@ -84,7 +84,7 @@ Router.map(function(){
 	});
 
 
-	this.route('not-found', {path: '/*wildcard'});
+	this.route('not_found', {path: '/*wildcard'});
 });
 
 export default Router;
