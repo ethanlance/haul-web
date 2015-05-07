@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
-import ResetScrollMixin from '../mixins/resetscroll';
+
 import config from '../config/environment';
-export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 	limit: config.APP.paginationLimit.feed,
 

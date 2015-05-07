@@ -18,7 +18,10 @@ export default Ember.Component.extend({
 	}.on('willDestroyElement'),
 
 	preservePos: function() {
-		Ember.$(window).scrollTop(this.getWithDefault('currentScrollPos', 0));
+		var _this = this;
+		Ember.run.later(function(){
+			Ember.$(window).scrollTop(_this.getWithDefault('currentScrollPos', 0));
+		},100)
 	}.on('didInsertElement'),
 
 	runScrolled: function() {

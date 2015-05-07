@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import PaginateMixin from '../mixins/paginate';
-export default Ember.ObjectController.extend(PaginateMixin,{
+export default Ember.ObjectController.extend(PaginateMixin, {
 
 	loading: true,
 
