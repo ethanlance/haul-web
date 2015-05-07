@@ -56,7 +56,7 @@
 		<label>You purchased this from:</label><br/>
 		
 		{{#link-to 'profile' model.seller.username }}
-	    	<img class="profile-image" {{bind-attr src=model.seller.icon}}>
+			{{make-icon icon=model.seller.icon}}
 	    {{/link-to}}
 
 		<div class="block">

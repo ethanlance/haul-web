@@ -9,9 +9,7 @@
 			
 			{{#form-for model}}
 
-				<img class="profile-image" {{bind-attr src=session.currentUser.icon}}>
-				
-
+				{{make-icon icon=session.currentUser.icon}}
 
 				<div class="comment-input">
 					{{input comment as="text" placeholder="Write a comment..." class="commentbox"  label="false"   }}
@@ -54,7 +52,9 @@
 					</button>
 					
 					
-					{{#link-to 'profile' item.user.username }}<img class="profile-image" {{bind-attr src=item.user.icon}}>{{/link-to}}
+					{{#link-to 'profile' item.user.username }}
+						{{make-icon icon=item.user.icon}}
+					{{/link-to}}
 
 					<div class="comment-section-comment">
 						<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.name}}{{/link-to}}</span>

@@ -27,7 +27,9 @@
 				{{#each post in sortedContent}}
 
 					<div class="mention-owner">
-						{{#link-to 'profile' post.user.username }}<img class="profile-image" {{bind-attr src=post.user.icon}}>{{/link-to}}
+						{{#link-to 'profile' post.user.username }}
+							{{make-icon icon=post.user.icon}}
+						{{/link-to}}
 
 						<div class="post-owner-details">
 							<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span>

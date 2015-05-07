@@ -60,7 +60,7 @@
 		<label>You sold this to:</label><br/>
 		
 		{{#link-to 'profile' model.buyer.username }}
-	    	<img class="profile-image" {{bind-attr src=model.buyer.icon}}>
+			{{make-icon icon=model.buyer.icon}}
 	    {{/link-to}}
 
 		<div class="block">

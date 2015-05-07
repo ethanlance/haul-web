@@ -8,7 +8,7 @@
 	{{#if post.repost_id}}
 	<div class="repost-citations">
 		<i class="fa fa-retweet"></i>
-		<img class="profile-image" {{bind-attr src=post.repost_user.icon}}>
+		{{make-icon icon=post.repost_user.icon}}
 		<span class="name">{{post.repost_user.name}}'s </span>
 		<span class="title"> original post
 			{{#link-to 'profile.post'
@@ -49,7 +49,7 @@
 			<h3>{{post.subject}}</h3>
 
 			<div class="profile-pod">
-				<img class="profile-image" {{bind-attr src=post.product_user.icon}}>
+				{{make-icon icon=post.product_user.icon}}
 
 				<div class="profile-name">
 					<span class="name">{{post.product_user.name}}</span>

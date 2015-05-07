@@ -4,8 +4,7 @@
 <div class="container-fluid">	
 	<div class="profile-container">
 
-
-		{{#link-to 'profile' model}}<img class="profile-image" {{bind-attr src=model.icon}}>{{/link-to}}
+		{{#link-to 'profile' model}}{{make-icon icon=model.icon}}{{/link-to}}
 
 
 		<div class="profile-name">
