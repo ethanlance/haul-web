@@ -140,54 +140,63 @@ export default Ember.Component.extend( PaginateMixin,{
 		var box = $(".commentbox textarea");
 		this.set('comment_box', box);
 
-		//Get this people this user follows.
-		var usernames = [];
-		var store = this.container.lookup('store:main');
-		store.find('user-following-list', {user_id: this.get('currentUserId'), limit:20} )
-		.then(function(results) {
+		$(box).mentionsInput({ 
+	  		elastic: true,
+	  		templates: {
+				wrapper                    : _.template('<div class="mentions-input-box"></div>'),
+				autocompleteList           : _.template('<div class="mentions-autocomplete-list"></div>'),
+				autocompleteListItem       : _.template('<li data-ref-id="<%= id %>" data-ref-type="<%= type %>" data-display="<%= display %>"><%= content %></li>'),
+				autocompleteListItemAvatar : _.template('<img src="<%= avatar %>" />'),
+				autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
+				mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
+				mentionItemSyntax          : _.template('<%= value %>'),
+				mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>')
+			},
+	    	onDataRequest:function (mode, query, callback) {
+				
+				var limit = 10;
+				var query = query;
+				var type = 'users';
+				var url = _this.ENV.Server.SEARCH_SERVER_HOST + '/search/' + type + '?query=' + query+ "&limit=" + limit;
+				var promise = Ember.$.ajax({
+					url:         url,
+					type:        'GET',
+					dataType:    'json',
+					contentType: 'application/x-www-form-urlencoded',
+					headers: {
+						Authorization: 'Bearer ' + _this.ENV.Server.CLIENT_TOKEN
+					},
+				});
+				promise.then(function(results){
+					
+					if( Ember.isEmpty(results)){return;}
 
-			return results.map(function(result){
-				return store.find('user', result.get('user.id'))
-					.then(function(user){
-						usernames.push({
-							name: user.get('username'),
-							name2: user.get('name'),
-							avatar: user.get('icon'),
-							id: user.get('id'),
-							type: 'users',
-						});
-					})
-			});
-		})
-
-		.then(function(){
-			
-			$(box).mentionsInput({ 
-		  		elastic: true,
-		  		templates: {
-					wrapper                    : _.template('<div class="mentions-input-box"></div>'),
-					autocompleteList           : _.template('<div class="mentions-autocomplete-list"></div>'),
-					autocompleteListItem       : _.template('<li data-ref-id="<%= id %>" data-ref-type="<%= type %>" data-display="<%= display %>">@<%= content %></li>'),
-					autocompleteListItemAvatar : _.template('<img src="<%= avatar %>" />'),
-					autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
-					mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
-					mentionItemSyntax          : _.template('@<%= value %>'),
-					mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>')
-				},
-		    	onDataRequest:function (mode, query, callback) {
-
-		      		var data = usernames,
+					var data = results.data;
 
 		      		data = _.filter(data, 
 		      			function(item) { 
-		      				return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 ||  item.name2.toLowerCase().indexOf(query.toLowerCase()) > -1
+
+		      				//Image:
+		       				var image;
+		       				if( item.facebook_user_id ) {
+		       					image = "https://graph.facebook.com/" + item.facebook_user_id + "/picture?width=20";
+		       				}else if( item.image_id) {
+		       					image = "http://static.haul.io/images/local/"+item.image_id+"/thumb";
+		       				}
+		       				item.icon = image;
+		       				item.avatar = image;
+	 						
+	 						item.name = "@" + item.username;
+
+		      				return item;
 		      			}
 		      		);
 
-		      		callback.call(this, data);
-		    	}
-		  	});
-		});		
+					callback.call(this, data);
+				});
+	      		
+	    	}
+	  	});		
 	},
 
 	makeModel: function() {
