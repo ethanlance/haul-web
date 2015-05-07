@@ -21,6 +21,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	
 	//Selected image objects
 	selectedImages: [],
+
+	//Does current user need to fill out the seller account form?
+	needsSellerAccount: false,
 	
 	//Default value of the quill text editor.
 	editorialForQuill: "",
@@ -29,23 +32,39 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	showErrors: false,
 
-	stepOne: true,
-
-	stepTwo: false,
-
-	scrollToTop: false,
-
 	triggerEditorResize: false,
 
+	animateClose:false,
+
+	show_one: true,
+
+	show_two: false,
+
+	show_three: false,
+
+	showChanged: function() {
+		this.set('show_one', false);
+		this.set('show_two', false);
+		this.set('show_three', false);
+		this.set('show_'+this.get('show'), true);
+
+		//Scroll the modal to top again
+		var el = $('.modal')
+		el.scrollTop(0,0);
+
+	}.observes('show'),
+
+
 	stepTwoChanged: function() {
-		this.set('scrollToTop', true);
+
 		this.doTagInjection();
 
 		var _this = this;
 		Ember.run.later(function(){
 			_this.set('triggerEditorResize', true);
 		}, 300);
-	}.observes('stepTwo'),
+
+	}.observes('step_two'),
 	
 	start: function() {
 
@@ -65,10 +84,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return;
 		}
 
-		this.set('stepOne', true);
-		this.set('stepTwo', false);
+		this.set('show', 'one');
 		this.set('selectedImages', []);
-		this.set('showErrors', false);
+		this.set('showErrors', false); 
 
 		this.get('model').setProperties(
 			{
@@ -78,12 +96,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				'user': this.get('currentUser')
 			}
 		);
-
-		// var _this = this;
-		// this.store.find('image', 'c3cfe0d0-c9e2-11e4-9189-bba69b9a959e')
-		// .then(function(image){
-		// 	_this.selectImage(image);
-		// });
 		
 	}.observes('currentUser', 'model'),
 
@@ -128,8 +140,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		model.validate()
 		.then(
 			function valid(){
-				_this.set('stepOne', false);
-				_this.set('stepTwo', true);
+				_this.set('show', "two");
 				_this.set('showErrors', false);
 			},
 			function invalid(errors){
@@ -143,8 +154,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 					errors.get('product_status').length > 0 ){
 						_this.set('showErrors', true);
 				}else{
-					_this.set('stepOne', false);
-					_this.set('stepTwo', true);
+					_this.set('show', "two");
 					_this.set('showErrors', false);
 				}
 			}
@@ -295,15 +305,25 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			//Reload user's feed list
 			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
+		.then(function(){
+
+        	return _this.store.find('seller', _this.get('currentUserId')).then(
+            	function success(record){
+
+	                if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
+	                    _this.set('needsSellerAccount', true);
+	                }
+
+            	}
+            );
+        })
 		.then(
 			function success(record){
 				var user = _this.get('currentUser');
 
-				_this.set('animateClose', true);
+				_this.set('isProcessing', false); 
 
-				_this.set('isProcessing', false);
-				
-				_this.transitionToRoute('profile.post', user.get('username'), _this.get('postRecord'));
+				_this.set('show', "three");
 				
 			}, 
 			function fail(error){
@@ -318,12 +338,30 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		);
 	},
 
-	animateClose:false,
+	transitionToPost: function() {
+		this.set('animateClose', true);
+		
+		var username = this.get('currentUser').get('username');
+
+		var post = this.get('postRecord'); 
+
+		this.transitionToRoute('profile.post', username, post );
+	},
+
+
+
 	actions: { 
 
+		sellerAccountSaved: function() {
+			this.transitionToPost();
+		},
+
+		goToPost: function() {
+			this.transitionToPost();
+		},
+
 		back: function() {
-			this.set('stepOne', true);
-			this.set('stepTwo', false);
+			this.set('show', "one");
 		},
 
 		next: function() {

@@ -162,10 +162,13 @@ export default Ember.Component.extend(TransformMixin, {
 
 
 	requestContentsChanged: function() {
+
+		if(!this.get('requestContents')){return;}
 		 
 		var html = this.transformImagesForSaving();
 
 		this.sendAction('quillChange', html);
+		
 
 	}.observes('requestContents'),
 

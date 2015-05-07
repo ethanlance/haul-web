@@ -39,5 +39,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 		}, function() {
 			return _this.transitionTo('not-found');
 		});
- 	}
+ 	},
+	renderTemplate: function() {
+		this.render('layouts/header_base', {
+			into: 'application',
+			outlet: 'header'
+		});
+		this.render('checkout');
+	},
 });

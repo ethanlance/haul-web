@@ -3,66 +3,49 @@
 	{{partial '_spinner'}}
 </div>
 
+
 <div {{bind-attr class="show_seller:show:hide"}}>
 
-		<h4>Your Contact Information</h4>
+		<h1>
+			Your Contact Information
+			<button {{action 'showEdit'}} class='btn btn-default btn-xs'>edit</button>
+		</h1>
 
-		<ul>
-			<li><label>Your name:</label> {{model.firstname}} {{model.lastname}}</li>
-			
-			<li><label>Email:</label> {{model.email}}</li>
-		
-			<li><label>Phone:</label> {{phone-helper model.phone}}</li>
-		
-
-			<li><label>Address:</label>
+		<label>Your name:</label> {{model.firstname}} {{model.lastname}}<br/>
+		<label>Email:</label> {{model.email}}<br/>
+		<label>Phone:</label> {{phone-helper model.phone}}<br/>
+		<label>Address:</label><br/>
 				{{model.address}}<br/>
 				{{model.city}}, {{model.state}} {{model.postal_code}}
-			</li>
-		</ul>
-
-		
-
-
-		<h4>For security</h4>
-
-		<ul>
-			<li><label>DOB:</label> {{dob-helper model.dob}}</li>
-		</ul>
-
+		<br/>
+		<br/>
+			
 
 		<h4>How we send you money.</h4>
-
-		<ul>
-			<li><label>Routing number:</label> {{model.routing_number}}</li>
-
-			<li><label>Account number:</label> {{model.account_number}}</li>	
-		</ul>
-
-
-		<h4>Are you a business?</h4>
+		
+		<label>Routing number:</label> {{model.routing_number}}<br/>
+		<label>Account number:</label> {{model.account_number}}<br/>
 			
 
 		{{#if business_tax_id}}
-			<ul>
-				<li><label>Business legal name:</label> {{model.business_legal_name}}</li>
 
-				<li><label>Busiess common name:</label> {{model.business_name}}</li>
+			<h4>Business Details</h4>
+			
+			<label>Business legal name:</label> {{model.business_legal_name}}<br/>
 
-				<li><label>Tax Id:</label> {{model.business_tax_id}}</li>
+			<label>Busiess common name:</label> {{model.business_name}}<br/>
 
-
-				<li><label>Business address:</label>
+			<label>Tax Id:</label> {{model.business_tax_id}}<br/>
+				
+			<label>Business address:</label><br/>
 				{{model.business_address}}<br/>
-					{{model.business_city}}, {{model.business_state}} {{model.business_postal_code}}
-				</li>
-			</ul>
-		{{else}}
-			<ul><li><label>No</label></li></ul>
+				{{model.business_city}}, {{model.business_state}} {{model.business_postal_code}}
+			<br/>
+			
 		{{/if}}
 		
 
-		<button {{action 'showEdit'}} class='btn btn-default btn-right'>edit</button>
+		
 			
 </div>
 
@@ -75,11 +58,9 @@
 <div {{bind-attr class="show_form:show:hide"}}>
 
 
-	{{#if model}}
-		<h3>Create Address</h3>
-	{{else}}
-		<h3>Edit Address</h3>
-	{{/if}}
+	
+	<h3>Your Contact Info</h3>
+	
 
 
 	{{#form-for model}}
@@ -119,18 +100,18 @@
 		{{#if showErrors}}
 			<span class="has-error help-block">{{error-field city}}</span>
 		{{/if}}
-{{#if statesReady}}
-		{{view "select"
-	       content = state_options.states
-	       optionLabelPath = "content.name"
-	       optionValuePath = "content.abbreviation"
-	       selection = state_options.selectedState
-	       prompt="state"
-	       class = "form-control"
-	    }}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field state}}</span>
-		{{/if}}
+		{{#if statesReady}}
+			{{view "select"
+		       content = state_options.states
+		       optionLabelPath = "content.name"
+		       optionValuePath = "content.abbreviation"
+		       selection = state_options.selectedState
+		       prompt="state"
+		       class = "form-control"
+		    }}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field state}}</span>
+			{{/if}}
 		{{/if}}
 
 		{{input-field model.postal_code class="form-control" placeholder="zip code"}}
@@ -141,7 +122,7 @@
 
 
 
-		<h4>How we send you money.</h4>
+		<h3>How we send you money.</h3>
 
 		{{input-mask class='form-control'
 					value=model.routing_number
@@ -156,66 +137,86 @@
 			<span class="has-error help-block">{{error-field account_number}}</span>
 		{{/if}}	
 
-
-		<h4>Are you a business?</h4>
-
-		{{input-field model.business_legal_name class="form-control" placeholder="legal name of business"}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field business_legal_name}}</span>
-		{{/if}}
-
-		{{input-field model.business_name class="form-control" placeholder="business name you use"}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field business_name}}</span>
-		{{/if}}
-
-		{{input-field model.business_tax_id class="form-control" placeholder="tax id"}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field business_tax_id}}</span>
-		{{/if}}
-
-		{{input-field model.business_address class="form-control" placeholder="business street address"}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field business_address}}</span>
-		{{/if}}
-
-		{{input-field model.business_city class="form-control" placeholder="city"}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field business_city}}</span>
-		{{/if}}
-{{#if statesReady}}
-		{{view "select"
-	       content = business_state_options.states
-	       optionLabelPath = "content.name"
-	       optionValuePath = "content.abbreviation"
-	       selection = business_state_options.selectedBusinessState
-	       prompt="state"
-	       class = "form-control"
-	    }}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field business_state}}</span>
-		{{/if}}
-{{/if}}
-		{{input-field model.business_postal_code class="form-control" placeholder="zip code"}}
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field business_postal_code}}</span>
-		{{/if}}
+		<div class="text-left">
+			{{input-field model.tos_accepted as="checkbox" }} 
+			<small>I accept the Haul.io Terms of Service</small>
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field tos_accepted}}</span>
+			{{/if}}
+		</div>
 
 
-		<h4>Do you accept our Terms of Service?</h4>
 
-		{{input-field model.tos_accepted as="checkbox" }} 
-		<small>I accept the Haul.io Terms of Service</small>
-		{{#if showErrors}}
-			<span class="has-error help-block">{{error-field tos_accepted}}</span>
-		{{/if}}
+		<h3>
+			<input data-toggle="collapse" 
+				data-parent="#accordion" 
+				href="#collapseOne" 
+				aria-expanded="false" 
+				aria-controls="collapseOne"
 
-		<h4>For security</h4>
+				 type="checkbox">
+			Are you a business?
+		</h3>
+
+		<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+
+			{{input-field model.business_legal_name class="form-control" placeholder="legal name of business"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_legal_name}}</span>
+			{{/if}}
+
+			{{input-field model.business_name class="form-control" placeholder="business name you use"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_name}}</span>
+			{{/if}}
+
+			{{input-field model.business_tax_id class="form-control" placeholder="tax id"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_tax_id}}</span>
+			{{/if}}
+
+			{{input-field model.business_address class="form-control" placeholder="business street address"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_address}}</span>
+			{{/if}}
+
+			{{input-field model.business_city class="form-control" placeholder="city"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_city}}</span>
+			{{/if}}
+			{{#if statesReady}}
+					{{view "select"
+				       content = business_state_options.states
+				       optionLabelPath = "content.name"
+				       optionValuePath = "content.abbreviation"
+				       selection = business_state_options.selectedBusinessState
+				       prompt="state"
+				       class = "form-control"
+				    }}
+					{{#if showErrors}}
+						<span class="has-error help-block">{{error-field business_state}}</span>
+					{{/if}}
+			{{/if}}
+			{{input-field model.business_postal_code class="form-control" placeholder="zip code"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_postal_code}}</span>
+			{{/if}}
+
+		</div>
+
+
+		
+
+		
+		<h3>For security</h3>
+
 
 		<div class="row">
+
+		
 			<div class="col-md-6 col-sm-6 col-xs-12">
 
-				<label>Date of Birth {{dateValue}}</label>
+				<label>Date of Birth {{dateValue}}</label><br/>
 				{{input-mask class="form-control input-sm"
 		  			value=dob_formated
 		  			mask='mm/dd/yyyy'
@@ -230,11 +231,11 @@
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-12">
 			
-				<label>Social Security Number</label>
+				<label>Last 4 Digits of Social Security #</label><br/>
 				{{input-mask class='form-control input-sm'
 					value=model.ssn
 					mask='9999'
-					placeholder='last four: 5555'}}
+					placeholder='5555'}}
 				{{#if showErrors}}
 					<span class="has-error help-block">{{error-field ssn}}</span>
 				{{/if}}
@@ -248,9 +249,9 @@
 		{{/if}}
 
 		{{ladda-btn
-			name='save'
+			name='save & prosper'
 			class="display-inline"
-			btnClasses='btn btn-default ladda-button btn-right'
+			btnClasses='btn btn-default ladda-button'
 			btnClick='doSubmit'
 			spin=isProcessing
 		}}

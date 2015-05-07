@@ -60,18 +60,9 @@ export default  Ember.Component.extend({
 	            if (_this.options.capture != null) {
 	              _this.hiddenFileInput.setAttribute("capture", true);
 	            }
-	            // _this.hiddenFileInput.style.visibility = "hidden";
-	            // _this.hiddenFileInput.style.position = "absolute";
-	            // _this.hiddenFileInput.style.top = "0";
-	            // _this.hiddenFileInput.style.left = "0";
-	            // _this.hiddenFileInput.style.height = "0";
-	            // _this.hiddenFileInput.style.width = "0";
-
-	            console.log('_this.hiddenFileInput', _this.hiddenFileInput);
 	            
 	            //document.body.appendChild(_this.hiddenFileInput);
 	            var el  = _this.element.querySelector("#haul-dropzone-filebutton")
-	            console.log("EL " , el)
 	            el.appendChild(_this.hiddenFileInput);
 
 
@@ -181,7 +172,7 @@ export default  Ember.Component.extend({
 	              "click": function(evt) {
 
 	                if ((clickableElement !== _this.element) || (evt.target === _this.element || Dropzone.elementInside(evt.target, _this.element.querySelector(".dz-message")))) {
-	                	console.log("CLICK ", _this.hiddenFileInput)
+	                	
 	                  return _this.hiddenFileInput.click();
 	                }
 	              }

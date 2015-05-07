@@ -103,7 +103,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return image.id;
 		}); 
 		//Set the images on the repost.		
-console.log("BOOOM", ids);
+
 		var model = this.get('model');
 		model.set('product_image_ids', ids); 
 		model.set('image_id', ids[0]); 
@@ -124,22 +124,6 @@ console.log("BOOOM", ids);
 			body = " ";
 		}
 		repost.set('body', body);		
-
-console.log('repost', repost.get('user_id'));		
-
-			
-            console.log('repost', repost.get('subject'))
-            console.log('repost', repost.get('body'))
-            console.log('repost', repost.get('image_id'))
-            console.log('repost', repost.get('product_name'))
-            console.log('repost', repost.get('product_description'))
-            console.log('repost', repost.get('product_currency'))
-            console.log('repost', repost.get('product_price'))
-            console.log('repost', repost.get('product_quantity'))
-            console.log('repost', repost.get('product_image_ids'))
-            console.log('repost', repost.get('product_status'))
-
-
  		//Model Validations:
 		repost.validate()
 		.then(function(){

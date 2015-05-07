@@ -27,7 +27,9 @@ export default Ember.Component.extend({
 	},
 
 	willDestroyElement: function() {
-		this.set('showModal', false);	
+		this.set('showModal', false);
+		this.set('animateClose', false);
+		this.closeTripped();
 		Ember.$(document).off('keyup');//, Ember.run.bind(this, this.esc_close));
 	},
 

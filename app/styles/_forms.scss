@@ -3,6 +3,10 @@ input, select {
 	transition: all 0.2s ease;
 }
 
+.form-wrapper {
+	display:inline-block;
+}
+
 .haul-checkout{
 
 	h3.disabled {
@@ -16,8 +20,6 @@ input, select {
 	input[type=checkbox] {
 		margin-right:5px
 	}
-
-
 
 	ul {
 		padding:0;
@@ -709,6 +711,7 @@ button.btn-cancel{
 		max-width: 670px;
 		margin-left: auto;
 		margin-right: auto;
+
 	}
 
 }

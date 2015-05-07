@@ -105,7 +105,9 @@ export default Ember.Component.extend(ErrorMixin, {
 		  states: states_list,
 		}); 
 		this.set('business_state_options', business_state_options);
-this.set('statesReady', true);
+		
+		this.set('statesReady', true);
+
 	}.observes('model.id'),
 
 	saveSeller: function() {
@@ -135,20 +137,55 @@ this.set('statesReady', true);
 		}catch(e){
 			
 		}
-console.log("HERE? ", model.get('user_id'))
+
 		model.validate()
 		.then(
 			function(){
-				console.log("SAVE", model);
 				return model.save();
 			}
 		)
+
+		//If the user has not saved the buyer form yet, then do it now.
+		.then(
+
+			function() {	
+				
+				var phone = model.get('phone'); //this is the only information we needed.
+
+				var store = _this.container.lookup("store:main");
+				var user = _this.get('currentUser');
+
+				return store.find('buyer', user.id).then(
+					function success(record){
+						//do nothing.
+					},
+					function failure(error){
+						//Buyer does not exist.
+						var buyer = store.createRecord('buyer');
+						buyer.set('id', user.get('id'));
+						buyer.set('user_id', user.get('id'));
+						buyer.set('firstname', user.get('firstname'));
+						buyer.set('lastname', user.get('lastname'));
+						buyer.set('email', user.get('email'));
+						
+						buyer.set('phone', phone);
+						
+						try{
+							buyer.save();
+						}catch(e){
+							//console.log("error making buyer", e);
+						}
+					}	
+				);
+			}
+		)
+
 		.then(
 			function success(results){
-				console.log("SUCCESS", results);
 				_this.set('isProcessing', false);
 				_this.set('model', model);
 				_this.set('show', 'seller');
+				_this.sendAction('sellerAccountSaved', true);
 			},
 			function failed(error){
 				_this.set('isProcessing', false);
