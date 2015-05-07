@@ -20,6 +20,12 @@ export default Ember.Component.extend( PaginateMixin,{
 
     pollInterval: 3000,
 
+    resize: function() {
+        var height = window.outerHeight;
+        var h = height - 150;
+        $('.message-center').css("height", h);   
+    },
+
     
     schedulePoll: function(f) {
         var _this = this;
@@ -112,6 +118,14 @@ export default Ember.Component.extend( PaginateMixin,{
         this.getMentions();
 
         this.startPoll();
+
+        this.resize();
+
+        //RESIZE:
+        var _this = this;
+        $( window ).resize(function() {
+            Ember.run.bind(_this, _this.resize());
+        });
    
     }.observes('currentUserId'),
 
