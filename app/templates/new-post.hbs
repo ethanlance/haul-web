@@ -7,57 +7,6 @@
 		{{partial "_modal_error_alert"}}
 
 
-		{{!-- SUCCESS MESSAGE --}}
-		{{!-- SUCCESS MESSAGE --}}
-		<div {{bind-attr class=":show_three :hide"}}>
-			<div class="text-center edit-wrapper">
-				<div class="edit-row">
-					<div class="edit-col">
-
-
-					{{#if needsSellerAccount}}
-
-						<h2>
-							Congrats!  Your post went live!
-
-							<small>Now setup your seller account so people can give you money!</small>
-
-						</h2>
-
-						<button {{action 'goToPost'}} class="btn btn-default">skip for now</button>
-						<button class="btn btn-default">
-							<a data-toggle="collapse" 
-								data-parent="#accordion" 
-								href="#collapseSellerForm" 
-								aria-expanded="false" 
-								aria-controls="collapseSellerForm">yep, let's do it</a>
-						</button>
-
-						<div id="collapseSellerForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-							{{seller-form sellerAccountSaved='sellerAccountSaved'}}
-						</div>
-
-					{{else}}
-
-						
-						<h2>
-							Congrats!  Your post went live!
-
-							<small>You can edit it anytime you like.</small>
-
-						</h2>
-
-						<button {{action 'goToPost'}} class="btn btn-default">go to your post</button>
-
-					{{/if}}
-
-
-						
-					</div>
-				</div>
-			</div>
-		</div>
-
 	
 		{{!-- POST FORM --}}
 		<div class="text-center edit-wrapper">
@@ -241,6 +190,61 @@
 			</div>
 			{{/form-for}}
 		</div>
+
+
+
+		{{!-- SUCCESS MESSAGE --}}
+		{{!-- SUCCESS MESSAGE --}}
+		<div {{bind-attr class=":show_three :hide"}}>
+			<div class="text-center edit-wrapper">
+				<div class="edit-row">
+					<div class="edit-col">
+
+
+					{{#if needsSellerAccount}}
+
+						<h2>
+							Congrats!  Your post went live!
+
+							<small>Now setup your seller account so people can give you money!</small>
+
+						</h2>
+
+						<button {{action 'goToPost'}} class="btn btn-default">skip for now</button>
+						<button class="btn btn-default">
+							<a data-toggle="collapse" 
+								data-parent="#accordion" 
+								href="#collapseSellerForm" 
+								aria-expanded="false" 
+								aria-controls="collapseSellerForm">yep, let's do it</a>
+						</button>
+
+						<div id="collapseSellerForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+							{{seller-form sellerAccountSaved='sellerAccountSaved'}}
+						</div>
+
+					{{else}}
+
+						
+						<h2>
+							Congrats!  Your post went live!
+
+							<small>You can edit it anytime you like.</small>
+
+						</h2>
+
+						<button {{action 'goToPost'}} class="btn btn-default">go to your post</button>
+
+					{{/if}}
+
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
 	</div>
 </div>
 {{/modal-modal}}		

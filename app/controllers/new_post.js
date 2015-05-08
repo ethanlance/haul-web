@@ -55,11 +55,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		}, 300, 
 			function(){
 
-				$('.show_'+slideIn).removeClass('hide').slideDown(1, function(){
-					$('.show_'+slideOut).slideUp(400, function(){	
-				});
+				$('.show_'+slideIn).removeClass('hide').slideDown(1).fadeOut(1, function(){
+					$('.show_'+slideOut ).slideUp(600);
+				}).fadeIn();
 
-			});
 		});
 
 		this.set('slideOpened', slideIn);
@@ -390,10 +389,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		back: function() {
+//this.set('isProcessingNext', false);
 			this.set('show', 'one');
 		},
 
 		next: function() {
+//this.set('show', 'two');return;
 			this.set('isProcessingNext', true);
 			this.validateProduct();
 		},
