@@ -119,8 +119,22 @@ export default Base.extend({
 				if (Ember.isEmpty(data.access_token)) {
 			  		reject();
 				} else {
-			  		_this.scheduleAccessTokenRefresh(data.expires_in, data.expires_at, data.refresh_token);
-					resolve(data);
+
+
+					//Wait, does this user really exist?
+					var url = this.host + "/" + data.user_id;
+					_this.makeRequest(url, null, {type:'get'}).then(function(response) {
+
+						Ember.run(function() {
+							_this.scheduleAccessTokenRefresh(data.expires_in, data.expires_at, data.refresh_token);
+							resolve(data);
+
+						});
+						
+					}, function(xhr, status, error) {
+						reject();
+					});
+
 				}
 			}
 		});

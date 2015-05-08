@@ -33,7 +33,7 @@ export default Ember.Component.extend({
 				url:this.ENV.Server.SEARCH_SERVER_HOST,
 				ajax: {
 					beforeSend: function(jqXHR) {
-               			jqXHR.setRequestHeader('Authorization', 'Bearer ' + _this.user_token);
+               			jqXHR.setRequestHeader('Authorization', 'Bearer ' + _this.ENV.Server.CLIENT_TOKEN);
            			}
        			},
        			
