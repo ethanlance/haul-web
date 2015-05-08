@@ -21,7 +21,15 @@
 					
 					<div class="moment">{{format-moment updated_at}}</div>
 
-					<h1 class="subject">{{ subject }}</h1>
+					<h1 class="subject">{{ subject }}
+						{{#if isProfileOwner}}
+						 	{{#link-to 'profile.post.edit_post' user.username this }}
+							<button class="btn btn-default btn-xs">
+								Edit Your Post
+							</button>
+							{{/link-to}}
+						{{/if}}
+					</h1>
 
 					{{!-- //REPOST --}}
 					{{#if repost_id}}
@@ -60,13 +68,6 @@
 
 						 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
 
-							{{#if isProfileOwner}}
-							 	{{#link-to 'profile.post.edit_post' user.username this }}
-								<button class="btn btn-default">
-									Edit Your Post
-								</button>
-								{{/link-to}}
-							{{/if}}
 						</div>
 
 						<div class="external-social-buttons">
@@ -107,7 +108,7 @@
 
 					{{#if isProductOwner }}
 						{{#link-to 'profile.post.edit_product' user.username this }}
-						<button class="btn btn-default btn-edit">
+						<button class="btn btn-default btn-edit btn-xs">
 							Edit Your Product
 						</button>
 						{{/link-to}}

@@ -628,6 +628,23 @@ button.btn-cancel{
 	padding:10px;
 	padding-right: 20px;
 	padding-left: 20px;
+	font-family: $primary-font;
+	font-weight: 400;
+	font-size: 12px;
+	background-color: transparent;
+	color: red;
+	border: none;
+	display:inline-block; 
+	transition: background-color 0.2s ease;
+}
+
+.btn-danger:hover {
+	color: $primary-color;
+	background-color: transparent;
+}
+
+button.btn-danger{
+	border: 1px solid #ccc;
 }
 
 .has-error, .help-block, .alert, .error {

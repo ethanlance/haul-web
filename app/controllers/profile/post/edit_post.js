@@ -103,16 +103,23 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return _this.store.find('post-list', {user_id:_this.get('currentUser').get('id')});
 		})
 		.then(function() {
+
 			//Find this post in the list.
-			console.log("GO FIND ", id)
 			var record = _this.store.getById('post-list', id);
-			console.log('found ', record);
-			_this.store.unloadRecord(record);
+			
+			if(!Ember.isEmpty(record) && record !== undefined && !record.get('isDirty') ){
+				_this.store.unloadRecord(record);	
+			}
+
+			
+
 		})
 		.then(function(record){
+
 			_this.set('isProcessingDelete', false);
-			var user = _this.get('currentUser'); 
-			_this.transitionToRoute('profile', user);
+			
+			_this.transitionToRoute('profile', _this.get('currentUser'));
+
 		}, function(error){
 			console.log("Error", error);
 			_this.set('isProcessingDelete', false);
@@ -192,6 +199,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		showDeleteModal: function(){
 			var _this = this;
 			this.set('showDeleteModal', true);
+		
+			$('#editModal').parent().scrollTop(0);
+	
 			Ember.run.later(function(){
 				_this.set('animateDeleteModal', true);
 			},100);

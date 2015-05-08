@@ -1,5 +1,5 @@
 {{#modal-modal animateClose=animateClose closeModal='closeModal' scrollToTop=scrollToTop}}
-<div {{bind-attr class=":modal-dialog showSuccess:sm:lg :text-left"}}>
+<div id="editModal" {{bind-attr class=":modal-dialog showSuccess:sm:lg :text-left"}}>
 	<div class="modal-content">
 
 		{{partial "_modal_nav"}}
@@ -17,9 +17,9 @@
 			<div class="edit-footer">
 				<div class="edit-col">			
 
-					<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
+					<span {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
 						Delete Post
-					</button>
+					</span>
 
 					{{ladda-btn
 						name='SAVE POST'
@@ -53,13 +53,14 @@
 						</h4>
 					</div>
 					<div class="modal-body">
-						<button {{action 'closeDeleteModal'}} class="btn btn-warning">Cancel</button>
+						<button {{action 'closeDeleteModal'}} class="btn btn-cancel">Cancel</button>
 						{{ladda-btn
 							name='Delete Post'
 							class="display-inline"
 							btnClasses='btn btn-danger ladda-button'
 							btnClick='deletePost'
 							spin=isProcessingDelete
+							dataSpinnerColor="red"
 						}}
 					</div>
 				</div>
