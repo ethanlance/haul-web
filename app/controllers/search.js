@@ -18,12 +18,16 @@ export default Ember.ArrayController.extend(PaginateMixin, {
 
     currentTypeChanged: function() {
 
-			console.log("CHANGED CURRENT ", this.get('currentType'))
+		this.set('currentTypeIsHashtag', false);
+		this.set('currentTypeIsUser', false);	
+		this.set('currentTypeIsPost', false);
+
     	if( this.get('currentType') === "hashtag" ){
-    		console.log("BOOM")
     		this.set('currentTypeIsHashtag', true);
+    	}else if( this.get('currentType') === "user" ){
+    		this.set('currentTypeIsUser', true);	
     	}else {
-    		this.set('currentTypeIsHashtag', false);
+    		this.set('currentTypeIsPost', true);
     	}
     }.observes('currentType'),
 
@@ -95,13 +99,11 @@ export default Ember.ArrayController.extend(PaginateMixin, {
 
 	actions: {
     	fetchMore: function(callback) {
-    		console.log("FETCH MORE");
 			var promise = this.paginateMore();		
 			if(callback){callback(promise)};
     	},
 
     	clickHashtag: function(tag) {
-    		console.log("TAG", tag)
     		var key = "tag_" + tag.get('name');
     		this.transitionToRoute('search', {queryParams: {q:key}} );
     	}

@@ -88,46 +88,45 @@ body.anon{
 
 
 
+//When modal's pop open but the user is anonymous:
+.anon{
 
+	.modal-dialog{
+		
+		text-align:center;
+		
+		.modal-content, .modal-body {
+			background-color: rgba(0, 0, 0, 0.8);	
+		}
 
+		.modal-header{
+			border: none;
+		}
 
-
-
-
-.modal.auth {
-	text-align:center;
-	
-	.modal-content{
-		background-color: rgba(0, 0, 0, 0.8);	
-	}
-
-	.modal-header{
-		border: none;
-	}
-
-	.or {
-		color: yellow;
-		font-size:20px;
-	}
-	
-	h1, h2, h3, h4, a {
-		color:white;
-	}
-	
-	a {
-		text-decoration: underline;
-	}
-	
-	.alert{
-		color: yellow;
+		.or {
+			color: yellow;
+			font-size:20px;
+		}
+		
+		h1, h2, h3, h4, a {
+			color:white;
+		}
+		
 		a {
 			text-decoration: underline;
 		}
+		
+		.alert{
+			color: yellow;
+			a {
+				text-decoration: underline;
+			}
+		}
+	
 	}
+
+
 }
-
-
-
 
 
 

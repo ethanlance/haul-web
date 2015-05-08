@@ -52,7 +52,6 @@ export default Ember.Component.extend({
 
 		return Ember.run.later(function(){ 
 			_this.sendAction('closeModal');
-
-		},500); 
+		},100); 
 	}.observes('animateClose')
 });

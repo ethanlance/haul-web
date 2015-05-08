@@ -45,7 +45,11 @@ app.import('bower_components/underscore/underscore.js');
 
 app.import('bower_components/bootstrap/dist/js/bootstrap.js'); 
 
+app.import('vendor/spin.js');
 
+app.import('vendor/ladda.js');
+
+app.import('vendor/ladda-themeless.css');
 
 app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
   destDir: 'assets/fonts'
@@ -76,11 +80,9 @@ app.import('bower_components/moment/moment.js');
 
 app.import('bower_components/dropzone/downloads/dropzone.js');
 
-app.import('bower_components/ladda-bootstrap/dist/spin.js');
 
-app.import('bower_components/ladda-bootstrap/dist/ladda.js');
 
-app.import('bower_components/ladda-bootstrap/dist/ladda-themeless.css'); 
+//app.import('vendor/ladda-themeless.css'); 
 
 app.import('bower_components/fastclick/lib/fastclick.js'); 
 
@@ -118,6 +120,7 @@ lightboxCssContent = lightboxCssContent.replace(/\.\.\/fonts\//g, 'fonts/');
 lightboxCssContent = lightboxCssContent.replace(/\?(.+?)\'/g, '\'');
 fs.writeFileSync(path.join(lightboxPath, 'dist/css', 'bootstrap.processed.css'), lightboxCssContent);
 app.import(path.join(lightboxPath, 'dist/css', 'bootstrap.processed.css'));
+
 
 
 

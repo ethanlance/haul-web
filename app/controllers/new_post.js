@@ -42,15 +42,26 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	show_three: false,
 
-	showChanged: function() {
-		this.set('show_one', false);
-		this.set('show_two', false);
-		this.set('show_three', false);
-		this.set('show_'+this.get('show'), true);
+	slideOpened: 'slide_one',
 
-		//Scroll the modal to top again
-		var el = $('.modal')
-		el.scrollTop(0,0);
+	showChanged: function() {
+
+		var slideIn 	= this.get('show');
+		var slideOut 	= this.get('slideOpened');
+
+
+		$('.modal').animate({
+			scrollTop: 0
+		}, 300, 
+			function(){
+
+				$('.show_'+slideIn).removeClass('hide').slideDown(1).fadeOut(1, function(){
+					$('.show_'+slideOut ).slideUp(600);
+				}).fadeIn();
+
+		});
+
+		this.set('slideOpened', slideIn);
 
 	}.observes('show'),
 
@@ -75,6 +86,22 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		  selectedStatus: for_sale,
 		  status: [for_sale, sold, not_for_sale],
 		})); 
+
+
+		var  _this = this;
+    	this.store.find('seller', _this.get('currentUserId')).then(
+        	function success(record){
+
+                if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
+                    _this.set('needsSellerAccount', true);
+                }
+
+        	},
+        	function failed(error){
+        		_this.set('needsSellerAccount', true);
+        	}
+        );
+
 
 	}.on('init'),
 
@@ -116,11 +143,17 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		if(this.get('showErrors')){
 			this.set('showErrorBar', true);
 
+			$('.modal').animate({
+    			scrollTop: 0
+			}, 200);
+
 			var _this = this;
 			Ember.run.later(function() {
 				_this.set('showErrorBar', false);
-			}, 1000);
+			}, 1500);
 
+		}else{
+			_this.set('showErrorBar', false);
 		}
 	}.observes('showErrors'),
 
@@ -279,6 +312,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	savePost: function() {
 		this.set('isProcessingSavePost', true);
+		this.set('showErrors', false);
+
 		var _this = this;
 		var model = this.get('model');
 
@@ -307,18 +342,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			//Reload user's feed list
 			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
-		.then(function(){
-
-        	return _this.store.find('seller', _this.get('currentUserId')).then(
-            	function success(record){
-
-	                if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
-	                    _this.set('needsSellerAccount', true);
-	                }
-
-            	}
-            );
-        })
 		.then(
 			function success(record){
 				var user = _this.get('currentUser');
@@ -347,7 +370,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		var post = this.get('postRecord'); 
 
-		this.transitionToRoute('profile.post', username, post );
+		var _this = this;
+		Ember.run.later(function(){
+			_this.transitionToRoute('profile.post', username, post );
+		},200);
 	},
 
 
@@ -363,10 +389,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		back: function() {
-			this.set('show', "one");
+//this.set('isProcessingNext', false);
+			this.set('show', 'one');
 		},
 
 		next: function() {
+//this.set('show', 'two');return;
 			this.set('isProcessingNext', true);
 			this.validateProduct();
 		},
@@ -380,6 +408,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 	
 		savePost: function() { 
+			this.set('show','three');
 			this.set('isProcessingSavePost', true);
 			this.set('requestEditorContents', true);
 		},

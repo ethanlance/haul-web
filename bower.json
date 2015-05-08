@@ -14,7 +14,6 @@
     "qunit": "~1.17.1",
     "bootstrap": "~3.3.1",
     "moment": "~2.8.4",
-    "ladda-bootstrap": "~0.1.0",
     "jquery-ui": "~1.11.2",
     "quill": "~0.19.8",
     "sanitize.js": "~1.0.0",
@@ -26,9 +25,7 @@
     "font-awesome": "~4.3.0",
     "typeahead.js": "~0.10.5",
     "bootstrap-sass-official": "~3.3.4",
-    "jquery.inputmask": "~3.1.62"
-  },
-  "devDependencies": {
+    "jquery.inputmask": "~3.1.62",
     "fastclick": "~1.0.6"
   }
 }

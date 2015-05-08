@@ -84,7 +84,7 @@ Router.map(function(){
 	});
 
 
-	this.route('not_found', {path: '/*wildcard'});
+	this.route('404', {path: '/*wildcard'});
 });
 
 export default Router;

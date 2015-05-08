@@ -102,8 +102,9 @@ export default Base.extend({
 	*/
 	restore: function(data) {
 		var _this = this;
+		console.log("RESTPRE?")
 		return new Ember.RSVP.Promise(function(resolve, reject) {
-			
+			console.log("WTF?")
 			var now = Math.round(new Date().getTime() /1000)
 
 			if (!Ember.isEmpty(data.expires_at) && data.expires_at < now) {
@@ -119,8 +120,33 @@ export default Base.extend({
 				if (Ember.isEmpty(data.access_token)) {
 			  		reject();
 				} else {
-			  		_this.scheduleAccessTokenRefresh(data.expires_in, data.expires_at, data.refresh_token);
-					resolve(data);
+
+					//Wait, does this user really exist?
+					var url = _this.host + "/users/" + data.user_id;					
+
+					Ember.$.ajax({
+						url:         url,
+						type:        'GET',
+						dataType:    'json',
+						contentType: 'application/x-www-form-urlencoded',
+						headers: {
+							Authorization: 'Bearer ' + _this.clientToken
+						},
+					})
+
+					.then(function(response) {
+
+						Ember.run(function() {
+							_this.scheduleAccessTokenRefresh(data.expires_in, data.expires_at, data.refresh_token);
+							resolve(data);
+
+						});
+						
+					}, function(xhr, status, error) {
+						console.log("NO", error)
+						reject();
+					});
+
 				}
 			}
 		});
