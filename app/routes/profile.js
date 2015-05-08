@@ -7,7 +7,8 @@ export default Ember.Route.extend({
 			return result;
 		}, function(error) {
 			console.log("ERROR... do transition.")
-			return _this.transitionTo('not_found');
+			_this.transitionTo('not_found');
+			return false;
 		});
 	},
 	setupController: function(controller, model) {
