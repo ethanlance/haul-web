@@ -170,8 +170,15 @@
 
 				<div class="edit-footer">
 					<div class="edit-col">			
-						<button {{action 'next'}} class="btn-next">NEXT</button>
-
+						
+						{{ladda-btn
+							name='NEXT'
+							class="display-inline"
+							btnClasses='btn-next ladda-button'
+							btnClick='next'
+							spin=isProcessingNext
+							dataSpinnerColor="white"
+						}}
 
 						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
 							Cancel
@@ -182,7 +189,7 @@
 			</div>
 
 
-			<div {{bind-attr class="show_two:show:hide"}}>
+			<div {{bind-attr class=":fade show_two:in:out"}}>
 
 				<div class="edit-row">
 					<div class="edit-col">
@@ -217,14 +224,14 @@
 						</span>
 
 						{{ladda-btn
-							name='SAVE PRODUCT'
+							name='SAVE POST'
 							class="display-inline"
-							btnClasses='btn-post ladda-button'
+							btnClasses='btn-next ladda-button'
 							btnClick='savePost'
+							spin=isProcessingSavePost
 							dataSpinnerColor="white"
-							spin=isProcessing
 						}}
-						
+							
 						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
 							Cancel
 						</span>

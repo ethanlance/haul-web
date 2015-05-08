@@ -44,7 +44,10 @@ export default Ember.Component.extend({
 	        setupHiddenFileInput = (function(_this) {
 	          return function() {
 	            if (_this.hiddenFileInput) {
-	              document.body.removeChild(_this.hiddenFileInput);
+	            	try{
+	              		document.body.removeChild(_this.hiddenFileInput);
+	              	}catch(e){
+	              	}
 	            }
 	            _this.hiddenFileInput = document.createElement("input");
 	            _this.hiddenFileInput.setAttribute("type", "file");

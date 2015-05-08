@@ -16,7 +16,16 @@
 
 			<div class="edit-footer">
 				<div class="edit-col">			
-					<button {{action 'saveProduct'}} class="btn-next">SAVE</button>
+					
+
+					{{ladda-btn
+						name='SAVE'
+						class="display-inline"
+						btnClasses='btn-next ladda-button'
+						btnClick='saveProduct'
+						spin=isProcessing
+						dataSpinnerColor="white"
+					}}
 
 
 					<span {{action 'cancel'}} class="btn btn-cancel btn-right">

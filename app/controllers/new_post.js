@@ -9,7 +9,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	currentUserIdBinding: 'session.currentUser.id',
 	
 	//Are we proccesing a submission.
-	isProcessing: false,
+	isProcessingSavePost: false,
 
 	//Have images been selected?
 	imagesAreSelected: Ember.computed.gte('productImageIds.length', 1),
@@ -131,6 +131,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		if( Ember.isEmpty(this.get('selectedImages')) ) {
 			this.set('showImageError', true);
 			this.set('showErrors', true); 
+			this.set('isProcessingNext', false);
 			return;
 		}
 
@@ -142,9 +143,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			function valid(){
 				_this.set('show', "two");
 				_this.set('showErrors', false);
+				_this.set('isProcessingNext', false);
 			},
 			function invalid(errors){
-
+				_this.set('isProcessingNext', false);
 
 				if( errors.get('product_name').length > 0 ||
 					errors.get('product_description').length > 0 ||
@@ -276,7 +278,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	},
 
 	savePost: function() {
-		this.set('isProcessing', true);
+		this.set('isProcessingSavePost', true);
 		var _this = this;
 		var model = this.get('model');
 
@@ -321,7 +323,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			function success(record){
 				var user = _this.get('currentUser');
 
-				_this.set('isProcessing', false); 
+				_this.set('isProcessingSavePost', false); 
 
 				_this.set('show', "three");
 				
@@ -333,7 +335,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 				_this.set('showErrors', true);
 
-				_this.set('isProcessing', false);
+				_this.set('isProcessingSavePost', false);
 			}
 		);
 	},
@@ -365,6 +367,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		next: function() {
+			this.set('isProcessingNext', true);
 			this.validateProduct();
 		},
 
@@ -377,7 +380,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 	
 		savePost: function() { 
-			this.set('isProcessing', true);
+			this.set('isProcessingSavePost', true);
 			this.set('requestEditorContents', true);
 		},
 

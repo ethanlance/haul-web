@@ -21,8 +21,14 @@
 						Delete Post
 					</button>
 
-
-					<button {{action 'savePost'}} class="btn-next">SAVE POST</button>
+					{{ladda-btn
+						name='SAVE POST'
+						class="display-inline"
+						btnClasses='btn-next ladda-button'
+						btnClick='savePost'
+						spin=isProcessing
+						dataSpinnerColor="white"
+					}}
 
 
 					<span {{action 'cancel'}} class="btn btn-cancel btn-right">
