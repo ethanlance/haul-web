@@ -42,15 +42,31 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	show_three: false,
 
-	showChanged: function() {
-		this.set('show_one', false);
-		this.set('show_two', false);
-		this.set('show_three', false);
-		this.set('show_'+this.get('show'), true);
+	slideOpened: 'slide_one',
 
-		//Scroll the modal to top again
-		var el = $('.modal')
-		el.scrollTop(0,0);
+	showChanged: function() {
+
+		var slideIn 	= this.get('show');
+		var slideOut 	= this.get('slideOpened');
+
+		//Which one is open.  Close it.
+		
+		if( slideIn ){
+			$('.show_'+slideIn).removeClass('hide').slideDown(500);
+		}
+
+		
+		if( slideOut ){ 
+			$('.show_'+slideOut).removeClass('hide').slideUp(500,
+				function(){
+					$('.modal').animate({
+	        			scrollTop: 0
+	    			}, 200);
+				}
+			);
+		}
+
+		this.set('slideOpened', slideIn);
 
 	}.observes('show'),
 
@@ -347,7 +363,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		var post = this.get('postRecord'); 
 
-		this.transitionToRoute('profile.post', username, post );
+		var _this = this;
+		Ember.run.later(function(){
+			_this.transitionToRoute('profile.post', username, post );
+		},200);
 	},
 
 
@@ -363,7 +382,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		back: function() {
-			this.set('show', "one");
+			this.set('show', 'one');
 		},
 
 		next: function() {
@@ -380,6 +399,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 	
 		savePost: function() { 
+			this.set('show','three');
 			this.set('isProcessingSavePost', true);
 			this.set('requestEditorContents', true);
 		},
