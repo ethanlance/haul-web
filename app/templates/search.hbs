@@ -6,7 +6,7 @@
 
 
 		<h1 {{bind-attr class="showResults:hide:show"}}>Discover</h1>
-		    	<h1 {{bind-attr class="showResults:show:hide"}}>{{{typeText}}}  <b>{{queryText}}</b></h1>
+		<h1 {{bind-attr class="showResults:show:hide"}}>{{{typeText}}}  <b>{{queryText}}</b></h1>
 
 
 
@@ -41,7 +41,22 @@
 			 		</ul>
 				{{/each}}
 
-			{{else}}
+			{{/if}}
+
+
+
+			{{#if currentTypeIsUser }}
+					
+				{{#each item in sortedContent}}
+					{{profile-badge profile=item.user}} 
+				{{/each}}
+
+			{{/if}}
+
+
+
+
+			{{#if currentTypeIsPost }}
 			 	{{#each post in sortedContent}}
 
 			 	<div class="product-post">

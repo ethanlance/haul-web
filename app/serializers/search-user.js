@@ -10,9 +10,13 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
  		var data = [];
 		data = payload.data.map(function(result){ 
 			return {
-				id: result.name,	
+				id: result.user_id,	
+				facebook_user_id: result.facebook_user_id,
+				follows_total: result.follows_total,
 				name: result.name,
-				price: result.price,
+				username: result.username,
+				user_id: result.user_id,
+				user: result.user_id,
 				image: result.image_id
 			};
 		});
