@@ -49,22 +49,18 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var slideIn 	= this.get('show');
 		var slideOut 	= this.get('slideOpened');
 
-		//Which one is open.  Close it.
-		
-		if( slideIn ){
-			$('.show_'+slideIn).removeClass('hide').slideDown(500);
-		}
 
-		
-		if( slideOut ){ 
-			$('.show_'+slideOut).removeClass('hide').slideUp(500,
-				function(){
-					$('.modal').animate({
-	        			scrollTop: 0
-	    			}, 200);
-				}
-			);
-		}
+		$('.modal').animate({
+			scrollTop: 0
+		}, 300, 
+			function(){
+
+				$('.show_'+slideIn).removeClass('hide').slideDown(1, function(){
+					$('.show_'+slideOut).slideUp(400, function(){	
+				});
+
+			});
+		});
 
 		this.set('slideOpened', slideIn);
 
@@ -91,6 +87,22 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		  selectedStatus: for_sale,
 		  status: [for_sale, sold, not_for_sale],
 		})); 
+
+
+		var  _this = this;
+    	this.store.find('seller', _this.get('currentUserId')).then(
+        	function success(record){
+
+                if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
+                    _this.set('needsSellerAccount', true);
+                }
+
+        	},
+        	function failed(error){
+        		_this.set('needsSellerAccount', true);
+        	}
+        );
+
 
 	}.on('init'),
 
@@ -132,11 +144,17 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		if(this.get('showErrors')){
 			this.set('showErrorBar', true);
 
+			$('.modal').animate({
+    			scrollTop: 0
+			}, 200);
+
 			var _this = this;
 			Ember.run.later(function() {
 				_this.set('showErrorBar', false);
-			}, 1000);
+			}, 1500);
 
+		}else{
+			_this.set('showErrorBar', false);
 		}
 	}.observes('showErrors'),
 
@@ -295,6 +313,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	savePost: function() {
 		this.set('isProcessingSavePost', true);
+		this.set('showErrors', false);
+
 		var _this = this;
 		var model = this.get('model');
 
@@ -323,18 +343,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			//Reload user's feed list
 			return _this.store.find('feed', {user_id:_this.get('currentUserId'), doNotPaginate:true});
 		})
-		.then(function(){
-
-        	return _this.store.find('seller', _this.get('currentUserId')).then(
-            	function success(record){
-
-	                if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
-	                    _this.set('needsSellerAccount', true);
-	                }
-
-            	}
-            );
-        })
 		.then(
 			function success(record){
 				var user = _this.get('currentUser');
