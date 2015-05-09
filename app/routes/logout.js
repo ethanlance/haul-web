@@ -8,6 +8,6 @@ export default Ember.Route.extend(AnonMixin, {
 			this.get('session').invalidate();	
 		}
 		
-		this.transitionTo('login');
+		this.transitionTo('discover');
 	}
 });

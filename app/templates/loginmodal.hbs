@@ -1,12 +1,14 @@
 {{#modal-modal animateClose=animateClose closeModal='closeModal'}}
 <div class="modal-dialog lg text-left">
 	<div class="modal-content">
+		
+		{{partial "_modal_nav"}}
+
 		<div class="text-center edit-wrapper">
 			<div class="edit-row">
 				<div class="edit-col">
 
-					<button {{action 'close'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
+					
 					<h1 class="modal-title" id="myModalLabel">
 						Sign in to Haul<!--<a class="or" {{action 'openModal' 'signupmodal'}}>or create an account</a>-->
 					</h1>

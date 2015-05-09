@@ -71,6 +71,7 @@ export default Ember.ObjectController.extend({
 			.then(
 		 		function onFulfill(response) {
 					_this.set('isProcessingFacebook', false);
+					_this.send('closeModal');
 					return console.log("Success!", response); 
 				}, 
 				function onReject(error) {
@@ -97,7 +98,9 @@ export default Ember.ObjectController.extend({
 				return  _this.authenticate('/auth/user', 'post', data);
 			})	
 			.then(
-				function() {},
+				function() {
+					_this.send('closeModal');
+				},
 				function(error) {	
 					_this.set('isProcessingLogin', false);
 					_this.set('showErrors', true);

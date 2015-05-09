@@ -110,6 +110,7 @@ export default Ember.ObjectController.extend({
 			.then(
 		 		function onFulfill() {
 					_this.set('isProcessingFacebook', false);
+					_this.send('closeModal');
 				}, 
 				function onReject(error) {
 					
@@ -124,13 +125,6 @@ export default Ember.ObjectController.extend({
 						_this.set('isProcessingFacebook', false);
 						_this.set('error', true);	
 					} 
-				}
-			)
-			.then(
-				function onNada(){},
-				function onReject() {
-					_this.set('isProcessingFacebook', false);
-					_this.set('error', true);	
 				}
 			);
 		},

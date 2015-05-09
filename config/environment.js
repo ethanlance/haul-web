@@ -181,7 +181,7 @@ module.exports = function(environment) {
 	ENV['simple-auth'] = {
 		store: 'simple-auth-session-store:local-storage',
 		authenticator: 'authenticator:custom',
-		authenticationRoute: 'login',
+		authenticationRoute: 'discover',
 		refreshAccessTokens: true
 	};
 	return ENV;
