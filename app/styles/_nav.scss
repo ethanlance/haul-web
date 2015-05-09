@@ -1,7 +1,8 @@
 .nav-add-post {
+	color: $primary-color;
 	margin-top: 13px; 
 	background-color: inherit;
-	border: 1px solid #dfdfdf;
+	border: 0px solid #dfdfdf;
 	padding: 10px 15px 10px 15px;
 	font-size: 12px;
 	transition: all 0.2s ease;
@@ -13,7 +14,28 @@
 }
 
 .nav-add-post:hover {
-	border: 1px solid $primary-color;
+	border: 0px solid $primary-color;
+	color: $primary-color;
+	background-color: #fce6e7;
+}
+
+
+.nav-cancel-post {
+	margin-top: 13px; 
+	background-color: inherit;
+	border: 0px solid #dfdfdf;
+	padding: 10px 15px 10px 15px;
+	font-size: 11px;
+	transition: all 0.2s ease;
+
+	@media (max-width: 400px) {
+		padding: 5px 7px;
+		margin-top:6px;
+	}
+}
+
+.nav-cancel-post:hover {
+	border: 0px solid $primary-color;
 	color: $primary-color;
 }
 
@@ -156,6 +178,10 @@ nav {
 
 	.nav-link {
 		font-family: $primary-font;
+		font-size: 11px;
+		font-weight: 400;
+		letter-spacing: 1.0;
+		color: #555;
 		display:inline;
 		padding:0;
 		margin:0;
@@ -187,6 +213,15 @@ nav {
 	}
 
 	.nav-add-post {
+		font-family: $primary-font;
+		font-size: 11px;
+		//color: #7e7e7e;
+		color: $primary-color;
+		font-weight: 600;
+		float:right;
+	}
+
+	.nav-cancel-post {
 		font-family: $primary-font;
 		font-size: 11px;
 		color: #7e7e7e;
@@ -246,6 +281,7 @@ nav.anon {
 	}
 
 	.btn-about {
+		font-size: 11px;
 		color: #333;
 		margin-top: 18px;
 		transition: all 0.2s ease;
@@ -258,6 +294,7 @@ nav.anon {
 	}
 
 	.btn-signin {
+		font-size: 11px;
 		color: $primary-color;
 		margin-top: 18px;
 		transition: all 0.2s ease;
@@ -270,6 +307,7 @@ nav.anon {
 	}
 
 	.btn-login {
+		font-size: 11px;
 		color: #333;
 		margin-top: 18px;
 		transition: all 0.2s ease;
