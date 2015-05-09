@@ -229,6 +229,7 @@ nav {
 			}
 		}
 	}
+
 }
 
 nav.anon {
@@ -236,7 +237,50 @@ nav.anon {
 		float: right;
 		margin-right:20px;
 		margin-top:10px;
+		border: 0px;
+		background-color: #fff;
+		text-transform: uppercase;
+		font-size: 12px;
+		color:#333;
+		transition: all 0.2s ease;
 	}
+
+	.btn-about {
+		color: #333;
+		margin-top: 18px;
+		transition: all 0.2s ease;
+	}
+
+	.btn-about:hover {
+		background-color: #fff;
+		color: $primary-color;
+		border-bottom: 0px;
+	}
+
+	.btn-signin {
+		color: $primary-color;
+		margin-top: 18px;
+		transition: all 0.2s ease;
+		font-weight: 600;
+	}
+
+	.btn-signin:hover {
+		background-color: #fce6e7;
+		border-bottom: 0px;
+	}
+
+	.btn-login {
+		color: #333;
+		margin-top: 18px;
+		transition: all 0.2s ease;
+	}
+
+	.btn-login:hover {
+		background-color: #fff;
+		color: $primary-color;
+		border-bottom: 0px;
+	}
+
 	
 	@media (max-width: 400px) {
 		button {
