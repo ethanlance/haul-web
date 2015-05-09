@@ -45,11 +45,6 @@ export default Ember.Component.extend(ErrorMixin, {
 			return;
 		}
 
-		if( this.get('buyer_id') ) {
-			this.set('hasBuyer', true); 
-			this.displayCardList(true);
-		}
-
 		var _this = this;
 		var store = this.container.lookup("store:main");
 		var user = this.get('currentUser');
@@ -58,7 +53,7 @@ export default Ember.Component.extend(ErrorMixin, {
 		store.find('buyer', user.id).then(
 			function success(record){
 
-
+console.log("GO FIND THE TOKEN!!!")
 				var user_id = _this.get('currentUser').id;
 				var host = _this.ENV.Server.PROSPER_SERVER_HOST;
 				var url = host + "/buyers/" + user_id + "/tokens";

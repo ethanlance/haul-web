@@ -25,11 +25,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
     showTransactionButton: Ember.computed.bool('readyForTransaction'),
 
 	braintree_url: function() {
-		console.log("BOOM?", this.ENV.BT_MERCHANT_ID);
-
 		var braintree_merchant_id = this.ENV.BT_MERCHANT_ID
 		var url = "https://www.braintreegateway.com/merchants/"+ braintree_merchant_id +"/verified";
-
 		return url;
 	}.property(),
 
