@@ -1,15 +1,21 @@
 {{#modal-modal animateClose=animateClose closeModal='closeModal'}}
-	<div class="modal-dialog sm ">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button {{action 'close'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h2 class="modal-title" id="myModalLabel">
-					Please Login <a class="or" {{action 'openModal' 'signupmodal'}}>or Signup</a>
-				</h2>
+<div class="modal-dialog lg text-left">
+	<div class="modal-content">
+		<div class="text-center edit-wrapper">
+			<div class="edit-row">
+				<div class="edit-col">
+
+					<button {{action 'close'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+					<h2 class="modal-title" id="myModalLabel">
+						Please Login <a class="or" {{action 'openModal' 'signupmodal'}}>or Signup</a>
+					</h2>
+			
+					{{partial "_login"}}
+
+				</div>
 			</div>
 		</div>
-		<div class="modal-body">  
-			{{partial "_login"}}
-		</div>
 	</div>
+</div>
 {{/modal-modal}}
