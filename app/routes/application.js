@@ -9,7 +9,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 	metaOgSitename: "Haul.io",
 
-	metaTitle: "Welcome to Haul",
+	metaTitle: "Haul",
 
   	metaDescription: "Buy, sell and find things that matter.",
 

@@ -105,7 +105,7 @@ export default Ember.ArrayController.extend(PaginateMixin, {
 
     	clickHashtag: function(tag) {
     		var key = "tag_" + tag.get('name');
-    		this.transitionToRoute('search', {queryParams: {q:key}} );
+    		this.transitionToRoute('discover', {queryParams: {q:key}} );
     	}
 	}
 });

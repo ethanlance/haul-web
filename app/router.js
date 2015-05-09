@@ -60,7 +60,7 @@ Router.map(function(){
 
 
 	//Search
-	this.route('search');
+	this.route('discover');
 
 	this.route('not_found');
 	this.route('not_authorized');

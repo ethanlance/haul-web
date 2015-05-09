@@ -202,12 +202,12 @@ export default Ember.Component.extend({
 				if( type === "tag" ) {
 
 					qt =  "hashtag_" + data.name;
-					_this.sendAction('goToRoute', 'search', {queryParams: {q:qt}});	
+					_this.sendAction('goToRoute', 'discover', {queryParams: {q:qt}});	
 					
 				} else {
 
 					qt = type + "_" + data.name;
-					_this.sendAction('goToRoute', 'search', {queryParams: {q:qt}});	
+					_this.sendAction('goToRoute', 'discover', {queryParams: {q:qt}});	
 				}
 
 
@@ -233,7 +233,7 @@ export default Ember.Component.extend({
 			//Hashtag Search
 			}else{
 				qt = type + "_" + data.name;
-				_this.sendAction('goToRoute', 'search', {queryParams: {q:qt}});	
+				_this.sendAction('goToRoute', 'discover', {queryParams: {q:qt}});	
 			}
 		    
 		});

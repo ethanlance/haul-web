@@ -6,6 +6,6 @@ export default Ember.Route.extend(ResetScrollMixin,{
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('search');
+		this.render('discover');
 	},
 });
