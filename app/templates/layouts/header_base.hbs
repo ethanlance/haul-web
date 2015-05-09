@@ -39,7 +39,7 @@
 		{{!-- When browser is NOT collapsed --}}
 		<div class="nav-link-wrapper">
 			<div class="nav-link home">
-				{{#link-to 'home' }}HOME{{/link-to}}
+				{{#link-to 'home' }}FEED{{/link-to}}
 			</div>	
 
 			<div class="nav-link">
@@ -54,7 +54,7 @@
 				{{#link-to 'mentions' }}
 					{{#if session.currentUser.hastUnreadMentions}}
 						{{mention-count}}
-					{{/if}}MENTIONS
+					{{/if}}NOTIFICATIONS
 				{{/link-to}}
 			</div>	
 
