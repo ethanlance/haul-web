@@ -60,7 +60,8 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 				if( !Ember.isEmpty(user.get('username'))){
 					var attemptedTransition = _this.get('session.attemptedTransition'); 
 					if(Ember.isEmpty(attemptedTransition)){  
-						_this.transitionTo("profile", user.get('username')  );
+						//_this.transitionTo("profile", user.get('username')  );
+						_this.transitionTo("home");
 					}else{
 						console.log("TRANS TO ", attemptedTransition)
 						attemptedTransition.retry();
