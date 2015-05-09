@@ -127,64 +127,6 @@ body.modal-open {
 
 
 
-//MODAL 
-.modal{
-	display:inline;
-	z-index: $z-index-modal;
-	background-color: rgba(255, 255, 255, 0);
-	overflow: scroll;
-	border-radius: none;
- 
-
-	.modal-content {
-		background-color: #fff;
-		border-radius: 0;
-		box-shadow: 0 rgba (0, 0, 0, 0);
-		-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-			border: 0px;
-	}
-
-	.modal-dialog {
-
-		-webkit-transition: opacity .3s ease-in-out;
-		-o-transition: all .3s ease-in-out;
-		transition: all .3s ease-in-out;
-
-		width:90%;
-		margin-top: -200px;
-	  	opacity: 0;
-
-
-	  	&.sm { 
-	  		width:400px;
-	  		margin-left:auto;
-	  		margin-right:auto;
-	  	}
-
-	  	&.lg{
-	  		width: 100%;
-	  		margin-left:0;
-	  		margin-right:0;
-	  	}
-   	}
-}
-
-
-.modal.in { 
-	.modal-dialog{
-		//margin-top: 59px;
-		margin-top: 0;
-		opacity: 1; 
-
-
-	  	&.sm {
-	  		margin-top:10%; 
-	  	}
-
-
-	  
-	}
-} 
 
 
 
