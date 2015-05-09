@@ -3,13 +3,13 @@
 
 
 	  {{#if error404}}
-	  	<div class="alert">Sorry, you need to signup first.<br/>Go to {{#link-to 'signup'}}Sign Up{{/link-to}}</div>
+	  	<div class="alert">Sorry, you need to sign up and create an account first.<br/>Go to {{#link-to 'signup'}}Sign Up{{/link-to}}</div>
 	  {{/if}}
 
-	<div class="form-group"> 
+	<div class="form-group">
 
 		{{ladda-btn 
-			name='FACEBOOK'
+			name='Sign in with Facebook'
 			btnClasses='btn btn-block btn-facebook ladda-button'
 			btnClick='facebookLogin'
 			spin=isProcessingFacebook
@@ -19,7 +19,7 @@
 
 
 	<div class="form-group padding-top">
-		<h4>or with your <br/>email & password</h4>
+		<h3>or with your email & password</h3>
 	</div>
 
 	{{#form-for model}}
@@ -29,7 +29,7 @@
 	  {{/if}} 
 	  
 	  {{#if error409}}
-	    <div class="alert">Your email needs to be validated before you can login.</div>
+	    <div class="alert">Your email needs to be validated before you can Sign in.</div>
 	  {{/if}} 
 
 
@@ -43,7 +43,7 @@
 
 		<div class="form-group">
 			{{ladda-btn 
-				name='LOGIN'
+				name='Sign In'
 				btnClasses='btn btn-primary btn-block ladda-button'
 				btnClick='emailLogin'
 				spin=isProcessingLogin

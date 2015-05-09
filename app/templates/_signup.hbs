@@ -21,9 +21,10 @@
 
 
 						<div class="form-group"> 
+						
 
 							{{ladda-btn 
-								name='FACEBOOK'
+								name='Sign up with Facebook'
 								btnClasses='btn btn-block btn-facebook ladda-button'
 								btnClick='facebookSignup'
 								spin=isProcessingFacebook
@@ -34,7 +35,7 @@
 
 
 						<div class="form-group padding-top">
-							<h4 class="">or with email</h4>
+							<h3>or with email</h3>
 						</div>
 
 
@@ -50,13 +51,13 @@
 						  {{/if}} 
 
 						  	<div class="form-group"> 
-					      		{{input email placeholder="Type your email address" label="false"}}
+					      		{{input email placeholder="Your email address" label="false"}}
 					      	</div> 
 
 							<div class="form-group">
 
 								{{ladda-btn 
-									name='SIGNUP'
+									name='Create and account'
 									btnClasses='btn btn-block btn-primary ladda-button'
 									btnClick='emailSignup'
 									spin=isProcessingSignup
