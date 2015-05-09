@@ -10,6 +10,15 @@ export default Ember.Component.extend({
 	userLikes: false,
 	userLikesRecord: false,
 	userLikeListRecord:false,
+	likeText: 'likes',
+
+	totalChanged: function() {
+		if(this.get('total') === 1 ){
+			this.set('likeText', 'like');
+		}else{
+			this.set('likeText', 'likes');
+		}
+	}.observes('total'),
 
 	didInsertElement: function() {
 		var store = this.container.lookup("store:main");

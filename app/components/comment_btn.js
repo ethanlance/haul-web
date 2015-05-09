@@ -5,6 +5,16 @@ export default Ember.Component.extend(ScrolltoMixin, {
 	
 	totalBinding: "post.commentCount.total",
 
+	commentText: 'comments',
+
+	totalChanged: function() {
+		if(this.get('total') === 1 ){
+			this.set('commentText', 'comment');
+		}else{
+			this.set('commentText', 'comments');
+		}
+	}.observes('total'),
+
 	gotolink:false,
 	
 	actions: {

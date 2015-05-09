@@ -1,6 +1,14 @@
 {{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="leaveComment") class="no-decoration"}}
+<span class="haul-btn" {{ action 'btnClick'}} >
+	<i {{bind-attr class=":fa :fa-comment"}}></i> 
+	{{ total }} {{ commentText }}
+</span>	
+{{/link-to}}
+
+{{!-- {{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="leaveComment") class="no-decoration"}}
 <button {{action 'btnClick'}} type="button" class="btn btn-default"> 
 	<i class="fa fa-comment"></i>{{ total }}
 </button>
 {{/link-to}}
 
+ --}}
