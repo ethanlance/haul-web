@@ -9,7 +9,7 @@ export default DS.RESTSerializer.extend({
 		var id = payload.data.user_id +payload.data.subject.id;
 		var data = {
 			id: id,
-			ref_type: payload.data.subject.type + "s",
+			ref_type: payload.data.subject.type,
 			ref_id: payload.data.subject.id,
 			user_id: payload.data.user_id
 		};
