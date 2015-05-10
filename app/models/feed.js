@@ -1,12 +1,13 @@
 import Ember from "ember";
 import DS from "ember-data";
 export default DS.Model.extend({
-		
+		 
 	//Helpers, keep.
 	post_id: DS.attr('string'),
 	user_id: DS.attr('string'),
 		
-	//POST
+	post: DS.belongsTo('post', {async:true}),
+
 	user: DS.belongsTo('user', {async:true}),
 
 	subject: DS.attr('string'),

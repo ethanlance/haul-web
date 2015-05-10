@@ -7,7 +7,10 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	post_id: DS.attr('string'),	
 	user_id: DS.attr('string'),	
 
-	
+
+	post: DS.belongsTo('post', {async:true}),
+
+
 	user: DS.belongsTo('user', {async:true}),
 	
 	//POST
