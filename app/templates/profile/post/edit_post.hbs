@@ -45,14 +45,14 @@
 		<div {{bind-attr class=":modal animateDeleteModal:in:out showDeleteModal:show:hide"}}>
 			<div class="modal-dialog sm text-left haul-edit">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-body text-center">
+
 						<button {{action 'closeDeleteModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">
+						<h3 class="modal-title" id="myModalLabel">
 							Delete This Post?
 							<small>This cannot be undone.</small>
-						</h4>
-					</div>
-					<div class="modal-body text-center">
+						</h3>
+
 						<button {{action 'closeDeleteModal'}} class="btn btn-cancel">Cancel</button>
 						{{ladda-btn
 							name='Delete Post'

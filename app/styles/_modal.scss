@@ -3,7 +3,7 @@
 .modal{
 	display:inline;
 	z-index: $z-index-modal;
-	background-color: rgba(255, 255, 255, 0);
+	background-color: rgba(255, 255, 255, .8);
 	overflow: scroll;
 	border-radius: none;
  
@@ -32,6 +32,11 @@
 	  		width:400px;
 	  		margin-left:auto;
 	  		margin-right:auto;
+
+	  		.modal-content {
+	  			border: 1px solid #eee;
+	  			height: auto;
+	  		}
 	  	}
 
 	  	&.lg{

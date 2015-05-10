@@ -23,6 +23,15 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	started: false,
 
+	reset: function() {
+		this.set('started', false);
+		this.set('showSuccess', false);
+		this.set('showRepost', false);
+		this.set('requestEditorContents', false);
+		this.set('selectedImages', []);
+		this.set('editorialForBody', "");
+	},
+
 	// The post model has been sent to this controller.  Now make a repost clone model of it.
  	modelReady: function() {
 
@@ -160,8 +169,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	actions: {
 
 		goToFeed: function() {
-			this.send('closeModal');
-			this.transitionToRoute('profile', this.get('currentUser'));
+			var _this = this;
+			this.transitionToRoute('profile', this.get('currentUser')).then(function(){
+				_this.reset();
+				_this.send('closeModal');
+			});
 		},
 
 		close: function() {
@@ -170,6 +182,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		cancel: function() {
 			this.set('animateClose', true);
+			this.reset();
 		},
 
 		savePost: function() { 

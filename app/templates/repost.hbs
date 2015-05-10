@@ -1,5 +1,5 @@
 {{#modal-modal animateClose=animateClose closeModal='closeModal'}}
-<div {{bind-attr class=":modal-dialog showSuccess:sm :text-left"}}>
+<div {{bind-attr class=":modal-dialog showSuccess:sm:lg :text-left"}}>
 	<div class="modal-content">	
 
 		{{!-- SUCCESS MESSAGE --}}
@@ -62,15 +62,16 @@
 				{{/form-for}} 
 
 				<div class="edit-footer">
-					<div class="edit-col">			
+					<div class="edit-col">
 
-						<button {{action 'showDeleteModal'}} class="btn btn-danger btn-left">
-							Delete Post
-						</button>
-
-
-						<button {{action 'savePost'}} class="btn-next">SAVE POST</button>
-
+						{{ladda-btn
+							name='SAVE POST'
+							class="display-inline"
+							btnClasses='btn-next ladda-button'
+							btnClick='savePost'
+							spin=isProcessing
+							dataSpinnerColor="white"
+						}}
 
 						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
 							Cancel
