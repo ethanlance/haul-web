@@ -13,8 +13,8 @@
     <div>
 
         {{ladda-btn 
-            name='change'
-            btnClasses='btn btn-primary ladda-button btn-right'
+            name='Change Username'
+            btnClasses='btn ladda-button btn-right btn-positive'
             btnClick='saveForm'
             spin=isProcessing
         }}
@@ -27,5 +27,5 @@
 
 <div {{bind-attr class="showForm:hide:show"}}>
     <h4>Congrats! {{session.currentUser.username}} is your new username</h4>
-    <button {{action 'showForm'}} class="btn btn-default btn-xs">Change again</button>
+    <button {{action 'showForm'}} class="btn btn-default btn-positive">Change again</button>
 </div>
