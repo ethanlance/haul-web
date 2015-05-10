@@ -12,7 +12,7 @@
 			<span class="comment">
 				{{#link-to 'settings.seller'}}
 					<strong><i class="fa fa-exclamation-circle"></i> Whoop, setup your seller account.</strong>  Your items can't be purchased until you do! 
-					<i class="fa fa-arrow-right"></i>
+					
 				{{/link-to}}
 			</span>
 		</div>
@@ -31,7 +31,7 @@
 			<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
 			<div class="moment">{{ format-moment post.created_at }}</div> 
 			<span class="comment">{{sanitizehtml-andtag post.comment "comment" ENV}}<span class="reply">
-		{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}REPLY{{/link-to}}
+		{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments")}}Reply&nbsp;<i class="fa fa-angle-double-right"></i>{{/link-to}}
 	</span></span>
 		</div>
 	</div>
