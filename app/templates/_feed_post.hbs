@@ -32,10 +32,10 @@
 	</div>
 	{{/if}}
 
-
+	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}
 	<div class="post-image">
 		{{#unless postHasImage}}
-			{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}<img {{bind-attr src=post.image.large}}/>{{/link-to}}
+			<img {{bind-attr src=post.image.large}}/>
 		{{/unless}}
 
 		<div class="post-image-overlay">
@@ -51,6 +51,7 @@
 		</div>
 
 	</div>
+	{{/link-to}}
 
 	<div class="post-bottom-cap">	
 

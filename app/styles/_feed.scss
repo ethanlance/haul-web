@@ -24,68 +24,68 @@
 	}
 
 	.post-owner {
-	margin-bottom: 20px;
+		margin-bottom: 20px;
 
 
-	.profile-image{
-		padding:0;
-		margin:0;
-		float: left;
-		border-radius: 50%;
-		width: 40px;
-		height: 40px;
-		margin-right: 15px;
-	}
-
-	.post-owner-details {
-		float:none;  
-		overflow:hidden;
-		display:block;
-		transition: all 0.2s ease;
-
-
-		.name a{
-			font-family: $primary-font;
-			font-weight: 600;
-			font-size: 12px;
-			color: #333;
-			transition: all 0.2s ease;
-			//text-transform: uppercase;
+		.profile-image{
+			padding:0;
+			margin:0;
+			float: left;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			margin-right: 15px;
 		}
-		.name a:hover {
-			color: $primary-color;
-			text-decoration: none;
-		}
-		.username a{
-			font-family: $primary-font;
-			font-size: 11px;
-			font-weight: 100;
-			color: #999;
-			font-style: italic;
-			text-transform: lowercase;
+
+		.post-owner-details {
+			float:none;  
+			overflow:hidden;
+			display:block;
 			transition: all 0.2s ease;
 
-			a:hover {
-				font-weight: 800;
-			color: $primary-color;
-			text-decoration: none;
+
+			.name a{
+				font-family: $primary-font;
+				font-weight: 600;
+				font-size: 12px;
+				color: #333;
+				transition: all 0.2s ease;
+				//text-transform: uppercase;
+			}
+			.name a:hover {
+				color: $primary-color;
+				text-decoration: none;
+			}
+			.username a{
+				font-family: $primary-font;
+				font-size: 11px;
+				font-weight: 100;
+				color: #999;
+				font-style: italic;
+				text-transform: lowercase;
+				transition: all 0.2s ease;
+
+				a:hover {
+					font-weight: 800;
+				color: $primary-color;
+				text-decoration: none;
+				}
+			}
+			.moment{ 
+				font-family: $primary-font;
+				font-weight: 100;
+				font-size: 9px;
+				color: #cccccc;
+				text-transform: lowercase;
+			}
+			.comment{ 
+				margin-top: 10px;
+				font-family: $primary-font;
+				font-size: 13px;
+				color: #333333;
 			}
 		}
-		.moment{ 
-			font-family: $primary-font;
-			font-weight: 100;
-			font-size: 9px;
-			color: #cccccc;
-			text-transform: lowercase;
-		}
-		.comment{ 
-			margin-top: 10px;
-			font-family: $primary-font;
-			font-size: 13px;
-			color: #333333;
-		}
 	}
-}
 
 	.repost-citations {
 		border: 0px solid #cccccc;
@@ -196,6 +196,7 @@
 			font-weight: 800;
 			font-size: 0.750em;
 			transition: all 0.4s ease;
+			cursor:pointer;
 		}
 		.product-status:hover{
 			display:inline-block;
@@ -236,10 +237,12 @@
 
 		.haul-btn {
 			margin-right:15px;
+			cursor:pointer;
 		}
 
 		.btn-buy-this {
 			margin-top: -12px;
+			cursor:pointer;
 		}
 	}
 
