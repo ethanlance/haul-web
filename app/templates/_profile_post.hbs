@@ -1,7 +1,8 @@
-<div class="product-post">
+<div class="feed-post">
 
-	<h1 class="subject">{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}</h1>
-
+	<h1 class="post-title">
+		{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}
+	</h1>
 
 
 	{{!-- //REPOST --}}
@@ -20,57 +21,36 @@
 	{{/if}}
 
 
-
-
-	<div class="social-buttons">
-		<div class="internal-social-buttons">
-			{{like-btn post=post openModal='openModal' class="display-inline"}}
-			 	
-		 	{{comment-btn post=post class="display-inline" gotolink='true'}}
-
-		 	{{repost-btn post=post openModal='openModal' class="display-inline"}}
-		</div>
-
-		<div class="external-social-buttons">
-			{{!-- {{social-btns post=post}} --}}
-		</div>
-	</div>
-
-	{{!-- EDITORIAL --}}
-	<div class="editorial">
+	<div class="post-image">
 		{{#unless postHasImage}}
 			{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}<img {{bind-attr src=post.image.large}}/>{{/link-to}}
 		{{/unless}}
-	</div>
 
-	<div class="product-feed-post-card">
-		<div class="card-details-box">
-			
-			<h3>{{post.subject}}</h3>
+		<div class="post-image-overlay">
 
-			<div class="profile-pod">
-				{{make-icon icon=post.product_user.icon}}
+			<div class="product-status">FOR SALE</div>
 
-				<div class="profile-name">
-					<span class="name">{{post.product_user.name}}</span>
-					<span class="username">@{{post.product_user.username}}</span>
-				</div>
-			</div>
-			
-			<div class="price">
-				${{post.product_price}}
-			</div>
+			<div class="product-price">${{post.product_price}}</div> 
 
-			{{buy-btn post=post class="display-inline" }}
+			<div class="product-title">{{post.subject}}</div>
+
+			<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.name}}</div>
 
 		</div>
-		{{!-- <div class="card-image-box">
-			<div class="card-image-mask">
-				<img {{bind-attr src=post.image.thumb}}/>
-			</div>
-			<div class="count">4 photos</div>
-		</div> --}}
+
 	</div>
 
+	<div class="post-bottom-cap">	
+
+		{{like-btn post=post openModal='openModal' class="display-inline"}}	 
+		 	
+		{{comment-btn post=post class="display-inline" gotolink='true' }}
+
+		{{repost-btn post=post openModal='openModal' class="display-inline"}}
+
+		{{buy-btn post=post class="display-inline btn-right btn-buy-this" }}
+	
+
+	</div>
 
 </div>
