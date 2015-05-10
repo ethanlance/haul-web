@@ -1,7 +1,7 @@
 .feed-post {
 
 	border: 1px solid #eee;
-	padding: 15px;
+	padding: 12px;
 
 
 	.post-title {
@@ -13,7 +13,7 @@
 		position:relative;
 		display: block; 
 		font-family: $primary-font;
-		font-weight: 400;
+		font-weight: 300;
 		font-size: 14px;
 		color: #555555;
 		line-height: 1.7;
@@ -31,8 +31,8 @@
 			// margin-left:auto;
 			// margin-right:auto;
 			display:block;
-			margin-bottom: 40px;
-			margin-top:40px;
+			margin-bottom: 20px;
+			margin-top:24px;
 			background-color: #fff;
 			//border: 8px solid #fff;
 			//box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
@@ -66,26 +66,39 @@
 		padding-bottom:15px;
 		width:100%;
 
-		background-color: rgba(0,0,0,.5);
+		background-color: rgba(0,0,0,.6);
 		color:white;
 
 		.product-status{
 			display:inline-block;
 			background-color: $primary-color;
 			padding:10px;
-			margin-bottom:20px;
+			margin-bottom:4px;
+			font-family: 'Arvo';
+			font-weight: 800;
+			font-size: 12px;
 		}
 
 		.product-price {
+			font-family: 'Arvo';
 			font-size: 30px;
+			font-weight: 800;
 		}
 
 		.product-title {
-			font-size: 20px;
+			font-family: $primary-font;
+			color: #fff;
+			font-weight: 300;
+			font-size: 18px;
 		}
 
 		.product-owner{ 
-			font-size: 10px;
+			font-size: 0.688em;
+			font-weight: 600;
+
+			.pre-text {
+				font-weight: 300;
+			}
 		}
 	}
 
@@ -109,9 +122,9 @@
 			margin:0;
 			float: left;
 			border-radius: 50%;
-			width: 40px;
-			height: 40px;
-			margin-right: 15px;
+			width: 28px;
+			height: 28px;
+			margin-right: 10px;
 		}
 
 		.post-owner-details {
