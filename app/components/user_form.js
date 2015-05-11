@@ -15,24 +15,29 @@ export default Ember.Component.extend({
 		if(Ember.isEmpty(this.get('currentUserId'))){
 			return;
 		}
+		var _this = this;
 		var store = this.container.lookup("store:main");
-		var model = store.createRecord('username',{user_id: this.get('currentUserId')});
-		this.set('model', model);
+		store.find('user', this.get('currentUserId'))
+		.then(function(record) {
+			_this.set('model', record);
+		});
 
 	}.observes('currentUserId'),
 
-	saveUsername: function() {
+	save: function() {
 
 		var _this = this;
 		var model = this.get('model');
-		var username = model.get('username');
+		var firstname = model.get('firstname');
+		var lastname = model.get('lastname');
 		
 		model.validate()
 		.then(function(){
 			return model.save();
 		})
 		.then(function(){
-			_this.set('session.currentUser.username', username);
+			_this.set('session.currentUser.firstname', firstname);
+			_this.set('session.currentUser.lastname', lastname);
 		})
 		.then(
 			function() { 
@@ -45,7 +50,7 @@ export default Ember.Component.extend({
 				if(error.status === 400){ 
 					_this.set('errorMessage', "Oops, usernames must be <ul><li>at least 3 characters long</li><li>must start with a letter</li><li>cannot have spaces</li><li>and can only contain letters and numbers</li></ul>");
 				}else if(error.status === 409){ 
-					_this.set('errorMessage', "Sorry, username unavailable.");
+					_this.set('errorMessage', "Sorry, name unavailable.");
 				}else{
 					_this.set('errorMessage', "Uhoh, there was an error.");
 				}
@@ -57,7 +62,7 @@ export default Ember.Component.extend({
 
 	actions: {
 		saveForm: function() {
-			this.saveUsername();
+			this.save();
 		},
 		showForm: function() {
 			this.set('showForm', true);

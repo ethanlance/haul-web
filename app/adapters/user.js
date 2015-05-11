@@ -32,9 +32,12 @@ export default ApplicationAdapter.extend({
         var user_id = this.get('currentUser').id;
 
         var data = {
-        	image_id: record.get('image_id'),
         	firstname: record.get('firstname'),
         	lastname: record.get('lastname')
+        }
+
+        if( record.get('image_id') ) {
+        	data.image_id = record.get('image_id');
         }
 
 		var url = this.get('host') + '/users/'+user_id;

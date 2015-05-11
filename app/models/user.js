@@ -1,7 +1,7 @@
 import DS from "ember-data"; 
 import Ember from 'ember';
-
-export default DS.Model.extend({
+import EmberValidations from 'ember-validations';
+export default DS.Model.extend(EmberValidations.Mixin, {
 	username: DS.attr('string'),
 	name: DS.attr('string'),
 	firstname: DS.attr('string'),
@@ -17,6 +17,16 @@ export default DS.Model.extend({
 	getPostsCount: DS.belongsTo('user-posts-count', {async:true} ),
 	getMentionsCount: DS.belongsTo('user-mentions-count', {async:true} ),
 	getUnreadMentionsCount: DS.belongsTo('user-mentions-unread-count', {async:true} ),
+
+
+	validations: { 
+		firstname: {
+		 	presence: true,
+		},
+		lastname: {
+		 	presence: true,
+		}
+	},
 
 	hastUnreadMentions: function() {
 

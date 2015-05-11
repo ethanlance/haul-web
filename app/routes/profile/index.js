@@ -15,7 +15,7 @@ export default Ember.Route.extend({
   	metaDescription: function() {
 		var user = this.modelFor('profile');
 
-		var title = "Post from " + user.get('name') + "(" + user.get('username') + ")";
+		var title = "Post from " + user.get('name') + " (" + user.get('username') + ")";
 
 		return title;
 	}.property(),

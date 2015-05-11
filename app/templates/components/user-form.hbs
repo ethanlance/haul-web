@@ -2,7 +2,8 @@
 <div {{bind-attr class="showForm:show:hide"}}>
     {{#form-for model}}
     <div >
-        {{input-field model.username class="form-control" placeholder="" label="false" enter='btnClick'}}
+        {{input-field model.firstname class="form-control" placeholder="First Name" label="false" enter='btnClick'}}
+        {{input-field model.lastname class="form-control" placeholder="Last Name" label="false" enter='btnClick'}}
     </div> 
     {{/form-for}}
 
@@ -26,6 +27,6 @@
 
 
 <div {{bind-attr class="showForm:hide:show"}}>
-    <h4>Congrats! {{session.currentUser.username}} is your new username</h4>
+    <h4>You're new name! {{session.currentUser.firstname}} {{session.currentUser.lastname}}</h4>
     <button {{action 'showForm'}} class="btn btn-default btn-right btn-positive">Change again</button>
 </div>
