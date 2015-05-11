@@ -3,12 +3,11 @@
 <div class="container">  
 	<div class="haul-content"> 
 		<div class="row">
-			<div class="col-md-2 col-sm-2 col-xs-12"></div>
-			<div class="col-md-8 col-sm-8 col-xs-12 padding-top">
+			
+			<div class="col-md-12 col-sm-12 col-xs-12 padding-top border">
 
 
 				{{!-- //CONTENT --}}
-				<div {{bind-attr class=":galleryView showGridView:in"}}>
 				{{#each like in sortedContent}}
 					{{#with like.post as post }}
 						
@@ -16,7 +15,7 @@
 					
 					{{/with}}
 				{{/each}}
-				</div>
+				
 				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 					<i class="fa fa-circle-o-notch fa-spin"></i>
 				{{/infinite-scroll}}
@@ -39,7 +38,7 @@
 
 
 			</div> 
-			<div class="col-md-2 col-sm-2 col-xs-12"></div>	
+			
 		</div>
 	</div>
 </div>
