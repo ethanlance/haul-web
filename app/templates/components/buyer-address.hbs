@@ -125,13 +125,13 @@
 		{{partial "_server_error"}}
 
 		{{#if hasAddressList }}
-		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right btn-xs">cancel</button>
+		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right btn-cancel"><i class="fa fa-times"></i> Cancel</button>
 		{{/if}}
 
 		{{ladda-btn
 			name=buttonText
 			class="display-inline"
-			btnClasses='btn btn-default ladda-button btn-right btn-xs'
+			btnClasses='btn btn-default ladda-button btn-right btn-positive'
 			btnClick='doSubmitAddressForm'
 			spin=isProcessing
 		}}

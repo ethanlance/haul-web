@@ -11,7 +11,7 @@
 
 <div {{bind-attr class="showList:show:hide :haul-checkout"}}>
 	<h3>Select a card.
-		<button {{action 'showCreateNewCard' }} class="btn btn-default btn-xs">add new</button>
+		<button {{action 'showCreateNewCard' }} class="btn btn-default btn-positive">Add New</button>
 	</h3> 
 	
 	<ul>
@@ -23,8 +23,8 @@
 				{{card.card_type}} ending in {{card.number}} 
 			</label>
 
-			{{!-- <button {{action 'showEditAddress' address.id}} class="btn btn-default btn-xs">edit</button> --}}
-			<button {{action 'showRemoveCard' card.id}} class="btn btn-default btn-xs">remove</button>
+			{{!-- <button {{action 'showEditAddress' address.id}} class="btn btn-default btn-cancel">Edit</button> --}}
+			<button {{action 'showRemoveCard' card.id}} class="btn btn-default btn-cancel">remove</button>
 			
 		</li>
 	{{/each}}
@@ -43,8 +43,8 @@
 		<img height="20px" {{bind-attr src=selectedCard.card_image_url}}> 
 			{{selectedCard.card_type}} ending in {{selectedCard.number}} 
 
-		<button {{action 'doRemoveCard' selectedCard }} class="btn btn-default btn-right btn-xs">yes, remove</button>
-		<button {{action 'showCardList' }} class="btn btn-default btn-right btn-xs">cancel</button>
+		<button {{action 'doRemoveCard' selectedCard }} class="btn btn-default btn-right btn-positive">yes, remove</button>
+		<button {{action 'showCardList' }} class="btn btn-default btn-right btn-cancel"><i class="fa fa-times"></i> Cancel</button>
 	</p>
 
 </div>	
@@ -117,15 +117,15 @@
 
 
 		{{ladda-btn
-			name='save'
+			name='Save Card'
 			class="display-inline"
-			btnClasses='btn btn-default ladda-button btn-right btn-xs'
+			btnClasses='btn btn-default ladda-button btn-right btn-positive'
 			btnClick='doSubmitCardForm'
 			spin=isProcessing
 		}}
 
 		{{#if hasCardList }}
-		<button {{action 'doCancelCardForm' }} class="btn btn-default btn-right btn-xs">cancel</button>
+		<button {{action 'doCancelCardForm' }} class="btn btn-default btn-right btn-cancel"><i class="fa fa-times"></i> Cancel</button>
 		{{/if}}
 
 </form>

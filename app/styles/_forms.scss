@@ -574,6 +574,8 @@ textarea.form-control {
 
 .btn-next {
 	background-color: #6FD014;
+	font-size: 13px;
+	font-weight: 600;
 	color: #ffffff;
 	border: none;
 	display:inline-block;
@@ -590,6 +592,7 @@ textarea.form-control {
 
 .btn-post {
 	background-color: #6FD014;
+	font-size: 13px;
 	color: #ffffff;
 	border: none;
 	display:inline-block;
@@ -604,18 +607,39 @@ textarea.form-control {
 	background-color:#5dad12;
 }
 
+.btn-positive {
+	background-color: #6FD014;
+	font-size: 13px;
+	font-weight: 600;
+	color: #ffffff;
+	border: none;
+	display:inline-block;
+	padding:10px;
+	padding-right: 20px;
+	padding-left: 20px;
+	margin-left: 0px;
+	transition: background-color 0.2s ease;
+	text-transform: uppercase;
+}
+
+.btn-positive:hover {
+	background-color:#5dad12;
+	color: #fff;
+}
+
 .btn-cancel { 
 	padding:10px;
 	padding-right: 20px;
 	padding-left: 20px;
 	font-family: $primary-font;
-	font-weight: 400;
-	font-size: 12px;
+	font-weight: 600;
+	font-size: 13px;
 	background-color: transparent;
 	color: #cccccc;
 	border: none;
 	display:inline-block; 
 	transition: background-color 0.2s ease;
+	text-transform: uppercase;
 }
 
 .btn-cancel:hover {
@@ -623,7 +647,7 @@ textarea.form-control {
 }
 
 button.btn-cancel{
-	border: 1px solid #ccc;
+	border: 0px solid #ccc;
 }
 
 .btn-danger {
