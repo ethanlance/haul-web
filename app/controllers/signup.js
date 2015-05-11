@@ -139,10 +139,7 @@ export default Ember.ObjectController.extend({
 			var model = this.get('model');
 
 	 		//Validate Modal.
-			model.validate().then(function(){
-				//Create User.
-				return _this.createUserByEmail(data);	
-			})
+			_this.createUserByEmail(data)
 			.then(
 				function() {
 					_this.set('isProcessingSubmit', false); 

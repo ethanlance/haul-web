@@ -238,9 +238,18 @@ nav {
 			padding-right: 20px;
 		}
 
-		img {
+		.profile-image {
 			width:30px;
+			height:30px;
 			border-radius: 50%;
+
+			&.default-user{
+				border:1px solid #eee;
+				overflow:hidden;
+			}	
+			.glyphicon-user{
+				font-size:30px;
+			}
 		}
 
 		&:hover{
@@ -259,7 +268,7 @@ nav {
 			padding-left: 10px;
 			margin-top:8px;
 
-			img {
+			.profile-image {
 				width: 25px;
 			}
 		}

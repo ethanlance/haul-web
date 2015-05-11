@@ -41,10 +41,16 @@ header.profile{
 		border-radius: 50%;
 		width: 40px;
 		height: 40px;
+		.glyphicon-user{
+			font-size:40px;
+		}
 
 		@media (max-width: 400px) {
 			width:30px;
 			height:30px;
+			.glyphicon-user{
+				font-size:30px;
+			}
 		}
 	}
 
