@@ -4,7 +4,7 @@
 
 
 
-	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}
+	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 	<div class="post-image">
 		{{#unless postHasImage}}
 			<img {{bind-attr src=post.image.large}}/>
@@ -29,7 +29,7 @@
 
 
 			<div class="post-title">
-				{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}
+				{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null"  reply="null")}}{{ post.subject }}{{/link-to}}
 			</div>
 
 			{{#link-to 'profile' post.user.username }}{{make-icon icon=post.user.icon}}{{/link-to}}

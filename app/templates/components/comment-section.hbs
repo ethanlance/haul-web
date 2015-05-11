@@ -12,7 +12,7 @@
 				{{make-icon icon=session.currentUser.icon}}
 
 				<div class="comment-input">
-					{{input comment as="text" placeholder="Write a comment..." class="commentbox"  label="false"   }}
+					{{input model.comment as="text" placeholder="Write a comment..." class="commentbox"  label="false"   }}
 					
 		    		<div {{bind-attr class="showServerErrors:show:hide :alert"}}>{{{serverErrorMessage}}}</div> 
 				</div>

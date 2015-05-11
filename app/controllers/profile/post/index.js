@@ -18,9 +18,11 @@ export default Ember.ObjectController.extend({
 	totalCommentsBinding: "model.commentCount.total",
 
  	queryParams: {
-    	anchor: "anchor"
+    	anchor: "anchor",
+    	reply: "reply"
   	},
   	anchor: null,
+  	reply: null,
  	
 	currentUserIdBinding: 'session.currentUser.id',
 	

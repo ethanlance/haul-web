@@ -19,6 +19,7 @@ export default Ember.Component.extend( PaginateMixin,{
 
 	anchorBinding: 'anchor',
 
+	replyBinding: 'reply',
 
 	storeName: 'comment',	
 
@@ -87,6 +88,13 @@ export default Ember.Component.extend( PaginateMixin,{
 
 		this.makeModel();
 
+  		if(this.get('reply')) {
+  			var model = this.get('model');
+  			var txt = "Hi @" + this.get('reply') +" ...";
+  			model.set('comment', txt);
+  			this.set('showSubmitCommentButton', true);
+  		}		
+
 		//Pagination:	
 		this.set('paginateQuery', {
 			storeName: this.get('storeName'),
@@ -132,7 +140,9 @@ export default Ember.Component.extend( PaginateMixin,{
 			}else{
 				_this.set('showSubmitCommentButton', false);
 			}
-		})
+		});
+
+
 	},
 
 	startMentions: function() {

@@ -1,7 +1,7 @@
 <div class="feed-post">
 
 	<h1 class="post-title">
-		{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}
+		{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}{{ post.subject }}{{/link-to}}
 	</h1>
 
 
@@ -20,7 +20,7 @@
 	</div>
 	{{/if}}
 
-	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null")}}
+	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 	<div class="post-image">
 		{{#unless postHasImage}}
 			<img {{bind-attr src=post.image.large}}/>
