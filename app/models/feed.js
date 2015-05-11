@@ -38,6 +38,17 @@ export default DS.Model.extend({
 	commentCount: DS.belongsTo('comment-count', {async:true}),
 	likesCount: DS.belongsTo('post-likes-count', {async:true}),
 
+	product_status_text: function() {
+		var product_status = this.get('product_status');
+		if( product_status == 'FOR_SALE' ) {
+			return "FOR SALE";
+		}else if( product_status === "SOLD") {
+			return "SOLD!";
+		}else{
+			return "Not For Sale.";
+		}
+	}.property('product_status'),
+
 	post_slug: function() {		
 		if(!Ember.isEmpty(this.get('subject'))){
 			return this.get('subject').toLowerCase().replace(/ /g,'-').replace(/[-]+/g, '-').replace(/[^\w-]+/g,''); 
