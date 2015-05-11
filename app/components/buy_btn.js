@@ -1,4 +1,9 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
-	contentBinding:'post'
+	
+	postBinding:'post',
+
+	isForSale: Ember.computed.equal('post.product_status', "FOR_SALE"),
+
+
 });

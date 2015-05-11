@@ -39,6 +39,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	commentCount: DS.belongsTo('comment-count', {async:true}),
 	likesCount: DS.belongsTo('post-likes-count', {async:true}),
 
+
 	product_status_text: function() {
 		return this.get('product_status').replace("_"," ");
 	}.property('product_status'),	
