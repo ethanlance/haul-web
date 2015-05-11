@@ -22,7 +22,6 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
-
 	userChanged: function() {
 
 		//Pagination:	

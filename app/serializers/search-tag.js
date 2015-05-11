@@ -29,7 +29,8 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 				likes_total: result.likes_total,
 			};
 		});
-
+console.log("PAYLOAD", payload);
+console.log("DATA", data);
 		payload = {'search-tag': data}; 
 		return this._super(store, primaryType, payload);
 	},

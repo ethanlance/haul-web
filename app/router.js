@@ -58,8 +58,7 @@ Router.map(function(){
 		this.route('creditcards');
 	});
 
-
-	//Search
+	this.route('search');	
 	this.route('discover');
 
 	this.route('not_found');

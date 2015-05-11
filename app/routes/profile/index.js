@@ -31,6 +31,7 @@ export default Ember.Route.extend({
 			});
 		});
 	},
+	
 	setupController: function(controller, model) {
 		controller.set('limit', this.get('limit'));
 		controller.set('pagedContent', model);

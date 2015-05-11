@@ -1,0 +1,107 @@
+
+
+<header class="profile">
+<div class="container-fluid">	
+	<div class="profile-container">
+
+
+		<h1 {{bind-attr class="showResults:hide:show"}}>Discover</h1>
+		<h1 {{bind-attr class="showResults:show:hide"}}>{{{typeText}}}  <b>{{queryText}}</b></h1>
+
+
+
+	</div>
+</div>
+</header>
+
+<div class="container">  
+	<div class="haul-content"> 
+		<div class="row">
+			<div class="col-md-2 col-sm-2 col-xs-12"></div>
+			<div class="col-md-8 col-sm-8 col-xs-12 padding-top">
+
+		 
+
+			{{!-- //LOADING CONTENT --}}
+			{{#if loading }}
+				{{partial '_spinner'}}
+			{{/if}}
+
+
+			{{!-- //CONTENT --}}
+			<div {{bind-attr class="galleryView:gallery"}}>
+			
+			 	
+
+			{{#if currentTypeIsHashtag }}
+			 	{{#each item in sortedContent}}
+			 		<ul class="search-hashtag">
+			 			<li {{action 'clickHashtag' item}}>
+			 				<span class="search-hashtag-tag">#{{item.name}}</span> <span class="search-hashtag-total">{{item.total}} posts</span></li>
+			 		</ul>
+				{{/each}}
+
+			{{/if}}
+
+
+
+			{{#if currentTypeIsUser }}
+					
+				{{#each item in sortedContent}}
+					{{profile-badge profile=item.user}} 
+				{{/each}}
+
+			{{/if}}
+
+
+
+
+			{{#if currentTypeIsPost }}
+			 	{{#each post in sortedContent}}
+
+			 	<div class="product-post">
+
+			 		<h1 class="subject">
+			 			{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}
+			 		</h1>
+
+			 		<div class="editorial"> 
+						{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}<img {{bind-attr src=post.image.large}}/>{{/link-to}} 
+					</div>
+
+					<div class="product-feed-post-card">
+						<div class="card-details-box">
+							
+							<h3>{{#link-to 'profile.post' 
+								post.user.username 
+								post.id 
+								post.post_slug 
+								(query-params anchor="null")
+								}}{{post.product_name}}{{/link-to}}</h3>
+							
+							<div class="price">
+								${{post.product_price}}
+								<small>{{post.product_status_text}}</small>
+							</div>
+
+
+						</div> 
+					</div>
+
+
+			 	</div>
+ 
+				{{/each}}
+			{{/if}}
+
+	 
+			</div>
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<span>Loading...</span>	
+			{{/infinite-scroll}}
+		    
+			</div> 
+			<div class="col-md-2 col-sm-2 col-xs-12"></div>
+		</div>
+	</div>
+</div>

@@ -51,6 +51,10 @@ module.exports = function(environment) {
 		}
 	};
 
+	//Admin username
+	ENV.APP.adminUser = "admin";
+
+
 	if (environment === 'development') {
 
 		var protocol = 'http://';
