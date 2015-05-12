@@ -7,6 +7,6 @@ export default Ember.Route.extend(ResetScrollMixin,{
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('haul');
-	},
+		this.render('about');
+	}
 });
