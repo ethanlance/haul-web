@@ -25,6 +25,7 @@ export default DS.RESTSerializer.extend({
 			small: image.locations.small,
 			large: image.locations.large,
 			medium: image.locations.medium,
+			square: image.locations.square,
 			
 
 			caption: image.caption,

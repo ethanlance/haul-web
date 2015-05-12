@@ -6,6 +6,7 @@ export default DS.Model.extend({
 	large: DS.attr('string'),
 	small: DS.attr('string'),
 	thumb: DS.attr('string'),
+	square: DS.attr('string'),
 	caption: DS.attr('string'),
 	user_id: DS.attr('string'),
 	created_at: DS.attr('number'),
