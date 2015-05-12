@@ -52,7 +52,7 @@ module.exports = function(environment) {
 	};
 
 	//Admin username
-	ENV.APP.adminUser = "admin";
+	ENV.APP.adminUser = "haul";
 
 
 	if (environment === 'development') {

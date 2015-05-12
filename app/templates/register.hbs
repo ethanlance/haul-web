@@ -1,4 +1,4 @@
-{{super-slides}}
+
 <span class="anon">
 <header>
     <div class="container">
@@ -13,34 +13,42 @@
 				
 
 				{{#if error}}
-					<div class="alert">Oops, that did not work out.</div>
+					<div class="alert">
+						Oops, that did not work out.
+						{{partial "_server_error"}}
+					</div>
 				{{/if}}
+				
  	
 				{{#form-for model}}
 	 			<div class="form-group">	
-			      		{{input ticket_id as="hidden"}}
-			      		{{input user_id as="hidden"}}
+			      		{{input ticket_id as="hidden" label="false"}}
+			      		{{input user_id as="hidden" label="false"}}
 					</div> 
 		 
 			 		<div class="form-group">	
-			 			{{input password placeholder="Password" label="false"}} 
+			 			{{input password placeholder="Password" showErrors='' label="false"}} 
+			 			{{#if showErrors}}
+							<span class="has-error help-block">{{error-field password}}</span>
+						{{/if}}
 					</div> 
 
 
-		 {{!-- 
-			 		<div class="form-group">	
-			 			{{input display_name placeholder="Username" label="false"}} 
-					</div>  --}}
 
-		 
 			 		<div class="form-group">	
-			 			{{input firstname placeholder="First Name"  label="false"}} 
+			 			{{input firstname placeholder="First Name"  label="false"}}  
+			 			{{#if showErrors}}
+							<span class="has-error help-block">{{error-field firstname}}</span>
+						{{/if}}
 					</div> 
 
 
 		 
 			 		<div class="form-group">	
-			 			{{input lastname placeholder="Last Name" label="false"}} 
+			 			{{input lastname placeholder="Last Name" label="false"}}  
+			 			{{#if showErrors}}
+							<span class="has-error help-block">{{error-field lastname}}</span>
+						{{/if}}
 					</div> 
 
 

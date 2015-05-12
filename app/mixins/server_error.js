@@ -17,21 +17,27 @@ export default Ember.Mixin.create({
 	},
 
 	handleServerError: function( error ) {
-		console.log("Error", error);
+		
 
-		if( !error.hasOwnProperty('status')) {
-			return;
-		}
+		// if( !error.hasOwnProperty('status')) {
+		// 	return;
+		// }
 		
 		var message;
-		if( this.ENV.errorMessages[error.status] ){
+		if( error.hasOwnProperty('status') && this.ENV.errorMessages[error.status] ){
 			message = this.ENV.errorMessages[error.status];
+		}else if( error.message ){
+			message = error.message;
 		}else{
 			message = this.ENV.errorMessages[400];
 		}
 
-		var obj = JSON.parse(error.responseText);
-		message = message + "<p>" + obj.message + "</p>";
+		if( error.hasOwnProperty('responseText')) {
+			var obj = JSON.parse(error.responseText);
+			message = message + "<p>" + obj.message + "</p>";
+		}
+
+
 
 		this.set('serverErrorMessage', message); 
 	},

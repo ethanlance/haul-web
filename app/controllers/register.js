@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import config from '../config/environment';
+import ErrorMixin from '../mixins/server_error';
 var Config = config.APP;
 
-export default Ember.ObjectController.extend({
+export default Ember.ObjectController.extend(ErrorMixin,{
 
 	needs: ['login'],
 
@@ -30,9 +31,9 @@ export default Ember.ObjectController.extend({
 
 		return _this.get('controllers.login').authenticate(url, 'put', data)
 		.then(null, function(error) {
-			console.log("Error submit confirm", error);
 			_this.set('isProcessing', false);
 			_this.set('error', true); 
+			_this.handleServerError(error);
 		});
 	},
 
@@ -45,7 +46,6 @@ export default Ember.ObjectController.extend({
 		//LOGIN via email, password
 		submit: function() {
 			this.set('isProcessing', true);
-
 			var _this = this;
 			var model = this.get('model');
 			var data = this.getProperties('firstname', 'lastname', 'password');
@@ -53,9 +53,9 @@ export default Ember.ObjectController.extend({
 	 		//Model Validations:
 			model.validate().then(function(){
 				_this.confirmSignup(data);	
-			}, function() {
+			}, function(errors) {
 				_this.set('isProcessing', false);
-				_this.set('showErrors', true);
+				_this.set('showErrors', true); 
 			});
 	 	}
 	}

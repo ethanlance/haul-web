@@ -35,7 +35,7 @@ Router.map(function(){
 	this.route('reset-password');
 	
 	this.route('signup');
-	this.route('signupconfirm', {path: "register"});
+	this.route('register');
 	this.route('signupusername');
 
 	
