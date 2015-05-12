@@ -3,7 +3,8 @@
 
 
 	  {{#if error404}}
-	  	<div class="alert">Sorry, you need to sign up and create an account first.<br/>Go to {{#link-to 'signup'}}Sign Up{{/link-to}}</div>
+	  	<div class="alert">Sorry, you need to sign up and create an account first.<br/>
+	  	Go to <a {{action 'openModal' 'signupmodal'}}>Sign Up</a></div>
 	  {{/if}}
 
 	<div class="form-group">
