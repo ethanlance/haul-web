@@ -156,11 +156,18 @@ nav {
 		float:left;
 
 		i {
-			padding-left: 15px;
+			margin-left: 7px;
+			margin-right: 7px;
 		}
 
 		.nav-link-badge {
 
+		}
+
+
+		a.active {
+			border-bottom: 2px solid $primary-color;
+			padding-bottom: 18px;
 		}
 
 		@media (max-width: 750px) {
@@ -198,6 +205,11 @@ nav {
 
 		a:hover {
 			color: $primary-color;
+		}
+
+		a.active {
+			border-bottom: 2px solid $primary-color;
+			padding-bottom: 18px;
 		}
 
 		.nav-link-badge {
@@ -270,6 +282,10 @@ nav {
 
 			.profile-image {
 				width: 25px;
+				height: 25px;	
+				.glyphicon-user{
+					font-size:25px;
+				}
 			}
 		}
 	}
