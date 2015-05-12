@@ -119,7 +119,20 @@ export default Ember.ObjectController.extend({
 						var data = { 
 							fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
 							fb_token: 	_this.get('controllers.facebook.facebook_access_token')}
-						return  _this.get('controllers.login').authenticate('/auth/facebook', 'post', data);
+
+							var promise = _this.get('controllers.login').authenticate('/auth/facebook', 'post', data);
+							
+							promise.then(
+
+								function success() {
+									_this.set('isProcessingFacebook', false);
+									_this.send('closeModal');
+								},
+								function failed(error){
+									console.log("error", error)
+								}
+							);
+
 					}else{
 						console.error("Failed Signup", error);
 						_this.set('isProcessingFacebook', false);
