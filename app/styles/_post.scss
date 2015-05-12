@@ -240,6 +240,10 @@
 
 }
 
+
+
+// This is the CSS for the single post page.  
+// Meaning the post detail page.  Not a post within a feed.
 .product-post {
 	margin:0;
 	padding:0;
@@ -277,14 +281,22 @@
 			font-family: $primary-font;
 			font-size: 12px; 
 			float:left;
-			width: 300px;
+			width: 340px;
 
-			button {
+
+
+			.haul-btn, button {
 				background-color: #fafafa;
 				padding:3px 8px 3px 8px;
 				color: #555;
 				font-size: 12px;
-				border-color: #dedede;
+				border: 1px solid #dedede;
+				cursor:pointer;
+				margin-right: 10px;
+			}
+
+			.haul-btn:hover{
+				background-color: #fce6e7;
 			}
 
 
