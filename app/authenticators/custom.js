@@ -102,9 +102,9 @@ export default Base.extend({
 	*/
 	restore: function(data) {
 		var _this = this;
-		console.log("RESTPRE?")
+		
 		return new Ember.RSVP.Promise(function(resolve, reject) {
-			console.log("WTF?")
+			
 			var now = Math.round(new Date().getTime() /1000)
 
 			if (!Ember.isEmpty(data.expires_at) && data.expires_at < now) {
