@@ -5,8 +5,6 @@
 <nav>
 
 	<div class="nav">
-
-
 		
 		<div class="logo">
 			{{#link-to "home"}}HAUL{{/link-to}}
@@ -16,21 +14,25 @@
 		{{!-- When browser is collapsed --}}
 		<div class="nav-link-wrapper-collapse">
  
- 
-				{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-home fa-2x"></i>{{/link-to}}
-			 
- 
-				
-					{{#link-to 'mentions' }}<i class="fa fa-envelope-o fa-2x"></i>{{/link-to}}
-					{{#if session.currentUser.hastUnreadMentions}}
-						{{mention-count}}
-					{{/if}}
-				
-		 
- 
-				<i {{action 'toggleSearch'}} class="fa fa-search fa-2x"></i> 
+ 			<span class="nav-item">
+				{{#link-to 'home' }}<i class="fa fa-home fa-2x"></i>{{/link-to}}
+		 	</span>
 
-			{{new-post-btn openModal='openModal' btn-text="ADD A NEW POST" iconOnly='true' class="display-inline"}}
+		 	<span class="nav-item">
+				{{#link-to 'mentions' }}<i class="fa fa-envelope-o fa-2x"></i>{{/link-to}}
+				{{#if session.currentUser.hastUnreadMentions}}
+					{{mention-count}}
+				{{/if}}
+			</span>
+			
+			<span class="nav-item">
+				<i {{action 'toggleSearch'}} class="fa fa-search fa-2x"></i> 
+			</span>
+
+			<span class="nav-item">
+			{{new-post-btn 
+				openModal='openModal' btn-text="ADD A NEW POST" iconOnly='true' class="display-inline"}}
+			</span>
 
 		</div>	
 		
@@ -101,7 +103,18 @@
 		{{!-- When browser is collapsed --}}
 		<div class="nav-link-wrapper-collapse">
 
-			<i {{action 'toggleSearch'}} class="fa fa-search fa-2x"></i> 
+			
+			<i {{action 'toggleSearch'}} class="fa fa-search fa-2x display-inline "></i> 
+
+			<div class="nav-link display-inline">
+				{{#link-to 'about.us'}}ABOUT{{/link-to}}
+			</div>	
+
+			{{signup-btn openModal='openModal' class="display-inline"}}
+
+			{{login-btn openModal='openModal' class="display-inline"}}
+					
+
  
 		</div>	
 		
@@ -117,12 +130,15 @@
 		</div>	
 
 
-		{{signup-btn openModal='openModal'}}
+		<div class="nav-link-wrapper right">
+			{{signup-btn openModal='openModal' class="display-inline"}}
 
-		{{login-btn openModal='openModal'}}
-		
-
-		{{#link-to 'about.us'}}<button type="button" class="btn btn-default btn-about">About</button>{{/link-to}}
+			{{login-btn openModal='openModal' class="display-inline"}}
+			
+			<div class="nav-link">
+				{{#link-to 'about.us'}}ABOUT{{/link-to}}
+			</div>
+		</div>
 
 	</div>
 </nav>
