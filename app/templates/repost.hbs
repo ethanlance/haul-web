@@ -8,7 +8,7 @@
 				<div class="edit-row">
 					<div class="edit-col">
 						<h5>Repost Complete!</h5>
-						<button {{action 'close'}} class="btn btn-default">Close</button>
+						<button {{action 'close'}} class="btn btn-default"><i class="fa fa-times"></i> Close</button>
 						<button {{action 'goToFeed'}} class="btn btn-default">Go to my feed</button>
 					</div>
 				</div>
@@ -21,8 +21,8 @@
 		<div {{bind-attr class="showSuccess:hide:show"}}>
 			<nav>
 				<div class="nav">
-					<div class="logo rehaul">REHAUL</div>
-					<button {{action 'cancel'}} class="nav-add-post">Cancel</button>
+					<div class="logo rehaul">RE-HAUL</div>
+					<button {{action 'cancel'}} class="nav-cancel-post"><i class="fa fa-times"></i> CANCEL</button>
 				</div>
 			</nav>
 
@@ -36,10 +36,9 @@
 					<div class="edit-row">
 						<div class="edit-col">
 
-							<h2>Rehaul this post
+							<h2>Repost Product
 
-								<small>You can write an awesome blog about this, or just post 
-								what you see below.
+								<small>You can write an your own new blog about this, or edit the post below as you see fit, or just repost it as is. The actual product itself will still be associated to your new post, uncahnged.
 								</small>
 
 							</h2>
@@ -67,14 +66,14 @@
 						{{ladda-btn
 							name='Save Post'
 							class="display-inline"
-							btnClasses='btn-next ladda-button'
+							btnClasses='btn-positive ladda-button'
 							btnClick='savePost'
 							spin=isProcessing
 							dataSpinnerColor="white"
 						}}
 
 						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
-							Cancel
+							<i class="fa fa-times"></i> CANCEL
 						</span>
 
 					</div>
