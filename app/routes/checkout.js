@@ -41,7 +41,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 		});
  	},
 	renderTemplate: function() {
-		this.render('layouts/header_base', {
+		this.render('layouts/header_slim', {
 			into: 'application',
 			outlet: 'header'
 		});

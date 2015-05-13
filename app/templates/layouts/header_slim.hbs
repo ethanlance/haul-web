@@ -1,0 +1,33 @@
+<nav>
+
+	<div class="nav">
+		
+		<div class="logo">
+			{{#link-to "home"}}HAUL{{/link-to}}
+		</div>
+
+		{{#if session.isAuthenticated }}
+		<div class="nav-profile">
+			
+			{{make-icon icon=session.currentUser.icon}}
+			
+			<ul class="dropdown-menu dropdown-menu-right" role="menu">
+				
+				<li>{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-user"></i> Profile{{/link-to}}</li>
+				
+				<li class="divider"></li>
+				<li>{{#link-to 'settings.profile'}}<i class="fa fa-wrench"></i> Settings{{/link-to}}</li>
+				
+	            <li class="divider"></li>
+	            <li>{{#link-to 'about.us'}}<i class="fa fa-compass"></i> About {{/link-to}}</li>
+
+				<li class="divider"></li>
+				<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
+			</ul>
+
+		</div>
+		{{/if}}
+		
+	</div>
+</nav>
+
