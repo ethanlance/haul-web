@@ -86,7 +86,7 @@ export default Ember.ObjectController.extend({
 		}else if( product_status === "SOLD") {
 			this.set('statusText', "SOLD!");
 		}else{
-			this.set('statusText', "Not For Sale.");
+			this.set('statusText', "Not For Sale");
 		}
 
 

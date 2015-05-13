@@ -71,7 +71,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		}else if( product_status === "SOLD") {
 			this.set('statusText', "SOLD!");
 		}else{
-			this.set('statusText', "Not For Sale.");
+			this.set('statusText', "Not For Sale");
 		}
 
 	}.observes('model', 'model.product_status'),

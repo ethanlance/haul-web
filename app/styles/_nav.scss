@@ -193,6 +193,7 @@ nav {
 
 		a.active {
 			padding-bottom: 12px;
+			font-weight: 800;
 			border-bottom: 2px solid $primary-color;
 			@media (max-width: 400px) {
 				padding-bottom: 18px;
@@ -240,15 +241,17 @@ nav {
 		}
 
 		a.active {
+			font-weight: 800;
 			border-bottom: 2px solid $primary-color;
 			padding-bottom: 18px;
 		}
 
 		.nav-link-badge {
 			min-width: 20px;
-			padding:1px 4px 1px 4px;
-			background-color: $primary-color;
-			color: #ffffff;
+			font-weight: 800;
+			padding:1px 2px 1px 4px;
+			background-color: #fff;
+			color: $primary-color;
 		}
 	}
 

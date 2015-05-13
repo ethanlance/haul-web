@@ -45,7 +45,7 @@ export default DS.Model.extend({
 		}else if( product_status === "SOLD") {
 			return "SOLD!";
 		}else{
-			return "Not For Sale.";
+			return "Not For Sale";
 		}
 	}.property('product_status'),
 

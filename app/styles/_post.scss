@@ -277,32 +277,41 @@
 		display:inline-block;
 
 		.internal-social-buttons{
-			font-weight: bold;
+			font-weight: 500;
 			font-family: $primary-font;
-			font-size: 12px; 
+			font-size: 11px; 
 			float:left;
 			width: 340px;
+			text-transform: uppercase;
+
 
 
 
 			.haul-btn, button {
-				background-color: #fafafa;
-				padding:3px 8px 3px 8px;
+				background-color: #fcfcfc;
+				padding:4px 8px 4px 8px;
 				color: #555;
-				font-size: 12px;
-				border: 1px solid #dedede;
+				font-weight: 600;
+				font-size: 11px;
+				border: 1px solid #eee;
 				cursor:pointer;
 				margin-right: 10px;
+
+				
+				
+
 			}
 
 			.haul-btn:hover{
-				background-color: #fce6e7;
+				background-color: #fff;
+				border-color: $primary-color;
+				color: $primary-color;
 			}
 
 
 			.fa{
 				padding-right:5px;
-				font-size: 16px;
+				font-size: 12px;
 			}
 
 			.fa-retweet {
