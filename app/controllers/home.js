@@ -45,6 +45,7 @@ export default Ember.ObjectController.extend(PaginateMixin, {
 		
 	}.on('init').observes('currentUserId'),
 
+
 	actions: {
     	fetchMore: function(callback) {
 			var promise = this.paginateMore();		
