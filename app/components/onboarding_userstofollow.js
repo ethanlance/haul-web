@@ -5,6 +5,8 @@ export default Ember.Component.extend({
 
 	users: [],
 
+	usersReady: Ember.computed.notEmpty('users'),
+
 	currentUserIdBinding: "session.currentUser.id",
 
 	
@@ -62,8 +64,6 @@ export default Ember.Component.extend({
 			});
 
 		});
-
-
 	}.observes('currentUserId'),
 
 
