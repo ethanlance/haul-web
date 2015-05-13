@@ -4,11 +4,15 @@
 	{{#each user in users}}
 		{{#if user}}
 			<div class="user">
-				{{make-icon icon=user.icon}}
+				
+				{{#link-to 'profile' user.username }}
+					{{make-icon icon=user.icon}}
+				{{/link-to}}
+				
 				{{ follow-btn followUser=user openModal='openModal' }}
 
 				{{#if user.isCurrentUser}}
-					<div>Wow, your famous!</div>
+					<div>Wow, you're famous!</div>
 				{{/if}}
 
 			</div>

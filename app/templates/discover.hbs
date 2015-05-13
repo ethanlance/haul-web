@@ -14,10 +14,14 @@
 </div>
 </header>
 
-<div class="container">  
-	<div class="haul-content"> 
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
+
+<div class="container-fluid">
+	
+	<div class="haul-wrapper2">
+
+		<div class="haul-content2">
+
+			<div class="col-left2"> 
 
 		 
 				{{!-- //CONTENT --}}
@@ -28,12 +32,22 @@
 					
 					{{/with}}
 				{{/each}}
+
 				
 				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 					<i class="fa fa-circle-o-notch fa-spin"></i>
 				{{/infinite-scroll}}
 				
 		    
+			</div> 
+
+			<div class="col-right2">
+
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{onboarding-userstofollow}}
 			</div> 
 		</div>
 	</div>
