@@ -137,6 +137,23 @@ p {
 
 
 //GENERAL BUTTONS
+
+.btn-edit {
+		font-size: 11px;
+		font-weight: 500;
+		color: #ccc;
+		border: 0px;
+		display: inline-block;
+		background-color: transparent;
+		text-transform: uppercase;
+		transition: all 0.2s ease;
+	}
+
+	.btn-edit:hover {
+		color: $primary-color;
+	}
+
+
 .btn {
 	border-radius: $radius;
 }
