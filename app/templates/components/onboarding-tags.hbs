@@ -3,7 +3,7 @@
 	<h1>Tags</h1>
 	
 	{{#each tag in tags}}
-		<button {{action 'tagClick' tag}} class="btn btn-default">{{tag}}</button>
+		<button {{action 'tagClick' tag}} class="btn btn-default">#{{tag}}</button>
 	{{/each}}
 
 </div>

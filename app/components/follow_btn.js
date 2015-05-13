@@ -114,6 +114,8 @@ export default Ember.Component.extend({
 
 				store.find('user-following-list', {user_id:_this.get('currentUserId')});
 
+				//Reload the user's feed.
+				store.find('feed', {user_id:_this.get('currentUserId')});
 
 				store.find('user-followers-count', _this.get('followId'))
 				.then(function(r){

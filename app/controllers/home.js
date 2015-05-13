@@ -22,6 +22,8 @@ export default Ember.ObjectController.extend(PaginateMixin, {
 
     currentScrollPos: 0,
 
+    showOnboarding: false,
+
 	userChange: function() {
 
 		if( Ember.isEmpty(this.get('currentUserId'))) {
@@ -40,6 +42,10 @@ export default Ember.ObjectController.extend(PaginateMixin, {
 		var promise = this.paginateMore()
 		.then(function(results){
 			_this.set('loading', false);
+
+			if( Ember.isEmpty(_this.get('sortedContent'))) {
+				_this.set('showOnboarding', true);
+			}
 		});
 
 		
