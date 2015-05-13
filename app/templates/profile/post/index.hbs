@@ -21,14 +21,16 @@
 					
 					<div class="moment">{{format-moment updated_at}}</div>
 
+
 					<h1 class="subject">{{ subject }}
-						{{#if isProfileOwner}}
+					{{#if isProfileOwner}}
 						 	{{#link-to 'profile.post.edit_post' user.username this }}
-							<button class="btn btn-default btn-xs">
-								Edit Your Post
+							<button class="btn-edit-post">
+								<i class="fa fa-cog"></i> Edit Post
 							</button>
 							{{/link-to}}
 						{{/if}}
+						
 					</h1>
 
 					{{!-- //REPOST --}}
@@ -111,7 +113,7 @@
 					{{#if isProductOwner }}
 						{{#link-to 'profile.post.edit_product' user.username this }}
 						<button class="btn btn-default btn-edit btn-xs">
-							Edit Your Product
+							<i class="fa fa-cog"></i> Edit Product
 						</button>
 						{{/link-to}}
 					{{/if}}
@@ -140,6 +142,7 @@
 
 					<div class="description">
 						{{description-list product_description "description"}}
+
 					</div>
 
 				{{!-- 	{{#link-to "profile.post" product_user.username product_post.post_id product_post.subject}}
