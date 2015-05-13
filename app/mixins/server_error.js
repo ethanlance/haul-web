@@ -37,8 +37,6 @@ export default Ember.Mixin.create({
 			message = message + "<p>" + obj.message + "</p>";
 		}
 
-
-
 		this.set('serverErrorMessage', message); 
 	},
 

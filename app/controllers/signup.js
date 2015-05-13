@@ -1,8 +1,9 @@
 import Ember from 'ember';  
 import config from '../config/environment';
+import ErrorMixin from '../mixins/server_error';
 var Config = config.APP;
 
-export default Ember.ObjectController.extend({
+export default Ember.ObjectController.extend(ErrorMixin,{
 	
 	needs: ['facebook', 'login'], 
  
@@ -129,14 +130,32 @@ export default Ember.ObjectController.extend({
 									_this.send('closeModal');
 								},
 								function failed(error){
-									console.log("error", error)
+									console.log("error", error);
 								}
 							);
 
 					}else{
 						console.error("Failed Signup", error);
 						_this.set('isProcessingFacebook', false);
-						_this.set('error', true);	
+						_this.set('showErrorsFB', true);	
+
+
+						
+
+						if( error.hasOwnProperty('responseText')) {
+							var obj = JSON.parse(error.responseText);
+							if( obj.message  === "email is required" ){
+								var message = "Oops, Facebook did not supply us with your email address. You may need to verify your email address in your Facebook settings."
+								_this.set('serverErrorMessage', message); 
+							}else{
+								_this.handleServerError(error);
+							}
+							
+							
+						}else{
+							_this.handleServerError(error);
+						}
+
 					} 
 				}
 			);
@@ -164,8 +183,6 @@ export default Ember.ObjectController.extend({
 
 					if( error.status === 409){
 						_this.set('error409', true);
-					}else{
-						_this.set('error', true);
 					}
 				}
 			);

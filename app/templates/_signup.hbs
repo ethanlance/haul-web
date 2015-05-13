@@ -3,7 +3,7 @@
 
 			    	<div class="alert">
 			    		<h2>Oops</h2>
-			    		This email is already registered.  Want to <a href="/login">login</a> or <a href='/forgotpassword'>recover your password</a>?
+			    		This email is already registered.  Want to <a href="/login">login</a> or <a href='/forgot-password'>recover your password</a>?
 
 			    	</div>
 
@@ -21,6 +21,12 @@
 
 
 						<div class="form-group"> 
+
+							{{#if showErrorsFB}}
+						    	<div class="alert">
+							  		{{partial "_server_error"}}
+						    	</div>
+						  	{{/if}} 
 						
 
 							{{ladda-btn 
@@ -39,16 +45,14 @@
 						</div>
 
 
-						{{#if error}}
-					    	<div class="alert">Oh no! Something went wrong.</div>
+						{{#if showErrors}}
+					    	<div class="alert">
+						  		{{partial "_server_error"}} 
+					    	</div>
 					  	{{/if}} 
 
 
 	            		{{#form-for model}}
-
-						  {{#if submitFailed}}
-						    <div class="alert">Oh no, something went wrong.</div>
-						  {{/if}} 
 
 						  	<div class="form-group"> 
 					      		{{input email placeholder="Your email address" label="false"}}

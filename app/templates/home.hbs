@@ -2,65 +2,54 @@
 
 <div class="container-fluid">
 
-<div class="haul-wrapper2">
+	<div class="haul-wrapper2">
 
-	<div class="haul-content2">
+		<div class="haul-content2">
 
-		<div class="col-left2"> 
-		
-
-		{{!-- //CONTENT --}}
-		<div {{bind-attr class=":galleryView showGridView:in"}}>
-		{{#each post in sortedContent}}
-			{{#if post.image}}
-				{{partial 'feed_post'}}	
-			{{/if}}
-		{{/each}}
-		</div>
-		{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-			<i class="fa fa-circle-o-notch fa-spin"></i>
-		{{/infinite-scroll}}
+			<div class="col-left2"> 
 
 
-		{{!-- //NO CONTENT CTA --}}
-		{{#unless pagedContent }}
-			{{#if isProfileOwner}} 
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12 text-center cta-welcome">
-						
-						<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
-						
-						{{new-post-btn openModal='openModal' btn-text='Post Something For Sale' class="display-inline"}}
+
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{onboarding-userstofollow}}
+
 				
-					</div>	
-				</div> 
-			{{else}}
-				<div class="padding-top text-center font-weak">
-				{{user.username}} has no posts.
-				<p class="text-center">
-					<span class="glyphicon glyphicon-flash sad-heart"></span>
-				</p>
+
+				
+
+				{{!-- FEED --}}
+				{{!-- FEED --}}
+				{{!-- FEED --}}
+				{{!-- FEED --}}
+				{{!-- FEED --}}
+				{{!-- FEED --}}
+				<div {{bind-attr class=":galleryView showGridView:in"}}>
+				{{#each post in sortedContent}}
+					{{#if post.image}}
+						{{partial 'feed_post'}}	
+					{{/if}}
+				{{/each}}
 				</div>
-			{{/if}}
-		{{/unless}}
+				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+					<i class="fa fa-circle-o-notch fa-spin"></i>
+				{{/infinite-scroll}}
 
 
- 
-		</div>
-
-		<div class="col-right2 grey">
-			<div class="message-center">
-
-				<h2>NOTIFICATIONS</h2>
-				
-				{{mention-pod}}
-
-
+	 
 			</div>
-		</div>
-	</div> 
+
+			<div class="col-right2 grey">
+				<div class="message-center">
+
+					<h2>NOTIFICATIONS</h2>
+					
+					{{mention-pod}}
+
+				</div>
+			</div>
+		</div> 
+	</div>
 </div>
- </div>
-
-
- 

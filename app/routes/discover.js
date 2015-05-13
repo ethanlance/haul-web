@@ -32,7 +32,10 @@ export default Ember.Route.extend(ResetScrollMixin,{
 		}, function(error) {
 			
 
-
+			//If there is an error, it's likley caused when a user 
+			//logs out and is redirected to /discover at which point their 
+			//access token causes the above to error. So try one more time
+			//using the client token.
 
 			return _this.store.find('user', 'haul').then(function(result){ 
 				return result;

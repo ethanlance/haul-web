@@ -157,7 +157,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			console.log("FAILED", error);
 			_this.set('isProcessing', false);
 			
-			_this.handleServerError(error)
+			_this.handleServerError(error);
 			
 			_this.set('showErrors', true);
 			

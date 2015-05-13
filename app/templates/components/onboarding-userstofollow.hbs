@@ -1,0 +1,18 @@
+<div class="onboarding-pod">
+	<h1>People To Follow</h1>
+
+	{{#each user in users}}
+		{{#if user}}
+			<div class="user">
+				{{make-icon icon=user.icon}}
+				{{ follow-btn followUser=user openModal='openModal' }}
+
+				{{#if user.isCurrentUser}}
+					<div>Wow, your famous!</div>
+				{{/if}}
+
+			</div>
+		{{/if}}
+	{{/each}}
+</div>
+

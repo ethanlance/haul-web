@@ -1,0 +1,35 @@
+
+.onboarding-pod {
+	margin-bottom: 30px;
+	display:inline-block;
+
+	.user {
+		display:inline;
+		float:left;
+		padding:10px;
+		margin-right:10px;
+		text-align:center;
+	}
+
+	.btn-follow{
+		font-family: 'Open Sans', sans-serif;
+	  	color: #7e7e7e;
+	  	margin-top: 0px;
+	  	background-color: inherit;
+	  	border: 1px solid #dfdfdf;
+	  	padding: 10px 20px 10px 20px;
+	  	font-size: 11px;
+	  	transition: all 0.2s ease;
+	  	text-transform: uppercase;
+	}
+
+	.profile-image {
+		margin-bottom:10px;
+		width:60px;
+		height:60px;
+		border-radius: 50%;
+		.glyphicon-user{
+			font-size:60px;
+		}
+	}
+}
