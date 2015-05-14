@@ -1,6 +1,5 @@
 import Ember from 'ember';
-import AnonMixin from '../mixins/anon';
-export default Ember.Route.extend(AnonMixin, {
+export default Ember.Route.extend( {
 	
 	model: function() {
 		return this.store.createRecord('authconfirmation');

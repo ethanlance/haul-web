@@ -3,11 +3,12 @@ import config from '../config/environment';
 var Config = config.APP;
 
 //Forgot Password Confirm: Form to change a user password w/ ticket_id (token)
-var ForgotpasswordconfirmController = Ember.ObjectController.extend({
+export default Ember.ObjectController.extend({
 	
 	needs: ['login'],
 	client_token: Config.Server.CLIENT_TOKEN,
 	host: Config.Server.USER_SERVER_HOST,
+
 
 	queryParams: ['ticket_id', 'user_id'],
 
@@ -16,6 +17,7 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 	user_id: null,
 	isProcessing: false, 
 	error: false,
+	showSuccess:false,
 
 	reset: function() {
 		this.set('error', false); 
@@ -33,11 +35,21 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 			this.set('isProcessing', true);
 
 			var data = this.getProperties('password');
-
 			var url = _this.get('host') + '/users/' + this.get('user_id') + "/tickets/" + this.get('ticket_id');
-			return _this.get('controllers.login').authenticate(url, 'put', data)
+
+			return Ember.$.ajax({
+					url: url,
+					type: 'PUT',
+					data: data,
+					headers: {
+						Authorization: 'Bearer ' + _this.get('client_token')
+					},
+					dataType: 'json'
+			})
 			.then(
-				function(response) {}, 
+				function(response) {
+					_this.set('showSuccess', true);
+				}, 
 				function() {
 					_this.set('isProcessing', false);
 					_this.set('error', true);
@@ -46,4 +58,3 @@ var ForgotpasswordconfirmController = Ember.ObjectController.extend({
 		}
 	}
 });
-export default ForgotpasswordconfirmController;

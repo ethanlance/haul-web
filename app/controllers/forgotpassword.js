@@ -12,7 +12,7 @@ export default  Ember.ObjectController.extend({
 	emailSent: false,
 	isProcessing: false, 
 	error: false,
-	error409: false, 
+	error409: false,  
 
 	reset: function() {
 		this.set('error', false);

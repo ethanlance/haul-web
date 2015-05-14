@@ -2,6 +2,8 @@ import Ember from 'ember';
 import AnonMixin from '../mixins/anon';
 export default Ember.Route.extend(AnonMixin, {
 
+	controllerName: 'loginmodal',
+
 	beforeModel: function(transition) {
         this._super(transition);
 
@@ -16,6 +18,7 @@ export default Ember.Route.extend(AnonMixin, {
 	},
 	setupController: function(controller, model){ 
 		controller.reset();
+		controller.set("hideCancelBtn", true);
 		this._super(controller, model);
 	},
 	renderTemplate: function() {
@@ -23,6 +26,6 @@ export default Ember.Route.extend(AnonMixin, {
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('login');
+		this.render('loginmodal');
 	}
 }); 

@@ -15,6 +15,7 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	isProcessingSubmit: false,
 	error409: false,
 	error: false,
+	hideCancelBtn:false,
 
 	//Hide API Errors when changes are made to email field.
 	emailChanged: (function() {	

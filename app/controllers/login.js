@@ -14,7 +14,7 @@ export default Ember.ObjectController.extend({
 	error409: false,
 	isProcessingFacebook: false, 
 	isProcessingLogin: false,
-
+	hideCancelBtn:false,
 	start: function() {
 		this.socialApiClient.load()
 	}.on('init'),
