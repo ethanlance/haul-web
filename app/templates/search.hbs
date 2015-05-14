@@ -59,38 +59,8 @@
 			{{#if currentTypeIsPost }}
 			 	{{#each post in sortedContent}}
 
-			 	<div class="product-post">
+			 		{{partial "_grid_post"}}
 
-			 		<h1 class="subject">
-			 			{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}{{ post.subject }}{{/link-to}}
-			 		</h1>
-
-			 		<div class="editorial"> 
-						{{#link-to 'profile.post' post.user.username post.id post.post_slug (query-params anchor="null")}}<img {{bind-attr src=post.image.large}}/>{{/link-to}} 
-					</div>
-
-					<div class="product-feed-post-card">
-						<div class="card-details-box">
-							
-							<h3>{{#link-to 'profile.post' 
-								post.user.username 
-								post.id 
-								post.post_slug 
-								(query-params anchor="null")
-								}}{{post.product_name}}{{/link-to}}</h3>
-							
-							<div class="price">
-								${{post.product_price}}
-								<small>{{post.product_status_text}}</small>
-							</div>
-
-
-						</div> 
-					</div>
-
-
-			 	</div>
- 
 				{{/each}}
 			{{/if}}
 
