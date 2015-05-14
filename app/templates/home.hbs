@@ -27,9 +27,7 @@
 				{{!-- FEED --}}
 				<div {{bind-attr class=":galleryView showGridView:in"}}>
 				{{#each post in sortedContent}}
-					{{#if post.image}}
-						{{partial 'feed_post'}}	
-					{{/if}}
+					{{partial 'feed_post'}}	
 				{{/each}}
 				</div>
 				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
