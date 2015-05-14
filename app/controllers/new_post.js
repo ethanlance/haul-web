@@ -68,8 +68,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	stepTwoChanged: function() {
 
-		this.doTagInjection();
-
 		var _this = this;
 		Ember.run.later(function(){
 			_this.set('triggerEditorResize', true);
@@ -120,7 +118,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				'product_quantity':'1',
 				'product_currency':'USD',
 				'product_status': 'FOR_SALE',
-				'user': this.get('currentUser')
+				'user': this.get('currentUser'),
+				'tags': ''
 			}
 		);
 		
@@ -153,7 +152,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			}, 1500);
 
 		}else{
-			_this.set('showErrorBar', false);
+			this.set('showErrorBar', false);
 		}
 	}.observes('showErrors'),
 
@@ -177,6 +176,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				_this.set('show', "two");
 				_this.set('showErrors', false);
 				_this.set('isProcessingNext', false);
+				_this.doTagInjection();
 			},
 			function invalid(errors){
 				_this.set('isProcessingNext', false);
@@ -191,6 +191,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				}else{
 					_this.set('show', "two");
 					_this.set('showErrors', false);
+					_this.doTagInjection();
 				}
 			}
 		);
@@ -241,9 +242,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	doTagInjection: function() {
 
 		var model = this.get('model');
-		var body = model.get('body');
 		var tags = model.get('tags');
-		
+
 		if( !Ember.isEmpty(tags) ){
 
 			tags = tags.split(",");
