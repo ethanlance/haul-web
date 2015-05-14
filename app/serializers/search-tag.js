@@ -13,6 +13,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 			user_id = result.post_id.split("_")[0];
 			return {
 				id: result.post_id,
+				post_id: result.post_id,
 				post: result.post_id,
 				user: user_id,
 
@@ -29,8 +30,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 				likes_total: result.likes_total,
 			};
 		});
-console.log("PAYLOAD", payload);
-console.log("DATA", data);
+
 		payload = {'search-tag': data}; 
 		return this._super(store, primaryType, payload);
 	},

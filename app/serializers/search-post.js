@@ -8,10 +8,15 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 		}
  		
  		var data = [];
+ 		var user_id;
 		data = payload.data.map(function(result){ 
+
+			user_id = result.post_id.split("_")[0];
 			return {
 				id: result.post_id,
 				post_id: result.post_id,
+				post: result.post_id,
+				user: user_id,
 
 				subject: result.subject,
 				image: result.image_id,	

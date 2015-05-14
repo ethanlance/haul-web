@@ -2,6 +2,8 @@ import DS from 'ember-data';
 export default DS.Model.extend({
 	
 	post_id: DS.attr('string'),
+	post: DS.belongsTo('post', {async:true}),	
+	user: DS.belongsTo('user', {async:true}),	
 
 	subject: DS.attr( 'string' ),
 	image: DS.belongsTo('image', {async:true}),	
