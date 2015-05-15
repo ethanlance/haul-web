@@ -2,16 +2,20 @@
 	Cards
 </h1>
 
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-6">
+		
+			{{creditcard-list 
+				hasBuyer=hasBuyer 
+				buyer_id=selected_buyer_id
+			}}
 
-<p>
-	{{creditcard-list 
-		hasBuyer=hasBuyer 
-		buyer_id=selected_buyer_id
-	}}
+			{{#unless hasBuyer }}
+				{{buyer-form 
+					selected_buyer_id=selected_buyer_id
+				}}
+			{{/unless}}
+		
 
-	{{#unless hasBuyer }}
-		{{buyer-form 
-			selected_buyer_id=selected_buyer_id
-		}}
-	{{/unless}}
-</p>
+	</div>
+</div>
