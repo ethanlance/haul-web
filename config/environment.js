@@ -86,6 +86,7 @@ module.exports = function(environment) {
 		ENV.APP.Server.IMAGE_SERVER_HOST = protocol + domain + ":8081";
 		ENV.APP.Server.USER_SERVER_HOST = protocol + domain + ":8080";
 		ENV.APP.Server.PROSPER_SERVER_HOST = protocol + domain + ":8090";
+		ENV.APP.Server.HARVEST_SERVER_HOST = protocol + domain + ":8091";
 
 		ENV.APP.Server.CLIENT_ID = "5eed07b8d71cf26f6df6566cf705adaa";
 		
@@ -128,6 +129,7 @@ module.exports = function(environment) {
 		ENV.APP.Server.IMAGE_SERVER_HOST = "https://image.haul.io";
 		ENV.APP.Server.USER_SERVER_HOST = "https://user.haul.io";
 		ENV.APP.Server.PROSPER_SERVER_HOST = "https://prosper.haul.io";
+		ENV.APP.Server.HARVEST_SERVER_HOST = "https://harvest.haul.io";
 
 
 		ENV.APP.Server.CLIENT_ID = "5eed07b8d71cf26f6df6566cf705adaa";
@@ -156,6 +158,7 @@ module.exports = function(environment) {
 		ENV.APP.Server.IMAGE_SERVER_HOST = "https://image.haul.io";
 		ENV.APP.Server.USER_SERVER_HOST = "https://user.haul.io";
 		ENV.APP.Server.PROSPER_SERVER_HOST = "https://prosper.haul.io";
+		NV.APP.Server.HARVEST_SERVER_HOST = "https://harvest.haul.io";
 
 
 		ENV.APP.Server.CLIENT_ID = "5eed07b8d71cf26f6df6566cf705adaa";

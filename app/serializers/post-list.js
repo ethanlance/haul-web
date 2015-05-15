@@ -38,6 +38,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 				product_status: result.product.status,
 				product_quantity: result.product.quantity,
 				product_user: result.product.user_id,
+				product_link: result.product.link,
 
 				commentCount: result.post_id,
 				likesCount: result.post_id

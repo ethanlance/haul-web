@@ -66,7 +66,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		body: {
 		 	///presence: true,
 		 	length: { maximum: 12000 },
-			image: {message:'Sorry, only images from the product can go in your post'},
+			//image: {message:'Sorry, only images from the product can go in your post'},
 		},
 		subject: {
 		 	presence: true

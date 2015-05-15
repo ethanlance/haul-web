@@ -11,8 +11,6 @@ var Router = Ember.Router.extend({
 });
 
 
-
-
 // //Router Map
 Router.map(function(){
 
@@ -33,7 +31,6 @@ Router.map(function(){
 
 	this.route('forgotpassword', {path: "forgot-password"});
 	this.route('reset-password');
-	
 	this.route('signup');
 	this.route('register');
 	this.route('signupusername');
@@ -64,7 +61,10 @@ Router.map(function(){
 	this.route('not_found');
 	this.route('not_authorized');
 
-	
+	//Import Story
+	this.route('import');
+
+
 	//mentions
 	this.route('mentions');
 

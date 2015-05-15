@@ -30,6 +30,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	currentModelId: false,
 
+	model: null,
+
+	hasProductLink:  Ember.computed.notEmpty('model.product_link'),
+
 	currentModelIdChanged: function() {
 		if( this.get('prevModelId') && this.get('prevModelId') !== this.get('currentModelId')  ){
 			this.reset();

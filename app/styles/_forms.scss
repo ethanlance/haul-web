@@ -586,7 +586,11 @@ textarea.form-control {
 	transition: background-color 0.2s ease;
 }
 
-.btn-next:hover {
+.btn-next-center{
+	margin-left:0;
+}
+
+.btn-next-center:hover, .btn-next:hover {
 	background-color:#5dad12;
 }
 

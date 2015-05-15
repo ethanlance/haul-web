@@ -21,11 +21,13 @@ export default Ember.Route.extend( {
 			}
 		});
 	},
+	
 	setupController: function(controller, model) {
 		controller.set('limit', this.get('limit'));
 		controller.set('pagedContent', model);
 		this._super(controller, model);
 	},
+
 	renderTemplate: function() {
 		this.render('layouts/header_base', {
 			into: 'application',

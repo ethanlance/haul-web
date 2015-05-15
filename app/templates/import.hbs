@@ -1,0 +1,63 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal' scrollToTop=scrollToTop}}
+<div {{bind-attr class=":modal-dialog :lg :text-left"}}>
+	<div class="modal-content">
+
+		{{partial "_modal_nav"}}
+
+		{{partial "_modal_error_alert"}}
+	
+		{{!-- POST FORM --}}
+		<div class="text-center edit-wrapper">
+
+
+			{{#form-for model}}
+			<div {{bind-attr class=":show_one  "}}>
+				<div class="edit-row">
+					<div class="edit-col">
+
+						<h2>
+							Let's Curate the Internet
+							<small>Import any thing for sale with a link</small>
+						</h2>
+
+						
+
+						{{input-field url class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
+
+						{{#if showErrors}}
+							<span class="has-error help-block">Yikes, we could not import that url.</span>
+						{{/if}}
+
+
+					</div>
+				</div>
+				<div class="edit-footer">
+					<div class="edit-col">	
+
+						{{ladda-btn
+							name='IMPORT'
+							class="display-inline"
+							btnClasses='btn-next btn-next-center ladda-button'
+							btnClick='doImport'
+							spin=isProcessing
+							dataSpinnerColor="white"
+						}}
+
+						<br>
+						<br>
+						<br>
+						<br>
+						<small>Please only import and blog about things that are for sale.</small>
+						
+
+					</div>
+				</div>
+			</div>
+			{{/form-for}}
+
+		</div>
+	</div>
+</div>
+{{/modal-modal}}		
+				 
+		

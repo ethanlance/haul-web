@@ -22,6 +22,22 @@
 					</div>
 				</div>
 
+
+				{{#if hasProductLink}}
+				{{!-- IF THIS WAS IMPORTED FROM ANOTHER SITE THEN ALLOW THE product_link TO BE EDITED --}}
+				<div class="edit-row border">		
+					<div class="edit-col">
+						<h2>Website URL You Where You Found This
+							<small>Cannot be edited</small>
+						</h2> 
+
+						{{input-field product_link class="form-control" disabled='true'}}
+						
+
+					</div>
+				</div>
+				{{/if}}
+
 				
 
 				<div class="edit-row border">		

@@ -1,0 +1,40 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal' scrollToTop=scrollToTop}}
+<div {{bind-attr class=":modal-dialog :lg :text-left"}}>
+	<div class="modal-content">
+
+		{{partial "_modal_nav"}}
+	
+		{{!-- POST FORM --}}
+		<div class="text-center edit-wrapper">
+			<div class="edit-row">
+				<div class="edit-col">
+
+
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							
+							<h2>Import a Link</h2>
+
+							{{import-link-btn 
+								openModal='openModal' btn-text="ADD A NEW POST"  class="display-inline"}}
+
+						</div>
+
+
+						<div class="col-md-6 col-sm-6 col-xs-6">
+
+							<h2>Post something to sell</h2>
+
+							{{new-post-btn 
+								openModal='openModal' btn-text="ADD A NEW POST"  class="display-inline"}}
+
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/modal-modal}}		
+				 
+		

@@ -5,6 +5,12 @@ export default ApplicationAdapter.extend({
 	host: function(){
 		return this.ENV.Server.IMAGE_SERVER_HOST;	
 	}.property(), 
+
+	find: function(store, type, id) {
+		console.log("FIND ID", id);
+		var url = this.get('host') + "/images/" + id
+		return this.ajax(url, 'GET');
+	},
 	    
 	deleteRecord: function(store, type, record) {
 		var id = record.get('id');

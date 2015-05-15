@@ -1,11 +1,21 @@
-{{#if isForSale}}
-{{#link-to 'checkout' post.post_id}}
-<button class="btn-buy">
-	BUY THIS
-</button>
-{{/link-to}}
-{{/if}}
 
+{{#if isLink}}
+
+	<button  {{action 'followLink'}} class="btn btn-default btn-external-link">
+		LINK TO PRODUCT <i class="fa fa-external-link"></i>
+	</button>
+
+{{else}}
+
+	{{#if isForSale}}
+	{{#link-to 'checkout' post.post_id}}
+	<button class="btn-buy">
+		BUY THIS
+	</button>
+	{{/link-to}}
+	{{/if}}
+
+{{/if}}
 
 {{!-- <span class="product-status">
 

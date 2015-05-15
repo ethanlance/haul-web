@@ -42,8 +42,12 @@ export default Ember.Component.extend(TransformMixin, {
 		var text = this.get('setEditorText'); 
 
 		var editor = this.get('editor');
-		 
-		editor.insertText(3, text);
+
+		var delta = editor.getContents();
+ 
+		var pos = delta.length();
+
+		editor.insertText(pos, text);
 
 	}.observes('setEditorText'),
 

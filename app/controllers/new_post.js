@@ -113,7 +113,27 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('selectedImages', []);
 		this.set('showErrors', false); 
 
-		this.get('model').setProperties(
+
+		//Does this model have a product_link? If yes then this is an import.
+		var model = this.get('model');
+		if( !Ember.isEmpty(model.get('product_link'))){
+
+
+			//If Link Import, there are images to import:
+			var _this = this;
+			var import_images = model.get('import_images');
+			if(!Ember.isEmpty(import_images)) {
+				import_images.forEach(function(image){
+					_this.selectImage(image);
+				});
+			}
+
+		} else {
+			model.set('body', "");
+		}
+
+		//Now set some defaults.
+		model.setProperties(
 			{
 				'product_quantity':'1',
 				'product_currency':'USD',
@@ -211,10 +231,14 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		this.set('showImageError', false);
 
+
+
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
 		});
 		this.set('productImageIds', ids); 
+
+
 
 		//Set the images on the model.
 		var model = this.get('model');
@@ -344,6 +368,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		})
 		.then(
 			function success(record){
+				console.log("SUCCESS", record)
 				var user = _this.get('currentUser');
 
 				_this.set('isProcessingSavePost', false); 
@@ -389,12 +414,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		back: function() {
-//this.set('isProcessingNext', false);
+
 			this.set('show', 'one');
 		},
 
 		next: function() {
-//this.set('show', 'two');return;
+
 			this.set('isProcessingNext', true);
 			this.validateProduct();
 		},
@@ -408,7 +433,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 	
 		savePost: function() { 
-			this.set('show','three');
 			this.set('isProcessingSavePost', true);
 			this.set('requestEditorContents', true);
 		},
