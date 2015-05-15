@@ -132,7 +132,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			}
 
 		} else {
-			model.set('body', "");
+			model.set('body', " ");
 		}
 
 		//Now set some defaults.
@@ -253,7 +253,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var model = this.get('model');
 		var body = model.get('body');
 		
-		if( Ember.isEmpty(body) ){
+		if( Ember.isEmpty(body.trim()) ){
 			this.doImageInjection();
 		}
 
