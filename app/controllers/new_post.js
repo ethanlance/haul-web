@@ -77,6 +77,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	
 	start: function() {
 
+		if(Ember.isEmpty(this.get('currentUserId'))){
+			return;
+		}
+
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
 		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
@@ -89,23 +93,22 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var  _this = this;
     	this.store.find('seller', _this.get('currentUserId')).then(
         	function success(record){
-
                 if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
                     _this.set('needsSellerAccount', true);
                 }
 
         	},
-        	function failed(error){
+        	function failed(error){   		
         		_this.set('needsSellerAccount', true);
         	}
         );
 
 
-	}.on('init'),
+	}.on('init').observes('currentUserId'),
 
 	setup: function() {  
 		
-		if( Ember.isEmpty(this.get('currentUser')) ){
+		if( Ember.isEmpty(this.get('currentUserId')) ){
 			return;
 		}
 
@@ -138,12 +141,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				'product_quantity':'1',
 				'product_currency':'USD',
 				'product_status': 'FOR_SALE',
-				'user': this.get('currentUser'),
+				'user_id': this.get('currentUserId'),
 				'tags': ''
 			}
 		);
 		
-	}.observes('currentUser', 'model'),
+	}.observes('currentUserId', 'model'),
 
 
 	//Prepopulate the post.subject with the value of post.product_name
@@ -401,7 +404,13 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},200);
 	},
 
+	closeWindow: function() {
+		
+		this.set('animateClose', true);
 
+		this.send('closeRouter');
+
+	},
 
 	actions: { 
 
@@ -425,11 +434,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		},
 
 		close: function() {
-			this.set('animateClose', true);
+			this.closeWindow();
 		},
 
 		cancel: function() {
-			this.set('animateClose', true);
+			this.closeWindow();
 		},
 	
 		savePost: function() { 

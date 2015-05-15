@@ -59,7 +59,7 @@ export default ApplicationAdapter.extend({
 	createRecord: function(store, type, record) {
 
 		var data = {
-            user_id: record.get('user').get('id'),
+            user_id: record.get('user_id'),
             subject: record.get('subject'),
             body: record.get('body'),
             image_id: record.get('image_id'),

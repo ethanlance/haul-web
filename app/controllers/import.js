@@ -29,6 +29,8 @@ export default Ember.ObjectController.extend({
 	//A model of a new post that will be sent to new-post.js after we import
 	newpost: null,
 
+	animateClose: null,
+
 	importLink: function() {
 
 		this.set('isProcessing', true);
@@ -153,6 +155,14 @@ export default Ember.ObjectController.extend({
 
 	},
 
+	closeWindow: function() {
+		
+		this.set('animateClose', true);
+
+		this.send('closeRouter');
+
+	},
+
 
 	actions: {
 
@@ -161,11 +171,11 @@ export default Ember.ObjectController.extend({
 		},
 
 		close: function() {
-			this.set('animateClose', true);
+			this.closeWindow();
 		},
 
 		cancel: function() {
-			this.set('animateClose', true);
+			this.closeWindow();
 		},
 	 
 	}

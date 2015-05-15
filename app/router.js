@@ -63,7 +63,7 @@ Router.map(function(){
 
 	//Import Story
 	this.route('import');
-
+	this.route('new-post');
 
 	//mentions
 	this.route('mentions');
@@ -71,7 +71,6 @@ Router.map(function(){
 	this.route('checkout', {path: "/buy/:id"});	
 
 	//Profiles
-	//this.route('new-post');
 	this.resource('profile', {path: '/:username'}, function() {
 		this.route('followers');
 		this.route('following');
