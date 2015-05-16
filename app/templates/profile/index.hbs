@@ -1,53 +1,72 @@
 {{preserve-scroll currentScrollPos=currentScrollPos}}
 
-<div class="container">   
+<div class="container no-margins">
+
 	<div class="haul-content">
-		<div class="row">
-			<div class="col-md-2 col-sm-2 col-xs-12"></div>
-			<div class="col-md-8 col-sm-8 col-xs-12 padding-top">		
-	 
-				{{!-- //CONTENT --}}
-				<div {{bind-attr class=":galleryView showGridView:in"}}>
-				{{#each post in sortedContent}}
-					{{#if post.image}}
-						{{partial 'profile_post'}}	
-					{{/if}}
-				{{/each}}
-				</div>
 
-				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-					<i class="fa fa-circle-o-notch fa-spin"></i>
-				{{/infinite-scroll}}
-		
+		<div class="haul-col-menu with-page-header">
 
-				{{!-- //NO CONTENT CTA --}}
-				{{#unless pagedContent }}
-					{{#if isProfileOwner}} 
-						<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12 text-center cta-welcome">
-								
-								<h3>Welcome to Haul.<br/><small>Let's get started!</small></h3>		
-								
-								{{new-post-btn openModal='openModal' btn-text='Post Something For Sale' class="display-inline"}}
-						
-							</div>	
-						</div> 
-					{{else}}
-						<div class="padding-top text-center font-weak">
-						{{user.username}} has no posts.
-						<p class="text-center">
-							<span class="glyphicon glyphicon-flash sad-heart"></span>
-						</p>
-						</div>
-					{{/if}}
+			<div class="haul-menu-content">
+				{{#if isProfileOwner}}
+				 	{{#link-to 'settings.profile'}}
+					<button class="btn-edit-post">
+						<i class="fa fa-cog"></i> Edit Your Bio
+					</button><br/>
+					{{/link-to}}
+				{{/if}}
+
+				{{sanitize-html user.bio "comment" ENV}}
+
+			</div>
+		</div>
+
+
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+		<label for="nav-trigger" class="with-page-header"></label>
+
+
+		<div class="haul-col-content"> 
+			<div class="haul-content">
+
+
+			{{!-- EMPTY --}}
+			{{!-- EMPTY --}}
+			{{!-- EMPTY --}}
+			{{!-- EMPTY --}}
+			{{#unless pagedContent }}
+				<div class="padding-top text-center font-weak">
+				{{#unless isProfileOwner}} 
+					You have not posted anything yet.
+				{{else}}
+					{{user.username}} has no posts.
 				{{/unless}}
+					<p class="text-center">
+						<span class="glyphicon glyphicon-flash sad-heart"></span>
+					</p>
+				</div>
+			{{/unless}}
 
 
-	 
-	 
-				 
-			</div> 
-			<div class="col-md-2 col-sm-2 col-xs-12"></div>	
+
+			{{!-- MY POSTS --}}
+			{{!-- MY POSTS --}}
+			{{!-- MY POSTS --}}
+			{{!-- MY POSTS --}}
+			{{!-- MY POSTS --}}
+			{{!-- MY POSTS --}}
+			{{#each post in sortedContent}}
+				{{partial 'grid_post'}}	
+			{{/each}} 
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<i class="fa fa-circle-o-notch fa-spin"></i>
+			{{/infinite-scroll}}
+
+		</div>
 		</div>
 	</div>
 </div>

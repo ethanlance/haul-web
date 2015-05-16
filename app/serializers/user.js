@@ -11,6 +11,8 @@ export default DS.RESTSerializer.extend({
 			name: payload.data.name,
 			firstname: payload.data.firstname,
 			lastname: payload.data.lastname,
+			display_name: payload.data.display_name,
+			bio: payload.data.bio,
 			email: payload.data.email,
 			id: payload.data.user_id,
 			

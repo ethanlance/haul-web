@@ -35,8 +35,6 @@ export default Ember.Component.extend( PaginateMixin,{
     
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
-    pollInterval: 3000,
-
 	
 	schedulePoll: function(f) {
     	var _this = this;

@@ -20,7 +20,7 @@
 
 
 					<h1 class="subject">{{ subject }}
-					{{#if isProfileOwner}}
+						{{#if isProfileOwner}}
 						 	{{#link-to 'profile.post.edit_post' user.username this }}
 							<button class="btn-edit-post">
 								<i class="fa fa-cog"></i> Edit Post

@@ -6,6 +6,9 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	name: DS.attr('string'),
 	firstname: DS.attr('string'),
 	lastname: DS.attr('string'),
+	display_name: DS.attr('string'),
+	bio: DS.attr('string'),
+
 	email: DS.attr('string'),
 	facebook_user_id: DS.attr('string'),
 	image: DS.belongsTo('image', {async:true}),

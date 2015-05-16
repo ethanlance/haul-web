@@ -40,6 +40,14 @@ export default ApplicationAdapter.extend({
         	data.image_id = record.get('image_id');
         }
 
+        if( record.get('bio') ) {
+        	data.bio = record.get('bio');
+        }
+
+        if( record.get('display_name') ) {
+        	data.display_name = record.get('display_name');
+        }
+
 		var url = this.get('host') + '/users/'+user_id;
 
 		return this.ajax(url, "PUT", { data: data });

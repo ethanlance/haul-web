@@ -1,9 +1,21 @@
         
-<div {{bind-attr class="showForm:show:hide"}}>
+
     {{#form-for model}}
-    <div >
-        {{input-field model.firstname class="form-control" placeholder="First Name" label="false" enter='btnClick'}}
-        {{input-field model.lastname class="form-control" placeholder="Last Name" label="false" enter='btnClick'}}
+    <div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                {{input-field model.firstname class="form-control" placeholder="First Name" label="false" enter='btnClick'}}
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                {{input-field model.lastname class="form-control" placeholder="Last Name" label="false" enter='btnClick'}}
+            </div>
+        </div>
+
+        {{input-field model.display_name class="form-control" placeholder="Display Name" label="false" enter='btnClick'}}
+        
+        <label>Your Biography</label>
+        
+        {{input model.bio as="text" placeholder="Write your story..." class="commentbox"  label="false"   }}
     </div> 
     {{/form-for}}
 
@@ -12,7 +24,7 @@
     </div>
 
     <div>
-
+        <br>
         {{ladda-btn 
             name='SAVE'
             btnClasses='btn ladda-button btn-right btn-positive'
@@ -20,13 +32,14 @@
             spin=isProcessing
         }}
 
+        <div {{bind-attr class="saveSuccess:show:hide"}}>
+            <span class="label label-success">
+                SAVED
+            </span>
+        </div>
+
     </div>
-</div>    
 
 
 
 
-<div {{bind-attr class="showForm:hide:show"}}>
-    <h4>You're new name! {{session.currentUser.firstname}} {{session.currentUser.lastname}}</h4>
-    <button {{action 'showForm'}} class="btn btn-default btn-right btn-positive">Change again</button>
-</div>

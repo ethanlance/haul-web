@@ -9,7 +9,16 @@ export default Ember.Component.extend({
 	
 	currentUserIdBinding: 'session.currentUser.id',
 
-	showForm:true,
+	saveSuccess:false,
+
+	saveSuccessChanged: function() {
+		if( this.get('saveSuccess') ){
+			var _this = this;
+			Ember.run.later(function(){
+				_this.set('saveSuccess', false);
+			},500);
+		}
+	}.observes('saveSuccess'),
 
 	didInsertElement: function() {
 		if(Ember.isEmpty(this.get('currentUserId'))){
@@ -25,6 +34,8 @@ export default Ember.Component.extend({
 	}.observes('currentUserId'),
 
 	save: function() {
+
+		this.set('saveSuccess', false);
 
 		var _this = this;
 		var model = this.get('model');
@@ -42,7 +53,7 @@ export default Ember.Component.extend({
 		.then(
 			function() { 
 				_this.set('isProcessing', false);
-				_this.set('showForm', false);
+				_this.set('saveSuccess', true);
 			},
 			function(error){
 				_this.set('isProcessing', false);	
@@ -64,8 +75,5 @@ export default Ember.Component.extend({
 		saveForm: function() {
 			this.save();
 		},
-		showForm: function() {
-			this.set('showForm', true);
-		}
 	}
 });
