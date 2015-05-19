@@ -80,7 +80,7 @@ export default Ember.ObjectController.extend({
 
 		var product_status = this.get('model.product_status');
 		this.set('isForSale', false);
-		if( product_status == 'FOR_SALE' ) {
+		if( product_status == 'FOR_SALE'  ||  product_status == 'FOR_SALE_OFFSITE' ) {
 			this.set('isForSale', true);
 			this.set('statusText', "FOR SALE");
 		}else if( product_status === "SOLD") {
