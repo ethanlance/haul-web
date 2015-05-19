@@ -8,7 +8,7 @@
 
 
 		<div class="profile-name">
-			{{#link-to 'profile' model}}<span class="name">{{model.name}}</span>{{/link-to}}
+			{{#link-to 'profile' model}}<span class="name">{{model.get_display_name}}</span>{{/link-to}}
 			<span class="username">@{{model.username}}</span>
 		</div>
 

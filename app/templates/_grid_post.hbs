@@ -12,7 +12,7 @@
 
 			<div class="product-title">{{post.product_name}}</div>
 
-			<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.name}}</div>
+			<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
 
 		</div>
 
@@ -30,7 +30,7 @@
 			{{#link-to 'profile' post.user.username }}{{make-icon icon=post.user.icon}}{{/link-to}}
 
 			<div class="post-owner-details">
-				<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.name}}{{/link-to}}</span>
+				<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
 				<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
 				<div class="moment">{{ format-moment post.created_at }}</div> 
 			</div>

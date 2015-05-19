@@ -21,6 +21,13 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	getMentionsCount: DS.belongsTo('user-mentions-count', {async:true} ),
 	getUnreadMentionsCount: DS.belongsTo('user-mentions-unread-count', {async:true} ),
 
+	get_display_name: function() {
+		if( Ember.isEmpty(this.get('display_name')) ) {
+			return this.get('name');
+		}else{
+			return this.get('display_name');
+		}
+	}.property(),
 
 	validations: { 
 		firstname: {

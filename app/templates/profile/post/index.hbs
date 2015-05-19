@@ -35,7 +35,7 @@
 					<div class="repost-citations">
 						<i class="fa fa-retweet"></i>
 						{{make-icon icon=repost_user.icon}}
-						<span class="name">{{repost_user.name}}'s </span>
+						<span class="name">{{repost_user.get_display_name}}'s </span>
 						<span class="title"> original post
 							{{#link-to 'profile.post'
 								repost.user.username 
@@ -122,7 +122,7 @@
 						{{make-icon icon=product_user.icon}}
 
 						<div class="profile-name">
-							<span class="name">{{product_user.name}}</span>
+							<span class="name">{{product_user.get_display_name}}</span>
 							<span class="username">@{{product_user.username}}</span>
 						</div>
 					</div>

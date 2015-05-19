@@ -57,7 +57,7 @@
 					{{/link-to}}
 
 					<div class="comment-section-comment">
-						<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.name}}{{/link-to}}</span>
+						<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}{{/link-to}}</span>
 						<span class="username">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}}</span>
 						<div class="moment">{{ format-moment item.created_at }}</div>
 						<div class="comment">{{sanitizehtml-andtag item.comment "comment" ENV}}</div>
