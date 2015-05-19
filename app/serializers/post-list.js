@@ -18,6 +18,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 		
 		var data = null;
 		var datas = payload.data.map(function(result){  
+			var price = Math.floor(result.product.price / 100);
 			data = {
 				id: result.post_id,	
 				post_id:result.post_id,
@@ -33,7 +34,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 				image: result.image_id,
 
 				product_currency: result.product.currency,				
-				product_price: result.product.price,
+				product_price: price,
 				product_name: result.product.name,
 				product_status: result.product.status,
 				product_quantity: result.product.quantity,

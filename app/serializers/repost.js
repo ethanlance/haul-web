@@ -10,6 +10,7 @@ export default DS.RESTSerializer.extend({
 		}
 		
 		var id = payload.data.post_id; 
+		var price = Math.floor(payload.data.product.price / 100);
 		var data = {
 
 			id: id,	
@@ -24,7 +25,7 @@ export default DS.RESTSerializer.extend({
             product_description: payload.data.product.description,
             product_link: payload.data.product.link,
             product_currency: payload.data.product.currency,
-            product_price: payload.data.product.price,
+            product_price: price,
             product_quantity: payload.data.product.quantity,
             product_images: payload.data.product.image_ids,
             product_status: payload.data.product.status,

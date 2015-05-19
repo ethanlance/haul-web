@@ -11,6 +11,7 @@ extractArray: function(store, primaryType, payload) {
 		var data = null;
 		var datas = payload.data.map(function(result){  
 			var id = result.post_id; 
+			var price = Math.floor(result.product.price / 100);
 			data = {
 				id: id,	
 				post_id:result.post_id,
@@ -26,7 +27,7 @@ extractArray: function(store, primaryType, payload) {
 				image: result.image_id,
 
 				product_currency: result.product.currency,				
-				product_price: result.product.price,
+				product_price: price,
 				product_name: result.product.name,
 				product_status: result.product.status,
 				product_quantity: result.product.quantity,

@@ -45,11 +45,13 @@ export default ApplicationAdapter.extend({
             product_description: record.get('product_description'),
             product_currency: record.get('product_currency'),
             product_shipping: record.get('product_shipping'),
-            product_price: record.get('product_price'),
+            //product_price: record.get('product_price'),
             product_quantity: record.get('product_quantity'),
             product_image_ids: record.get('product_image_ids'),
             product_status: record.get('product_status'),
         };
+
+        data['product_price'] = record.get('product_price') * 100;
 
 		var url = this.get('host') + "/posts/" + post_id;
 		return this.ajax(url, "PUT", { data: data }); 
@@ -67,12 +69,19 @@ export default ApplicationAdapter.extend({
             product_description: record.get('product_description'),
             product_link: record.get('product_link'),
             product_currency: record.get('product_currency'),
-            product_price: record.get('product_price'),
+            //product_price: record.get('product_price'),
             product_shipping: record.get('product_shipping'),
             product_quantity: record.get('product_quantity'),
             product_image_ids: record.get('product_image_ids'),
             product_status: record.get('product_status'),
         };
+
+
+        //Convert dollars to pennies.
+        data['product_price'] = record.get('product_price') * 100;
+
+
+
 
 		var url = this.get('host') + "/posts";
 		return this.ajax(url, "POST", { data: data }); 
