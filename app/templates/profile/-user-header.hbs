@@ -8,8 +8,20 @@
 
 
 		<div class="profile-name">
-			{{#link-to 'profile' model}}<span class="name">{{model.get_display_name}}</span>{{/link-to}}
+			
+			<span class="name">{{#link-to 'profile' model}}{{model.get_display_name}}{{/link-to}}
+
+				{{#if isProfileOwner}}
+				 	{{#link-to 'settings.profile'}}
+					<button class="btn-edit-post display-inline">
+						<i class="fa fa-cog"></i> Edit
+					</button><br/>
+					{{/link-to}}
+				{{/if}}
+			</span>
+
 			<span class="username">@{{model.username}}</span>
+			
 		</div>
 
 
