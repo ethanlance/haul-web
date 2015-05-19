@@ -112,7 +112,7 @@ export default Ember.Component.extend( PaginateMixin,{
         if(!this.get('currentUserId')){ return; }
 
         //Check if user has a seller account.
-        this.doesUserNeedSellerAccount();
+        //this.doesUserNeedSellerAccount();
                 
         //Get last X mentions.
         this.getMentions();
