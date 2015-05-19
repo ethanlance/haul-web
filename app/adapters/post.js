@@ -48,8 +48,12 @@ export default ApplicationAdapter.extend({
             //product_price: record.get('product_price'),
             product_quantity: record.get('product_quantity'),
             product_image_ids: record.get('product_image_ids'),
-            product_status: record.get('product_status'),
+            //product_status: record.get('product_status'),
         };
+
+        if( record.get('product_status') !== 'FOR_SALE_OFFSITE') {
+            data['product_status'] = record.get('product_status');
+        }
 
         data['product_price'] = record.get('product_price') * 100;
 
