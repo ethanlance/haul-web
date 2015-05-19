@@ -15,7 +15,21 @@
 					{{/link-to}}
 				{{/if}}
 
-				{{sanitize-html user.bio "comment" ENV}}
+				{{#if user.bio}}
+					{{sanitize-html user.bio "comment" ENV}}
+				{{else}}
+
+					
+					<p>
+						<strong>Bio</strong>
+						<br/>
+
+						{{#if isProfileOwner}}You have{{else}}@{{user.username}} has{{/if}} not written a bio yet
+					</p>
+
+				
+				
+				{{/if}}
 
 			</div>
 		</div>
@@ -40,11 +54,11 @@
 			{{!-- EMPTY --}}
 			{{#unless pagedContent }}
 				<div class="padding-top text-center font-weak">
-				{{#unless isProfileOwner}} 
+				{{#if isProfileOwner}} 
 					You have not posted anything yet.
 				{{else}}
-					{{user.username}} has no posts.
-				{{/unless}}
+					@{{user.username}} has no posts.
+				{{/if}}
 					<p class="text-center">
 						<span class="glyphicon glyphicon-flash sad-heart"></span>
 					</p>
