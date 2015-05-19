@@ -6,19 +6,55 @@
 
 		{{partial "_modal_error_alert"}}
 
-
 	
 		{{!-- POST FORM --}}
 		<div class="text-center edit-wrapper">
 
 
-
 			{{#form-for model}}
-			<div {{bind-attr class=":show_one  "}}>
-				<div class="edit-row">
+			
+				<div {{bind-attr class=":show_one"}}>
+			
+					<div class="edit-row border">
+						<div class="edit-col">
+
+							<h2>For sale on Haul</h2> 	 
+
+							{{view  'checkbox' checked=isForSaleOnHaul}}
+ 
+							
+							
+							<label class="normal" for="sellOnHaul">
+								<span {{bind-attr class="isForSaleOnHaul::disabled"}} >Yes, I am selling this on Haul</span>
+							</label>
+
+							<p {{bind-attr class=":collapse isForSaleOnHaul:out:in"}} >
+								<small>Nope, just blogging about it</small>
+							</p>
+
+							<div class="collapse" id="isExternal">
+								
+								<h2> 
+									Ok, where can this be purchased?
+								</h2> 
+
+								{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
+								{{#if showLinkError}}
+									<span class="has-error help-block">Whoops, a link to the item is super important.</span>
+								{{/if}}
+
+							</div>
+						</div>
+					</div>
+
+
+			
+			
+				<div class="edit-row border">
 					<div class="edit-col">
 
-						<h2>Post something to sell.</h2>
+						<h2>Add photos</h2>
+
 
 						{{#image-picker 
 							images=userImages
@@ -38,6 +74,18 @@
 
 					</div>
 				</div>
+
+
+
+				
+
+
+
+				
+
+
+
+
 
 				
 
@@ -76,9 +124,16 @@
 
 				<div class="edit-row border">
 					<div class="edit-col">
-						<h2>How much do you want to sell this for?</h2>	
 
-						{{input-field product_price label="false" class="form-control input-sm"}}
+						<div {{bind-attr class="isForSaleOnHaul:show:hide"}}>
+							<h2>How much do you want to sell this for?</h2>	
+						</div>
+
+						<div {{bind-attr class="isForSaleOnHaul:hide:show"}}>
+							<h2>What is the price?</h2>	
+						</div>
+
+						$ {{input-field product_price label="false" class="form-control input-sm"}}
 						{{#if showErrors}}
 							<span class="has-error help-block">{{error-field product_price}}</span>
 						{{/if}}
@@ -87,18 +142,19 @@
 
 
 
-
+				<div {{bind-attr class="isForSaleOnHaul:show:hide"}}>
 				<div class="edit-row border">
 					<div class="edit-col">
 						<h2>Add shipping &amp; handling?
 							<small>We only support flat rates for now. For example "$5"</small>
 						</h2>
-						{{input-field product_shipping label="false" class="form-control input-sm"}}
+						$ {{input-field product_shipping label="false" class="form-control input-sm"}}
 						{{#if showErrors}}
 							<span class="has-error help-block">{{error-field product_shipping}}</span>
 						{{/if}}
 
 					</div>
+				</div>
 				</div>
 
 
@@ -108,12 +164,32 @@
 					<div class="edit-col">
 
 						<h2>Tag it.
+							<span class="optional">optional</span>
 							<small>Adding tags will help promote your product. Separate multiple tags with a comma. For example "car, sportscar"</small>
 						</h2>
 						
 						{{input-field tags class="form-control"}}
 
 					</div>
+				</div>
+
+				
+				<div {{bind-attr class="isForSaleOnHaul:show:hide"}} >
+				<div class="edit-row border">
+					<div class="edit-col">
+
+						<h2> 
+							Add a link 
+							<span class="optional">optional</span>
+						</h2> 
+
+						{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
+						{{#if showErrors}}
+							<span class="has-error help-block">{{error-field product_link}}</span>
+						{{/if}}
+
+					</div>
+				</div>
 				</div>
 
 
@@ -167,6 +243,8 @@
 
 				<div class="edit-footer">
 					<div class="edit-col">			
+
+						{{partial "_server_error"}}
 
 						<span {{action 'back'}} class="btn btn-cancel btn-left">
 							<i class="fa fa-arrow-left"></i> &nbsp;Back

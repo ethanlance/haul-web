@@ -91,6 +91,11 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 				onlyInteger:true,
 			}
 		},
+		// product_link: {
+		// 	dependent: {
+				
+		// 	}
+		// },
 		product_price: {
 			numericality: {
 				greaterThan:5, 

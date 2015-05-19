@@ -7,7 +7,6 @@ export default ApplicationAdapter.extend({
 	}.property(), 
 
 	find: function(store, type, id) {
-		console.log("FIND ID", id);
 		var url = this.get('host') + "/images/" + id
 		return this.ajax(url, 'GET');
 	},

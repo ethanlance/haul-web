@@ -85,7 +85,8 @@ export default Ember.ObjectController.extend({
 					body: body,
 					product_name: name,
 					product_link: product_link,
-					image_url: image_url
+					image_url: image_url,
+					product_status: 'FOR_SALE_OFFSITE'
 				});
 
 				_this.set('newpost', post);

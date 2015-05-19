@@ -13,8 +13,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	//Have images been selected?
 	imagesAreSelected: Ember.computed.gte('productImageIds.length', 1),
-
-	product_status_options: null,
 	
 	//Selected image ids
 	productImageIds: [],
@@ -43,6 +41,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	show_three: false,
 
 	slideOpened: 'slide_one',
+
+	//Is this item for sale on Haul? Or is it just a post to an external link.
+	isForSaleOnHaul: true,
 
 	showChanged: function() {
 
@@ -81,16 +82,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return;
 		}
 
-		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
-		var sold 			= {name: "sold",    id: 'SOLD'};
-		var not_for_sale 	= {name: "no longer for sale",    id: 'NOT_FOR_SALE'};
-		this.set('product_status_options', Ember.ArrayController.create({
-		  selectedStatus: for_sale,
-		  status: [for_sale, sold, not_for_sale],
-		})); 
-
-
 		var  _this = this;
+		
     	this.store.find('seller', _this.get('currentUserId')).then(
         	function success(record){
                 if(Ember.isEmpty(record)  ||  record.get('isDirty') ) {
@@ -103,8 +96,35 @@ export default Ember.ObjectController.extend(ErrorMixin, {
         	}
         );
 
-
 	}.on('init').observes('currentUserId'),
+
+
+	isForSaleOnHaulChanged: function() {
+		
+		var model = this.get('model');
+
+		if( !this.get('isForSaleOnHaul') ){
+		
+			$('#isExternal').collapse('show');
+
+			model.set('product_status', 'FOR_SALE_OFFSITE');
+			model.set('product_shipping', 0);
+		
+		}else{
+		
+			$('#isExternal').collapse('hide');
+			
+			model.set('product_status', 'FOR_SALE');
+
+		}
+	}.observes('isForSaleOnHaul'),
+
+	reset: function() {
+		this.set('show', 'one');
+		this.set('selectedImages', []);
+		this.set('showErrors', false); 
+		this.set('isForSaleOnHaul', true);
+	},
 
 	setup: function() {  
 		
@@ -112,15 +132,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			return;
 		}
 
-		this.set('show', 'one');
-		this.set('selectedImages', []);
-		this.set('showErrors', false); 
+		this.reset();
 
-
+		//Product Link:
 		//Does this model have a product_link? If yes then this is an import.
 		var model = this.get('model');
 		if( !Ember.isEmpty(model.get('product_link'))){
-
 
 			//If Link Import, there are images to import:
 			var _this = this;
@@ -135,12 +152,18 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			model.set('body', " ");
 		}
 
+		//Product Status:
+		if( model.get('product_status') === 'FOR_SALE_OFFSITE' ){
+			this.set('isForSaleOnHaul', false);
+		} else {
+			model.set('product_status', 'FOR_SALE');
+		}
+
 		//Now set some defaults.
 		model.setProperties(
 			{
 				'product_quantity':'1',
 				'product_currency':'USD',
-				'product_status': 'FOR_SALE',
 				'user_id': this.get('currentUserId'),
 				'tags': ''
 			}
@@ -182,20 +205,36 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	//Observe the product for completeness, and triggers validation on the product
 	//before the user can advance to the post section.
 	validateProduct: function() {
-		
-		if( Ember.isEmpty(this.get('selectedImages')) ) {
-			this.set('showImageError', true);
-			this.set('showErrors', true); 
-			this.set('isProcessingNext', false);
-			return;
-		}
-
 
 		var _this = this;
 		var model = this.get('model');
+
+		var hasErrors = false;
+		
+		//Has image?
+		if( Ember.isEmpty(this.get('selectedImages')) ) {
+			hasErrors = true;
+			this.set('showImageError', true);
+		}
+
+		//If product_status === FOR_SALE_OFFSITE
+		//then product_link must no be empty.
+		if( model.get('product_status') === 'FOR_SALE_OFFSITE' && Ember.isEmpty( model.get('product_link') )) {
+			hasErrors = true;
+			this.set('showLinkError', true);
+		}
+
+		
 		model.validate()
 		.then(
 			function valid(){
+
+				if( hasErrors ) {
+					_this.set('showErrors', true); 
+					_this.set('isProcessingNext', false);
+					return;
+				}
+
 				_this.set('show', "two");
 				_this.set('showErrors', false);
 				_this.set('isProcessingNext', false);
@@ -204,16 +243,19 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			function invalid(errors){
 				_this.set('isProcessingNext', false);
 
-				if( errors.get('product_name').length > 0 ||
+				if( hasErrors ||
+					errors.get('product_name').length > 0 ||
 					errors.get('product_description').length > 0 ||
 					errors.get('product_price').length > 0 ||
 					errors.get('product_quantity').length > 0 || 
 					errors.get('product_shipping').length > 0 || 
 					errors.get('product_status').length > 0 ){
 						_this.set('showErrors', true);
+						_this.set('isProcessingNext', false);
 				}else{
 					_this.set('show', "two");
 					_this.set('showErrors', false);
+					_this.set('isProcessingNext', false);
 					_this.doTagInjection();
 				}
 			}
@@ -467,6 +509,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		descriptionChange: function(text) { 
 			var model = this.get('model');
 			model.set('product_description', text);	
-		}
+		},
+
+
 	}
 });

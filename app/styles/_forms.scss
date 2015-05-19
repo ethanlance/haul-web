@@ -1,3 +1,9 @@
+label.normal{
+	font-weight: normal;
+	cursor: pointer;
+}
+
+
 .btn-block{
 	display:inline-block;
 }
@@ -110,22 +116,33 @@ textarea.form-control {
 	padding-bottom: 100px;
 }
 
-.upload-images{
-	padding-top:20px;
-	padding-left:15px;
-	margin-bottom: 20px;
+
+
+
+
+.upload-images {
+	padding:0;
+	margin:0;
+
+	.ui-sortable{
+		&:empty{
+	  		display:none !important;
+	  	}
+  	}
 
 	ul.sortable{
-		margin:0;
-		padding:0;
+		padding-top:20px;
+		padding-bottom:20px;
+		margin-bottom: 20px; 
 		list-style: none;
-		display:inline;
+		display:block;
 
 		li{
 			position:relative;
 			display:inline-block;
 			cursor: hand;
-			padding-left: 10px;
+			padding-left: 5px;
+			padding-right: 5px;
 
 			&:hover .btn-delete {
 				opacity: 1;
@@ -157,7 +174,7 @@ textarea.form-control {
 		position: absolute;
 		display: block;
 		top: 0px;
-		width: 100%;
+		width: 100px;
 		left: 0px;
 		.alert {
 			border-radius: 0px;
@@ -169,7 +186,7 @@ textarea.form-control {
 	.progress-wrapper {
 		position: absolute;
 		bottom: -20px;
-		width: 100%;
+		width: 100px;
 		margin-left: 0px;
 		.progress {
 			border-radius: 0px;
@@ -178,11 +195,12 @@ textarea.form-control {
 		}
 	}
 
-	.image-wrapper {
+	.image-wrapper, .dz-preview, .dz-file-preview {
+		padding-left:5px;
+		padding-right:5px;
 		display:inline-block;
 		position:relative;
-		width: 100px;
-		height: 100px;
+		
 	}
 	img{
 		padding:2px; 
@@ -197,6 +215,9 @@ textarea.form-control {
 		}
 	}
 }
+
+
+
 
 
 // NEW POST STYLES
@@ -290,7 +311,9 @@ textarea.form-control {
 
 
 
-
+span.disabled{
+	color: #ddd;
+}
 
 
 
@@ -727,10 +750,24 @@ button.btn-danger{
 
 
 
+
+	
+
 	small {
 		font-size: 13px;
 		font-weight: 400;
 		color: #555;
+	}
+
+	p small {
+		font-size: .8em;
+		font-weight: 400;
+		color: #555;
+	}
+	
+	.optional {
+		font-size: .5em;
+		font-style: italic;
 	}
 
 
