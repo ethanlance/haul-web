@@ -61,10 +61,10 @@ export default Ember.Component.extend({
 		store.find('follow', key)
 		.then(function(record){
 			if(!Ember.isEmpty(record)){
-				if(_this.get('userFollows')){
+				//if(_this.get('userFollows')){
 					_this.set('userFollows', true);
 					_this.set('userFollowsRecord', record);
-				}
+				//}
 			}
 		}, function(error) {
 			_this.set('userFollowsRecord', false);
