@@ -3,10 +3,10 @@ export default Ember.Component.extend({
 	
 	wait: 1000,
 
-	loaded: false,
+
 
 	showImage: function() {
-		this.set('loaded', true);
+		
 
 		var el = $('#'+ this.get('unHideId'));
 
