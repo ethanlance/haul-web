@@ -138,6 +138,10 @@ export default Ember.ObjectController.extend({
 			var promisesArray = [];
 
 			var image_urls = _this.get('image_urls');
+
+
+			//Image url conditioning:
+			image_urls = _this.conditionImageUrls( image_urls );
  			
 
  			//TYPEWRITER:
@@ -237,6 +241,27 @@ export default Ember.ObjectController.extend({
 				_this.set('showErrors', true);
 			}
 		);
+
+	},
+
+
+	conditionImageUrls: function( urls ) {
+
+		for( var i=0; i<urls.length; i++) {
+
+			var url = urls[i];
+
+			//Shopify
+			if( url.indexOf('cdn.shopify.com') > -1 ) {
+				url = url.replace(/_medium./, ".");
+				url = url.replace(/large./, ".");
+				url = url.replace(/_small./, ".");
+				url = url.replace(/_thumb./, ".");
+				urls[i] = url;
+			}
+		}
+
+		return urls;
 
 	},
 
