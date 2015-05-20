@@ -21,13 +21,15 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	getMentionsCount: DS.belongsTo('user-mentions-count', {async:true} ),
 	getUnreadMentionsCount: DS.belongsTo('user-mentions-unread-count', {async:true} ),
 
-	get_display_name: function() {
-		if( Ember.isEmpty(this.get('display_name')) ) {
-			return this.get('name');
-		}else{
-			return this.get('display_name');
+	get_display_name: DS.attr('string'),
+
+	get_display_nameChanged: function() {
+		if( Ember.isEmpty(this.get('display_name')) ) { 
+			this.set('get_display_name', this.get('name') );
+		}else{ 
+			this.set('get_display_name', this.get('display_name') );
 		}
-	}.property(),
+	}.observes('name', 'display_name'),
 
 	validations: { 
 		firstname: {
