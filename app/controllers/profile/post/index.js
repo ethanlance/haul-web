@@ -61,9 +61,7 @@ export default Ember.ObjectController.extend({
 				}
 			}
 		}
-
 		
-
 		this.set('url', window.location.href);
 
 		this.set('isRepost', false);

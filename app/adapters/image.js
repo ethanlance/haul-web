@@ -6,7 +6,7 @@ export default ApplicationAdapter.extend({
 		return this.ENV.Server.IMAGE_SERVER_HOST;	
 	}.property(), 
 
-	find: function(store, type, id) {
+	find: function(store, type, id) { 
 		var url = this.get('host') + "/images/" + id
 		return this.ajax(url, 'GET');
 	},
@@ -18,7 +18,7 @@ export default ApplicationAdapter.extend({
 		return this.ajax(url, "DELETE");
 	},
   
-	findMany: function(store, type, ids) { 
+	findMany: function(store, type, ids) {  
 		var url;
 		if( ids.length < 2 ){
 			url = this.get('host') + "/images/" + ids[0];

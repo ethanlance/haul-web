@@ -31,6 +31,29 @@ export default Ember.ObjectController.extend({
 
 	animateClose: null,
 
+	image_urls: [],
+
+	image_ids: [],
+
+	images: [],
+
+	messages: {
+		'start': 		'Analyzing link',
+		'image': 		'Uploading',
+		'image2': 		'We are on target',
+		'end': 			'Succesfully processed!',
+	},
+
+	typeMessage: [],
+
+	typeClear: false,
+
+	showErrorsChange: function() {
+		if( this.get('showErrors') ) {
+			this.set('typeClear', true);
+		}
+	}.observes('showErrors'),
+
 	importLink: function() {
 
 		this.set('isProcessing', true);
@@ -43,19 +66,31 @@ export default Ember.ObjectController.extend({
 
 		var urlencoded = encodeURIComponent( url );
 
+		this.get('typeMessage').pushObject( this.get('messages')['start'] );
+
 		return Ember.$.ajax({
-					url: _this.get('harvest_host') + '/pages/opengraph?link='+urlencoded,
-					type: 'GET',
-					headers: {
-						Authorization: 'Bearer ' + _this.get('access_token')
-					},
-					dataType: 'json'
+			url: _this.get('harvest_host') + '/pages/opengraph?link='+urlencoded,
+			type: 'GET',
+			headers: {
+				Authorization: 'Bearer ' + _this.get('access_token')
+			},
+			dataType: 'json'
 		})
 
 		//Take the OG Data and clean it up.
 		.then(function(response){
+				var image_url = '';
+				var image_urls = _this.get('image_urls');
+				if( !Ember.isEmpty(response.data.image_urls)){
+					image_urls = response.data.image_urls;
+				}else if( !Ember.isEmpty(response.data.image_url) ){
+					image_urls.push( response.data.image_url );
+				}
 
-				var image_url = response.data.image_url;				
+				if( !Ember.isEmpty(image_urls) ){
+					image_url = image_urls[0];
+				}
+				
 				
 				var product_link = response.data.link;
 				
@@ -90,62 +125,111 @@ export default Ember.ObjectController.extend({
 				});
 
 				_this.set('newpost', post);
+				_this.set('image_urls', image_urls);
 
-
-			return image_url;
+			return;
 		})
 
 		//Upload the image by the image_url.
-		.then(function(image_url){
+		.then(function(){
 
-			var data = {
-				user_id: _this.get('currentUserId'),
-				link: image_url,
-			}
+			var promise, message;
 
-			return Ember.$.ajax({
-				url: _this.get('image_host') + '/images/links',
-				type: 'POST',
-				data:data,
-				headers: {
-					Authorization: 'Bearer ' + _this.get('access_token')
-				},
-				dataType: 'json'
+			var promisesArray = [];
+
+			var image_urls = _this.get('image_urls');
+ 			
+
+ 			//TYPEWRITER:
+ 			//TYPEWRITER:
+ 			//TYPEWRITER:
+ 			if( image_urls.length.length === 0){
+ 				//Nothing
+ 			}else if( image_urls.length === 1){
+ 				message = _this.get('messages')['image'] + " 1 image";
+ 				_this.get('typeMessage').pushObject( message);
+ 			}else{
+ 				message = _this.get('messages')['image'] + " " + image_urls.length + " images";	
+ 				_this.get('typeMessage').pushObject(message);
+ 			}
+			
+
+			image_urls.forEach(function(image_url, index) {
+				var data = {
+					user_id: _this.get('currentUserId'),
+					link: image_url,
+				};
+
+				promise = Ember.$.ajax({
+					url: _this.get('image_host') + '/images/links',
+					type: 'POST',
+					data:data,
+					headers: {
+						Authorization: 'Bearer ' + _this.get('access_token')
+					},
+					dataType: 'json'
+				})
+				.then(function(response){
+					var image_id = response.data[0].image_id;
+
+					var image_ids = _this.get('image_ids');
+
+					image_ids.pushObject(image_id);
+
+				});
+
+				promisesArray.push(promise);
 			});
-		})
-
-		//Image uploaded, now request it.
-		.then(function(image_response){
+ 			
 			
-			var image_id = image_response.data[0].image_id;
+ 			_this.get('typeMessage').pushObject( _this.get('messages')['image2'] );
 
-			return _this.store.find('image', image_id)
-			.then(function(record){
+			return Ember.RSVP.all(promisesArray)
+				.then(function(){
+		
+				var image_ids = _this.get('image_ids');
+	
+				var promise;
 
-				var model = _this.get('newpost');	
-			
-				console.log("RECORD", record.id)
-				
-				model.set('import_images', [record]);
+				var promisesArray = [];
 
-				return model;	
+			 	image_ids.forEach(function(id){
 
+			 		promise = _this.store.find('image', id)
+			 		.then(function(image){
+			 			_this.get('images').pushObject(image);
+			 		});
+			 		promisesArray.push(promise);
+
+			 	});
+
+			 	return Ember.RSVP.all(promisesArray)
+				.then(
+					function() {
+
+						_this.set('isProcessing', false);
+
+						//TYPEWRITER
+						//TYPEWRITER
+						//TYPEWRITER
+						_this.get('typeMessage').pushObject( _this.get('messages')['end'] );
+
+						var model = _this.get('newpost');	
+
+						model.set('import_images', _this.get('images'));
+
+						Ember.run.later(function() {
+							_this.send('openModal', 'new-post', model);
+						}, 1500);
+					}
+				);
 			})
-			.then(
-				function() {
-					console.log("OPEN MODAL");
-					_this.set('isProcessing', false);
-					_this.send('openModal', 'new-post', _this.get('newpost'));			
-
-				}
-			);
-			
 		})
+	
 
 		.then(
 			function success(response) {
 				//Should never get to here.
-				console.log('ping')
 			},
 
 			function failed(error) {
