@@ -71,7 +71,7 @@ export default ApplicationAdapter.extend({
             image_id: record.get('image_id'),
             product_name: record.get('product_name'),
             product_description: record.get('product_description'),
-            product_link: record.get('product_link'),
+            
             product_currency: record.get('product_currency'),
             //product_price: record.get('product_price'),
             product_shipping: record.get('product_shipping'),
@@ -85,7 +85,9 @@ export default ApplicationAdapter.extend({
         data['product_price'] = record.get('product_price') * 100;
 
 
-
+        if( !Ember.isEmpty(record.get('product_link'))) {
+            data['product_link'] = record.get('product_link');
+        }
 
 		var url = this.get('host') + "/posts";
 		return this.ajax(url, "POST", { data: data }); 

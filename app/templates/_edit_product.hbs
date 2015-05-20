@@ -1,142 +1,155 @@
 <div class="edit-row">
-					<div class="edit-col">
+	<div class="edit-col">
 
-						<h2>Post something to sell</h2>
+		<h2>Post something for sale</h2>
 
-						{{#image-picker 
-							images=userImages
-							selectedImages=selectedImages
-							refresh='refresh'
-							imageClick='imageClick' 
-							imageDelete='imageDelete'
-							
-							showImagePicker=showImagePicker
-						}} 
-							{{view 'sortable' content=selectedImages}}
-						{{/image-picker}}
+		{{#image-picker 
+			images=userImages
+			selectedImages=selectedImages
+			refresh='refresh'
+			imageClick='imageClick' 
+			imageDelete='imageDelete'
+			
+			showImagePicker=showImagePicker
+		}} 
+			{{view 'sortable' content=selectedImages}}
+		{{/image-picker}}
 
-						{{#if showImageError}}
-							<span class="has-error help-block">A product needs at least one image</span>
-						{{/if}}
+		{{#if showImageError}}
+			<span class="has-error help-block">A product needs at least one image</span>
+		{{/if}}
 
-					</div>
-				</div>
-
-
-				{{#if hasProductLink}}
-				{{!-- IF THIS WAS IMPORTED FROM ANOTHER SITE THEN ALLOW THE product_link TO BE EDITED --}}
-				<div class="edit-row border">		
-					<div class="edit-col">
-						<h2>Website URL You Where You Found This
-							<small>Cannot be edited</small>
-						</h2> 
-
-						{{input-field product_link class="form-control" disabled='true'}}
-						
-
-					</div>
-				</div>
-				{{/if}}
-
-				
-
-				<div class="edit-row border">		
-					<div class="edit-col">
-						<h2>What is this?
-							<small>Name this product. For example "1968 Aston Martin"</small>
-						</h2> 
-
-						{{input-field product_name class="form-control"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_name}}</span>
-						{{/if}}
-
-					</div>
-				</div>
+	</div>
+</div>
 
 
 
-				<div class="edit-row border">
-					<div class="edit-col">
-						<h2>What are the specs?
-							<small>Add one fact per line. For example "Color: silver"</small>
-						</h2>
 
-						{{description-input rollupValue=product_description descriptionChange='descriptionChange'}}
+{{!-- SHOW when FOR_SALE_OFFSITE --}}
+{{!-- SHOW when FOR_SALE_OFFSITE --}}
+{{!-- SHOW when FOR_SALE_OFFSITE --}}
+{{!-- SHOW when FOR_SALE_OFFSITE --}}
+{{!-- SHOW when FOR_SALE_OFFSITE --}}
+{{#if isForSaleOffsite}}
+<div class="edit-row border">		
+	<div class="edit-col">
+		<h2>Website URL You Where You Found This
+			<small>Cannot be edited</small>
+		</h2> 
 
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_description}}</span>
-						{{/if}}
-
-					</div>
-				</div>
-
-
-
-				<div class="edit-row border">
-					<div class="edit-col">
-						<h2>How much?</h2>	
-
-						{{input-field product_price label="false" class="form-control input-sm"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_price}}</span>
-						{{/if}}
-
-						<h2>Shipping &amp; handling?
-							<small>We only support flat rates for now, example "$5"</small>
-						</h2>
-
-						{{input-field product_shipping label="false" class="form-control input-sm"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_shipping}}</span>
-						{{/if}}
-
-					</div>
-				</div>
-
-				<div class="edit-row border">
-					<div class="edit-col">
-					
-					<div class="row">	
-					<div class="col-md-6 col-sm-6 col-xs-6">
-						<h2>Change Quantity</h2>
-
-						{{input product_quantity class="" placeholder="quantity" label="false"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_quantity}}</span>
-						{{/if}}
-
-					</div>
-
-					<div class="col-md-6 col-sm-6 col-xs-6">
-
-						<h2>Change status</h2>	
-					
-							{{view "select"
-						       content = product_status_options.status
-						       optionLabelPath = "content.name"
-						       optionValuePath = "content.id"
-						       selection = product_status_options.selectedStatus
-						       class = "form-control"
-						    }}
-						    {{#if showErrors}}{{error-field product_status}}{{/if}}
-						</div>
-						</div>
-					</div>
-				</div>
+		{{input-field product_link class="form-control" disabled='true'}}
+		
+	</div>
+</div>
+{{/if}}
 
 
-				{{!-- <div class="edit-row border">
-					<div class="edit-col">
-
-						<h2>Tag it
-							<small>Tags will help promote your product. Separate multiple tags with a comma.</small>
-						</h2>
-						
-						{{input-field tags class="form-control"}}
-
-					</div>
-				</div> --}}
 
 
-				
+
+
+<div class="edit-row border">		
+	<div class="edit-col">
+		<h2>What is this?
+			<small>Name this product. For example "1968 Aston Martin"</small>
+		</h2> 
+
+		{{input-field product_name class="form-control"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field product_name}}</span>
+		{{/if}}
+
+	</div>
+</div>
+
+
+
+<div class="edit-row border">
+	<div class="edit-col">
+		<h2>What are the specs?
+			<small>Add one fact per line. For example "Color: silver"</small>
+		</h2>
+
+		{{description-input rollupValue=product_description descriptionChange='descriptionChange'}}
+
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field product_description}}</span>
+		{{/if}}
+
+	</div>
+</div>
+
+
+
+<div class="edit-row border">
+	<div class="edit-col">
+		<h2>How much?</h2>	
+
+		$ {{input-field product_price label="false" class="form-control input-sm"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field product_price}}</span>
+		{{/if}}
+
+
+		{{!-- DONT SHOW S/H when FOR_SALE_OFFSITE --}}
+		{{!-- DONT SHOW S/H when FOR_SALE_OFFSITE --}}
+		{{!-- DONT SHOW S/H when FOR_SALE_OFFSITE --}}
+		{{!-- DONT SHOW S/H when FOR_SALE_OFFSITE --}}
+		{{#unless isForSaleOffsite}}
+			<h2>Shipping &amp; handling?
+				<small>We only support flat rates for now, example "$5"</small>
+			</h2>
+
+			$ {{input-field product_shipping label="false" class="form-control input-sm"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_shipping}}</span>
+			{{/if}}
+		{{/unless}}
+
+
+
+	</div>
+</div>
+
+
+{{!-- DONT SHOW when FOR_SALE_OFFSITE --}}
+{{!-- DONT SHOW when FOR_SALE_OFFSITE --}}
+{{!-- DONT SHOW when FOR_SALE_OFFSITE --}}
+{{!-- DONT SHOW when FOR_SALE_OFFSITE --}}
+{{#unless isForSaleOffsite}}
+<div class="edit-row border">
+	<div class="edit-col">
+	
+	<div class="row">	
+	<div class="col-md-6 col-sm-6 col-xs-6">
+		<h2>Change Quantity</h2>
+
+		{{input product_quantity class="" placeholder="quantity" label="false"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field product_quantity}}</span>
+		{{/if}}
+
+	</div>
+
+	<div class="col-md-6 col-sm-6 col-xs-6">
+
+		<h2>Change status</h2>	
+	
+			{{view "select"
+		       content = product_status_options.status
+		       optionLabelPath = "content.name"
+		       optionValuePath = "content.id"
+		       selection = product_status_options.selectedStatus
+		       class = "form-control"
+		    }}
+		    {{#if showErrors}}{{error-field product_status}}{{/if}}
+		</div>
+		</div>
+	</div>
+</div>
+{{/unless}}
+
+
+
+
+

@@ -9,10 +9,14 @@ export default Ember.ObjectController.extend(ErrorMixin, {
  	currentPageBinding: 'controllers.profile.currentPage',
 
 	productImagesBinding: "model.product_images",
+
+	productUserIdBinding: "model.product_user.id",
 	
 	product_status_options: null,
 	
 	currentUserBinding: 'session.currentUser',
+
+	currentUserIdBinding: 'session.currentUser.id',
 	
 	isProcessing: false,
 
@@ -31,16 +35,17 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	animateClose:false,
 
 	prevModelId: false,
-	currentModelId: false,
 
-	currentModelIdChanged: function() {
-		if( this.get('prevModelId') && this.get('prevModelId') !== this.get('currentModelId')  ){
-			this.reset();
-		}
+	modelIdBinding: 'model.id',
 
-		this.set('prevModelId', this.get('currentModelId'));
-	}.observes('currentModelId'),
+	currentModelIdBinding: 'model.id',
 
+	isForSaleOffsite: Ember.computed.equal('model.product_status', "FOR_SALE_OFFSITE"),
+
+
+	/*
+		Set all our states back to default.
+	*/
 	reset: function() {
 		this.setProperties({
 			showImageUploadError: false,
@@ -52,18 +57,39 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		})
 	},
 
-	setup: function() {
-		this.set('canEditProduct', false);
-		if(Ember.isEmpty(this.get('model')) || Ember.isEmpty(this.get('currentUser')) ){
-			return
-		} 
 
-		//Safety Check.  Is current user the owner of this product?
-		if( this.get('model').get('product_user').get('id') !== this.get('currentUser').get('id') ){
-			console.log("ERROR, not the owner");
-			return;
+	/*
+		Observe if the model changes to another model. Controllers are singletons, so we need to let it know
+		when we're editing a new model.
+	*/
+	currentModelIdChanged: function() {
+		
+		if( this.get('prevModelId') && this.get('prevModelId') !== this.get('currentModelId')  ){
+			this.reset();
 		}
 
+		this.set('prevModelId', this.get('currentModelId'));
+
+	}.observes('currentModelId'),
+
+
+	/*
+		Setup our form.  Anytime the controller detects a new model this reruns.
+	*/
+	setup: function() {
+
+		if( Ember.isEmpty( this.get('currentUserId')) ||  Ember.isEmpty(this.get('modelId'))) { return; }
+		
+		this.setupStatusDropown();
+
+
+	}.observes('modelId', 'currentUserId'),
+
+
+	/*
+		Setup the status dropdown for products that are not offsite.
+	*/
+	setupStatusDropown: function() {
 		var selectedStatus;
 		var for_sale 		= {name: "for sale", id: 'FOR_SALE'};
 		var sold 			= {name: "sold",    id: 'SOLD'};
@@ -83,17 +109,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		  status: [for_sale, sold, not_for_sale],
 		}); 
 		this.set('product_status_options', product_status_options); 
-
-		
-
-		this.set('currentModelId', this.get('model.id'));
-
-	}.observes('model', 'currentUser'),
+	},
 
 
-
-
-	/* Get and set the products images. */
+	/* 
+		Get and set the products images. 
+	*/
 	setSelectedImages: function() {
 		if( Ember.isEmpty(this.get('productImages')) ){
 			this.set('selectedImages', []);
@@ -109,8 +130,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	}.observes('productImages.@each', 'model'),
 
 
-	//Observer: anytime our array of selected images changes, update
-	// our list of image_ids.
+	/*
+		Observer: anytime our array of selected images changes, update
+		our list of image_ids.
+	*/
 	imagesIdsChanged: function() {
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
@@ -122,7 +145,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	}.observes('selectedImages.@each'),
 
-	//Preserves the drag sort order of the images.
+	/*
+		Preserves the drag sort order of the images.
+	*/
 	updateSortOrder: function(indexes) { 
 		var selectedImages = this.get('selectedImages');
 	    selectedImages.beginPropertyChanges();
@@ -174,22 +199,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			this.removeImage(image, 'deletedImages');
 			this.addImage(image, 'selectedImages');
 		}
-
-		//Remove
-		// if( found ) { 
-		// 	var objects = [];
-		// 	selectedImages.forEach(function(result){
-		// 		if( result.get('id') !== image.get('id')){
-		// 			objects.push(result);
-		// 		}
-		// 	});
-		// 	this.set('selectedImages', objects);
-		// 	var deletedImages = this.get('deletedImages');
-		// 	deletedImages.pushObject(image)
-		// //Add
-		// } else {
-		// 	selectedImages.pushObject(image);
-		// }
 	},
 
 	
@@ -202,8 +211,16 @@ export default Ember.ObjectController.extend(ErrorMixin, {
  
 
 		//Get-Set the product status.
-		model.set('product_status', this.get('product_status_options').get('selectedStatus').id);
-
+		if( this.get('isForSaleOffsite') ) {
+			model.setProperties({
+				'product_status': "FOR_SALE_OFFSITE",
+				'product_quantity': 1,
+				'product_shipping': 0,
+			});
+		}else{
+			model.set('product_status', this.get('product_status_options').get('selectedStatus').id);	
+		}
+		
 
  		//Model Validations:
 		model.validate()
@@ -247,8 +264,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	},
 
 
-
-
+	/*
+		Catch all the actions.
+	*/
 	actions: {
 
 		close: function() {
@@ -257,7 +275,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		cancel: function() {
 			this.set('animateClose', true);
-			//this.transitionToRoute('profile', this.get('currentUser'));
 		},
 
 		closeModal: function() { 
@@ -270,7 +287,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		saveProduct: function() { 
 			this.saveProduct();
 		},
-
 
 		//Click "imageClick" in UI
 		imageClick: function(event) {

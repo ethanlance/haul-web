@@ -163,6 +163,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		model.setProperties(
 			{
 				'product_quantity':'1',
+				'product_shipping':'0',
 				'product_currency':'USD',
 				'user_id': this.get('currentUserId'),
 				'tags': ''
