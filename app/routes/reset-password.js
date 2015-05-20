@@ -1,5 +1,10 @@
 import Ember from 'ember';
 export default Ember.Route.extend({ 
+
+	metaTitle: function() {
+		return "Reset Password";
+	}.property(),	
+
 	model: function() {
 		return this.store.createRecord('authresetpassword');
 	},

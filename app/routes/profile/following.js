@@ -5,6 +5,14 @@ export default Ember.Route.extend(ResetScrollMixin,{
 
 	limit: config.APP.paginationLimit.following,
 
+	metaTitle: function() {
+		var user = this.modelFor('profile');
+
+		var title =  user.get('get_display_name') + " follows these users";
+
+		return title;
+	}.property(),
+
 	model: function() {
 		var _this  = this;
 		return this.store.find('user-following-list', {user_id: this.modelFor('profile').get('id'), limit:this.get('limit')} )

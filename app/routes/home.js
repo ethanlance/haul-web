@@ -6,6 +6,10 @@ export default Ember.Route.extend( {
 
 	limit: config.APP.paginationLimit.feed,
 
+	metaTitle: function() {
+		return "Your Feed";
+	}.property(),	
+
 	model: function() {
 		var _this = this;
 

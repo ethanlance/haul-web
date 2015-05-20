@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 	metaTitle: function() {
 		var user = this.modelFor('profile');
 
-		var title = user.get('name') + "(" + user.get('username') + ") profile";
+		var title = user.get('get_display_name') + " (@" + user.get('username') + ") profile";
 
 		return title;
 	}.property(),

@@ -5,6 +5,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin,{
 
 	limit: Ember.computed.alias('ENV.paginationLimit.mentions'),
 
+	metaTitle: function() {
+		return "Your Notifications";
+	}.property(),	
+
 	model: function() {	
 		var _this = this;
 		return this.store.find('user-mentions-list', {user_id: this.get('session.user_id'), limit:this.get('limit')} )

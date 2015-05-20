@@ -2,6 +2,10 @@ import Ember from 'ember';
 import AnonMixin from '../mixins/anon';
 export default Ember.Route.extend(AnonMixin, {
 
+	metaTitle: function() {
+		return "Haul Login";
+	}.property(),	
+
 	controllerName: 'loginmodal',
 
 	beforeModel: function(transition) {

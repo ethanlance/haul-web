@@ -17,7 +17,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 	}.property(),
 
 	metaDescription: function() {
-    	return "Write a post about soemthing that is for sale.";
+    	return "Write a post about something that is for sale.";
 	}.property(),
 
 	model: function() {

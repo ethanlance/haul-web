@@ -7,6 +7,10 @@ export default Ember.Route.extend(ResetScrollMixin,{
 
 	haulUser: null,
 
+	metaTitle: function() {
+		return "Discover Haul";
+	}.property(),	
+
 	model: function(params) { 
 		var _this = this; 
 		return this.store.find('user', 'haul').then(function(result){ 

@@ -1,6 +1,10 @@
 import Ember from 'ember';
 export default Ember.Route.extend({
 
+	metaTitle: function() {
+		return "Forgot Password";
+	}.property(),	
+
 	setupController: function(controller, model){ 
 		controller.reset();
 		this._super(controller, model);
