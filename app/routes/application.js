@@ -21,6 +21,10 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 	actions: {
 
+		closeRouter: function() {
+			return false;
+		},
+
 		
 		toggleSearch: function() {
 			console.log("CAUGHT IT?")
