@@ -530,9 +530,13 @@
 	.price {
 		font-family: arvo;
 		font-size: 26px;
-		width:100px;
+		//width:100px;
 		display:inline-block;
 		font-weight: bold;
+	}
+
+	.btn-buy, .btn-external-link{
+		float:right;
 	}
 
 

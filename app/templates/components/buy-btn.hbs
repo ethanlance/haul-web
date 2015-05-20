@@ -1,9 +1,11 @@
 
 {{#if isLink}}
-
+	
+	{{#if allowExternalLink}}
 	<button  {{action 'followLink'}} class="btn btn-default btn-external-link">
 		SEE THIS <i class="fa fa-external-link"></i>
 	</button>
+	{{/if}}
 
 {{else}}
 
@@ -16,34 +18,3 @@
 	{{/if}}
 
 {{/if}}
-
-{{!-- <span class="product-status">
-
-
-{{#if-equal param1=content.product_status param2='FOR_SALE'}}
-	<div class="price">
-		<i class="fa fa-dollar"></i>{{content.product_price}}
-	</div>
-{{/if-equal}}
-{{#unless-equal param1=content.product_status param2='FOR_SALE'}}
-	<div class="price strikethrough">
-		<i class="fa fa-dollar"></i>{{content.product_price}}
-	</div>
-{{/unless-equal}}
-
-{{#if multiline}}<br/>{{/if}}
-
-{{#if-equal param1=content.product_status param2='SOLD'}}
-	<span class="product-sold">SOLD</span>
-{{/if-equal}}
-
-{{#if-equal param1=content.product_status param2='NOT_FOR_SALE'}}
-	<span class="product-not-for-sale">NO LONGER FOR SALE</span>
-{{/if-equal}}
-
-{{#if-equal param1=content.product_status param2='FOR_SALE'}}
-<button class="btn btn-default btn-buy">
-	buy
-</button>
-{{/if-equal}}
-</span> --}}

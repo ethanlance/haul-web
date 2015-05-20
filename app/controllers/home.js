@@ -24,6 +24,8 @@ export default Ember.ObjectController.extend(PaginateMixin, {
 
     showOnboarding: false,
 
+    allowExternalLink: false, 
+    
 	userChange: function() {
 
 		if( Ember.isEmpty(this.get('currentUserId'))) {
