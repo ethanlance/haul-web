@@ -39,7 +39,6 @@ export default Em.Component.extend({
 
 		promise.then(
 			function success(result) {
-				console.log("TOKEN", result);
 				_this.set('token', result.data.value);
 			},
 			function failed(error){
@@ -56,7 +55,7 @@ export default Em.Component.extend({
 		if( Ember.isEmpty( token ) ){
 			return;
 		}
-console.log("WHAM")
+
 		var handler = Em.run.bind(this, this._handler);
 
 		// braintree.setup(token, 'custom', {
@@ -68,7 +67,6 @@ console.log("WHAM")
 
 
 		this.$('#checkout').on('submit', function(e){
-			console.log("BRAINTREE:", e);
 			alert('braintree');
 			e.preventDefault();
 			return false;
@@ -78,8 +76,6 @@ console.log("WHAM")
 
 	_handler: function(event, nonce) {
 
-		console.log("HANDLER", nonce);
-alert("HADNLER?")
 		this.sendAction('payment_nonce_set', nonce);
 
 		return false;

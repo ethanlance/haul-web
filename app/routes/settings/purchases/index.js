@@ -19,7 +19,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 	setupController: function(controller, model) {
 		controller.set('limit', this.get('limit'));
 		controller.set('pagedContent', model);
-		console.log("pagedContent", model);
 		this._super(controller, model);
 	},
 });

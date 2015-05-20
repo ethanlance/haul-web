@@ -47,8 +47,6 @@ export default Ember.Component.extend({
 
 	typeMessageChanged: function() {
 
-		console.log("type changed ", this.get('typeMessage'));
-
 		var arr = this.get('typeMessage');
 		var _this = this;
 		

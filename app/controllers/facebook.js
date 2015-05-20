@@ -26,7 +26,6 @@ export default Ember.ObjectController.extend({
 		.then(function(FB){
 
 			FB.api('/me', {fields: 'first_name, last_name, email'}, function(response) { 
-				console.log("FB RESPONSE", response);
 				var data =  {
 					email: response.email,
 					firstname: response.first_name,

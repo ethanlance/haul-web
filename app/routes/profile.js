@@ -6,7 +6,6 @@ export default Ember.Route.extend({
 		return this.store.find('user', params.username).then(function(result){ 
 			return result;
 		}, function(error) {
-			console.log("ERROR... do transition.")
 			_this.transitionTo('not_found');
 			return false;
 		});

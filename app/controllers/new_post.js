@@ -413,7 +413,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		})
 		.then(
 			function success(record){
-				console.log("SUCCESS", record)
+				
 				var user = _this.get('currentUser');
 
 				_this.set('isProcessingSavePost', false); 

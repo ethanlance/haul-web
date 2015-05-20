@@ -43,8 +43,6 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     	markRead: function(mention) {
 
-    		console.log("MENTION", mention);
-
     		var _this = this;
     		var user_id = this.get('currentUserId');
     		var access_token = this.get('session.access_token');

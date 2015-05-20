@@ -36,7 +36,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 	var match, username, hashtag;
 	var wordHash = [];
 	words.forEach(function(word){
-		//console.log("WORD", word);
+		
 		//MENTIONS
 		match = word.match(/^@.*[^\s]$|^[^@].*,$/);
 		if( match) {

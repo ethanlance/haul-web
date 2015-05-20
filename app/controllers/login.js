@@ -73,7 +73,6 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 					  		});
 
 					  	} else {
-							console.log('User cancelled login or did not fully authorize.');
 							reject();
 					  	}
 				  	}, {scope: 'email'});	
@@ -142,76 +141,6 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 					} 
 				}
 			);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			// return this.socialApiClient.load()
-			// .then(function(FB){
-		
-			// 	return new Ember.RSVP.Promise(function(resolve, reject) {
-
-			// 		FB.login(function(response){
-			// 		  	if (response.authResponse) {
-			// 		  		_this.get('controllers.facebook').set('facebook_user_id', response.authResponse.userID);
-			// 		  		_this.get('controllers.facebook').set('facebook_access_token', response.authResponse.accessToken);
-					  		
-			// 		  		return _this.get('controllers.facebook').getFBUser(function(data){
-			// 		  			resolve(data);
-			// 		  		});
-
-			// 		  	} else {
-			// 				console.log('User cancelled login or did not fully authorize.');
-			// 				reject();
-			// 		  	}
-			// 	  	}, {scope: 'email'});	
-			// 	});
-			// })
-			// .then(function(response){
-			// 	var data = { 
-			// 		fb_user_id: response.fb_user_id, 
-			// 		fb_token: 	response.fb_token
-			// 	}
-			// 	return  _this.authenticate('/auth/facebook', 'post', data);
-			// })
-			// .then(
-		 // 		function onFulfill(response) {
-			// 		_this.set('isProcessingFacebook', false);
-			// 		_this.send('closeModal');
-			// 		return console.log("Success!", response); 
-			// 	}, 
-			// 	function onReject(error) {
-			// 		_this.set('error404', true);
-			// 		_this.set('isProcessingFacebook', false);
-			// 		console.error("Failed!", error);
-			// 	}
-			// );
-
 		},
 
 		//LOGIN via email, password

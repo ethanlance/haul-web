@@ -179,7 +179,7 @@ export default Ember.Component.extend(ErrorMixin, {
 						try{
 							buyer.save();
 						}catch(e){
-							//console.log("error making buyer", e);
+							
 						}
 					}	
 				);

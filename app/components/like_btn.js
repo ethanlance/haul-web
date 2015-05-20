@@ -44,7 +44,7 @@ export default Ember.Component.extend({
 			}else{
 			}
 		});
-	},//.on('init').observes('postId'),
+	},
 
 
 
@@ -79,11 +79,6 @@ export default Ember.Component.extend({
 			.then(function(record){ 
 
 				if( like ){ 
-					// //Like
-					// if(_this.get('userLikeListRecord')){
-					// 	_this.get('userLikeListRecord').userLike.rollBack();	
-					// }
-					
 					_this.set('userLikes', true);
 					_this.set('userLikesRecord', record);
 					_this.incrementProperty('total');
@@ -94,15 +89,6 @@ export default Ember.Component.extend({
 					_this.set('userLikesRecord', null);
 					_this.decrementProperty('total');
 
-					// store.filter('user-likes-list', function(userLike){
-					// 	if(userLike.get('id') === _this.get('postKey')){
-					// 		userLike.deleteRecord();
-					// 		//userLike.save();
-
-					// 		_this.set('userLikeListRecord', userLike);
-					// 	}
-
-					// })
 
 				}
 

@@ -7,10 +7,6 @@ export default ApplicationAdapter.extend({
 	}.property(), 
 
 	find: function(store, type, id) {
-
-		console.log("FIND USER", this.get('host'));
-		console.log("FIND USER", this.get('host'));
-
 		var url = this.get('host') + "/users/" + id;
         return this.ajax(url, 'GET');
     },

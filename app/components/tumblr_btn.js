@@ -26,7 +26,7 @@ export default Ember.Component.extend({
 		
 		this.socialApiClient.load().then(function(tumblr) {
 
-			console.log("TMBLR", tumblr);
+
   
 			//_this.$(_this.get('element')).html('<a class="tumblr-share-button" ' + attrs.join(' ') +' href="https://embed.tumblr.com/share"></a>');
 

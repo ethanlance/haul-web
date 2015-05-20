@@ -23,7 +23,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		})
 		.then(function() {
 			var record = _this.store.getById('transaction-list', id);
-			console.log('found ', record);
 			_this.store.unloadRecord(record);
 		})
 		.then(function(record){

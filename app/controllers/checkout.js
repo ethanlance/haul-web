@@ -47,8 +47,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		transaction.save()
 		.then(
 			function success(record) {
-				console.log('Save', record);
-
+				
 				_this.transitionToRoute('settings.purchases.purchase', record.get('transaction_id'));
 
 			},

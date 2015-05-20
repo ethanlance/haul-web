@@ -270,7 +270,6 @@ export default Ember.Component.extend(ErrorMixin, {
 		)
 		.then(
 			function success(results){
-				console.log("SUCCESS", results);
 				_this.set('isProcessing', false);
 				_this.displayAddress(results.id);
 				_this.getAddressList();

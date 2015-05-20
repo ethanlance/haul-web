@@ -50,7 +50,7 @@ export default Ember.View.extend({
 			var imagesTop = images.parent().next().position().top - scrollTop;
 
 	    	if( imagesTop <= navBottom){
-	       		//console.log("ADD " + toolbarTop + " <= "+ navBottom) 
+	       		
 	        	images.addClass('fixed'); 
 	        	
 	        	if(_this.get('showPost')){
@@ -58,7 +58,7 @@ export default Ember.View.extend({
 	        	}
 	        	
 	        }else{
-	        	//console.log("REMOVE " + toolbarTop + " > "+ navBottom)
+	        	
 	        	images.removeClass('fixed'); 
 	        	toolbar.removeClass('fixed'); 
 	        	
