@@ -53,11 +53,8 @@
 							{{#if image.large}}<img {{bind-attr src=image.large}}/>{{/if}}
 						{{/unless}}
 
-						{{sanitizehtml-andtag 
-							body 
-							"editorial" 
-							ENV
-						}}
+						{{sanitizehtml-andtag  body  "editorial"  ENV }}
+						
 					</div>
 					<div class="social-buttons">
 						<div class="internal-social-buttons">

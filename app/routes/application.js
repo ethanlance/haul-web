@@ -27,7 +27,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 		
 		toggleSearch: function() {
-			console.log("CAUGHT IT?")
+			
 			
 			if($("#searchDropDown").hasClass('expand')){
 				$("#searchDropDown").removeClass('expand')
@@ -59,15 +59,14 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 			this.store.find('user', currentUserId)
 			.then(function(user) {			
 
-				//_this.get('session').set('currentUser', user);
+				
 
 				if( !Ember.isEmpty(user.get('username'))){
 					var attemptedTransition = _this.get('session.attemptedTransition'); 
 					if(Ember.isEmpty(attemptedTransition)){  
-						//_this.transitionTo("profile", user.get('username')  );
+						
 						_this.transitionTo("home");
 					}else{
-						console.log("TRANS TO ", attemptedTransition)
 						attemptedTransition.retry();
             			_this.set('attemptedTransition', null);
 					}
@@ -103,7 +102,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 		goToRoute: function(arg1, arg2, arg3) {
 
-			console.log("Got To Route "  , arg1 , arg2 , arg3)
+			
 
 			if( arg3 ){
 				this.transitionTo(arg1, arg2, arg3);

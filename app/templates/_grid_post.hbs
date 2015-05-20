@@ -2,11 +2,12 @@
 
 	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 	<div class="post-image">
-		{{#unless postHasImage}}
 			
-			{{#if post.image.square}}<img {{bind-attr src=post.image.square}}/>{{/if}}
-
-		{{/unless}}
+		{{#if post.image.square}}
+			<img {{bind-attr src=post.image.square}} />
+		{{else}}
+			<img {{bind-attr src=post.image.large}} />
+		{{/if}}
 
 		<div class="post-image-overlay">
 

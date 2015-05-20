@@ -28,6 +28,10 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 	html = html.replace(/<\/div>/g, "</p>");
 	html = html.replace(/\n/g, "<br>");
 
+	//Text links to html links
+	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    html = html.replace(exp,"<a href='$1'>$1</a>"); 
+
 	var sanitized = sanitize(html, config);
 
 
@@ -57,6 +61,8 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 
 		wordHash.push(word);
 	});
+
+
 
 	var sanitized = wordHash.join(" ");	
 

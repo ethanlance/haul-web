@@ -31,39 +31,8 @@ export default Ember.Route.extend(ResetScrollMixin,{
 
 		}, function(error) {
 			
-
-			//If there is an error, it's likley caused when a user 
-			//logs out and is redirected to /discover at which point their 
-			//access token causes the above to error. So try one more time
-			//using the client token.
-
-			return _this.store.find('user', 'haul').then(function(result){ 
-				return result;
-			})
-			.then(function(user){
-
-				_this.set('haulUser', user);
-
-				return _this.store.find('user-likes-list', { 
-					user_id: user.id, 
-					limit: _this.get('limit')
-				})
-				.then(function(){
-					return _this.store.filter('user-likes-list', function(result){
-						var haulUser = _this.get('haulUser');
-						if(result.get('user_id') === haulUser.id ){
-							return result	
-						}
-					});
-				});
-
-			}, function(error) {
-				_this.transitionTo('not_found');
-				return false;
-			});
-
-
-
+			_this.transitionTo('not_found');
+			return false;
 
 		});
 	},

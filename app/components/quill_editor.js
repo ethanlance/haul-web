@@ -74,12 +74,17 @@ export default Ember.Component.extend(TransformMixin, {
 
 	resize: function() {
 		var el = $('#editor');	
- 
+ 		
+ 		var top = 0;
 		var h = null;
 		if( this.get('height')) {
 			h = this.get('height');
 		} else {
-			var top = el.parent().offset().top;
+			try{
+				top = el.parent().offset().top;
+			}catch(e){
+				//
+			}
 			var scrollTop = $(window).scrollTop();
 			var height = window.outerHeight;
 			h = height - (top - scrollTop) - this.get('variance');

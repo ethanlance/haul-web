@@ -140,9 +140,7 @@
 		}
 	}
 
-	.col-right2-container {
-		width: 300px;
-	}
+
 
 	.col-right2 {
 		top:160;
@@ -182,6 +180,14 @@
 		@media (max-width: 400px) {
 			margin-top: 30px;
 		}
+	}
+
+	.col-right2-container {
+		width: 300px;
+		height: 90%;
+		overflow: scroll;
+		padding-bottom:160px;
+		margin-bottom:30px;
 	}
 }
 

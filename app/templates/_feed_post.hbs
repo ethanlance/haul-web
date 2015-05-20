@@ -37,38 +37,48 @@
 	</div>
 	{{/if}}
 
-	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
+	
 	<div class="post-image">
-		{{#unless postHasImage}}
+	
+		{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 			{{#if post.image.large}}{{image-loader src=post.image.large unHideId=post.id}}{{/if}}
-		{{/unless}}
+		{{/link-to}}
 
-		<div class="post-image-overlay">
 
-			<div class="product-status">{{post.product_status_text}}</div>
 
-			<div class="product-price">${{post.product_price}}</div> 
+		<div class="post-bottom-cap">	
+			
+			{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
+			<div class="post-info">
 
-			<div class="product-title">{{post.post.product_name}}</div>
+				
 
-			<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+				<div class="product-status">{{post.product_status_text}}</div>
+
+				<div class="product-price">${{post.product_price}}</div> 
+
+				<div class="product-title">{{post.post.product_name}}</div>
+
+				<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+
+				
+
+			</div>
+			{{/link-to}}
+
+			<div class="post-buttons">
+
+				{{like-btn post=post openModal='openModal' class="display-inline"}}	 
+				 	
+				{{comment-btn post=post class="display-inline" gotolink='true' }}
+
+				{{repost-btn post=post openModal='openModal' class="display-inline"}}
+
+				{{buy-btn post=post allowExternalLink=allowExternalLink class="display-inline btn-right btn-buy-this" }}
+			</div>
 
 		</div>
 
 	</div>
-	{{/link-to}}
-
-	<div class="post-bottom-cap">	
-
-		{{like-btn post=post openModal='openModal' class="display-inline"}}	 
-		 	
-		{{comment-btn post=post class="display-inline" gotolink='true' }}
-
-		{{repost-btn post=post openModal='openModal' class="display-inline"}}
-
-		{{buy-btn post=post allowExternalLink=allowExternalLink class="display-inline btn-right btn-buy-this" }}
 	
-
-	</div>
-
 </div>

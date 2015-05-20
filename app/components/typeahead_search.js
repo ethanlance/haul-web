@@ -148,7 +148,7 @@ export default Ember.Component.extend({
 			source: search.ttAdapter(),
 			templates: {
 				suggestion: function( s ) {
-					console.log("SUGGESTION", s);	
+					
 					var str = "";
 					if( s.last ) {
 		  				str += '<div class="tt-more-results">more results</div>';
