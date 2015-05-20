@@ -25,7 +25,7 @@
 	<div class="col-md-6 col-sm-6 col-xs-6">
 		
 		{{#link-to 'profile.post' model.post.user.username model.post.post_id model.post.post_slug}}		
-		<img class="image" {{bind-attr src=model.post.image.thumb}}>
+			{{#if model.post.image.thumb}}<img class="image" {{bind-attr src=model.post.image.thumb}}>{{/if}}
 		{{/link-to}}
 
 		<div class="block">

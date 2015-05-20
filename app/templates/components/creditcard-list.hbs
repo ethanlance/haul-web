@@ -19,7 +19,7 @@
 		<li>
 			<label>
 				<input type="checkbox"  {{action 'selectThisCardId' card.id}}> 
-				<img height="20px" {{bind-attr src=card.card_image_url}}> 
+				{{#if card.card_image_url}}<img height="20px" {{bind-attr src=card.card_image_url}}>{{/if}}
 				{{card.card_type}} ending in {{card.number}} 
 			</label>
 

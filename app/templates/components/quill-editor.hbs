@@ -6,10 +6,10 @@
 	{{#if hasGallery}}
 		<div id="gallery" class="editor-gallery">   		
 			{{#each image in selectedImages}}
-				<img
+				{{#if image.thumb}}<img
 					{{bind-attr src=image.thumb}} 
 					{{bind-attr id=image.id}} 
-					draggable='true'  />
+					draggable='true'  />{{/if}}
 			{{/each}} 
 		</div>
 	{{/if}}

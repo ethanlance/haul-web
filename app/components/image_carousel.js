@@ -98,7 +98,7 @@ export default Ember.Component.extend({
 		itemViewClass: Ember.View.extend({
 			classNames: ['item'],
 			classNameBindings: ['content.isActive:active'],
-			template: Ember.Handlebars.compile('{{#light-box href=view.content.large data-lightbox="test" data-title="title" inlineImage=false}}<img {{bind-attr src="view.content.small"}} alt=""/>{{/light-box}}<div class="carousel-caption"><h4>{{view.content.title}}</h4><p>{{view.content.content}}</p></div>')
+			template: Ember.Handlebars.compile('{{#light-box href=view.content.large data-lightbox="test" data-title="title" inlineImage=false}}{{#if view.content.small}}<img {{bind-attr src="view.content.small"}} alt=""/>{{/if}}{{/light-box}}<div class="carousel-caption"><h4>{{view.content.title}}</h4><p>{{view.content.content}}</p></div>')
 		})
 	})
 });

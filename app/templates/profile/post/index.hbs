@@ -50,7 +50,7 @@
 					{{!-- EDITORIAL --}}
 					<div class="editorial">
 						{{#unless postHasImage}}
-							<img {{bind-attr src=image.large}}/>
+							{{#if image.large}}<img {{bind-attr src=image.large}}/>{{/if}}
 						{{/unless}}
 
 						{{sanitizehtml-andtag 
@@ -139,7 +139,6 @@
 
 					<div class="description">
 						{{description-list product_description "description"}}
-
 					</div>
 
 				{{!-- 	{{#link-to "profile.post" product_user.username product_post.post_id product_post.subject}}

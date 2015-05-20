@@ -43,7 +43,9 @@
 	<div class="col-md-2 col-sm-2 col-xs-2">
 		
 		
+	      {{#if transaction.image.thumb}}
 	      <img class="media-object image-responsive" {{bind-attr src=transaction.image.thumb}}>
+	      {{/if}}
 	    
 
 	</div>
