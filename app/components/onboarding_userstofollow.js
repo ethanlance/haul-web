@@ -53,7 +53,7 @@ export default Ember.Component.extend({
 							user.set('isCurrentUser', true);
 						}
 
-						if( !users.contains(user) ){
+						if( Ember.isArray(users) && !users.contains(user) ){
 							users.pushObject( user );
 						}
 
