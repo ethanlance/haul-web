@@ -7,6 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 
 		closeRouter: function() { 
 			this.transitionTo('home');
+			return false;
 		}
 
 	},
