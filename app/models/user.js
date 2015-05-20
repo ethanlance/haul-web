@@ -68,7 +68,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	},
 
 	getIconFacebook: function() {
-		var url = "https://graph.facebook.com/" + this.get('facebook_user_id') + "/picture?width=200";
+		var url = "https://graph.facebook.com/" + this.get('facebook_user_id') + "/picture?width=200&height=200";
 		this.set('icon', url);
 	},
 
