@@ -21,11 +21,11 @@
     "ember-simple-auth": "0.7.3",
     "underscore": "~1.8.2",
     "lodash": "~3.5.0",
-    "dropzone": "~3.12.0",
     "font-awesome": "~4.3.0",
     "typeahead.js": "~0.10.5",
     "bootstrap-sass-official": "~3.3.4",
     "jquery.inputmask": "~3.1.62",
-    "fastclick": "~1.0.6"
+    "fastclick": "~1.0.6",
+    "dropzone": "~4.0.1"
   }
 }
