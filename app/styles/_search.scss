@@ -31,9 +31,7 @@
 	top: 60px;  
 	z-index: $z-index-search;
 
-	@media (max-width: 400px) {
-		top: 40px;
-	}
+
 }
 
 .twitter-typeahead {
@@ -52,6 +50,11 @@
 	
 	
 	width:400px; 
+	@media (max-width: 400px) {
+		width:300px;
+	}
+
+
 	cursor: pointer;	
 	transition: all 0.2s ease;
 	
@@ -124,6 +127,7 @@
 	.tt-query,
 	.tt-hint {
 		width:300px;
+		width:100%;
 	    outline: none;
 	}
 

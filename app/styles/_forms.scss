@@ -846,3 +846,15 @@ button.btn-danger{
 .add-payment-method-form-view {
 	border: 1px solid pink;
 }
+
+
+.btn-to-text .btn{
+	border:0;
+	text-transform: none;
+	color: $primary-color;
+	font: $primary-font;
+	font-weight: normal;
+	padding:0;
+	background-color: none;
+	font-size: 1em;
+}

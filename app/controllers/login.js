@@ -8,13 +8,17 @@ export default Ember.ObjectController.extend(ErrorMixin,{
  
 	client_token: Config.Server.CLIENT_TOKEN,
 	host: Config.Server.USER_SERVER_HOST,
-
+	showErrors:false,
+	email:null,
+	password:null,
 	error: false,
 	error404: false,
 	error409: false,
 	isProcessingFacebook: false, 
 	isProcessingLogin: false,
 	hideCancelBtn:false,
+	content:null,
+	model:null,
 	start: function() {
 		this.socialApiClient.load()
 	}.on('init'),
@@ -145,12 +149,16 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 
 		//LOGIN via email, password
 		emailLogin: function() {
-			this.set('isProcessingSubmit', true);
+			this.set('isProcessingLogin', true);
 
 			//Get the following from user submitted form.
 			var data = this.getProperties('email', 'password');	
 			var _this = this;
 			var model = this.get('model');
+
+			if( Ember.isEmpty(model) ){
+				model = this.store.createRecord('authlogin', data);
+			}
 
 	 		//Model Validations:
 			model.validate()
@@ -162,6 +170,7 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 					_this.send('closeModal');
 				},
 				function(error) {	
+					console.log("ERRROR", error);
 					_this.set('isProcessingLogin', false);
 					_this.set('showErrors', true);
 					if( error.status === 409 ){

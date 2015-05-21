@@ -295,9 +295,9 @@ label[for="nav-trigger"] {
 		top: 80px;
 	//}
 	&.with-page-header {
-		@media (max-width: 810px) {
-			top: 130px;
-		}
+		//@media (max-width: 810px) {
+			top: 170px;
+		//}
 	}
 	
 }

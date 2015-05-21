@@ -1,6 +1,3 @@
-{{#if session.isAuthenticated }}
-	
-
 
 <nav>
 
@@ -11,138 +8,96 @@
 		</div>
 
 
-		{{!-- When browser is collapsed --}}
-		<div class="nav-link-wrapper-collapse">
- 
- 			<span class="nav-item">
-				{{#link-to 'home' }}<i class="fa fa-home fa-2x"></i>{{/link-to}}
-		 	</span>
-
-		 	<span class="nav-item">
-				{{#link-to 'mentions' }}<i class="fa fa-envelope-o fa-2x"></i>{{/link-to}}
-				{{#if session.currentUser.hastUnreadMentions}}
-					{{mention-count}}
-				{{/if}}
-			</span>
-			
-			<span class="nav-item">
-				<i {{action 'toggleSearch'}} class="fa fa-search fa-2x"></i> 
-			</span>
-
-			<span class="nav-item">
-			{{make-post-btn 
-				openModal='openModal' btn-text="ADD A NEW POST" iconOnly='true' class="display-inline"}}
-			</span>
-
-		</div>	
-		
-
-
 		{{!-- When browser is NOT collapsed --}}
 		<div class="nav-link-wrapper">
-			<div class="nav-link home">
-				{{#link-to 'home' }}FEED{{/link-to}}
-			</div>	
 
-			<div class="nav-link">
-				{{#link-to 'discover' }}DISCOVER{{/link-to}}
-			</div>	
 
-			<div class="nav-link">
-				{{#link-to 'profile' session.currentUser.username }}MY POSTS{{/link-to}}
-			</div>	
+			
 
-			<div class="nav-link">
-				{{#link-to 'mentions' }}
-					{{#if session.currentUser.hastUnreadMentions}}
-						{{mention-count}}
-					{{/if}}NOTIFICATIONS
-				{{/link-to}}
-			</div>	
+			<span class="">
+				{{#if session.isAuthenticated }}
+				<div class="nav-link home hide-on-small">
+					{{#link-to 'home' }}FEED{{/link-to}}
+				</div>	
+				{{/if}}
 
-			<div {{action 'toggleSearch'}} class="nav-link needsclick">
-				<i class="fa fa-search"></i> SEARCH
-			</div>	
+				<div class="nav-link">
+					{{#link-to 'discover' }}DISCOVER{{/link-to}}
+				</div>	
+
+				{{#if session.isAuthenticated }}
+				<div class="nav-link hide-on-small">
+					{{#link-to 'profile' session.currentUser.username }}MY POSTS{{/link-to}}
+				</div>	
+				{{/if}}
+
+				{{#if session.isAuthenticated }}
+				<div class="nav-link hide-on-small">
+					{{#link-to 'mentions' }}
+						{{#if session.currentUser.hastUnreadMentions}}
+							{{mention-count}}
+						{{/if}}NOTIFICATIONS
+					{{/link-to}}
+				</div>	
+				{{/if}}
+
+				<div {{action 'toggleSearch'}} class="nav-link needsclick">
+					<i class="fa fa-search"></i> SEARCH
+				</div>	
+			</span>
 		</div>	
 
-
+		{{#if session.isAuthenticated }}
 		<div class="nav-profile">
 			
-			{{make-icon icon=session.currentUser.icon}}
-			
-			<ul class="dropdown-menu dropdown-menu-right" role="menu">
+				{{make-icon icon=session.currentUser.icon}}
 				
-				<li>{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-user"></i> My Posts{{/link-to}}</li>
-				
-				<li class="divider"></li>
-				<li>{{#link-to 'settings.profile'}}<i class="fa fa-wrench"></i> Profile{{/link-to}}</li>
-				
-	            <li class="divider"></li>
-	            <li>{{#link-to 'about.us'}}<i class="fa fa-compass"></i> About {{/link-to}}</li>
-
-				<li class="divider"></li>
-				<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
-			</ul>
-
-		</div>
-
-		{{make-post-btn openModal='openModal' btn-text="ADD A NEW POST" class="display-inline collapse"}}
-
-	</div>
-</nav>
-
-{{else}}
-
-<nav class="anon">
-	<div class="nav">
-		
-		<div class="logo">
-			{{#link-to "home"}}HAUL{{/link-to}}
-		</div>
-
-		{{!-- When browser is collapsed --}}
-		<div class="nav-link-wrapper-collapse">
-
-			
-			<i {{action 'toggleSearch'}} class="fa fa-search fa-2x display-inline "></i> 
-
-			<div class="nav-link display-inline">
-				{{#link-to 'about.us'}}ABOUT{{/link-to}}
-			</div>	
-
-			{{signup-btn openModal='openModal' class="display-inline"}}
-
-			{{login-btn openModal='openModal' class="display-inline"}}
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					
+					<li>{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-user"></i> My Posts{{/link-to}}</li>
+					
+					<li class="divider"></li>
+					<li>{{#link-to 'settings.profile'}}<i class="fa fa-wrench"></i> Profile{{/link-to}}</li>
+					
+		            <li class="divider"></li>
+		            <li>{{#link-to 'about.us'}}<i class="fa fa-compass"></i> About {{/link-to}}</li>
 
- 
-		</div>	
-		
-		{{!-- When browser is NOT collapsed --}}
-		<div class="nav-link-wrapper"> 
-			<div class="nav-link">
-				{{#link-to 'discover' }}DISCOVER{{/link-to}}
-			</div>	 
-
-			<div {{action 'toggleSearch'}} class="nav-link">
-				<i class="fa fa-search"></i> SEARCH
-			</div>	
-		</div>	
-
-
-		<div class="nav-link-wrapper right">
-			{{signup-btn openModal='openModal' class="display-inline"}}
-
-			{{login-btn openModal='openModal' class="display-inline"}}
+					<li class="divider"></li>
+					<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
+				</ul>
 			
+		</div>
+		{{/if}}
+
+
+		{{#unless session.isAuthenticated }}
+		<div class="nav-anon">
 			<div class="nav-link">
 				{{#link-to 'about.us'}}ABOUT{{/link-to}}
 			</div>
+
+			<span class="hide-on-small">
+			{{login-btn openModal='openModal' class="display-inline"}}
+			</span>
+
+			{{signup-btn openModal='openModal' class="display-inline"}}
 		</div>
+		{{/unless}}
+
+		
+
+		{{#if session.isAuthenticated }}
+			<span class="hide-on-small">
+				{{make-post-btn openModal='openModal' btn-text="ADD A NEW POST" class="display-inline"}}
+			</span>
+			<span class="show-on-small">
+				{{make-post-btn openModal='openModal' btn-text="POST" class="display-inline"}}
+			</span>
+		{{/if}}
 
 	</div>
 </nav>
-{{/if}}
+ 
 
 <div id="searchDropDown" class="search">
 	{{typeahead-search  goToRoute='goToRoute'}}
