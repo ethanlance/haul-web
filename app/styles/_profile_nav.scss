@@ -25,7 +25,11 @@ header.profile{
 .profile-container{
 	padding:0px;
 	margin:0px; 
+
 	padding-top: 20px; 
+	@media (max-width: 700px) {
+		padding-top: 10px;
+	}
 
 	width:100%;
 	max-width: $haul-max-width;
@@ -46,13 +50,13 @@ header.profile{
 			font-size:40px;
 		}
 
-		@media (max-width: 400px) {
-			width:30px;
-			height:30px;
-			.glyphicon-user{
-				font-size:30px;
-			}
-		}
+		// @media (max-width: 400px) {
+		// 	width:30px;
+		// 	height:30px;
+		// 	.glyphicon-user{
+		// 		font-size:30px;
+		// 	}
+		// }
 	}
 
 	.profile-name {
@@ -92,10 +96,6 @@ header.profile{
 			color: #999;
 			margin-top: -2px;
 		}
-
-		@media (max-width: 400px) {
-			padding-top:0;
-		}
 	}
 
 	.btn-follow {
@@ -109,9 +109,9 @@ header.profile{
 		transition: all 0.2s ease;
 		text-transform: uppercase;
 
-	@media (max-width: 400px) {
-		padding: 5px 10px;
-		margin-top:0px;
+		@media (max-width: 700px) {
+			padding: 5px 10px;
+			margin-top:0px;
 		}
 
 	}
@@ -124,10 +124,20 @@ header.profile{
 
 
 	.stats {
-		@media (max-width: 750px) {
-			display:inline-block;
-			padding-top:15px;
-			//padding-bottom:20px;
+		text-align: center;
+		@media (max-width: 700px) {
+			float:right;
+		}
+		.counts{
+			@media (max-width: 700px) {
+				display:block;
+			}
+		}
+		.follow{
+			@media (max-width: 700px) {
+				display:block;
+				float:right;
+			}
 		}
 	}
 
@@ -173,7 +183,7 @@ header.profile{
 		//	text-decoration: none;
 		}
 
-		@media (max-width: 400px) {
+		@media (max-width: 700px) {
 
 			float:left;
 			display: inline-block;

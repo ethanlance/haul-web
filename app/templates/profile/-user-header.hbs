@@ -27,40 +27,45 @@
 
 		<div class="stats">
 
-			{{#link-to "profile.likes" model.username}}
-			<div class="stat-btn">
-				<span class="total">{{model.getLikesCount.total}}</span>
-				<span class="title">likes</span>
-			</div>
-			{{/link-to}}
+			<div class="counts">
+				{{#link-to "profile.likes" model.username}}
+				<div class="stat-btn">
+					<span class="total">{{model.getLikesCount.total}}</span>
+					<span class="title">likes</span>
+				</div>
+				{{/link-to}}
 
-			{{#link-to "profile.followers" model}}
-			<div class="stat-btn">
-				<span class="total">{{model.getFollowersCount.total}}</span>
-				<span class="title">followers</span>
-			</div>
-			{{/link-to}}
+				{{#link-to "profile.followers" model}}
+				<div class="stat-btn">
+					<span class="total">{{model.getFollowersCount.total}}</span>
+					<span class="title">followers</span>
+				</div>
+				{{/link-to}}
 
-			{{#link-to "profile.following" model}}
-			<div class="stat-btn">
-				<span class="total">{{model.getFollowingCount.total}}</span>
-				<span class="title">following</span>
-			</div>
-			{{/link-to}}
+				{{#link-to "profile.following" model}}
+				<div class="stat-btn">
+					<span class="total">{{model.getFollowingCount.total}}</span>
+					<span class="title">following</span>
+				</div>
+				{{/link-to}}
 
-			{{#link-to "profile" model}}
-			<div class="stat-btn">
-				<span class="total">{{model.getPostsCount.total}}</span>
-				<span class="title">posts</span> 
-			</div> 
-			{{/link-to}}
-		
-			<div class="stat-btn">
-				{{ follow-btn followUser=model openModal='openModal' }}
+				{{#link-to "profile" model}}
+				<div class="stat-btn">
+					<span class="total">{{model.getPostsCount.total}}</span>
+					<span class="title">posts</span> 
+				</div> 
+				{{/link-to}}			
 			</div>
-			
+
+			<div class="follow">
+				<div class="stat-btn">
+					{{ follow-btn followUser=model openModal='openModal' }}
+				</div>
+			</div>
 
 		</div>
+
+
 	
 	</div>
 </div>
