@@ -198,10 +198,17 @@
 
 .haul-col-menu { 
 
+
+	float:left;
+
+	&.rigth{
+		float:right;
+	}
+
 	width: 300px;
 	position:relative;
 	display:inline;
-	float:left;
+	
 	padding-top:30px;
 
 	.haul-menu-content {
@@ -320,6 +327,95 @@ label:empty[for="nav-trigger"] {
 .nav-trigger:checked ~ .haul-col-content {
   left: 300px;
 }
+
+
+
+
+
+
+
+
+/**
+	
+
+	Fluid Left / Fixed Right
+
+	-- Where the right column colapses in small browsers.
+	-- A Hamburger menu appears and will slide the hidden right column to the left <-
+
+	
+**/
+
+
+.haul-fluid-left{
+	width: 100%;
+	float:left;
+	position:relative;
+	z-index: 1;
+	right: 0;
+
+	
+
+	.haul-fluid-content {
+		padding-top:30px;
+		margin-right: 300px;
+		background-color: $primary-background-color;
+
+		@media (max-width: 700px) {
+			margin-right:0;
+			padding-right: 45px;
+		}
+	}
+}
+
+.haul-fixed-right {
+ 	float: right;
+  	width: 300px;
+ 	margin-left: -300px;
+}
+
+.nav-trigger-right {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+}
+
+label[for="nav-trigger-right"] {
+  	
+  	position: absolute;
+  	right: 15px; 
+  	z-index: 2;
+  	
+  	height: 30px;
+  	width: 30px;
+  	cursor: pointer;
+  	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
+  	background-size: contain;
+
+	top: 40px;
+	
+}
+
+label:empty[for="nav-trigger-right"] {
+	@media (max-width: 700px) {
+		display:block !important;
+	}
+}
+/* Make the Magic Happen */
+.nav-trigger-right + label, .haul-fluid-left {
+  transition: right 0.2s;
+}
+
+.nav-trigger-right:checked + label {
+  right: 315px;
+}
+
+.nav-trigger-right:checked ~ .haul-fluid-left {
+  right: 300px;
+}
+
+
+
+
 
 
 

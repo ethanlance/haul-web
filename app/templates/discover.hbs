@@ -15,13 +15,26 @@
 </header>
 
 
-<div class="container">
-	
-	<div class="haul-wrapper2">
+<div class="container no-margins">
+	<div class="haul-content">
 
-		<div class="haul-content2">
 
-			<div class="col-left2 no-margin"> 
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+		{{hamburger-menu name="nav-trigger-right"}}
+		<input type="checkbox" id="nav-trigger-right" class="nav-trigger-right" />
+		<label for="nav-trigger-right" class="with-page-header"></label>
+
+
+		{{!-- FLUID LEFT --}}
+		{{!-- FLUID LEFT --}}
+		{{!-- FLUID LEFT --}}
+		{{!-- FLUID LEFT --}}
+		<div class="haul-fluid-left" data-info="haul-fluid-left"> 
+			
+			<div class="haul-fluid-content text-center">
 
 		 
 				{{!-- //CONTENT --}}
@@ -40,25 +53,31 @@
 				
 		    
 			</div> 
-
-			<div class="col-right2">
-
-				<div class="col-right2-container">
-
-					{{!-- ONBOARDING --}}
-					{{!-- ONBOARDING --}}
-					{{!-- ONBOARDING --}}
-					{{!-- ONBOARDING --}}
-					{{onboarding-userstofollow}}
-
-					{{!-- ONBOARDING --}}
-					{{!-- ONBOARDING --}}
-					{{!-- ONBOARDING --}}
-					{{!-- ONBOARDING --}}
-					{{onboarding-tags goToRoute='goToRoute'}}
-
-				</div>
-			</div> 
 		</div>
+
+
+
+		{{!-- FIXED RIGHT --}}
+		{{!-- FIXED RIGHT --}}
+		{{!-- FIXED RIGHT --}}
+		{{!-- FIXED RIGHT --}}
+		<div class="haul-fixed-right with-page-header">
+			<div class="haul-menu-content">
+
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{onboarding-userstofollow}}
+
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{!-- ONBOARDING --}}
+				{{onboarding-tags goToRoute='goToRoute'}}
+
+			</div>
+		</div>
+		
 	</div>
 </div>

@@ -3,9 +3,10 @@
 .grid-post {
 	
 	display:inline-block;
-	@media (max-width: 600px) {
-		display:block;
-	}
+	text-align: left;
+	// @media (max-width: 600px) {
+	// 	display:block;
+	// }
 
 	border: 1px solid green;
 	width: 40%;
