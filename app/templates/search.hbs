@@ -28,8 +28,6 @@
 			{{/if}}
 
 
-			{{!-- //CONTENT --}}
-			<div {{bind-attr class="galleryView:gallery"}}>
 			
 			 	
 
@@ -57,15 +55,17 @@
 
 
 			{{#if currentTypeIsPost }}
+			<div class="text-center">
 			 	{{#each post in sortedContent}}
 
 			 		{{partial "_grid_search"}}
 
 				{{/each}}
+			</div>
 			{{/if}}
 
 	 
-			</div>
+			
 			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 				<span>Loading...</span>	
 			{{/infinite-scroll}}
