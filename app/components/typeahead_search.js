@@ -248,7 +248,9 @@ export default Ember.Component.extend({
 		var input = $('input.form-control.tt-query.tt-input');
 		var theVal = input.val();
 		input.typeahead('val', '');
-		input.focus().typeahead('val',theVal).focus(); 
+
+		//Turning this off, since it opens the keyboard on every page transition in iOS.
+		//input.focus().typeahead('val',theVal).focus(); 
 	},
 
 	actions: {
