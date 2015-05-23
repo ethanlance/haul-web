@@ -16,7 +16,7 @@
 	//color: #7e7e7e;
 	color: $primary-color;
 	font-weight: 600;
-	float:right;
+	
 
 	&:hover {
 		border: 0px solid $primary-color;
@@ -47,7 +47,9 @@
 	}
 }
 
-
+.nav-right{
+	float:right;
+}
 
 //HAUL MAIN NAVIGATION
 nav {

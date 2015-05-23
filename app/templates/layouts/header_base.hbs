@@ -87,12 +87,14 @@
 		
 
 		{{#if session.isAuthenticated }}
+		<div class="nav-right">
 			<span class="hide-on-small">
 				{{make-post-btn openModal='openModal' btn-text="ADD A NEW POST" class="display-inline"}}
 			</span>
 			<span class="show-on-small">
 				{{make-post-btn openModal='openModal' btn-text="POST" class="display-inline"}}
 			</span>
+		</div>
 		{{/if}}
 
 	</div>
