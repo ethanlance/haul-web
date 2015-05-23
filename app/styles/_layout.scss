@@ -350,9 +350,12 @@ label:empty[for="nav-trigger"] {
 .haul-fluid-left{
 	width: 100%;
 	float:left;
-	position:relative;
-	z-index: 1;
 	right: 0;
+
+	@media (max-width: 700px) {
+		position:relative;
+		z-index: 1;
+	}
 
 	.haul-fluid-content {
 		padding-top:30px;
