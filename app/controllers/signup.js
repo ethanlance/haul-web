@@ -169,8 +169,7 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 			//Get the following from user submitted form.
 			var data = this.getProperties('email');	
 			var _this = this;
-			var model = this.get('model');
-
+			
 	 		//Validate Modal.
 			_this.createUserByEmail(data)
 			.then(

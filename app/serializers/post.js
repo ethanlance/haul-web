@@ -20,6 +20,7 @@ export default DS.RESTSerializer.extend({
 
 			user: payload.data.user_id,
 			updated_at: payload.data.updated_at,
+			created_at: payload.data.created_at,
 			body: payload.data.body,
 			subject: payload.data.subject,
             image: payload.data.image_id,
