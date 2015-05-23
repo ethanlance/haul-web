@@ -49,7 +49,7 @@
 
 					{{!-- EDITORIAL --}}
 					<div class="editorial">
-						{{#unless postHasImage}}
+						{{#unless model.postHasImage}}
 							{{#if image.large}}<img {{bind-attr src=image.large}}/>{{/if}}
 						{{/unless}}
 
@@ -104,25 +104,42 @@
 
 
 
-					{{#if isProductOwner }}
-						{{#link-to 'profile.post.edit_product' user.username this }}
-						<button class="btn btn-default btn-edit btn-xs">
-							<i class="fa fa-cog"></i> Edit Product
-						</button>
-						{{/link-to}}
-					{{/if}}
-
-					<h2>{{product_name}}</h2>
 
 
+					<h2>
+						{{product_name}}
+
+						{{#if isProductOwner }}
+							{{#link-to 'profile.post.edit_product' user.username this }}
+							<button class="btn btn-default btn-edit btn-xs">
+								<i class="fa fa-cog"></i> Edit Product
+							</button>
+							{{/link-to}}
+						{{/if}}
+					</h2>
+
+
+				
 					<div class="profile-pod">
+
+						
+					{{#link-to 'profile' product_user.username }}
 						{{make-icon icon=product_user.icon}}
+					{{/link-to}}
 
 						<div class="profile-name">
-							<span class="name">{{product_user.get_display_name}}</span>
-							<span class="username">@{{product_user.username}}</span>
+							<span class="name">
+
+								{{#if isForSaleOffsite }}
+									<span class="curated_by">Curated By</span>
+								{{/if}}
+
+								{{#link-to 'profile' product_user.username }}{{product_user.get_display_name}}{{/link-to}}
+							</span>
+							<span class="username">{{#link-to 'profile' product_user.username }}@{{product_user.username}}{{/link-to}}</span>
 						</div>
 					</div>
+					
 
 					<div class="price">
 						${{product_price}}

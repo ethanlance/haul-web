@@ -18,21 +18,35 @@
 					<div class="edit-row border">
 						<div class="edit-col">
 
-							<h2>For sale on Haul</h2> 	 
+							{{!-- <h2>Post about something for sale</h2> 	  --}}
 
-							{{view  'checkbox' checked=isForSaleOnHaul}}
- 
+
+							<div class="row">
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div {{action 'toggleOnsite'}} {{bind-attr class=":isOnsite isOnsite:selected"}}>
+
+										
+											I am selling this on Haul.
+										
+
+									</div>
+								</div>
 							
-							
-							<label class="normal" for="sellOnHaul">
-								<span {{bind-attr class="isForSaleOnHaul::disabled"}} >Yes, I am selling this on Haul</span>
-							</label>
 
-							<p {{bind-attr class=":collapse isForSaleOnHaul:out:in"}} >
-								<small>Nope, just blogging about it</small>
-							</p>
+								<div class="col-md-6 col-sm-6 col-xs-6">
 
-							<div class="collapse" id="isExternal">
+									<div {{action 'toggleOnsite'}} {{bind-attr class=":isOffsite isOnsite::selected"}}>
+
+										
+											Just blogging about it.
+										
+
+									</div>	
+								</div>
+							</div>
+
+
+							<div {{bind-attr class=":collapse isForSaleOffsite:in"}} id="isExternal">
 								
 								<h2> 
 									Ok, where can this be purchased?
@@ -125,11 +139,11 @@
 				<div class="edit-row border">
 					<div class="edit-col">
 
-						<div {{bind-attr class="isForSaleOnHaul:show:hide"}}>
+						<div {{bind-attr class="isOnsite:show:hide"}}>
 							<h2>How much do you want to sell this for?</h2>	
 						</div>
 
-						<div {{bind-attr class="isForSaleOnHaul:hide:show"}}>
+						<div {{bind-attr class="isOnsite:hide:show"}}>
 							<h2>What is the price?</h2>	
 						</div>
 
@@ -142,7 +156,7 @@
 
 
 
-				<div {{bind-attr class="isForSaleOnHaul:show:hide"}}>
+				<div {{bind-attr class="isOnsite:show:hide"}}>
 				<div class="edit-row border">
 					<div class="edit-col">
 						<h2>Add shipping &amp; handling?
@@ -174,7 +188,7 @@
 				</div>
 
 				
-				<div {{bind-attr class="isForSaleOnHaul:show:hide"}} >
+				<div {{bind-attr class="isOnsite:show:hide"}} >
 				<div class="edit-row border">
 					<div class="edit-col">
 

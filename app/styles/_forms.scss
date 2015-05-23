@@ -858,3 +858,28 @@ button.btn-danger{
 	background-color: none;
 	font-size: 1em;
 }
+
+
+.isOffsite, .isOnsite {
+	margin:0;
+	padding:10px; 
+	padding-top:20px;
+	padding-bottom:20px;
+	border: 2px dashed #cccccc;
+	cursor: pointer;
+	//background-color: #fce6e7;
+
+	&:hover{
+		border: 2px dashed $primary-color;
+	}
+
+	&.selected{
+		border: 2px dashed green;
+		background-color: #e6fce5;
+	}
+}
+
+
+
+
+

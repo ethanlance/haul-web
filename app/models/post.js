@@ -41,6 +41,41 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	commentCount: DS.belongsTo('comment-count', {async:true}),
 	likesCount: DS.belongsTo('post-likes-count', {async:true}),
 
+	
+	isForSale: function() {
+		var product_status = this.get('product_status');
+		if( product_status == 'FOR_SALE'  ||  product_status == 'FOR_SALE_OFFSITE' ) {
+			return true;
+		}else{
+			return false;
+		}
+	}.property('product_status'),
+
+
+	isForSaleOffsite: function() {
+		var product_status = this.get('product_status');
+
+		if( product_status === 'FOR_SALE_OFFSITE' ) {
+			return true;
+		}else{
+			return false;
+		}
+		
+	}.property('product_status'),
+
+
+	postHasImage: function() {
+		//Does the body have an image?
+		var body = this.get('body');
+		console.log("BODY", body);
+		if( body && body.indexOf("[img") > -1 ) {
+			return true;
+		}else{
+			return false;
+		}
+
+	}.property('body'),
+
 	//Is the owner of the post selling this?  Or blogging?
 	postOwnerIsSeller: function() {
 

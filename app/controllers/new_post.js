@@ -43,7 +43,16 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	slideOpened: 'slide_one',
 
 	//Is this item for sale on Haul? Or is it just a post to an external link.
-	isForSaleOnHaul: true,
+	isOnsite: true,
+	isForSaleOffsite: false,
+
+
+	reset: function() {
+		this.set('show', 'one');
+		this.set('selectedImages', []);
+		this.set('showErrors', false); 
+		this.set('isOnsite', true);
+	},
 
 	showChanged: function() {
 
@@ -99,11 +108,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	}.on('init').observes('currentUserId'),
 
 
-	isForSaleOnHaulChanged: function() {
+	isOnsiteChanged: function() {
 		
 		var model = this.get('model');
 
-		if( !this.get('isForSaleOnHaul') ){
+		if( !this.get('isOnsite') ){
 		
 			$('#isExternal').collapse('show');
 
@@ -117,14 +126,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			model.set('product_status', 'FOR_SALE');
 
 		}
-	}.observes('isForSaleOnHaul'),
+	}.observes('isOnsite'),
 
-	reset: function() {
-		this.set('show', 'one');
-		this.set('selectedImages', []);
-		this.set('showErrors', false); 
-		this.set('isForSaleOnHaul', true);
-	},
+
 
 	setup: function() {  
 		
@@ -154,10 +158,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		//Product Status:
 		if( model.get('product_status') === 'FOR_SALE_OFFSITE' ){
-			this.set('isForSaleOnHaul', false);
+			this.set('isOnsite', false);
+			this.set('isForSaleOffsite', true);
 		} else {
 			model.set('product_status', 'FOR_SALE');
 		}
+
 
 		//Now set some defaults.
 		model.setProperties(
@@ -512,6 +518,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			model.set('product_description', text);	
 		},
 
-
+		toggleOnsite: function() {
+			this.set('isOnsite', !this.get('isOnsite'));
+		},
 	}
 });

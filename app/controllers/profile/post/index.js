@@ -64,29 +64,6 @@ export default Ember.ObjectController.extend({
 		
 		this.set('url', window.location.href);
 
-		this.set('isRepost', false);
-		if(!Ember.isEmpty(this.get('model').get('repost_user').get('content'))){
-			this.set('isRepost', true);
-		}
-
-		//Does the body have an image?
-		this.set('postHasImage', false);
-		var body = this.get('model').get('body');
-		if( body && body.indexOf("[img") > -1 ) {
-			this.set('postHasImage', true);
-		}
-
-		var product_status = this.get('model.product_status');
-		this.set('isForSale', false);
-		if( product_status == 'FOR_SALE'  ||  product_status == 'FOR_SALE_OFFSITE' ) {
-			this.set('isForSale', true);
-			this.set('statusText', "FOR SALE");
-		}else if( product_status === "SOLD") {
-			this.set('statusText', "SOLD!");
-		}else{
-			this.set('statusText', "Not For Sale");
-		}
-
 
 	}.observes('currentUserId', 'model.id', 'model', 'model.body', 'model.product_status'),
 });
