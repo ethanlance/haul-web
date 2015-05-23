@@ -27,6 +27,7 @@ export default DS.RESTSerializer.extend( MetaSerializer,{
 				product_name: result.product_name,
 
 				update_at: result.update_at,
+				created_at: result.created_at,
 				comments_total: result.comments_total,
 				likes_total: result.likes_total,
 			};

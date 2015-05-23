@@ -27,6 +27,7 @@ export default DS.RESTSerializer.extend({
 
             
             //product
+            product_user_id: payload.data.product.user_id,
             product_user: payload.data.product.user_id,
             product_name: payload.data.product.name,
             product_description: payload.data.product.description,

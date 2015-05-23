@@ -13,6 +13,7 @@ export default DS.Model.extend({
 	product_status: DS.attr('string'),
 	product_name: DS.attr('string'),
 
+	
 	update_at: DS.attr('string'),
 	comments_total: DS.attr('string'),
 	likes_total: DS.attr('string'),

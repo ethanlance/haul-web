@@ -40,7 +40,7 @@ export default DS.Model.extend({
 
 	product_status_text: function() {
 		var product_status = this.get('product_status');
-		if( product_status == 'FOR_SALE' ) {
+		if( product_status === 'FOR_SALE' || product_status === "FOR_SALE_OFFSITE" ) {
 			return "FOR SALE";
 		}else if( product_status === "SOLD") {
 			return "SOLD!";

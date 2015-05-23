@@ -27,6 +27,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
     repost_id: DS.attr('string'),
 
 	//PRODUCT	
+	product_user_id: DS.attr('string'),
 	product_user: DS.belongsTo('user', {async:true}),	 
 	product_currency: DS.attr('string'),
 	product_price: DS.attr('string'),
@@ -45,9 +46,27 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		}
 	}.property('subject'),
 
+	//Is the owner of the post selling this?  Or blogging?
+	postOwnerIsSeller: function() {
+
+		if( this.get('user_id') === this.get('product_user_id') && this.get('product_status') !== 'FOR_SALE_OFFSITE' ){
+			return true;
+		}else{
+			return false;
+		}
+
+	}.property('product_status', 'user_id', 'product_user_id'),
+
 
 	product_status_text: function() {
-		return this.get('product_status').replace("_"," ");
+		var product_status = this.get('product_status');
+		if( product_status === 'FOR_SALE' || product_status === "FOR_SALE_OFFSITE" ) {
+			return "FOR SALE";
+		}else if( product_status === "SOLD") {
+			return "SOLD!";
+		}else{
+			return "Not For Sale";
+		}
 	}.property('product_status'),	
 
 	validations: { 

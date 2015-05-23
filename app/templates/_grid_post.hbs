@@ -13,9 +13,20 @@
 
 			<div class="product-price">${{post.product_price}}</div> 
 
-			<div class="product-title">{{post.product_name}}</div>
+			{{#if post.product_name}}
+				<div class="product-title">{{post.product_name}}</div>
+			{{/if}}
 
-			<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+
+			{{!-- CURATED or SELLING --}}
+			{{!-- CURATED or SELLING --}}
+			{{!-- CURATED or SELLING --}}
+			{{!-- CURATED or SELLING --}}
+			{{#if post.postOwnerIsSeller}}
+				<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+			{{else}}
+				<div class="product-owner"><span class="pre-text">Curated by</span> {{post.product_user.get_display_name}}</div>
+			{{/if}}
 
 		</div>
 
@@ -35,7 +46,12 @@
 			<div class="post-owner-details">
 				<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
 				<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
-				<div class="moment">{{ format-moment post.created_at }}</div> 
+				
+
+				{{#if post.created_at}}
+					<div class="moment">{{ format-moment post.created_at }}</div>  
+				{{/if}}
+
 			</div>
 		</div>
 	</div>
