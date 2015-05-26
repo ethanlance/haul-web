@@ -1,8 +1,8 @@
 .feed-post {
 	position:relative;
-	border-bottom: 1px solid #eee;
+	//border-bottom: 1px solid #eee;
 	padding: 0px;
-	padding-bottom: 50px;
+	padding-bottom: 200px;
 	margin-bottom: 50px;
 	transition: all 0.2s ease;
 
@@ -178,11 +178,17 @@
 			border-bottom: 1px dashed $primary-color;
 			text-decoration: none;
 		}
+
+		&:hover .product-status{
+			display:inline-block;
+			background-color: rgba(247,92,97,0.8);
+		}
 	}
 
 	
 	.post-bottom-cap {
-		bottom:0;
+		position:absolute;
+		bottom:-130px;
 		width:100%;
 		color:white;
 
@@ -235,6 +241,11 @@
 
 		background-color: rgba(0,0,0,.6);
 		color:white;
+
+		&:hover > .product-status{
+			display:inline-block;
+			background-color: rgba(247,92,97,0.8);
+		}
 
 		.product-status{
 			display:inline-block;
