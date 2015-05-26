@@ -98,6 +98,11 @@ export default Ember.ObjectController.extend({
 				
 				var name = response.data.name;
 
+				//Sitename:
+				var parser = document.createElement('a');
+				parser.href = product_link;
+				var sitename = parser.hostname;
+				
 				//string
 				name = String(name);
 				body = String(body);
@@ -113,7 +118,7 @@ export default Ember.ObjectController.extend({
 				body = new Ember.Handlebars.SafeString(body);
 				name = new Ember.Handlebars.SafeString(name);
 
-				body = "<blockquote>"+body.toString()+"</blockquote>";
+				body = '<blockquote>"'+body.toString()+'" ~ '+ sitename +' </blockquote>';
 				name = name.toString();
 
 				var post = _this.store.createRecord('post', {
