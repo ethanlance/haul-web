@@ -4,9 +4,11 @@ export default Ember.Mixin.create({
 	paginateQuery: {},
 	paginateHasMore: true,
 	pagedContent:null,
-
+	isProcessingFetch:false,
 
 	paginateMore: function() {
+
+		this.set('isProcessingFetch', true);
  
 		var _this = this;
 		var paginateQuery = this.get('paginateQuery'); 
@@ -14,6 +16,7 @@ export default Ember.Mixin.create({
 		
 		if(!this.get('paginateHasMore')){
 			console.log("DO NOT PAGINATE ANYMORE.  YOU ARE DONE!")
+			this.set('isProcessingFetch', false);
 			return;
 		}
 		
@@ -55,6 +58,7 @@ export default Ember.Mixin.create({
 				_this.set('paginateHasMore', true);	
 			}
 
+			_this.set('isProcessingFetch', false);
 			return results
 		});
 	},

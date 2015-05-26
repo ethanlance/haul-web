@@ -11,7 +11,7 @@ export default Ember.Component.extend( PaginateMixin,{
 	 
 	currentUserIdBinding: "session.currentUser.id",
 
-	limit:10,
+	limitBinding: "this.ENV.paginationLimit.comments",
 
 	hasMoreBinding: 'paginateHasMore',
 
@@ -48,7 +48,8 @@ export default Ember.Component.extend( PaginateMixin,{
     	var store = this.container.lookup('store:main');
     	store.find('comment', {
     		object_id: _this.get('objectId'),
-    		object_type: _this.get('objectType')
+    		object_type: _this.get('objectType'),
+    		limit: this.get('limit'),
     	})
     	.then(function() {
     		_this.set('runPoll', _this.schedulePoll(_this.get('onPoll')));
