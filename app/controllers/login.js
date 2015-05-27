@@ -5,22 +5,43 @@ import ErrorMixin from '../mixins/server_error';
 export default Ember.ObjectController.extend(ErrorMixin,{
 	
 	needs: ['facebook'],
- 
+	
+	animateClose:false, 
+	
 	client_token: Config.Server.CLIENT_TOKEN,
+	
 	host: Config.Server.USER_SERVER_HOST,
+	
 	showErrors:false,
+	
 	email:null,
+	
 	password:null,
+	
 	error: false,
+	
 	error404: false,
+	
 	error409: false,
+	
 	isProcessingFacebook: false, 
+	
 	isProcessingLogin: false,
-	hideCancelBtn:false,
-	content:null,
+	
 	model:null,
+
 	start: function() {
+		
+		//Get ready for Facebook login:
 		this.socialApiClient.load()
+		
+
+		//Get ready for email/password login:
+		var model =  this.store.createRecord('authlogin');
+		this.set('model', model);
+
+		console.log("INIT THE MODEL", model);
+
 	}.on('init'),
 
 	reset: function() {
@@ -53,7 +74,13 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 		});
 	},
 
+
+
 	actions: {
+
+		cancel: function() {
+			this.set('animateClose', true);
+		},
 
 		//LOGIN via FB token
 		facebookLogin: function() {
@@ -150,19 +177,19 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 		//LOGIN via email, password
 		emailLogin: function() {
 			this.set('isProcessingLogin', true);
-
-			//Get the following from user submitted form.
-			var data = this.getProperties('email', 'password');	
+	
 			var _this = this;
+	
 			var model = this.get('model');
 
-			if( Ember.isEmpty(model) ){
-				model = this.store.createRecord('authlogin', data);
-			}
+
+	
+console.log("HERE? " , model);
 
 	 		//Model Validations:
 			model.validate()
 			.then(function(){
+				var data = model.getProperties('email', 'password');	
 				return  _this.authenticate('/auth/user', 'post', data);
 			})	
 			.then(

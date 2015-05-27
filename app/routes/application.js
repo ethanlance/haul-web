@@ -83,20 +83,30 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
     	},
   	 	
 		openModal: function(modalName, model) {
+			
 			Ember.$('body').addClass('modal-open');
-			this.controllerFor(modalName).set('model', model);
+			
+			if( !jQuery.isEmptyObject(model)) {
+				console.log("OK SET THE MODEL", model)
+				this.controllerFor(modalName).set('model', model);
+			}
+			
 			return this.render(modalName, {
 				into: 'application',
 				outlet: 'modal'
 			});
+
 		},
 	    
 	    closeModal: function() {
+	    	
 	    	Ember.$('body').removeClass('modal-open');
+			
 			return this.disconnectOutlet({
 				outlet: 'modal',
 				parentView: 'application'
 			});
+
 		},
 
 		goToRoute: function(arg1, arg2, arg3) {
@@ -108,8 +118,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 			}else{
 				this.transitionTo(arg1);
 			}
-
-			
+	
 		}
 	}
 });

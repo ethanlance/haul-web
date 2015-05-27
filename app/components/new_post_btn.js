@@ -9,7 +9,7 @@ export default Ember.Component.extend(ScrolltoMixin, {
 
 			//Intercept if user is anonymous:
 			if( !this.get('currentUserId')){
-				this.sendAction('openModal', 'loginmodal', {});
+				this.sendAction('openModal', 'login', {});
 				return;
 			}
 

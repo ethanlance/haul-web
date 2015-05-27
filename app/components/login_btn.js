@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
 		onClick: function() {
 			var store = this.container.lookup("store:main");
-			this.sendAction('openModal', 'loginmodal', store.createRecord('authlogin'));
+			this.sendAction('openModal', 'login', {});
 		}
 	}
 });
