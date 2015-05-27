@@ -87,7 +87,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 			Ember.$('body').addClass('modal-open');
 			
 			if( !jQuery.isEmptyObject(model)) {
-				console.log("OK SET THE MODEL", model)
 				this.controllerFor(modalName).set('model', model);
 			}
 			
@@ -109,9 +108,13 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 		},
 
-		goToRoute: function(arg1, arg2, arg3) {
+		goToRoute: function(arg1, arg2, arg3, arg4, arg5) {
 
-			if( arg3 ){
+			if( arg5 ){
+				this.transitionTo(arg1, arg2, arg3, arg4, arg5);
+			}else if(arg4){
+				this.transitionTo(arg1, arg2, arg3, arg4);
+			}else if(arg3){
 				this.transitionTo(arg1, arg2, arg3);
 			}else if(arg2){
 				this.transitionTo(arg1, arg2);

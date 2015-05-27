@@ -20,7 +20,7 @@
 	{{/if}}
 
 
-{{#unless post}}
+{{#unless pagedContent}}
 	<p>You have no notifications</p>
 {{/unless}}
 
@@ -34,11 +34,19 @@
 
 		<div class="post-owner-details">
 			<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
+
 			<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
+			
 			<div class="moment">{{ format-moment post.created_at }}</div> 
-			<span class="comment">{{sanitizehtml-andtag post.comment "comment" ENV}}<span class="reply">
-		{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments" reply=post.user.username)}}Reply&nbsp;<i class="fa fa-angle-double-right"></i>{{/link-to}}
-	</span></span>
+			
+			<span {{bind-attr class=":comment post.read:read:unread"}}>
+				
+				{{sanitizehtml-andtag post.comment "comment" ENV}}
+				
+				<span class="reply pull-right" {{action "doReply" post}}>
+					REPLY&nbsp;<i class="fa fa-angle-double-right"></i>
+				</span>
+			</span>
 		</div>
 	</div>
 

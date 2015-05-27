@@ -5,10 +5,7 @@
 <div class="container-fluid">	
 	<div class="header-basic">
 
-
-		<h1>Mentions</h1>
-
-
+		<h1>Notifications</h1>
 
 	</div>
 </div>
@@ -17,10 +14,8 @@
 
 <div class="container">
 	<div class="haul-content">  
-		<div class="row">
-			<div class="col-md-2 col-sm-2 col-xs-12"></div>
-			<div class="col-md-8 col-sm-8 col-xs-12  padding-top">
-
+		<div class="row"> 
+			<div class="col-md-12 col-sm-12 col-xs-12">
 				
 
 
@@ -32,15 +27,36 @@
 						{{/link-to}}
 
 						<div class="post-owner-details">
-							<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
-							<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
-							<div class="moment">{{ format-moment post.created_at }}</div> 
-							<span class="comment">{{sanitizehtml-andtag post.comment "comment" ENV}}<span class="reply">
-						{{#link-to 'profile.post' post.subject.user.username post.subject  (query-params anchor="comments" reply=post.user.username)}}REPLY{{/link-to}}
-					</span></span>
+							
+							<span class="name">
+								{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}
+							</span>
+							
+							<span class="username">
+								{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}
+							</span>
+							
+							<div class="moment">
+								{{ format-moment post.created_at }}
+							</div> 
+							
+							<span {{bind-attr class=":comment post.read:read:unread"}}>
+								{{sanitizehtml-andtag post.comment "comment" ENV}}
+							</span>
+
+							<span class="reply pull-right" {{action "doReply" post}}>
+								REPLY&nbsp;<i class="fa fa-angle-double-right"></i>
+							</span>
+
+							<span {{bind-attr class=":reply :pull-right post.read:hide"}} {{action 'markRead' post}}>
+								MARK AS READ&nbsp;<i class="fa fa-square-o"></i>
+							</span>
+
+
 						</div>
 					</div> 
 				{{/each}}
+
 				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 					<span>Loading...</span>	
 				{{/infinite-scroll}}
@@ -60,7 +76,7 @@
 				{{/unless}}
 
 			</div>
-			<div class="col-md-2 col-sm-2 col-xs-12"></div>
+	
 		</div>
 	</div>
 </div>
