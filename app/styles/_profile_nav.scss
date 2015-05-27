@@ -1,24 +1,45 @@
+header.basic {
+	width: 100%;
+	text-align: center;
+	background-color: #ffffff;
+	z-index: 3000;
+	margin:0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 1px dashed #eee;
+
+
+	.header-basic{
+		padding:0px;
+		margin:0px; 
+		width:100%;
+		max-width: $haul-max-width;
+		display: inline-block;
+
+		h1 {
+			float:left;
+			margin-top:0;
+		}
+	}
+}
+
+
+
 
 //Header Nav For Profile.
 /* Basic header for a user. */
 header.profile{
 	width: 100%;
 	text-align: center;
-	background-color: #ffffff; 
-	
-	//top:80;
-	//left:0;
-	//position: fixed;
+	background-color: #ffffff;
 	z-index: 3000;
 
 	margin:0;
 	padding: 0;
 	margin-left: auto;
 	margin-right: auto;
-	
-	//height: 120px;
 	min-height:80px;
-	//max-height:120px; 
 	border-bottom: 1px dashed #eee;
 }
 
@@ -37,6 +58,7 @@ header.profile{
 		
 	h1 {
 		float:left;
+		margin-top:0;
 	}
 
 	.profile-image {
