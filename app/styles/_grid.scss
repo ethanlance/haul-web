@@ -4,9 +4,10 @@
 	
 	display:inline-block;
 	text-align: left;
-	// @media (max-width: 600px) {
-	// 	display:block;
-	// }
+	
+	@media (max-width: 700px) {
+		display:block;
+	}
 
 	border: 1px solid green;
 	width: 40%;
