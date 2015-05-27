@@ -6,7 +6,7 @@ export default Ember.Route.extend(AnonMixin, {
 		return "Signup On Haul";
 	}.property(),	
 
-	controllerName: 'signupmodal',
+	controllerName: 'signup',
 
 	beforeModel: function(transition) {
         this._super(transition);
@@ -30,6 +30,6 @@ export default Ember.Route.extend(AnonMixin, {
 			into: 'application',
 			outlet: 'header'
 		});
-		this.render('signupmodal');
+		this.render('signup');
 	}
 });

@@ -8,14 +8,22 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	needs: ['facebook', 'login'], 
  
 	client_token: Config.Server.CLIENT_TOKEN,
+	
 	host: Config.Server.USER_SERVER_HOST,
 
+	animateClose:false,
+
 	emailRegistrationRequested: false,	
+	
 	isProcessingFacebook: false,
+	
 	isProcessingSubmit: false,
+	
 	error409: false,
+	
 	error: false,
-	hideCancelBtn:false,
+
+	model: {},
 
 	//Hide API Errors when changes are made to email field.
 	emailChanged: (function() {	
@@ -65,6 +73,10 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	}, 
 
 	actions: {
+
+		cancel: function() {
+			this.set('animateClose', true);
+		},
 
 		focus: function() { 
 			this.reset();
