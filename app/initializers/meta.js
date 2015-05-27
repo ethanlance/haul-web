@@ -281,12 +281,6 @@ export default {
 
 		// save object to app
 		application.set('meta', meta);
-
-
-
-
-
-
 		application.register('metadata:main', meta, { instantiate: false });
 		application.inject('router', 'meta', 'metadata:main');
 

@@ -171,7 +171,9 @@ module.exports = function(environment) {
 		}
 	}
 
-
+	ENV.APP.googleAnalytics = {
+		webPropertyId: 'UA-63427657-1'
+	};
 
 	ENV.APP.paginationLimit = {
 		feed: 20,

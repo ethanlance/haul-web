@@ -4,10 +4,38 @@ import config from './config/environment';
 var Router = Ember.Router.extend({
   	location: config.locationType,
 
-	didTransition: function(infos) {
+	changeMetaTags: function() {
     	this.meta.trigger('reloadDataFromRoutes');
     	return true;
-  	}
+  	}.on('didTransition'),
+
+  	
+
+  	/**
+  	 Google Analytics
+  	**/
+  	pageviewToGA: function() {
+  		var _this = this;
+    	
+    	this.ga.load()
+    	.then(function(){
+
+			var url = _this.get('url');
+
+			ga('create', 'UA-63427657-1', 'auto');
+
+			ga('set', {
+				page: url,
+				title: url
+			});
+
+			ga('send', 'pageview')
+
+    	});
+
+	}.on('didTransition')
+
+
 });
 
 
@@ -84,5 +112,7 @@ Router.map(function(){
 
 	this.route('404', {path: '/*wildcard'});
 });
+
+
 
 export default Router;
