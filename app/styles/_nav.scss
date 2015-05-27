@@ -308,3 +308,30 @@ nav {
 		display:inline !important;	
 	}	
 }
+
+
+
+
+
+.haul-loading-bar {
+	.progress {
+		height: 2px;
+		background-color: white;
+		border-radius: 0;
+		box-shadow:none;
+		.progress-bar {
+			transition: none;
+			box-shadow:none;
+			-webkit-box-shadow:none;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+

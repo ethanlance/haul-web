@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ResetScrollMixin from '../mixins/resetscroll';
+import ResetScrollMixin from '../../mixins/resetscroll';
 export default Ember.Route.extend(ResetScrollMixin,{
 
 	setupController: function(controller, model) {
@@ -11,13 +11,4 @@ export default Ember.Route.extend(ResetScrollMixin,{
 	willTransition: function() {
 		this.send('turnLoadingBarOn', false);
 	}.on('deactivate'),
-	
-
-	renderTemplate: function() {
-		this.render('layouts/header_base', {
-			into: 'application',
-			outlet: 'header'
-		});
-		this.render('loading');
-	},
 });

@@ -67,7 +67,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	postHasImage: function() {
 		//Does the body have an image?
 		var body = this.get('body');
-		console.log("BODY", body);
+		
 		if( body && body.indexOf("[img") > -1 ) {
 			return true;
 		}else{

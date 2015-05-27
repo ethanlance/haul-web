@@ -15,11 +15,19 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
   	metaOgImage: "none",
 
+  	turnLoadingBarOn: false,
+
 	metaOgUrl: function() {
 		return window.location.href;
 	}.property().volatile(),
 
 	actions: {
+
+		turnLoadingBarOn: function(bool) {
+			console.log("LOADING BAR ", bool);
+			this.set('turnLoadingBarOn', bool);
+			this.get('session').set('turnLoadingBarOn', bool);
+		},
 
 		closeRouter: function() {
 			return false;
@@ -27,7 +35,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 		
 		toggleSearch: function() {
-			
 			
 			if($("#searchDropDown").hasClass('expand')){
 				$("#searchDropDown").removeClass('expand')
