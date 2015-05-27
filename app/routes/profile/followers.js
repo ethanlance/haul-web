@@ -11,7 +11,7 @@ export default Ember.Route.extend(ResetScrollMixin,{
 		var title =  "Followers of " + user.get('get_display_name');
 
 		return title;
-	}.property(),
+	}.property().volatile(),
 
 	model: function() { 
 		var _this  = this;

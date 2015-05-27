@@ -10,7 +10,7 @@ export default Ember.Route.extend({
 		var title = user.get('get_display_name') + " (@" + user.get('username') + ") profile";
 
 		return title;
-	}.property(),
+	}.property().volatile(),
 
   	metaDescription: function() {
 		var user = this.modelFor('profile');
@@ -18,7 +18,7 @@ export default Ember.Route.extend({
 		var title = "Post from " + user.get('name') + " (" + user.get('username') + ")";
 
 		return title;
-	}.property(),
+	}.property().volatile(),
 
 	model: function() {
 		var _this  = this;

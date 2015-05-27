@@ -15,7 +15,7 @@ export default Ember.Route.extend( {
 		
 		return title;
 
-	}.property('post'),
+	}.property('post').volatile(),
 
   	metaDescription: function() {
 
@@ -27,7 +27,7 @@ export default Ember.Route.extend( {
 		
 		return title;
 
-	}.property('post'),
+	}.property('post').volatile(),
 
 	metaOgImage: function() {
 
@@ -41,7 +41,7 @@ export default Ember.Route.extend( {
 
 		return src;
 
-	}.property('post'),
+	}.property('post').volatile(),
 
 
 	model: function(params) {
