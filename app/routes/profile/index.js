@@ -37,5 +37,5 @@ export default Ember.Route.extend({
 		controller.set('pagedContent', model);
 		controller.set('user', this.modelFor('profile'));
 		this._super(controller, model);
-	}	
+	},
 });

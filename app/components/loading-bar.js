@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 	turnLoadingBarOn: false,
 
 	didInsertElement: function() {
-		console.log("   component = " , this.get('turnLoadingBarOn'))
+		console.log("turnLoadingBarOn", this.get('turnLoadingBarOn'))
 		this.progressTheBar();
 	}.observes('turnLoadingBarOn'),
 

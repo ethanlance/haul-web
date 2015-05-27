@@ -15,7 +15,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
   	metaOgImage: "none",
 
-  	turnLoadingBarOn: false,
+  	
 
 	metaOgUrl: function() {
 		return window.location.href;
@@ -23,11 +23,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
 	actions: {
 
-		turnLoadingBarOn: function(bool) {
-			console.log("LOADING BAR ", bool);
-			this.set('turnLoadingBarOn', bool);
-			this.get('session').set('turnLoadingBarOn', bool);
-		},
 
 		closeRouter: function() {
 			return false;
@@ -66,8 +61,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 			this.store.find('user', currentUserId)
 			.then(function(user) {			
 
-				
-
 				if( !Ember.isEmpty(user.get('username'))){
 					var attemptedTransition = _this.get('session.attemptedTransition'); 
 					if(Ember.isEmpty(attemptedTransition)){  
@@ -104,12 +97,9 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 				outlet: 'modal',
 				parentView: 'application'
 			});
-
 		},
 
 		goToRoute: function(arg1, arg2, arg3) {
-
-			
 
 			if( arg3 ){
 				this.transitionTo(arg1, arg2, arg3);
