@@ -87,7 +87,7 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 			})
 
 			//Now Save username:
-			.then(function(response){
+			.then(function(){
 
 				_this.send('doNotRedirectOnAuthentication', false);
 				
@@ -110,20 +110,28 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 			
 			})
 
-			//Get the session user, or we cannot set the username on it.
+			//Set the session.
 			.then(function(user){
-				return _this.get('session.currentUser');
+				return _this.store.find("user", _this.get('user_id'))
+				.then(function(user){
+					var session = _this.get('session');
+					var currentUser = session.get('currentUser');
+					return;
+				});
 			})
 
 
 			.then(
 				function success(){
-					
-					//Must set the username on the session or urls will break!
-					_this.set('session.currentUser.username', _this.get('username'));
-					
 					//Now redirect the logged in user to Discover page.
-					_this.transitionToRoute("discover");
+					
+					//if the username was not set on the session, then do hard refresh
+					if( Ember.isEmpty(_this.get('session.currentUser')) || Ember.isEmpty(_this.get('session.currentUser.username'))){
+						window.location = _this.ENV.baseDomain + "/discover";
+					}else{
+						_this.transitionToRoute("discover");	
+					}
+
 				},
 				function failed(error) {
 					console.log("error", error);
