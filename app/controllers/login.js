@@ -182,10 +182,6 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	
 			var model = this.get('model');
 
-
-	
-console.log("HERE? " , model);
-
 	 		//Model Validations:
 			model.validate()
 			.then(function(){

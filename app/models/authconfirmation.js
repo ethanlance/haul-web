@@ -6,6 +6,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 	password: DS.attr('string'),
 	firstname: DS.attr('string'),
 	lastname: DS.attr('string'),
+	username: DS.attr('string'),
 
 	validations: { 
 		password: {
@@ -17,6 +18,10 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		},
 		lastname: {
 		 	presence: true
-		}
+		},
+		username: {
+		 	presence: true,
+		 	length: { minimum: 2 }
+		},
 	}
 });

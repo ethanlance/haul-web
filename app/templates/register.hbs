@@ -10,44 +10,37 @@
 				</div>
 				
 
-				{{#if error}}
-					<div class="alert">
-						Oops, that did not work out.
-						{{partial "_server_error"}}
-					</div>
-				{{/if}}
+				{{partial "_server_error"}}
 				
  	
 				{{#form-for model}}
-	 			<div class="form-group">	
+	 				<div class="form-group">	
 			      		{{input ticket_id as="hidden" label="false"}}
 			      		{{input user_id as="hidden" label="false"}}
 					</div> 
 		 
 			 		<div class="form-group">	
-			 			{{input password placeholder="Password" showErrors='' label="false"}} 
-			 			{{#if showErrors}}
-							<span class="has-error help-block">{{error-field password}}</span>
-						{{/if}}
+			 			{{input password placeholder="Password" label="false"}}
 					</div> 
 
 
 
 			 		<div class="form-group">	
-			 			{{input firstname placeholder="First Name"  label="false"}}  
-			 			{{#if showErrors}}
-							<span class="has-error help-block">{{error-field firstname}}</span>
-						{{/if}}
-					</div> 
+				 		<div class="row">
+					 		<div class="col-md-6 col-sm-6 col-xs-6">
+					 			{{input firstname placeholder="First Name"  label="false"}}  
+							</div>
 
+							<div class="col-md-6 col-sm-6 col-xs-6">		
+					 			{{input lastname placeholder="Last Name" label="false"}} 
+							</div>							
+	                	</div>
+                	</div> 
 
-		 
-			 		<div class="form-group">	
-			 			{{input lastname placeholder="Last Name" label="false"}}  
-			 			{{#if showErrors}}
-							<span class="has-error help-block">{{error-field lastname}}</span>
-						{{/if}}
-					</div> 
+                	<div class="form-group"> 
+                    	{{input username placeholder="Username" label="false"}}  
+			 			
+                	</div>
 
 
 					<div class="form-group">

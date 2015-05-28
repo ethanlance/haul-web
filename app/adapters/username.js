@@ -15,7 +15,7 @@ export default ApplicationAdapter.extend({
 		
 		var username = record.get('username');
 
-        var user_id = this.get('currentUser').id;
+        var user_id = record.get('user_id');
         
 		var url = this.get('host') + '/users/'+user_id+'/username/'+username;
 
@@ -26,7 +26,7 @@ export default ApplicationAdapter.extend({
 		
 		var username = record.get('username');
 
-        var user_id = this.get('currentUser').id;
+        var user_id = record.get('user_id');
         
 		var url = this.get('host') + '/users/'+user_id+'/username/'+username;
 

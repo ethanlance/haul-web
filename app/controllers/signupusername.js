@@ -4,7 +4,7 @@ export default Ember.ObjectController.extend({
 	errorMessage: null,
 
 	turnOffNav:true,
-	currentUserId: 'session.currentUser.id',
+	currentUserIdBinding: 'session.currentUser.id',
 
 	saveUsername: function() {
 

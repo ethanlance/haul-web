@@ -15,13 +15,17 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 
   	metaOgImage: "none",
 
-  	
+  	doNotRedirectOnAuthentication: false,
 
 	metaOgUrl: function() {
 		return window.location.href;
 	}.property().volatile(),
 
 	actions: {
+
+		doNotRedirectOnAuthentication: function(bool) {
+			this.set('doNotRedirectOnAuthentication',bool);
+		},
 
 
 		closeRouter: function() {
@@ -54,6 +58,12 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 			We catch it here and determine where best to redirect this user.
 		*/
 		sessionAuthenticationSucceeded: function() {
+
+console.log('doNotRedirectOnAuthentication', this.get('doNotRedirectOnAuthentication'));
+
+			if( this.get('doNotRedirectOnAuthentication') ){
+				return;
+			}
 
 			var _this = this;
 			var currentUserId = this.get('session.user_id');
