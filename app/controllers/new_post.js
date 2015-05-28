@@ -140,7 +140,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		var model = this.get('model');
 
-console.log("PROUDCTLINK", model.get('product_link'))		
+
 		//Product Link:
 		//Does this model have a product_link? If yes then this is an import.
 		if( !Ember.isEmpty(model.get('product_link'))){
@@ -162,10 +162,6 @@ console.log("PROUDCTLINK", model.get('product_link'))
 			model.set('body', " ");
 			model.set('product_status', 'FOR_SALE');
 		}
-
-console.log("STATUS?", model.get('product_status'))
-console.log("ONSITE", this.get('isOnsite'))
-
 
 		//Now set some defaults.
 		model.setProperties(
