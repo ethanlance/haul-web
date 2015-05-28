@@ -35,12 +35,9 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 		//Get ready for Facebook login:
 		this.socialApiClient.load()
 		
-
 		//Get ready for email/password login:
 		var model =  this.store.createRecord('authlogin');
 		this.set('model', model);
-
-		console.log("INIT THE MODEL", model);
 
 	}.on('init'),
 
@@ -185,7 +182,18 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	 		//Model Validations:
 			model.validate()
 			.then(function(){
-				var data = model.getProperties('email', 'password');	
+				
+				var data = model.getProperties('password');	
+
+				//Username or Email?
+				var email = model.get('email');
+				if( email.indexOf("@") !== -1){
+					data['email'] = email;
+				}else{
+					data['username'] = email;
+				}
+
+
 				return  _this.authenticate('/auth/user', 'post', data);
 			})	
 			.then(

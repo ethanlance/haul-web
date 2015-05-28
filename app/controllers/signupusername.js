@@ -23,7 +23,7 @@ export default Ember.ObjectController.extend({
 		.then(
 			function() { 
 				_this.set('isProcessing', false);
-				_this.transitionToRoute('profile', username);		
+				_this.transitionToRoute('discover');		
 			},
 			function(error){
 				_this.set('isProcessing', false);	
