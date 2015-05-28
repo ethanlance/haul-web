@@ -37,6 +37,16 @@ export default Ember.ObjectController.extend({
 
 	images: [],
 
+
+	reset: function() {
+		this.set('isProcessing', false);
+		this.set('showErrors', false);
+		this.set('image_urls', []);
+		this.set('image_ids', []);
+		this.set('images', []);
+		this.set('url', null);
+	},
+
 	messages: {
 		'start': 		'Analyzing link',
 		'image': 		'Uploading',
@@ -79,58 +89,58 @@ export default Ember.ObjectController.extend({
 
 		//Take the OG Data and clean it up.
 		.then(function(response){
-				var image_url = '';
-				var image_urls = _this.get('image_urls');
-				if( !Ember.isEmpty(response.data.image_urls)){
-					image_urls = response.data.image_urls;
-				}else if( !Ember.isEmpty(response.data.image_url) ){
-					image_urls.push( response.data.image_url );
-				}
+			var image_url = '';
+			var image_urls = _this.get('image_urls');
+			if( !Ember.isEmpty(response.data.image_urls)){
+				image_urls = response.data.image_urls;
+			}else if( !Ember.isEmpty(response.data.image_url) ){
+				image_urls.push( response.data.image_url );
+			}
 
-				if( !Ember.isEmpty(image_urls) ){
-					image_url = image_urls[0];
-				}
-				
-				
-				var product_link = response.data.link;
-				
-				var body = response.data.description;
-				
-				var name = response.data.name;
+			if( !Ember.isEmpty(image_urls) ){
+				image_url = image_urls[0];
+			}
+			
+			
+			var product_link = response.data.link;
+			
+			var body = response.data.description;
+			
+			var name = response.data.name;
 
-				//Sitename:
-				var parser = document.createElement('a');
-				parser.href = product_link;
-				var sitename = parser.hostname;
-				
-				//string
-				name = String(name);
-				body = String(body);
+			//Sitename:
+			var parser = document.createElement('a');
+			parser.href = product_link;
+			var sitename = parser.hostname;
+			
+			//string
+			name = String(name);
+			body = String(body);
 
-				//clean
-				name = name.replace(/[&\/\\#,+()~%.'":*?<>{}]/g,' ');
+			//clean
+			name = name.replace(/[&\/\\#,+()~%.'":*?<>{}]/g,' ');
 
-				//trim
-				name = name.trim();
-				body = body.trim();
+			//trim
+			name = name.trim();
+			body = body.trim();
 
-				//Safe:
-				body = new Ember.Handlebars.SafeString(body);
-				name = new Ember.Handlebars.SafeString(name);
+			//Safe:
+			body = new Ember.Handlebars.SafeString(body);
+			name = new Ember.Handlebars.SafeString(name);
 
-				body = '<blockquote>"'+body.toString()+'" ~ '+ sitename +' </blockquote>';
-				name = name.toString();
+			body = '<blockquote>"'+body.toString()+'" ~ '+ sitename +' </blockquote>';
+			name = name.toString();
 
-				var post = _this.store.createRecord('post', {
-					body: body,
-					product_name: name,
-					product_link: product_link,
-					image_url: image_url,
-					product_status: 'FOR_SALE_OFFSITE'
-				});
+			var post = _this.store.createRecord('post', {
+				body: body,
+				product_name: name,
+				product_link: product_link,
+				image_url: image_url,
+				product_status: 'FOR_SALE_OFFSITE'
+			});
 
-				_this.set('newpost', post);
-				_this.set('image_urls', image_urls);
+			_this.set('newpost', post);
+			_this.set('image_urls', image_urls);
 
 			return;
 		})

@@ -177,6 +177,9 @@ export default Ember.Component.extend(TransformMixin, {
 		var html = this.transformImagesForSaving();
 
 		this.sendAction('quillChange', html);
+
+		this.set('requestContents', false); //reset.
+
 		
 
 	}.observes('requestContents'),

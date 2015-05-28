@@ -59,8 +59,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 		*/
 		sessionAuthenticationSucceeded: function() {
 
-console.log('doNotRedirectOnAuthentication', this.get('doNotRedirectOnAuthentication'));
-
 			if( this.get('doNotRedirectOnAuthentication') ){
 				return;
 			}

@@ -138,9 +138,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		this.reset();
 
+		var model = this.get('model');
+
+console.log("PROUDCTLINK", model.get('product_link'))		
 		//Product Link:
 		//Does this model have a product_link? If yes then this is an import.
-		var model = this.get('model');
 		if( !Ember.isEmpty(model.get('product_link'))){
 
 			//If Link Import, there are images to import:
@@ -152,17 +154,17 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 				});
 			}
 
-		} else {
-			model.set('body', " ");
-		}
-
-		//Product Status:
-		if( model.get('product_status') === 'FOR_SALE_OFFSITE' ){
+			model.set('product_status', 'FOR_SALE_OFFSITE');
 			this.set('isOnsite', false);
 			this.set('isForSaleOffsite', true);
+
 		} else {
+			model.set('body', " ");
 			model.set('product_status', 'FOR_SALE');
 		}
+
+console.log("STATUS?", model.get('product_status'))
+console.log("ONSITE", this.get('isOnsite'))
 
 
 		//Now set some defaults.
@@ -430,12 +432,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			}, 
 			function fail(error){
 
+				_this.set('isProcessingSavePost', false);
+
 				//Mixin:
 				_this.handleServerError(error)
 
 				_this.set('showErrors', true);
-
-				_this.set('isProcessingSavePost', false);
 			}
 		);
 	},

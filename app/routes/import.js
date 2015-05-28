@@ -19,4 +19,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
   	metaDescription: function() {
 		return "Curate anything for sale on the internet.  Just paste in a link to import it.  Then write your own blog post for it.";
 	}.property(),
+
+	setupController: function(controller, model){ 
+		controller.reset();
+		this._super(controller, model);
+	},
+
 });

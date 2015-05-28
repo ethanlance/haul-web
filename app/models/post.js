@@ -152,7 +152,7 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		// },
 		product_price: {
 			numericality: {
-				greaterThan:5, 
+				greaterThan:3, 
 				onlyInteger:true,
 				//messages: {notAnInteger:'Whole numbers only, no decimals, no punctuation'}
 			},
