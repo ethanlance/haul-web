@@ -76,17 +76,35 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							
 							<div class="comment-section-nav">
-								<span class="comment-count">{{totalComments}} Comments</span>
-								<span class="likes-count">&nbsp;{{!-- {{totalLikes}} Likes --}}</span>
+
+								<ul class="nav nav-tabs" role="tablist">
+
+	    							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">{{totalComments}} Comments</a></li>
+
+	    							<li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">{{totalLikes}} Likes</a></li>
+								</ul>
+
 							</div>
 
-							{{comment-section 
-								openModal='openModal' 
-								objectId=this.id
-								objectType="posts"
-								anchor=anchor 
-								reply=reply
-								class="display-inline" }}
+
+							<div class="tab-content">
+								
+								<div class="tab-pane active" id="tab1">
+									{{comment-section 
+										openModal='openModal' 
+										objectId=this.id
+										objectType="posts"
+										anchor=anchor 
+										reply=reply
+										class="display-inline" }}
+								</div>
+
+								<div class="tab-pane" id="tab2">
+									{{post-likes post=this}}
+								</div>
+
+							</div>
+
 						</div>
 					</div>
 

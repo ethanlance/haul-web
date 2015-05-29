@@ -6,7 +6,6 @@ export default Ember.Component.extend({
 	},
 
 	willDestroyElement: function() {
-		console.log("DESTORY LOADING WATCHER")
 		this.sendAction('doLoading', false);
 	},
 

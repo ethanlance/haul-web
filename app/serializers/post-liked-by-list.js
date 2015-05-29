@@ -1,37 +1,30 @@
 import DS from 'ember-data';
-export default  DS.RESTSerializer.extend({
+import MetaSerializer from '../mixins/meta_serializer';
+export default DS.RESTSerializer.extend( MetaSerializer,{ 
 
-	extractSingle: function(store, primaryType, payload, recordId, requestType) {
+	extractArray: function(store, primaryType, payload) {
 
 		if( payload.data === "ok"){
 			return;
 		} 
 
-		var product_id = null;
-		var user_ids = []; 
 		var user_id = null;
+		var post_id = null;
 
-		payload.data.map(function(result){ 
+		var data = null;
+		var datas = payload.data.map(function(result){
+			var id = result.user_id + result.subject.id;
+			return {
+				id: id,
+				post:result.subject.id,		
+				user:result.user_id,
+				created_at: result.created_at,		
+				post_id: result.subject.id,
+				user_id: result.user_id,
+			}
+		});
 
-			var id = String(result.context_id);
-			var key = id.split(':');
-			product_id = key[1];
-
-			id = String(result.id);
-			key = id.split(':');
-			user_id = key[1];
-			user_ids.push(user_id);
-			
-		});  
-
-		var id = recordId;
-		var data = {
-			id: id,
-			users: user_ids,
-			//product_id: product_id,
-		};
-
-		payload ={'post-liked-by-list': data}; 
-		return this._super(store, primaryType, payload, recordId, requestType);
+		payload = {'post-liked-by-list': datas}; 
+		return this._super(store, primaryType, payload);
 	}
 });

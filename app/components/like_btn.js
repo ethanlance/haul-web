@@ -78,10 +78,15 @@ export default Ember.Component.extend({
 			record.save()
 			.then(function(record){ 
 
+
 				if( like ){ 
 					_this.set('userLikes', true);
 					_this.set('userLikesRecord', record);
 					_this.incrementProperty('total');
+
+					//Post page users who like post.
+					store.find('post-liked-by-list', {id: _this.get('postId') } )
+
 				}else{
 
 					//Unlike
@@ -89,8 +94,18 @@ export default Ember.Component.extend({
 					_this.set('userLikesRecord', null);
 					_this.decrementProperty('total');
 
-
 				}
+				
+
+				//Post page list of users who like the post:
+				_this.set('like', like);
+				store.filter('post-liked-by-list', function(result) {
+					var like = _this.get('like');
+					if(!like && result.id && (result.get('user.id') === _this.get('currentUserId')) && (result.get('post_id') === _this.get('postId'))) {	 
+						store.unloadRecord(result);
+					}
+				});
+
 
 				store.find('user-likes-list', {user_id: _this.get('currentUserId') } );
 

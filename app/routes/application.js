@@ -24,7 +24,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 	actions: {
 
 		doLoading: function(bool) {
-			console.log("CAUGHT LOADING ", bool);
 			this.controllerFor('application').set('doLoading', bool);
 		},
 
