@@ -26,6 +26,59 @@
 		width: 100%;
 		padding-bottom: 30px;
 
+		.nav-tabs {
+			border:0;
+			padding:0;
+			margin:0;
+			border-bottom: 1px solid #dedede;
+		}
+
+		.nav-tabs > li > a {
+			color: #cccccc;
+			border-radius: 0;
+		}
+
+		
+		.nav-tabs > li.active > a:hover,
+		.nav-tabs > li.active > a:focus {
+			color: #cccccc;
+			border-radius: 0;
+			cursor: default;
+			background-color: #fff;
+			border-top: 0;
+			border-right: 0;
+			border-left: 0;
+			//border-bottom-color: transparent;
+		}
+		
+		.nav-tabs > li.active > a:focus {
+			color: #333333;
+		}
+
+		.nav-tabs > li.active > a {
+			color: #333333;
+			//float:left;
+			padding-bottom: 10px;
+			border:0;
+			border-bottom: 3px solid $primary-color; 
+			cursor:pointer;
+		}
+
+
+
+
+		.nav-tabs > li {
+			//float:none;
+			//display:block;
+			//overflow:hidden;
+			min-height: 1px;
+			//padding-bottom: 10px;
+			//padding-left: 70px;
+			border:0;
+			
+			cursor:pointer;
+		}
+
 		.comment-count { 
 			color: #333333;
 			float:left;
