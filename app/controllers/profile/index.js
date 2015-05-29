@@ -22,6 +22,13 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
+    noBio: Ember.computed.empty('user.bio'),
+
+    notProfileOwner: Ember.computed.not('isProfileOwner'),
+
+    hideLeftColumn: Ember.computed.and('notProfileOwner', 'noBio'),
+
+
 	userChanged: function() {
 
 		//Pagination:	
@@ -42,6 +49,9 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 				this.set('isProfileOwner', true);
 			}
 		} 
+
+
+
 	}.observes('user', 'currentUserId'),
 
 	actions: {
