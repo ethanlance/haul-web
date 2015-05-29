@@ -205,14 +205,59 @@
 						{{description-list product_description "description"}}
 					</div>
 
-				{{!-- 	{{#link-to "profile.post" product_user.username product_post.post_id product_post.subject}}
-					<div class="link-to-post">Read Post <i class="fa fa-angle-double-right"></i></div>
-					{{/link-to}} --}}
 				</div>
 
 			</div>
+
 			{{/unless}}
+
 
 		</div> 
 	</div>
 </div>
+
+
+
+
+
+
+
+
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{#if model}}
+<div class="container-fluid">
+
+	<div class="haul-wrapper ">
+
+		<div class="row">
+
+			<div class="col-md-12 col-sm-12 col-xs-12">
+
+				<div class="related-posts">
+					{{ related-posts post=this limit=3 }}
+				</div>
+
+			</div>	
+
+		</div>
+
+	</div>
+</div>
+{{/if}}
+
+
+
+
+
+
+
+
+
+
+
+
