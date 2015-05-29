@@ -25,7 +25,7 @@
 {{/unless}}
 
 
-{{#each post in pagedContent}}
+{{#each post in sortedResults}}
 
 	<div class="mention-owner">
 		{{#link-to 'profile' post.user.username }}
@@ -52,6 +52,6 @@
 
 {{/each}}
 
-{{#if pagedContent}}
+{{#if sortedResults}}
 <span class="more">{{#link-to 'mentions'}}MORE{{/link-to}}</span>
 {{/if}}

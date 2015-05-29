@@ -16,7 +16,7 @@ export default Ember.Component.extend( PaginateMixin,{
 
     commentsSorting: ['created_at:desc'],
     
-    sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
+    sortedResults: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
     pollInterval: 3000,
 
@@ -31,13 +31,13 @@ export default Ember.Component.extend( PaginateMixin,{
         var _this = this;
         return Ember.run.later(this, function(){
             f.apply(this);
-        }, _this.ENV.pollingTime.comments );
+        }, _this.ENV.pollingTime.mention_count );
     },
 
     onPoll: function() {
         var _this = this;
         var store = this.container.lookup('store:main');
-        store.find(_this.get('storeName'), {user_id: this.get('session.user_id')})
+        store.find(_this.get('storeName'), {user_id: this.get('currentUserId')})
         .then(function() {
             _this.set('runPoll', _this.schedulePoll(_this.get('onPoll')));
         });
@@ -84,7 +84,7 @@ export default Ember.Component.extend( PaginateMixin,{
         );
     },
 
-    getMentions: function() {
+    startFilter: function() {
         
         var _this = this;
         
@@ -92,19 +92,17 @@ export default Ember.Component.extend( PaginateMixin,{
         
         var storeName = this.get('storeName');
 
-        var filter = store.find(storeName, {
-            user_id: this.get('currentUserId'), 
-            limit:this.get('limit')
-        })
-        .then(function(){
-            return store.filter(storeName, function(result){
-                return result;
-            });
-        });
+        store.find(_this.get('storeName'), {user_id: this.get('currentUserId')})
 
-        filter.then(function(results){
-            _this.set('pagedContent', results.get('content').splice(0, _this.get('limit'))); 
+        var filter = store.filter(storeName, function(result){
+            if( !result.get('read') ){
+                return result;
+            }
         });
+        
+        //filter.then(function(results){
+        _this.set('pagedContent', filter); 
+        //});
     },
 
 
@@ -113,11 +111,11 @@ export default Ember.Component.extend( PaginateMixin,{
 
         //Check if user has a seller account.
         //this.doesUserNeedSellerAccount();
-                
-        //Get last X mentions.
-        this.getMentions();
 
         this.startPoll();
+                
+        //Get last X mentions.
+        this.startFilter();
 
         this.resize();
 
