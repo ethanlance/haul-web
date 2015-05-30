@@ -9,6 +9,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin,{
 		return "Your Notifications";
 	}.property(),	
 
+	model: function() {
+		return  this.store.find('user-mentions-list', {user_id: this.get('session.user_id')})
+	},
+
 	setupController: function(controller, model) {
 		controller.set('limit', this.get('limit'));
 		controller.set('pagedContent', model);

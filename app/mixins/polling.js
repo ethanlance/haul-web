@@ -11,11 +11,8 @@ export default Ember.Mixin.create({
             intTime = 10000;
         }
 
-console.log("Run in -> ", intTime)
-
         //Run our scheduled function later.
         return Ember.run.later(this, function(){
-            console.log("Next run the func.")
             func.apply(this);
         }, intTime );
     },

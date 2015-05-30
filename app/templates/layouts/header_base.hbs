@@ -35,7 +35,7 @@
 				<div class="nav-link hide-on-small">
 					{{#link-to 'mentions' }}
 						{{#if session.currentUser.hasUnreadMentions}}
-							{{session.currentUser.getUnreadMentionCount.total}}
+							{{mention-count}}
 						{{/if}}NOTIFICATIONS
 					{{/link-to}}
 				</div>	

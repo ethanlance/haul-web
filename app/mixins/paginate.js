@@ -49,6 +49,7 @@ export default Ember.Mixin.create({
 		//Return promise:
 		return store.find(storeName, params)
 		.then(function(results){
+			
 			//Check if more to paginate.
 			var meta = store.metadataFor(storeName);
 			if(Ember.isEmpty(results)  || (meta.limit > meta.count) ){

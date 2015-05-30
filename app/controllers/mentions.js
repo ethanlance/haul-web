@@ -26,9 +26,10 @@ export default Ember.ObjectController.extend(PaginateMixin, {
 
 		if(!this.get('currentUserId')){ return; }
 
-		this.startFilter();
 
 		this.startPagination();
+
+		this.startFilter();
 		
 		
 	}.on('init').observes('currentUserId'),
@@ -38,6 +39,7 @@ export default Ember.ObjectController.extend(PaginateMixin, {
 		Start up the pagination which automatically runs as page scrolls.
 	*/
     startPagination: function() {
+
 		//Pagination:	
 		this.set('paginateQuery', {
 			storeName: this.get('storeName'),
@@ -61,13 +63,14 @@ export default Ember.ObjectController.extend(PaginateMixin, {
         
         var _this = this;
         
-        var store = this.container.lookup('store:main'); 
+        
         
         var storeName = this.get('storeName');
 
-        store.find(_this.get('storeName'), {user_id: this.get('currentUserId')})
+        this.store.find(storeName, {user_id: this.get('currentUserId')})
 
-        var filter = store.filter(storeName, function(result){
+
+        var filter = this.store.filter(storeName, function(result){
             //if( !result.get('read') ){
                 return result;
             //}

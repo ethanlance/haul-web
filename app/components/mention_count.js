@@ -17,7 +17,7 @@ export default Ember.Component.extend( PollingMixin, {
         Fire it up.
     **/
     setup: function() {  
-        console.log("BOOOM")
+        
         this.startPoll();
 
     }.on('didInsertElement'),
@@ -34,7 +34,6 @@ export default Ember.Component.extend( PollingMixin, {
         //Get and reload the count of unread mentions.
         store.find('user-mentions-unread-count', _this.get('currentUserId'))
     	.then(function(model) { 
-            console.log("FOUND COUNT")
     		return model.reload();
 		})
     	.then(function(record){
@@ -44,12 +43,10 @@ export default Ember.Component.extend( PollingMixin, {
 
         //Now get mentions for the current user.
         .then(function(){
-            console.log("FOUND Comments")
 
             store.find('user-mentions-list', {user_id: _this.get('currentUserId')})
             .then(function() {
 
-                console.log("START POLL AGAIN")
                 _this.startPoll();
 
 

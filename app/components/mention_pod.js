@@ -18,6 +18,12 @@ export default Ember.Component.extend( PaginateMixin, {
     
     sortedResults: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
+    sortedLimitedResults: function() {
+        
+        return this.get('sortedResults').slice(0, this.get('limit'));
+
+    }.property('sortedResults.[]'),
+
 
     /**
         Start it up!
