@@ -84,12 +84,11 @@
 		<div class="comment-section-nav">
 			<h3 class="comment-count">Message with the seller, {{model.seller.name}}</h3>
 		</div>
-		{{comment-section 
-			openModal='openModal' 
-			objectId=model.id 
-			objectType='transactions'
-			anchor=anchor 
-			class="display-inline" }}
+		{{direct-message 
+			toUser=model.seller 
+			regardingId=model.id 
+			regardingType='transactions'
+		}}
 	</div>
 </div>
 

@@ -1,23 +1,43 @@
 import Ember from 'ember';
 import PaginateMixin from '../mixins/paginate';
-export default Ember.ObjectController.extend(PaginateMixin,{
+export default Ember.ObjectController.extend(PaginateMixin, {
 
 	loading: true,
+
 	limit: null,
+	
 	storeName: 'user-mentions-list',
+	
 	currentUserIdBinding: 'session.currentUser.id',
+	
 	currentUserBinding: 'session.currentUser',
+	
 	model:false,
 	
 	sorting: ['created_at:desc'],
-    sortedContent: Ember.computed.sort('pagedContent', 'sorting'),	
 
-	userChange: function() {
+    sortedContent: Ember.computed.sort('pagedContent', 'sorting'),
 
-		if( Ember.isEmpty(this.get('currentUserId'))) {
-			return;
-		}
+
+	/**
+        Start it up!
+    **/
+	setup: function() {
+
+		if(!this.get('currentUserId')){ return; }
+
+		this.startFilter();
+
+		this.startPagination();
 		
+		
+	}.on('init').observes('currentUserId'),
+
+
+	/*
+		Start up the pagination which automatically runs as page scrolls.
+	*/
+    startPagination: function() {
 		//Pagination:	
 		this.set('paginateQuery', {
 			storeName: this.get('storeName'),
@@ -27,13 +47,37 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 		this.set('paginateHasMore', true);
 
 		var _this = this;
-		var promise = this.paginateMore()
+		this.paginateMore()
 		.then(function(results){
 			_this.set('loading', false);
 		});
+    },
 
-		
-	}.on('init').observes('currentUserId'),
+
+    /**
+        Start up the filter which automatically updates.
+    **/
+    startFilter: function() {
+        
+        var _this = this;
+        
+        var store = this.container.lookup('store:main'); 
+        
+        var storeName = this.get('storeName');
+
+        store.find(_this.get('storeName'), {user_id: this.get('currentUserId')})
+
+        var filter = store.filter(storeName, function(result){
+            //if( !result.get('read') ){
+                return result;
+            //}
+        });
+         
+        _this.set('pagedContent', filter);  
+    },
+
+
+
 
 	markMentionAsRead: function(mention) {
 		var _this = this;
@@ -72,6 +116,94 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 		);
 	},
 
+
+
+
+
+	redirectToPost: function(mention) {
+		var _this = this;
+		//Start by finding out who this is is from:
+		mention.get('user')
+		.then(function(user){
+
+			_this.set('fromUsername', user.get('username'));
+			
+			//Find info about the post.
+			return mention.get('subject');
+		})
+
+		.then(function(post){
+			
+			var post_username = post.get('user.username'); 
+			var username_who_made_comment = _this.get('fromUsername');
+
+			_this.transitionToRoute('profile.post', post_username, post, {
+				queryParams: {anchor: "comments", reply: username_who_made_comment}
+			});    			
+		});
+	},
+
+
+	redirectToUser: function(mention) {
+		var _this = this;
+		
+		//Start by finding out who this is is from:
+		var subject_id = mention.get('subject_id');
+
+		var userIds = subject_id.split("_");
+		var fromUserId;
+
+		if( this.get('currentUserId') !== userIds[0]) {
+			fromUserId = userIds[0];
+		}else{
+			fromUserId = userIds[1];
+		}
+
+		this.store.find('user', fromUserId)
+
+		.then(function(user){
+
+			_this.set('fromUsername', user.get('username'));
+			
+			return;
+		})
+
+		.then(function(post){ 
+			_this.transitionToRoute('profile.dm', _this.get('fromUsername') );    			
+		});
+	},
+
+
+	redirectToTransaction: function(mention) {
+		var _this = this;
+		_this.transitionToRoute('settings.sales', mention.get('subject_id') );    			
+	},
+
+	redirectToMessage: function(mention) {
+
+		var objectType = mention.get('subject_type');
+
+
+		//Find out what type of message this is:
+		//ie posts, transactions, usertousers
+		if( objectType === "posts" ){
+
+			this.redirectToPost( mention );
+
+		}else if( objectType === "usertousers") {
+
+			this.redirectToUser( mention );
+
+		}else if( objectType === "transactions") {
+
+			this.redirectToTransaction( mention );
+
+		}
+
+		this.markMentionAsRead(mention);
+
+	},
+
 	actions: {
     	fetchMore: function(callback) {
 			var promise = this.paginateMore();		
@@ -79,33 +211,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
     	},
 
     	doReply: function(mention) {
-    		this.markMentionAsRead(mention);
-
-    		//var username = mention.subject.user.username
-    		var _this = this;
-    		var post = mention.post;
-
-    		//Find username of the commenter
-    		mention.get('user')
-    		.then(function(user){
-
-    			_this.set('username_who_made_comment', user.get('username'));
-				
-				//Find info about the post.
-				return mention.get('subject');
-			})
-			.then(function(post){
-				
-				var post = post;
-				var post_username = post.get('user.username'); 
-				var username_who_made_comment = _this.get('username_who_made_comment');
-
-    			_this.transitionToRoute('profile.post', post_username, post, {
-    				queryParams: {anchor:"comments", reply:username_who_made_comment}
-    			});    			
-    		});
-
-
+    		this.redirectToMessage(mention);
     	},
 
     	markRead: function(mention) {

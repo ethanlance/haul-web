@@ -1,0 +1,85 @@
+
+
+<div {{bind-attr class=":dms-section canDM:show:hide"}}>
+
+		{{!-- DM FORM --}}
+		<div class="row dm-box">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+			
+			
+			{{#form-for model}}
+
+				{{make-icon icon=session.currentUser.icon}}
+
+				<div class="dm-input">
+					{{input model.comment as="text" placeholderBinding=placeholder class="dmbox"  label="false"   }}
+					
+		    		<div {{bind-attr class="showServerErrors:show:hide :alert"}}>{{{serverErrorMessage}}}</div> 
+				</div>
+
+
+				<div {{bind-attr class=":dm-submit showSubmitCommentButton:visible:invisible"}}>
+						
+					{{ladda-btn 
+						class="primary display-inline"
+						name='Post Message'
+						btnClasses='btn btn-default ladda-button '
+						btnClick='submit'
+						spin=isProcessing
+					}}
+
+				</div>
+				
+			{{/form-for}}
+
+	
+			
+			</div>
+		</div> 
+
+
+
+		{{!-- DM --}}
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+				{{#each item in sortedComments }}
+				<div class="dm-section-row">
+						
+					
+					{{#link-to 'profile' item.user.username }}
+						{{make-icon icon=item.user.icon}}
+					{{/link-to}}
+
+					<div class="dm-section-dm">
+						<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}{{/link-to}}</span>
+						<span class="username">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}}</span>
+						<div class="moment">{{ format-moment item.created_at }}</div>
+						<div class="dm">{{sanitizehtml-andtag item.comment "comment" ENV}}</div>
+					</div>
+				</div>
+				{{/each}}
+		
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+
+				<div {{bind-attr class="hasMore::hide"}}>
+				{{ladda-btn
+					name='LOAD PREVIOUS MESSAGES'
+					class="display-inline"
+					btnClasses='ladda-button btn-default'
+					btnClick='fetchMore'
+					spin=isProcessingFetch
+					dataSpinnerColor="white"
+				}}
+				</div>
+				
+
+			</div>
+		</div>
+
+
+</div>

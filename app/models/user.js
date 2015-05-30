@@ -40,8 +40,8 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		}
 	},
 
-	hastUnreadMentions: function() {
-
+	hasUnreadMentions: function() {
+ 
 		return this.store.find('user-mentions-unread-count', this.get('id'))
 		.then(function(result) {
 			var total = result.get('total');
@@ -51,6 +51,14 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 				return false;
 			}
 		});
+
+	}.property().volatile(),
+
+
+	getUnreadMentionCount: function() {
+ 
+		return this.store.find('user-mentions-unread-count', this.get('id'))
+	
 
 	}.property().volatile(),
 

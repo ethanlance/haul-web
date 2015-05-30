@@ -103,6 +103,7 @@ Router.map(function(){
 		this.route('followers');
 		this.route('following');
 		this.route('likes'); 
+		this.route('dm'); 
 		this.route('post', {path: "/:id/:post_slug"}, function() {
 			this.route('edit_post');
 			this.route('edit_product');

@@ -1,54 +1,78 @@
 import Ember from 'ember';
-export default Ember.Component.extend({
+import PollingMixin from '../mixins/polling';
+export default Ember.Component.extend( PollingMixin, {
+
 	tagName: 'span',
-	classNames: 'nav-link-badge',
-	totalBinding: 'session.currentUser.getUnreadMentionsCount.total',
+	
+    classNames: 'nav-link-badge',
+	
+    totalBinding: 'session.currentUser.getUnreadMentionsCount.total',
 
-	schedulePoll: function(f) {
-    	var _this = this;
-    	return Ember.run.later(this, function(){
-    		f.apply(this);
-    	}, _this.ENV.pollingTime.mention_count );
-    },
+    pollIntervalBinding: 'this.ENV.pollingTime.comments', 
 
+    currentUserIdBinding: 'session.currentUser.id',
+
+
+    /**
+        Fire it up.
+    **/
+    setup: function() {  
+        console.log("BOOOM")
+        this.startPoll();
+
+    }.on('didInsertElement'),
+
+
+
+    /**
+        Poll.
+    **/
     onPoll: function() {
     	var _this = this;
     	var store = this.container.lookup('store:main');
-    	store.find('user-mentions-unread-count', this.get('session.currentUser.id'))
+    	
+        //Get and reload the count of unread mentions.
+        store.find('user-mentions-unread-count', _this.get('currentUserId'))
     	.then(function(model) { 
+            console.log("FOUND COUNT")
     		return model.reload();
 		})
     	.then(function(record){
-            _this.set('total', record.get('total'));                
-    		_this.set('runPoll', _this.schedulePoll(_this.get('onPoll')));
-    	});
+            _this.set('total', record.get('total'));
+            return;
+    	})
+
+        //Now get mentions for the current user.
+        .then(function(){
+            console.log("FOUND Comments")
+
+            store.find('user-mentions-list', {user_id: _this.get('currentUserId')})
+            .then(function() {
+
+                console.log("START POLL AGAIN")
+                _this.startPoll();
+
+
+            });
+        })
+
     },
 
-    stopPoll: function() {
-    	Ember.run.cancel(this.get('runPoll'));
-    },
-
-    startPoll: function() {
-    	this.set('runPoll', this.schedulePoll(this.get('onPoll')));
-    },
+ 
 
     totalChanged: function() {
+
         this.flash();
+
     }.observes('total'),
 
+
     flash: function() { 
+
     	$(this.get('element')).effect("highlight", {}, 1500);
-    },
-
-    willDestroyElement: function() {
-    	this.stopPoll();
-    },
-
-    didInsertElement: function() {	
-    	
-    	this.startPoll();
 
     }
+
 });
 
 

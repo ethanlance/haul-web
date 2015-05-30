@@ -2,7 +2,8 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 import PaginateMixin from '../mixins/paginate';
-export default Ember.Component.extend( PaginateMixin,{
+import PollingMixin from '../mixins/polling';
+export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 
 	objectId: false,
 
@@ -35,47 +36,53 @@ export default Ember.Component.extend( PaginateMixin,{
     
     sortedComments: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
-	
-	schedulePoll: function(f) {
-    	var _this = this;
-    	return Ember.run.later(this, function(){
-    		f.apply(this);
-    	}, _this.ENV.pollingTime.comments );
-    },
+    pollIntervalBinding: 'this.ENV.pollingTime.comments', 
 
+
+
+    setup: function() {
+
+    	this.makeModel();
+
+    	this.startFilter();
+
+		this.startPagination();
+
+    	this.startPoll();
+
+    	this.startMentions();
+
+		this.startUI();
+
+
+	}.on('didInsertElement'),
+
+	
+	/**
+		Polling Mixin.
+	**/
     onPoll: function() {
+
     	var _this = this;
     	var store = this.container.lookup('store:main');
+    	
     	store.find('comment', {
     		object_id: _this.get('objectId'),
     		object_type: _this.get('objectType'),
     		limit: this.get('limit'),
     	})
+    	
     	.then(function() {
-    		_this.set('runPoll', _this.schedulePoll(_this.get('onPoll')));
+    		_this.startPoll();
 		});
-    },
 
-    stopPoll: function() {
-    	Ember.run.cancel(this.get('runPoll'));
-    },
-
-    startPoll: function() {
-    	this.set('runPoll', this.schedulePoll(this.get('onPoll')));
     },
 
 
-    willDestroyElement: function() {
-    	this.stopPoll();
-    },
 
-    didInsertElement: function() {
 
-    	
-    	this.startPoll();
-    	
-    	this.startMentions();
 
+	startUI: function() {
   		if(this.get('anchor')) {
   			Ember.run.later(function(){
   				var top = $('#leaveComment').offset().top - 100;
@@ -85,14 +92,29 @@ export default Ember.Component.extend( PaginateMixin,{
 		    }, 300);
   		}
 
-		this.makeModel();
-
   		if(this.get('reply')) {
   			var model = this.get('model');
   			var txt = "Hi @" + this.get('reply') +" ...";
   			model.set('comment', txt);
   			this.set('showSubmitCommentButton', true);
   		}		
+
+
+		Ember.$(this.get('element')).find('textarea').keypress(function(e){
+
+			$(e.currentTarget).css('outline', 0);
+
+			if( e.currentTarget.value ){
+				_this.set('showSubmitCommentButton', true);
+			}else{
+				_this.set('showSubmitCommentButton', false);
+			}
+		});
+	},
+
+
+	startPagination: function() {
+
 
 		//Pagination:	
 		this.set('paginateQuery', {
@@ -114,6 +136,11 @@ export default Ember.Component.extend( PaginateMixin,{
 		//Set Content.
 		this.paginateMore()
 
+	},
+
+
+
+	startFiter: function() {
 		//The Filter. 
 		var _this = this;
 		var filter = store.filter('comment', function(result) {
@@ -128,21 +155,10 @@ export default Ember.Component.extend( PaginateMixin,{
 		filter.then(function(results){
 			_this.set('pagedContent', results);	
 		});
-
-
-		Ember.$(this.get('element')).find('textarea').keypress(function(e){
-
-			$(e.currentTarget).css('outline', 0);
-
-			if( e.currentTarget.value ){
-				_this.set('showSubmitCommentButton', true);
-			}else{
-				_this.set('showSubmitCommentButton', false);
-			}
-		});
-
-
 	},
+
+
+
 
 	startMentions: function() {
 		var _this = this;

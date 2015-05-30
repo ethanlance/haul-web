@@ -2,7 +2,7 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 import PaginateMixin from '../mixins/paginate';
-export default Ember.Component.extend( PaginateMixin,{
+export default Ember.Component.extend( PaginateMixin, {
 
     currentUserIdBinding: "session.currentUser.id",
     
@@ -10,7 +10,7 @@ export default Ember.Component.extend( PaginateMixin,{
 
     storeName: 'user-mentions-list',  
     
-    limit:5,
+    limit: 5,
 
     hasMoreBinding: 'paginateHasMore',
 
@@ -18,43 +18,50 @@ export default Ember.Component.extend( PaginateMixin,{
     
     sortedResults: Ember.computed.sort('pagedContent', 'commentsSorting'),
 
-    pollInterval: 3000,
 
+    /**
+        Start it up!
+    **/
+    setup: function() {
+        if(!this.get('currentUserId')){ return; }
+
+        //Check if user has a seller account.
+        //this.doesUserNeedSellerAccount();
+                
+        this.startFilter();
+
+        this.resize();
+
+        this.startWatchResize();
+   
+    }.on('didInsertElement').observes('currentUserId'),
+
+
+
+
+
+
+    /**
+        Resizing...
+    **/
     resize: function() {
         var height = window.outerHeight;
         var h = height - 150;
         $('.message-center').css("height", h);   
     },
 
-    
-    schedulePoll: function(f) {
+    startWatchResize: function() {
         var _this = this;
-        return Ember.run.later(this, function(){
-            f.apply(this);
-        }, _this.ENV.pollingTime.mention_count );
-    },
-
-    onPoll: function() {
-        var _this = this;
-        var store = this.container.lookup('store:main');
-        store.find(_this.get('storeName'), {user_id: this.get('currentUserId')})
-        .then(function() {
-            _this.set('runPoll', _this.schedulePoll(_this.get('onPoll')));
+        $( window ).resize(function() {
+            Ember.run.bind(_this, _this.resize());
         });
     },
 
-    stopPoll: function() {
-        Ember.run.cancel(this.get('runPoll'));
-    },
-
-    startPoll: function() {
-        this.set('runPoll', this.schedulePoll(this.get('onPoll')));
-    },
 
 
-    willDestroyElement: function() {
-        this.stopPoll();
-    },
+
+
+
 
 
 
@@ -84,6 +91,12 @@ export default Ember.Component.extend( PaginateMixin,{
         );
     },
 
+
+
+
+    /**
+        Start up the filter which automatically updates.
+    **/
     startFilter: function() {
         
         var _this = this;
@@ -99,33 +112,11 @@ export default Ember.Component.extend( PaginateMixin,{
                 return result;
             }
         });
-        
-        //filter.then(function(results){
-        _this.set('pagedContent', filter); 
-        //});
+         
+        _this.set('pagedContent', filter);  
     },
 
 
-    didInsertElement: function() {
-        if(!this.get('currentUserId')){ return; }
-
-        //Check if user has a seller account.
-        //this.doesUserNeedSellerAccount();
-
-        this.startPoll();
-                
-        //Get last X mentions.
-        this.startFilter();
-
-        this.resize();
-
-        //RESIZE:
-        var _this = this;
-        $( window ).resize(function() {
-            Ember.run.bind(_this, _this.resize());
-        });
-   
-    }.observes('currentUserId'),
 
 
 
@@ -169,35 +160,98 @@ export default Ember.Component.extend( PaginateMixin,{
     },
 
 
+
+
+
+    redirectToPost: function(mention) {
+        var _this = this;
+        //Start by finding out who this is is from:
+        mention.get('user')
+        .then(function(user){
+
+            _this.set('fromUsername', user.get('username'));
+            
+            //Find info about the post.
+            return mention.get('subject');
+        })
+
+        .then(function(post){
+            
+            var post_username = post.get('user.username'); 
+            var username_who_made_comment = _this.get('fromUsername');
+
+            _this.sendAction('goToRoute', 'profile.post', post_username, post, {
+                queryParams: {anchor: "comments", reply: username_who_made_comment}
+            }); 
+
+        });
+    },
+
+
+    redirectToUser: function(mention) {
+        var _this = this;
+        
+        //Start by finding out who this is is from:
+        var subject_id = mention.get('subject_id');
+
+        var userIds = subject_id.split("_");
+        var fromUserId;
+
+        if( this.get('currentUserId') !== userIds[0]) {
+            fromUserId = userIds[0];
+        }else{
+            fromUserId = userIds[1];
+        }
+
+        var store = this.container.lookup('store:main');
+        store.find('user', fromUserId)
+        .then(function(user){
+
+            _this.set('fromUsername', user.get('username'));
+            
+            return;
+        })
+
+        .then(function(post){ 
+            _this.sendAction('goToRoute', 'profile.dm', _this.get('fromUsername') );              
+        });
+    },
+
+
+    redirectToTransaction: function(mention) {
+        var _this = this;
+        _this.sendAction('goToRoute', 'settings.sales', mention.get('subject_id') );              
+    },
+
+    redirectToMessage: function(mention) {
+
+        var objectType = mention.get('subject_type');
+
+
+        //Find out what type of message this is:
+        //ie posts, transactions, usertousers
+        if( objectType === "posts" ){
+
+            this.redirectToPost( mention );
+
+        }else if( objectType === "usertousers") {
+
+            this.redirectToUser( mention );
+
+        }else if( objectType === "transactions") {
+
+            this.redirectToTransaction( mention );
+
+        }
+
+        this.markMentionAsRead(mention);
+
+    },
+
     actions: {
+
         doReply: function(mention) {
-            this.markMentionAsRead(mention);
-
-            //var username = mention.subject.user.username
-            var _this = this;
-            var post = mention.post;
-
-            //Find username of the commenter
-            mention.get('user')
-            .then(function(user){
-
-                _this.set('username_who_made_comment', user.get('username'));
-                
-                //Find info about the post.
-                return mention.get('subject');
-            })
-            .then(function(post){
-                
-                var post = post;
-                var post_username = post.get('user.username'); 
-                var username_who_made_comment = _this.get('username_who_made_comment');
-
-                _this.sendAction('goToRoute', 'profile.post', post_username, post, {
-                    queryParams: {anchor:"comments", reply:username_who_made_comment}
-                });             
-            });
-
-
+            this.redirectToMessage(mention);
         },
     }
 
