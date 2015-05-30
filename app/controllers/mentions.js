@@ -188,12 +188,12 @@ export default Ember.ObjectController.extend(PaginateMixin, {
 
 
 		//Find out what type of message this is:
-		//ie posts, transactions, usertousers
+		//ie posts, transactions, users
 		if( objectType === "posts" ){
 
 			this.redirectToPost( mention );
 
-		}else if( objectType === "usertousers") {
+		}else if( objectType === "users") {
 
 			this.redirectToUser( mention );
 
