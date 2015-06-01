@@ -3,6 +3,8 @@
 	width:100px;
 	height:100px;
 	border-radius: 50%;
+	vertical-align: inherit !important;
+
 
 	&.default-user{
 		border:1px solid #eee;
