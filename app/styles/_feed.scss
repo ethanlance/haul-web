@@ -99,10 +99,11 @@
 		color: #F76664;
 
 		.profile-image{
-			width: 20px;
-			height: 20px;
+			display:inline;
+			width: 30px;
+			height: 30px;
 			.glyphicon-user{
-				font-size:20px;
+				display:none;
 			}
 		}
 
