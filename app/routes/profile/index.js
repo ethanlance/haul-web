@@ -1,6 +1,7 @@
 import ApplicationRoute from './../application';
 import config from '../../config/environment';
-export default Ember.Route.extend({
+import ResetScrollMixin from '../../mixins/resetscroll';
+export default Ember.Route.extend(ResetScrollMixin,{
 
 	limit: config.APP.paginationLimit.posts,
 
