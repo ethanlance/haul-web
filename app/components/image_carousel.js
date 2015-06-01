@@ -30,7 +30,7 @@ export default Ember.Component.extend({
 		var _this = this;
 		// at least one item must have the active class, so we set the first here, and the class will be added by class binding
 		this.get('content').then(function(results) { 
-
+console.log("BOOM", results);
 			var imageCount = 0;
 			var i = 0;
 			results.forEach(function(image){ 

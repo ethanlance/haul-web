@@ -140,9 +140,10 @@ export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 
 
 
-	startFiter: function() {
+	startFilter: function() {
 		//The Filter. 
 		var _this = this;
+		var store = this.container.lookup('store:main'); 
 		var filter = store.filter('comment', function(result) {
 			if(result.id && (result.get('object_id') === _this.get('objectId'))) {
 				
