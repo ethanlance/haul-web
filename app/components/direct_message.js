@@ -86,13 +86,13 @@ export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 
 	/**
 		What object/type is this conversation about
-		ie: transactionId/transactions  or userIds/usertousers
+		ie: transactionId/transactions  or userIds/users
 	**/
 	startObject: function() {
 
 		//To and From can talk to eachother.		
 		//What are we talking about?  
-		// ie: is this a DM regarding a 'transaction' or 'user2user'?
+		// ie: is this a DM regarding a 'transaction' or 'user'?
 		if( this.get('regardingType') && this.get('regardingId') ){
 
 			this.set('objectId', this.get('regardingId'));
@@ -100,9 +100,9 @@ export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 			
 		} else {
 
-			//Assume it's a user2user
+			//Assume it's a user DM
 			this.set('objectId', this.makeUserKey( this.get('toUserId'), this.get('currentUserId') ));
-			this.set('objectType', "usertousers");
+			this.set('objectType', "users");
 
 		}
 
