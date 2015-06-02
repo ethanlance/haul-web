@@ -49,7 +49,7 @@ export default Ember.Component.extend({
 			_this.set('posts', posts);
 		});
 
-	}.observes('post'),
+	}.observes('post.id'),
 
 
 	findHashTags: function(body) {
