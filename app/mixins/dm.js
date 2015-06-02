@@ -35,11 +35,10 @@ export default Ember.Mixin.create({
 			.then(function(){
 				
 				//Save & fail/succeed silently.
-				if( _this.get('isSpam') ){
-					return;
-				} else {
+				if( !_this.get('isSpam') ){
 					return _this.saveDm(toId, fromId, message)
 				}
+				return;
 					
 			});
 		})	
@@ -53,6 +52,11 @@ export default Ember.Mixin.create({
 
 	},
 
+
+	/**
+		Key is the combination of the userIds.  
+		Highest value id first.
+	**/
 	makeUserKey: function(to, from){
 		var key;
 		if( to > from ) {
@@ -63,6 +67,10 @@ export default Ember.Mixin.create({
 		return key;
 	},
 
+
+	/**
+		Save the DM
+	**/
 	saveDm: function(toId, fromId, message) {
 		//Prepare our model data.
 		var store = this.container.lookup('store:main');
@@ -75,6 +83,13 @@ export default Ember.Mixin.create({
 		return model.save();
 	},
 
+
+
+
+	/**
+		If this message has been saved within the last X times
+		then raise a isSpam flag.
+	**/
 	spamCheck: function(toId, fromId, message) {
 		var _this = this;
 		var store = this.container.lookup('store:main');

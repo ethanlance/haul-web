@@ -1,9 +1,13 @@
 import Ember from 'ember';
-export default Ember.ObjectController.extend({
+import FollowMixin from '../mixins/follow';
+export default Ember.ObjectController.extend( FollowMixin, {
+	
 	showErrorMessage: false,
+	
 	errorMessage: null,
 
 	turnOffNav:true,
+
 	currentUserIdBinding: 'session.currentUser.id',
 
 	saveUsername: function() {
@@ -17,9 +21,19 @@ export default Ember.ObjectController.extend({
 		.then(function(){
 			return model.save();
 		})
+
+		//Set the username on the user's session.
 		.then(function(){
 			_this.set('session.currentUser.username', username);
 		})
+
+		//Now have this user automatically follow Haul.
+		.then(function() {
+			//Follow Mixin
+			//Now have this user follow @haul
+			_this.setFollowByUsername('haul');
+		})
+
 		.then(
 			function() { 
 				_this.set('isProcessing', false);

@@ -1,9 +1,10 @@
 import Ember from 'ember';
 import config from '../config/environment';
 import ErrorMixin from '../mixins/server_error';
+import FollowMixin from '../mixins/follow';
 var Config = config.APP;
 
-export default Ember.ObjectController.extend(ErrorMixin,{
+export default Ember.ObjectController.extend( ErrorMixin, FollowMixin, {
 
 	needs: ['login'],
 
@@ -110,12 +111,20 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 			
 			})
 
+
 			//Set the session.
 			.then(function(user){
 				return _this.store.find("user", _this.get('user_id'))
 				.then(function(user){
 					var session = _this.get('session');
 					var currentUser = session.get('currentUser');
+
+					var username = currentUser.get('username');
+
+					//Follow Mixin
+					//Now have this user follow @haul
+					_this.setFollowByUsername('haul');
+
 					return;
 				});
 			})

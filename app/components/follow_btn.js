@@ -1,34 +1,6 @@
 import Ember from 'ember';
-
-import DirectMessageMixin from '../mixins/dm';
-export default Ember.Component.extend( DirectMessageMixin, {
-	
-	userFollows: false,
-	
-	buttonText: Ember.computed('userFollows', function() {
-		if( this.get('userFollows') ) {
-			return "following";
-		} else {
-			return "follow";
-		}
-	}), 
-	
-	userFollowsRecord: false,
-	
-	currentUserBinding: "session.currentUser",
-	
-	currentUserIdBinding: "session.currentUser.id",
-
-	followUser: null,
-	
-	followType: 'users',
-	
-	followIdBinding: 'followUser.id',
-
-	followKey: Ember.computed('followId', 'followType', function() {
-		return this.get('followId') + "-" + this.get('followType');
-	}),
-	
+import FollowMixin from '../mixins/follow';
+export default Ember.Component.extend( FollowMixin, {
 
 	currentUserNotEmpty: Ember.computed.notEmpty('currentUserId'),
 
@@ -47,6 +19,14 @@ export default Ember.Component.extend( DirectMessageMixin, {
 	readyToStart: Ember.computed.and('notFollowingSelf', 'idsAreReady'),
 
 	showButton: Ember.computed.bool('readyToStart'),
+
+	buttonText: Ember.computed('userFollows', function() {
+		if( this.get('userFollows') ) {
+			return "following";
+		} else {
+			return "follow";
+		}
+	}), 
 
  	startComponent: function() {
 
@@ -79,68 +59,9 @@ export default Ember.Component.extend( DirectMessageMixin, {
 
 		buttonClick: function() { 
 
-			var _this = this;
+			//Mixin:
+			this.setFollow();
 
-			var record = this.get('userFollowsRecord'); 
-
-			var store = this.container.lookup("store:main");
-
-			var follow;
-			
-			if( record ){
-				record.deleteRecord();
-				follow = false;
-			} else {
-				record = store.createRecord('follow', {
-					user_id: this.get('currentUserId'),
-					ref_id: this.get('followId'), 
-					ref_type: this.get('followType')
-				});
-				
-				follow = true;
-			}
-
-			record.save()
-			.then(function(){
-
-				//FOLLOW:
-				if( follow ){
-					_this.set('userFollowsRecord', record);
-					_this.set('userFollows', true); 
-
-					_this.sendFollowingDm(_this.get('followId'));
-
-				//UNFOLLOW
-				}else{
-					_this.set('userFollowsRecord', false);
-					_this.set('userFollows', false); 
-				}
-  				
-				store.find('user-following-count', _this.get('currentUserId'))
-				.then(function(r){
-					r.reload();
-				});
-
-				store.find('user-following-list', {
-					user_id:_this.get('currentUserId')
-				});
-
-				//Reload the user's feed.
-				store.find('feed', {
-					user_id: _this.get('currentUserId'),
-					doNotPaginate: true
-				});
-
-				store.find('user-followers-count', _this.get('followId'))
-				.then(function(r){
-					r.reload();
-				});
-
-				store.find('user-followers-list', {user_id:_this.get('followId')});
-				
-			}, function(error){
-				console.log("Error", error);
-			});
 		}
 	}
 });
