@@ -41,7 +41,7 @@ export default Ember.Component.extend({
 				}
 				Ember.set(image, 'isActive', false);
 
-				if(i==1){
+				if(i==0){
 					Ember.set(image, 'isActive', true);					
 				}
 
