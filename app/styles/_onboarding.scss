@@ -3,15 +3,46 @@
 	margin-bottom: 30px;
 	display:inline-block;
 
+
+
 	.user {
 		width:130px;
+
+		overflow: hidden;
+
 		display:inline-block;
 		padding:0px;
-		padding-bottom:15px;
+		padding-bottom:20px;
+
+		margin-bottom:10px;
 		margin:0px; 
 		text-align:center;
 		vertical-align: top;
 
+		.user-wrap{
+			padding-bottom: 5px;
+
+			.profile-image {
+				width:60px;
+				height:60px;
+				border-radius: 50%;
+				.glyphicon-user{
+					font-size:60px;
+				}
+			}
+
+			.name{
+				font-family: 'Open Sans', sans-serif;
+				font-size: 12px;
+				// /font-weight: 600;
+			}
+
+
+			.username{
+				font-family: 'Open Sans', sans-serif;
+				font-size: 12px;
+			}
+		}
 	}
 
 	.btn-follow{
@@ -26,13 +57,5 @@
 	  	text-transform: uppercase;
 	}
 
-	.profile-image {
-		margin-bottom:10px;
-		width:60px;
-		height:60px;
-		border-radius: 50%;
-		.glyphicon-user{
-			font-size:60px;
-		}
-	}
+
 }

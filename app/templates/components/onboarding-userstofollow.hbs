@@ -6,10 +6,13 @@
 		{{#if user}}
 			<div class="user">
 				
+				<div class="user-wrap">
 				{{#link-to 'profile' user.username }}
 					{{make-icon icon=user.icon class="display-inline-block"}}
-					<div>@{{user.username}}</div>
+					<div class="name">{{user.get_display_name}}</div>
+					{{!-- <div class="username">{{user.username}}</div> --}}
 				{{/link-to}}
+				</div>
 
 				
 				
