@@ -1,5 +1,7 @@
 import Ember from 'ember';
-export default Ember.Component.extend({
+
+import DirectMessageMixin from '../mixins/dm';
+export default Ember.Component.extend( DirectMessageMixin, {
 	
 	userFollows: false,
 	
@@ -101,14 +103,19 @@ export default Ember.Component.extend({
 			record.save()
 			.then(function(){
 
+				//FOLLOW:
 				if( follow ){
 					_this.set('userFollowsRecord', record);
 					_this.set('userFollows', true); 
+
+					_this.sendFollowingDm(_this.get('followId'));
+
+				//UNFOLLOW
 				}else{
 					_this.set('userFollowsRecord', false);
 					_this.set('userFollows', false); 
 				}
-  
+  				
 				store.find('user-following-count', _this.get('currentUserId'))
 				.then(function(r){
 					r.reload();

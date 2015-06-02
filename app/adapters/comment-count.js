@@ -14,7 +14,7 @@ export default ApplicationAdapter.extend({
 			type = "posts";
 		}
 
-		var url = this.get('host') + '/'+ type +'/' + id + '/comments/total';
+		var url = this.get('host') + '/comments/'+ type +'/' + id + '/total';
 		return this.ajax(url, 'GET');
 	}
 });

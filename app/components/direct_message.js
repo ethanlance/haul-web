@@ -129,7 +129,7 @@ export default Ember.Component.extend( PaginateMixin, PollingMixin, {
     	var _this = this;
     	var store = this.container.lookup('store:main');
     	
-    	store.find('comment', {
+    	store.find(_this.get('storeName'), {
     		object_id: _this.get('objectId'),
     		object_type: _this.get('objectType'),
     		limit: this.get('limit'),
@@ -170,7 +170,7 @@ export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 		//The Filter. 
 		var _this = this;
 		var store = this.container.lookup('store:main');
-		var filter = store.filter('comment', function(result) {
+		var filter = store.filter(_this.get('storeName'), function(result) {
 			if(result.id && (result.get('object_id') === _this.get('objectId'))) {
 				return result;
 			}

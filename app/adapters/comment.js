@@ -8,8 +8,8 @@ export default ApplicationAdapter.extend({
 	}.property(), 
 
 	findQuery: function(store, type, query) {
-		var url = this.get('host') + "/"+ query.object_type +"/" + query.object_id + "/comments";
-		url = this.queryBuilder(query, url);
+		var url = this.get('host') + "/comments/"+ query.object_type +"/" + query.object_id;
+		url = this.queryBuilder(query, url);		
 		return this.ajax(url, 'GET');
 	},
 
