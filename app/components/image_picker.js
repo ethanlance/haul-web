@@ -66,7 +66,7 @@ export default Ember.Component.extend({
 			
 			previewTemplate: '<li class="image-wrapper dz-preview dz-file-preview"><div class="dz-details"><img data-dz-thumbnail /></div><div class="alert-wrapper hide"><div class="alert alert-danger" role="alert">Upload Failed</div></div><div class="progress-wrapper"><div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 10%" data-dz-uploadprogress><span class="sr-only">10% Complete</span></div></div></div><button data-dz-remove type="button" class="btn btn-default btn-sm btn-delete"><span class="glyphicon glyphicon-trash"></span></button></li>',
 			
-			previewsContainer:  '.sortable', //".dropzone-preview",
+			previewsContainer:  '#uploading', //".dropzone-preview",
 			
 			thumbnailWidth: 100,
 			
@@ -186,7 +186,7 @@ export default Ember.Component.extend({
 
 					var message = response.message;
 					var alert;
-					if( message.indexOf("maximum allowed") !== -1){
+					if( message && message.indexOf("maximum allowed") !== -1){
 						alert = "Sorry, your image is too large.";
 					}else{
 						alert = "Image upload error.";
