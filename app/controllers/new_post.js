@@ -43,15 +43,15 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	slideOpened: 'slide_one',
 
 	//Is this item for sale on Haul? Or is it just a post to an external link.
-	isOnsite: true,
-	isForSaleOffsite: false,
+	isOnsite: false,
+	isForSaleOffsite: true,
 
 
 	reset: function() {
 		this.set('show', 'one');
 		this.set('selectedImages', []);
 		this.set('showErrors', false); 
-		this.set('isOnsite', true);
+		this.set('isOnsite', false);
 	},
 
 	showChanged: function() {
