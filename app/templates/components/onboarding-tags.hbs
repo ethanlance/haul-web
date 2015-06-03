@@ -1,9 +1,9 @@
 <div class="onboarding-pod">
 	
-	<h1>Tags</h1>
+	<span class="rail-header"><h2>Tags</h2></span>
 	
 	{{#each tag in tags}}
-		<button {{action 'tagClick' tag}} class="btn btn-default">#{{tag}}</button>
+		<button {{action 'tagClick' tag}} class="tag-cloud">#{{tag}}</button>
 	{{/each}}
 
 </div>
