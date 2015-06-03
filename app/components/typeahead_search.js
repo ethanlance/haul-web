@@ -238,6 +238,31 @@ export default Ember.Component.extend({
 		    
 		});
 
+		$('.btn-search input').keypress(function(e) {
+
+
+    		if(e.which == 13) {
+
+				var qt = $('input.tt-input').val();
+				var type = _this.get('searchType');
+				var key;
+				
+				console.log("INPUT VAL " , qt);
+
+
+    			key = type + "_" + qt;
+			
+				if( type === "tag" ) {
+
+					key =  "hashtag_" + qt;
+				}
+
+				console.log("QkeyT", key)
+					
+				_this.sendAction('goToRoute', 'search', {queryParams: {q:key}});	
+    		}
+		});
+
 		this.changeSearchType('tag');
 	},
 
