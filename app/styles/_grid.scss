@@ -11,10 +11,10 @@
 
 	border: 1px solid green;
 	width: 40%;
-	width: 300px;
+	width: 230px;
 
 	margin-left:auto;
-	margin-right:auto;
+	margin-right:10px;
 
 	padding-right:-15px;
 	margin-bottom:40px;
@@ -33,8 +33,8 @@
 		position:relative;
 		display: block; 
 		font-family: $primary-font;
-		font-weight: 300;
-		font-size: 14px;
+		font-weight: 500;
+		font-size: 13px;
 		color: #555555;
 		line-height: 1.4;
 		margin-bottom: 20px;
@@ -56,7 +56,7 @@
 			vertical-align: top;
 			position:absolute;
 		    margin: auto; 
-		    min-width: 300px;
+		    min-width: 230px;
 		    width: 100%;
 		}
 
@@ -187,7 +187,7 @@
 				.name a{
 					font-family: $primary-font;
 					font-weight: 600;
-					font-size: 12px;
+					font-size: 10px;
 					color: #333;
 					transition: all 0.2s ease;
 					//text-transform: uppercase;
@@ -198,7 +198,7 @@
 				}
 				.username a{
 					font-family: $primary-font;
-					font-size: 11px;
+					font-size: 10px;
 					font-weight: 100;
 					color: #999;
 					font-style: italic;
@@ -206,7 +206,7 @@
 				}
 				.moment{ 
 					font-family: $primary-font;
-					font-size: 10px;
+					font-size: 9px;
 					color: #cccccc;
 					text-transform: lowercase;
 				}

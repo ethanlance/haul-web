@@ -6,7 +6,7 @@
 
 
 	.user {
-		width:130px;
+		width:100px;
 
 		overflow: hidden;
 
@@ -23,36 +23,36 @@
 			padding-bottom: 5px;
 
 			.profile-image {
-				width:60px;
-				height:60px;
+				width:40px;
+				height:40px;
 				border-radius: 50%;
 				.glyphicon-user{
-					font-size:60px;
+					font-size:40px;
 				}
 			}
 
 			.name{
-				font-family: 'Open Sans', sans-serif;
-				font-size: 12px;
+				font-family: $primary-font;
+				font-size: 11px;
 				// /font-weight: 600;
 			}
 
 
 			.username{
-				font-family: 'Open Sans', sans-serif;
-				font-size: 12px;
+				font-family: $primary-font;
+				font-size: 11px;
 			}
 		}
 	}
 
 	.btn-follow{
-		font-family: 'Open Sans', sans-serif;
+		font-family: $primary-font;
 	  	color: #7e7e7e;
 	  	margin-top: 0px;
 	  	background-color: inherit;
 	  	border: 1px solid #dfdfdf;
-	  	padding: 10px 20px 10px 20px;
-	  	font-size: 11px;
+	  	padding: 2px 4px 2px 4px;
+	  	font-size: 9px;
 	  	transition: all 0.2s ease;
 	  	text-transform: uppercase;
 	}
