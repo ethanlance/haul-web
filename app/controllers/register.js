@@ -121,14 +121,20 @@ export default Ember.ObjectController.extend( ErrorMixin, FollowMixin, {
 
 					var username = currentUser.get('username');
 
-					//Follow Mixin
-					//Now have this user follow @haul
-					_this.setFollowByUsername('haul');
-
+					
 					return;
 				});
 			})
 
+			//Follow Haul
+			.then(function(){
+				//Follow Mixin
+				//Now have this user follow @haul
+				var followerId = 		_this.get('user_id'); 
+				var followerUsername = 	_this.get('username');
+				return _this.setFollowByUsername('haul', followerId, followerUsername);
+
+			})
 
 			.then(
 				function success(){

@@ -26,14 +26,22 @@ export default Ember.Mixin.create( DirectMessageMixin, {
 		This was created to auto follow @haul (and other haul users)
 		by the new currentUser at signup.
 	**/
-	setFollowByUsername: function(username){
+	setFollowByUsername: function(username, currentUserId, currentUsername){
+
+		//In case the session has not been updated yet.
+		//We can pass in the  currentUserId, currentUsername
+		if( currentUserId ) {
+			this.set('currentUserId', currentUserId);
+			this.set('currentUsername', currentUsername);
+		}
+
 		var _this = this;
 		var store = this.container.lookup("store:main");
 		return store.find('user', username)
 		.then(function(haul){
 			//Follow Mixin
 			_this.set('followId', haul.id);
-			_this.setFollow();
+			return _this.setFollow();
 		});
 	},
 
@@ -63,7 +71,7 @@ export default Ember.Mixin.create( DirectMessageMixin, {
 			follow = true;
 		}
 
-		record.save()
+		return record.save()
 		.then(function(){
 
 			//FOLLOW:
