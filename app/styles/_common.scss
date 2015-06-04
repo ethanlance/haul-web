@@ -395,3 +395,38 @@ a.editorial {
 	top:59px;
 	z-index: 30000;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.haul-words {
+
+	a {
+		font-weight: 300;
+		color: $primary-color;
+		transition: all 0.2s ease;
+	}
+
+	a:hover {
+		border-bottom: 1px dashed;
+		text-decoration: none;
+	}	
+
+}
