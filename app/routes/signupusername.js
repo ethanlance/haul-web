@@ -10,7 +10,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		return this.store.createRecord('username');
 	},
 	renderTemplate: function() {
-		this.render('layouts/header_anon', {
+		this.render('layouts/header_deadend', {
 			into: 'application',
 			outlet: 'header'
 		});

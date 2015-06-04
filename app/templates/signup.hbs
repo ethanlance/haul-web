@@ -52,7 +52,7 @@
 							{{ladda-btn 
 								name='Sign up with Facebook'
 								btnClasses='btn btn-block btn-facebook ladda-button'
-								btnClick='facebookSignup'
+								btnClick='facebookLogin'
 								spin=isProcessingFacebook
 							}}
  
@@ -75,7 +75,7 @@
 	            		{{#form-for model}}
 
 						  	<div class="form-group"> 
-					      		{{input model.email placeholder="Your email address" label="false"}}
+					      		{{input email placeholder="Your email address" label="false"}}
 					      	</div> 
 
 							<div class="form-group">

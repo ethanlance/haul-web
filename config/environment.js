@@ -93,7 +93,7 @@ module.exports = function(environment) {
 		ENV.APP.Server.CLIENT_TOKEN = "client_5eed07b8d71cf26f6df6566cf705adaa";
 			
 		
-		ENV.APP.Server.FACEBOOK_APP_ID = "443672575768207";
+		ENV.APP.Server.FACEBOOK_APP_ID = "616663165135813";
 
 		ENV.APP.pollingTime = {
 			comments: 10000,

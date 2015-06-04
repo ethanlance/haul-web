@@ -25,10 +25,25 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	error409: false,
 	
 	isProcessingFacebook: false, 
+
+	isProcessingSignup: false,
 	
 	isProcessingLogin: false,
+
+	emailRegistrationRequested: false,	
 	
-	model:null,
+	isProcessingSubmit: false,
+	
+	content: null,
+	
+	model: {},
+
+	//Hide API Errors when changes are made to email field.
+	emailChanged: (function() {	
+		this.set('error', false);
+		this.set('error409', false);
+	}).observes('email'),
+
 
 	start: function() {
 		
@@ -47,6 +62,8 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 		this.set('error409', false);
 		this.set('isProcessingFacebook', false);
 		this.set('isProcessingLogin', false);
+		this.set('emailRegistrationRequested', false);
+		this.set('isProcessingSignup', false);
 	},
 
 	authenticate: function(api, type, data) {
@@ -71,7 +88,22 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 		});
 	},
 
+	createUserByEmail: function(data) {
+		
+		//Flag:
+		data['action'] = 'email-register';
 
+		//Pass params email/password to it.
+		return Ember.$.ajax({
+			url: this.get('host') + '/users/email',
+			type: 'post',
+			data: data,
+			headers: {
+				Authorization: 'Bearer ' + this.client_token
+			},
+			dataType: 'json'
+		});
+	}, 
 
 	actions: {
 
@@ -167,6 +199,34 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 						}
 
 					} 
+				}
+			);
+		},
+
+		emailSignup: function() { 
+			this.set('isProcessingSubmit', true);
+
+			//Get the following from user submitted form.
+			var data = this.getProperties('email');	
+			var _this = this;
+			
+	 		//Validate Modal.
+			_this.createUserByEmail(data)
+			.then(
+				function() {
+					_this.set('isProcessingSubmit', false); 
+					_this.set('emailRegistrationRequested', true);
+				},
+				function(error) {
+					_this.set('isProcessingSignup', false);
+					_this.set('showErrors', true);
+
+					if( error.status === 409){
+						_this.set('error409', true);
+					}else{
+						_this.set('error', true);
+					}
+					_this.handleServerError(error);
 				}
 			);
 		},

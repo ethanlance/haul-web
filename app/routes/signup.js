@@ -6,7 +6,7 @@ export default Ember.Route.extend(AnonMixin, {
 		return "Signup On Haul";
 	}.property(),	
 
-	controllerName: 'signup',
+	controllerName: 'login',
 
 	beforeModel: function(transition) {
         this._super(transition);
