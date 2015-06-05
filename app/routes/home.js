@@ -17,13 +17,7 @@ export default Ember.Route.extend( {
 			this.transitionTo('discover');	
 		}
 
-		return this.store.filter('feed', function(result){
-			if( _this.get('session') && _this.get('session.user_id')) {
-				//if(result.get('user_id') === _this.get('session.user_id') ){
-					return result	
-				//}
-			}
-		});
+		return this.store.find('feed', {user_id: _this.get('session.user_id') });
 	},
 	
 	setupController: function(controller, model) {
