@@ -13,7 +13,7 @@
 			{{!-- FIXED LEFT --}}
 			<div class="haul-fixed-left">
 
-				<div class="haul-fixed-content  padding-top">
+				<div class="haul-fixed-content  padding-top margin-right">
 					{{#if isProfileOwner}}
 					 	{{#link-to 'settings.profile'}}
 						<button class="btn-edit-post">
@@ -86,12 +86,10 @@
 				{{!-- MY POSTS --}}
 				{{!-- MY POSTS --}}
 				{{!-- MY POSTS --}}
-				{{!-- MY POSTS --}}
-				<div class="text-center">
+				{{!-- MY POSTS --}} 
 				{{#each post in sortedContent}}
 					{{partial 'grid_post'}}	
-				{{/each}} 
-				</div>
+				{{/each}}  
 				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 					<i class="fa fa-circle-o-notch fa-spin"></i>
 				{{/infinite-scroll}}
