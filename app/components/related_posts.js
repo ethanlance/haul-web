@@ -58,7 +58,7 @@ export default Ember.Component.extend({
    		tmp.innerHTML = body;
    		body = tmp.textContent || tmp.innerText || "";
 		
-		var words = body.split(" ");
+		var words = body.toLowerCase().split(" ");
 		var match,hashtag;
 		var wordHash = [];
 		words.forEach(function(word){
@@ -68,16 +68,19 @@ export default Ember.Component.extend({
 			if( match) {
 				hashtag = word.split('#')[1];
 		  		if( hashtag !== 'undefined' && hashtag !== undefined ){
-				   word = hashtag;
+		  			hashtag = hashtag.replace(/^[^a-z\d]*|[^a-z\d]*$/gi, '');
+		  			wordHash.push(hashtag);
 		  		}
-		  		wordHash.push(word);
 			}
 
 			
 		});
 
 		//Turn the tags into a string.
+		wordHash = _.uniq(wordHash);
 		var tags = wordHash.join(',');
+
+
 
 		return tags;
 	}
