@@ -361,8 +361,20 @@ label:empty[for="nav-trigger"] {
 
 .haul-fixed-right {
  	float: right;
+  	
+ 	//WIDE
   	width: 204px;
  	margin-left: -204px;
+
+ 	@media (max-width: 700px) {
+  		width: 300px;
+ 		margin-left: -300px;
+ 	}
+
+ 	@media (max-width: 350px) {
+  		width: 275px;
+ 		margin-left: -275px;
+ 	}
 }
 
 .nav-trigger-right {
@@ -383,13 +395,6 @@ label[for="nav-trigger-right"] {
   	background-size: contain;
 
 	top: 20px;
-
-	/*phone*/
-	@media (max-width: 350px) {
-		height: 10px;
-  		width: 10px;
-  		right: 5px;
-	}
 }
 
 label:empty[for="nav-trigger-right"] {
@@ -403,12 +408,30 @@ label:empty[for="nav-trigger-right"] {
 }
 
 .nav-trigger-right:checked + label {
-  right: 305px;
+ 	right: 305px;
+
+	@media (max-width: 700px) {
+  		right: 325px;
+ 	}
+
+ 	@media (max-width: 350px) {
+  		right: 295px;
+ 	}
 }
 
 .nav-trigger-right:checked ~ .haul-fluid-left {
-  right: 300px;
-  border-right: 1px solid #eee;
+
+  	right: 300px;
+
+	@media (max-width: 700px) {
+		border-right: 1px solid #eee;
+  		right: 320px;
+ 	}
+
+ 	@media (max-width: 350px) {
+ 		border-right: 1px solid #eee;
+  		right: 290px;
+ 	}
 }
 
 

@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 
 			var id = "nav-trigger-right";
 
-			$('#'+id).prop('checked', false);
+			//$('#'+id).prop('checked', false);
 
 		});
 	}
