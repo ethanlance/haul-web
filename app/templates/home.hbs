@@ -1,22 +1,26 @@
 {{preserve-scroll currentScrollPos=currentScrollPos}}
 
-<div class="container-fluid">
+<div class="container-fluid no-margins">
+	<div class="haul-content">
 
-	<div class="haul-wrapper2">
+		<div class="hamburger-right-side">
 
-		<div class="haul-content2">
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{hamburger-menu}}
+			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
+			<label for="hamburger-trigger" class="with-page-header"></label>
+		
 
-			<div class="col-left2"> 
-
-
-
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{#if showOnboarding}}
-					{{onboarding-userstofollow}}
-				{{/if}}
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			<div class="haul-fluid-left" data-info="haul-fluid-left"> 
+				
+				<div class="haul-feed-content">
 				
 
 				{{!-- FEED --}}
@@ -34,15 +38,23 @@
 
 
 	 
+				</div> 
 			</div>
 
-			<div class="col-right2 grey">
-				<div class="message-center">
 
-					<h2>NOTIFICATIONS</h2>
+
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			<div class="haul-fixed-right">
+				<div class="haul-menu-content">
+					<div class="message-center">
+
+						<h2>NOTIFICATIONS</h2>
 					
-					{{mention-pod goToRoute="goToRoute"}}
-
+						{{mention-pod goToRoute="goToRoute"}}
+					</div>
 				</div>
 			</div>
 		</div> 

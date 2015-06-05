@@ -1,90 +1,103 @@
 {{preserve-scroll currentScrollPos=currentScrollPos}}
 
 <div class="container ">
-
 	<div class="haul-content">
+		<div class="hamburger-left-side">
 
-	{{#unless hideLeftColumn}}
-		<div class="haul-col-menu">
+		{{#unless hideLeftColumn}}
 
-			<div class="haul-menu-content">
-				{{#if isProfileOwner}}
-				 	{{#link-to 'settings.profile'}}
-					<button class="btn-edit-post">
-						<i class="fa fa-cog"></i> Edit Your Bio
-					</button><br/>
-					{{/link-to}}
-				{{/if}}
 
-				{{#if user.bio}}
-					{{sanitize-html user.bio "comment" ENV}}
-				{{else}}
+			{{!-- FIXED LEFT --}}
+			{{!-- FIXED LEFT --}}
+			{{!-- FIXED LEFT --}}
+			{{!-- FIXED LEFT --}}
+			<div class="haul-fixed-left">
+
+				<div class="haul-fixed-content">
+					{{#if isProfileOwner}}
+					 	{{#link-to 'settings.profile'}}
+						<button class="btn-edit-post">
+							<i class="fa fa-cog"></i> Edit Your Bio
+						</button><br/>
+						{{/link-to}}
+					{{/if}}
+
+					{{#if user.bio}}
+						{{sanitize-html user.bio "comment" ENV}}
+					{{else}}
+
+						
+						<p>
+							<strong>Bio</strong>
+							<br/>
+
+							{{#if isProfileOwner}}You have{{else}}@{{user.username}} has{{/if}} not written a bio yet
+						</p>
 
 					
-					<p>
-						<strong>Bio</strong>
-						<br/>
+					
+					{{/if}}
 
-						{{#if isProfileOwner}}You have{{else}}@{{user.username}} has{{/if}} not written a bio yet
-					</p>
-
-				
-				
-				{{/if}}
-
-			</div>
-		</div>
-
-
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{hamburger-menu name="nav-trigger-left"}}
-		<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-		<label for="nav-trigger" class="with-page-header"></label>
-	{{/unless}}
-
-		<div class="haul-col-content"> 
-			<div class="haul-content">
-
-
-			{{!-- EMPTY --}}
-			{{!-- EMPTY --}}
-			{{!-- EMPTY --}}
-			{{!-- EMPTY --}}
-			{{#unless pagedContent }}
-				<div class="padding-top text-center font-weak">
-				{{#if isProfileOwner}} 
-					You have not posted anything yet.
-				{{else}}
-					@{{user.username}} has no posts.
-				{{/if}}
-					<p class="text-center">
-						<span class="glyphicon glyphicon-flash sad-heart"></span>
-					</p>
 				</div>
-			{{/unless}}
-
-
-
-			{{!-- MY POSTS --}}
-			{{!-- MY POSTS --}}
-			{{!-- MY POSTS --}}
-			{{!-- MY POSTS --}}
-			{{!-- MY POSTS --}}
-			{{!-- MY POSTS --}}
-			<div class="text-center">
-			{{#each post in sortedContent}}
-				{{partial 'grid_post'}}	
-			{{/each}} 
 			</div>
-			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-				<i class="fa fa-circle-o-notch fa-spin"></i>
-			{{/infinite-scroll}}
 
-		</div>
+
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}	
+			{{hamburger-menu}}
+			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
+			<label for="hamburger-trigger" class="with-page-header"></label>
+		
+		{{/unless}}
+
+
+			{{!-- FLUID RIGHT --}}
+			{{!-- FLUID RIGHT --}}
+			{{!-- FLUID RIGHT --}}
+			{{!-- FLUID RIGHT --}}
+			<div class="haul-fluid-right"> 
+				<div class="haul-fluid-content center-on-collapse">
+
+
+				{{!-- EMPTY --}}
+				{{!-- EMPTY --}}
+				{{!-- EMPTY --}}
+				{{!-- EMPTY --}}
+				{{#unless pagedContent }}
+					<div class="padding-top text-center font-weak">
+					{{#if isProfileOwner}} 
+						You have not posted anything yet.
+					{{else}}
+						@{{user.username}} has no posts.
+					{{/if}}
+						<p class="text-center">
+							<span class="glyphicon glyphicon-flash sad-heart"></span>
+						</p>
+					</div>
+				{{/unless}}
+
+
+
+				{{!-- MY POSTS --}}
+				{{!-- MY POSTS --}}
+				{{!-- MY POSTS --}}
+				{{!-- MY POSTS --}}
+				{{!-- MY POSTS --}}
+				{{!-- MY POSTS --}}
+				<div class="text-center">
+				{{#each post in sortedContent}}
+					{{partial 'grid_post'}}	
+				{{/each}} 
+				</div>
+				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+					<i class="fa fa-circle-o-notch fa-spin"></i>
+				{{/infinite-scroll}}
+
+			</div>
+			</div>
 		</div>
 	</div>
 </div>

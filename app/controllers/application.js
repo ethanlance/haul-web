@@ -8,7 +8,7 @@ var ApplicationController = Ember.ObjectController.extend({
 	
 	start: function() {
 		$(function() {
-		    FastClick.attach(document.body);
+		   // FastClick.attach(document.body);
 		});
 	}.on('init'),
 }); 

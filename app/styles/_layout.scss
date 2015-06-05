@@ -8,6 +8,18 @@
 	text-align: center;
 }
 
+.container-fluid {
+	position:relative;
+
+	@media (max-width: 700px) {
+
+		&.no-margins{
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+	}
+}
+
 .container {
 	position:relative;
 
@@ -17,7 +29,7 @@
 		max-width: 100%;
 		&.no-margins{
 			padding-left:0;
-			padding-right:0;
+			padding-right:0; 
 		}
 	}
 }
@@ -85,241 +97,6 @@
 
 
 
-.haul-wrapper2 {
-	width: 100%;  
-	margin:0;
-	padding: 0;
-	margin-left: auto;
-	margin-right: auto; 
-	text-align: center;
-	//background-color: #EDEEE8;
-}
-
-.haul-content2 {
-
-	position:relative;
-	
-	margin:0;
-	padding:0;
-
-	display: inline-block;
-	width: 100%;
-	max-width: $haul-max-width;
-	text-align: left;	
-
-	.col-left2 {
-		//background-color: #F5F6F1;
-		margin:0;
-		padding:0;		
-		padding-top: 30px;
-		width: 65%;
-		max-width: 690px;
-		float:left;
-		display:inline-block;
-
-		@media (max-width: 990px) {
-			padding-right: 20px;
-		}
-
-		//Collapse Right Col
-		@media (max-width: 750px) {
-			width: 100%;
-			margin-bottom: 30px;
-		} 
-
-		//iphone
-		@media (max-width: 400px) {
-			margin-bottom: 30px;
-		}
-
-		&.no-margin{
-			margin-left:0;
-			margin-right:0;
-			padding-left:0;
-			padding-right:0;
-		}
-	}
-
-
-
-	.col-right2 {
-		top:160;
-		right:0;
-		position: fixed;
-		z-index: $z-index-fixed-column;
-
-
-		margin:0;
-		padding:0; 
-		width: 31%;
-		min-height: 200px;
-		//max-width: 310px; 
-
-		height: 100%;
-
-		// float:right;
-		// display:block;
-		overflow: none !important;
-		//border:1px solid green;
-
-		//background-color: #EDEEE8;
-
-		//Collapse Right Col
-		@media (max-width: 750px) {
-			padding-top:50px;
-			width: 100%;
-			float:none;
-			display:table;
-			margin:auto; 
-			z-index: 0;
-			height: auto;
-			position: relative;
-		}
-
-		//iphone
-		@media (max-width: 400px) {
-			margin-top: 30px;
-		}
-	}
-
-	.col-right2-container {
-		width: 300px;
-		height: 90%;
-		overflow: scroll;
-		padding-bottom:160px;
-		margin-bottom:30px;
-	}
-}
-
-
-
-//Left Menu, Rigt content.
-//Menu colapses on small browser, and opens with hamburger
-
-.haul-col-menu { 
-
-
-	float:left;
-
-	&.rigth{
-		float:right;
-	}
-
-	width: 300px;
-	position:relative;
-	display:inline;
-	
-	padding-top:30px;
-
-	.haul-menu-content {
-		padding-left: 15px;
-		padding-right: 15px;
-		width:300px;
-		position:absolute;
-
-		
-	  	.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
-	  		z-index:1;
-	  	}
-	}
-
-	@media (max-width: 810px) {
-		width: 100%;
-		height: 100%;
-	}
-	
-
-	.list-group {
-		margin-top:30px;
-		@media (max-width: 810px) {
-			margin-top:0px;
-		}
-	}
-
-
-	.list-group-item:first-child, .list-group-item:last-child {
-		border-radius: 0;
-	}
-
-	a {
-  		width: 200px;
-	}	 
-}
-
-.haul-col-content {
-	padding: 15px;
-	padding-left: 30px;
-	padding-top:30px;
-  	min-height: 10000px;
-	background-color: $primary-background-color;
-  	position: relative;
-  	margin:0;
-  	z-index: 1;
-
-	overflow: hidden;
-
-	@media (max-width: 810px) {
-  		top: 0;
-  		bottom: 100%;
-  		left: 0;
-		float:none;
-		display:block;
-  		min-width: 100%;
-  		max-width: 100%;
-  		height:100%;
-  		//padding-left: 75px;
-  	}
-
-}
-
-
-.nav-trigger {
-	position: absolute;
-	clip: rect(0, 0, 0, 0);
-}
-
-label[for="nav-trigger"] {
-  	//@media (max-width: 810px) {
-	  	position: absolute;
-	  	left: 15px; 
-	  	z-index: 2;
-	  	
-	  	/* non-critical apperance styles */
-	  	height: 20px;
-	  	width: 20px;
-	  	cursor: pointer;
-	  	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
-	  	background-size: contain;
-
-
-		top: 20px;
-	//}
-	
-	
-}
-
-label:empty[for="nav-trigger"] {
-	@media (max-width: 810px) {
-		display:block !important;
-	}
-}
-
-/* Make the Magic Happen */
-.nav-trigger + label, .haul-col-content {
-  transition: left 0.2s;
-}
-
-.nav-trigger:checked + label {
-  left: 320px;
-}
-
-.nav-trigger:checked ~ .haul-col-content {
-  left: 300px;
-  border-left: 1px solid #eee;
-}
-
-
-
 
 
 
@@ -336,115 +113,251 @@ label:empty[for="nav-trigger"] {
 	
 **/
 
+.hamburger-right-side{
+	.haul-fluid-left{
+		width: 100%;
+		float:left;
+		right: 0;
 
-.haul-fluid-left{
-	width: 100%;
-	float:left;
-	right: 0;
-
-	@media (max-width: 700px) {
-		position:relative;
-		z-index: 1;
-	}
-
-	.haul-fluid-content {
-		padding-top:30px;
-		margin-right: 204px;
-		background-color: $primary-background-color;
 
 		@media (max-width: 700px) {
-			margin-right:0;
-			padding-right: 45px;
+			position:relative;
+			z-index: 1;
+			padding-left: 30px;
+			padding-right: 30px;
+			background-color: $primary-background-color;
+		}
+
+		.haul-fluid-content {
+			margin-right: 204px;
+			background-color: $primary-background-color;
+
+			@media (max-width: 700px) {
+				margin-right:0;
+			}
 		}
 	}
-}
 
-.haul-fixed-right {
- 	float: right;
-  	
- 	//WIDE
-  	width: 204px;
- 	margin-left: -204px;
+	.haul-fixed-right {
+	 	float: right;
+	  	
+	 	//WIDE
+	  	width: 204px;
+	 	margin-left: -204px;
 
- 	@media (max-width: 700px) {
-  		width: 300px;
- 		margin-left: -300px;
- 	}
+	 	@media (max-width: 700px) {
+	  		width: 300px;
+	 		margin-left: -300px;
+	 	}
 
- 	@media (max-width: 350px) {
-  		width: 275px;
- 		margin-left: -275px;
- 	}
-}
+	 	@media (max-width: 350px) {
+	  		width: 275px;
+	 		margin-left: -275px;
+	 	}
 
-.nav-trigger-right {
-	position: absolute;
-	clip: rect(0, 0, 0, 0);
-}
+	 	.haul-fixed-content {
+	 	}
+	}
 
-label[for="nav-trigger-right"] {
-  	
-  	position: absolute;
-  	right: 15px; 
-  	z-index: 2;
-  	
-  	height: 20px;
-  	width: 20px;
-  	cursor: pointer;
-  	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
-  	background-size: contain;
+	.hamburger {
+		position: absolute;
+		clip: rect(0, 0, 0, 0);
+	}
 
-	top: 20px;
-}
+	label[for="hamburger-trigger"] {
+	  	
+	  	position: absolute;
+	  	right: 15px; 
+	  	z-index: 2;
+	  	
+	  	height: 20px;
+	  	width: 20px;
+	  	cursor: pointer;
+	  	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
+	  	background-size: contain;
 
-label:empty[for="nav-trigger-right"] {
-	@media (max-width: 700px) {
-		display:block !important;
+		top: 20px;
+	}
+
+	label:empty[for="hamburger-trigger"] {
+		@media (max-width: 700px) {
+			display:block !important;
+		}
+	}
+	/* Make the Magic Happen */
+	.hamburger + label, .haul-fluid-left {
+	  transition: right 0.2s;
+	}
+
+	.hamburger:checked + label {
+	 	right: 305px;
+
+		@media (max-width: 700px) {
+	  		right: 335px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		right: 295px;
+	 	}
+	}
+
+	.hamburger:checked ~ .haul-fluid-left {
+
+	  	right: 300px;
+
+		@media (max-width: 700px) {
+			border-right: 1px solid #eee;
+	  		right: 320px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	 		border-right: 1px solid #eee;
+	  		right: 290px;
+	 	}
 	}
 }
-/* Make the Magic Happen */
-.nav-trigger-right + label, .haul-fluid-left {
-  transition: right 0.2s;
+
+
+
+
+
+
+/**
+	
+
+	Fixed Left / Fluid Right
+
+	-- Where the left column colapses in small browsers.
+	-- A Hamburger menu appears and will slide the hidden left column to the right --->
+
+	
+**/
+
+.hamburger-left-side{
+
+	.haul-fluid-right{
+		left: 0;
+		background-color: white; //need this or the haul-fixed-left col will show when collapsed
+		position:relative;
+		overflow: hidden;
+
+		@media (max-width: 700px) {
+			position:absolute;
+			padding-left: 30px;
+			padding-right: 30px;
+			background-color: $primary-background-color;
+			width: 100%; //important
+		}
+
+		.haul-fluid-content {
+			background-color: $primary-background-color;
+
+			@media (max-width: 700px) {
+				margin-right:0;
+			}
+		}
+	}
+
+	.haul-fixed-left {
+	 	float: left;
+	  	
+	 	//WIDE
+	  	width: 204px;
+
+	 	@media (max-width: 700px) {
+	  		width: 300px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		width: 275px;
+	 	}
+
+	 	.haul-fixed-content {
+	 	}
+	}
+
+	
+
+	.hamburger {
+		position: absolute;
+		clip: rect(0, 0, 0, 0);
+	}
+
+
+	//Hamburger
+	label[for="hamburger-trigger"] {
+	  	
+	  	position: absolute;
+	  	left: 10px; 
+	  	z-index: 2;
+	  	
+	  	height: 20px;
+	  	width: 20px;
+	  	cursor: pointer;
+	  	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect width='30' height='6'/><rect y='24' width='30' height='6'/><rect y='12' width='30' height='6'/></svg>");
+	  	background-size: contain;
+
+		top: 20px;
+	}
+
+	label:empty[for="hamburger-trigger"] {
+		@media (max-width: 700px) {
+			display:block !important;
+		}
+	}
+	/* Make the Magic Happen */
+	.hamburger + label, .haul-fluid-right {
+	  	transition: left 0.2s;
+	}
+
+	//Slide the Hamgburger ->
+	.hamburger:checked + label {
+	 	left: 305px;
+
+		@media (max-width: 700px) {
+	  		left: 325px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		left: 295px;
+	 	}
+	}
+
+	//Slide the right div ->
+	.hamburger:checked ~ .haul-fluid-right {
+
+	  	left: 300px;
+
+		@media (max-width: 700px) {
+			border-left: 1px solid #eee;
+	  		left: 320px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	 		border-left: 1px solid #eee;
+	  		left: 290px;
+	 	}
+	}
 }
 
-.nav-trigger-right:checked + label {
- 	right: 305px;
 
-	@media (max-width: 700px) {
-  		right: 325px;
- 	}
 
- 	@media (max-width: 350px) {
-  		right: 295px;
- 	}
+
+
+//About and Settings pages.
+.haul-fixed-left {
+	//nav menu
+	.list-group {
+		margin-top: 20px;
+		margin-right:15px;	
+	}
+
+	.list-group-item.active{
+		z-index: 0;
+	}
 }
 
-.nav-trigger-right:checked ~ .haul-fluid-left {
-
-  	right: 300px;
-
-	@media (max-width: 700px) {
-		border-right: 1px solid #eee;
-  		right: 320px;
- 	}
-
- 	@media (max-width: 350px) {
- 		border-right: 1px solid #eee;
-  		right: 290px;
- 	}
+.haul-feed-content {
+	max-width: 690px;
+	padding-top:40px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

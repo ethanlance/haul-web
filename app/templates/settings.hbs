@@ -1,20 +1,41 @@
-<div class="container no-margins">
-
+<div class="container">
 	<div class="haul-content">
+		<div class="hamburger-left-side">
 
-		<div class="haul-col-menu"> 
-			<div class="haul-menu-content">
-				{{outlet 'nav'}}
+
+
+			{{!-- FIXED LEFT --}}
+			{{!-- FIXED LEFT --}}
+			{{!-- FIXED LEFT --}}
+			{{!-- FIXED LEFT --}}
+			<div class="haul-fixed-left">
+				<div class="haul-fixed-content">
+					{{outlet 'nav'}}
+				</div>
 			</div>
-		</div>
 
-		<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-		<label for="nav-trigger"></label>
 
-		<div class="haul-col-content">
+	
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}	
+			{{hamburger-menu}}
+			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
+			<label for="hamburger-trigger" class="with-page-header"></label>
 
-			<div class="haul-content">
-				{{outlet}}
+		
+			{{!-- FLUID RIGHT --}}
+			{{!-- FLUID RIGHT --}}
+			{{!-- FLUID RIGHT --}}
+			{{!-- FLUID RIGHT --}}
+			<div class="haul-fluid-right"> 
+				<div class="haul-fluid-content">
+					<div class="margin-left">
+						{{outlet}}
+					</div>
+				</div>
 			</div>
 
 		</div>

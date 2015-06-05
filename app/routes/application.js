@@ -23,7 +23,6 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
   	//IMPORTANT!
   	//If user is logged in but does not have a username, redirect them to the username form.
   	currentUserChanged: function() {
-  		console.log("PING", this.get('currentUserId'))
   		if( this.get('currentUserId') && !this.get('currentUsername')) {
   			this.transitionTo('signupusername');
   		}
@@ -75,18 +74,18 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 			We catch it here and determine where best to redirect this user.
 		*/
 		sessionAuthenticationSucceeded: function() {
-console.log("HERE?")
+
 			if( this.get('doNotRedirectOnAuthentication') ){
 				return;
 			}
-console.log("THERE?")
+
 			var _this = this;
 			var currentUserId = this.get('session.user_id');
 
 			this.store.find('user', currentUserId)
 			.then(function(user) {			
 
-console.log("LOGGED IN USER IS ", user.get('username'))
+
 
 				if( !Ember.isEmpty(user.get('username'))){
 					var attemptedTransition = _this.get('session.attemptedTransition'); 

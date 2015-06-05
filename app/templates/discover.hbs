@@ -15,69 +15,76 @@
 </header>
 
 
+
+
+
+
+
+
 <div class="container no-margins">
 	<div class="haul-content">
 
+		<div class="hamburger-right-side">
 
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-		{{hamburger-menu name="nav-trigger-right"}}
-		<input type="checkbox" id="nav-trigger-right" class="nav-trigger-right" />
-		<label for="nav-trigger-right" class="with-page-header"></label>
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{hamburger-menu}}
+			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
+			<label for="hamburger-trigger" class="with-page-header"></label>
+		
 
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			<div class="haul-fluid-left" data-info="haul-fluid-left"> 
+				
+				<div class="haul-fluid-content center-on-collapse padding-top">
 
-		{{!-- FLUID LEFT --}}
-		{{!-- FLUID LEFT --}}
-		{{!-- FLUID LEFT --}}
-		{{!-- FLUID LEFT --}}
-		<div class="haul-fluid-left" data-info="haul-fluid-left"> 
-			
-			<div class="haul-fluid-content center-on-collapse">
-
-		 
-				{{!-- //CONTENT --}}
-				{{#each like in sortedContent}}
-					{{#with like.post as post }}
+			 
+					{{!-- //CONTENT --}}
+					{{#each like in sortedContent}}
+						{{#with like.post as post }}
+							
+							{{render '_grid_post' post}}
 						
-						{{render '_grid_post' post}}
+						{{/with}}
+					{{/each}}
+
 					
-					{{/with}}
-				{{/each}}
-
-				
-				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-					<i class="fa fa-circle-o-notch fa-spin"></i>
-				{{/infinite-scroll}}
-				
-		    
-			</div> 
-		</div>
+					{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+						<i class="fa fa-circle-o-notch fa-spin"></i>
+					{{/infinite-scroll}}
+					
+			    
+				</div> 
+			</div>
 
 
 
-		{{!-- FIXED RIGHT --}}
-		{{!-- FIXED RIGHT --}}
-		{{!-- FIXED RIGHT --}}
-		{{!-- FIXED RIGHT --}}
-		<div class="haul-fixed-right with-page-header">
-			<div class="haul-menu-content">
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			<div class="haul-fixed-right with-page-header">
+				<div class="haul-menu-content">
 
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{onboarding-userstofollow}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{onboarding-userstofollow}}
 
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{!-- ONBOARDING --}}
-				{{onboarding-tags goToRoute='goToRoute'}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{onboarding-tags goToRoute='goToRoute'}}
 
+				</div>
 			</div>
 		</div>
-		
 	</div>
 </div>

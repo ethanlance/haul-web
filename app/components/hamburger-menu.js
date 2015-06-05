@@ -10,10 +10,13 @@ export default Ember.Component.extend({
 
 		$( window ).resize(function() {
 
-			var id = "nav-trigger-right";
-
-			//$('#'+id).prop('checked', false);
-
+			//If the window is wider than 700px then make
+			//sure the hamburger hidden checkbox is unchecked.
+			//otherwise the fluid column will be jacked.
+			if( window.innerWidth >= 701 ){
+				$('#hamburger-trigger').prop('checked', false);	
+			}
 		});
+
 	}
 });

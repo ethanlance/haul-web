@@ -24,8 +24,6 @@ export default Ember.Component.extend({
 
 		w = w + _this.get('spread');
 
-
-
 		if( !_this.get('turnLoadingBarOn') ) {
 
 			$(el).css('width', '0%').attr("aria-valuenow", 0); 
