@@ -361,3 +361,81 @@
 	max-width: 690px;
 	padding-top:40px;
 }
+
+
+
+/**
+	Product Page has special sizing for left/right cols.
+**/
+.hamburger-right-side.haul-product-page {
+
+	.haul-fluid-left{
+
+		width: 65%;
+		@media (max-width: 700px) {
+			width:100%;
+		}
+
+		max-width: 690px;
+		padding-right: 20px;
+
+		.haul-fluid-content {
+			margin-right: 310px;
+			background-color: $primary-background-color;
+			@media (max-width: 700px) {
+				margin-right:0;
+			}
+		}	
+	}
+
+	.haul-fixed-right{
+		
+		margin-top:30px;
+		width:35%;
+		@media (max-width: 700px) {
+			width:100%;
+		}
+		max-width: 310px;
+
+		margin-left: -310px;
+
+	 	@media (max-width: 700px) {
+	  		width: 300px;
+	 		//margin-left: -300px;
+	 		margin-right:10px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		width: 275px;
+	 		//margin-left: -275px;
+	 		margin-right:10px;
+	 	}
+	}
+
+	.hamburger:checked + label {
+	 	right: 305px;
+
+		@media (max-width: 700px) {
+	  		right: 335px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		right: 295px;
+	 	}
+	}
+
+	.hamburger:checked ~ .haul-fluid-left {
+
+	  	right: 300px;
+
+		@media (max-width: 700px) {
+			border-right: 1px solid #eee;
+	  		right: 320px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	 		border-right: 1px solid #eee;
+	  		right: 290px;
+	 	}
+	}
+}

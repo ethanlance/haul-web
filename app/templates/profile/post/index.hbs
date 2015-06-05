@@ -1,8 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid no-margins">
+	<div class="haul-content">
 
-	<div class="haul-wrapper ">
-
-		<div class="haul-content">
+		<div class="hamburger-right-side haul-product-page">
 
 			{{#unless model}}
 					
@@ -13,143 +12,152 @@
 			
 
 
-			{{!-- LEFT COLUMN --}}
-			{{!-- LEFT COLUMN --}}
-			{{!-- LEFT COLUMN --}}
-			{{!-- LEFT COLUMN --}}
-			<div class="col-left">
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
+			{{hamburger-menu}}
+			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
+			<label for="hamburger-trigger" class="with-page-header"></label>
+		
 
-				<div class="product-post">
-					
-					<div class="moment">{{format-moment created_at}}</div>
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			{{!-- FLUID LEFT --}}
+			<div class="haul-fluid-left" data-info="haul-fluid-left"> 
+				
+				<div class="haul-feed-content">
+
+					<div class="product-post">
+						
+						<div class="moment">{{format-moment created_at}}</div>
 
 
-					<h1 class="subject">{{ subject }}
-						{{#if isProfileOwner}}
-						 	{{#link-to 'profile.post.edit_post' user.username this }}
-							<button class="btn-edit-post">
-								<i class="fa fa-cog"></i> Edit Post
-							</button>
-							{{/link-to}}
+						<h1 class="subject">{{ subject }}
+							{{#if isProfileOwner}}
+							 	{{#link-to 'profile.post.edit_post' user.username this }}
+								<button class="btn-edit-post">
+									<i class="fa fa-cog"></i> Edit Post
+								</button>
+								{{/link-to}}
+							{{/if}}
+							
+						</h1>
+
+						{{!-- //REPOST --}}
+						{{#if repost_id}}
+						<div class="repost-citations">
+							<i class="fa fa-retweet"></i>
+							{{make-icon icon=repost_user.icon}}
+							<span class="name">{{repost_user.get_display_name}}'s </span>
+							<span class="title"> original post
+								{{#link-to 'profile.post'
+									repost.user.username 
+									repost.post_id 
+									repost.post_slug}}{{repost.subject}}{{/link-to}}
+							</span>
+						</div>
 						{{/if}}
+
 						
-					</h1>
 
-					{{!-- //REPOST --}}
-					{{#if repost_id}}
-					<div class="repost-citations">
-						<i class="fa fa-retweet"></i>
-						{{make-icon icon=repost_user.icon}}
-						<span class="name">{{repost_user.get_display_name}}'s </span>
-						<span class="title"> original post
-							{{#link-to 'profile.post'
-								repost.user.username 
-								repost.post_id 
-								repost.post_slug}}{{repost.subject}}{{/link-to}}
-						</span>
-					</div>
-					{{/if}}
+						{{!-- EDITORIAL --}}
+						<div class="editorial">
+							{{#unless model.postHasImage}}
+								{{#if image.large}}<img {{bind-attr src=image.large}}/>{{/if}}
+							{{/unless}}
 
-					
-
-					{{!-- EDITORIAL --}}
-					<div class="editorial">
-						{{#unless model.postHasImage}}
-							{{#if image.large}}<img {{bind-attr src=image.large}}/>{{/if}}
-						{{/unless}}
-
-						{{sanitizehtml-andtag  body  "editorial"  ENV }}
-						
-					</div>
-					<div class="social-buttons">
-						<div class="internal-social-buttons">
+							{{sanitizehtml-andtag  body  "editorial"  ENV }}
 							
-							{{like-btn post=this openModal='openModal' class="display-inline"}}
-							 	
-						 	{{comment-btn post=this class="display-inline" }}
-
-						 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
-
 						</div>
+						<div class="social-buttons">
+							<div class="internal-social-buttons">
+								
+								{{like-btn post=this openModal='openModal' class="display-inline"}}
+								 	
+							 	{{comment-btn post=this class="display-inline" }}
 
-						<div class="external-social-buttons">
-							{{social-btns post=this}}
-						</div>
-					</div>
-					
-
-
-
-
-					{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
-					{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
-					{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
-					{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
-					{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
-					<div class="row padding-top comments-section">
-						<div class="col-md-12 col-sm-12 col-xs-12">
-							
-
-							{{!-- TABS --}}
-							{{!-- TABS --}}
-							{{!-- TABS --}}
-							<div class="comment-section-nav">
-
-								<ul class="nav nav-tabs" role="tablist">
-
-	    							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">{{totalComments}} Comments</a></li>
-
-	    							<li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">{{totalLikes}} Likes</a></li>
-								</ul>
+							 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
 
 							</div>
 
+							<div class="external-social-buttons">
+								{{social-btns post=this}}
+							</div>
+						</div>
+						
 
-							<div class="tab-content">
+
+
+
+						{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+						{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+						{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+						{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+						{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+						<div class="row padding-top comments-section">
+							<div class="col-md-12 col-sm-12 col-xs-12">
 								
 
-								{{!-- COMMENTS PANE --}}
-								{{!-- COMMENTS PANE --}}
-								{{!-- COMMENTS PANE --}}
-								<div class="tab-pane active" id="tab1">
-									{{comment-section 
-										openModal='openModal' 
-										objectId=this.id
-										objectType="posts"
-										anchor=anchor 
-										reply=reply
-										class="display-inline" }}
+								{{!-- TABS --}}
+								{{!-- TABS --}}
+								{{!-- TABS --}}
+								<div class="comment-section-nav">
+
+									<ul class="nav nav-tabs" role="tablist">
+
+		    							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">{{totalComments}} Comments</a></li>
+
+		    							<li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">{{totalLikes}} Likes</a></li>
+									</ul>
+
 								</div>
 
 
-								{{!-- USERS WHO LIKE POST PANE --}}
-								{{!-- USERS WHO LIKE POST PANE --}}
-								{{!-- USERS WHO LIKE POST PANE --}}
-								<div class="tab-pane" id="tab2">
-									{{post-likes post=this}}
-								</div>
+								<div class="tab-content">
+									
 
+									{{!-- COMMENTS PANE --}}
+									{{!-- COMMENTS PANE --}}
+									{{!-- COMMENTS PANE --}}
+									<div class="tab-pane active" id="tab1">
+										{{comment-section 
+											openModal='openModal' 
+											objectId=this.id
+											objectType="posts"
+											anchor=anchor 
+											reply=reply
+											class="display-inline" }}
+									</div>
+
+
+									{{!-- USERS WHO LIKE POST PANE --}}
+									{{!-- USERS WHO LIKE POST PANE --}}
+									{{!-- USERS WHO LIKE POST PANE --}}
+									<div class="tab-pane" id="tab2">
+										{{post-likes post=this}}
+									</div>
+								</div>
 							</div>
-
 						</div>
 					</div>
-
-
 				</div>
-
 			</div>
 
 
 
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			{{!-- FIXED RIGHT --}}
+			<div class="haul-fixed-right">
+				
 
 
 
-			{{!-- RIGHT COLUMN --}}
-			{{!-- RIGHT COLUMN --}}
-			{{!-- RIGHT COLUMN --}}
-			{{!-- RIGHT COLUMN --}}
-			<div class="col-right">
-						
+
+					
 				{{#if isProductOwner }}
 					{{#link-to 'profile.post.edit_product' user.username this }}
 					<button class="btn btn-default btn-edit btn-xs">
