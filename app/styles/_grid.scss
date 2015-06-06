@@ -31,9 +31,10 @@
 	border-bottom: 1px solid #eee;
 	
 	padding: 0px;
-	
+	background-color: #fff;
 	
 	transition: all 0.2s ease;
+	box-shadow: .5px .5px .5px 0px #eee;
 
 	
 	.post-image {
@@ -54,7 +55,7 @@
 
 		padding-bottom:100%;
 		
-		background-color: #eee;
+		background-color: #fff;
 
 		overflow:hidden;
 		vertical-align: top;
@@ -125,8 +126,8 @@
 		.product-title {
 			font-family: $primary-font;
 			color: #fff;
-			font-weight: 300;
-			font-size: 1em;
+			font-weight: 600;
+			font-size: 0.95em;
 			line-height: 1.4;
 
 			height: 18px;
@@ -134,9 +135,10 @@
 		}
 
 		.product-owner{ 
-			font-size: 0.688em;
+			font-size: 0.7em;
 			font-weight: 600;
 			padding-top: 4px;
+			color: rgba(255,255,255,.7);
 
 			.pre-text {
 				font-weight: 300;
@@ -159,8 +161,9 @@
 				font-weight: 100;
 				color: #333;
 				margin-bottom:10px;
+				font-size: 0.95em;
 
-				height: 20px;
+				height: 18px;
 				overflow:hidden;
 
 				:hover {

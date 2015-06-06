@@ -3,8 +3,9 @@
 	//border-bottom: 1px solid #eee;
 	padding: 0px;
 	padding-bottom: 20px;
-	margin-bottom: 50px;
+	margin-bottom: 60px;
 	transition: all 0.2s ease;
+	border-bottom: 1px dashed #eee;
 
 	
 	.post-title {
@@ -89,6 +90,7 @@
 
 		&:hover .product-status{
 			display:inline-block;
+			text-align: center;
 			background-color: rgba(247,92,97,0.8);
 		}
 		
@@ -240,7 +242,7 @@
 
 
 	.post-owner {
-		margin-bottom: 0px;
+		margin-bottom: -14px;
 
 
 		.profile-image{
