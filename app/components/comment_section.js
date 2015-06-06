@@ -83,6 +83,7 @@ export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 
 
 	startUI: function() {
+		var _this = this;
   		if(this.get('anchor')) {
   			Ember.run.later(function(){
   				var top = $('#leaveComment').offset().top - 100;
