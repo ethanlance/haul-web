@@ -21,6 +21,12 @@
 				  		Go to <a {{action 'openModal' 'signup'}}>Sign Up</a></div>
 				  	{{/if}}
 
+		  			{{#if showErrorsFB}}
+				    	<div class="alert">
+					  		{{partial "_server_error"}}
+				    	</div>
+				  	{{/if}} 
+
 					<div class="form-group">
 
 						{{ladda-btn 
