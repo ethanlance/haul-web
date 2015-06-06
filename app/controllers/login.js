@@ -23,6 +23,8 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	error404: false,
 	
 	error409: false,
+
+	showErrorsFB: false,
 	
 	isProcessingFacebook: false, 
 
