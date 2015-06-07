@@ -19,14 +19,14 @@
 				{{#unless pagedContent }}
 					<div class="padding-top text-center font-weak">
 					{{#unless isProfileOwner}}
-						@{{user.username}} doesn't follow anyone yet.
+						<h4 class="prompt-text">{{user.get_display_name}} doesn't follow anyone yet.</h4>
 					{{else}}
-						You don't follow any one yet.
+						<h4 class="prompt-text">You are not following anyone. What are you waiting for?</h4>
 					{{/unless}}
 					</div>
 
 					<p class="text-center padding-top">
-						<span class="glyphicon glyphicon-bookmark sad-heart"></span>
+						<!--<span class="glyphicon glyphicon-bookmark sad-heart"></span>-->
 					</p>
 				{{/unless}}
 

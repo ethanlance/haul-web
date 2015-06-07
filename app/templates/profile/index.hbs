@@ -67,14 +67,14 @@
 				{{!-- EMPTY --}}
 				{{!-- EMPTY --}}
 				{{#unless pagedContent }}
-					<div class="padding-top text-center font-weak">
+					<div class="padding-top text-center">
 					{{#if isProfileOwner}} 
-						You have not posted anything yet.
+						<h4 class="prompt-text">You haven't posted anything yet.</h4>
 					{{else}}
-						@{{user.username}} has no posts.
+						<h4 class="prompt-text">{{user.get_display_name}} has not posted anything yet.</h4>
 					{{/if}}
-						<p class="text-center">
-							<span class="glyphicon glyphicon-flash sad-heart"></span>
+						<p class="text-center" style="margin:0;">
+							<!--<span class="glyphicon glyphicon-flash sad-heart"></span>-->
 						</p>
 					</div>
 				{{/unless}}

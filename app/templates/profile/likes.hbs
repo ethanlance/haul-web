@@ -25,14 +25,14 @@
 				{{#unless pagedContent }} 
 					<div class="padding-top text-center font-weak">
 					{{#unless isProfileOwner}}
-						{{user.username}} hasn't liked anything yet.
+						<h4 class="prompt-text">{{user.get_display_name}} hasn't liked anything yet.</h4>
 					{{else}}
-						You haven't liked anything yet.
+						<h4 class="prompt-text">You haven't liked any posts yet.</h4>
 					{{/unless}}
 					</div>
 
 					<p class="text-center">
-						<span class="glyphicon glyphicon-heart-empty sad-heart"></span>
+						<!--<span class="glyphicon glyphicon-heart-empty sad-heart"></span>-->
 					</p>
 				{{/unless}}
 
