@@ -13,7 +13,7 @@ header.basic {
 	.header-basic{
 		padding:0px;
 		margin:0px; 
-		padding-top:20px;
+		padding-top:14px;
 		width:100%;
 		max-width: $haul-max-width;
 		display: inline-block;
@@ -22,6 +22,15 @@ header.basic {
 			float:left;
 			margin-top:0;
 		}
+
+		h2 {
+			float:left;
+			margin-top:0;
+			font-weight: 800;
+			text-transform: none;
+			letter-spacing: -0.03em;
+		}
+		
 	}
 }
 
@@ -92,16 +101,18 @@ header.profile{
 		transition: all 0.2s ease;
 
 		.name{
-			font-size: 16px;
-			font-weight: 600;
+			font-size: 20px;
+			font-weight: 800;
 			//text-transform: uppercase;
 			display:block;
 			color: #333;
+			letter-spacing: -0.05em;
 		}
 
 		a { 
 			text-decoration: none;
 			transition: all 0.2s ease;
+			color:#333;
 		}
 
 		a:hover {
