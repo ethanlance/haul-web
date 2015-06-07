@@ -16,40 +16,36 @@
 		{{!-- When browser is NOT collapsed --}}
 		<div class="nav-link-wrapper">
 
+			{{#if session.isAuthenticated }}
+			<div class="nav-link home hide-on-small">
+				{{#link-to 'home' }}FEED{{/link-to}}
+			</div>	
+			{{/if}}
 
-			
+			<div class="nav-link">
+				{{#link-to 'discover' }}DISCOVER{{/link-to}}
+			</div>	
 
-			<span class="">
-				{{#if session.isAuthenticated }}
-				<div class="nav-link home hide-on-small">
-					{{#link-to 'home' }}FEED{{/link-to}}
-				</div>	
-				{{/if}}
+			{{#if session.isAuthenticated }}
+			<div class="nav-link hide-on-small">
+				{{#link-to 'profile' session.currentUser.username }}MY POSTS{{/link-to}}
+			</div>	
+			{{/if}}
 
-				<div class="nav-link">
-					{{#link-to 'discover' }}DISCOVER{{/link-to}}
-				</div>	
+			{{#if session.isAuthenticated }}
+			<div class="nav-link hide-on-small">
+				{{#link-to 'mentions' }}
+					{{#if session.currentUser.hasUnreadMentions}}
+						{{mention-count}}
+					{{/if}}NOTIFICATIONS
+				{{/link-to}}
+			</div>	
+			{{/if}}
 
-				{{#if session.isAuthenticated }}
-				<div class="nav-link hide-on-small">
-					{{#link-to 'profile' session.currentUser.username }}MY POSTS{{/link-to}}
-				</div>	
-				{{/if}}
-
-				{{#if session.isAuthenticated }}
-				<div class="nav-link hide-on-small">
-					{{#link-to 'mentions' }}
-						{{#if session.currentUser.hasUnreadMentions}}
-							{{mention-count}}
-						{{/if}}NOTIFICATIONS
-					{{/link-to}}
-				</div>	
-				{{/if}}
-
-				<div {{action 'toggleSearch'}} class="nav-link needsclick">
-					<i class="fa fa-search"></i> SEARCH
-				</div>	
-			</span>
+			<div {{action 'toggleSearch'}} class="nav-link needsclick">
+				<i class="fa fa-search"></i> <span class="hide-on-small">SEARCH</span>
+			</div>	
+		
 		</div>	
 
 		{{#if session.isAuthenticated }}

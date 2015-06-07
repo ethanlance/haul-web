@@ -119,6 +119,7 @@
 		float:left;
 		right: 0;
 		min-height: 1000px;
+		margin-right: -204px;
 
 		@media (max-width: 700px) {
 			position:relative;
@@ -143,7 +144,6 @@
 	  	
 	 	//WIDE
 	  	width: 204px;
-	 	margin-left: 204px;
 
 	 	@media (max-width: 700px) {
 	  		width: 204px;
@@ -367,7 +367,7 @@
 /**
 	Product Page has special sizing for left/right cols.
 **/
-.hamburger-right-side.haul-product-page {
+.hamburger-right-side.col-60-col-30{
 
 	.haul-fluid-left{
 

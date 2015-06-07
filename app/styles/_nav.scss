@@ -110,11 +110,11 @@ nav {
 		}
 
 		/*phone*/
-		@media (max-width: 350px) {
-			width:50px;
-			font-size: 12px;
-			padding-top:30px;
-		}
+		// @media (max-width: 350px) {
+		// 	width:50px;
+		// 	font-size: 12px;
+		// 	padding-top:30px;
+		// }
 	}
 	.logo-nav-img {
 		width:66px;
@@ -144,6 +144,12 @@ nav {
 		margin:0;
 		margin-top: -50px;
 		margin-left: 20px;
+		
+		//PHONE
+		@media (max-width: 700px) {
+			margin-left: 10px;
+		}
+
 		cursor:pointer;
 		transition: all 0.2s ease;
 
