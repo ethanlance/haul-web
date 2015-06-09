@@ -88,11 +88,11 @@
 			text-decoration: none;
 		}
 
-		&:hover .product-status{
-			display:inline-block;
-			text-align: center;
-			background-color: rgba(247,92,97,0.8);
-		}
+		// &:hover .product-status{
+		// 	display:inline-block;
+		// 	text-align: center;
+		// 	background-color: rgba(247,92,97,0.8);
+		// }
 		
 		.post-image {
 			position:relative;
@@ -186,6 +186,7 @@
 		padding-bottom:5px;
 
 		width:100%;
+		min-height: 85px;
 
 		background-color: rgba(0,0,0,.6);
 		color:white;
@@ -197,26 +198,38 @@
 
 		.product-status{
 			display:inline-block;
+			float:left;
 			background-color: rgba(0,0,0,0.5);
 			padding:10px;
-			margin-bottom:4px;
+			//margin-bottom:20px;
 			font-family: 'Arvo';
 			font-weight: 800;
-			font-size: 0.750em;
+			font-size: 1.1em;
 			transition: all 0.4s ease;
 			cursor:pointer;
 			text-transform: uppercase;
+			text-align: center;
+			min-width: 90px;
+
+
+			.product-price {
+				font-family: 'Arvo';
+				font-weight: 800;
+				padding-bottom: 0px;
+				padding-top:5px;
+				font-size: 1.2em;
+			}
+
 		}
 		.product-status:hover{
 			display:inline-block;
 			background-color: rgba(247,92,97,0.8);
 		}
 
-		.product-price {
-			font-family: 'Arvo';
-			font-size: 1.875em;
-			font-weight: 800;
-			padding-bottom: 0px;
+		.product-deets{
+			float:left;
+			margin-left: 10px;
+			margin-top: 25px;
 		}
 
 		.product-title {
@@ -231,7 +244,6 @@
 			font-size: 0.688em;
 			font-weight: 600;
 			margin-bottom: 12px;
-			padding-top: 4px;
 
 			.pre-text {
 				font-weight: 300;
