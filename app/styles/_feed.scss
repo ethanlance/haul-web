@@ -66,6 +66,10 @@
 
 	.post-content {
 
+		&:hover .product-status{
+			display:inline-block;
+			background-color: rgba(247,92,97,0.8);
+		}
 
 		font-family: $primary-font;
 		font-weight: 300;
@@ -87,18 +91,14 @@
 			border-bottom: 1px dashed $primary-color;
 			text-decoration: none;
 		}
-
-		// &:hover .product-status{
-		// 	display:inline-block;
-		// 	text-align: center;
-		// 	background-color: rgba(247,92,97,0.8);
-		// }
+ 
 		
 		.post-image {
 			position:relative;
 			display: block; 
 			//margin-bottom: 20px;
 			
+	 
 
 			img {
 				width: 100%;
@@ -191,10 +191,6 @@
 		background-color: rgba(0,0,0,.6);
 		color:white;
 
-		&:hover > .product-status{
-			display:inline-block;
-			background-color: rgba(247,92,97,0.8);
-		}
 
 		.product-status{
 			display:inline-block;
@@ -221,10 +217,7 @@
 			}
 
 		}
-		.product-status:hover{
-			display:inline-block;
-			background-color: rgba(247,92,97,0.8);
-		}
+
 
 		.product-deets{
 			float:left;
