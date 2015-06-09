@@ -34,7 +34,7 @@ export default Ember.Component.extend({
 			//Now get what @haul likes.
 			return store.find('user-likes-list', { 
 				user_id: user.id, 
-				limit: 10,
+				limit: 20,
 			});
 
 		})
