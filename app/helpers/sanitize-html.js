@@ -22,7 +22,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 
 	html = html.replace(/<div>/g, "<p>");
 	html = html.replace(/<\/div>/g, "</p>");
-	html = html.replace(/\n/g, "<br>");
+	html = html.replace(/\n/g, "<p>");
 
 	var sanitized = sanitize(html, config);
 
