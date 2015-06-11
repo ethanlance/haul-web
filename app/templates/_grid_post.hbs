@@ -3,9 +3,11 @@
 	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 	<div class="post-image">
 			
-		
+		{{#if post.image.square}}
 		{{image-loader src=post.image.square width='230px' height='230px'}}
-		
+		{{else}}
+		{{image-loader src=post.image.large width='230px' height='230px'}}
+		{{/if}}
 
 		<div class="post-image-overlay">
 
