@@ -10,12 +10,12 @@ export default Ember.Component.extend( FollowMixin, {
 
 	currentUserNotEmpty: Ember.computed.notEmpty('currentUserId'),
 
-	followUserNotEmpty: Ember.computed.notEmpty('toId'),
+	toUserNotEmpty: Ember.computed.notEmpty('toId'),
 
-	idsAreReady: Ember.computed.and('followUserNotEmpty', 'currentUserNotEmpty'),
+	idsAreReady: Ember.computed.and('toUserNotEmpty', 'currentUserNotEmpty'),
 
 	notFollowingSelf: Ember.computed("currentUserId", "followId", function() {
-		if( this.get('currentUserId') === this.get('followId') ){
+		if( this.get('currentUserId') === this.get('toId') ){
 			return false;
 		}else{
 			return true;
