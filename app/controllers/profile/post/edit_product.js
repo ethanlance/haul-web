@@ -8,8 +8,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
  	currentPageBinding: 'controllers.profile.currentPage',
 
-	productImagesBinding: "model.product_images",
-
 	productUserIdBinding: "model.product_user.id",
 	
 	product_status_options: null,
@@ -38,6 +36,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	modelIdBinding: 'model.id',
 
+	productImages: null,
+
 	currentModelIdBinding: 'model.id',
 
 	isForSaleOffsite: Ember.computed.equal('model.product_status', "FOR_SALE_OFFSITE"),
@@ -47,6 +47,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		Set all our states back to default.
 	*/
 	reset: function() {
+		console.log("....REST")
 		this.setProperties({
 			showImageUploadError: false,
 			imageUploadError: "",
@@ -54,6 +55,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			showDeleteModal: false,
 			isProcessing: false,
 			isProcessingDelete: false,
+			showErrors: false,
+			productImages: null
 		})
 	},
 
@@ -62,7 +65,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		Observe if the model changes to another model. Controllers are singletons, so we need to let it know
 		when we're editing a new model.
 	*/
-	currentModelIdChanged: function() {
+	startModelChanged: function() {
 		
 		if( this.get('prevModelId') && this.get('prevModelId') !== this.get('currentModelId')  ){
 			this.reset();
@@ -70,20 +73,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		this.set('prevModelId', this.get('currentModelId'));
 
-	}.observes('currentModelId'),
+		this.set('productImages', this.get('model.product_images'));
 
-
-	/*
-		Setup our form.  Anytime the controller detects a new model this reruns.
-	*/
-	setup: function() {
-
-		if( Ember.isEmpty( this.get('currentUserId')) ||  Ember.isEmpty(this.get('modelId'))) { return; }
-		
 		this.setupStatusDropown();
 
-
-	}.observes('modelId', 'currentUserId'),
+	}.observes('currentModelId'),
 
 
 	/*
@@ -116,6 +110,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		Get and set the products images. 
 	*/
 	setSelectedImages: function() {
+
 		if( Ember.isEmpty(this.get('productImages')) ){
 			this.set('selectedImages', []);
 			return;
@@ -135,11 +130,17 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		our list of image_ids.
 	*/
 	imagesIdsChanged: function() {
+
+		if( Ember.isEmpty(this.get('selectedImages')) ){
+			return;
+		}
+
 		var ids = this.get('selectedImages').map(function(image) {
 			return image.get('id');
 		}); 
 		//Set the images on the model.
 		var model = this.get('model');
+
 		model.set('product_image_ids', ids); 
 		model.set('image_id', ids[0]); 
 
@@ -176,10 +177,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set(collectionName, objects);
 	},
 
+
 	addImage: function(image, collectionName) {
 		var collection = this.get(collectionName);
 		collection.pushObject(image);
 	},
+
 
 	toggleImageSelected: function(image) {
 		var selectedImages = this.get('selectedImages'); 
@@ -202,7 +205,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	},
 
 	
-
 	saveProduct: function() {
 		var _this = this;		
 		var model = this.get('model');

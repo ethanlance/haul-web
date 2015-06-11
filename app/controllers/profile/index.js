@@ -26,7 +26,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     notProfileOwner: Ember.computed.not('isProfileOwner'),
 
-    hideLeftColumn: Ember.computed.and('notProfileOwner', 'noBio'),
+    hideBio: Ember.computed.and('notProfileOwner', 'noBio'),
 
 
 	userChanged: function() {

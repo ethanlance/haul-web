@@ -134,6 +134,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('isOnsite', true);
 
 		this.set('selectedImages', []);
+		this.set('productImageIds', []);
+
+		this.set('import_image_urls', []);
+		this.set('import_image_ids', []);
+		this.set('import_images', []);
+
 		this.set('showErrors', false); 
 		this.set('showLinkError');
 		this.set('showImportFailed', false);
@@ -227,12 +233,14 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 	doEditorResize: function() {
 
-		var _this = this;
-		Ember.run.later(function(){
-			_this.set('triggerEditorResize', true);
-		}, 300);
+		if(this.get('slideOpened') === "showPostForm" ) {
+			var _this = this;
+			Ember.run.later(function(){
+				_this.set('triggerEditorResize', true);
+			}, 300);
+		}
 
-	}.observes('step_two'),
+	}.observes('slideOpened'),
 
 
 

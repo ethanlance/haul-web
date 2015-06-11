@@ -26,11 +26,14 @@ export default Ember.Component.extend({
 				str += val + key
 			}
 		});
-		
+
 		this.sendAction('descriptionChange', str);
 	},
 
 	didInsertElement: function(){
+
+
+		this.set('inputs', []);
 
 		var str = this.get('rollupValue');
 
