@@ -14,7 +14,12 @@ export default Ember.Component.extend(ScrolltoMixin, {
 			}
 
 			var store = this.container.lookup('store:main'); 
-			this.sendAction('openModal', 'new-post', store.createRecord('post'));			
+
+			var randomId = Math.floor((Math.random() * 1000) + 1);
+
+			this.sendAction('openModal', 'new-post', store.createRecord('post', {
+				key: randomId
+			}));			
 		}
 	}
 });

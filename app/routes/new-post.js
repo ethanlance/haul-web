@@ -21,6 +21,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 	}.property(),
 
 	model: function() {
-    	return this.store.createRecord('post');
-  }
+		var randomId = Math.floor((Math.random() * 1000) + 1);
+    	return this.store.createRecord('post', {
+    		key: randomId
+    	});
+  	},
+
+  	beforeModel: function() {
+  		console.log("PING");
+  	}
 });

@@ -26,7 +26,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 
 	html = html.replace(/<div>/g, "<p>");
 	html = html.replace(/<\/div>/g, "</p>");
-	html = html.replace(/\n/g, "<br>");
+	html = html.replace(/\n/g, " <br> ");
 
 	//Text links to html links
 	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
@@ -40,7 +40,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 	var match, username, hashtag;
 	var wordHash = [];
 	words.forEach(function(word){
-		
+		console.log('word', word)
 		//MENTIONS
 		match = word.match(/^@.*[^\s]$|^[^@].*,$/);
 		if( match) {
@@ -51,11 +51,12 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 		}
 
 		//HASHTAGS
-		match = word.match(/^\#.*[^\s]$|^[^\#].*,$/);
+		match = word.match(/^#/ig);
 		if( match) {
 			hashtag = word.split('#')[1];
 	  		if( hashtag !== 'undefined' && hashtag !== undefined ){
-			   word = "<a href='/search?q=tag_"+hashtag+"'>#" + hashtag + "</a> ";
+	  		
+			   word = "<a class='tag-cloud' href='/search?q=tag_"+hashtag+"'>#" + hashtag + "</a> ";
 	  		}
 		}
 

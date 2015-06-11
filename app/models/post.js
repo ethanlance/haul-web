@@ -132,10 +132,10 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 		 	presence: true,
 		 	length: { minimum: 2 }
 		},
-		product_description: {
-		 	presence: true,
-		 	length: { maximum: 2000 }
-		},
+		// product_description: {
+		//  	presence: true,
+		//  	length: { maximum: 2000 }
+		// },
 		product_quantity: {
 			numericality: {greaterThan:0, onlyInteger:true},
 		 	presence: true,

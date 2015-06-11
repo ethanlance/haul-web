@@ -1,0 +1,92 @@
+
+	{{!-- PRODUCT TITLE --}}
+	{{!-- PRODUCT TITLE --}}
+	{{!-- PRODUCT TITLE --}}
+	<div class="edit-row border">		
+		<div class="edit-col">
+			<h2>What is this?
+				<small>Name this product. For example "1968 Aston Martin"</small>
+			</h2> 
+
+			{{input-field product_name class="form-control"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_name}}</span>
+			{{/if}}
+
+		</div>
+	</div>
+
+
+
+
+	{{!-- PRODUCT PRICE --}}
+	{{!-- PRODUCT PRICE --}}
+	{{!-- PRODUCT PRICE --}}
+	<div class="edit-row border">
+		<div class="edit-col">
+ 
+			<h2>How much do you want to sell this for?
+			<small>No decimals please</small>
+			</h2>	
+
+			$ {{input-field product_price label="false" class="form-control input-sm"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_price}}</span>
+			{{/if}}
+		</div>
+	</div>
+
+
+	{{!-- SHIPPING AND HANDLING --}}
+	{{!-- SHIPPING AND HANDLING --}}
+	{{!-- SHIPPING AND HANDLING --}}
+	<div class="edit-row border">
+		<div class="edit-col">
+			<h2>Add shipping &amp; handling?
+				<span class="optional">optional</span>
+				<small>We only support flat rates for now. For example "$5"</small>
+			</h2>
+			$ {{input-field product_shipping label="false" class="form-control input-sm"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_shipping}}</span>
+			{{/if}}
+
+		</div>
+	</div>
+
+
+
+
+	{{!-- PRODUCT SPECS --}}
+	{{!-- PRODUCT SPECS --}}
+	{{!-- PRODUCT SPECS --}}
+	<div class="edit-row border">
+		<div class="edit-col">
+			<h2>What are the specs? <span class="optional">optional</span>
+				<small>Add one simple fact per line. For example "Color: Silver"</small>
+			</h2>
+
+			{{description-input descriptionChange='descriptionChange'}}
+
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_description}}</span>
+			{{/if}}
+
+		</div>
+	</div>	
+
+	<div class="edit-row border">
+		<div class="edit-col">
+
+			<h2> 
+				Add a link? 
+				<span class="optional">optional</span>
+			</h2> 
+
+			{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_link}}</span>
+			{{/if}}
+
+		</div>
+	</div>

@@ -11,60 +11,98 @@
 		<div class="text-center edit-wrapper">
 
 
+
+
+
+
+
+
+			{{!-- BUILD A PRODUCT / POST --}}
+			{{!-- BUILD A PRODUCT / POST --}}
+			{{!-- BUILD A PRODUCT / POST --}}
+			{{!-- BUILD A PRODUCT / POST --}}
 			{{#form-for model}}
-			
-				<div {{bind-attr class=":show_one"}}>
-			
-					<div class="edit-row border">
-						<div class="edit-col">
+				
 
-							{{!-- <h2>Post about something for sale</h2> 	  --}}
+	
+
+			{{!-- IMPORT --}}
+			{{!-- IMPORT --}}
+			{{!-- IMPORT --}}
+			{{!-- IMPORT --}} 
+			<div {{bind-attr class=":fade isReady:in:out"}} id="showImportForm">
+				<div class="edit-row">
+					<div class="edit-col"> 
+				
+						<h2> 
+							Import an item from another site?
+						</h2> 
+
+						{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
+
+						{{#if showLinkError}}
+							<span class="has-error help-block">Whoops, a link to the item is super important.</span>
+						{{/if}}
+
+						{{message-typer typeClear=typeClear typeMessage=typeMessage}}
 
 
-							<div class="row">
-							
-
-								<div class="col-md-6 col-sm-6 col-xs-6">
-
-									<div {{action 'toggleOnsite'}} {{bind-attr class=":isOffsite isOnsite::selected"}}>
-
-										
-											Just blogging about it.
-										
-
-									</div>	
-								</div>
+						{{#if showImportFailed}}
+							<span class="has-error help-block">
 								
-								<div class="col-md-6 col-sm-6 col-xs-6">
-									<div {{action 'toggleOnsite'}} {{bind-attr class=":isOnsite isOnsite:selected"}}>
-
-										
-											I am selling this on Haul.
-										
-
-									</div>
-								</div>
-							</div>
+								<p>Bummer! We cannot seem to import that link for you.</p>
+								<p>
+									You can try to import again, or just skip and continue
+									
+								</p>
+							</span>
+						{{/if}}
 
 
-							<div {{bind-attr class=":collapse isForSaleOffsite:in"}} id="isExternal">
-								
-								<h2> 
-									Ok, where can this be purchased?
-								</h2> 
+						{{ladda-btn
+							name='IMPORT'
+							class="display-inline"
+							btnClasses='btn btn-default ladda-button'
+							btnClick='doImport'
+							spin=isProcessingImport
+							dataSpinnerColor="black"
+						}} 
 
-								{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
-								{{#if showLinkError}}
-									<span class="has-error help-block">Whoops, a link to the item is super important.</span>
-								{{/if}}
+ 
+						<button {{action 'doShowTypeOfPostForm'}} {{bind-attr class=":btn :btn-default isProcessingImport:disabled"}}>Skip and Continue</button>
 
-							</div>
-						</div>
+						
 					</div>
+				</div>
+			</div>
 
 
-			
-			
+			<div class="hide" id="showTypeOfPostForm">
+				<div class="edit-row border">
+					<div class="edit-col"> 
+						
+							<h2>Are you selling or sharing this on Haul?</h2>
+
+							<button {{action 'doShowOnsiteForm'}} class="btn btn-default">I am selling</button>
+
+							<button {{action 'doShowOffsiteForm'}} class="btn btn-default">I am sharing</button>
+
+					</div>
+				</div>
+			</div>
+
+	
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			<div class="hide" id="showProductForm">
+
+
+				{{!-- ADD PHOTOS --}}
+				{{!-- ADD PHOTOS --}}
+				{{!-- ADD PHOTOS --}}
 				<div class="edit-row border">
 					<div class="edit-col">
 
@@ -91,123 +129,30 @@
 				</div>
 
 
-
-				
-
-
-
-				
-
-
-
-
-
-				
-
-				<div class="edit-row border">		
-					<div class="edit-col">
-						<h2>What is this?
-							<small>Name this product. For example "1968 Aston Martin"</small>
-						</h2> 
-
-						{{input-field product_name class="form-control"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_name}}</span>
-						{{/if}}
-
-					</div>
-				</div>
-
-
-
-				<div class="edit-row border">
-					<div class="edit-col">
-						<h2>What are the specs?
-							<small>Add one simple fact per line. For example "Color: Silver"</small>
-						</h2>
-
-						{{description-input descriptionChange='descriptionChange'}}
-
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_description}}</span>
-						{{/if}}
-
-					</div>
-				</div>
-
-
-
-				<div class="edit-row border">
-					<div class="edit-col">
-
-						<div {{bind-attr class="isOnsite:show:hide"}}>
-							<h2>How much do you want to sell this for?</h2>	
-						</div>
-
-						<div {{bind-attr class="isOnsite:hide:show"}}>
-							<h2>What is the price?</h2>	
-						</div>
-
-						$ {{input-field product_price label="false" class="form-control input-sm"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_price}}</span>
-						{{/if}}
-					</div>
-				</div>
-
-
-
+				{{!-- PRODUCT IS FOR SALE HERE ON HAUL --}}
+				{{!-- PRODUCT IS FOR SALE HERE ON HAUL --}}
+				{{!-- PRODUCT IS FOR SALE HERE ON HAUL --}}
 				<div {{bind-attr class="isOnsite:show:hide"}}>
-				<div class="edit-row border">
-					<div class="edit-col">
-						<h2>Add shipping &amp; handling?
-							<small>We only support flat rates for now. For example "$5"</small>
-						</h2>
-						$ {{input-field product_shipping label="false" class="form-control input-sm"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_shipping}}</span>
-						{{/if}}
 
-					</div>
-				</div>
+					{{partial '_edit_product_onsite'}}
+
 				</div>
 
 
+				{{!-- PRODUCT IS FOR SALE ELSWHERE --}}
+				{{!-- PRODUCT IS FOR SALE ELSWHERE --}}
+				{{!-- PRODUCT IS FOR SALE ELSWHERE --}}
+				<div {{bind-attr class="isOnsite:hide:show"}}>
 
+					{{partial '_edit_product_offsite'}}
 
-				<div class="edit-row border">
-					<div class="edit-col">
-
-						<h2>Tag it.
-							<span class="optional">optional</span>
-							<small>Adding tags will help promote your product. Separate multiple tags with a comma. For example "car, sportscar"</small>
-						</h2>
-						
-						{{input-field tags class="form-control"}}
-
-					</div>
-				</div>
-
-				
-				<div {{bind-attr class="isOnsite:show:hide"}} >
-				<div class="edit-row border">
-					<div class="edit-col">
-
-						<h2> 
-							Add a link 
-							<span class="optional">optional</span>
-						</h2> 
-
-						{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
-						{{#if showErrors}}
-							<span class="has-error help-block">{{error-field product_link}}</span>
-						{{/if}}
-
-					</div>
-				</div>
 				</div>
 
 
+
+				{{!-- VALIDATE & GO TO NEXT POST --}}
+				{{!-- VALIDATE & GO TO NEXT POST --}}
+				{{!-- VALIDATE & GO TO NEXT POST --}}
 				<div class="edit-footer">
 					<div class="edit-col">			
 						
@@ -227,10 +172,22 @@
 					</div>
 				</div>
 			</div>
+		
 
 
-			<div {{bind-attr class=":show_two :hide"}}>
 
+
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			<div class="hide" id="showPostForm">
+
+
+				{{!-- BLOG POST --}}
+				{{!-- BLOG POST --}}
+				{{!-- BLOG POST --}}
 				<div class="edit-row">
 					<div class="edit-col">
 
@@ -252,6 +209,24 @@
 							selectedImages=selectedImages
 							triggerResize=triggerEditorResize
 						}} 
+
+					</div>
+				</div>
+
+
+
+				{{!-- TAG POST --}}
+				{{!-- TAG POST --}}
+				{{!-- TAG POST --}}
+				<div class="edit-row border">
+					<div class="edit-col">
+
+						<h2>Tag your post
+							<span class="optional">optional</span>
+							<small>Adding tags will help promote your post</small>
+						</h2>
+						
+						{{input-field tags class="form-control"}}
 
 					</div>
 				</div>
@@ -288,7 +263,7 @@
 
 		{{!-- SUCCESS MESSAGE --}}
 		{{!-- SUCCESS MESSAGE --}}
-		<div {{bind-attr class=":show_three :hide"}}>
+		<div class="hide" id="showSuccess">
 			<div class="text-center edit-wrapper">
 				<div class="edit-row">
 					<div class="edit-col">
@@ -352,8 +327,6 @@
 				</div>
 			</div>
 		</div>
-
-		
 	</div>
 </div>
 {{/modal-modal}}		

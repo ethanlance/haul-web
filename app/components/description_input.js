@@ -48,9 +48,9 @@ export default Ember.Component.extend({
 			text='';
 		}
 
-		var input = document.createElement('input');
+		var input = document.createElement('textarea');
 
-		$(input).addClass('form-control margin-bottom');
+		$(input).addClass('description-input');
 
 		$(this.get('element')).append(input);
 
@@ -63,10 +63,46 @@ export default Ember.Component.extend({
 		} 
 
 		this.set('currentInput', input)
+	
+		Ember.$(this.get('currentInput')).on('paste', Ember.run.bind(this, this.examinePaste));
 
 		Ember.$(this.get('currentInput')).on('keyup', Ember.run.bind(this, this.inputEntered));
 
 		Ember.$(this.get('currentInput')).on('blur', Ember.run.bind(this, this.sendInputValues));
+
+		Ember.$(this.get('currentInput')).on('keypress', function(event) {
+    		if (event.keyCode == 13) {
+        		event.preventDefault();
+    		}
+		});
+	
+	},
+
+	examinePaste: function(e) {
+        $(e.target).unbind('keyup');
+		$(e.target).keyup( Ember.run.bind(this, this.getInput) );
+	},
+
+	getInput: function(e) {
+		var inputText = $(e.target).val();
+
+		if( inputText == undefined || inputText.trim() === "" ) {
+			return;
+		}
+
+        var lines = inputText.split('\n');
+
+        $(e.target).val( lines[0] );
+
+        for(var i=1; i<lines.length; i++) {
+        	var line = lines[i].trim();
+        	if( line ) {
+        		this.createNewInput(line);
+        	}
+        }
+
+        //and an empty one at the end.
+        this.createNewInput();
 	},
 
 	inputEntered: function(e) {

@@ -3,14 +3,7 @@
 
 	<div class="nav">
 		
-		<!--<div class="logo">
-			{{#link-to "home"}}HAUL{{/link-to}}
-		</div>-->
-
-		<div class="logo">
-			{{#link-to "home"}}<img class="logo-nav-img" src="/assets/images/haul-v2-sil.png">{{/link-to}}
-		</div>
-
+		{{#link-to 'home'}}{{partial '_logo'}}{{/link-to}}
 
 
 		{{!-- When browser is NOT collapsed --}}
@@ -68,9 +61,6 @@
 					</span>
 
 					<li>{{#link-to 'new-post' }}<i class="fa fa-plus-square-o"></i> New Post{{/link-to}}</li>
-
-					<li class="divider"></li>
-					<li>{{#link-to 'import' }}<<i class="fa fa-download"></i> Import Post{{/link-to}}</li>
 
 
 					<li class="divider"></li>

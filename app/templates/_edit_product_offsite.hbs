@@ -1,0 +1,87 @@
+	{{!-- PRODUCT LINK --}}
+	{{!-- PRODUCT LINK --}}
+	{{!-- PRODUCT LINK --}}
+	<div class="edit-row border">
+		<div class="edit-col">
+
+			<h2> 
+				Link to where this can be bought
+				<small>Mandatory when sharing</small>
+			</h2> 
+
+			{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
+			{{#if showLinkError}}
+				<span class="has-error help-block">
+					Needs a url
+				</span>
+			{{/if}}
+
+		</div>
+	</div>
+
+
+
+	{{!-- PRODUCT TITLE --}}
+	{{!-- PRODUCT TITLE --}}
+	{{!-- PRODUCT TITLE --}}
+	<div class="edit-row border">		
+		<div class="edit-col">
+			<h2>What is this?
+				<small>Name this product. For example "1968 Aston Martin"</small>
+			</h2> 
+
+			{{input-field product_name class="form-control"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_name}}</span>
+			{{/if}}
+
+		</div>
+	</div>
+	
+
+	{{!-- PRODUCT PRICE --}}
+	{{!-- PRODUCT PRICE --}}
+	{{!-- PRODUCT PRICE --}}
+	<div class="edit-row border">
+		<div class="edit-col">
+
+			<div {{bind-attr class="isOnsite:hide:show"}}>
+				<h2>What is the price?
+				<small>No decimals please</small>
+				</h2>	
+			</div>
+
+			$ {{input-field product_price label="false" class="form-control input-sm"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_price}}</span>
+			{{/if}}
+		</div>
+	</div>
+
+
+
+
+	{{!-- PRODUCT SPECS --}}
+	{{!-- PRODUCT SPECS --}}
+	{{!-- PRODUCT SPECS --}}
+	<div class="edit-row border">
+		<div class="edit-col">
+			<h2>What are the specs? <span class="optional">optional</span>
+				<small>Add one simple fact per line. For example "Color: Silver"</small>
+			</h2>
+
+			{{description-input descriptionChange='descriptionChange'}}
+
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field product_description}}</span>
+			{{/if}}
+
+		</div>
+	</div>	
+
+
+
+
+
+
+

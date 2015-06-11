@@ -2,9 +2,8 @@
 
 	<div class="nav">
 		
-		<div class="logo">
-			{{#link-to "home"}}HAUL{{/link-to}}
-		</div>
+		{{#link-to "home"}}{{partial '_logo'}}{{/link-to}}
+		
 
 		{{#if session.isAuthenticated }}
 		<div class="nav-profile">
