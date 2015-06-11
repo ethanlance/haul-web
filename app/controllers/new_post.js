@@ -771,7 +771,18 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 					image_ids.pushObject(image_id);
 
-				});
+				},
+					function failed(error) {
+						
+						console.log("AN IMPORT FAIL", error);
+
+						_this.set('isProcessingImport', false); 
+
+						_this.set('typeClear', true);
+
+						_this.set('showImportFailed', true);
+						
+					});
 
 				promisesArray.push(promise);
 			});
@@ -815,9 +826,21 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 						_this.doImageInjection();
 
 						_this.doShowTypeOfPostForm();
+					},
+					function failed(error) {
+						
+						console.log("AN IMPORT FAIL", error);
+
+						_this.set('isProcessingImport', false); 
+
+						_this.set('typeClear', true);
+
+						_this.set('showImportFailed', true);
+						
 					}
+
 				);
-			})
+			});
 		})
 	
 
