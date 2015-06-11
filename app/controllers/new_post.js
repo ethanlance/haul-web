@@ -346,19 +346,13 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		if( !Ember.isEmpty(tags) ){
 
-			tags = tags.split(",");
+			tags = tags.split(" ");
 
 			var str = "";
 			tags.forEach(function(tag){
 				tag = tag.trim();
 
-				var tagW = tag.split(" ");
-				if(tagW.length > 1) {
-					tag = "";
-					for(var i=0; i<tagW.length; i++){
-						tag = tag+tagW[i];
-					}
-				}
+				tag = tag.replace(/[\W_]+/g,'');
 
 				if( tag ) {
 					str += " #" + tag + " ";
