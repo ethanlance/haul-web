@@ -1,19 +1,20 @@
 {{preserve-scroll currentScrollPos=currentScrollPos}}
 
-<div class="container ">
-	<div class="haul-content">
-		<div class="hamburger-left-side">
 
-		{{#unless hideLeftColumn}}
+{{!-- BIO --}}
+{{!-- BIO --}}
+{{!-- BIO --}}
+{{!-- BIO --}}
+<div class="container">  
+	
+	<div class="haul-content"> 
 
+		<div class="row">
+			
+			<div class="col-md-12 col-sm-12 col-xs-12">
 
-			{{!-- FIXED LEFT --}}
-			{{!-- FIXED LEFT --}}
-			{{!-- FIXED LEFT --}}
-			{{!-- FIXED LEFT --}}
-			<div class="haul-fixed-left">
-
-				<div class="haul-fixed-content  padding-top margin-right">
+				<div class="padding-top margin-right text-center">
+					
 					{{#if isProfileOwner}}
 					 	{{#link-to 'settings.profile'}}
 						<button class="btn-edit-post">
@@ -23,43 +24,30 @@
 					{{/if}}
 
 					{{#if user.bio}}
+						<strong>Bio</strong><br/>
 						{{sanitize-html user.bio "comment" ENV}}
-					{{else}}
-
-						
-						<p>
-							<strong>Bio</strong>
-							<br/>
-
-							<h4 class="prompt-text">{{#if isProfileOwner}}You have{{else}}@{{user.get_display_name}} has{{/if}} not written a bio yet</h4>
-						</p>
-
-					
-					
 					{{/if}}
+
+					<br/>
+					
+					{{dm-btn to=user goToRoute='goToRoute' class="display-inline-block"}}
 
 				</div>
 			</div>
+		</div>
+	</div>
+</div>
 
 
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}	
-			{{hamburger-menu}}
-			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
-			<label for="hamburger-trigger" class="with-page-header"></label>
+<div class="container">  
+	
+	<div class="haul-content"> 
+
+		<div class="row">
+			
+			<div class="col-md-12 col-sm-12 col-xs-12 padding-top text-center">
+
 		
-		{{/unless}}
-
-
-			{{!-- FLUID RIGHT --}}
-			{{!-- FLUID RIGHT --}}
-			{{!-- FLUID RIGHT --}}
-			{{!-- FLUID RIGHT --}}
-			<div class="haul-fluid-right"> 
-				<div class="haul-fluid-content center-on-collapse  padding-top">
 
 
 				{{!-- EMPTY --}}
@@ -94,7 +82,6 @@
 					<i class="fa fa-circle-o-notch fa-spin"></i>
 				{{/infinite-scroll}}
 
-			</div>
 			</div>
 		</div>
 	</div>
