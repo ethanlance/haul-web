@@ -11,12 +11,6 @@
 		<div class="text-center edit-wrapper">
 
 
-
-
-
-
-
-
 			{{!-- BUILD A PRODUCT / POST --}}
 			{{!-- BUILD A PRODUCT / POST --}}
 			{{!-- BUILD A PRODUCT / POST --}}
@@ -24,22 +18,40 @@
 			{{#form-for model}}
 				
 
-	
 
-			{{!-- IMPORT --}}
-			{{!-- IMPORT --}}
-			{{!-- IMPORT --}}
-			{{!-- IMPORT --}} 
-			<div {{bind-attr class=":fade isReady:in:out"}} id="showImportForm">
-				<div class="edit-row">
+			<div {{bind-attr class=":fade isReady:in:out"}} id="showTypeOfPostForm">
+				<div class="edit-row border">
 					<div class="edit-col"> 
-				
-						<h2> 
-							Import an item from another site?
-						</h2> 
+						
+						<h2>Are you selling or sharing this on Haul?</h2>
 
+						<button {{action 'doSell'}} class="btn btn-default">I am selling</button>
+
+						<button {{action 'doShare'}} class="btn btn-default">I am sharing</button>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			<div class="hide" id="showImportForm">
+				<div class="edit-row">
+					<div class="edit-col">
+
+						<h2> 
+							Link to where this can be bought
+							<small>Mandatory when sharing</small>
+						</h2> 
+						
 						{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
 
+					
 						{{#if showLinkError}}
 							<span class="has-error help-block">Whoops, a link to the item is super important.</span>
 						{{/if}}
@@ -53,7 +65,6 @@
 								<p>Bummer! We cannot seem to import that link for you.</p>
 								<p>
 									You can try to import again, or just skip and continue
-									
 								</p>
 							</span>
 						{{/if}}
@@ -69,27 +80,12 @@
 						}} 
 
  
-						<button {{action 'doShowTypeOfPostForm'}} {{bind-attr class=":btn :btn-default isProcessingImport:disabled"}}>Skip and Continue</button>
-
-						
-					</div>
-				</div>
-			</div>
-
-
-			<div class="hide" id="showTypeOfPostForm">
-				<div class="edit-row border">
-					<div class="edit-col"> 
-						
-							<h2>Are you selling or sharing this on Haul?</h2>
-
-							<button {{action 'doShowOnsiteForm'}} class="btn btn-default">I am selling</button>
-
-							<button {{action 'doShowOffsiteForm'}} class="btn btn-default">I am sharing</button>
+						<button {{action 'doShowProductForm'}} {{bind-attr class=":btn :btn-default isProcessingImport:disabled hasProductLink::disabled"}}>Skip and Continue</button>
 
 					</div>
 				</div>
 			</div>
+
 
 	
 			{{!-- PRODUCT FORM --}}

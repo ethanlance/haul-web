@@ -46,12 +46,16 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	**/
 	animateClose:false,
 
-	slideOpened: 'showImportForm',
+	slideOpened: 'showTypeOfPostForm',
 
 	//Is this item for sale on Haul? Or is it just a post to an external link.
 	isOnsite: true,
 
 	isReady: false,
+
+	hideImport: false,
+
+	hasProductLink: false,
 
 
 
@@ -118,7 +122,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var _this = this;
 		Ember.run.later(function(){
 			_this.set('isReady', true);
-		},2000);
+		},1000);
 
 	}.on('init').observes('modelKey', 'currentUserId'),
 
@@ -130,7 +134,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		// this.set('showProductForm', false);
 		// this.set('showChoose', true);
 
-		this.set('slideOpened', 'showImportForm');
+		this.set('slideOpened', 'showTypeOfPostForm');
 		this.set('isOnsite', true);
 
 		this.set('selectedImages', []);
@@ -144,6 +148,9 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		this.set('showLinkError');
 		this.set('showImportFailed', false);
 		this.set('needsSellerAccount', false);
+		this.set('hideImport', false);
+		this.set('hasProductLink', false);
+
 		
 	},
 
@@ -193,24 +200,19 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	/**
 		Method is called after suceess/failure of the importLink method.
 	**/
-	doShowOffsiteForm: function() {
+	doShare: function() {
 		this.makeModelOffsite();
-		this.set('show','showProductForm');
+		this.set('show','showImportForm');
 	},
 
 
-	doShowOnsiteForm: function() {
+	doSell: function() {
 		this.makeModelOnSite();
 		this.set('show','showProductForm');
 	},
 
-
-	doShowImportForm: function(){
-		this.set('show','showImportForm');
-	},
-
-	doShowTypeOfPostForm: function() {
-		this.set('show','showTypeOfPostForm');
+	doShowProductForm: function() {
+		this.set('show', 'showProductForm');
 	},
 
 
@@ -371,7 +373,13 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 
 
-
+	watchHasProductLink: function() {
+		if( !Ember.isEmpty(this.get('model.product_link') )) {
+			this.set('hasProductLink', true);
+		}else{
+			this.set('hasProductLink', false);
+		}
+	}.observes('model.product_link'),
 
 
 
@@ -825,7 +833,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 						_this.doImageInjection();
 
-						_this.doShowTypeOfPostForm();
+						_this.doShowProductForm();
 					},
 					function failed(error) {
 						
@@ -953,26 +961,22 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			model.set('product_description', text);	
 		},
 
-
-		doShowImportForm: function() {
-			this.doShowImportForm();
+		doSell: function() {
+			this.doSell();
 		},
 
-		doShowOnsiteForm: function() {
-			this.doShowOnsiteForm();
+		doShare: function() {
+			this.doShare();
 		},
 
-		doShowOffsiteForm: function() {
-			this.doShowOffsiteForm();
+		doShowProductForm: function() {
+			this.doShowProductForm();
 		},
 
 		doImport: function() {
 			this.importLink();
 		},
 
-		doShowTypeOfPostForm: function() {
-			this.doShowTypeOfPostForm();
-		}
 
 	}
 });
