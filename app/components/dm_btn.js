@@ -2,6 +2,8 @@ import Ember from 'ember';
 import FollowMixin from '../mixins/follow';
 export default Ember.Component.extend( FollowMixin, {
 
+	toBinding: 'to',
+
 	toIdBinding: 'to.id',
 
 	currentUserBinding: "session.currentUser",
@@ -29,7 +31,7 @@ export default Ember.Component.extend( FollowMixin, {
 	
 	actions: {
 		buttonClick: function() {
-			this.sendAction('goToRoute', 'profile.dm', this.get('toId') );
+			this.sendAction('goToRoute', 'profile.dm', this.get('to.username') );
 		}
 	}
 
