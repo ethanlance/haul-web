@@ -3,10 +3,14 @@ export default Ember.Component.extend({
 	
 	wait: 1000,
 
+	isLoaded: false,
+
+	width: null,
+
+	height: null,
 
 
 	showImage: function() {
-		
 
 		var el = $('#'+ this.get('unHideId'));
 
@@ -15,23 +19,38 @@ export default Ember.Component.extend({
  	
  	handleLoad: function() {
  		var _this = this;
-		
 
+ 		var placeholder = $(this.get('element')).find('.isPlaceholder');
+
+ 		var image = $(this.get('element')).find('.isImage');
+ 		
+ 		image = image[0];
+
+ 		placeholder = placeholder[0];
+
+ 		var classList = image.className.split(/\s+/);
+ 		for (var i = 0; i < classList.length; i++) {
+ 			if( classList[i] !== "hide" && classList[i] !== "isImage") {
+ 				$(placeholder).addClass(classList[i]);
+ 			}
+		}
+
+ 		if( this.get('width') ) {
+ 			$(placeholder).css('width', this.get('width'));
+ 		}
+ 		if( this.get('height') ) {
+ 			$(placeholder).css('height', this.get('height'));
+ 		}
+ 		
+		
 		//When the image loads send out an alert.
-		this.$().children('img').one('load', function() {
+		$(image).on('load', function() {
 		
 			Ember.run(function(){
-				_this.showImage();
+				_this.set('isLoaded', 'true');
 			});
 		
-		}.bind(this));
-	
-
-		//Regardless of if the image loads, after X milliseconds 
-		//send out an alert.
-		Ember.run.later(function(){
-			_this.showImage();
-		}, this.get('wait'));
+		}.bind(this)); 
 
 	}.on('didInsertElement')
 

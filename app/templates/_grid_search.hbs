@@ -3,11 +3,7 @@
 	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 	<div class="post-image">
 		
-		{{#if post.image.square}}
-			<img {{bind-attr src=post.image.square}} />
-		{{else}}
-			<img {{bind-attr src=post.image.large}} />
-		{{/if}}
+		{{image-loader src=post.image.square width='230px' height='230px'}}
 
 		<div class="post-image-overlay">
 
