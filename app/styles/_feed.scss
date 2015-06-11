@@ -220,7 +220,8 @@
 
 
 		.product-deets{
-			float:left;
+			padding-top: 20px;
+			padding-left: 100px;
 			margin-left: 10px;
 			margin-top: 25px;
 		}
@@ -231,6 +232,10 @@
 			font-weight: 300;
 			font-size: 1.375em;
 			line-height: 1.4;
+
+			@media (max-width: 700px) {
+				font-size: 1em;
+			}
 		}
 
 		.product-owner{ 
