@@ -22,24 +22,15 @@
 
 			<span class="username">@{{model.username}}</span>
 
+
+			
+			{{#if model.bio}}
 			<div class="bio">
-				{{#if isProfileOwner}}
-				 	{{#link-to 'settings.profile'}}
-					<button class="btn-edit-post">
-						<i class="fa fa-cog"></i> Edit Your Bio
-					</button><br/>
-					{{/link-to}}
-				{{/if}}
 
-				{{#if model.bio}}
-					<strong>Bio</strong><br/>
-					{{sanitize-html model.bio "comment" ENV}}
-				{{/if}}
+				{{sanitize-html model.bio "comment" ENV}}
 
-				<br/>
-				
-				{{dm-btn to=model goToRoute='goToRoute' class="display-inline-block"}}
 			</div>
+			{{/if}}		
 
 		</div>
 
@@ -78,9 +69,14 @@
 
 			<div class="follow">
 				<div class="stat-btn">
-					{{ follow-btn followUser=model openModal='openModal' }}
+					{{dm-btn to=model goToRoute='goToRoute' class="display-inline-block"}}
+					{{ follow-btn followUser=model openModal='openModal' class="display-inline-block"}}
 				</div>
 			</div>
+
+			
+				
+			
 
 		</div>
 

@@ -9,6 +9,7 @@ export default Ember.Component.extend({
 
 	currentUserIdBinding: "session.currentUser.id",
 
+	limit:20,
 	
 	didInsertElement: function() {
 		this.start();
@@ -53,7 +54,7 @@ export default Ember.Component.extend({
 							user.set('isCurrentUser', true);
 						}
 
-						if( Ember.isArray(users) && !users.contains(user) ){
+						if( Ember.isArray(users) && !users.contains(user) && users.length < _this.get('limit')){
 							users.pushObject( user );
 						}
 

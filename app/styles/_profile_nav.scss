@@ -132,9 +132,21 @@ header.profile{
 		}
 
 		.bio {
-			padding-top: 20px;
-			max-width: 400px;
+			margin-top: 20px;
+			max-width: 300px;
 			font-size: 12px;
+			height: 17px;
+			max-height:17px;
+			width:400px;
+			overflow: hidden;
+			transition: max-height 0.2s ease;
+			cursor: pointer;
+		}
+
+		.bio:hover{
+			max-height:200px;
+			height:100%;
+			overflow:none;
 		}
 	}
 
@@ -145,6 +157,24 @@ header.profile{
 		background-color: inherit;
 		border: 1px solid #dfdfdf;
 		padding: 10px 20px 10px 20px;
+		font-size: 11px;
+		transition: all 0.2s ease;
+		text-transform: uppercase;
+
+		@media (max-width: 700px) {
+			padding: 5px 10px;
+			margin-top:0px;
+		}
+
+	}
+
+	.btn-dm {
+		font-family: $primary-font;
+		color: #7e7e7e;
+		margin-top: 0px; 
+		background-color: inherit;
+		border: 1px solid #dfdfdf;
+		padding: 10px;
 		font-size: 11px;
 		transition: all 0.2s ease;
 		text-transform: uppercase;

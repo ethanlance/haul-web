@@ -17,7 +17,7 @@
 	width: 230px;
 
 	margin-left:auto;
-	margin-right:10px;
+	margin-right:auto;
 
 	@media (max-width: 700px) {
 		margin-right: auto;
@@ -223,5 +223,11 @@
 				}
 			}
 		}
+	}
+}
+
+.grid-spacing {
+	.grid-post {
+		margin-right: 10px;
 	}
 }
