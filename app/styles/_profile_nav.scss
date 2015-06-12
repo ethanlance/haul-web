@@ -132,8 +132,17 @@ header.profile{
 		}
 
 		.bio {
-			margin-top: 20px;
-			max-width: 300px;
+			margin-top: 10px;
+
+			max-width: 400px;
+			@media (max-width: 700px) {
+				max-width: 300px;
+			}
+			@media (max-width: 400px) {
+				max-width: 200px;
+			}
+
+			font-family: $primary-font;
 			font-size: 12px;
 			height: 17px;
 			max-height:17px;
@@ -196,17 +205,20 @@ header.profile{
 	.stats {
 		text-align: center;
 		@media (max-width: 700px) {
-			float:right;
+			float:left;
+			width:100%;
+			text-align: center;
+			//margin-left:50px;
 		}
 		.counts{
 			@media (max-width: 700px) {
-				display:block;
+				display:inline-block;
 			}
 		}
 		.follow{
 			@media (max-width: 700px) {
-				display:block;
-				float:right;
+				display:inline-block;
+				
 			}
 		}
 	}
@@ -217,37 +229,27 @@ header.profile{
 		float:right;
 		//text-transform: uppercase;
 		text-align: center;
-		color: #7e7e7e;
+		color:#999;
+
+		font-family: $primary-font;
+		font-weight: 300;
 		transition: all 0.2s ease;
 
-		a:hover {
+		&:hover {
 			color: $primary-color;
 		}
 
 		.total{ 
-			font-family: $primary-font;
-			//min-height:22px;
-			font-weight: 300;
 			font-size:14px;
 			display:block;
-			color:#999;
 		}
-
-		.total:hover {
-			color: $primary-color;
-		}
+ 
 
 		.title {
-			font-family: $primary-font;
 			font-size: 10px;
 			display:block;
-			color:#999;
-			font-weight: 300;
 		}
-
-		.title:hover {
-			color: $primary-color;
-		}
+ 
 
 		a {
 		//	text-decoration: none;
