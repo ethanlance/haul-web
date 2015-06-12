@@ -21,7 +21,26 @@
 			</span>
 
 			<span class="username">@{{model.username}}</span>
-			
+
+			<div class="bio">
+				{{#if isProfileOwner}}
+				 	{{#link-to 'settings.profile'}}
+					<button class="btn-edit-post">
+						<i class="fa fa-cog"></i> Edit Your Bio
+					</button><br/>
+					{{/link-to}}
+				{{/if}}
+
+				{{#if model.bio}}
+					<strong>Bio</strong><br/>
+					{{sanitize-html model.bio "comment" ENV}}
+				{{/if}}
+
+				<br/>
+				
+				{{dm-btn to=model goToRoute='goToRoute' class="display-inline-block"}}
+			</div>
+
 		</div>
 
 
