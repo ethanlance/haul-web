@@ -14,6 +14,9 @@ export default Ember.Component.extend({
 	progressTheBar: function() {
 		var _this = this;
 
+
+		var progress = $('.progress')[0];
+
 		var el = $('.progress-bar')[0];
 
 		var w = parseInt($(el).attr("aria-valuenow"));
@@ -28,8 +31,12 @@ export default Ember.Component.extend({
 
 			$(el).css('width', '0%').attr("aria-valuenow", 0); 
 
+			$(progress).css('height', '0px');
+
 			return;
 		}else{
+
+			$(progress).css('height', '2px');
 
 			$(el).css('width', w+'%').attr("aria-valuenow", w); 
 

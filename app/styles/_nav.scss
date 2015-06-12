@@ -172,7 +172,7 @@ nav {
 		a.active {
 			font-weight: 800;
 			border-bottom: 2px solid $primary-color;
-			padding-bottom: 12px;
+			padding-bottom: 9px;
 		}
 
 		.nav-link-badge {
@@ -327,7 +327,7 @@ nav {
 	.progress {
 		margin:0;
 		padding:0;
-		height: 2px;
+		height: 0px;
 		background-color: white;
 		border-radius: 0;
 		box-shadow:none;
