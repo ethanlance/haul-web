@@ -1,25 +1,34 @@
 
+{{#unless session.isAuthenticated}}
+<div class="hero">
+	<div class="hero-mask"></div>
+	<div class="container no-margins">
+		<div class="haul-content">
+			<div class="hero-inner">
+				<h1>Post about the unique things to buy that you're passionate about.</h1>
 
+				<h2>Signup to start sharing and selling.</h2>
+
+				{{signup-btn openModal='openModal' class="display-inline"}}
+			</div>
+		</div>
+	</div>
+</div>
+{{/unless}}
+
+
+
+{{#if session.isAuthenticated}}
 <header class="basic">
 <div class="container-fluid">	
 	<div class="header-basic">
 
-
-		<h2 {{bind-attr class="showResults:hide:show"}}>Discover</h2>
-		<h2 {{bind-attr class="showResults:show:hide"}}>{{{typeText}}}  <b>{{queryText}}</b></h2>
-
-
-
+		<h1 {{bind-attr class="showResults:hide:show"}}>Discover</h1>
 
 	</div>
 </div>
 </header>
-
-
-
-
-
-
+{{/if}}
 
 
 <div class="container no-margins">

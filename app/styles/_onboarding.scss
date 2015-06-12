@@ -59,3 +59,114 @@
 
 
 }
+
+
+
+
+
+.hero {
+	margin:0;
+	padding:0;
+	height: 250px;
+
+	display:block;
+	background-attachment: scroll;
+	background-image: url(/assets/images/slide1.jpg);
+	background-position: center center;
+	background-attachment: scroll;
+	background-position: center top;
+	background-repeat: none;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	overflow-x: hidden;
+
+	.hero-mask {
+		width: 100%;
+		height: 250px;
+		position:absolute;
+		background-color: #000;
+		opacity: .4;
+	}
+
+	.hero-inner{
+
+		max-width: 450px;
+		margin-top:40px;
+
+
+		//MOBILE
+		@media (max-width: 400px) {
+			margin-top: 20px;
+		}
+
+		@media (max-width: 810px) {
+			margin-left: 15px;
+			margin-right: 15px;
+		}
+
+		h1{
+			padding:0;
+			margin:0;
+			padding-bottom:30px;
+			color: white;
+			font-size: 1.8em;
+
+			//MOBILE
+			@media (max-width: 400px) {
+				padding-bottom: 10px;
+			}
+		}
+
+		h2 {
+			padding:0;
+			margin:0;
+			padding-bottom:30px;
+			color: white;
+			font-size: 1em;	
+
+			//MOBILE
+			@media (max-width: 400px) {
+				padding-bottom: 20px;
+			}
+		}
+
+		.btn-signin {
+			color: white;
+			background-color: $primary-color;
+			border: none;
+			text-transform: uppercase;
+			border-radius: 0;
+			font-size: 16px;
+			padding: 5px 20px 5px 20px;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

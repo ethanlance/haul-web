@@ -27,7 +27,7 @@
 			{{#if model.bio}}
 			<div class="bio">
 
-				{{sanitize-html model.bio "comment" ENV}}
+				{{sanitizehtml-andtag model.bio "comment" ENV}}
 
 			</div>
 			{{/if}}		
