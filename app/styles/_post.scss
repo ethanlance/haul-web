@@ -314,11 +314,13 @@
 	}
 
 	h1.subject {
-		font-family: $primary-font;
-		font-weight: 100;
+		font-family: 'Arvo';
+		font-weight: 800;
 		color: #333;
-		font-size: 26px;
+		font-size: 4.05em;
+		line-height: 1.05em;
 		margin-top: 4px;
+		letter-spacing: -0.05em;
 	}
 
 
