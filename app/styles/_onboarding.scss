@@ -67,14 +67,14 @@
 .hero {
 	margin:0;
 	padding:0;
-	height: 250px;
+	height: 300px;
 
 	display:block;
 	background-attachment: scroll;
 	background-image: url(/assets/images/slide1.jpg);
 	background-position: center center;
 	background-attachment: scroll;
-	background-position: center top;
+	background-position: center center;
 	background-repeat: none;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -84,16 +84,16 @@
 
 	.hero-mask {
 		width: 100%;
-		height: 250px;
+		height: 300px;
 		position:absolute;
 		background-color: #000;
-		opacity: .4;
+		opacity: .5;
 	}
 
 	.hero-inner{
 
-		max-width: 450px;
-		margin-top:40px;
+		max-width: 520px;
+		margin-top:30px;
 
 
 		//MOBILE
@@ -109,9 +109,10 @@
 		h1{
 			padding:0;
 			margin:0;
-			padding-bottom:30px;
-			color: white;
-			font-size: 1.8em;
+			padding-bottom:20px;
+			color: #fff;
+			font-size: 2.5em;
+			line-height: 1.1em;
 
 			//MOBILE
 			@media (max-width: 400px) {
@@ -122,9 +123,9 @@
 		h2 {
 			padding:0;
 			margin:0;
-			padding-bottom:30px;
-			color: white;
-			font-size: 1em;	
+			padding-bottom:24px;
+			color: #fff;
+			font-size: 1.4em;	
 
 			//MOBILE
 			@media (max-width: 400px) {
@@ -133,13 +134,22 @@
 		}
 
 		.btn-signin {
-			color: white;
+			color: #fff;
+			font-weight: 800;
 			background-color: $primary-color;
 			border: none;
 			text-transform: uppercase;
 			border-radius: 0;
-			font-size: 16px;
+			font-size: 14px;
 			padding: 5px 20px 5px 20px;
+		}
+
+		.btn-signin:hover {
+			color: #fff;
+			font-weight: 800;
+			background-color: $primary-color;
+			opacity: .9;
+			
 		}
 	}
 }
