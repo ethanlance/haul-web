@@ -146,10 +146,10 @@ header.profile{
 			font-family: $primary-font;
 			font-size: 11px;
 			font-style: italic;
-			
+
 			height: 17px;
 			max-height:17px;
-			width:600px;
+			width:500px;
 			overflow: hidden;
 			transition: max-height 0.2s ease;
 			cursor: pointer;
@@ -193,7 +193,7 @@ header.profile{
 		margin-top: 0px; 
 		background-color: inherit;
 		border: 1px solid #dfdfdf;
-		padding: 10px 20px 10px 20px;
+		padding: 10px 10px 10px 10px;
 		font-size: 11px;
 		transition: all 0.2s ease;
 		text-transform: uppercase;
@@ -211,8 +211,9 @@ header.profile{
 		margin-top: 0px; 
 		background-color: inherit;
 		border: 1px solid #dfdfdf;
-		padding: 10px;
+		padding: 10px 10px 10px 10px;
 		font-size: 11px;
+		font-weight: 500;
 		transition: all 0.2s ease;
 		text-transform: uppercase;
 
@@ -224,6 +225,11 @@ header.profile{
 	}
 
 	.btn-follow:hover {
+	border: 1px solid $primary-color;
+	color: $primary-color;
+}
+
+	.btn-dm:hover {
 	border: 1px solid $primary-color;
 	color: $primary-color;
 }
