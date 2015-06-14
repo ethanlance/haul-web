@@ -8,17 +8,19 @@
 	border-bottom: 1px dashed #eee;
 
 	
-	.post-title {
-		font-family: $primary-font;
-		font-weight: 300;
+	.post-title a {
+		font-family: 'Arvo';
+		font-weight: 800;
 		color: #333;
 		padding-top: -20px;
+		letter-spacing: -0.05em;
+		transition: all 0.2s ease;
+	}
 
-		:hover {
+	.post-title a:hover {
 			color: $primary-color;
 			text-decoration: none;
 		}
-	}
 
 
 	.repost-citations {
@@ -68,7 +70,7 @@
 
 		&:hover .product-status{
 			display:inline-block;
-			background-color: rgba(247,92,97,0.8);
+			background-color: rgba(247,92,97,1.0);
 		}
 
 		font-family: $primary-font;
@@ -188,7 +190,7 @@
 		width:100%;
 		min-height: 85px;
 
-		background-color: rgba(0,0,0,.6);
+		background-color: rgba(0,0,0,.8);
 		color:white;
 
 
@@ -278,8 +280,9 @@
 
 			.name a{
 				font-family: $primary-font;
-				font-weight: 600;
-				font-size: 12px;
+				font-weight: 800;
+				font-size: 1.00em;
+				letter-spacing: -0.02em;
 				color: #333;
 				transition: all 0.2s ease;
 				//text-transform: uppercase;
