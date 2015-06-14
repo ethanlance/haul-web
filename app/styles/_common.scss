@@ -419,23 +419,6 @@ a.editorial {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .haul-words {
 
 	a {
@@ -449,4 +432,34 @@ a.editorial {
 		text-decoration: none;
 	}	
 
+}
+
+
+/*ABOUT US PAGES */
+.about p {
+	font-size: 1.08em;
+	font-weight: 400;
+	line-height: 1.9em;
+	color:#555;
+
+}
+
+.about h1 {
+	font-family: 'Arvo';
+	font-size: 4.05em;
+	font-weight: 800;
+	color: #333;
+	line-height: 1.05em;
+	letter-spacing: -0.02em;
+
+}
+
+.about h2 {
+	font-family: 'Arvo';
+	font-size: 2.85em;
+	font-weight: 800;
+	color: #333;
+	line-height: 1.05em;
+	letter-spacing: -0.03em;
+	padding-top: 20px;
 }
