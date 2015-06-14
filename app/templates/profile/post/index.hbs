@@ -31,17 +31,17 @@
 
 					<div class="product-post">
 						
-						<div class="moment">{{format-moment created_at}}</div>
+						<div class="moment">{{format-moment created_at}} {{#if isProfileOwner}}
+							 	{{#link-to 'profile.post.edit_post' user.username this }}
+								<button class="btn-edit-post">
+									<i class="fa fa-cog"></i> Edit post
+								</button>
+								{{/link-to}}
+							{{/if}}</div>
 
 
 						<h1 class="subject">{{ subject }}
-							{{#if isProfileOwner}}
-							 	{{#link-to 'profile.post.edit_post' user.username this }}
-								<button class="btn-edit-post">
-									<i class="fa fa-cog"></i> Edit Post
-								</button>
-								{{/link-to}}
-							{{/if}}
+							
 							
 						</h1>
 
@@ -84,8 +84,19 @@
 
 							<div class="external-social-buttons">
 								{{social-btns post=this}}
+
+
 							</div>
+
+
+
+
+						
+							
+						
 						</div>
+
+
 						
 
 
