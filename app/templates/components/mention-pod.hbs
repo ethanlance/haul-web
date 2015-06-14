@@ -29,9 +29,7 @@
 {{#each post in sortedLimitedResults}}
 
 	<div class="mention-owner">
-		{{#link-to 'profile' post.user.username }}
-			{{make-icon icon=post.user.icon}}
-		{{/link-to}}
+		
 
 		<div class="post-owner-details">
 			<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
@@ -44,9 +42,9 @@
 				
 				{{sanitizehtml-andtag post.comment "comment" ENV}}
 				
-				<span class="reply pull-right" {{action "doReply" post}}>
+				<!--<span class="reply pull-right" {{action "doReply" post}}>
 					REPLY&nbsp;<i class="fa fa-angle-double-right"></i>
-				</span>
+				</span>-->
 			</span>
 		</div>
 	</div>
