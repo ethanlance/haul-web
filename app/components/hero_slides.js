@@ -4,10 +4,10 @@ export default Ember.Component.extend({
 	didInsertElement: function() {
 
 		var backgrounds = [
-			'/assets/images/hero-cargo-1.jpg',
-			'/assets/images/hero-cargo-2.jpg',
-			'/assets/images/hero-cargo-3.jpg',
 			'/assets/images/hero-cargo-4.jpg',
+			'/assets/images/hero-auto-1.jpg',
+			'/assets/images/hero-books-1.jpg',
+			'/assets/images/hero-outdoors-1.jpg',
 		];
 
 		function getRandomInt(min, max) {
