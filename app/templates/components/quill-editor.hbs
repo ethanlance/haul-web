@@ -1,3 +1,4 @@
+
  
 	<div class="editorWrapper">
 		
@@ -12,7 +13,7 @@
 					draggable='true'  />{{/if}}
 			{{/each}}
 		</div>
-		<div class="editor-gallery-label"><small>Drag and drop images into your post</small></div>	
+		<div class="editor-gallery-label"><small>Drag and drop the product's images into your post</small></div>	
 
 	{{/if}}
 
@@ -38,14 +39,39 @@
 
 				<span class="ql-format-group">
 					<span title="Link" class="ql-format-button ql-link fa  fa-link"></span> 
+
+					<span title="Image" class="ql-format-button ql-image fa  fa-image" {{action 'showImageModal'}}	></span> 
 				</span>
 			</div>
 		</div>
-
-
-
-
 	 
 		<div id="editor">{{sanitize-html content "editorial" ENV}}</div>
 	</div>
  
+
+
+	<div {{bind-attr class=":modal :noScroll animateImageModal:in:out showImageModal:show:hide"}} id="imageModal">
+		<div class="modal-dialog sm text-left haul-edit"  id="imageModalDialog">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<button {{action 'closeImageModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					
+					{{image-picker 
+						images=userImages
+						refresh='refresh'
+						imageClick='imageClick' 
+						imageDelete='imageDelete'
+						showImagePicker=showImagePicker
+					}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+

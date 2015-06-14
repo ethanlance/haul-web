@@ -1,6 +1,6 @@
 import { sanitize } from 'ember-sanitize/utils/sanitize';
 export default {
-	elements: ['b', 'em', 'i', 'strong', 'u', 'img', 'p', 'a', 'ul', 'ol', 'li', 'blockquote'],
+	elements: ['h1', 'h2', 'h3', 'h4', 'b', 'em', 'i', 'strong', 'u', 'img', 'p', 'a', 'ul', 'ol', 'li', 'blockquote'],
 	attributes: {
 		'a'         : ['href'],
 		'img'       : ['src']

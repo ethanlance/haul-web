@@ -6,8 +6,8 @@ export default Ember.Route.extend({
 	}.property(),	
 
 	renderTemplate: function() {
-		this.render('about/_nav', {
-			into: 'about',
+		this.render('details/_nav', {
+			into: 'details',
 			outlet: 'nav'
 		}); 
 		this._super();

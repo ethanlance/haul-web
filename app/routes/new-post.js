@@ -26,8 +26,4 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
     		key: randomId
     	});
   	},
-
-  	beforeModel: function() {
-  		console.log("PING");
-  	}
 });

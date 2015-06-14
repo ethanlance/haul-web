@@ -65,6 +65,23 @@ export default Ember.Component.extend(TransformMixin, {
 	}.observes('setEditorImgSrc'),
 
 	
+	injectImage: function(image) {
+
+		var editor = this.get('editor');
+
+		var range = editor.getSelection();
+
+		var text = image.get('small');
+
+		if( range ) {
+			editor.insertEmbed(range, 'image', text);
+		} else {
+			editor.insertEmbed(0, 'image', text);
+		}
+
+	},
+
+	
 	triggerResizeChanged: function() {
 		if( this.get('triggerResize') ) {
 			this.resize();
@@ -157,6 +174,7 @@ export default Ember.Component.extend(TransformMixin, {
     			_this.convertImages();
 			}, 1000);
 		});
+
 	},
 
 
@@ -184,5 +202,44 @@ export default Ember.Component.extend(TransformMixin, {
 
 	}.observes('requestContents'),
 
+
+	actions: {
+		showImageModal: function(){
+			var _this = this;
+			this.set('showImageModal', true);
+			
+			var top = $(window).scrollTop();
+			var h = window.innerHeight;
+			var w = window.innerWidth;
+
+			$('#imageModal').css('width', w);
+			$('#imageModal').css('height', h);
+			$('#imageModal').css('top', top);
+			$('#imageModal').css('overflow', 'hidden');
+			
+			$('#imageModal').css('padding-top', top);
+			$('#imageModal').css('padding-bottom', height);
+
+
+//$('#imageModalDialog').css('margin-top', top);
+			///$('#editModal').parent().scrollTop(0);
+	
+			Ember.run.later(function(){
+				_this.set('animateImageModal', true);
+			},100);
+		},
+
+		closeImageModal: function(){
+			var _this = this;
+			this.set('animateImageModal', false);
+			Ember.run.later(function(){
+				_this.set('showImageModal', false);
+			},300);
+		}, 
+
+		refresh: function(image) {
+			this.injectImage(image);
+		}, 
+	}
 
 });

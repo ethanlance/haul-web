@@ -45,8 +45,9 @@ Router.map(function(){
 	//Home
 	this.route('home', {path: "/"});
 
-	this.route('about', function(){
-		this.route('us');
+	this.route('about');
+
+	this.route('details', function(){
 		this.route('tips');
 		this.route('tos');
 		this.route('faq');
