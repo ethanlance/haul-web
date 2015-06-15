@@ -116,7 +116,6 @@ export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 
 	startPagination: function() {
 
-
 		//Pagination:	
 		this.set('paginateQuery', {
 			storeName: this.get('storeName'),

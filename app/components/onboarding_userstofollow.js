@@ -1,71 +1,58 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
 
-	haulUser: null,
-
 	users: [],
+
+	storeName: 'user-likes-list',
 
 	usersReady: Ember.computed.notEmpty('users'),
 
 	currentUserIdBinding: "session.currentUser.id",
 
 	limit:20,
+
+	usernameFilter: 'haul',
+
+	userFilter: null,
 	
-	didInsertElement: function() {
-		this.start();
-	},
-
-
-
 	start: function() {
-
-		var user = this.get('users');
-		var currentUserId = this.get("currentUserId");
 		
+		var usernameFilter = this.get('usernameFilter');
+		if(!usernameFilter){ return; }
+
 		//Get the @haul user data.
 		var _this = this;
 		var store = this.container.lookup('store:main'); 
-		return store.find('user', 'haul').then(function(result){ 
-			return result;
-		})
-		.then(function(user){
+		return store.find('user', usernameFilter).then(function(user){ 
+			_this.set('userFilter', user);
+		});
 
-			_this.set('haulUser', user);
+	}.on('didInsertElement').observes('usernameFilter'),
 
-			//Now get what @haul likes.
-			return store.find('user-likes-list', { 
-				user_id: user.id, 
-				limit: 20,
-			});
-
-		})
-		.then(function(likes){
-
-			var users = _this.get('users');
-
-			//Now pull all the users from the list of likes.
-			likes.forEach(function(result){
-
-				result.get('post').then(function(post){
+	userChanged: function() {
+		
+		var user = this.get('userFilter');
+		if(Ember.isEmpty(user)) { return; }
+		
+		this.set('users', [])
+		var users = this.get('users');	
+		var _this = this;
+		var store = this.container.lookup('store:main');
+		
+		store.find(this.get('storeName'), {user_id: user.id, limit:this.get('limit')})
+		.then(function(likes) { 
+			likes.forEach(function(like) {
+				like.get('post').then(function(post){ 
 
 					post.get('user').then(function(user){
 
-						if(user.id === currentUserId){
-							user.set('isCurrentUser', true);
-						}
-
 						if( Ember.isArray(users) && !users.contains(user) && users.length < _this.get('limit')){
-							users.pushObject( user );
-						}
-
+							users.pushObject( user );	
+					 	}
 					});
-					
 				});
-				
 			});
-
 		});
-	}.observes('currentUserId'),
 
-
+	}.observes('userFilter')
 });

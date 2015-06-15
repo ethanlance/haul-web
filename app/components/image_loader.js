@@ -9,13 +9,6 @@ export default Ember.Component.extend({
 
 	height: null,
 
-
-	showImage: function() {
-
-		var el = $('#'+ this.get('unHideId'));
-
-		el.removeClass('hide');
-	},
  	
  	handleLoad: function() {
  		var _this = this;
@@ -43,14 +36,21 @@ export default Ember.Component.extend({
  		}
  		
 		
-		//When the image loads send out an alert.
-		$(image).on('load', function() {
+ 		$(image).on('load', Ember.run.bind(this, function(){
+ 			try{
+ 				this.set('isLoaded', 'true');
+ 			}catch(e){}
+ 		}));
+
+
+		// //When the image loads send out an alert.
+		// $(image).on('load', function() {
 		
-			Ember.run(function(){
-				_this.set('isLoaded', 'true');
-			});
+		// 	//Ember.run(function(){
+		// 		_this.set('isLoaded', 'true');
+		// 	//});
 		
-		}.bind(this)); 
+		// }.bind(this)); 
 
 	}.on('didInsertElement')
 

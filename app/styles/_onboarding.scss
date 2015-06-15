@@ -168,7 +168,28 @@
 }
 
 
+.discover-categories {
 
+	list-style:none;
+	margin: 0;
+	padding:0;
+
+	margin-bottom:30px;
+
+	li {
+		display: inline;
+		cursor: pointer;
+		color: #ccc;
+		text-transform: uppercase;
+
+		padding-right: 40px;
+	}
+
+	li.active {
+		color: $primary-color;
+	}
+
+}
 
 
 
