@@ -30,11 +30,6 @@ export default Ember.Component.extend(TransformMixin, {
 
 	editorImageSize: 'small',
 
-	actions: {
-		toggleGallery: function() {
-			this.set('galleryOpen', !this.get('galleryOpen'));
-		}
-	},
 
 
 	setEditorTextChanged: function() {
@@ -204,6 +199,11 @@ export default Ember.Component.extend(TransformMixin, {
 
 
 	actions: {
+
+		toggleGallery: function() {
+			this.set('galleryOpen', !this.get('galleryOpen'));
+		},
+
 		showImageModal: function(){
 			var _this = this;
 			this.set('showImageModal', true);

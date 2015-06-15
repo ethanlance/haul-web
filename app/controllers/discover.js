@@ -41,22 +41,26 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
 	categoryChanged: function() {
 
+		var _this = this; 
 		var username = this.get('categoryUsername')[this.get('category')];
 
 		this.set('usernameFilter', username);
-
-		//Find this user.
-		var _this = this; 
-		this.store.find('user', username).then(function(user){
-			_this.set('user', user);
-		});
 
 
 		var cats = this.get('categoryUsername')
 		for(var prop in cats){
 			_this.set('is'+prop, false);
 		}
-		_this.set('is'+this.get('category'), true);
+		this.set('is'+this.get('category'), true);
+
+		this.set('pagedContent', []);
+
+		//Find this user.
+		this.store.find('user', username).then(function(user){
+			_this.set('user', user);
+		});
+
+
 
 	}.on('init').observes('category'),
 

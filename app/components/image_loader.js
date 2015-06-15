@@ -43,15 +43,6 @@ export default Ember.Component.extend({
  		}));
 
 
-		// //When the image loads send out an alert.
-		// $(image).on('load', function() {
-		
-		// 	//Ember.run(function(){
-		// 		_this.set('isLoaded', 'true');
-		// 	//});
-		
-		// }.bind(this)); 
-
 	}.on('didInsertElement')
 
 });
