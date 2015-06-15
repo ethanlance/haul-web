@@ -46,7 +46,6 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
 		this.set('usernameFilter', username);
 
-
 		var cats = this.get('categoryUsername')
 		for(var prop in cats){
 			_this.set('is'+prop, false);
@@ -59,8 +58,6 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 		this.store.find('user', username).then(function(user){
 			_this.set('user', user);
 		});
-
-
 
 	}.on('init').observes('category'),
 

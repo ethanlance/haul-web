@@ -9,6 +9,11 @@ export default Ember.Component.extend({
 
 	height: null,
 
+	image: null,
+
+	willDestroyElement: function() {
+		$( this.get('image') ).off('load');
+	},
  	
  	handleLoad: function() {
  		var _this = this;
@@ -18,6 +23,8 @@ export default Ember.Component.extend({
  		var image = $(this.get('element')).find('.isImage');
  		
  		image = image[0];
+
+ 		this.set('image', image);
 
  		placeholder = placeholder[0];
 
@@ -36,10 +43,8 @@ export default Ember.Component.extend({
  		}
  		
 		
- 		$(image).on('load', Ember.run.bind(this, function(){
- 			try{
- 				this.set('isLoaded', 'true');
- 			}catch(e){}
+ 		$(image).on('load', Ember.run.bind(this, function(){ 
+ 			this.set('isLoaded', 'true'); 
  		}));
 
 
