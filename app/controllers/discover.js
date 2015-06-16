@@ -27,16 +27,35 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	isart: false,
 	ismusic: false,
 	isbooks: false,
+	ismotors: false,
+	isoutdoor: false,
+	isfashion: false,
+	isliving: false,
 
+
+	categories: [
+		'motors',
+		'outdoor',
+		'gear',
+		'art',
+		'living',
+		'music',
+		'books',
+		'style',
+		'fashion',
+	],
 
 	categoryUsername: {
 		'featured':'haul',
-		'gear':'haulcargo',
-		'style':'haulstyle',
-		'tech':'haultech',
+		'motors':'haulmotors',
+		'outdoor':'hauloutdoors',
+		'gear':'haulgear',
 		'art':'haulart',
+		'living':'haulliving',
 		'music':'haulmusic',
 		'books':'haulbooks',
+		'style':'haulstyle',
+		'fashion':'haulfashion',
 	},
 
 	categoryChanged: function() {
@@ -48,9 +67,9 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
 		var cats = this.get('categoryUsername')
 		for(var prop in cats){
-			_this.set('is'+prop, false);
+			$("li."+prop).removeClass('active');
 		}
-		this.set('is'+this.get('category'), true);
+		$("li."+this.get('category')).addClass('active');
 
 		this.set('pagedContent', []);
 
@@ -116,7 +135,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 			if(callback){callback(promise)};
     	},
 
-    	clickCategory: function(category) {
+    	clickCategory: function(category) { 
     		this.changeCategory( category );
     	}
 	},

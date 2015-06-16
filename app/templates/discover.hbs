@@ -59,15 +59,12 @@
 				<div class="haul-fluid-content center-on-collapse padding-top grid-spacing">
 
 					<ul class="discover-categories">
-						<li {{action 'clickCategory' 'featured'}} 	{{bind-attr class="isfeatured:active"}}>Featured</li>
-						<li {{action 'clickCategory' 'gear'}}  		{{bind-attr class="isgear:active"}}>Gear</li>
-						<li {{action 'clickCategory' 'style'}}  	{{bind-attr class="isstyle:active"}}>Style</li>
-						<li {{action 'clickCategory' 'tech'}}  		{{bind-attr class="istech:active"}}>Tech</li> 
-						<li {{action 'clickCategory' 'art'}}  		{{bind-attr class="isart:active"}}>Art</li>
-						<li {{action 'clickCategory' 'music'}} 		{{bind-attr class="ismusic:active"}} >Music</li>
-						<li {{action 'clickCategory' 'books'}}  	{{bind-attr class="isbooks:active"}}>Books</li>
+					<li class="featured active" {{action 'clickCategory' 'featured'}}>featured</li>
+					{{#each cat in categories}}
+						<li {{bind-attr class="cat"}} {{action 'clickCategory' cat}}>{{cat}}</li>
+					{{/each}}
 					</ul>
-
+						
 
 					{{#unless sortedContent}}
 						{{loading-bar turnLoadingBarOn='true'}}
