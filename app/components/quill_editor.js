@@ -30,6 +30,7 @@ export default Ember.Component.extend(TransformMixin, {
 
 	editorImageSize: 'small',
 
+	cursorPosition: null,
 
 
 	setEditorTextChanged: function() {
@@ -64,12 +65,12 @@ export default Ember.Component.extend(TransformMixin, {
 
 		var editor = this.get('editor');
 
-		var range = editor.getSelection();
+		var cursorPosition = this.get('cursorPosition');
 
 		var text = image.get('small');
 
-		if( range ) {
-			editor.insertEmbed(range, 'image', text);
+		if( cursorPosition ) {
+			editor.insertEmbed(cursorPosition, 'image', text);
 		} else {
 			editor.insertEmbed(0, 'image', text);
 		}
@@ -159,6 +160,22 @@ export default Ember.Component.extend(TransformMixin, {
 		  	theme: 'snow'
 		});
 
+
+		editor.on('selection-change', function(range) {
+			if (range) {
+				if (range.start == range.end) {
+
+					_this.set('cursorPosition', range.start);
+
+			    } else {
+					var text = editor.getText(range.start, range.end);
+					
+				}
+			} else {
+			    
+			}
+		});
+
 		_this.set('editor', editor);
 
 		
@@ -169,6 +186,8 @@ export default Ember.Component.extend(TransformMixin, {
     			_this.convertImages();
 			}, 1000);
 		});
+
+
 
 	},
 
@@ -197,6 +216,14 @@ export default Ember.Component.extend(TransformMixin, {
 
 	}.observes('requestContents'),
 
+	closeImageModal: function() {
+		console.log("CLOSE");
+		var _this = this;
+		this.set('animateImageModal', false);
+		Ember.run.later(function(){
+			_this.set('showImageModal', false);
+		},300);
+	},
 
 	actions: {
 
@@ -205,24 +232,17 @@ export default Ember.Component.extend(TransformMixin, {
 		},
 
 		showImageModal: function(){
+
 			var _this = this;
 			this.set('showImageModal', true);
-			
-			var top = $(window).scrollTop();
-			var h = window.innerHeight;
-			var w = window.innerWidth;
+
+			var h = $('body').prop('scrollHeight');
+			var w = window.innerWidth; 
 
 			$('#imageModal').css('width', w);
 			$('#imageModal').css('height', h);
-			$('#imageModal').css('top', top);
-			$('#imageModal').css('overflow', 'hidden');
-			
-			$('#imageModal').css('padding-top', top);
-			$('#imageModal').css('padding-bottom', height);
-
-
-//$('#imageModalDialog').css('margin-top', top);
-			///$('#editModal').parent().scrollTop(0);
+			$('#imageModal').css('overflow', 'hidden'); 
+			$('#imageModal').css('padding-top', '300px'); 
 	
 			Ember.run.later(function(){
 				_this.set('animateImageModal', true);
@@ -230,15 +250,13 @@ export default Ember.Component.extend(TransformMixin, {
 		},
 
 		closeImageModal: function(){
-			var _this = this;
-			this.set('animateImageModal', false);
-			Ember.run.later(function(){
-				_this.set('showImageModal', false);
-			},300);
+			this.closeImageModal();
 		}, 
 
 		refresh: function(image) {
+			console.log("KABOOM", image)
 			this.injectImage(image);
+			this.closeImageModal();
 		}, 
 	}
 

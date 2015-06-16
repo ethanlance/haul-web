@@ -11,6 +11,10 @@ export default Ember.Component.extend({
 		this.progressTheBar();
 	}.observes('turnLoadingBarOn'),
 
+	willDestroyElement: function() {
+		this.set('turnLoadingBarOn', false);
+	},
+
 	progressTheBar: function() {
 		var _this = this;
 

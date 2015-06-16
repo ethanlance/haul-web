@@ -523,6 +523,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 					errors.get('product_price').length > 0 ||
 					errors.get('product_quantity').length > 0 || 
 					errors.get('product_shipping').length > 0 || 
+					errors.get('product_description').length > 0 || 
 					errors.get('product_status').length > 0 ){
 						_this.set('showErrors', true);
 						_this.set('isProcessingNext', false);

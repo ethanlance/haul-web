@@ -13,6 +13,21 @@ export default Ember.Component.extend({
 
 	store: null,
 
+	maxFiles: 20,
+
+	canUploadMultiple: null,
+
+	isUploading: false,
+
+	showUploader: true,
+
+	isUploadingChanges: function() {
+		if( this.get('isUploading') && this.get('maxFiles') == 1 ) {
+			this.set('showUploader', false);
+		} else {
+			this.set('showUploader', true);
+		}
+	}.observes('isUploading'),
 
 	didInsertElement: function(){
 		var _this = this;  
@@ -23,11 +38,17 @@ export default Ember.Component.extend({
 		var user_id = this.get('user_id');
 		this.set('store', this.container.lookup("store:main"));
 
-		var el = this.$().find('.poop');
+		var el = $(this.get('element')).find('.haulDropZone').one()[0];
 
 		var className = 'drop' + Math.random().toString( 36 ).substr( 2 )
 		$(el).addClass(className);
 
+		var clickClassName = "click" + className;
+		var btn = $(this.get('element')).find('#haul-dropzone-browse').one()[0];
+		$(btn).addClass(clickClassName);
+		clickClassName = "." + clickClassName;
+
+		
 
 		var isMobile = { 
 			Android: function() { return navigator.userAgent.match(/Android/i); }, 
@@ -38,17 +59,23 @@ export default Ember.Component.extend({
 			any: function() { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } 
 		};
 
-		var maxFiles = 20;
-
+		
+		var maxFiles = this.get('maxFiles');
 		if(isMobile.any()) {
 			maxFiles = 1;
 		}
 
 
+		if( maxFiles > 1 ) {
+			this.set('canUploadMultiple', true);
+		}else{
+
+			this.set('canUploadMultiple', false);
+		}
+
 
 
 		Dropzone.autoDiscover = false;
-
 
 		this.dropzone = new Dropzone('.'+className, { 
 
@@ -72,7 +99,7 @@ export default Ember.Component.extend({
 			
 			thumbnailHeight: 100,
 			
-			clickable: "#haul-dropzone-browse", 
+			clickable: clickClassName, 
 			
 			capture: true,
 
@@ -84,6 +111,8 @@ export default Ember.Component.extend({
 			init: function() {
 
 				this.on('success', function(file, response) {
+
+					_this.set('isUploading', false);
 
 
 					var _self = this;
@@ -168,8 +197,7 @@ export default Ember.Component.extend({
 
 				this.on('addedfile', function(file) {	
 					
-					// console.log("ADDED FILE", file);
-					// return;
+					_this.set('isUploading', true);
 
 				});
 

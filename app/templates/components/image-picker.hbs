@@ -1,5 +1,5 @@
 
-<div class="poop"> 
+<div class="haulDropZone"> 
 
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
@@ -10,7 +10,7 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div {{bind-attr class=":row showUploader:show:hide"}}>
 		<div class="col-md-12 col-sm-12 col-xs-12 ">
 
 			<div id="haul-dropzone-filebutton"></div> 
@@ -20,9 +20,10 @@
 				<i class="fa fa-camera fa-1x"></i>
 
 				{{#if selectedImages}}
-				<span>Add more photos</span>
+					<span>Add more photos</span>
 				{{else}}
-				<div>Upload one or more photos</div>
+					<div {{bind-attr class="canUploadMultiple:show:hide"}}>Upload one or more photos</div>
+					<div {{bind-attr class="canUploadMultiple:hide:show"}}>Upload one photo</div>
 				{{/if}}
 			</div>
 		</div>	

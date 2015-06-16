@@ -1,23 +1,6 @@
 
  
 	<div class="editorWrapper">
-		
-
-
-	{{#if hasGallery}}
-		<div id="gallery" class="editor-gallery">   		
-			{{#each image in selectedImages}}
-				{{#if image.thumb}}<img
-					{{bind-attr src=image.thumb}} 
-					{{bind-attr id=image.id}} 
-					draggable='true'  />{{/if}}
-			{{/each}}
-		</div>
-		<div class="editor-gallery-label"><small>Drag and drop the product's images into your post</small></div>	
-
-	{{/if}}
-
-
 		<div id="toolbar" class="ql-toolbar ql-snow">
 			<div class="toolbar-btns">
 				<span class="ql-format-group">
@@ -54,15 +37,44 @@
 		<div class="modal-dialog sm text-left haul-edit"  id="imageModalDialog">
 			<div class="modal-content">
 				<div class="modal-body text-center">
-					<button {{action 'closeImageModal'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					
-					{{image-picker 
-						images=userImages
-						refresh='refresh'
-						imageClick='imageClick' 
-						imageDelete='imageDelete'
-						showImagePicker=showImagePicker
-					}}
+					<button {{action 'closeImageModal'}} id="closeImageModal" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+						<ul class="nav nav-tabs" role="tablist">
+
+							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Product Images</a></li>
+
+							<li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">
+								Upload Image
+							</a></li>
+						</ul>
+
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab1">
+
+								<div id="gallery" class="editor-gallery">   		
+									{{#each image in selectedImages}}
+										{{#if image.thumb}}<img
+											{{bind-attr src=image.thumb}} 
+											{{bind-attr id=image.id}}  
+											{{action 'refresh' image}}/>{{/if}}
+									{{/each}}
+								</div>
+								
+							</div>	
+
+
+							<div class="tab-pane" id="tab2">
+							
+								{{image-picker 
+									images=userImages
+									refresh='refresh'
+									imageClick='imageClick' 
+									imageDelete='imageDelete'
+									showImagePicker=showImagePicker
+									maxFiles=1
+								}}
+							</div>
+						</div>
 				</div>
 			</div>
 		</div>
