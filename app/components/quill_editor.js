@@ -79,35 +79,35 @@ export default Ember.Component.extend(TransformMixin, {
 
 	
 	triggerResizeChanged: function() {
-		if( this.get('triggerResize') ) {
-			this.resize();
-		}
+		// if( this.get('triggerResize') ) {
+		// 	this.resize();
+		// }
 	}.observes('triggerResize'),
 
 
 	resize: function() {
-		var el = $('#editor');	
+		// var el = $('#editor');	
  		
- 		var top = 0;
-		var h = null;
-		if( this.get('height')) {
-			h = this.get('height');
-		} else {
-			try{
-				top = el.parent().offset().top;
-			}catch(e){
-				//
-			}
-			var scrollTop = $(window).scrollTop();
-			var height = window.outerHeight;
-			h = height - (top - scrollTop) - this.get('variance');
-		}
+ 	// 	var top = 0;
+		// var h = null;
+		// if( this.get('height')) {
+		// 	h = this.get('height');
+		// } else {
+		// 	try{
+		// 		top = el.parent().offset().top;
+		// 	}catch(e){
+		// 		//
+		// 	}
+		// 	var scrollTop = $(window).scrollTop();
+		// 	var height = window.outerHeight;
+		// 	h = height - (top - scrollTop) - this.get('variance');
+		// }
 
-		if( h < this.get('minHeight') ) {
-			h = this.get('minHeight');
-		}
+		// if( h < this.get('minHeight') ) {
+		// 	h = this.get('minHeight');
+		// }
 
-		$('#editor').css("height", h);	 
+		// $('#editor').css("height", h);	 
 	},
 
 
@@ -143,14 +143,14 @@ export default Ember.Component.extend(TransformMixin, {
 
 		var _this = this; 
 
-		//RESIZE:
-		$( window ).resize(function() {
-			Ember.run.bind(_this, _this.resize());
-		});
+		// //RESIZE:
+		// $( window ).resize(function() {
+		// 	Ember.run.bind(_this, _this.resize());
+		// });
 			
-		Ember.run.later(function(){
-			Ember.run.bind(_this, _this.resize());
-		}, 1000);
+		// Ember.run.later(function(){
+		// 	Ember.run.bind(_this, _this.resize());
+		// }, 1000);
 			
  		var editor = new Quill('#editor',{
 		  	modules: {
@@ -187,10 +187,66 @@ export default Ember.Component.extend(TransformMixin, {
 			}, 1000);
 		});
 
-
-
+		this.watchToolbar();
 	},
 
+
+	watchToolbar: function() {
+		//TOOLBAR
+		var modal = $('.editorWrapper').parents('.modal')[0];
+
+		var self = this;
+		var fixToolbar = function() {
+			Ember.run.debounce(self, self.toolbarPosition, 15)
+		};
+
+		$(modal).on('scroll', fixToolbar );
+
+		$(window).on('resize', fixToolbar );
+	},
+
+	toolbarPosition: function() { 
+		var modal = $('.editorWrapper').parents('.modal')[0];		
+			
+		var top = $(".editorWrapper").offset().top;
+
+		var b = $('body').scrollTop();
+
+		var toolbar = $("#toolbar")[0];
+
+		if( top < 20 ||  b > top ) {
+			var t = $(modal).scrollTop();
+			var w = $('.editorWrapper').width();
+			$(toolbar).addClass('fixed').css('top', t).css('width', w)
+		}else{
+			$(toolbar).removeClass('fixed');
+		} 
+	},
+
+
+	doShowImageModal: function() {
+		var _this = this;
+		this.set('showImageModal', true);
+
+		var h = $('body').prop('scrollHeight');
+		var w = window.innerWidth; 
+
+		var modal = $('.editorWrapper').parents('.modal')[0];		
+		var t = $(modal).scrollTop();
+
+		console.log("T", t);
+
+		$('#imageModal').css('z-index', 5001);
+		$('#imageModal').css('width', w);
+		$('#imageModal').css('height', h);
+		$('#imageModal').css('overflow', 'hidden'); 
+		$('#imageModal').css('padding-top', t); 
+
+
+		Ember.run.later(function(){
+			_this.set('animateImageModal', true);
+		},100);
+	},
 
 	transformImagesForSaving: function() {
 
@@ -233,20 +289,7 @@ export default Ember.Component.extend(TransformMixin, {
 
 		showImageModal: function(){
 
-			var _this = this;
-			this.set('showImageModal', true);
-
-			var h = $('body').prop('scrollHeight');
-			var w = window.innerWidth; 
-
-			$('#imageModal').css('width', w);
-			$('#imageModal').css('height', h);
-			$('#imageModal').css('overflow', 'hidden'); 
-			$('#imageModal').css('padding-top', '200px'); 
-	
-			Ember.run.later(function(){
-				_this.set('animateImageModal', true);
-			},100);
+			this.doShowImageModal();
 		},
 
 		closeImageModal: function(){

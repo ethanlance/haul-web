@@ -24,6 +24,9 @@
 .profile-badge {
 	 float: left;
 	 margin-right: 15px;
+	 margin-bottom: 15px;
+	 max-width: 100px;
+	 max-height: 120px;
 
 	img{
 		display:inline-block;
@@ -34,7 +37,9 @@
 
 	.profile-badge-name {
 		height: 20px;
+		width:100%;
 	 	text-align: center;
+	 	overflow: hidden;
 	}
 }
 
@@ -54,6 +59,9 @@
 	}	
 	.glyphicon-user{
 		font-size:100px;
+	}
+	.glyphicon {
+		position: inherit;
 	}
 }
 

@@ -71,14 +71,6 @@ input, select {
     box-shadow: 0 0 0px rgba(51, 153, 51, 1);
 }
 
-#editor{
-	-moz-transition: height 0.2s ease-in-out;
-	-o-transition: height 0.2s ease-in-out;
-	-webkit-transition: height 0.2s ease-in-out;
-	transition: height 0.2s ease-in-out;
-
-	height: 100px; 
-}
 
 //FORM HELPERS
 .input-sm {
@@ -109,12 +101,6 @@ textarea.form-control {
 
 
 
-
-
-
-.ql-editor-col {
-	padding-bottom: 100px;
-}
 
 
 
@@ -347,7 +333,29 @@ span.disabled{
 
 
 
+#editor{
+	-moz-transition: height 0.2s ease-in-out;
+	-o-transition: height 0.2s ease-in-out;
+	-webkit-transition: height 0.2s ease-in-out;
+	transition: height 0.2s ease-in-out;
 
+	//height: 100px; 
+}
+
+
+#toolbar.fixed{
+	z-index: 4000;
+	background-color: white;
+	position:fixed;
+	width: 60%;
+	max-width:671px;
+	border-bottom: 1px solid #ccc;
+}
+
+
+.ql-editor-col {
+	padding-bottom: 100px;
+}
 
 
 
@@ -744,8 +752,8 @@ button.btn-danger{
 	}
 
 	.post-subject {
-		margin-top: 30px;
-		margin-bottom: 30px;
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 
 	.edit-footer {
