@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend({
 
  	needs: ['profile'],
 
- 	statusText: "FOR SALE",
+ 	
 
  	isRepost:false,
 

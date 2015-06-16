@@ -89,8 +89,10 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 
 	product_status_text: function() {
 		var product_status = this.get('product_status');
-		if( product_status === 'FOR_SALE' || product_status === "FOR_SALE_OFFSITE" ) {
+		if( product_status === 'FOR_SALE') {
 			return "FOR SALE";
+		}else if( product_status === "FOR_SALE_OFFSITE" ) {
+			return "FOUND FOR SALE";
 		}else if( product_status === "SOLD") {
 			return "SOLD!";
 		}else{
