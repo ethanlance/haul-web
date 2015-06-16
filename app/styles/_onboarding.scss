@@ -81,6 +81,7 @@
 	background-size: cover;
 	-o-background-size: cover;
 	overflow-x: hidden;
+	border-bottom: 1px solid #efefef;
 
 	.hero-mask {
 		width: 100%;
@@ -175,11 +176,14 @@
 	padding:0;
 
 	margin-bottom:30px;
+	font-size: 0.85em;
+	transition: all 0.2s ease;
 
 	li {
+
 		display: inline;
 		cursor: pointer;
-		color: #ccc;
+		color: #555;
 		text-transform: uppercase;
 
 		padding-right: 40px;
@@ -191,6 +195,11 @@
 
 	li.active {
 		color: $primary-color;
+		font-weight: 800;
+	}
+	li:hover {
+		color: $primary-color;
+		border-bottom:  none;
 	}
 
 }
