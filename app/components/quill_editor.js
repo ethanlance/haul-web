@@ -242,7 +242,7 @@ export default Ember.Component.extend(TransformMixin, {
 			$('#imageModal').css('width', w);
 			$('#imageModal').css('height', h);
 			$('#imageModal').css('overflow', 'hidden'); 
-			$('#imageModal').css('padding-top', '300px'); 
+			$('#imageModal').css('padding-top', '200px'); 
 	
 			Ember.run.later(function(){
 				_this.set('animateImageModal', true);
