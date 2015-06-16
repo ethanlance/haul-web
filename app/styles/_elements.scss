@@ -21,6 +21,25 @@
 	color: $primary-color;
 }
 
+.profile-badge {
+	 float: left;
+	 margin-right: 15px;
+
+	img{
+		display:inline-block;
+	}
+	.thumbnail{
+		margin-bottom:0;
+	}
+
+	.profile-badge-name {
+		height: 20px;
+	 	text-align: center;
+	}
+}
+
+
+
 
 .profile-image {
 	width:100px;
@@ -49,21 +68,7 @@
 	background-color: $primary-color;	
 }
 
-.profile-badge {
-	img{
-		float:left;
-		display:inline-block;
-	}
-	a {
-		padding-left:10px;
-		padding-top:15px;
-		float:left;
-		display:inline-block;
-	}
-	.thumbnail{
-		margin-bottom:0;
-	}
-}
+
 
 .tag-cloud {
 		font-family: $primary-font;

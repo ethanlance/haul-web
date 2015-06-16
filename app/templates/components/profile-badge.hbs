@@ -1,12 +1,12 @@
-<div class="box-rigid text-center">
-  	<div>
-      {{#link-to "profile" profile.username class="pull-left"}}  
+<div class="profile-badge">
+  	
+      {{#link-to "profile" profile.username  }}  
         {{make-icon icon=profile.icon isSmall=isSmall}}
       {{/link-to}}
-    </div>
-    <div>
-      {{#link-to "profile" profile}}  
-        {{profile.username}}
+    
+    <div class="profile-badge-name">
+      {{#link-to "profile" profile.username}}
+        {{profile.get_display_name}}
       {{/link-to}}
     </div>
 </div>
