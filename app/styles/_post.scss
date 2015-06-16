@@ -441,8 +441,8 @@
          	 transition: all 1s ease
 		}
 
-		img:hover {
-			-webkit-filter:  brightness(120%);
+		img a:hover {
+			-webkit-filter:  brightness(110%);
 			cursor: pointer; cursor: hand;
 		}
 
