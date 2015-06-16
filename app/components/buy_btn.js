@@ -1,9 +1,10 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
-
-	allowExternalLink: true,
+ 
 	
 	postBinding:'post',
+
+	isForSaleOffsite: Ember.computed.equal('post.product_status', "FOR_SALE_OFFSITE"),
 
 	isForSale: Ember.computed.equal('post.product_status', "FOR_SALE"),
 
