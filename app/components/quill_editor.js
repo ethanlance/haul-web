@@ -238,9 +238,9 @@ export default Ember.Component.extend(TransformMixin, {
 
 		$('#imageModal').css('z-index', 5001);
 		$('#imageModal').css('width', w);
-		$('#imageModal').css('height', h);
-		$('#imageModal').css('overflow', 'hidden'); 
-		$('#imageModal').css('padding-top', t); 
+		$('#imageModal').css('min-height', h);
+		//$('#imageModal').css('overflow', 'hidden'); 
+		$('#imageModal').css('top', t); 
 
 
 		Ember.run.later(function(){
