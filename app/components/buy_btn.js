@@ -13,7 +13,9 @@ export default Ember.Component.extend({
 
 	actions: {
 		followLink: function() {
-			window.location.href = this.get('post.product_link');
+			//window.location.href = this.get('post.product_link');
+			var url = this.get('post.product_link');
+			window.open(url, "_blank");
 		}
 	}
 });
