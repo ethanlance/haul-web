@@ -195,14 +195,24 @@ export default Ember.Component.extend(TransformMixin, {
 		//TOOLBAR
 		var modal = $('.editorWrapper').parents('.modal')[0];
 
+		//When scroll is finished, move the toolbar
 		var self = this;
-		var fixToolbar = function() {
-			Ember.run.debounce(self, self.toolbarPosition, 15)
-		};
+		$(modal).on('scroll',function() {
+		  clearTimeout($.data(self, 'timer'));
+		  $.data(this, 'timer', setTimeout(function() {
+		     self.toolbarPosition(); 
+		     clearTimeout($.data(self, 'timer'));
+		     console.log('ping')
+		  }, 250));
+		});
 
-		$(modal).on('scroll', fixToolbar );
 
-		$(window).on('resize', fixToolbar );
+		var self = this;
+		$(window).on('resize',function() { 
+		     self.toolbarPosition();
+		});
+
+
 	},
 
 	toolbarPosition: function() { 

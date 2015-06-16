@@ -347,9 +347,9 @@ span.disabled{
 	z-index: 4000;
 	background-color: white;
 	position:fixed;
-	width: 60%;
 	max-width:671px;
 	border-bottom: 1px solid #ccc;
+	transition: top 0.2s ease-in-out;
 }
 
 
