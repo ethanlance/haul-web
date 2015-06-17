@@ -180,26 +180,28 @@
 					</h2>
 
 
-				
-					<div class="profile-pod">
+					{{#unless isForSaleOffsite }}
+						<div class="profile-pod">
 
-						
-					{{#link-to 'profile' product_user.username }}
-						{{make-icon icon=product_user.icon}}
-					{{/link-to}}
+						{{#link-to 'profile' product_user.username }}
+							{{make-icon icon=product_user.icon}}
+						{{/link-to}}
 
-						<div class="profile-name">
-							<span class="name">
+							<div class="profile-name">
+								<span class="name">
 
-								{{#if isForSaleOffsite }}
-									<span class="curated_by">Found By</span>
-								{{/if}}
+									
+										<span class="curated_by">Found By</span>
+								
 
-								{{#link-to 'profile' product_user.username }}{{product_user.get_display_name}}{{/link-to}}
-							</span>
-							<span class="username">{{#link-to 'profile' product_user.username }}@{{product_user.username}}{{/link-to}}</span>
+									{{#link-to 'profile' product_user.username }}{{product_user.get_display_name}}{{/link-to}}
+								</span>
+								<span class="username">{{#link-to 'profile' product_user.username }}@{{product_user.username}}{{/link-to}}</span>
+							</div>
 						</div>
-					</div>
+					{{/unless}}
+
+
 					
 
 					<div class="price">
@@ -207,6 +209,14 @@
 					</div>
 
 					{{buy-btn post=this class="display-inline" }}
+
+
+					{{#if isForSaleOffsite }}
+						<div class="for-sale-at">For sale at: <span class="website">{{product_link_domain}}</span></div>
+					{{/if}}
+
+
+
 
 					{{#if product_images}}
 						{{image-carousel content=product_images}}

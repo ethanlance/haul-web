@@ -87,12 +87,23 @@ export default DS.Model.extend(EmberValidations.Mixin, {
 
 	}.property('product_status', 'user_id', 'product_user_id'),
 
+	product_link_domain: function() {
+
+		var parser = document.createElement('a');
+		
+		parser.href = this.get('product_link');
+		
+		var domain  = parser.hostname;
+
+		return domain;
+	}.property('product_link'),
+
 	product_status_text: function() {
 		var product_status = this.get('product_status');
 		if( product_status === 'FOR_SALE') {
 			return "FOR SALE";
 		}else if( product_status === "FOR_SALE_OFFSITE" ) {
-			return "FOUND FOR SALE";
+			return "FOR SALE";
 		}else if( product_status === "SOLD") {
 			return "SOLD!";
 		}else{
