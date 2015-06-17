@@ -29,8 +29,8 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 	html = html.replace(/\n/g, " <br> ");
 
 	//Text links to html links
-	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    html = html.replace(exp,"<a href='$1'>$1</a>"); 
+	//var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    //html = html.replace(exp,"<a href='$1'>$1</a>"); 
 
 	var sanitized = sanitize(html, config);
 
@@ -42,7 +42,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, 
 	words.forEach(function(word){
 		
 		//MENTIONS
-		match = word.match(/^@.*[^\s]$|^[^@].*,$/);
+		match = word.match(/^@.*[^\s]$/);
 		if( match) {
 			username = word.split('@')[1];
 	  		if( username !== 'undefined' && username !== undefined ){
