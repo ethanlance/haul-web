@@ -13,12 +13,26 @@ export default Ember.Route.extend( {
 	model: function() {
 		var _this = this;
 
+
+		return this.store.find('feed', {user_id: _this.get('session.user_id'), limit:this.get('limit')});
+	},
+
+
+	model: function() {
+		var _this  = this;
+
+
 		if(!_this.get('session.user_id')){
 			this.transitionTo('discover');	
 		}
 
-		return this.store.find('feed', {user_id: _this.get('session.user_id') });
-	},
+		return this.store.find('feed', {user_id: _this.get('session.user_id'), limit:this.get('limit')} )
+		.then(function(){
+			return _this.store.filter('feed', function(result){ 
+				return result; 
+			});
+		});
+	}, 
 	
 	setupController: function(controller, model) {
 		controller.set('limit', this.get('limit'));
