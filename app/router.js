@@ -85,7 +85,17 @@ Router.map(function(){
 	});
 
 	this.route('search');	
+
 	this.route('discover');
+	this.route('motors');
+	this.route('outdoor');
+	this.route('gear');
+	this.route('art');
+	this.route('living');
+	this.route('music');
+	this.route('books');
+	this.route('style');
+	this.route('fashion');
 
 	this.route('not_found');
 	this.route('not_authorized');
