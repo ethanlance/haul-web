@@ -46,8 +46,42 @@
 				
 			{{/link-to}}
 
+			<span class="hide-on-small">
+				<div class="post-image-overlay">	
+					
+					{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
+					<div class="post-info">
 
-			<div class="post-image-overlay">	
+						<div class="product-status">
+							{{post.product_status_text}}
+							<div class="product-price">${{post.product_price}}</div> 
+						</div>
+
+							<div class="product-deets">
+								<div class="product-title">{{post.post.product_name}}</div>
+
+								{{!-- CURATED or SELLING --}}
+								{{!-- CURATED or SELLING --}}
+								{{!-- CURATED or SELLING --}}
+								{{!-- CURATED or SELLING --}}
+								
+								{{#if post.postOwnerIsSeller}}
+									<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+								{{else}}
+									<div class="product-owner"><span class="pre-text">Found by</span> {{post.product_user.get_display_name}}</div>
+								{{/if}}
+							</div>			
+						</div>
+					{{/link-to}}
+				</div>
+			</span>
+
+		</div>
+
+
+		<div class="post-bottom-cap">
+			
+			<span class="show-on-small">
 				
 				{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 				<div class="post-info">
@@ -60,8 +94,6 @@
 					<div class="product-deets">
 						<div class="product-title">{{post.post.product_name}}</div>
 
-						
-
 						{{!-- CURATED or SELLING --}}
 						{{!-- CURATED or SELLING --}}
 						{{!-- CURATED or SELLING --}}
@@ -72,21 +104,11 @@
 						{{else}}
 							<div class="product-owner"><span class="pre-text">Found by</span> {{post.product_user.get_display_name}}</div>
 						{{/if}}
-					</div>
-
-					
-
+					</div>			
 				</div>
 				{{/link-to}}
 
-			</div>
-
-		</div>
-
-
-		<div class="post-bottom-cap">
-			
-			
+			</span>
 				
 
 
@@ -98,7 +120,9 @@
 
 				{{repost-btn post=post openModal='openModal' class="display-inline"}}
 
-				{{buy-btn post=post allowExternalLink=allowExternalLink class="display-inline btn-right btn-buy-this" }}
+				<span class="hide-on-small">
+					{{buy-btn post=post allowExternalLink=allowExternalLink class="display-inline btn-right btn-buy-this" }}
+				</span>
 			</div>
 
 		</div>
