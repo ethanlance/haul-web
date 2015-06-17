@@ -7,7 +7,7 @@ export default Ember.Route.extend(AnonMixin, {
 		if( this.get('session').isAuthenticated ){
 			this.get('session').invalidate();	
 		}
-		
-		this.transitionTo('discover');
+		window.location = "/discover";
+		//this.transitionTo('discover');
 	}
 });

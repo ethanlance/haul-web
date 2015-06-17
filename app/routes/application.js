@@ -25,6 +25,7 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
   	currentUserChanged: function() {
   		if( this.get('currentUserId') && !this.get('currentUsername')) {
   			this.transitionTo('signupusername');
+  			//location.href = "/signupusername";
   		}
   	}.observes('currentUserId'),
 
@@ -92,12 +93,17 @@ export default Ember.Route.extend(ApplicationRouteMixin,{
 					if(Ember.isEmpty(attemptedTransition)){  
 						
 						_this.transitionTo("home");
+
+						//window.location = "/home";
+
+
 					}else{
 						attemptedTransition.retry();
             			_this.set('attemptedTransition', null);
 					}
 				} else {
 					_this.transitionTo("signupusername");
+					//window.location = "/signupusername";
 				}
 			});
 		},

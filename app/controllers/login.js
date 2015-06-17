@@ -121,10 +121,12 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 			var _this = this;
 
 			return this.socialApiClient.load()
+
+
+			//Sign this user in via FB.
 			.then(function(FB){
 			
 				return new Ember.RSVP.Promise(function(resolve, reject) {
-
 					FB.login(function(response){
 					  	if (response.authResponse) {
 					  		_this.get('controllers.facebook').set('facebook_user_id', response.authResponse.userID);
@@ -141,10 +143,12 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 				});
 			})
 			
+			//Create a HAUL user for this FB user.
 			.then(function(response) {
 				return _this.createUserByFB(response); 
 			})
 			
+			//Log this Haul user in.
 			.then(function(response){
 				var data = { 
 					fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
@@ -159,7 +163,8 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 				}, 
 				function onReject(error) {
 					
-					//User exists already.  Try to login them in.
+					//A Haul user already exists for this FB user.
+					// -- instead log this user in.
 					if( error.status === 409){
 						var data = { 
 							fb_user_id: _this.get('controllers.facebook.facebook_user_id'), 
@@ -182,9 +187,6 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 						console.error("Failed Signup", error);
 						_this.set('isProcessingFacebook', false);
 						_this.set('showErrorsFB', true);	
-
-
-						
 
 						if( error.hasOwnProperty('responseText')) {
 							var obj = JSON.parse(error.responseText);

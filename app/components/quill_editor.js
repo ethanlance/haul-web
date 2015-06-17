@@ -77,39 +77,6 @@ export default Ember.Component.extend(TransformMixin, {
 
 	},
 
-	
-	triggerResizeChanged: function() {
-		// if( this.get('triggerResize') ) {
-		// 	this.resize();
-		// }
-	}.observes('triggerResize'),
-
-
-	resize: function() {
-		// var el = $('#editor');	
- 		
- 	// 	var top = 0;
-		// var h = null;
-		// if( this.get('height')) {
-		// 	h = this.get('height');
-		// } else {
-		// 	try{
-		// 		top = el.parent().offset().top;
-		// 	}catch(e){
-		// 		//
-		// 	}
-		// 	var scrollTop = $(window).scrollTop();
-		// 	var height = window.outerHeight;
-		// 	h = height - (top - scrollTop) - this.get('variance');
-		// }
-
-		// if( h < this.get('minHeight') ) {
-		// 	h = this.get('minHeight');
-		// }
-
-		// $('#editor').css("height", h);	 
-	},
-
 
 	//Method for finding images that are not the correct size and changing them.
 	convertImages: function() {
@@ -143,14 +110,6 @@ export default Ember.Component.extend(TransformMixin, {
 
 		var _this = this; 
 
-		// //RESIZE:
-		// $( window ).resize(function() {
-		// 	Ember.run.bind(_this, _this.resize());
-		// });
-			
-		// Ember.run.later(function(){
-		// 	Ember.run.bind(_this, _this.resize());
-		// }, 1000);
 			
  		var editor = new Quill('#editor',{
 		  	modules: {
@@ -202,7 +161,6 @@ export default Ember.Component.extend(TransformMixin, {
 		  $.data(this, 'timer', setTimeout(function() {
 		     self.toolbarPosition(); 
 		     clearTimeout($.data(self, 'timer'));
-		     console.log('ping')
 		  }, 250));
 		});
 
@@ -227,7 +185,9 @@ export default Ember.Component.extend(TransformMixin, {
 		if( top < 20 ||  b > top ) {
 			var t = $(modal).scrollTop();
 			var w = $('.editorWrapper').width();
-			$(toolbar).addClass('fixed').css('top', t).css('width', w)
+			if( w > 0 ){
+				$(toolbar).addClass('fixed').css('top', t).css('width', w);
+			}
 		}else{
 			$(toolbar).removeClass('fixed');
 		} 
@@ -244,12 +204,9 @@ export default Ember.Component.extend(TransformMixin, {
 		var modal = $('.editorWrapper').parents('.modal')[0];		
 		var t = $(modal).scrollTop();
 
-		console.log("T", t);
-
 		$('#imageModal').css('z-index', 5001);
 		$('#imageModal').css('width', w);
 		$('#imageModal').css('min-height', h);
-		//$('#imageModal').css('overflow', 'hidden'); 
 		$('#imageModal').css('top', t); 
 
 
@@ -283,7 +240,6 @@ export default Ember.Component.extend(TransformMixin, {
 	}.observes('requestContents'),
 
 	closeImageModal: function() {
-		console.log("CLOSE");
 		var _this = this;
 		this.set('animateImageModal', false);
 		Ember.run.later(function(){
@@ -307,7 +263,6 @@ export default Ember.Component.extend(TransformMixin, {
 		}, 
 
 		refresh: function(image) {
-			console.log("KABOOM", image)
 			this.injectImage(image);
 			this.closeImageModal();
 		}, 
