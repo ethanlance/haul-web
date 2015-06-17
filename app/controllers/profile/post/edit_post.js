@@ -74,26 +74,20 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		}
 
 		var obj = [];	
+		var ids = [];
 		this.get('productImages').forEach(function(image){
 			obj.push(image);
+			ids.push(image.id);
 		});
 		this.set('selectedImages', obj);
+
+		var model = this.get('model');
+		model.set('product_image_ids', ids);
 
 	}.observes('productImages.@each', 'model'),
 
 
-	//Observer: anytime our array of selected images changes, update
-	// our list of image_ids.
-	imagesIdsChanged: function() {
-		var ids = this.get('selectedImages').map(function(image) {
-			return image.get('id');
-		}); 
-		//Set the images on the model.
-		var model = this.get('model');
-		model.set('product_image_ids', ids); 
-		model.set('image_id', ids[0]); 
 
-	}.observes('selectedImages.@each'),
 
 
 	deletePost: function() {
@@ -116,7 +110,6 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			}
 
 			
-
 		})
 		.then(function(record){
 
@@ -140,6 +133,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			body = " ";
 		}
 		model.set('body', body);
+
 
  		//Model Validations:
 		model.validate()
