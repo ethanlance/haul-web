@@ -625,6 +625,11 @@
 		}
 	}
 
+	.carousel-indicators {
+		@media (max-width: 400px) {
+			z-index: 0;
+		}
+	}
 
 	.carousel-inner > .item > {
 		img, a > img {
