@@ -208,7 +208,20 @@
 
 
 
+.curated{
 
+	.curated-header{
+
+		h1 {
+			float:none;
+			text-transform: capitalize;
+		}
+
+		text-align: left;
+
+		padding-bottom: 15px;
+	}
+}
 
 
 
