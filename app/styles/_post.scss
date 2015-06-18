@@ -76,10 +76,10 @@
 	color: #F76664;
 
 	.profile-image{
-		width: 28px;
-		height: 28px;
+		width: 20px;
+		height: 20px;
 		.glyphicon-user{
-			font-size:28px;
+			font-size:20px;
 		}
 	}
 
@@ -608,14 +608,18 @@
 
 
 	.for-sale-at { 
-		padding-top:10px;
-		font-size: 16px;
+		padding-top:0px;
+		font-size: 12px;
 		display:inline-block;
-		font-weight: bold;	
+		font-weight:800;
+		color: $primary-color;	
+		text-transform: uppercase;
 
 		.website{
-			font-size: 14px;
-			font-weight: normal;	
+			font-size: 12px;
+			font-weight: 500;
+			color: $primary-color;
+			text-transform: none;	
 		}
 	}
 

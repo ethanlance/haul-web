@@ -179,6 +179,12 @@
 						{{product_name}}
 					</h2>
 
+					{{#if isForSaleOffsite }}
+					<div class="profile-pod">
+						<div class="for-sale-at">For sale at: <span class="website">{{product_link_domain}}</span></div>
+						</div>
+					{{/if}}
+
 
 					{{#unless isForSaleOffsite }}
 						<div class="profile-pod">
@@ -202,6 +208,8 @@
 					{{/unless}}
 
 
+
+
 					
 
 					<div class="price">
@@ -211,9 +219,7 @@
 					{{buy-btn post=this class="display-inline" }}
 
 
-					{{#if isForSaleOffsite }}
-						<div class="for-sale-at">For sale at: <span class="website">{{product_link_domain}}</span></div>
-					{{/if}}
+					
 
 
 
