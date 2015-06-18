@@ -10,13 +10,6 @@ export default Ember.Route.extend( {
 		return "Your Feed";
 	}.property(),	
 
-	model: function() {
-		var _this = this;
-
-
-		return this.store.find('feed', {user_id: _this.get('session.user_id'), limit:this.get('limit')});
-	},
-
 
 	model: function() {
 		var _this  = this;

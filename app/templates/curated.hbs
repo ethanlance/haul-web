@@ -1,17 +1,15 @@
 
 
-<div class="curated">
-
-
 <header class="basic">
-<div class="container">	
-	<div class="curated-header">
+<div class="container-fluid">	
+	<div class="header-basic">
 
-		<h1>Haul {{category}}</h1>
+		<h2>Haul {{category}}</h2>
+		<span class="clearfix"></span>
+		<span class="blurb">Curated by haul staff member {{#link-to 'profile' user.username}}{{user.get_display_name}}{{/link-to}}.  The posts below are from Haul users.</span>
+		
 
-		<div>Curated by haul staff member {{user.display_name}}.  The posts below are from Haul users.</div>
 	</div>
-
 </div>
 </header>
 
@@ -97,4 +95,3 @@
 	</div>
 </div>
 
-</div>

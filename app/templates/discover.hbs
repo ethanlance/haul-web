@@ -28,8 +28,8 @@
 <div class="container-fluid">	
 	<div class="header-basic">
 
-		<h2 {{bind-attr class="showResults:hide:show"}}>Discover</h2>
-<span class="clearfix"></span>
+		<h2>Discover</h2>
+		<span class="clearfix"></span>
 		<span class="blurb">A curated selection of interesting and recent posts from the community, hand-picked by the Haul staff.</span>
 		
 
@@ -61,10 +61,17 @@
 				
 				<div class="haul-fluid-content center-on-collapse padding-top grid-spacing">
 
-					<ul class="discover-categories">
+					{{!-- <ul class="discover-categories">
 					<li class="featured active" {{action 'clickCategory' 'featured'}}>featured</li>
 					{{#each cat in categories}}
 						<li {{bind-attr class="cat"}} {{action 'clickCategory' cat}}>{{cat}}</li>
+					{{/each}}
+					</ul> --}}
+
+					<ul class="discover-categories">
+						<li class="featured active">{{#link-to "discover"}}featured{{/link-to}}</li>
+					{{#each cat in categories}}
+						<li {{bind-attr class="cat"}}>{{#link-to cat}}{{cat}}{{/link-to}}</li>
 					{{/each}}
 					</ul>
 						

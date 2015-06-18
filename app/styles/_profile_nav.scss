@@ -45,6 +45,10 @@ header.basic {
 			font-size: 12px;
 			font-style: italic;
 			letter-spacing: -0.01em;
+
+			a {
+				color: $primary-color;
+			}
 		}
 		
 	}
