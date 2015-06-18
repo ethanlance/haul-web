@@ -19,16 +19,32 @@ header.basic {
 		display: inline-block;
 
 		h1 {
+			font-family: 'Arvo';
+			font-weight: 800;
 			float:left;
 			margin-top:0;
+			color:$primary-color;
 		}
 
 		h2 {
+			font-family: 'Arvo';
+			font-weight: 800;
 			float:left;
 			margin-top:0;
-			font-weight: 800;
+			font-size: 34px;
 			text-transform: none;
 			letter-spacing: -0.03em;
+			margin-bottom: 0px;
+		}
+		.blurb {
+			float:left;
+			padding-top: 4px;
+			padding-bottom:10px;
+			font-family: $primary-font;
+			color:#666;
+			font-size: 12px;
+			font-style: italic;
+			letter-spacing: -0.01em;
 		}
 		
 	}
