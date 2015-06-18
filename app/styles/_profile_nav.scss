@@ -133,7 +133,7 @@ header.profile{
 		}
 
 		.bio {
-			margin-top: 8px;
+			margin-top: 6px;
 
 			max-width: 600px;
 			@media (max-width: 700px) {
@@ -153,7 +153,7 @@ header.profile{
 			overflow: hidden;
 			transition: max-height 0.2s ease;
 			cursor: pointer;
-			color: #999;
+			color: #555;
 
 			a.tag-cloud {
 					font-family: $primary-font;
