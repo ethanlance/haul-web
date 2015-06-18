@@ -7,7 +7,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, ResetScrollMixin, {
 	beforeModel: function(transition) {
         this._super(transition);
         if( this.modelFor('profile').get('id') !== this.get('session.currentUser.id')){
-        	this.transitionTo('not-authorized');
+        	this.transitionTo('not_authorized');
         }
 	},
 

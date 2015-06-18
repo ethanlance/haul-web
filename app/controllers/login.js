@@ -40,6 +40,8 @@ export default Ember.ObjectController.extend(ErrorMixin,{
 	
 	model: {},
 
+	hideCancelBtn: false, //do not remove this. breaks anon users trying to hit page that requires auth.
+
 	//Hide API Errors when changes are made to email field.
 	emailChanged: (function() {	
 		this.set('error', false);
