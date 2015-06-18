@@ -202,26 +202,25 @@
 		border-bottom:  none;
 	}
 
-}
 
-
-
-
-
-.curated{
-
-	.curated-header{
-
-		h1 {
-			float:none;
-			text-transform: capitalize;
+	li{
+		a.active {
+			color: $primary-color;
+			font-weight: 800;
+			text-decoration: none;
 		}
-
-		text-align: left;
-
-		padding-bottom: 15px;
+		a:hover {
+			color: $primary-color;
+			border-bottom:  none;
+			text-decoration: none;
+		}
 	}
+
 }
+
+
+
+
 
 
 
