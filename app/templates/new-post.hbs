@@ -105,17 +105,18 @@
 						<h2>Add photos</h2>
 
 
-						{{#image-picker 
-							images=userImages
-							selectedImages=selectedImages
-							refresh='refresh'
+						{{#image-uploader
+
+							
+							imageHasUploaded='refresh' 
+
 							imageClick='imageClick' 
+
 							imageDelete='imageDelete'
 							
-							showImagePicker=showImagePicker
 						}} 
 							{{view 'sortable' content=selectedImages}}
-						{{/image-picker}}
+						{{/image-uploader}}
 
 						{{#if showImageError}}
 							<span class="has-error help-block">A product needs at least one image</span>
@@ -194,7 +195,20 @@
 
 						</h2>
 
-						{{input subject label="false" class="post-subject" }} 
+						{{input subject label="false" class="post-subject" placeholder="Your post's title"}} 
+
+
+						<h2>Your Post's Main Image</h2>
+
+						{{image-uploader 
+
+							singleImage=image 
+
+							imageHasUploaded='mainImageChanged'
+
+							singleImageButtonText='change'
+
+						}}
 
 						{{quill-editor 
 							setEditorImgSrc=setEditorImgSrc

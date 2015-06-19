@@ -224,5 +224,11 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			this.savePost();
 		},
 
+		mainImageChanged: function(image) {
+			var model = this.get('model');
+			model.set('image_id', image.id);
+			model.set('image', image);
+		}
+
 	}
 });

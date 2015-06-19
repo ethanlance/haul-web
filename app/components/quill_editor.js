@@ -68,6 +68,10 @@ export default Ember.Component.extend(TransformMixin, {
 		var cursorPosition = this.get('cursorPosition');
 
 		var text = image.get('small');
+		if( !text ) {
+			text = image.get('thumb');
+		}
+
 
 		if( cursorPosition ) {
 			editor.insertEmbed(cursorPosition, 'image', text);
@@ -184,12 +188,12 @@ export default Ember.Component.extend(TransformMixin, {
 
 		if( top < 20 ||  b > top ) {
 			var t = $(modal).scrollTop();
-			var w = $('.editorWrapper').width();
+			var w = $('.editorWrapper').width() + 1;
 			if( w > 0 ){
 				$(toolbar).addClass('fixed').css('top', t).css('width', w);
 			}
 		}else{
-			$(toolbar).removeClass('fixed');
+			$(toolbar).removeClass('fixed').css('width', '100%');
 		} 
 	},
 
@@ -262,7 +266,7 @@ export default Ember.Component.extend(TransformMixin, {
 			this.closeImageModal();
 		}, 
 
-		refresh: function(image) {
+		injectImage: function(image) {
 			this.injectImage(image);
 			this.closeImageModal();
 		}, 

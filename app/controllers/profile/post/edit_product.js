@@ -106,6 +106,29 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 	},
 
 
+
+	/*
+		Enforce numbers only
+	*/
+	prevPrice: null,
+	prevShipping: null,
+	priceCleaner: function(){
+		var model = this.get('model');
+
+		//Product Price
+		if( model.get('product_price') && model.get('product_price') !== this.get('prevPrice') ) {
+			model.set('product_price', this.get('product_price').replace(/\D/g,''))
+			this.set('prevPrice', model.get('product_price'));
+		}
+
+		//Product Shipping
+		if( model.get('product_shipping') &&  model.get('product_shipping') !== this.get('prevShipping') ) {
+			model.set('product_shipping', this.get('product_shipping').replace(/\D/g,''))
+			this.set('prevShipping', model.get('product_shipping'));
+		}
+		
+	}.observes('model.product_shipping','model.product_price'),
+
 	/* 
 		Get and set the products images. 
 	*/

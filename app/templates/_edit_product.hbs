@@ -3,17 +3,16 @@
 
 		<h2>Post something for sale</h2>
 
-		{{#image-picker 
-			images=userImages
-			selectedImages=selectedImages
-			refresh='refresh'
-			imageClick='imageClick' 
-			imageDelete='imageDelete'
+		{{#image-uploader
+
+			imageHasUploaded='refresh'
 			
-			showImagePicker=showImagePicker
+			imageClick='imageClick' 
+
+			imageDelete='imageDelete'
 		}} 
 			{{view 'sortable' content=selectedImages}}
-		{{/image-picker}}
+		{{/image-uploader}}
 
 		{{#if showImageError}}
 			<span class="has-error help-block">A product needs at least one image</span>

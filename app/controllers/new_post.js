@@ -413,6 +413,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var model = this.get('model');
 		model.set('product_image_ids', this.get('productImageIds')); 
 		model.set('image_id', this.get('productImageIds')[0]); 
+		model.set('image', this.get('selectedImages')[0]); 
 
 
 		//If the post body has no content, then add the main image as content.
@@ -978,6 +979,10 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			this.importLink();
 		},
 
-
+		mainImageChanged: function(image) {
+			var model = this.get('model');
+			model.set('image_id', image.id);
+			model.set('image', image);
+		}
 	}
 });

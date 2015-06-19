@@ -33,7 +33,20 @@
 
 
 	  	&.sm { 
-	  		width:400px;
+	  		width: 100%;
+	  		max-width:400px;
+	  		margin-left:auto;
+	  		margin-right:auto;
+
+	  		.modal-content {
+	  			border: 1px solid #eee;
+	  			height: auto;
+	  		}
+	  	}
+
+	  	&.md { 
+	  		width: 100%;
+	  		max-width:600px;
 	  		margin-left:auto;
 	  		margin-right:auto;
 
@@ -133,7 +146,7 @@
 		opacity: 1; 
 
 
-	  	&.sm {
+	  	&.sm, .md {
 	  		margin-top:10%; 
 	  	}
 

@@ -1,26 +1,40 @@
 <div class="edit-row">
 	<div class="edit-col">
 
-		<h2>Edit your post
+		<h2>A Catchy Post Title</h2>
 
-			<small>Tell a us story about this product.</small>
+		{{input subject label="false" class="post-subject" placeholder="Title of your post"}} 
 
-		</h2>
+		
 
-		{{input subject label="false" class="post-subject" }} 
+		<h2>Your Post's Main Image</h2>
 
+		{{image-uploader 
 
+			singleImage=image 
 
+			imageHasUploaded='mainImageChanged'
+
+			singleImageButtonText='change'
+
+		}}
+		
 
 
 		{{quill-editor 
+			
 			setEditorImgSrc=setEditorImgSrc
+			
 			setEditorText=setEditorText 
+			
 			content=body
+			
 			quillChange='quillChange' 
+			
 			requestContents=requestEditorContents
+			
 			selectedImages=selectedImages
-			triggerResize=triggerEditorResize
+			
 		}} 
 
 	</div>

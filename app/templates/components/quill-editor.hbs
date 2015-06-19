@@ -34,7 +34,7 @@
 
 
 	<div {{bind-attr class=":modal :noScroll animateImageModal:in:out showImageModal:show:hide"}} id="imageModal">
-		<div class="modal-dialog sm text-left haul-edit"  id="imageModalDialog">
+		<div class="modal-dialog md text-left haul-edit"  id="imageModalDialog">
 			<div class="modal-content">
 				<div class="modal-body text-center">
 					<button {{action 'closeImageModal'}} id="closeImageModal" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -43,7 +43,7 @@
 
 							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Product Images</a></li>
 
-							<li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">
+							<li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
 								Upload Image
 							</a></li>
 						</ul>
@@ -52,26 +52,24 @@
 							<div class="tab-pane active" id="tab1">
 
 								<div id="gallery" class="editor-gallery">   		
-									{{#each image in selectedImages}}
-										{{#if image.thumb}}<img
-											{{bind-attr src=image.thumb}} 
-											{{bind-attr id=image.id}}  
-											{{action 'refresh' image}}/>{{/if}}
+									{{#each img in selectedImages}}
+										{{#if img.thumb}}<img
+											{{bind-attr src=img.thumb}} 
+											{{bind-attr id=img.id}}  
+											{{action 'injectImage' img}}/>{{/if}}
 									{{/each}}
 								</div>
 								
 							</div>	
 
-
-							<div class="tab-pane" id="tab2">
+							<div class="tab-pane" id="tab3">
 							
-								{{image-picker 
-									images=userImages
-									refresh='refresh'
-									imageClick='imageClick' 
-									imageDelete='imageDelete'
-									showImagePicker=showImagePicker
+								{{image-uploader 
+									
+									imageHasUploaded='injectImage'
+									
 									maxFiles=1
+									
 								}}
 							</div>
 						</div>

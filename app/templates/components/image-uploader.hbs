@@ -1,0 +1,50 @@
+
+<div class="haul-image-uploader"> 
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="upload-images">
+
+				{{!-- Need yield for the selected images that you may want to display --}}
+				{{yield}}
+
+				{{!-- Images as they upload go here --}}
+				<ul id="uploading">
+					
+					{{!-- 	If component is set to upload and override another single image. --}}
+					{{#if isSingleImage }}
+						<li {{bind-attr class="hideSingleImage:hide"}}><img {{bind-attr src=singleImage.thumb}} /></li>
+					{{/if}}
+
+				</ul>
+
+			</div> 
+		</div>
+	</div>
+
+	<div {{bind-attr class=":row showUploader:show:hide"}}>
+		<div class="col-md-12 col-sm-12 col-xs-12 ">
+
+			{{!-- OVERLAY THE FILE BUTTON --}}
+			<div id='haul-dropzone-browse'>
+
+			{{#if isSingleImage }}
+			
+				<button class="btn btn-default btn-change-photo">{{ singleImageButtonText }}</button>
+
+			{{else}}
+			
+				<div class="image-drop dashed">
+					<i class="fa fa-plus"></i>
+					<i class="fa fa-camera fa-1x"></i>
+
+					<div {{bind-attr class="canUploadMultiple:show:hide"}}>Upload one or more photos</div>
+					<div {{bind-attr class="canUploadMultiple:hide:show"}}>Upload one photo</div>
+				</div>
+			
+			{{/if}}
+
+			</div>
+		</div>	
+	</div>
+</div> 
