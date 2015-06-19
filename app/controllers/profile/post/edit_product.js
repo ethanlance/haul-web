@@ -165,7 +165,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		var model = this.get('model');
 
 		model.set('product_image_ids', ids); 
-		model.set('image_id', ids[0]); 
+		
 
 	}.observes('selectedImages.@each'),
 
@@ -250,7 +250,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
  		//Model Validations:
 		model.validate()
 		.then(
-			function validateSuccess(){
+			function validateSuccess(){	
 				return model.save();
 			}
 		)
