@@ -5,15 +5,10 @@ import TransformMixin from '../mixins/transform';
 export default Ember.Handlebars.makeBoundHelper(function(html, ENV, options) {
 
 	
-
 	if(Ember.isEmpty(html) || html == undefined){
 		return new Ember.Handlebars.SafeString('');
 	}
 
-
-
-
- 
 	//Find the first paragraph without an image.
 	var div = $(document.createElement('div')).html(html);
 	var html = "";
@@ -24,7 +19,7 @@ export default Ember.Handlebars.makeBoundHelper(function(html, ENV, options) {
 		text = text.trim();
 		var len = 499;
 		if( text ){
-			console.log(text)
+			
 			html = text.substring(0,len);
 
 			html = html.trim();
@@ -40,7 +35,6 @@ export default Ember.Handlebars.makeBoundHelper(function(html, ENV, options) {
 	}	
 	
 	
-
 	html = html.replace(/<div>/g, "<p>");
 	html = html.replace(/<\/div>/g, "</p>");
 	html = html.replace(/\n/g, " <br> ");
