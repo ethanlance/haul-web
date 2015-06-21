@@ -24,6 +24,10 @@ export default Ember.Handlebars.makeBoundHelper(function(html, ENV, options) {
 
 			html = html.trim();
 			if(html && html.substring(html.length-1) !== "." && html.substring(html.length-1) !== "!" && html.substring(html.length-1) !== "?") {
+
+				if( html.substring(html.length-1) === "," ) {
+					html = html.substring(0,html.length-1)
+				}
 				html = html + "...";
 			}
 			return false;
