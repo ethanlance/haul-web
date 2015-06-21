@@ -237,6 +237,10 @@ export default Ember.Component.extend( PaginateMixin, {
         doReply: function(mention) {
             this.redirectToMessage(mention);
         },
+
+        doDismiss: function(mention) {
+            this.markMentionAsRead(mention);
+        },
     }
 
 });

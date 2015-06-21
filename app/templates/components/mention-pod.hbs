@@ -42,9 +42,18 @@
 				
 				{{sanitizehtml-andtag post.comment "comment" ENV}}
 				
-				<!--<span class="reply pull-right" {{action "doReply" post}}>
-					REPLY&nbsp;<i class="fa fa-angle-double-right"></i>
-				</span>-->
+				<div class="pull-right">
+					
+					<span class="reply" {{action "doDismiss" post}}>
+						DISMISS
+					</span>
+					
+					<span class="reply" {{action "doReply" post}}>
+						REPLY&nbsp;<i class="fa fa-angle-double-right"></i>
+					</span>
+
+				</div>
+
 			</span>
 		</div>
 	</div>
