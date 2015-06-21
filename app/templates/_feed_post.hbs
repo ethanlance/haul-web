@@ -22,6 +22,7 @@
 	</h1>
 
 
+
 	{{!-- //REPOST --}}
 	{{#if post.repost_id}}
 	<div class="repost-citations">
@@ -36,6 +37,8 @@
 		</span>
 	</div>
 	{{/if}}
+
+	<div class="body">{{first-paragraph post.post.body ENV }}</div>
 
 	<div class="post-content">
 		<div class="post-image">
@@ -79,7 +82,9 @@
 
 
 		<div class="post-bottom-cap">
+				
 			
+
 			<span class="show-on-small">
 				
 				{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}

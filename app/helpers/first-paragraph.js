@@ -2,32 +2,51 @@ import { sanitize } from 'ember-sanitize/utils/sanitize';
 import Ember from 'ember';
 import TransformMixin from '../mixins/transform';
 
-export default Ember.Handlebars.makeBoundHelper(function(html, configName, ENV, options) {
+export default Ember.Handlebars.makeBoundHelper(function(html, ENV, options) {
 
-	if(Ember.isEmpty(html)){
-		return new Ember.Handlebars.SafeString(html);
+	
+
+	if(Ember.isEmpty(html) || html == undefined){
+		return new Ember.Handlebars.SafeString('');
 	}
 
-	if (arguments.length === 2) {
-		options    = configName;
-		configName = null;
-	}
 
-	var config;
-	if (configName) {
-		var data      = options.data;
-		var container = this.container || (data && data.view && data.view.container);
-		var config    = container.lookup("sanitizer:"+configName);
-	}
+
+
+ 
+	//Find the first paragraph without an image.
+	var div = $(document.createElement('div')).html(html);
+	var html = "";
+	div.children('div').each(function(i, div){
+
+		var text = $(div).text();
+		text = text.replace(/\[(.*?)\]/g, " ");//.trim();
+		text = text.trim();
+		var len = 499;
+		if( text ){
+			console.log(text)
+			html = text.substring(0,len);
+
+			html = html.trim();
+			if(html && html.substring(html.length-1) !== "." && html.substring(html.length-1) !== "!" && html.substring(html.length-1) !== "?") {
+				html = html + "...";
+			}
+			return false;
+		}		
+	});
+
+	if(Ember.isEmpty(html) || html == undefined){
+		return new Ember.Handlebars.SafeString('');
+	}	
+	
+	
 
 	html = html.replace(/<div>/g, "<p>");
 	html = html.replace(/<\/div>/g, "</p>");
 	html = html.replace(/\n/g, " <br> ");
 
-	//Text links to html links
-	//var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    //html = html.replace(exp,"<a href='$1'>$1</a>"); 
-
+	
+    var config    = this.container.lookup("sanitizer:editorial");
 	var sanitized = sanitize(html, config);
 
 
