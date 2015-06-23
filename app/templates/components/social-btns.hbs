@@ -14,7 +14,7 @@
 	data-layout="button_count"
 }} --}}
  
-
+{{!-- 
 {{twitter-btn
 	classNames="twitter-share-btn"
 	text=post.subject
@@ -27,5 +27,25 @@
 	classNames="facebook-share-btn"
 	data-layout="button_count"
 	data-href=post.url
+}} --}}
+
+
+{{social-share 
+	type="facebook"
+	post=post
+	class="display-inline"
 }}
 
+
+{{social-share 
+	type="twitter"
+	post=post
+	class="display-inline"
+}}
+
+
+{{social-share 
+	type="pinterest"
+	post=post
+	class="display-inline"
+}}
