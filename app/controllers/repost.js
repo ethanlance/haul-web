@@ -67,6 +67,8 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 			'user_id': currentUserId,
 			'repost_id': post.get('post_id'),
 			'repost_user_id': post.get('user').get('id'),	
+			'image_id': post.get('image_id'),
+			'image': post.get('image')
 		});
 
  		
@@ -115,7 +117,7 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 
 		var model = this.get('model');
 		model.set('product_image_ids', ids); 
-		model.set('image_id', ids[0]); 
+		//model.set('image_id', ids[0]); 
 
 	},
 
@@ -193,6 +195,12 @@ export default Ember.ObjectController.extend(ErrorMixin, {
 		quillChange: function(text) { 
 			this.set('editorialForBody', text);
 			this.savePost();
+		},
+
+		mainImageChanged: function(image) {
+			var model = this.get('model');
+			model.set('image_id', image.id);
+			model.set('image', image);
 		}
 	}
 });
