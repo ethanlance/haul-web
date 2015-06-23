@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
 	currentUserIdBinding: "session.currentUser.id",
 
-	limit:20,
+	limitBinding: 'this.ENV.paginationLimit.posts',
 
 	usernameFilter: 'haul',
 

@@ -105,7 +105,7 @@ export default Ember.Component.extend({
 				});
 
 
-				store.find('user-likes-list', {user_id: _this.get('currentUserId') } );
+				store.find('user-likes-list', {user_id: _this.get('currentUserId'), limit:5 } );
 
 				store.find('user-likes-count', _this.get('currentUserId'))
 				.then(function(r){

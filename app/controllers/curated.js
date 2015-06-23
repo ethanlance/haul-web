@@ -6,7 +6,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
  	storeName: 'user-likes-list',
 
- 	limit:null, 
+ 	limitBinding: 'this.ENV.paginationLimit.posts',
 
  	user: false,
 

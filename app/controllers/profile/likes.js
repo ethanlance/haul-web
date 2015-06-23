@@ -4,7 +4,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
  	needs: ['profile'],
 
- 	limit:null, 
+ 	limitBinding: 'this.ENV.paginationLimit.posts',
  	thisPage: "likesPage", 
  	user: false,
 	showGridViewBinding: 'controllers.profile.showGridView',

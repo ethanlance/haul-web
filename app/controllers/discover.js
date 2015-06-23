@@ -6,7 +6,7 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
  	storeName: 'user-likes-list',
 
- 	limit:null, 
+ 	limitBinding: 'this.ENV.paginationLimit.posts',
 
  	user: false,
 
@@ -31,6 +31,10 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 	isoutdoor: false,
 	isfashion: false,
 	isliving: false,
+
+	listView: false,
+
+	gridView: true,
 
 
 	categories: [
@@ -137,6 +141,16 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     	clickCategory: function(category) { 
     		this.changeCategory( category );
+    	},
+
+		toggleView: function() {
+    		if( this.get('gridView') ){
+				this.set('gridView', false);
+    			this.set('listView', true);
+    		}else{
+    			this.set('gridView', true);
+    			this.set('listView', false);
+    		}
     	}
 	},
 }); 

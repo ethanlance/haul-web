@@ -76,19 +76,34 @@
 					</ul>
 						
 
+
+
+
+
+					{{!-- <i {{action 'toggleView'}} {{bind-attr class=":fa listView:fa-th-list:fa-th :view-icon"}}></i> --}}
+
+
+
 					{{#unless sortedContent}}
 						{{loading-bar turnLoadingBarOn='true'}}
 					{{/unless}}
 
 			 
-					{{!-- //CONTENT --}}
-					{{#each like in sortedContent}}
-						{{#with like.post as post }}
-							
-							{{render '_grid_post' post}}
-						
-						{{/with}}
-					{{/each}}
+					{{#if gridView}}
+						{{#each like in sortedContent}}
+							{{#with like.post as post }}
+								{{render '_grid_post' post}}
+							{{/with}}
+						{{/each}}
+					{{/if}}
+
+					{{#if listView}}
+						{{#each like in sortedContent}}
+							{{#with like.post as post }}
+								{{render '_feed_post' post}}
+							{{/with}}
+						{{/each}}
+					{{/if}}
 
 					
 					{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}

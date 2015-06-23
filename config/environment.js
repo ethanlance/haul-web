@@ -177,7 +177,7 @@ module.exports = function(environment) {
 
 	ENV.APP.paginationLimit = {
 		feed: 5,
-		posts: 20,
+		posts: 10,
 		followers: 20,
 		following: 20,
 		likes: 20,

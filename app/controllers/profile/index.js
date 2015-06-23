@@ -28,9 +28,9 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     hideBio: Ember.computed.and('notProfileOwner', 'noBio'),
 
-    listView: false,
+    listView: true,
 
-    gridView: true,
+    gridView: false,
 
 	userChanged: function() {
 
