@@ -700,3 +700,17 @@
 	border-top: 1px dashed #eee;
 	background-color: white;
 }
+
+
+.view-icon {
+	float: right;
+	color: #7e7e7e;
+
+	@media (max-width: 700px) {
+		margin-top: -15px;
+	}
+
+	&:hover{
+		color: $primary-color;
+	}
+}

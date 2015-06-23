@@ -10,9 +10,9 @@
 
 		<div class="row">
 			
-			<div class="col-md-12 col-sm-12 col-xs-12 padding-top center-on-collapse">
+			<div {{bind-attr class=":col-md-12 :col-sm-12 :col-xs-12 :padding-top gridView:center-on-collapse"}}>
 
-		
+				<i {{action 'toggleView'}} {{bind-attr class=":fa listView:fa-th-list:fa-th :view-icon"}}></i>
 
 
 				{{!-- EMPTY --}}
@@ -40,9 +40,18 @@
 				{{!-- MY POSTS --}}
 				{{!-- MY POSTS --}}
 				{{!-- MY POSTS --}} 
-				{{#each post in sortedContent}}
-					{{partial 'grid_post'}}	
-				{{/each}}  
+				{{#if listView}}
+					{{#each post in sortedContent}}
+						{{partial 'feed_post'}}		
+					{{/each}}  
+				{{/if}}
+
+				{{#if gridView}}
+					{{#each post in sortedContent}}
+						{{partial 'grid_post'}}		
+					{{/each}}  
+				{{/if}}
+
 				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 					<i class="fa fa-circle-o-notch fa-spin"></i>
 				{{/infinite-scroll}}

@@ -28,6 +28,9 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     hideBio: Ember.computed.and('notProfileOwner', 'noBio'),
 
+    listView: false,
+
+    gridView: true,
 
 	userChanged: function() {
 
@@ -58,6 +61,16 @@ export default Ember.ObjectController.extend(PaginateMixin,{
     	fetchMore: function(callback) {
 			var promise = this.paginateMore();		
 			if(callback){callback(promise)};
-    	} 
+    	},
+
+    	toggleView: function() {
+    		if( this.get('gridView') ){
+				this.set('gridView', false);
+    			this.set('listView', true);
+    		}else{
+    			this.set('gridView', true);
+    			this.set('listView', false);
+    		}
+    	}
 	},
 }); 
