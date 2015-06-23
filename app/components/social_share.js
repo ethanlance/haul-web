@@ -39,7 +39,6 @@ export default Ember.Component.extend({
 			this.set("shareUrl", url );
 		}
 
-
 	}.on('didInsertElement').observes('image'),
 
 	actions: {
