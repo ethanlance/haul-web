@@ -3,12 +3,22 @@ import ScrolltoMixin from '../mixins/scrollto';
 
 export default Ember.Component.extend(ScrolltoMixin, {
 
-	gotolink:false,
+	totalBinding: "post.likesCount.total", 
 
-	post: false,
+	likeText: 'likes',
+
+	post: null, 
 
 	usernameBinding: 'post.user.username',
-	
+
+	totalChanged: function() {
+		if(this.get('total') === 1 ){
+			this.set('likeText', 'like');
+		}else{
+			this.set('likeText', 'likes');
+		}
+	}.observes('total'),
+
 	actions: {
 		btnClick: function() { 
 			if(this.get('goToRoute')){

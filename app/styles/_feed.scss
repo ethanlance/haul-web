@@ -162,6 +162,8 @@
 
 		}
 
+
+
 		.post-buttons{
 
 			color: #555;
@@ -170,11 +172,12 @@
 			text-transform: none;
 			padding-top:20px;
 
+
 			.haul-btn {
 				margin-right:15px;
 				cursor:pointer;
-				padding:5px;
-				size:11px;
+				font-size:14px;	
+				
 			}
 
 			.haul-btn:hover{
@@ -182,9 +185,38 @@
 				text-decoration: none;
 			}
 
+
 			.btn-buy-this {
 				margin-top: -12px;
 				cursor:pointer;
+			}
+
+			.counts {
+				
+				padding-bottom: 10px;
+				.haul-btn {
+					margin-right:15px;
+					cursor:pointer;
+					font-size:12px;	
+					
+				}
+
+				.haul-btn:hover{
+					color: $primary-color;
+					text-decoration: none;
+				}
+
+
+			}
+			.buttons {
+				padding-bottom: 10px;
+
+				a {
+					text-decoration: none;
+				}
+				a:hover {
+					text-decoration: none;
+				}
 			}
 		}
 	}

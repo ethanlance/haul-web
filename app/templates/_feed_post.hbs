@@ -117,13 +117,31 @@
 
 
 			<div class="post-buttons">
+				<div class="counts">	
+					{{like-count post=post goToRoute='goToRoute' class="display-inline"}}
+					{{comment-count post=post gotolink='true' goToRoute='goToRoute' class="display-inline"}}
+				</div>
 
-				{{like-btn post=post openModal='openModal' class="display-inline"}}	 
-				 	
-				{{comment-btn post=post class="display-inline" gotolink='true' }}
+				<div class="buttons">
+					{{like-btn post=post openModal='openModal' class="display-inline"}}		 
+					{{comment-btn post=post goToRoute='goToRoute' class="display-inline"}}
+					{{repost-btn post=post openModal='openModal' class="display-inline"}}
+				</div>
+			</div>
 
-				{{repost-btn post=post openModal='openModal' class="display-inline"}}
- 
+			{{!-- 
+				STEPHEN!
+				STEPHEN!
+				STEPHEN!
+				CSS FOR .comments-tease is in _comments.scss 
+			--}}
+			<div class="comments-tease">
+				<div class="comments-section">
+					<div class="comment-count">
+						{{comment-count-tease post=post  goToRoute='goToRoute' limit=3 class="display-inline" }}
+					</div>		 
+					{{comment-tease objectId=post.id objectType="posts" limit="3" class="display-inline"}}
+				</div>	
 			</div>
 
 		</div>

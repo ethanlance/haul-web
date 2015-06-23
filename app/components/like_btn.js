@@ -3,22 +3,20 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
 	postIdBinding: "post.post_id",
+	
 	postUserIdBinding: "post.user.id",
+	
 	postKeyBinding: "post.id",
+	
 	currentUserIdBinding: "session.currentUser.id",
-	totalBinding: "post.likesCount.total",
+	
 	userLikes: false,
+	
 	userLikesRecord: false,
-	userLikeListRecord:false,
-	likeText: 'likes',
+	
+	userLikeListRecord:false, 
 
-	totalChanged: function() {
-		if(this.get('total') === 1 ){
-			this.set('likeText', 'like');
-		}else{
-			this.set('likeText', 'likes');
-		}
-	}.observes('total'),
+	totalBinding: "post.likesCount.total", 
 
 	didInsertElement: function() {
 		var store = this.container.lookup("store:main");
