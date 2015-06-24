@@ -2,33 +2,17 @@
 	position:relative;
 	//border-bottom: 1px solid #eee;
 	padding: 0px;
-	padding-bottom: 20px;
+	//padding-bottom: 20px;
 	margin-bottom: 60px;
 	transition: all 0.2s ease;
 	border-bottom: 1px dashed #eee;
 
+	width: 100%;
 	max-width: 650px;
+	overflow: hidden;
 
 	
-	.post-title a {
-		font-family: 'Arvo';
-		font-weight: 800;
-		color: #333;
-		padding-top: -20px;
-		letter-spacing: -0.05em;
-		transition: all 0.2s ease;
-		font-size: 1.4em;
-		line-height: 1.02em;
-
-		@media (max-width: 400px) {
-			font-size: 1.1em;
-		}
-	}
-
-	.post-title a:hover {
-		color: $primary-color;
-		text-decoration: none;
-	}
+	
 
 
 	.repost-citations {
@@ -74,11 +58,6 @@
 		}
 	}
 
-	.body {
-		width:100%;
-		margin-left: 0px;
-		margin-right: 0px;
-	}
 
 	.post-content {
 
@@ -93,9 +72,9 @@
 		color: #555555;
 		line-height: 1.4;
 
-			margin-left: 0px;
-			margin-right: 0px;
-			margin-top: -10px;
+		margin-left: 0px;
+		margin-right: 0px;
+		//margin-top: -10px;
 
 		a {
 			color: $primary-color;
@@ -153,11 +132,36 @@
 			@media (max-width: 400px) {
 				margin-top: -25px;
 			}
+			
+			.body {
+				width:100%;
+				margin-left: 0px;
+				margin-right: 0px;
+				font-family: 'Open Sans',sans-serif;
+				font-size: 14px;
+				line-height: 1.42857143;
+				color: #333;
+				font-weight: 400;
+			}
 
+			.post-title a {
+				font-family: 'Arvo';
+				font-weight: 800;
+				color: #333;
+				padding-top: -20px;
+				letter-spacing: -0.05em;
+				transition: all 0.2s ease;
+				font-size: 1.4em;
+				line-height: 1.02em;
 
-			&:hover{
-				text-decoration: none;	
-				color:white;
+				@media (max-width: 400px) {
+					font-size: 1.1em;
+				}
+			}
+
+			.post-title a:hover {
+				color: $primary-color;
+				text-decoration: none;
 			}
 
 		}
@@ -302,8 +306,7 @@
 
 
 	.post-owner {
-		margin-bottom: -14px;
-
+		//margin-bottom: -14px;
 
 		.profile-image{
 			padding:0;

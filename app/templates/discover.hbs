@@ -39,27 +39,11 @@
 {{/if}}
 
 
-<div class="container no-margins">
+<div class="container-fluid">
 	<div class="haul-content">
+		<div class="col-content lg">
+			<div class="col-content-inner grid-spacing center-on-collapse">
 
-		<div class="hamburger-right-side">
-
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{hamburger-menu}}
-			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
-			<label for="hamburger-trigger" class="with-page-header  fa fa-bars"></label>
-		
-
-			{{!-- FLUID LEFT --}}
-			{{!-- FLUID LEFT --}}
-			{{!-- FLUID LEFT --}}
-			{{!-- FLUID LEFT --}}
-			<div class="haul-fluid-left" data-info="haul-fluid-left"> 
-				
-				<div class="haul-fluid-content center-on-collapse padding-top grid-spacing">
 
 					{{!-- <ul class="discover-categories">
 					<li class="featured active" {{action 'clickCategory' 'featured'}}>featured</li>
@@ -110,18 +94,10 @@
 						<i class="fa fa-circle-o-notch fa-spin"></i>
 					{{/infinite-scroll}}
 					
-			    
-				</div> 
-			</div>
-
-
-
-			{{!-- FIXED RIGHT --}}
-			{{!-- FIXED RIGHT --}}
-			{{!-- FIXED RIGHT --}}
-			{{!-- FIXED RIGHT --}}
-			<div class="haul-fixed-right with-page-header">
-				<div class="haul-menu-content">
+			</div>    
+		</div>
+		<div class="col-rail sm">
+			<div class="haul-menu-content">
 
 					{{!-- ONBOARDING --}}
 					{{!-- ONBOARDING --}}
@@ -138,7 +114,7 @@
 
 					{{partial 'footer_sidebar'}}
 
-				</div>
+			
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,3 @@
-
-
-
 <div class="feed-post">
 
 	<div class="post-owner">
@@ -15,30 +12,7 @@
 	</div>
 
 
-	<h1 class="post-title">
-		{{#link-to 'profile.post' 
-			post.user.username post.post_id post.post_slug 
-			(query-params anchor="null" reply="null")}}{{ post.subject }}{{/link-to}}
-	</h1>
 
-
-
-	{{!-- //REPOST --}}
-	{{#if post.repost_id}}
-	<div class="repost-citations">
-		<i class="fa fa-retweet"></i>
-		{{make-icon icon=post.repost_user.icon}}
-		<span class="name">{{post.repost_user.get_display_name}}'s </span>
-		<span class="title"> original post
-			{{#link-to 'profile.post'
-				post.repost.user.username 
-				post.repost.post_id 
-				post.repost.post_slug}}{{post.repost.subject}}{{/link-to}}
-		</span>
-	</div>
-	{{/if}}
-
-	<div class="body">{{first-paragraph post.post.body ENV }}</div>
 
 	<div class="post-content">
 		<div class="post-image">
@@ -86,7 +60,6 @@
 			
 
 			<span class="show-on-small">
-				
 				{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 				<div class="post-info">
 
@@ -111,11 +84,54 @@
 					</div>			
 				</div>
 				{{/link-to}}
-
 			</span>
-				
+		
 
 
+
+
+			{{!-- POST --}}
+			{{!-- POST --}}
+			{{!-- POST --}}
+			{{!-- POST --}}
+			<h1 class="post-title">
+				{{#link-to 'profile.post' 
+					post.user.username post.post_id post.post_slug 
+					(query-params anchor="null" reply="null")}}{{ post.subject }}{{/link-to}}
+			</h1>
+
+
+
+			{{!-- //REPOST --}}
+			{{#if post.repost_id}}
+			<div class="repost-citations">
+				<i class="fa fa-retweet"></i>
+				{{make-icon icon=post.repost_user.icon}}
+				<span class="name">{{post.repost_user.get_display_name}}'s </span>
+				<span class="title"> original post
+					{{#link-to 'profile.post'
+						post.repost.user.username 
+						post.repost.post_id 
+						post.repost.post_slug}}{{post.repost.subject}}{{/link-to}}
+				</span>
+			</div>
+			{{/if}}
+
+
+
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			<div class="body">{{first-paragraph post.post.body ENV }}</div>
+
+
+
+
+			{{!-- CTA ACTIONS --}}
+			{{!-- CTA ACTIONS --}}
+			{{!-- CTA ACTIONS --}}
+			{{!-- CTA ACTIONS --}}
 			<div class="post-buttons">
 				<div class="counts">	
 					{{like-count post=post goToRoute='goToRoute' class="display-inline"}}
@@ -129,12 +145,13 @@
 				</div>
 			</div>
 
-			{{!-- 
-				STEPHEN!
-				STEPHEN!
-				STEPHEN!
-				CSS FOR .comments-tease is in _comments.scss 
-			--}}
+
+
+			
+			{{!-- FIRST 3 COMMENTS --}}
+			{{!-- FIRST 3 COMMENTS --}}
+			{{!-- FIRST 3 COMMENTS --}}
+			{{!-- FIRST 3 COMMENTS --}}
 			<div class="comments-tease">
 				<div class="comments-section">
 					<div class="comment-count">

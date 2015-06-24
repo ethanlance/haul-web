@@ -706,3 +706,20 @@
 		color: $primary-color;
 	}
 }
+
+
+.post-likes{
+	.profile-image{
+		padding:0;
+		margin:0;
+		float: left;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		margin-right: 0px;
+		
+		.glyphicon-user{
+			font-size:40px;
+		}
+	}
+}

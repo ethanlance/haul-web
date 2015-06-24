@@ -6,6 +6,9 @@
 	transition: all 0.2s ease;
 
 	.comments-area{
+
+		overflow: hidden;
+
 		.profile-image{
 			padding:0;
 			margin:0;
@@ -151,15 +154,14 @@
 		}
 
 		.comment-input {
-  
-			width: 400px; 
-
-			@media (max-width: 400px) {
-				width: 100%;
-			}
-
+  			
+  			//width: 100%;
+			//min-width: 300px; 
+			border: 1px solid #eee;
+			margin-left: 45px;
+			display:block;
 			float:none;
-			display:inline-block; 
+
 
 			.mentions-input-box{ 
 				background-color: transparent;
@@ -185,8 +187,7 @@
 			float:right;
 			display:block;
 			margin:0;
-			margin-right: -30px;
-			margin-top:20px;
+			margin-top:5px;
 		}
 	}
 

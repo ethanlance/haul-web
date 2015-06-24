@@ -1,67 +1,36 @@
 {{preserve-scroll currentScrollPos=currentScrollPos}}
 
-<div class="container-fluid no-margins">
+<div class="container-fluid">
 	<div class="haul-content">
+		<div class="col-content">
 
-		<div class="hamburger-right-side col-60-col-30">
-
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{!-- HAMBURGER ICON, WHEN LEFT NAV IS COLAPSED --}}
-			{{hamburger-menu}}
-			<input type="checkbox" id="hamburger-trigger" class="hamburger" />
-			<label for="hamburger-trigger" class="with-page-header  fa fa-bars"></label>
-		
-
-			{{!-- FLUID LEFT --}}
-			{{!-- FLUID LEFT --}}
-			{{!-- FLUID LEFT --}}
-			{{!-- FLUID LEFT --}}
-			<div class="haul-fluid-left" data-info="haul-fluid-left"> 
-				
-				<div class="haul-feed-content">
-				
-
-				{{!-- FEED --}}
-				{{!-- FEED --}}
-				{{!-- FEED --}}
-				{{!-- FEED --}}
-				{{!-- FEED --}}
-				{{!-- FEED --}} 
-				{{#each post in sortedContent}}
-					{{partial 'feed_post'}}	
-				{{/each}} 
-				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
-					<i class="fa fa-circle-o-notch fa-spin"></i>
-				{{/infinite-scroll}}
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}} 
+			{{#each post in sortedContent}}
+				{{partial 'feed_post'}}	
+			{{/each}} 
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<i class="fa fa-circle-o-notch fa-spin"></i>
+			{{/infinite-scroll}}
 
 
-	 
-				</div> 
-			</div>
-
-
-
-			{{!-- FIXED RIGHT --}}
-			{{!-- FIXED RIGHT --}}
-			{{!-- FIXED RIGHT --}}
-			{{!-- FIXED RIGHT --}}
-			<div class="haul-fixed-right">
-				<div class="haul-fixed-content"> 
-
+		</div>
+		<div class="col-rail">
 						
 					
-						{{mention-pod goToRoute="goToRoute"}}
+			{{mention-pod goToRoute="goToRoute"}}
 
-						{{onboarding-userstofollow limit=6}}
+			{{onboarding-userstofollow limit=6}}
 
-						{{onboarding-tags goToRoute='goToRoute'}}
+			{{onboarding-tags goToRoute='goToRoute'}}
 
-						{{partial 'footer_sidebar'}}
-					 
-				</div>
-			</div>
+			{{partial 'footer_sidebar'}}
+		 
+
 		</div> 
 	</div>
 </div>
