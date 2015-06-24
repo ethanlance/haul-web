@@ -1,4 +1,18 @@
+.hide-on-small {
+	display:inline;
+	@media (max-width: 738px) {
+		display:none !important;
+	}	
+}
 
+
+
+.show-on-small {
+	display:none !important;
+	@media (max-width: 738px) {
+		display:inline !important;	
+	}	
+}
 
 
 
@@ -59,7 +73,10 @@ nav {
 	z-index: $z-index-nav;
 
 	width: 100%;
-	min-height: 50px;
+
+	//IF YOU CHANGE THE HEIGHT OF NAV.... Make sure you change the padding of BODY
+	height: 50px;
+	max-height: 50px;
 
 	margin:0;
 	padding: 0;
@@ -93,12 +110,13 @@ nav {
 	}
 
 	.logo { 
+
 		float:left;
 		padding-top: 10px;
 		width: 90px;
-		font-size: 18px;
-		font-family: 'Arvo', "Helvetica Neue", Helvetica, Arial, sans-serif;
-		font-weight: 800;
+		@media (max-width: 738px) {
+			width: 50px;
+		}
 		text-align: center;
 		background-color: $logo-background-color; 
 		color: $logo-color;
@@ -109,18 +127,26 @@ nav {
 			}
 		}
 
-		/*phone*/
-		// @media (max-width: 350px) {
-		// 	width:50px;
-		// 	font-size: 12px;
-		// 	padding-top:30px;
-		// }
-	}
-	.logo-nav-img {
-		width:66px;
-		padding-bottom: 10px;
+		.logo-nav-img {
+			width:66px;
+			padding-bottom: 10px;
+			@media (max-width: 738px) {
+				display: none;
+			}
+		}
 
+		
+		.logo-nav-img-h {
+			height:35px;
+			padding-bottom: 10px;
+			display: none;
+			@media (max-width: 738px) {
+				display: inline-block;
+			}
+		}
 	}
+
+
 
 
 	.nav-link-wrapper {
@@ -169,10 +195,11 @@ nav {
 			color: $primary-color;
 		}
 
+		//this puts the line under the active nav link.
 		a.active {
 			font-weight: 800;
 			border-bottom: 2px solid $primary-color;
-			padding-bottom: 12px;
+			padding-bottom: 8px;
 		}
 
 		.nav-link-badge {
@@ -303,21 +330,7 @@ nav {
 
 
 
-.hide-on-small {
-	display:inline;
-	@media (max-width: 736px) {
-		display:none !important;
-	}	
-}
 
-
-
-.show-on-small {
-	display:none !important;
-	@media (max-width: 736px) {
-		display:inline !important;	
-	}	
-}
 
 
 
