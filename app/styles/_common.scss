@@ -1,3 +1,30 @@
+html {
+	height: 100%;
+	width: 100%;
+
+
+}
+
+body {
+	margin:0px;
+	margin-bottom: 1000px;
+	padding:0px;
+	padding-top:50px;
+	background-color: $primary-background-color;
+	background-image: none;
+	position: relative;
+	font-family: 'Open Sans', sans-serif;
+	overflow-x: hidden;
+}
+
+html, body { height: 100%; width: 100%}
+
+
+body.modal-open {
+    overflow: hidden;
+}
+
+
 .message-typer {
 	font-family: courier, times;
 }
@@ -58,31 +85,7 @@ i.fa {
 	border: 1px solid pink;
 }
 
-html {
-	height: 100%;
-	width: 100%;
 
-
-}
-
-body {
-	margin:0px;
-	margin-bottom: 1000px;
-	padding:0px;
-	padding-top:54px;
-	background-color: $primary-background-color;
-	background-image: none;
-	position: relative;
-	font-family: 'Open Sans', sans-serif;
-	overflow-x: hidden;
-}
-
-html, body { height: 100%; width: 100%}
-
-
-body.modal-open {
-    overflow: hidden;
-}
 
 p {
 	font-size: 1em;
