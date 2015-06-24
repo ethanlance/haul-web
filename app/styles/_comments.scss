@@ -1,8 +1,9 @@
 
 .comments-section {
 
-	margin-top: 30px;
+	margin-top: 0px;
 	margin-bottom: 70px;
+	transition: all 0.2s ease;
 
 	.comments-area{
 		.profile-image{
@@ -25,7 +26,7 @@
 		font-size: 13px;
 		font-weight: 400;
 		width: 100%;
-		padding-bottom: 30px;
+		padding-bottom: 10px;
 
 		.nav-tabs {
 			border:0;
@@ -35,34 +36,42 @@
 		}
 
 		.nav-tabs > li > a {
-			color: #cccccc;
+			color: #555;
 			border-radius: 0;
 		}
 
 		
 		.nav-tabs > li.active > a:hover,
 		.nav-tabs > li.active > a:focus {
-			color: #cccccc;
+			color: #555;
 			border-radius: 0;
 			cursor: default;
-			background-color: #fff;
+			background-color: transparent;
 			border-top: 0;
 			border-right: 0;
 			border-left: 0;
+			border-bottom: 3px solid $primary-color;
+			font-weight: 800;
 			//border-bottom-color: transparent;
+		}
+
+		.nav-tabs > a:hover{
+			border-bottom: 3px solid $primary-color;
+
 		}
 		
 		.nav-tabs > li.active > a:focus {
-			color: #333333;
+			color: #555;
 		}
 
 		.nav-tabs > li.active > a {
-			color: #333333;
+			color: #555;
 			//float:left;
 			padding-bottom: 10px;
 			border:0;
 			border-bottom: 3px solid $primary-color; 
 			cursor:pointer;
+			font-weight: 800;
 		}
 
 
@@ -81,14 +90,14 @@
 		}
 
 		.comment-count { 
-			color: #333333;
+			color: #555;
 			float:left;
 			padding-bottom: 10px;
 			border-bottom: 3px solid $primary-color; 
 			cursor:pointer;
 		}
 		.likes-count {
-			color: #cccccc;
+			color: #555;
 			float:none;
 			display:block;
 			overflow:hidden;
