@@ -7,9 +7,22 @@
 
 
 				{{!-- //CONTENT --}}
+				<div class="onboarding-pod">
 				{{#each item in sortedContent}}
-					{{profile-badge profile=item.user}} 
+					<div class="user">
+						<div class="user-wrap">
+						{{#link-to 'profile' item.user.username }}
+							{{make-icon icon=item.user.icon class="display-inline-block"}}
+							<div class="name">{{item.user.get_display_name}}</div>
+							{{!-- <div class="username">{{user.username}}</div> --}}
+						{{/link-to}}
+						</div>
+						{{ follow-btn followUser=item.user openModal='openModal' class="display-inline-block" }}
+					</div>
 				{{/each}}
+				</div>
+
+
 				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
 					<i class="fa fa-circle-o-notch fa-spin"></i>
 				{{/infinite-scroll}}

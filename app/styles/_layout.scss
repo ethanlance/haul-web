@@ -96,7 +96,8 @@
 			width: 31%;
 			@media (max-width: 729px) {
 				margin-right: auto;
-				width: 45%;
+				width: 31%;
+				min-width: 0;
 			}
 			
 			@media (max-width: 575px) {

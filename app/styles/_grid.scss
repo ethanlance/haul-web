@@ -64,7 +64,7 @@
 			vertical-align: top;
 			position:absolute;
 		    margin: auto; 
-		    min-width: 230px;
+		    //min-width: 230px;
 		    width: 100%;
 		}
 
@@ -233,12 +233,13 @@
 
 	@media (max-width: 740px) {
 		margin-right: auto;
-		width: 45%;
+		width: 31%;
+		min-width: 0;
 	}
 	@media (max-width: 575px) {
 		width:25%;
-		margin-top:20px;
-		margin-bottom:20px;
+		margin-top:0px;
+		margin-bottom:0px;
 		min-width:0;
 		float:left;
 
