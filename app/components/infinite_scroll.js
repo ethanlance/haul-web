@@ -4,7 +4,7 @@ var $window = Em.$(window),
     $document = Em.$(document),
     bind = Em.run.bind;
 
-var EPSILON = 150;
+var EPSILON = 350;
 
 export default Em.Component.extend({
   action: 'fetchMore',
