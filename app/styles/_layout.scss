@@ -132,6 +132,12 @@
 		}
 	}
 
+	.col-rail.hide-on-collapse {
+		@media (max-width: 990px) {
+			display: none;
+		}
+	}
+
 }
 
 
