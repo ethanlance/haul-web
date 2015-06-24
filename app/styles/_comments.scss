@@ -222,13 +222,19 @@
 				font-family: $primary-font;
 				font-weight: 600;
 				font-size: 12px;
-				color: #333
+				color: #555;
 				//text-transform: uppercase;
 			}
+
+			.name a:hover  {
+					border-bottom: 0px dashed $primary-color;
+					text-decoration: none;
+					color: $primary-color;
+				}
 			.username a{
 				font-family: $primary-font;
 				font-style: italic;
-				font-size: 11px;
+				font-size: 12px;
 				color: #999;
 				text-transform: lowercase;
 			}
@@ -245,8 +251,9 @@
 					text-decoration: none;
 				}
 				a:hover {
-					border-bottom: 1px dashed $primary-color;
+					border-bottom: 0px dashed $primary-color;
 					text-decoration: none;
+					color: $primary-color;
 				}
 				
 				a.tag-cloud {
@@ -276,7 +283,7 @@
 				margin-top: 4px;
 				margin-left: 70px;
 				font-family: $primary-font;
-				font-size: 14px;
+				font-size: 12px;
 				color: #555;
 				line-height: 1.7;
 			}
@@ -296,9 +303,10 @@
 
 		.comment-count {
 			cursor: pointer;
-			color: #ccc;
+			color: #555;
 			font-size: 12px;
 			padding-bottom: 10px;
+			font-weight: 800;
 
 			&:hover {
 				color: $primary-color;

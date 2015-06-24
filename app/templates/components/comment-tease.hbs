@@ -37,7 +37,7 @@
 			<div class="comment-section-row">
 
 				<div class="comment-section-comment">
-					<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.username}}:{{/link-to}}</span>
+					<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}:{{/link-to}}</span>
 					<span class="comment">{{sanitizehtml-andtag item.comment "comment" ENV}}</span>
 				</div>
 			</div>
