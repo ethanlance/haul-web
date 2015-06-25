@@ -13,6 +13,35 @@
 
 
 
+	{{!-- POST --}}
+	{{!-- POST --}}
+	{{!-- POST --}}
+	{{!-- POST --}}
+	<h1 class="post-title">
+		{{#link-to 'profile.post' 
+			post.user.username post.post_id post.post_slug 
+			(query-params anchor="null" reply="null")}}{{ post.subject }}{{/link-to}}
+	</h1>
+
+
+
+	{{!-- //REPOST --}}
+	{{#if post.repost_id}}
+	<div class="repost-citations">
+		<i class="fa fa-retweet"></i>
+		{{make-icon icon=post.repost_user.icon}}
+		<span class="name">{{post.repost_user.get_display_name}}'s </span>
+		<span class="title"> original post
+			{{#link-to 'profile.post'
+				post.repost.user.username 
+				post.repost.post_id 
+				post.repost.post_slug}}{{post.repost.subject}}{{/link-to}}
+		</span>
+	</div>
+	{{/if}}
+
+
+
 
 	<div class="post-content">
 		<div class="post-image">
@@ -90,32 +119,6 @@
 
 
 
-			{{!-- POST --}}
-			{{!-- POST --}}
-			{{!-- POST --}}
-			{{!-- POST --}}
-			<h1 class="post-title">
-				{{#link-to 'profile.post' 
-					post.user.username post.post_id post.post_slug 
-					(query-params anchor="null" reply="null")}}{{ post.subject }}{{/link-to}}
-			</h1>
-
-
-
-			{{!-- //REPOST --}}
-			{{#if post.repost_id}}
-			<div class="repost-citations">
-				<i class="fa fa-retweet"></i>
-				{{make-icon icon=post.repost_user.icon}}
-				<span class="name">{{post.repost_user.get_display_name}}'s </span>
-				<span class="title"> original post
-					{{#link-to 'profile.post'
-						post.repost.user.username 
-						post.repost.post_id 
-						post.repost.post_slug}}{{post.repost.subject}}{{/link-to}}
-				</span>
-			</div>
-			{{/if}}
 
 
 

@@ -14,7 +14,26 @@
 	max-width: 550px;
 	overflow: hidden;
 
-	
+	.post-title a {
+		font-family: 'Arvo';
+		font-weight: 800;
+		color: #333;
+		padding-top: -20px;
+		letter-spacing: -0.05em;
+		transition: all 0.2s ease;
+		font-size: 1.4em;
+		line-height: 1.02em;
+
+		@media (max-width: 400px) {
+			font-size: 1.1em;
+		}
+	}
+
+	.post-title a:hover {
+		color: $primary-color;
+		text-decoration: none;
+		border-bottom: 0;
+	}
 	
 
 
@@ -137,6 +156,7 @@
 			}
 			
 			.body {
+				padding-top: 15px;
 				width:100%;
 				margin-left: 0px;
 				margin-right: 0px;
@@ -147,26 +167,7 @@
 				font-weight: 400;
 			}
 
-			.post-title a {
-				font-family: 'Arvo';
-				font-weight: 800;
-				color: #333;
-				padding-top: -20px;
-				letter-spacing: -0.05em;
-				transition: all 0.2s ease;
-				font-size: 1.4em;
-				line-height: 1.02em;
 
-				@media (max-width: 400px) {
-					font-size: 1.1em;
-				}
-			}
-
-			.post-title a:hover {
-				color: $primary-color;
-				text-decoration: none;
-				border-bottom: 0;
-			}
 
 		}
 
