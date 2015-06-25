@@ -1,48 +1,16 @@
-<div class="comments-area">
-	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-
-
-			{{!-- 
-
-			STEPHEN!!!! 
-			STEPHEN!!!! 
-			STEPHEN!!!! 
-			STEPHEN!!!! 
-			STEPHEN!!!! 
-
-			the code commented out below is the code from the post view comments.
-			I removed the profile icons and stuff for this comment-tease.hbs view.  Figured we'd 
-			want comments to be slim when they are displayed in the _feed_post.hbs --}}
-
-
-{{!-- 			{{#each item in sortedComments }}
-			<div class="comment-section-row">
-
-				{{#link-to 'profile' item.user.username }}
-					{{make-icon icon=item.user.icon}}
-				{{/link-to}}
-
-				<div class="comment-section-comment">
-					<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}{{/link-to}}</span>
-					<span class="username">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}}</span>
-					<div class="moment">{{ format-moment item.created_at }}</div>
-					<div class="comment">{{sanitizehtml-andtag item.comment "comment" ENV}}</div>
-				</div>
-			</div>
-			{{/each}} --}}
-
-
-			{{#each item in sortedComments }}
-			<div class="comment-section-row">
-
-				<div class="comment-section-comment">
-					<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}:{{/link-to}}</span>
-					<span class="comment">{{sanitizehtml-andtag item.comment "comment" ENV}}</span>
-				</div>
-			</div>
-			{{/each}}
+{{#if sortedComments}}
+<div class="comments-tease">
 	
-		</div>
+	<div class="comment-count">
+		{{comment-count-tease post=post  goToRoute='goToRoute' limit=3 class="display-inline" }}
+	</div>		 
+
+	{{#each item in sortedComments }}
+	<div class="comment-row">
+		<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}:{{/link-to}}</span>
+		<span class="comment">{{sanitizehtml-andtag item.comment "comment" ENV}}</span>
 	</div>
-</div>
+	{{/each}}
+
+</div>		
+{{/if}}

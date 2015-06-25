@@ -5,10 +5,11 @@ import PaginateMixin from '../mixins/paginate';
 import PollingMixin from '../mixins/polling';
 export default Ember.Component.extend( PaginateMixin, PollingMixin, {
 
-	objectId: false,
+	post: null,
+	
+	objectIdBinding: 'post.id',
 
-	//ie. 'post', 'transaction', etc.
-	objectType: false,
+	objectType: 'posts',
 	 
 	limit: 3,
 

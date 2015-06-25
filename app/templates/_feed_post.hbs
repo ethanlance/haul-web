@@ -5,9 +5,10 @@
 		{{#link-to 'profile' post.user.username }}{{make-icon icon=post.user.icon}}{{/link-to}}
 
 		<div class="post-owner-details">
+			<div class="moment">{{ format-moment post.created_at }}</div> 
 			<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
 			<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
-			<div class="moment">{{ format-moment post.created_at }}</div> 
+			
 		</div>
 	</div>
 
@@ -47,8 +48,7 @@
 		<div class="post-image">
 		
 			{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
-				
-					{{image-loader src=post.image.large width="100%" height="300px"}}
+				{{image-loader src=post.image.large width="100%" height="300px"}}
 				
 			{{/link-to}}
 
@@ -85,9 +85,6 @@
 
 
 		<div class="post-bottom-cap">
-				
-			
-
 			<span class="show-on-small">
 				{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
 				<div class="post-info">
@@ -155,14 +152,8 @@
 			{{!-- FIRST 3 COMMENTS --}}
 			{{!-- FIRST 3 COMMENTS --}}
 			{{!-- FIRST 3 COMMENTS --}}
-			<div class="comments-tease">
-				<div class="comments-section">
-					<div class="comment-count">
-						{{comment-count-tease post=post  goToRoute='goToRoute' limit=3 class="display-inline" }}
-					</div>		 
-					{{comment-tease objectId=post.id objectType="posts" limit="3" class="display-inline"}}
-				</div>	
-			</div>
+			{{comment-tease post=post limit="3" class="display-inline"}}
+
 
 		</div>
 	</div>

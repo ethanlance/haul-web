@@ -17,7 +17,7 @@ export default Ember.Component.extend(ScrolltoMixin, {
 		}else{
 			this.set('commentText', 'comments');
 		}
-	}.observes('total'),
+	}.on('didInsertElement').observes('total'),
 
 	goToRoute:false,
 	

@@ -1,18 +1,158 @@
 .feed-post {
 	position:relative;
-	//border-bottom: 1px solid #eee;
-	padding: 0px;
-	//padding-bottom: 20px;
+	border: 1px solid #eee;
+	padding: 10px;
 	margin-bottom: 60px;
 	margin-left: auto;
 	margin-right: auto;
 
-	transition: all 0.2s ease;
-	border-bottom: 1px dashed #eee;
-
 	width: 100%;
 	max-width: 550px;
 	overflow: hidden;
+
+
+	.comments-tease {
+
+		border-top: 1px solid #eee;
+		margin-left: -10px;
+		margin-right: -10px;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top:10px;
+		background-color: #fcfcfc;
+
+		
+
+		.comment-count {
+			cursor: pointer;
+			color: #555;
+			font-size: 12px;
+			padding-bottom: 10px;
+			font-weight: 800;
+
+			&:hover {
+				color: $primary-color;
+			}	
+		}
+
+		.comment-row{ 
+
+			font-family: $primary-font;
+			font-size: 12px;
+			color: #555;
+			line-height: 1.7;
+
+			.name a {
+				font-weight:600;
+				color: #333;
+			}
+
+			.name a:hover {
+				color: $primary-color;
+				text-decoration: none;
+				border: 0;
+			}
+
+			.comment{
+				a {
+					color: $primary-color;
+					text-decoration: none;
+				}
+				a:hover {
+					border-bottom: 0px dashed $primary-color;
+					text-decoration: none;
+					color: $primary-color;
+				}
+				
+				a.tag-cloud {
+						font-family: $primary-font;
+						color: $primary-color;
+						margin-top: 4px; 
+						background-color: #ffebeb;
+						border: 0px solid #ffdddd;
+						border-radius: 10px;
+						padding: 6px 8px 6px 8px;
+						font-size: 11px;
+						font-weight: 500;
+						transition: all 0.2s ease;
+						text-transform: none;
+
+						@media (max-width: 100px) {
+							padding: 5px 10px;
+							margin-top:0px;
+						}
+				}
+
+				a.tag-cloud:hover {
+							background-color: $primary-color;
+							color: #fff;
+				}
+			}
+		}
+	}
+
+
+
+	.post-owner {
+		
+		.profile-image{
+			padding:0;
+			margin:0;
+			float: left;
+			border-radius: 50%;
+			width: 28px;
+			height: 28px;
+			margin-right: 10px;
+
+			.glyphicon-user{
+				font-size:28px;
+			}
+		}
+
+		.post-owner-details {
+			float:none;  
+			overflow:hidden;
+			display:block;
+			transition: all 0.2s ease;
+
+
+			.name a{
+				font-family: $primary-font;
+				font-weight: 800;
+				font-size: 0.9em;
+				letter-spacing: -0.02em;
+				color: #333;
+				transition: all 0.2s ease;
+				//text-transform: uppercase;
+			}
+			.name a:hover {
+				color: $primary-color;
+				text-decoration: none;
+			}
+			.username a{
+				font-family: $primary-font;
+				font-size: 11px;
+				font-weight: 100;
+				color: #999;
+				font-style: italic;
+				text-transform: lowercase;
+				display:block;
+			}
+			.moment{ 
+				font-family: $primary-font;
+				font-size: 10px;
+				color: #cccccc;
+				text-transform: lowercase;
+				float: right;
+			}
+			.comment{ 
+				margin-top: 10px;
+				font-family: $primary-font;
+				font-size: 11px;
+				color: #ccc;
+			}
+		}
+	}
 
 	.post-title a {
 		font-family: 'Arvo';
@@ -166,9 +306,6 @@
 				color: #333;
 				font-weight: 400;
 			}
-
-
-
 		}
 
 
@@ -181,12 +318,13 @@
 			text-transform: none;
 			padding-top:20px;
 
-
 			.haul-btn {
 				margin-right:15px;
 				cursor:pointer;
 				font-size:18px;
-				
+				.fa {
+					padding: 1px;
+				}
 			}
 
 			.haul-btn:hover{
@@ -305,67 +443,6 @@
 			.pre-text {
 				font-weight: 300;
 				color: rgba(255,255,255,.7);
-			}
-		}
-	}
-
-
-	.post-owner {
-		//margin-bottom: -14px;
-
-		.profile-image{
-			padding:0;
-			margin:0;
-			float: left;
-			border-radius: 50%;
-			width: 28px;
-			height: 28px;
-			margin-right: 10px;
-
-			.glyphicon-user{
-				font-size:28px;
-			}
-		}
-
-		.post-owner-details {
-			float:none;  
-			overflow:hidden;
-			display:block;
-			transition: all 0.2s ease;
-
-
-			.name a{
-				font-family: $primary-font;
-				font-weight: 800;
-				font-size: 0.9em;
-				letter-spacing: -0.02em;
-				color: #333;
-				transition: all 0.2s ease;
-				//text-transform: uppercase;
-			}
-			.name a:hover {
-				color: $primary-color;
-				text-decoration: none;
-			}
-			.username a{
-				font-family: $primary-font;
-				font-size: 11px;
-				font-weight: 100;
-				color: #999;
-				font-style: italic;
-				text-transform: lowercase;
-			}
-			.moment{ 
-				font-family: $primary-font;
-				font-size: 10px;
-				color: #cccccc;
-				text-transform: lowercase;
-			}
-			.comment{ 
-				margin-top: 10px;
-				font-family: $primary-font;
-				font-size: 11px;
-				color: #ccc;
 			}
 		}
 	}
