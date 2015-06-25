@@ -5,10 +5,14 @@
 	<div class="haul-content"> 
 
 		<div class="row">
-			
+			<div class="col-md-12">	
+				<i {{action 'toggleView'}} {{bind-attr class=":fa listView:fa-th-list:fa-th :view-icon"}}></i>
+			</div>
+		</div>
+		<div class="row">
 			<div {{bind-attr class=":col-md-12 :col-sm-12 :col-xs-12 :padding-top gridView:center-on-collapse"}}>
 
-				<i {{action 'toggleView'}} {{bind-attr class=":fa listView:fa-th-list:fa-th :view-icon"}}></i>
+				
 
 
 				{{!-- EMPTY --}}

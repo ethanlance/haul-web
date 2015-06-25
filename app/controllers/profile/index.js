@@ -32,6 +32,8 @@ export default Ember.ObjectController.extend(PaginateMixin,{
 
     gridView: false,
 
+    noHeadlines: true,
+
 	userChanged: function() {
 
 		//Pagination:	

@@ -1,6 +1,6 @@
 <div class="feed-post">
 
-	<div class="post-owner">
+	<div {{bind-attr class=":post-owner noHeadlines:hide:show"}}>
 
 		{{#link-to 'profile' post.user.username }}{{make-icon icon=post.user.icon}}{{/link-to}}
 

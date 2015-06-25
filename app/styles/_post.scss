@@ -698,9 +698,8 @@
 	float: right;
 	color: #7e7e7e;
 
-	@media (max-width: 700px) {
-		margin-top: -15px;
-	}
+	margin-top: -15px;
+
 
 	&:hover{
 		color: $primary-color;
