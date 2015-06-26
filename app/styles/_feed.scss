@@ -9,6 +9,7 @@
 	width: 100%;
 	max-width: 550px;
 	overflow: hidden;
+	background-color: #fff;
 
 
 	.comments-tease {
@@ -268,6 +269,7 @@
 				//border: 8px solid #fff;
 				//box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
 				transition: all 0.4s ease;
+				border: 1px solid #eee;
 			}
 
 			img:hover {
