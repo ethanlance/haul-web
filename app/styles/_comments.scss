@@ -43,6 +43,13 @@
 			border-radius: 0;
 		}
 
+		.nav-tabs > li > a:hover {
+			color: $primary-color;
+			background-color: transparent;
+			border: transparent;
+			
+		}
+
 		
 		.nav-tabs > li.active > a:hover,
 		.nav-tabs > li.active > a:focus {
@@ -60,11 +67,14 @@
 
 		.nav-tabs > a:hover{
 			border-bottom: 3px solid $primary-color;
+			background-color: transparent;
+			
 
 		}
 		
 		.nav-tabs > li.active > a:focus {
 			color: #555;
+			background-color: transparent;
 		}
 
 		.nav-tabs > li.active > a {
@@ -75,6 +85,7 @@
 			border-bottom: 3px solid $primary-color; 
 			cursor:pointer;
 			font-weight: 800;
+			background-color: transparent;
 		}
 
 
