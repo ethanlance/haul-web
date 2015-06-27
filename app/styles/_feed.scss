@@ -29,7 +29,7 @@
 		.comment-count {
 			cursor: pointer;
 			color: #555;
-			font-size: 12px;
+			font-size: 11px;
 			padding-bottom: 10px;
 			font-weight: 800;
 
@@ -41,7 +41,7 @@
 		.comment-row{ 
 
 			font-family: $primary-font;
-			font-size: 12px;
+			font-size: 11px;
 			color: #555;
 			line-height: 2.2;
 			font-weight: 500;
@@ -349,13 +349,15 @@
 				.haul-btn {
 					margin-right:15px;
 					cursor:pointer;
-					font-size:12px;	
+					font-size:11px;	
+					font-weight: 800;
 					
 				}
 
 				.haul-btn:hover{
 					color: $primary-color;
 					text-decoration: none;
+					transition: all 0.2s ease;
 				}
 
 
@@ -368,6 +370,7 @@
 				}
 				a:hover {
 					text-decoration: none;
+					transition: all 0.2s ease;
 				}
 			}
 		}
