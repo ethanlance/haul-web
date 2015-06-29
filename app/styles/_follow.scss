@@ -1,0 +1,121 @@
+.follower{
+
+	border-bottom: 1px solid #eee;
+	padding:0px;
+	margin:0px; 
+
+	padding-top: 10px;
+	padding-bottom: 20px;
+	@media (max-width: 700px) {
+		padding-top: 10px;
+	}
+
+	width:100%;
+	max-width: $haul-max-width;
+	display: inline-block;
+		
+	h1 {
+		float:left;
+		margin-top:0;
+	}
+
+	.profile-image {
+		padding:0;
+		margin:0;
+		float: left;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		.glyphicon-user{
+			font-size:40px;
+		}
+	}
+
+		.follow-button-wrap {
+			float: right;
+
+			.btn-follow {
+				font-family: $primary-font;
+				color: #7e7e7e;
+				margin-top: 0px; 
+				background-color: inherit;
+				border: 1px solid #dfdfdf;
+				padding: 10px 10px 10px 10px;
+				font-size: 11px;
+				transition: all 0.2s ease;
+				text-transform: uppercase;
+
+				@media (max-width: 700px) {
+					padding: 5px 10px;
+					margin-top:0px;
+				}
+
+			}
+			.btn-follow:hover {
+				border: 1px solid $primary-color;
+				color: $primary-color;
+			}
+		}
+
+	.follower-container {
+		margin-left: 40px;
+		font-family: $primary-font;
+		text-align: left;
+		padding-left: 10px;
+		padding-top: 0px;
+		transition: all 0.2s ease;
+		width: 60%;
+
+		
+
+		.name{
+			font-size: 20px;
+			font-weight: 800;
+			//text-transform: uppercase;
+			display:block;
+			color: #333;
+			letter-spacing: -0.05em;
+			width: 200px;
+		}
+
+		a { 
+			text-decoration: none;
+			transition: all 0.2s ease;
+			color:#333;
+			width: 200px;
+		}
+
+		a:hover {
+			color: $primary-color;
+			text-decoration: none;
+
+		}
+
+		.username{
+			font-size: 11px;
+			font-weight: 300;
+			font-style: italic;
+			text-transform: lowercase;
+			display:block;
+			color: #999;
+			margin-top: -2px;
+			width: 200px;
+		}
+
+		.bio {
+			margin-top: 6px;
+			font-family: $primary-font;
+			font-size: 11px;
+			font-style: italic;
+			overflow: hidden;
+			transition: max-height 0.2s ease;
+			cursor: pointer;
+			color: #555;
+		}
+
+
+		.follow {
+			float: right;
+		}
+	}
+}
