@@ -25,18 +25,21 @@ export default Ember.Component.extend({
 			this.set("src", "/assets/images/social/facebook_square.png");
 			url = "http://www.facebook.com/share.php?u="+ this.get('url') + "&title=" + this.get('title');
 			this.set("shareUrl", url );
+			this.set('isFacebook', true);
 		}
 
 		if( type === "twitter") {
 			this.set("src", "/assets/images/social/twitter_square.png");
 			url = "http://twitter.com/intent/tweet?status="+ this.get('title') +"+"+ this.get('url');
 			this.set("shareUrl", url );
+			this.set('isTwitter', true);
 		}
 
 		if( type === "pinterest" && this.get('image') ) {
 			this.set("src", "/assets/images/social/pinterest_square.png");
 			url = "http://pinterest.com/pin/create/bookmarklet/?media="+ this.get('image') +"&url="+ this.get('url') + "&is_video=false&description=" + this.get('title');
 			this.set("shareUrl", url );
+			this.set('isPinterest', true);
 		}
 
 	}.on('didInsertElement').observes('image'),

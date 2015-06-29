@@ -98,8 +98,8 @@
 }
 
 .tag-cloud:hover {
-			background-color: $primary-color;
-			color: #fff;
+	background-color: $primary-color;
+	color: #fff;
 }
 
 .rail-header{
@@ -133,8 +133,10 @@
 
 
 
-.footer-social-icon {
-	width: 30px;
-	height: 30px;
+.social-icon {
 	cursor:pointer;
+	
+		font-size: 24px;
+		color: $secondary-color;
+	
 }
