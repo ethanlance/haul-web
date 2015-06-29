@@ -110,14 +110,8 @@
 	padding-bottom:80px;
 	margin-bottom:30px;
 	text-transform: uppercase;
-
-	//position:absolute;
-
 	overflow: scroll;
-
-	
 	min-width: 130px;
-
 	height: 90%;
 
 	h2 {
@@ -135,8 +129,9 @@
 
 .social-icon {
 	cursor:pointer;
-	
-		font-size: 24px;
-		color: $secondary-color;
-	
+	font-size: 24px;
+	color: $secondary-color;
+	&:hover{
+		opacity:.8;
+	}
 }
