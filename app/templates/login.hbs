@@ -1,0 +1,101 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal'}}
+<div class="modal-dialog lg text-left">
+	<div class="modal-content">
+		
+		{{partial "_modal_nav"}}
+
+		<div class="text-center edit-wrapper">
+			<div class="edit-row">
+				<div class="edit-col">
+
+					
+					<h1 class="modal-title" id="myModalLabel">
+						Welcome back. Please sign in.
+					</h1>
+					<h3>( Don't have an account yet? <a class="or" {{action 'openModal' 'signup'}}>Sign up today!</a> )</h3>
+			
+					
+
+				  	{{#if error404}}
+				  		<div class="alert">Sorry, you need to sign up and create an account first.<br/>
+				  		Go to <a {{action 'openModal' 'signup'}}>Sign Up</a></div>
+				  	{{/if}}
+
+		  			{{#if showErrorsFB}}
+				    	<div class="alert">
+					  		{{partial "_server_error"}}
+				    	</div>
+				  	{{/if}} 
+
+					<div class="form-group">
+
+						{{ladda-btn 
+							name='Sign in with Facebook'
+							btnClasses='btn btn-block btn-facebook ladda-button'
+							btnClick='facebookLogin'
+							spin=isProcessingFacebook
+						}}
+
+				    </div> 
+
+
+
+					<h3>or sign in with your email & password below</h3>
+
+
+					{{#form-for model}}
+
+					  {{#if error}}
+					    <div class="alert">Invalid username or password.</div>
+					  {{/if}} 
+					  
+					  {{#if error409}}
+					    <div class="alert">Your email needs to be validated before you can Sign in.</div>
+					  {{/if}} 
+
+
+					  	<div class="form-group" >
+				      		{{input-field model.email class="form-control" placeholder="username or email" label="false"}}
+				      	</div>
+
+				 		<div class="form-group">	
+				      		{{input-field model.password class="form-control" placeholder="password" label="false"}}
+						</div> 
+
+						<div class="form-group">
+							{{ladda-btn 
+								name='Sign In'
+								btnClasses='btn btn-primary btn-block ladda-button'
+								btnClick='emailLogin'
+								spin=isProcessingLogin
+							}}
+					  	</div>
+
+					  	
+				  		<h4><a href="/forgot-password">Forgot Password?</a></h4>
+					  	
+
+					{{/form-for}} 
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/modal-modal}}

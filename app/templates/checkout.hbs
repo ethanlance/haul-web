@@ -1,0 +1,114 @@
+
+
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+
+{{!-- PAGE CONTENT --}}
+<div class="container haul-content haul-checkout">   
+	<div class="row">
+		<div class="col-md-3 col-sm-2 col-xs-12">
+			<h1></h1>
+			<div class="product-card">
+				<div {{bind-attr class=":product-card-cap isForSale::sold"}}>
+					{{statusText}}
+				</div>
+
+				{{#link-to 'profile.post' user.username post_id post_slug}}
+				<h2>{{product_name}}</h2>
+
+				<div class="profile-pod">
+					{{make-icon icon=product_user.icon}}
+
+					<div class="profile-name">
+						<span class="name">{{product_user.get_display_name}}</span>
+						<span class="username">@{{product_user.username}}</span>
+					</div>
+				</div>
+				{{/link-to}}
+
+				<div class="price">
+					${{product_price}}
+				</div>
+
+				{{#if product_images}}
+					{{image-carousel content=product_images}}
+				{{/if}}
+
+				<div class="description">
+					{{description-list product_description "description"}}
+				</div>
+			</div>
+
+
+		</div>
+
+		{{!-- PRODUCT IS NOT FOR SALE --}}
+		<div {{bind-attr class="isForSale:hide:show"}}>
+			<div class="col-md-6 col-sm-8 col-xs-12">
+				<h3>Whoops, this is {{statusText}}</h3>
+				<p>{{#link-to 'profile.post'  user.username post_id post_slug class="editorial"}}
+				<i class="fa fa-angle-double-left"></i> Back to the post{{/link-to}}</p>
+			</div>
+		</div>
+
+
+		{{!-- PRODUCT IS FOR SALE --}}
+		<div {{bind-attr class="isForSale:show:hide"}}>
+		<div class="col-md-6 col-sm-8 col-xs-12">
+
+			<h3>Hey there, we're not quite ready to allow items to be sold.  Check back soon!</h3>
+
+
+			{{!-- <div class="row section">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+					{{buyer-form selected_buyer_id=buyerId}}
+
+				</div>
+			</div>
+
+
+			<div class="row section">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					
+					{{buyer-address selected_address_id=addressId}}
+
+				</div>
+			</div>
+
+			<div class="row section">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+					{{creditcard-list buyer_id=buyerId selected_payment_id=paymentId}}
+
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+
+					<h3 {{bind-attr class="showTransactionButton::disabled"}}>Final Step</h3>
+
+					
+					{{partial "_server_error"}}
+
+					<button {{action 'doSubmitTransaction'}} {{bind-attr class="showTransactionButton::disabled :btn :btn-default"}}>Process Payment ${{model.product_price}}</button>
+
+
+
+				</div>
+			</div> --}}
+
+		</div>
+		</div>
+
+
+		<div class="col-md-3 col-sm-2 col-xs-12"></div>
+	</div>
+</div>	
+</div>	
+</div>	
+</div>	

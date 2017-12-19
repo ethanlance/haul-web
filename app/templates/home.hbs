@@ -1,0 +1,36 @@
+{{preserve-scroll currentScrollPos=currentScrollPos}}
+
+<div class="container-fluid">
+	<div class="haul-content">
+		<div class="col-content">
+
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}}
+			{{!-- FEED --}} 
+			{{#each post in sortedContent}}
+				{{partial 'feed_post'}}	
+			{{/each}} 
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<i class="fa fa-circle-o-notch fa-spin"></i>
+			{{/infinite-scroll}}
+
+
+		</div>
+		<div class="col-rail hide-on-collapse">
+						
+					
+			{{mention-pod goToRoute="goToRoute"}}
+
+			{{onboarding-userstofollow limit=6}}
+
+			{{onboarding-tags goToRoute='goToRoute'}}
+
+			{{partial 'footer_sidebar'}}
+		 
+
+		</div> 
+	</div>
+</div>

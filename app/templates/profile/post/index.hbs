@@ -1,0 +1,272 @@
+<div class="container-fluid">
+	<div class="haul-content">
+		
+
+		{{#unless model}}
+				
+			<h1 class="text-center">Oh no, that post does not seem to exist anymore</h1>
+
+
+		{{else}}
+		
+
+
+		<div class="col-content">		
+			<div class="product-post">
+				
+				<div class="moment">{{format-moment created_at}} {{#if isProfileOwner}}
+					 	{{#link-to 'profile.post.edit_post' user.username this }}
+						<button class="btn-edit-post">
+							<i class="fa fa-cog"></i> Edit post
+						</button>
+						{{/link-to}}
+					{{/if}}</div>
+
+
+				<h1 class="subject">{{ subject }}</h1>
+
+
+				{{!-- Social Share buttons at top of post on small screens --}}
+				{{!-- Social Share buttons at top of post on small screens --}}
+				{{!-- Social Share buttons at top of post on small screens --}}
+				<div class="show-on-small">
+					{{social-btns post=this}}
+				</div>
+
+
+				{{!-- //REPOST --}}
+				{{#if repost_id}}
+				<div class="repost-citations">
+					<i class="fa fa-retweet"></i>
+					{{make-icon icon=repost_user.icon}}
+					<span class="name">{{repost_user.get_display_name}}'s </span>
+					<span class="title"> original post
+						{{#link-to 'profile.post'
+							repost.user.username 
+							repost.post_id 
+							repost.post_slug}}{{repost.subject}}{{/link-to}}
+					</span>
+				</div>
+				{{/if}}
+
+				
+
+				{{!-- EDITORIAL --}}
+				<div class="editorial">
+					{{#unless model.postHasImage}}
+						{{#if image.large}}<img {{bind-attr src=image.large}}/>{{/if}}
+					{{/unless}}
+
+					{{sanitizehtml-andtag  body  "editorial"  ENV }}
+					
+				</div>
+
+
+				{{!-- CTA & SOCIAL BUTTONS  --}}
+				{{!-- CTA & SOCIAL BUTTONS  --}}
+				{{!-- CTA & SOCIAL BUTTONS  --}}
+				{{!-- CTA & SOCIAL BUTTONS  --}}
+				<div class="social-buttons">
+					<div class="internal-social-buttons">
+						
+						{{like-btn post=this openModal='openModal' class="display-inline"}}
+						 	
+					 	{{comment-btn post=this class="display-inline" }}
+
+					 	{{repost-btn post=this openModal='openModal' class="display-inline"}}
+
+					</div>
+
+					<div class="external-social-buttons">
+						{{social-btns post=this}}
+					</div>
+				</div>
+
+
+				
+
+
+
+
+				{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+				{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+				{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+				{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+				{{!-- COMMENT SECTION / USERS WHO LIKE THIS POST --}}
+				<div class="row padding-top comments-section">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						
+
+						{{!-- TABS --}}
+						{{!-- TABS --}}
+						{{!-- TABS --}}
+						<div class="comment-section-nav">
+
+							<ul class="nav nav-tabs" role="tablist">
+
+    							<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">{{totalComments}} Comments</a></li>
+
+    							<li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">{{totalLikes}} Likes</a></li>
+							</ul>
+
+						</div>
+
+
+						<div class="tab-content">
+							
+
+							{{!-- COMMENTS PANE --}}
+							{{!-- COMMENTS PANE --}}
+							{{!-- COMMENTS PANE --}}
+							<div class="tab-pane active" id="tab1">
+								{{comment-section 
+									openModal='openModal' 
+									objectId=this.id
+									objectType="posts"
+									anchor=anchor 
+									reply=reply
+									class="display-inline" }}
+							</div>
+
+
+							{{!-- USERS WHO LIKE POST PANE --}}
+							{{!-- USERS WHO LIKE POST PANE --}}
+							{{!-- USERS WHO LIKE POST PANE --}}
+							<div class="tab-pane" id="tab2">
+								{{post-likes post=this}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-rail">
+				
+			{{#if isProductOwner }}
+				{{#link-to 'profile.post.edit_product' user.username this }}
+				<button class="btn btn-default btn-edit btn-xs">
+					<i class="fa fa-cog"></i> Edit Product
+				</button>
+				{{/link-to}}
+			{{/if}}
+
+			<div class="product-card">
+				<div {{bind-attr class=":product-card-cap isForSale::sold"}}>
+					{{product_status_text}}
+				</div>
+
+
+				<h2>
+					{{product_name}}
+				</h2>
+
+				{{#if isForSaleOffsite }}
+				<div class="profile-pod">
+					<div class="for-sale-at">For sale at: <span class="website">{{product_link_domain}}</span></div>
+					</div>
+				{{/if}}
+
+
+				{{#unless isForSaleOffsite }}
+					<div class="profile-pod">
+
+					{{#link-to 'profile' product_user.username }}
+						{{make-icon icon=product_user.icon}}
+					{{/link-to}}
+
+						<div class="profile-name">
+							<span class="name">
+
+								
+									<span class="curated_by">Found By</span>
+							
+
+								{{#link-to 'profile' product_user.username }}{{product_user.get_display_name}}{{/link-to}}
+							</span>
+							<span class="username">{{#link-to 'profile' product_user.username }}@{{product_user.username}}{{/link-to}}</span>
+						</div>
+					</div>
+				{{/unless}}
+
+
+
+
+				
+
+				<div class="price">
+					${{product_price}}
+				</div>
+
+				{{buy-btn post=this class="display-inline" }}
+
+
+				
+
+
+
+
+				{{#if product_images}}
+					{{image-carousel content=product_images}}
+				{{/if}}
+
+				<div class="description">
+					{{description-list product_description "description"}}
+				</div>
+
+			</div>
+
+		</div>
+
+		{{/unless}}
+
+
+	</div>
+</div>
+
+
+
+
+
+
+
+
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{!-- NEXT RELATED POSTS --}}
+{{#if model}}
+<div class="container-fluid">
+
+	<div class="haul-wrapper ">
+
+		<div class="row">
+
+			<div class="col-md-12 col-sm-12 col-xs-12">
+
+				<div class="related-posts">
+					{{ related-posts post=this limit=8 }}
+				</div>
+
+			</div>	
+
+		</div>
+
+	</div>
+</div>
+{{/if}}
+
+
+
+
+
+
+
+
+
+
+
+

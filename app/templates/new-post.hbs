@@ -1,0 +1,349 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal' scrollToTop=scrollToTop}}
+<div {{bind-attr class=":modal-dialog :lg :text-left"}}>
+	<div class="modal-content">
+
+		{{partial "_modal_nav"}}
+
+		{{partial "_modal_error_alert"}}
+
+	
+		{{!-- POST FORM --}}
+		<div class="text-center edit-wrapper">
+
+
+			{{!-- BUILD A PRODUCT / POST --}}
+			{{!-- BUILD A PRODUCT / POST --}}
+			{{!-- BUILD A PRODUCT / POST --}}
+			{{!-- BUILD A PRODUCT / POST --}}
+			{{#form-for model}}
+				
+
+
+			<div {{bind-attr class=":fade isReady:in:out"}} id="showTypeOfPostForm">
+				<div class="edit-row border">
+					<div class="edit-col"> 
+						
+						
+						<h2>Blog about something for sale.</h2>
+
+						<button {{action 'doShare'}} class="btn btn-default">I am blogging</button>
+
+
+						<h2>Sell something on Haul?</h2>
+
+						<button {{action 'doSell'}} class="btn btn-default">I am selling</button>
+
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			{{!-- FOR SHARING, IMPORT LINK OPTION --}}
+			<div class="hide" id="showImportForm">
+				<div class="edit-row">
+					<div class="edit-col">
+
+						<h2> 
+							Link to where this can be bought
+							<small>Mandatory when sharing</small>
+						</h2> 
+						
+						{{input-field product_link class="form-control" placeholder="http://www.sitename.com/something-for-sale"}}
+
+					
+						{{#if showLinkError}}
+							<span class="has-error help-block">Whoops, a link to the item is super important.</span>
+						{{/if}}
+
+						{{message-typer typeClear=typeClear typeMessage=typeMessage}}
+
+
+						{{#if showImportFailed}}
+							<span class="has-error help-block">
+								
+								<p>Bummer! We cannot seem to import that link for you.</p>
+								<p>
+									You can try to import again, or just skip and continue
+								</p>
+							</span>
+						{{/if}}
+
+
+						{{ladda-btn
+							name='IMPORT'
+							class="display-inline"
+							btnClasses='btn btn-default ladda-button'
+							btnClick='doImport'
+							spin=isProcessingImport
+							dataSpinnerColor="black"
+						}} 
+
+ 
+						<button {{action 'doShowProductForm'}} {{bind-attr class=":btn :btn-default isProcessingImport:disabled hasProductLink::disabled"}}>Skip and Continue</button>
+
+					</div>
+				</div>
+			</div>
+
+
+	
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			{{!-- PRODUCT FORM --}}
+			<div class="hide" id="showProductForm">
+
+
+				{{!-- ADD PHOTOS --}}
+				{{!-- ADD PHOTOS --}}
+				{{!-- ADD PHOTOS --}}
+				<div class="edit-row border">
+					<div class="edit-col">
+
+						<h2>Add photos</h2>
+
+
+						{{#image-uploader
+
+							
+							imageHasUploaded='refresh' 
+
+							imageClick='imageClick' 
+
+							imageDelete='imageDelete'
+							
+						}} 
+							{{view 'sortable' content=selectedImages}}
+						{{/image-uploader}}
+
+						{{#if showImageError}}
+							<span class="has-error help-block">A product needs at least one image</span>
+						{{/if}}
+
+					</div>
+				</div>
+
+
+				{{!-- PRODUCT IS FOR SALE HERE ON HAUL --}}
+				{{!-- PRODUCT IS FOR SALE HERE ON HAUL --}}
+				{{!-- PRODUCT IS FOR SALE HERE ON HAUL --}}
+				<div {{bind-attr class="isOnsite:show:hide"}}>
+
+					{{partial '_edit_product_onsite'}}
+
+				</div>
+
+
+				{{!-- PRODUCT IS FOR SALE ELSWHERE --}}
+				{{!-- PRODUCT IS FOR SALE ELSWHERE --}}
+				{{!-- PRODUCT IS FOR SALE ELSWHERE --}}
+				<div {{bind-attr class="isOnsite:hide:show"}}>
+
+					{{partial '_edit_product_offsite'}}
+
+				</div>
+
+
+
+				{{!-- VALIDATE & GO TO NEXT POST --}}
+				{{!-- VALIDATE & GO TO NEXT POST --}}
+				{{!-- VALIDATE & GO TO NEXT POST --}}
+				<div class="edit-footer">
+					<div class="edit-col">			
+						
+						{{ladda-btn
+							name='NEXT'
+							class="display-inline"
+							btnClasses='btn-next ladda-button'
+							btnClick='next'
+							spin=isProcessingNext
+							dataSpinnerColor="white"
+						}}
+
+						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+							<i class="fa fa-times"></i> Cancel
+						</span>
+
+					</div>
+				</div>
+			</div>
+		
+
+
+
+
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			{{!-- POST FORM --}}
+			<div class="hide" id="showPostForm">
+
+
+				{{!-- BLOG POST --}}
+				{{!-- BLOG POST --}}
+				{{!-- BLOG POST --}}
+				<div class="edit-row">
+					<div class="edit-col">
+
+						<h2>Next, write a post about this.
+
+							<small>Just skip this section if you are happy with the blog post
+							we've created for you below.</small>
+
+						</h2>
+
+						{{input subject label="false" class="post-subject" placeholder="Your post's title"}} 
+
+
+						<h2>Your Post's Main Image</h2>
+
+						{{image-uploader 
+
+							singleImage=image 
+
+							imageHasUploaded='mainImageChanged'
+
+							singleImageButtonText='change'
+
+						}}
+
+						{{quill-editor 
+							setEditorImgSrc=setEditorImgSrc
+							setEditorText=setEditorText
+							content=body
+							quillChange='quillChange' 
+							requestContents=requestEditorContents
+							selectedImages=selectedImages
+							triggerResize=triggerEditorResize
+						}} 
+
+					</div>
+				</div>
+
+
+
+				{{!-- TAG POST --}}
+				{{!-- TAG POST --}}
+				{{!-- TAG POST --}}
+				<div class="edit-row border">
+					<div class="edit-col">
+
+						<h2>Tag your post
+							<span class="optional">optional</span>
+							<small>Adding tags will help promote your post</small>
+						</h2>
+						
+						{{input-field tags class="form-control"}}
+
+					</div>
+				</div>
+
+				<div class="edit-footer">
+					<div class="edit-col">			
+
+						{{partial "_server_error"}}
+
+						<span {{action 'back'}} class="btn btn-cancel btn-left">
+							<i class="fa fa-arrow-left"></i> &nbsp;Back
+						</span>
+
+						{{ladda-btn
+							name='SAVE POST'
+							class="display-inline"
+							btnClasses='btn-next ladda-button'
+							btnClick='savePost'
+							spin=isProcessingSavePost
+							dataSpinnerColor="white"
+						}}
+							
+						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+							<i class="fa fa-times"></i> Cancel
+						</span>
+
+					</div>
+				</div>
+			</div>
+			{{/form-for}}
+		</div>
+
+
+
+		{{!-- SUCCESS MESSAGE --}}
+		{{!-- SUCCESS MESSAGE --}}
+		<div class="hide" id="showSuccess">
+			<div class="text-center edit-wrapper">
+				<div class="edit-row">
+					<div class="edit-col">
+
+
+					{{#if needsSellerAccount}}
+
+
+						{{#if isOnsite}}
+							<h2>
+								Congrats!  Your post went live!
+
+								<small>Now setup your seller account so people can give you money!</small>
+
+							</h2>
+
+							<button {{action 'goToPost'}} class="btn btn-default">skip for now</button>
+							<button class="btn btn-default">
+								<a data-toggle="collapse" 
+									data-parent="#accordion" 
+									href="#collapseSellerForm" 
+									aria-expanded="false" 
+									aria-controls="collapseSellerForm">yep, let's do it</a>
+							</button>
+
+							<div id="collapseSellerForm" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								{{seller-form sellerAccountSaved='sellerAccountSaved'}}
+							</div>
+
+						{{else}}
+
+						
+							<h2>
+								Congrats!  Your post went live!
+
+								<small>You can edit it anytime you like.</small>
+
+							</h2>
+
+							<button {{action 'goToPost'}} class="btn btn-default">go to your post</button>
+
+						{{/if}}
+
+					{{else}}
+
+						
+						<h2>
+							Congrats!  Your post went live!
+
+							<small>You can edit it anytime you like.</small>
+
+						</h2>
+
+						<button {{action 'goToPost'}} class="btn btn-default">go to your post</button>
+
+					{{/if}}
+
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/modal-modal}}		
+				 
+		

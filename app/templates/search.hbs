@@ -1,0 +1,77 @@
+
+
+<header class="basic">
+<div class="container-fluid">	
+	<div class="header-basic">
+
+
+		<h1 {{bind-attr class="showResults:hide:show"}}>Discover</h1>
+		<h1 {{bind-attr class="showResults:show:hide"}}>{{{typeText}}}  <b>{{queryText}}</b></h1>
+
+
+
+	</div>
+</div>
+</header>
+
+<div class="container">  
+	<div class="haul-content"> 
+		<div class="row">
+			
+			<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
+
+		 
+
+			{{!-- //LOADING CONTENT --}}
+			{{#if loading }}
+				{{partial '_spinner'}}
+			{{/if}}
+
+
+			
+			 	
+
+			{{#if currentTypeIsHashtag }}
+			 	{{#each item in sortedContent}}
+			 		<ul class="search-hashtag">
+			 			<li {{action 'clickHashtag' item}}>
+			 				<span class="search-hashtag-tag">#{{item.name}}</span> <span class="search-hashtag-total">{{item.total}} posts</span></li>
+			 		</ul>
+				{{/each}}
+
+			{{/if}}
+
+
+
+			{{#if currentTypeIsUser }}
+					
+				{{#each item in sortedContent}}
+					{{profile-badge profile=item.user}} 
+				{{/each}}
+
+			{{/if}}
+
+
+
+
+			{{#if currentTypeIsPost }}
+			<div class="text-center">
+			 	{{#each post in sortedContent}}
+
+			 		{{partial "_grid_search"}}
+
+				{{/each}}
+			</div>
+			{{/if}}
+
+	 
+			
+			{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+				<span>Loading...</span>	
+			{{/infinite-scroll}}
+		    
+			</div> 
+			
+		</div>
+	</div>
+</div>

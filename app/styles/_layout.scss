@@ -1,0 +1,163 @@
+
+.haul-wrapper {
+	width: 100%;  
+	margin:0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto; 
+	text-align: center;
+}
+
+.container-fluid {
+	position:relative;
+
+	@media (max-width: 700px) {
+
+		&.no-margins{
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+	}
+}
+
+.container {
+	position:relative;
+	width: $haul-max-width;
+	max-width: 100%;
+}
+
+
+
+
+.haul-content {
+	padding:0;
+	padding-top: 30px;
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;
+	text-align: left;	
+	
+	width: 100%;
+	max-width: $haul-max-width;
+	
+	
+
+	.col-content {
+		
+		margin:0;
+		padding:0;				
+		float:left;
+		//sdisplay:inline-block;
+		overflow: none !important;
+
+		width: 100%;
+		max-width: 650px;
+
+		//Collapse Right Col
+		@media (max-width: 990px) {
+			width: 100%;
+			margin-left:auto;
+			margin-right: auto;
+			float: none;
+			display:block;
+		}
+	}
+
+	.col-rail { 
+		margin:0;
+		padding:0; 
+		float:right;
+		display:block;
+		overflow: none !important;
+
+		width: 35%;
+		max-width: 310px;
+		min-height: 200px;
+		
+		//Collapse Right Col
+		@media (max-width: 990px) {
+			padding-top:50px;
+			width: 100%;
+			float:none;
+			display:table;
+			margin:auto; 
+		}
+
+		
+	}
+
+
+	.col-content.lg{
+		max-width: 100%;
+		margin-right: -204px;
+		float:left;
+
+		.grid-post {
+			width: 31%;
+			@media (max-width: 729px) {
+				margin-right: auto;
+				width: 31%;
+				min-width: 0;
+			}
+			
+			@media (max-width: 575px) {
+				width:50%;
+				margin:0px;
+				min-width:0;
+				float:left;
+
+				.post-bottom-cap, .product-title, .product-owner{
+					display:none;
+				}
+				.post-image{
+					margin-bottom:0;
+					img {
+						min-width:0;
+					}
+				}
+			}
+		}
+
+
+
+		@media (max-width: 990px) {
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+		.col-content-inner {
+			margin-right: 200px;
+			
+			@media (max-width: 990px) {
+				margin-right: auto;
+				margin-left: auto;
+			}
+		}
+	}
+
+	.col-rail.sm {
+		width: 204px;
+		float:right;
+
+		@media (max-width: 990px) {
+			width: 100%;
+			float: none;
+		}
+	}
+
+	.col-rail.hide-on-collapse {
+		@media (max-width: 990px) {
+			display: none;
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+

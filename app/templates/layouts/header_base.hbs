@@ -1,0 +1,117 @@
+
+<nav>
+
+	<div class="nav">
+		
+		{{#link-to 'home'}}{{partial '_logo'}}{{/link-to}}
+
+
+		{{!-- When browser is NOT collapsed --}}
+		<div class="nav-link-wrapper">
+
+			{{#if session.isAuthenticated }}
+			<div class="nav-link home hide-on-small">
+				{{#link-to 'home' }}FEED{{/link-to}}
+			</div>	
+			{{/if}}
+
+			<div class="nav-link">
+				{{#link-to 'discover' }}TOP POSTS{{/link-to}}
+			</div>	
+
+			{{#if session.isAuthenticated }}
+			<div class="nav-link hide-on-small">
+				{{#link-to 'profile' session.currentUser.username }}MY POSTS{{/link-to}}
+			</div>	
+			{{/if}}
+
+			{{#if session.isAuthenticated }}
+			<div class="nav-link hide-on-small">
+				{{#link-to 'mentions' }}
+					{{#if session.currentUser.hasUnreadMentions}}
+						{{mention-count}}
+					{{/if}}NOTIFICATIONS
+				{{/link-to}}
+			</div>	
+			{{/if}}
+
+			<div {{action 'toggleSearch'}} class="nav-link needsclick">
+				<i class="fa fa-search"></i> <span class="hide-on-small">SEARCH</span>
+			</div>	
+		
+		</div>	
+
+		{{#if session.isAuthenticated }}
+		<div class="nav-profile">
+			
+				{{make-icon icon=session.currentUser.icon}}
+				
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+
+					<li class="show-on-small">
+						{{#link-to 'mentions' }}
+							{{#if session.currentUser.hasUnreadMentions}}
+								{{session.currentUser.getUnreadMentionCount.total}}
+							{{/if}}Notifications
+						{{/link-to}}
+					</li>
+					<span class="show-on-small">
+						<li class="divider"></li>
+					</span>
+
+					<li>{{#link-to 'new-post' }}<i class="fa fa-plus-square-o"></i> New Post{{/link-to}}</li>
+
+
+					<li class="divider"></li>
+					<li>{{#link-to 'profile' session.currentUser.username }}<i class="fa fa-user"></i> My Posts{{/link-to}}</li>
+					
+					<li class="divider"></li>
+					<li>{{#link-to 'settings.profile'}}<i class="fa fa-wrench"></i> Profile{{/link-to}}</li>
+					
+		            <li class="divider"></li>
+		            <li>{{#link-to 'about'}}<i class="fa fa-compass"></i> About {{/link-to}}</li>
+
+					<li class="divider"></li>
+					<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
+				</ul>
+			
+		</div>
+		{{/if}}
+
+
+		{{#unless session.isAuthenticated }}
+		<div class="nav-anon">
+			<div class="nav-link">
+				{{#link-to 'about'}}ABOUT{{/link-to}}
+			</div>
+
+			<span class="hide-on-small">
+			{{login-btn openModal='openModal' class="display-inline"}}
+			</span>
+
+			{{signup-btn openModal='openModal' class="display-inline"}}
+		</div>
+		{{/unless}}
+
+		
+
+		{{#if session.isAuthenticated }}
+		<div class="nav-right">
+			<span class="hide-on-small">
+				{{new-post-btn openModal='openModal' btn-text="ADD A NEW POST" class="display-inline"}}
+			</span>
+			<span class="show-on-small">
+				{{new-post-btn openModal='openModal' btn-text="POST" class="display-inline"}}
+			</span>
+		</div>
+		{{/if}}
+
+	</div>
+</nav>
+
+
+
+<div id="searchDropDown" class="search">
+	{{typeahead-search  goToRoute='goToRoute'}}
+</div>

@@ -1,0 +1,60 @@
+<div {{bind-attr class="show_loading:show:hide"}}>
+	{{partial '_spinner'}}
+</div>
+
+{{!-- CREATE BUYER --}}
+<div {{bind-attr class="show_buyer:show:hide"}}>
+	<h1>Your contact information.
+		<button {{action 'showEdit'}} class='btn-edit'><i class="fa fa-cog"></i> edit</button>
+	</h1>
+	<p>
+		{{model.firstname}} {{model.lastname}}<br/>
+		{{phone-helper model.phone}}
+	</p>
+</div>
+
+<div {{bind-attr class="show_form:show:hide"}}>
+
+	<h1 class="subject">Your contact information.
+		<small>
+			For your security we require the following info.  We promise not to do anything nefarious with it.
+		</small>
+	</h1>
+
+	{{#form-for model}}
+		{{input-field model.firstname class="form-control" placeholder='firstname'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field firstname}}</span>
+		{{/if}}
+
+		{{input-field model.lastname class="form-control" placeholder='last name'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field lastname}}</span>
+		{{/if}}
+
+		{{input-field model.email class="form-control" placeholder='email'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field email}}</span>
+		{{/if}}
+
+		{{input-mask class='form-control'
+			valueOut=model.phone
+			valueIn=model.phone
+			mask='999-999-9999'
+			placeholder='phone 555-555-5555'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field phone}}</span>
+		{{/if}}
+
+		{{ladda-btn
+			name=buttonText
+			class="display-inline"
+			btnClasses='btn btn-default ladda-button btn-right btn-positive'
+			btnClick='doSubmit'
+			spin=isProcessing
+		}}
+
+		<button {{action 'doCancel'}} class='btn btn-cancel btn-right'><i class="fa fa-times"></i> Cancel</button>
+		
+	{{/form-for}}
+</div>

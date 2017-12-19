@@ -1,0 +1,182 @@
+
+.dms-section {
+
+		.profile-image{
+			padding:0;
+			margin:0;
+			float: left;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			margin-right: 0px;
+			
+			.glyphicon-user{
+				font-size:40px;
+			}
+		}
+
+
+	margin-top: 70px;
+	margin-bottom: 70px;
+
+	
+
+	.btn-default {
+		font-family: $primary-font;
+		background-color: $primary-color;
+		font-size: 11px;
+		font-weight:500;
+		color: #fff;
+		border: 0;
+		padding: 10px 20px 10px 20px; 
+		border-radius: 0;
+		text-transform: uppercase;
+	}
+
+	.btn-default:hover {
+		background-color: $primary-color-hover;
+		
+	}
+
+	.load-more-btn {
+		margin-top:30px;
+	}
+
+	.dm-box { 
+		width: 100%;
+		margin-top: 20px;
+		margin-bottom: 0px;
+		//padding-bottom:20px; 
+
+		.profile-image{
+			padding:0;
+			margin:0;
+			float: left;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			margin-right: 0px;
+			
+			.glyphicon-user{
+				font-size:40px;
+			}
+		}
+
+		.dm-input {
+  
+			width: 400px; 
+
+			@media (max-width: 400px) {
+				width: 100%;
+			}
+
+			float:none;
+			display:inline-block; 
+
+			.mentions-input-box{ 
+				background-color: transparent;
+			}
+
+			textarea { 
+				padding-top: 10px;
+				padding-left: 20px;
+				border: 0;
+				background-color: $primary-background-color;
+				//background: transparent;
+				font-size: 14px; 
+				height: 60px;
+				outline: 0 none;
+				outline-style:none;
+				box-shadow:none;
+				border-color:transparent; 
+			}
+
+		}
+
+		.dm-submit {
+			float:right;
+			display:block;
+			margin:0;
+			margin-right: -30px;
+			margin-top:20px;
+		}
+	}
+
+	.dm-section-row{ 
+		display: inline-block;
+		width: 100%;
+		border-top: 1px dashed #cdcdcd;
+		padding-top: 10px;
+		margin-top: 10px;
+
+
+
+		.btn-delete{
+			float:right;
+			background-color: transparent;
+			border: 0;
+			color: #ccc;
+		}
+
+		.btn-delete:hover {
+			color: $primary-color;
+		}
+
+		.profile-image{
+			padding:0;
+			margin:0;
+			float: left;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			margin-right: 30px;
+			.glyphicon-user{
+				font-size:40px;
+			}
+		}
+
+		.dm-section-dm {
+			float:none;  
+			overflow:hidden;
+			display:block;
+
+			.name a{
+				font-family: $primary-font;
+				font-weight: 600;
+				font-size: 12px;
+				color: #333
+				//text-transform: uppercase;
+			}
+			.username a{
+				font-family: $primary-font;
+				font-style: italic;
+				font-size: 11px;
+				color: #999;
+				text-transform: lowercase;
+			}
+			.moment{ 
+				font-family: $primary-font;
+				font-size: 10px;
+				color: #cccccc;
+				text-transform: lowercase;
+			}
+			.dm{ 
+
+				a {
+					color: $primary-color;
+					text-decoration: none;
+				}
+				a:hover {
+					border-bottom: 1px dashed $primary-color;
+					text-decoration: none;
+				}
+				
+				margin-top: 4px;
+				font-family: $primary-font;
+				font-size: 14px;
+				color: #555;
+				line-height: 1.7;
+			}
+		}
+	}
+}

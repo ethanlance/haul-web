@@ -1,0 +1,16 @@
+{{#if sortedComments}}
+<div class="comments-tease">
+	
+	<div class="comment-count">
+		{{comment-count-tease post=post  goToRoute='goToRoute' limit=3 class="display-inline" }}
+	</div>		 
+
+	{{#each item in sortedComments }}
+	<div class="comment-row">
+		<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}:{{/link-to}}</span>
+		<span class="comment">{{sanitizehtml-andtag item.comment "comment" ENV}}</span>
+	</div>
+	{{/each}}
+
+</div>		
+{{/if}}

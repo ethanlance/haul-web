@@ -1,0 +1,9 @@
+<div class="onboarding-pod">
+	
+	<span class="rail-header"><h2>Favorite Tags</h2></span>
+	
+	{{#each tag in tags}}
+		<button {{action 'tagClick' tag}} class="tag-cloud">#{{tag}}</button>
+	{{/each}}
+
+</div>

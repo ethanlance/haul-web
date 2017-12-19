@@ -1,0 +1,22 @@
+<nav>
+
+	<div class="nav">
+		
+		{{#link-to "logout"}}{{partial '_logo'}}{{/link-to}}
+		
+
+		{{#if session.isAuthenticated }}
+		<div class="nav-profile">
+			
+			{{make-icon icon=session.currentUser.icon}}
+			
+			<ul class="dropdown-menu dropdown-menu-right" role="menu">
+				<li>{{#link-to 'logout'}}<i class="fa fa-power-off"></i> Logout{{/link-to}}</li>
+			</ul>
+
+		</div>
+		{{/if}}
+		
+	</div>
+</nav>
+

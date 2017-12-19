@@ -1,0 +1,44 @@
+<div class="container">  
+	
+	<div class="haul-content"> 
+
+		<div class="row">
+			
+			<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
+
+
+				{{!-- //CONTENT --}}
+				{{#each like in sortedContent}}
+					{{#with like.post as post }}
+						
+						{{render '_grid_post' post}}
+						
+					{{/with}}
+				{{/each}}
+				
+				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+					<i class="fa fa-circle-o-notch fa-spin"></i>
+				{{/infinite-scroll}}
+
+
+				{{!-- //NO CONTENT CTA --}}
+				{{#unless pagedContent }} 
+					<div class="padding-top text-center font-weak">
+					{{#unless isProfileOwner}}
+						<h4 class="prompt-text">{{user.get_display_name}} hasn't liked anything yet.</h4>
+					{{else}}
+						<h4 class="prompt-text">You haven't liked any posts yet.</h4>
+					{{/unless}}
+					</div>
+
+					<p class="text-center">
+						<!--<span class="glyphicon glyphicon-heart-empty sad-heart"></span>-->
+					</p>
+				{{/unless}}
+
+
+			</div> 
+			
+		</div>
+	</div>
+</div>

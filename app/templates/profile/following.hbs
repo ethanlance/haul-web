@@ -1,0 +1,64 @@
+
+
+<div class="container"> 
+	<div class="haul-content"> 
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12 padding-top">
+
+
+				{{!-- //CONTENT --}}
+				{{#each item in sortedContent}}
+					
+					<div class="follower">
+
+						{{#link-to 'profile' item.user}}{{make-icon icon=item.user.icon}}{{/link-to}}
+
+						
+						<div class="follow-button-wrap">
+								{{ follow-btn followUser=item.user openModal='openModal' class="display-inline-block" }}
+							</div>
+
+						<div class="follower-container">
+
+							<span class="name">{{#link-to 'profile' item.user}}{{item.user.get_display_name}}{{/link-to}}</span>
+							<span class="username">@{{item.user.username}}</span>
+							
+							{{#if item.user.bio}}
+							<div class="bio">
+
+								{{sanitizehtml-andtag item.user.bio "comment" ENV}}
+
+							</div>
+							{{/if}}		
+
+						</div>				
+
+					</div>
+
+				{{/each}}
+
+
+				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+					<i class="fa fa-circle-o-notch fa-spin"></i>
+				{{/infinite-scroll}}
+
+
+				{{!-- //NO CONTENT CTA --}}
+				{{#unless pagedContent }}
+					<div class="padding-top text-center font-weak">
+					{{#unless isProfileOwner}}
+						<h4 class="prompt-text">{{user.get_display_name}} doesn't follow anyone yet.</h4>
+					{{else}}
+						<h4 class="prompt-text">You are not following anyone. What are you waiting for?</h4>
+					{{/unless}}
+					</div>
+
+					<p class="text-center padding-top">
+						<!--<span class="glyphicon glyphicon-bookmark sad-heart"></span>-->
+					</p>
+				{{/unless}}
+
+			</div> 
+		</div>
+	</div>
+</div>

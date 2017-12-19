@@ -1,0 +1,16 @@
+<button {{action 'buttonClick' }}  
+
+{{bind-attr class="showButton:show:hide :btn :btn-primary :btn-follow"}}>
+
+{{#if userFollows}}
+<i class="fa fa-check"></i>
+{{/if}}
+
+	<span class="hide-on-small">
+		{{buttonText}}
+	</span>
+	<span class="show-on-small">
+		<i class="fa fa-user"/>
+	</span>
+
+</button>

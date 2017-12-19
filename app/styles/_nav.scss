@@ -1,0 +1,362 @@
+.hide-on-small {
+	display:inline;
+	@media (max-width: 738px) {
+		display:none !important;
+	}	
+}
+
+
+
+.show-on-small {
+	display:none !important;
+	@media (max-width: 738px) {
+		display:inline !important;	
+	}	
+}
+
+
+
+.nav-add-post {
+	color: $primary-color;
+	margin-top: 13px; 
+	background-color: inherit;
+	border: 0px solid #dfdfdf;
+	padding: 10px 15px 10px 15px;
+	font-size: 12px;
+	transition: all 0.2s ease;
+
+	font-family: $primary-font;
+	font-size: 11px;
+	//color: #7e7e7e;
+	color: $primary-color;
+	font-weight: 600;
+	
+
+	&:hover {
+		border: 0px solid $primary-color;
+		color: $primary-color;
+		background-color: #fce6e7;
+	}
+}
+
+
+
+
+.nav-cancel-post {
+	margin-top: 13px; 
+	background-color: inherit;
+	border: 0px solid #dfdfdf;
+	padding: 10px 15px 10px 15px;
+	font-size: 11px;
+	transition: all 0.2s ease;
+	float:right;
+
+	@media (max-width: 400px) {
+		padding: 5px 7px;
+	}
+
+	&:hover {
+		border: 0px solid $primary-color;
+		color: $primary-color;
+	}
+}
+
+.nav-right{
+	float:right;
+}
+
+//HAUL MAIN NAVIGATION
+nav {
+	top:0;
+	left:0;
+	position: fixed;
+	z-index: $z-index-nav;
+
+	width: 100%;
+
+	//IF YOU CHANGE THE HEIGHT OF NAV.... Make sure you change the padding of BODY
+	height: 50px;
+	max-height: 50px;
+
+	margin:0;
+	padding: 0;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	background-color: #ffffff; 
+	border-bottom: 1px solid #EAEAEA; 
+
+	text-align: center;
+
+	font-family: $primary-font;
+	font-size: $nav-font-size;
+	color: $nav-color;
+	
+	@media (max-width: 999px) {
+		padding-left:  15px;
+		padding-right: 5px;
+	}
+
+
+	.nav {
+		margin:0;
+		padding:0;
+		display: inline-block;
+		width: 100%;
+		max-width: $haul-max-width;
+		text-align: left;
+
+	}
+
+	.logo { 
+
+		float:left;
+		padding-top: 10px;
+		width: 90px;
+		@media (max-width: 738px) {
+			width: 50px;
+		}
+		text-align: center;
+		background-color: $logo-background-color; 
+		color: $logo-color;
+		a {
+			color: $logo-color;
+			&:hover{
+				text-decoration: none;	
+			}
+		}
+
+		.logo-nav-img {
+			width:66px;
+			padding-bottom: 10px;
+			@media (max-width: 738px) {
+				display: none;
+			}
+		}
+
+		
+		.logo-nav-img-h {
+			height:35px;
+			padding-bottom: 10px;
+			display: none;
+			@media (max-width: 738px) {
+				display: inline-block;
+			}
+		}
+	}
+
+
+
+
+	.nav-link-wrapper {
+		font-family: $primary-font;
+		margin-top: 23px;
+		float:left;
+		display:inline;
+		padding:0;
+		margin-left:10px;
+	}
+
+
+	.nav-link {
+		font-family: $primary-font;
+		font-size: 11px;
+		font-weight: 400;
+		letter-spacing: .1em;
+		color: #555;
+		display:inline;
+		padding:0;
+		margin:0;
+		margin-top: -50px;
+		margin-left: 20px;
+		
+		//PHONE
+		@media (max-width: 700px) {
+			margin-left: 10px;
+		}
+
+		cursor:pointer;
+		transition: all 0.2s ease;
+
+		/*phone*/
+		@media (max-width: 350px) {
+			font-size: 10px;
+			margin-left: 5px;
+		}
+
+		a {
+			text-decoration: none;
+			color: $nav-color;
+			transition: all 0.2s ease;
+		}
+
+		a:hover {
+			color: $primary-color;
+		}
+
+		//this puts the line under the active nav link.
+		a.active {
+			font-weight: 800;
+			border-bottom: 2px solid $primary-color;
+			padding-bottom: 8px;
+		}
+
+		.nav-link-badge {
+			min-width: 20px;
+			font-weight: 800;
+			padding:1px 2px 1px 4px;
+			background-color: #fff;
+			color: $primary-color;
+		}
+	}
+
+
+ 
+	.nav-profile {
+		float: right;
+		margin-top: 14px;
+		padding-left: 0px;
+		position:relative;
+
+		.nav-link{
+			padding-top:5px;
+		}
+
+		.profile-image {
+			width:30px;
+			height:30px;
+			border-radius: 50%;
+
+			&.default-user{
+				border:1px solid #eee;
+				overflow:hidden;
+			}	
+			.glyphicon-user{
+				font-size:30px;
+			}
+		}
+
+		&:hover{
+			.dropdown-menu{
+				z-index: $z-index-profile-dropdown;
+				display:inline;
+				top:20px;
+				//right: 10px;
+				max-width: 300px;
+			}
+		}
+	}
+
+
+	.nav-anon {
+		float: right;
+		margin-top: 20px;
+		padding-left: 0px;
+		position:relative;
+
+		.nav-link{
+			padding-top:5px;
+		}
+
+	}
+
+	.btn {
+		border: 0;
+		background-color: #fff;
+		text-transform: uppercase;
+		font-size: 12px;
+		color:#333;	
+		padding-top:4px;
+	}
+
+	.btn-signin {
+		font-size: 11px;
+		color: $primary-color; 
+		transition: all 0.2s ease;
+		font-weight: 600;
+
+		/*phone*/
+		@media (max-width: 350px) {
+			font-size: 10px;
+		}
+	
+		&:hover {
+			background-color: #fce6e7;
+			border-bottom: 0px;
+		}
+	}
+
+	.btn-login {
+		font-size: 11px;
+		color: #333;
+
+		/*phone*/
+		@media (max-width: 350px) {
+			font-size: 10px;
+		}
+		
+		&:hover {
+			background-color: #fff;
+			color: $primary-color;
+			border-bottom: 0px;
+		}
+	}
+	
+
+
+
+}
+
+.modal-dialog {
+	nav {
+		position: relative;
+		padding-left:15px;
+		padding-right: 15px;
+	}
+
+	&.lg{
+		nav {
+			padding:0;
+			@media (max-width: 999px) {
+				padding-left:15px;
+				padding-right: 15px;
+			}
+		}
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+.haul-loading-bar {
+	.progress {
+		margin:0;
+		padding:0;
+		height: 0px;
+		background-color: white;
+		border-radius: 0;
+		box-shadow:none;
+		.progress-bar {
+			transition: none;
+			box-shadow:none;
+			-webkit-box-shadow:none;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+

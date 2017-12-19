@@ -1,0 +1,339 @@
+
+/**
+	
+
+	Fluid Left / Fixed Right
+
+	-- Where the right column colapses in small browsers.
+	-- A Hamburger menu appears and will slide the hidden right column to the left <-
+
+	
+**/
+
+.hamburger-right-side{
+	.haul-fluid-left{
+		width: 100%;
+		float:left;
+		right: 0;
+		min-height: 1000px;
+		margin-right: -204px;
+
+		@media (max-width: 700px) {
+			position:relative;
+			z-index: 1;
+			padding-left: 30px;
+			padding-right: 30px;
+			background-color: $primary-background-color;
+		}
+
+		.haul-fluid-content {
+			margin-right: 204px;
+			background-color: $primary-background-color;
+
+			@media (max-width: 700px) {
+				margin-right:0;
+			}
+		}
+	}
+
+	.haul-fixed-right {
+	 	float: right;
+	  	
+	 	//WIDE
+	  	width: 204px;
+
+	 	@media (max-width: 700px) {
+	  		width: 204px;
+	 		margin-left: -204px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		width: 275px;
+	 		margin-left: -275px;
+	 	}
+
+	 	.haul-fixed-content {
+	 	}
+	}
+
+	.hamburger {
+		position: absolute;
+		clip: rect(0, 0, 0, 0);
+	}
+
+	label[for="hamburger-trigger"] {
+	  	
+	  	position: absolute;
+	  	right: 15px; 
+	  	z-index: 2;
+	  	
+	  	height: 20px;
+	  	width: 20px;
+	  	cursor: pointer;
+
+		top: 20px;
+	}
+
+	label:empty[for="hamburger-trigger"] {
+		@media (max-width: 700px) {
+			display:block !important;
+		}
+	}
+	/* Make the Magic Happen */
+	.hamburger + label, .haul-fluid-left {
+	  transition: right 0.2s;
+	}
+
+	.hamburger:checked + label {
+	 	right: 305px;
+
+		@media (max-width: 700px) {
+	  		right: 335px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		right: 295px;
+	 	}
+	}
+
+	.hamburger:checked ~ .haul-fluid-left {
+
+	  	right: 300px;
+
+		@media (max-width: 700px) {
+			border-right: 1px solid #eee;
+	  		right: 320px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	 		border-right: 1px solid #eee;
+	  		right: 290px;
+	 	}
+	}
+}
+
+
+
+
+
+
+/**
+	
+
+	Fixed Left / Fluid Right
+
+	-- Where the left column colapses in small browsers.
+	-- A Hamburger menu appears and will slide the hidden left column to the right --->
+
+	
+**/
+
+.hamburger-left-side{
+
+	.haul-fluid-right{
+		left: 0;
+		background-color: white; //need this or the haul-fixed-left col will show when collapsed
+		position:relative;
+		overflow: hidden;
+
+		@media (max-width: 700px) {
+			position:absolute;
+			padding-left: 30px;
+			padding-right: 30px;
+			background-color: $primary-background-color;
+			width: 100%; //important
+		}
+
+		.haul-fluid-content {
+			background-color: $primary-background-color;
+
+			@media (max-width: 700px) {
+				margin-right:0;
+			}
+		}
+	}
+
+	.haul-fixed-left {
+	 	float: left;
+	  	
+	 	//WIDE
+	  	width: 204px;
+
+	 	@media (max-width: 700px) {
+	  		width: 300px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		width: 275px;
+	 	}
+
+	 	.haul-fixed-content {
+	 	}
+	}
+
+	
+
+	.hamburger {
+		position: absolute;
+		clip: rect(0, 0, 0, 0);
+	}
+
+
+	//Hamburger
+	label[for="hamburger-trigger"] {
+	  	
+	  	position: absolute;
+	  	left: 10px; 
+	  	z-index: 2;
+	  	
+	  	height: 20px;
+	  	width: 20px;
+	  	cursor: pointer;
+	  	
+		top: 20px;
+	}
+
+	label:empty[for="hamburger-trigger"] {
+		@media (max-width: 700px) {
+			display:block !important;
+		}
+	}
+	/* Make the Magic Happen */
+	.hamburger + label, .haul-fluid-right {
+	  	transition: left 0.2s;
+	}
+
+	//Slide the Hamgburger ->
+	.hamburger:checked + label {
+	 	left: 305px;
+
+		@media (max-width: 700px) {
+	  		left: 325px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		left: 295px;
+	 	}
+	}
+
+	//Slide the right div ->
+	.hamburger:checked ~ .haul-fluid-right {
+
+	  	left: 300px;
+
+		@media (max-width: 700px) {
+			border-left: 1px solid #eee;
+	  		left: 320px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	 		border-left: 1px solid #eee;
+	  		left: 290px;
+	 	}
+	}
+}
+
+
+
+
+
+//About and Settings pages.
+.haul-fixed-left {
+	//nav menu
+	.list-group {
+		margin-top: 20px;
+		margin-right:15px;	
+	}
+
+	.list-group-item.active{
+		z-index: 0;
+	}
+}
+
+.haul-feed-content {
+	max-width: 690px;
+	padding-top:28px;
+}
+
+
+
+/**
+	Product Page has special sizing for left/right cols.
+**/
+.hamburger-right-side.col-60-col-30{
+
+	.haul-fluid-left{
+
+		width: 65%;
+		@media (max-width: 700px) {
+			width:100%;
+		}
+
+		max-width: 690px;
+		padding-right: 20px;
+
+		.haul-fluid-content {
+			margin-right: 310px;
+			background-color: $primary-background-color;
+			@media (max-width: 700px) {
+				margin-right:0;
+			}
+		}	
+	}
+
+	.haul-fixed-right{
+		
+		margin-top:30px;
+		width:35%;
+		@media (max-width: 700px) {
+			width:100%;
+		}
+		max-width: 310px;
+
+		margin-left: -310px;
+
+	 	@media (max-width: 700px) {
+	  		width: 300px;
+	 		//margin-left: -300px;
+	 		margin-right:10px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		width: 275px;
+	 		//margin-left: -275px;
+	 		margin-right:10px;
+	 	}
+	}
+
+	.hamburger:checked + label {
+	 	right: 305px;
+
+		@media (max-width: 700px) {
+	  		right: 335px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	  		right: 295px;
+	 	}
+	}
+
+	.hamburger:checked ~ .haul-fluid-left {
+
+	  	right: 300px;
+
+		@media (max-width: 700px) {
+			border-right: 1px solid #eee;
+	  		right: 320px;
+	 	}
+
+	 	@media (max-width: 350px) {
+	 		border-right: 1px solid #eee;
+	  		right: 290px;
+	 	}
+	}
+}
+
+
+label[for="hamburger-trigger"].fa{
+	font-size:20px;
+}

@@ -1,0 +1,137 @@
+.btn-follow {
+	font-family: $primary-font;
+	color: #7e7e7e;
+	margin-top: 0px; 
+	background-color: inherit;
+	border: 1px solid #dfdfdf;
+	padding: 10px 20px 10px 20px;
+	font-size: 11px;
+	transition: all 0.2s ease;
+	text-transform: uppercase;
+
+	@media (max-width: 700px) {
+		padding: 5px 10px;
+		margin-top:0px;
+	}
+
+}
+
+.btn-follow:hover {
+	border: 1px solid $primary-color;
+	color: $primary-color;
+}
+
+.profile-badge {
+	 float: left;
+	 margin-right: 15px;
+	 margin-bottom: 15px;
+	 max-width: 100px;
+	 max-height: 120px;
+
+	img{
+		display:inline-block;
+	}
+	.thumbnail{
+		margin-bottom:0;
+	}
+
+	.profile-badge-name {
+		height: 20px;
+		width:100%;
+	 	text-align: center;
+	 	overflow: hidden;
+	}
+}
+
+
+
+
+.profile-image {
+	width:100px;
+	height:100px;
+	border-radius: 50%;
+	//vertical-align: inherit !important;
+
+
+	&.default-user{
+		border:1px solid #eee;
+		overflow:hidden;
+	}	
+	.glyphicon-user{
+		font-size:100px;
+	}
+	.glyphicon {
+		position: inherit;
+	}
+}
+
+
+.cta-welcome {
+	padding-top:100px;
+}
+
+
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+	background-color: $primary-color;	
+}
+
+
+
+.tag-cloud {
+		font-family: $primary-font;
+		color: $primary-color;
+		margin-top: 4px; 
+		background-color: #ffebeb;
+		border: 0px solid #ffdddd;
+		border-radius: 4px;
+		padding: 6px 8px 6px 8px;
+		font-size: 11px;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		text-transform: none;
+
+		@media (max-width: 100px) {
+			padding: 5px 10px;
+			margin-top:0px;
+		}
+}
+
+.tag-cloud:hover {
+	background-color: $primary-color;
+	color: #fff;
+}
+
+.rail-header{
+
+	padding-top: 30px;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom:80px;
+	margin-bottom:30px;
+	text-transform: uppercase;
+	overflow: scroll;
+	min-width: 130px;
+	height: 90%;
+
+	h2 {
+		margin-top:0;
+		padding-bottom: 4px;
+		font-size: 11px;
+		font-weight: 800;
+		border-bottom: 1px solid #ededed;
+	}
+
+}
+
+
+
+
+.social-icon {
+	cursor:pointer;
+	font-size: 24px;
+	color: $secondary-color;
+	&:hover{
+		opacity:.8;
+	}
+}

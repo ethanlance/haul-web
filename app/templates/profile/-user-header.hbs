@@ -1,0 +1,87 @@
+
+{{!-- PROFILE PROFILE  --}}
+<header class="profile">
+<div class="container-fluid">	
+	<div class="profile-container">
+
+		{{#link-to 'profile' model}}{{make-icon icon=model.icon}}{{/link-to}}
+
+
+		<div class="profile-name">
+			
+			<span class="name">{{#link-to 'profile' model}}{{model.get_display_name}}{{/link-to}}
+
+				{{#if isProfileOwner}}
+				 	{{#link-to 'settings.profile'}}
+					<button class="btn-edit-post display-inline">
+						<i class="fa fa-cog"></i>
+					</button><br/>
+					{{/link-to}}
+				{{/if}}
+			</span>
+
+			<span class="username">@{{model.username}}</span>
+
+
+			
+			{{#if model.bio}}
+			<div class="bio">
+
+				{{sanitizehtml-andtag model.bio "comment" ENV}}
+
+			</div>
+			{{/if}}		
+
+		</div>
+
+
+		<div class="stats">
+
+			<div class="counts">
+				{{#link-to "profile.likes" model.username}}
+				<div class="stat-btn">
+					<span class="total">{{model.getLikesCount.total}}</span>
+					<span class="title">likes</span>
+				</div>
+				{{/link-to}}
+
+				{{#link-to "profile.followers" model}}
+				<div class="stat-btn">
+					<span class="total">{{model.getFollowersCount.total}}</span>
+					<span class="title">followers</span>
+				</div>
+				{{/link-to}}
+
+				{{#link-to "profile.following" model}}
+				<div class="stat-btn">
+					<span class="total">{{model.getFollowingCount.total}}</span>
+					<span class="title">following</span>
+				</div>
+				{{/link-to}}
+
+				{{#link-to "profile" model}}
+				<div class="stat-btn">
+					<span class="total">{{model.getPostsCount.total}}</span>
+					<span class="title">posts</span> 
+				</div> 
+				{{/link-to}}			
+			</div>
+
+			<div class="follow">
+				<div class="stat-btn">
+					{{dm-btn to=model goToRoute='goToRoute' class="display-inline-block"}}
+					{{ follow-btn followUser=model openModal='openModal' class="display-inline-block"}}
+				</div>
+			</div>
+
+			
+				
+			
+
+		</div>
+
+
+	
+	</div>
+</div>
+</header>

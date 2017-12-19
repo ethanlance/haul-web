@@ -1,0 +1,106 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal'}}
+<div class="modal-dialog lg text-left">
+	<div class="modal-content">
+
+		{{partial "_modal_nav"}}
+	
+		<div class="text-center edit-wrapper">
+			<div class="edit-row">
+				<div class="edit-col">
+
+					{{#unless error409}}
+    				{{#unless emailRegistrationRequested}}
+
+					<h1 class="modal-title" id="myModalLabel">
+						Sign up and start buying, selling, and blogging today.
+					</h1>
+					<h3>( Already have an account? <a class="or" {{action 'openModal' 'login'}}>Sign in</a> )</h3>
+					{{/unless}}
+					{{/unless}}
+			
+
+				{{#if error409}}
+
+			    	<div class="alert">
+			    		<h2>Oops</h2>
+			    		This email is already registered.  Want to <a {{action 'openModal' 'login'}}>login</a> or <a href='/forgot-password'>recover your password</a>?
+
+			    	</div>
+
+			    {{else}}	
+				  	
+
+					{{#if emailRegistrationRequested}}
+
+						<h2>Please check your email inbox.<br/>
+							<small>We sent you a confirmation email.</small>
+						</h2>
+
+					{{else}}	
+
+
+
+						<div class="form-group"> 
+
+							{{#if showErrorsFB}}
+						    	<div class="alert">
+							  		{{partial "_server_error"}}
+						    	</div>
+						  	{{/if}} 
+						
+
+							{{ladda-btn 
+								name='Sign up with Facebook'
+								btnClasses='btn btn-block btn-facebook ladda-button'
+								btnClick='facebookLogin'
+								spin=isProcessingFacebook
+							}}
+ 
+					    </div> 
+
+
+
+						<div class="form-group">
+							<h3>or sign up with your email account below</h3>
+						</div>
+
+
+						{{#if showErrors}}
+					    	<div class="alert">
+						  		{{partial "_server_error"}} 
+					    	</div>
+					  	{{/if}} 
+
+
+	            		{{#form-for model}}
+
+						  	<div class="form-group"> 
+					      		{{input email placeholder="Your email address" label="false"}}
+					      	</div> 
+
+							<div class="form-group">
+
+								{{ladda-btn 
+									name='Create a new account'
+									btnClasses='btn btn-block btn-primary ladda-button'
+									btnClick='emailSignup'
+									spin=isProcessingSignup
+								}}
+
+						  	</div>
+						{{/form-for}}
+
+						
+					{{/if}}
+				{{/if}} 
+
+				<p class="toc">By signing up, you agree to Haul's <a href="/about/tos">Terms of Use</a> and <a href="/about/privacy">Privacy Policy</a>.</p>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{/modal-modal}}

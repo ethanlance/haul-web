@@ -1,0 +1,82 @@
+
+
+
+<header class="basic">
+<div class="container-fluid">	
+	<div class="header-basic">
+
+		<h2>Notifications</h2>
+
+	</div>
+</div>
+</header>
+
+
+<div class="container">
+	<div class="haul-content">  
+		<div class="row"> 
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				
+
+
+				{{#each post in sortedContent}}
+
+					<div class="mention-owner">
+						{{#link-to 'profile' post.user.username }}
+							{{make-icon icon=post.user.icon}}
+						{{/link-to}}
+
+						<div class="post-owner-details">
+							
+							<span class="name">
+								{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}
+							</span>
+							
+							<span class="username">
+								{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}
+							</span>
+							
+							<div class="moment">
+								{{ format-moment post.created_at }}
+							</div> 
+							
+							<span {{bind-attr class=":comment post.read:read:unread"}}>
+								{{sanitizehtml-andtag post.comment "comment" ENV}}
+							</span>
+
+							<span class="reply pull-right" {{action "doReply" post}}>
+								REPLY&nbsp;<i class="fa fa-angle-double-right"></i>
+							</span>
+
+							<span {{bind-attr class=":reply :pull-right post.read:hide"}} {{action 'markRead' post}}>
+								MARK AS READ&nbsp;<i class="fa fa-square-o"></i>
+							</span>
+
+
+						</div>
+					</div> 
+				{{/each}}
+
+				{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+					<span>Loading...</span>	
+				{{/infinite-scroll}}
+
+
+				{{!-- //NO CONTENT CTA --}}
+				{{#unless sortedContent }} 
+					<div class="padding-top text-center font-weak">
+						You don't have any mentions yet.
+						<br/>Awe, don't be shy.
+						<br/>Go @mention someone in a comment!
+					</div>
+
+					<p class="text-center">
+						<span class="glyphicon glyphicon-comment sad-heart"></span>
+					</p>
+				{{/unless}}
+
+			</div>
+	
+		</div>
+	</div>
+</div>

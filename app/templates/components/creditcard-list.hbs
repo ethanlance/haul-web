@@ -1,0 +1,133 @@
+<div {{bind-attr class="showLoading:show:hide"}}>
+	{{partial '_spinner'}}
+</div>
+
+<div {{bind-attr class="showNeedsbuyer:show:hide"}}>
+	<h3>Please save your buyer account before entering your credit card information.</h3>
+
+</div>
+
+
+
+<div {{bind-attr class="showList:show:hide :haul-checkout"}}>
+	<h3>Select a card.
+		<button {{action 'showCreateNewCard' }} class="btn btn-default btn-positive">Add New</button>
+	</h3> 
+	
+	<ul>
+	{{#each card in cards}}
+		<li>
+			<label>
+				<input type="checkbox"  {{action 'selectThisCardId' card.id}}> 
+				{{#if card.card_image_url}}<img height="20px" {{bind-attr src=card.card_image_url}}>{{/if}}
+				{{card.card_type}} ending in {{card.number}} 
+			</label>
+
+			{{!-- <button {{action 'showEditAddress' address.id}} class="btn btn-default btn-cancel">Edit</button> --}}
+			<button {{action 'showRemoveCard' card.id}} class="btn btn-default btn-cancel">remove</button>
+			
+		</li>
+	{{/each}}
+	</ul>
+	
+</div>
+
+
+
+
+
+
+<div {{bind-attr class="showDelete:show:hide"}}>
+	<h3>Remove this card?</h3>
+	<p>
+		<img height="20px" {{bind-attr src=selectedCard.card_image_url}}> 
+			{{selectedCard.card_type}} ending in {{selectedCard.number}} 
+
+		<button {{action 'doRemoveCard' selectedCard }} class="btn btn-default btn-right btn-positive">yes, remove</button>
+		<button {{action 'showCardList' }} class="btn btn-default btn-right btn-cancel"><i class="fa fa-times"></i> Cancel</button>
+	</p>
+
+</div>	
+
+
+
+<div {{bind-attr class="showCard:show:hide"}}>
+	<h3>Selected card
+		<button {{action 'showCardList' }} class="btn btn-default btn-xs ">pick a differet card</button>
+	</h3>
+
+	<p>
+		<img height="20px" {{bind-attr src=selectedCard.card_image_url}}>	 
+			{{selectedCard.card_type}} ending in {{selectedCard.number}}
+	</p>
+</div>
+
+
+
+<div {{bind-attr class="showForm:show:hide"}}>
+	
+<form id="checkout" {{action "submit" model on="submit"}}>  
+		
+		<h3>Credit Card</h3>
+		
+		{{input-field model.name class="form-control"  data-braintree-name="cardholder_name" placeholder='name on card'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field name}}</span>
+		{{/if}}
+
+		{{input-mask class='form-control'
+			value=model.number
+			mask='9999 9999 9999 9999'
+			placeholder='card number 5555 5555 5555 5555'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field number}}</span>
+		{{/if}}
+
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+			
+
+				{{input-mask class='form-control input-xs'
+					value=model.expiration
+					mask='99/99'
+					placeholder='expires'}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field expiration}}</span>
+				{{/if}}
+
+
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+
+				{{input-field model.cvv class="form-control input-xs" data-braintree-name="cvv" placeholder='cvv'}}
+				{{#if showErrors}}
+					<span class="has-error help-block">{{error-field cvv}}</span>
+				{{/if}}
+
+			</div>
+		</div>
+
+
+		{{input-field model.postal_code class="form-control" data-braintree-name="postal_code" placeholder='zip code'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field postal_code}}</span>
+		{{/if}}
+
+		{{partial "_server_error"}}
+
+
+		{{ladda-btn
+			name='Save Card'
+			class="display-inline"
+			btnClasses='btn btn-default ladda-button btn-right btn-positive'
+			btnClick='doSubmitCardForm'
+			spin=isProcessing
+		}}
+
+		{{#if hasCardList }}
+		<button {{action 'doCancelCardForm' }} class="btn btn-default btn-right btn-cancel"><i class="fa fa-times"></i> Cancel</button>
+		{{/if}}
+
+</form>
+
+</div>

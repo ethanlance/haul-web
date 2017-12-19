@@ -1,0 +1,274 @@
+
+.center-on-collapse{
+	@media (max-width: 700px) {
+		text-align: center;
+	}
+}
+
+.grid-post {
+	
+	display:inline-block;
+	text-align: left;
+	
+
+
+	border: 1px solid green;
+	width: 40%;
+	
+	width: 22%;//230px;
+
+	min-width: 220px;
+
+	margin-left:auto;
+	margin-right:10px;
+	padding-right:-15px;
+	margin-bottom:40px;
+
+
+
+	border: 1px solid #eee;
+
+	border-bottom: 1px solid #eee;
+	
+	padding: 0px;
+	background-color: #fff;
+	
+	transition: all 0.2s ease;
+	box-shadow: .5px .5px .5px 0px #eee;
+
+	
+	.post-image {
+		position:relative;
+		display: block; 
+		font-family: $primary-font;
+		font-weight: 500;
+		font-size: 13px;
+		color: #555555;
+		line-height: 1.4;
+		margin-bottom: 20px;
+		
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+
+		height: auto;
+
+		padding-bottom:100%;
+		
+		background-color: #fff;
+
+		overflow:hidden;
+		vertical-align: top;
+
+		img {
+			vertical-align: top;
+			position:absolute;
+		    margin: auto; 
+		    //min-width: 230px;
+		    width: 100%;
+		}
+
+		img:hover {
+			-webkit-filter:  brightness(120%);
+			cursor: pointer; cursor: hand;
+		}
+
+		a {
+			color: $primary-color;
+			text-decoration: none;
+			transition: all 0.4s ease;
+		}
+
+		a:hover {
+				border-bottom: 1px dashed $primary-color;
+				text-decoration: none;
+		}
+	}
+
+
+	.post-image-overlay{
+
+		position: absolute;
+		left:0;
+		bottom:0;
+		padding-left:15px;
+		padding-right:15px;
+		padding-bottom:5px;
+		padding-top:5px;
+		width:100%;
+
+		background-color: rgba(0,0,0,.8);
+		color:white;
+
+		.product-status{
+			display:inline-block;
+			background-color: rgba(0,0,0,0.5);
+			padding:10px;
+			margin-bottom:4px;
+			font-family: 'Arvo';
+			font-weight: 800;
+			font-size: 0.750em;
+			transition: all 0.4s ease;
+			cursor:pointer;
+		}
+		.product-status:hover{
+			display:inline-block;
+			background-color: rgba(247,92,97,0.8);
+		}
+
+		.product-price {
+			font-family: 'Arvo';
+			font-size: 1.1em;
+			font-weight: 800;
+			padding-bottom: 0px;
+		}
+
+		.product-title {
+			font-family: $primary-font;
+			color: #fff;
+			font-weight: 600;
+			font-size: 0.95em;
+			line-height: 1.4;
+
+			height: 18px;
+			overflow:hidden;
+		}
+
+		.product-owner{ 
+			font-size: 0.7em;
+			font-weight: 600;
+			padding-top: 4px;
+			color: rgba(255,255,255,.7);
+
+			.pre-text {
+				font-weight: 300;
+				color: rgba(255,255,255,.7);
+			}
+		}
+	}
+
+	.post-bottom-cap{
+
+		padding-left:15px;
+		padding-right:15px;
+		padding-bottom: 15px;
+
+		.post-owner {
+			margin-bottom: 0px;
+
+			.post-title {
+				font-family: 'Arvo';
+				font-weight: 800;
+				color: #333;
+				margin-bottom:10px;
+				font-size: 0.95em;
+
+				height: 18px;
+				overflow:hidden;
+
+				:hover {
+					color: $primary-color;
+					text-decoration: none;
+				}
+				a {
+				color: #333;
+				
+				}
+			}
+
+
+			.profile-image{
+				padding:0;
+				margin:0;
+				float: left;
+				border-radius: 50%;
+				width: 28px;
+				height: 28px;
+				margin-right: 10px;
+
+				.glyphicon-user{
+					font-size:28px;
+				}
+			}
+		
+			.post-owner-details {
+				float:none;  
+				overflow:hidden;
+				display:block;
+				height: 30px;
+
+
+
+				.name a{
+					font-family: $primary-font;
+					font-weight: 600;
+					font-size: 10px;
+					color: #333;
+					transition: all 0.2s ease;
+					//text-transform: uppercase;
+				}
+				.name a:hover {
+					color: $primary-color;
+					text-decoration: none;
+				}
+				.username a{
+					font-family: $primary-font;
+					font-size: 10px;
+					font-weight: 100;
+					color: #999;
+					font-style: italic;
+					text-transform: lowercase;
+				}
+				.moment{ 
+					font-family: $primary-font;
+					font-size: 9px;
+					color: #cccccc;
+					text-transform: lowercase;
+				}
+			}
+		}
+	}
+
+
+
+	@media (max-width: 740px) {
+		margin-right: auto;
+		width: 31%;
+		min-width: 0;
+	}
+	@media (max-width: 575px) {
+		width:33%;
+		margin-top:0px;
+		margin-bottom:0px;
+		min-width:0;
+		float:left;
+
+		.post-bottom-cap, .product-title, .product-owner{
+			display:none;
+		}
+		.post-image{
+			margin-bottom:0;
+			img {
+				min-width:0;
+			}
+		}
+	}
+}
+
+
+.haul-fluid-left, .haul-fluid-right {
+	.grid-post {
+		margin-right:auto;
+		width: 31%;
+		@media (max-width: 575px) {
+			width:100%;
+		}
+	}
+}
+
+
+.grid-spacing {
+	.grid-post {
+		margin-right: 10px;
+	}
+}

@@ -1,0 +1,160 @@
+
+
+// // MENTIONS
+// .mentions {
+// 	width:100%;
+// 	display:inline-block;
+// 	text-align: left;
+// 	border: none;
+// 	transition: all 0.2s ease;
+	
+// 	.comment{
+// 		width:100%;
+// 		margin: 0;
+// 		padding: 0;
+// 		padding-top:0px;
+// 		padding-bottom:0px;
+// 		//border-bottom: 1px solid #ccc;
+// 		border:none;
+// 		background-color: pink;
+// 		font-weight: 200;
+
+// 	}
+
+// 	.comment.read {
+// 		background-color: #ebebeb;
+// 		text-decoration: none;
+// 	}
+
+// 	a {
+// 		transition: all 0.2s ease;
+// 		text-decoration: none;
+// 	}
+
+// 	a:hover {
+// 		border-bottom: 1px dashed $primary-color;
+// 		text-decoration: none;
+// 	}
+// }
+
+.mention-alert {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	border-bottom: 1px dashed #ededed;;
+
+}
+
+.more a{
+	color: $primary-color;
+	font-size: 10px;
+	font-family: $primary-font;
+	transition: all 0.2s ease;
+}
+
+.more a:hover {
+	text-decoration: none;
+	border-bottom: 1px dashed $primary-color;
+}
+
+.reply {
+	margin-right: 10px;
+}
+
+.reply, .reply a{
+	color: $primary-color;
+	font-size: 10px;
+	font-family: $primary-font;
+	transition: all 0.2s ease;
+}
+
+.reply a:hover{
+	text-decoration: none;
+}
+
+.reply:hover {
+	text-decoration: none;
+	border-bottom: 1px dashed $primary-color;	
+	cursor: pointer;
+}
+
+.mention-owner {
+	margin-bottom: 12px;
+	padding-bottom: 12px;
+	padding-right: 10px;
+	border-bottom: 1px dashed #ededed;
+	transition: all 0.2s ease;
+
+	.profile-image{
+		padding:0;
+		margin:0;
+		float: left;
+		border-radius: 50%;
+		width: 22px;
+		height: 22px;
+		margin-right: 10px;
+
+		.glyphicon-user{
+			font-size:22px;
+		}
+	}
+
+	.haul-icon {
+		 background-size: 22px 22px;
+	}
+
+	.post-owner-details {
+		float:none;  
+		overflow:hidden;
+		display:block;
+
+		.name, .name a{
+			font-family: $primary-font;
+			font-weight: 600;
+			font-size: 11px;
+			color: #333;
+			transition: all 0.2s ease;
+			text-decoration: none;
+			//text-transform: uppercase;
+		}
+
+		.name a:hover {color: $primary-color;}
+		.username, .username a{
+			font-family: $primary-font;
+			font-style: italic;
+			font-weight: 300;
+			font-size: 11px;
+			color: #999;
+			text-transform: lowercase;
+			transition: all 0.2s ease;
+			text-decoration: none;
+		}
+		.username a:hover {color: $primary-color;}
+		.moment{ 
+			font-family: $primary-font;
+			font-size: 10px;
+			color: #ccc;
+			font-weight: 100;
+			//text-transform: lowercase;
+		}
+		.comment{ 
+			font-family: $primary-font;
+			margin-top: 0px;
+			font-weight: 300;
+			font-size: 12px;
+			color: #333;
+			//font-weight: bold;
+		}
+
+		.comment.unread { 
+			font-weight: 600;
+			a{
+				font-weight: normal;
+			}
+		}
+
+		.comment.read {
+			font-weight: normal;
+		}
+	}
+}

@@ -1,0 +1,4 @@
+{{#if image.thumb}}<img data-id="{{unbound image.id}}" class="item" {{bind-attr src=image.thumb}}  draggable="true">{{/if}}
+<button {{action 'imageDelete' image}} type="button" class="btn btn-default btn-sm btn-delete">
+	<span class="glyphicon glyphicon-trash"></span>
+</button>

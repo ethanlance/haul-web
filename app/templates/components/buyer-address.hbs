@@ -1,0 +1,140 @@
+
+
+
+<div {{bind-attr class="showList:show:hide :haul-checkout"}}>
+	<h1 class="subject">Select an address.
+		<button {{action 'showCreateNewAddress' }} class="btn btn-default btn-xs">add new</button>
+	</h1> 
+	
+	<ul>
+	{{#each address in addresses}}
+		<li>
+			<label>
+				<input type="checkbox"  {{action 'selectThisAddressId' address.id}}> 
+				{{#if address.label}}{{address.label}}, {{/if}}{{address.address}}
+			</label>
+
+			{{!-- <button {{action 'showEditAddress' address.id}} class="btn btn-default btn-xs">edit</button> --}}
+			<button {{action 'showRemoveAddress' address.id}} class="btn btn-default btn-xs">remove</button>
+			
+		</li>
+	{{/each}}
+	</ul>
+	
+</div>
+
+
+
+
+
+<div {{bind-attr class="showDelete:show:hide"}}>
+	<h3>Remove this address?</h3>
+	<p>
+		{{#if selectedAddress.label}}{{selectedAddress.label}}<br/>{{/if}}
+		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
+		{{selectedAddress.address}}<br/>
+		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>
+		<button {{action 'doRemoveAddress' selectedAddress }} class="btn btn-default btn-right btn-xs">yes, remove</button>
+		<button {{action 'showAddressList' }} class="btn btn-default btn-right btn-xs">cancel</button>
+	</p>
+</div>
+
+
+
+
+<div {{bind-attr class="showAddress:show:hide"}}>
+	<h3>Selected address.
+		<button {{action 'showAddressList' }} class="btn btn-default btn-xs ">pick a differet address</button>
+	</h3>
+
+	<p>
+		{{#if selectedAddress.label}}{{selectedAddress.label}}<br/>{{/if}}
+		{{selectedAddress.firstname}} {{selectedAddress.lastname}}<br/>
+		{{selectedAddress.address}}<br/>
+		{{selectedAddress.city}}, {{selectedAddress.state}} {{selectedAddress.postal_code}}<br/>
+	</p>
+</div>
+
+
+
+
+
+
+
+<div {{bind-attr class="showForm:show:hide"}}>
+
+
+	{{#if model}}
+		<h3>Create address</h3>
+	{{else}}
+		<h3>Edit address</h3>
+	{{/if}}
+
+
+	{{#form-for model}}
+
+		{{input-field model.label class="form-control" placeholder="address nickname (ie. home, work)"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field label}}</span>
+		{{/if}}
+
+		{{input-field model.company class="form-control" placeholder="company - optional"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field  company}}</span>
+		{{/if}}
+
+		{{input-field model.firstname class="form-control" placeholder="first name"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field firstname}}</span>
+		{{/if}}
+
+		{{input-field model.lastname class="form-control" placeholder="last name"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field lastname}}</span>
+		{{/if}}
+
+		{{input-field model.address class="form-control" placeholder="address"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field address}}</span>
+		{{/if}}
+
+		{{input-field model.city class="form-control" placeholder="city"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field city}}</span>
+		{{/if}}
+
+		{{#if statesReady}}
+		{{view "select"
+	       content = state_options.states
+	       optionLabelPath = "content.name"
+	       optionValuePath = "content.abbreviation"
+	       selection = state_options.selectedState
+	       prompt="state"
+	       class = "form-control"
+	    }}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field state}}</span>
+		{{/if}}
+		{{/if}}
+
+		{{input-field model.postal_code class="form-control" placeholder="zip code"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field postal_code}}</span>
+		{{/if}}
+
+		{{partial "_server_error"}}
+
+		{{#if hasAddressList }}
+		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right btn-cancel"><i class="fa fa-times"></i> Cancel</button>
+		{{/if}}
+
+		{{ladda-btn
+			name=buttonText
+			class="display-inline"
+			btnClasses='btn btn-default ladda-button btn-right btn-positive'
+			btnClick='doSubmitAddressForm'
+			spin=isProcessing
+		}}
+
+	{{/form-for}}
+</div>

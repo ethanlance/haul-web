@@ -1,0 +1,139 @@
+<div class="transaction-detail">
+
+<h3>Your Sale!</h3>
+
+<div class="row header">
+	<div class="col-md-6 col-sm-6 col-xs-6">
+		Item
+	</div>
+
+
+
+	<div class="col-md-3 col-sm-3 col-xs-3">
+		Purchased On
+	</div>
+
+
+	<div class="col-md-3 col-sm-3 col-xs-3">
+		Action
+	</div>
+
+</div>
+
+
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-6">
+		
+		{{#link-to 'profile.post' model.post.user.username model.post.post_id model.post.post_slug}}		
+			{{#if model.post.image.thumb}}<img class="image" {{bind-attr src=model.post.image.thumb}}>{{/if}}
+		{{/link-to}}
+
+		<div class="block">
+			{{model.post.product_name}}<br/>
+			${{model.product_price}}<br/>
+			${{model.shipping_price}} s/h<br/>
+
+			{{#link-to 'profile.post' model.post.user.username model.post.post_id model.post.post_slug}}view post{{/link-to}}
+		</div>
+
+	</div> 
+
+	<div class="col-md-3 col-sm-3 col-xs-3">
+		{{ format-date model.created_at }}
+	</div>
+
+	<div class="col-md-3 col-sm-3 col-xs-3">
+		
+		<button {{action "showCancelPurchase"}} class='btn btn-default'>Cancel Purchase</button>
+
+		<button {{action "doSend"}} class='btn btn-default margin-top'>Package Sent</button>
+
+	</div>
+</div>
+
+
+
+
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-6">
+
+		<label>You sold this to:</label><br/>
+		
+		{{#link-to 'profile' model.buyer.username }}
+			{{make-icon icon=model.buyer.icon}}
+	    {{/link-to}}
+
+		<div class="block">
+		{{#link-to 'profile' model.buyer.username }}
+			{{model.buyer.name}}<br/>
+			@{{model.buyer.username}}
+		{{/link-to}}	
+		</div>
+
+	</div> 
+
+	<div class="col-md-6 col-sm-6 col-xs-6">
+		<label>This item is shipping to:</label><br/>
+		{{model.buyer.name}}<br/>
+    	{{model.shipping_address}}<br/>
+    	{{model.shipping_city}}, {{model.shipping_state}} {{model.shipping_postal_code}}<br/>
+	</div>
+</div>
+
+
+
+
+{{!-- COMMENTS --}}
+{{!-- COMMENTS --}}
+<div class="row padding-top comments-section">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+							
+		<div class="comment-section-nav">
+			<h3 class="comment-count">Message with the buyer, {{model.buyer.name}}</h3>
+		</div>
+
+		{{direct-message 
+			toUser=model.buyer 
+			regardingId=model.id 
+			regardingType='transactions'
+		}}
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	{{!-- //DELETE POST MODAL --}}
+		<div {{bind-attr class=":modal animateCancelModal:in:out showCancelModal:show:hide"}}>
+			<div class="modal-dialog sm text-left haul-edit">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button {{action 'closeCancelPurchase'}} type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">
+							Cancel this purchase?
+						</h4>
+					</div>
+					<div class="modal-body">
+						<button {{action 'closeCancelPurchase'}} class="btn btn-warning">No</button>
+						{{ladda-btn
+							name='Yes'
+							class="display-inline"
+							btnClasses='btn btn-danger ladda-button'
+							btnClick='cancelPurchase'
+							spin=isProcessing
+						}}
+					</div>
+				</div>
+		  	</div>
+		</div>
+</div>

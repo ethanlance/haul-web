@@ -1,0 +1,30 @@
+
+<div class="box-rigid">
+	<div class="dropzone-preview">
+		{{make-icon icon=currentUserIcon}}
+	</div>
+</div>
+
+<div class="box-rigid">
+	<div id="dropzone" class="box-vert-align padding-left">
+		
+		<div id="haul-dropzone-filebutton"></div> 
+		
+		<button id="haul-dropzone-browse" class="btn btn-default">Change Photo</button>
+		
+		<span {{bind-attr class=":badge :badge-success isSuccess:show:hide"}} >changed</span>
+
+		<div {{bind-attr class=":progress isProgress:show:hide"}}>
+			<div class="progress-bar progress-bar-striped active" 
+				role="progressbar" 
+				{{bind-attr style=progressStyle}}
+				aria-valuemin="0" 
+				aria-valuemax="100" 
+				data-dz-uploadprogress>
+			</div>
+		</div>
+
+		<div {{bind-attr class=":alert :alert-danger :alert-sm isFailed:show:hide"}} >{{errorMessage}}</div>
+
+	</div>
+</div>

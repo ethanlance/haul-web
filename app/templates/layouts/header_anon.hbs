@@ -1,0 +1,24 @@
+
+<nav>
+
+	<div class="nav">
+		
+		<div class="logo">
+			{{#link-to "home"}}HAUL{{/link-to}}
+		</div>
+
+
+		<div class="nav-anon">
+			<div class="nav-link">
+				{{#link-to 'about'}}ABOUT{{/link-to}}
+			</div>
+
+		
+			{{login-btn openModal='openModal' class="display-inline"}}
+		
+
+			{{signup-btn openModal='openModal' class="display-inline"}}
+		</div> 
+
+	</div>
+</nav>

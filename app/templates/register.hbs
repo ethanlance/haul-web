@@ -1,0 +1,59 @@
+
+    <div class="container">
+        <div class="row">
+        	<div class="col-md-4 col-sm-2 col-xs-2"></div>
+			<div class="col-md-4 col-sm-8 col-xs-8 form-box">
+			
+				<div class="form-group">
+					<h2 class="form-signin-heading">Welcome Back</h2>
+					<p>We just need a couple more things!</p>
+				</div>
+				
+
+				{{partial "_server_error"}}
+				
+ 	
+				{{#form-for model}}
+	 				<div class="form-group">	
+			      		{{input ticket_id as="hidden" label="false"}}
+			      		{{input user_id as="hidden" label="false"}}
+					</div> 
+		 
+			 		<div class="form-group">	
+			 			{{input password placeholder="Password" label="false"}}
+					</div> 
+
+
+
+			 		<div class="form-group">	
+				 		<div class="row">
+					 		<div class="col-md-6 col-sm-6 col-xs-6">
+					 			{{input firstname placeholder="First Name"  label="false"}}  
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-6">		
+					 			{{input lastname placeholder="Last Name" label="false"}} 
+							</div>							
+	                	</div>
+                	</div> 
+
+                	<div class="form-group"> 
+                    	{{input username placeholder="Username" label="false"}}  
+			 			
+                	</div>
+
+
+					<div class="form-group">
+				  		{{ladda-btn 
+							name='Complete Registration'
+							btnClasses='btn btn-primary btn-block ladda-button'
+							btnClick='submit'
+							spin=isProcessing
+						}}
+				  	</div>
+
+				{{/form-for}} 
+			</div>
+			<div class="col-md-4 col-sm-2 col-xs-2"></div>
+        </div>
+    </div>

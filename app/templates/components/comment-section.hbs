@@ -1,0 +1,87 @@
+
+
+	<div class="comments-area">
+
+		{{!-- COMMENT FORM --}}
+		<div class=" comment-box" id="leaveComment">
+			
+			
+			
+			{{#form-for model}}
+
+				{{make-icon icon=session.currentUser.icon}}
+
+				<div class="comment-input">
+					{{input model.comment as="text" placeholder="Write a comment, #hashtag, @mention..." class="commentbox"  label="false"   }}
+					
+		    		<div {{bind-attr class="showServerErrors:show:hide :alert"}}>{{{serverErrorMessage}}}</div> 
+				</div>
+
+
+				<div {{bind-attr class=":comment-submit showSubmitCommentButton:visible:invisible"}}>
+						
+					{{ladda-btn 
+						class="primary display-inline"
+						name='Post Comment'
+						btnClasses='btn btn-default ladda-button '
+						btnClick='submit'
+						spin=isProcessing
+					}}
+
+				</div>
+				
+			{{/form-for}}
+
+	
+			 
+		</div> 
+
+
+
+		{{!-- COMMENTS --}}
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+
+
+				{{#each item in sortedComments }}
+				<div class="comment-section-row">
+						
+					<button {{action "delete" item}} {{bind-attr class=":btn :btn-default :btn-sm :btn-delete item.canDelete:show:hide"}}>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+					
+					
+					{{#link-to 'profile' item.user.username }}
+						{{make-icon icon=item.user.icon}}
+					{{/link-to}}
+
+					<div class="comment-section-comment">
+						<span class="name">{{#link-to 'profile' item.user.username }}{{item.user.get_display_name}}{{/link-to}}</span>
+						<span class="username">{{#link-to 'profile' item.user.username }}@{{item.user.username}}{{/link-to}}</span>
+						<div class="moment">{{ format-moment item.created_at }}</div>
+						<div class="comment">{{sanitizehtml-andtag item.comment "comment" ENV}}</div>
+					</div>
+				</div>
+				{{/each}}
+		
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+
+						<div {{bind-attr class="hasMore::hide"}}>
+						{{ladda-btn
+							name='LOAD PREVIOUS COMMENTS'
+							class="display-inline"
+							btnClasses='ladda-button btn-default'
+							btnClick='fetchMore'
+							spin=isProcessingFetch
+							dataSpinnerColor="white"
+						}}
+						</div>
+				
+
+			</div>
+		</div>
+
+	</div>

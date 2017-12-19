@@ -1,0 +1,51 @@
+        
+
+    {{#form-for model}}
+    <div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                {{input-field model.firstname class="form-control" placeholder="First Name" label="false" enter='btnClick'}}
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                {{input-field model.lastname class="form-control" placeholder="Last Name" label="false" enter='btnClick'}}
+            </div>
+        </div>
+
+         <h1 class="subject">Optional Display Name
+        <small>Create a display name if you want to use an alias, your blog name, or store name on your profile instead of your actual name.</small>
+        </h1>
+
+        {{input-field model.display_name class="form-control" placeholder="Display Name" label="false" enter='btnClick'}}
+        
+        <h1 class="subject">Description
+        <small>Add a few sentences about you, your blog or online store.</small>
+        </h1>
+        
+        {{input model.bio as="text" placeholder="Just a few words..." class="commentbox"  label="false"   }}
+    </div> 
+    {{/form-for}}
+
+    <div {{bind-attr class="showErrorMessage:show:hide :errors"}}>
+        <span class="alert">{{{errorMessage}}}</span>
+    </div>
+
+    <div>
+        <br>
+        {{ladda-btn 
+            name='SAVE'
+            btnClasses='btn ladda-button btn-right btn-positive'
+            btnClick='saveForm'
+            spin=isProcessing
+        }}
+
+        <div {{bind-attr class="saveSuccess:show:hide"}}>
+            <span class="label label-success">
+                SAVED
+            </span>
+        </div>
+
+    </div>
+
+
+
+

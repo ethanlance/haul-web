@@ -1,0 +1,56 @@
+//box-shadow: 0 0 15px 5px #ffffff;
+$primary-color: #ff5a5f;
+$primary-background-color: #fcfcfc;
+$secondary-color: #F64D4A;
+$terthiary-color: #7a869d;
+$radius: 2px;
+$primary-color-hover: #d94b4b;
+
+$primary-font: 'Open Sans', sans-serif;
+
+
+$haul-max-width: 1000px;
+
+ 
+
+
+$logo-background-color: #ff5a5f;
+$logo-color: #ffffff;
+
+
+$nav-font-size: 12px;
+$nav-color: #555;
+
+$z-index-modal: 3001;
+$z-index-nav: 3000;
+$z-index-search: 2999;
+
+$z-index-profile-dropdown: 3000;
+$z-index-fixed-column: 2997;
+
+
+
+
+@import "_common";
+@import "_elements";
+@import "_nav";
+@import "_search";
+@import "_profile_nav";
+@import "_follow";
+@import "_layout";
+@import "_layout_sliding";
+@import "_feed";
+@import "_grid";
+@import "_post";
+@import "_transaction";
+@import "_anon";
+@import "_lightbox";
+@import "_modal";
+@import "_comments";
+@import "_dm";
+@import "_mentions";
+@import "_message_center";
+@import "_forms";
+@import "_image_upload";
+@import "_text_editor";
+@import "_onboarding";

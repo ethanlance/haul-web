@@ -1,0 +1,51 @@
+
+{{!-- {{pinterest-btn
+	classes="pull-left padding-right"
+	image=post.image.large
+	description=post.subject
+	data-pin-do="buttonPin"
+    data-pin-config="beside"
+}} --}}
+
+
+
+{{!-- {{tumblr-btn
+	classNames="tumblr-share-btn"
+	data-layout="button_count"
+}} --}}
+ 
+{{!-- 
+{{twitter-btn
+	classNames="twitter-share-btn"
+	text=post.subject
+	size=large
+	hashtags="haul"
+	count="right"
+}}
+
+{{facebook-btn
+	classNames="facebook-share-btn"
+	data-layout="button_count"
+	data-href=post.url
+}} --}}
+
+
+{{social-share 
+	type="facebook"
+	post=post
+	class="display-inline"
+}}
+
+
+{{social-share 
+	type="twitter"
+	post=post
+	class="display-inline"
+}}
+
+
+{{social-share 
+	type="pinterest"
+	post=post
+	class="display-inline"
+}}

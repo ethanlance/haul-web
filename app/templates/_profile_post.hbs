@@ -1,0 +1,57 @@
+<div class="feed-post">
+
+	<h1 class="post-title">
+		{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}{{ post.subject }}{{/link-to}}
+	</h1>
+
+
+	{{!-- //REPOST --}}
+	{{#if post.repost_id}}
+	<div class="repost-citations">
+		<i class="fa fa-retweet"></i>
+		{{make-icon icon=post.repost_user.icon}}
+		<span class="name">{{post.repost_user.get_display_name}}'s </span>
+		<span class="title"> original post
+			{{#link-to 'profile.post'
+				post.repost.user.username 
+				post.repost.post_id 
+				post.repost.post_slug}}{{post.repost.subject}}{{/link-to}}
+		</span>
+	</div>
+	{{/if}}
+
+	{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
+	<div class="post-image">
+		{{#unless postHasImage}}
+			{{#if post.image.large}}<img {{bind-attr src=post.image.large}}/>{{/if}}
+		{{/unless}}
+
+		<div class="post-image-overlay">
+
+			<div class="product-status">FOR SALE</div>
+
+			<div class="product-price">${{post.product_price}}</div> 
+
+			<div class="product-title">{{post.post.product_name}}</div>
+
+			<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+
+		</div>
+
+	</div>
+	{{/link-to}}
+
+	<div class="post-bottom-cap">	
+
+		{{like-btn post=post openModal='openModal' class="display-inline"}}	 
+		 	
+		{{comment-btn post=post class="display-inline" gotolink='true' }}
+
+		{{repost-btn post=post openModal='openModal' class="display-inline"}}
+
+		{{buy-btn post=post class="display-inline btn-right btn-buy-this" }}
+	
+
+	</div>
+
+</div>

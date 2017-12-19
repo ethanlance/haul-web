@@ -1,0 +1,457 @@
+.feed-post {
+	position:relative;
+	border: 1px solid #eee;
+	padding: 10px;
+	padding-bottom: 0px;
+	margin-bottom: 18px;
+	margin-left: auto;
+	margin-right: auto;
+
+	width: 100%;
+	max-width: 550px;
+	overflow: hidden;
+	background-color: #fff;
+
+
+	.comments-tease {
+
+		border-top: 1px solid #eee;
+		margin-left: -10px;
+		margin-right: -10px;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top:10px;
+		padding-bottom:10px;
+		background-color: #fcfcfc;
+
+		
+
+		.comment-count {
+			cursor: pointer;
+			color: #555;
+			font-size: 11px;
+			padding-bottom: 10px;
+			font-weight: 800;
+
+			&:hover {
+				color: $primary-color;
+			}	
+		}
+
+		.comment-row{ 
+
+			font-family: $primary-font;
+			font-size: 11px;
+			color: #555;
+			line-height: 2.2;
+			font-weight: 500;
+
+			.name a {
+				font-weight:600;
+				color: #333;
+			}
+
+			.name a:hover {
+				color: $primary-color;
+				text-decoration: none;
+				border: 0;
+			}
+
+			.comment{
+				a {
+					color: $primary-color;
+					text-decoration: none;
+				}
+				a:hover {
+					border-bottom: 0px dashed $primary-color;
+					text-decoration: none;
+					color: $primary-color;
+				}
+				
+				a.tag-cloud {
+						font-family: $primary-font;
+						color: $primary-color;
+						margin-top: 4px; 
+						background-color: #ffebeb;
+						border: 0px solid #ffdddd;
+						border-radius: 10px;
+						padding: 6px 8px 6px 8px;
+						font-size: 11px;
+						font-weight: 500;
+						transition: all 0.2s ease;
+						text-transform: none;
+
+						@media (max-width: 100px) {
+							padding: 5px 10px;
+							margin-top:0px;
+						}
+				}
+
+				a.tag-cloud:hover {
+							background-color: $primary-color;
+							color: #fff;
+				}
+			}
+		}
+	}
+
+
+
+	.post-owner {
+		
+		.profile-image{
+			padding:0;
+			margin:0;
+			float: left;
+			border-radius: 50%;
+			width: 28px;
+			height: 28px;
+			margin-right: 10px;
+
+			.glyphicon-user{
+				font-size:28px;
+			}
+		}
+
+		.post-owner-details {
+			float:none;  
+			overflow:hidden;
+			display:block;
+			transition: all 0.2s ease;
+
+
+			.name a{
+				font-family: $primary-font;
+				font-weight: 800;
+				font-size: 0.9em;
+				letter-spacing: -0.02em;
+				color: #333;
+				transition: all 0.2s ease;
+				//text-transform: uppercase;
+			}
+			.name a:hover {
+				color: $primary-color;
+				text-decoration: none;
+			}
+			.username a{
+				font-family: $primary-font;
+				font-size: 11px;
+				font-weight: 100;
+				color: #999;
+				font-style: italic;
+				text-transform: lowercase;
+				display:block;
+			}
+			.moment{ 
+				font-family: $primary-font;
+				font-size: 10px;
+				color: #cccccc;
+				text-transform: lowercase;
+				float: right;
+			}
+			.comment{ 
+				margin-top: 10px;
+				font-family: $primary-font;
+				font-size: 11px;
+				color: #ccc;
+			}
+		}
+	}
+
+	.post-title a {
+		font-family: 'Arvo';
+		font-weight: 800;
+		color: #333;
+		padding-top: -20px;
+		letter-spacing: -0.05em;
+		transition: all 0.2s ease;
+		font-size: 1.4em;
+		line-height: 1.02em;
+
+		@media (max-width: 400px) {
+			font-size: 1.1em;
+		}
+	}
+
+	.post-title a:hover {
+		color: $primary-color;
+		text-decoration: none;
+		border-bottom: 0;
+	}
+	
+
+
+	.repost-citations {
+		border: 0px solid #cccccc;
+		background-color: transparent;
+		margin-bottom: 15px;
+		padding: 0px 0px 0px 0px;
+		color: #F76664;
+
+		.profile-image{
+			display:inline;
+			width: 20px;
+			height: 20px;
+			vertical-align: middle;
+			.glyphicon-user{
+				display:none;
+			}
+		}
+
+		.name {
+		font-family: $primary-font;
+		font-weight: 400;
+		font-size: 11px;
+		transition: font-color 0.2s ease;
+		}
+
+		.title {
+		font-family: $primary-font;
+		font-size: 11px;
+		transition: font-color 0.2s ease;
+		
+		}
+
+		.title a {
+		font-weight: 600;
+		color: $primary-color;
+		transition: all 0.2s ease;
+		}
+
+		.title a:hover {
+		border-bottom: 1px dashed;
+		text-decoration: none;
+		}
+	}
+
+
+	.post-content {
+
+		&:hover .product-status{
+			display:inline-block;
+			background-color: rgba(247,92,97,1.0);
+		}
+
+		font-family: $primary-font;
+		font-weight: 300;
+		font-size: 14px;
+		color: #555555;
+		line-height: 1.4;
+
+		margin-left: 0px;
+		margin-right: 0px;
+		//margin-top: -10px;
+
+		a {
+			color: $primary-color;
+			text-decoration: none;
+			transition: all 0.4s ease;
+		}
+
+		a:hover {
+			border-bottom: 1px dashed $primary-color;
+			text-decoration: none;
+		}
+ 
+		
+		.post-image {
+			position:relative;
+			display: block; 
+
+			img {
+				width: 100%;
+				max-width:100%;
+				padding:0px;
+				margin:0;
+				margin-left:auto;
+				margin-right:auto;
+				display:block;
+				margin-bottom: 0px;
+				margin-top:20px;
+				background-color: #fff;
+				//border: 8px solid #fff;
+				//box-shadow: 1px 1px 1px 0px rgba(204,204,204,1);
+				transition: all 0.4s ease;
+				border: 1px solid #eee;
+			}
+
+			img:hover {
+				-webkit-filter:  brightness(110%);
+				cursor: pointer; cursor: hand;
+			}
+
+			.post-image-overlay {
+				position:absolute;
+				bottom: 0px;
+				width:100%;
+			}
+		}
+		
+		.post-bottom-cap {
+			width:100%;
+			
+			font-family: $primary-font;
+			font-weight: 300;
+			font-size: 14px;
+			color: #555555;
+			line-height: 1.4;
+
+			@media (max-width: 400px) {
+				margin-top: -25px;
+			}
+			
+			.body {
+				padding-top: 15px;
+				width:100%;
+				margin-left: 0px;
+				margin-right: 0px;
+				font-family: 'Open Sans',sans-serif;
+				font-size: 13px;
+				line-height: 1.6;
+				color: #555;
+				font-weight: 400;
+			}
+		}
+
+
+
+		.post-buttons{
+
+			color: #555;
+			font-size: 11px;
+			font-weight: 400;
+			text-transform: none;
+			padding-top:20px;
+
+			.haul-btn {
+				margin-right:15px;
+				cursor:pointer;
+				font-size:18px;
+				.fa {
+					padding: 1px;
+				}
+			}
+
+			.haul-btn:hover{
+				color: $primary-color;
+				text-decoration: none;
+			}
+
+
+			.btn-buy-this {
+				margin-top: -12px;
+				cursor:pointer;
+			}
+
+			.counts {
+				
+				padding-bottom: 10px;
+				.haul-btn {
+					margin-right:15px;
+					cursor:pointer;
+					font-size:11px;	
+					font-weight: 800;
+					
+				}
+
+				.haul-btn:hover{
+					color: $primary-color;
+					text-decoration: none;
+					transition: all 0.2s ease;
+				}
+
+
+			}
+			.buttons {
+				padding-bottom: 10px;
+
+				a {
+					text-decoration: none;
+				}
+				a:hover {
+					text-decoration: none;
+					transition: all 0.2s ease;
+				}
+			}
+		}
+	}
+
+	a.post-info{
+		color:white;
+	}
+	.post-info{
+
+		//position: absolute;
+		left:0;
+		//bottom:0;
+		padding-left:15px;
+		padding-right:15px;
+		padding-bottom:5px;
+
+		width:100%;
+		min-height: 85px;
+
+		background-color: rgba(0,0,0,.8);
+		color:white;
+
+
+		.product-status{
+			display:inline-block;
+			float:left;
+			background-color: rgba(0,0,0,0.5);
+			padding:10px;
+			//margin-bottom:20px;
+			font-family: 'Arvo';
+			font-weight: 800;
+			font-size: 1.1em;
+			transition: all 0.4s ease;
+			cursor:pointer;
+			text-transform: uppercase;
+			text-align: center;
+			min-width: 90px;
+
+
+			.product-price {
+				font-family: 'Arvo';
+				font-weight: 800;
+				padding-bottom: 0px;
+				padding-top:5px;
+				font-size: 1.2em;
+			}
+
+		}
+
+
+		.product-deets{
+			padding-top: 20px;
+			padding-left: 100px;
+			margin-left: 10px;
+			@media (max-width: 400px) {
+				margin-top: 25px;
+			}
+		}
+
+		.product-title {
+			font-family: $primary-font;
+			color: #fff;
+			font-weight: 300;
+			font-size: 1.375em;
+			line-height: 1.4;
+
+			@media (max-width: 700px) {
+				font-size: 1em;
+			}
+		}
+
+		.product-owner{ 
+			font-size: 0.688em;
+			font-weight: 600;
+			margin-bottom: 12px;
+
+			.pre-text {
+				font-weight: 300;
+				color: rgba(255,255,255,.7);
+			}
+		}
+	}
+}

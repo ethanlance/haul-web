@@ -1,0 +1,56 @@
+//IMAGE LIGHTBOX
+.lb-prev:before {
+	content: "\e079";
+	float:left;
+	margin-left: -40px;
+}
+
+.lb-nav a.lb-prev {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	text-decoration: none;
+	background: none; 
+	padding-top: 50%; 
+	font-size: 40px;
+	width:50%; 
+	color:white;
+}
+
+.lb-next:before{
+	content: "\e080";
+	float:right;
+	margin-right: -40px;
+}
+
+.lb-nav a.lb-next {
+	
+	position: relative;
+	top: 1px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	text-decoration: none;
+	background: none;
+	padding-top: 50%; 
+	font-size: 40px;
+	width:50%;
+	color:white; 
+}
+
+.lb-data .lb-caption {
+	display:none;
+	visibility: hidden;
+}

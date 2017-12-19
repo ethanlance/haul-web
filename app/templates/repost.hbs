@@ -1,0 +1,96 @@
+{{#modal-modal animateClose=animateClose closeModal='closeModal'}}
+<div {{bind-attr class=":modal-dialog showSuccess:sm:lg :text-left"}}>
+	<div class="modal-content">	
+
+		{{!-- SUCCESS MESSAGE --}}
+		<div {{bind-attr class="showSuccess:show:hide"}}>
+			<div class="text-center edit-wrapper">
+				<div class="edit-row">
+					<div class="edit-col">
+						<h5>Repost Complete!</h5>
+						<button {{action 'close'}} class="btn btn-default"><i class="fa fa-times"></i> Close</button>
+						<button {{action 'goToFeed'}} class="btn btn-default">Go to my feed</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		{{!-- REPOST FORM VIEW --}}
+		<div {{bind-attr class="showSuccess:hide:show"}}>
+			<nav>
+				<div class="nav">
+					{{partial '_logo'}}
+					<button {{action 'cancel'}} class="nav-cancel-post"><i class="fa fa-times"></i> CANCEL</button>
+				</div>
+			</nav>
+
+			{{partial "_modal_error_alert"}}
+
+			<div class="text-center edit-wrapper">
+
+				{{#form-for model}}
+					
+
+					<div class="edit-row">
+						<div class="edit-col">
+
+							<h2>Repost Product
+
+								<small>You can write your own new story about this, or edit the post below and create somehtng new from it, or just repost it as is. The actual product itself will still be associated to your new post, unchanged.
+								</small>
+
+							</h2>
+
+							{{image-uploader 
+
+								singleImage=image 
+
+								imageHasUploaded='mainImageChanged'
+
+								singleImageButtonText='change'
+
+							}}
+
+							{{input subject label="false" class="post-subject" }} 
+
+							{{quill-editor 
+								content=repostBody
+								quillChange='quillChange' 
+								requestContents=requestEditorContents
+								selectedImages=selectedImages
+								triggerResize=triggerEditorResize
+							}} 
+
+						</div>
+					</div>	
+
+
+
+				{{/form-for}} 
+
+				<div class="edit-footer">
+					<div class="edit-col">
+
+						{{ladda-btn
+							name='Save Post'
+							class="display-inline"
+							btnClasses='btn-positive ladda-button'
+							btnClick='savePost'
+							spin=isProcessing
+							dataSpinnerColor="white"
+						}}
+
+						<span {{action 'cancel'}} class="btn btn-cancel btn-right">
+							<i class="fa fa-times"></i> CANCEL
+						</span>
+
+					</div>
+				</div>
+
+			</div>	
+		</div>
+	</div>
+</div>
+{{/modal-modal}}

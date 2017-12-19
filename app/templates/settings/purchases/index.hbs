@@ -1,0 +1,77 @@
+<div class="transactions">
+<h1>
+	Your Purchases
+</h1>
+
+
+<div class="row header">
+
+	<div class="col-md-4 col-sm-4 col-xs-4">
+		<label>Item Name</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Product Price</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Shipping Status</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Purchase Date</label>
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		<label>Last Updated</label>
+	</div> 
+
+</div>	
+
+{{!-- //NO CONTENT CTA --}}
+{{#unless pagedContent }}
+	<div class="padding-top text-center font-weak">
+		You have made no purchases, yet.
+	</div>
+
+	<p class="text-center padding-top">
+		<span class="glyphicon glyphicon-usd sad-heart"></span>
+	</p>
+{{/unless}}
+
+
+{{#each transaction in pagedContent}}
+{{#link-to 'settings.purchases.purchase' transaction.id }}
+<div class="row transaction-list">
+
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		
+		
+	      {{#if transaction.image.thumb}}
+	      <img class="media-object image-responsive" {{bind-attr src=transaction.image.thumb}}>
+	      {{/if}}
+	    
+
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		
+			{{transaction.product_name}}
+		
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		${{transaction.product_price}}
+	</div>
+
+	<div {{bind-attr class=":col-md-2 :col-sm-2 :col-xs-2 purchase.statusCanceled:cancel"}}>
+		{{transaction.shipping_status}}
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		{{ format-date transaction.created_at }}
+	</div>
+	<div class="col-md-2 col-sm-2 col-xs-2">
+		{{ format-date transaction.updated_at }}
+	</div> 
+
+</div>	
+{{/link-to}}
+{{/each}}
+{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+	<i class="fa fa-circle-o-notch fa-spin"></i>
+{{/infinite-scroll}}
+</div>

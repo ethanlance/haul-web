@@ -1,0 +1,19 @@
+
+  <div class="btn-search">
+    <div class="input-group">
+  	
+      <span type="button" class=" dropdown-toggle input-group-addon" data-toggle="dropdown" aria-expanded="false">{{{searchSymbol}}}<span class="caret"></span></span>
+      <ul class="dropdown-menu" role="menu">
+        <li {{action 'changeSearchType' 'tag'}}><span class="symbol">#</span> hashtag</li>
+        <li {{action 'changeSearchType' 'user'}}><span class="symbol">@</span> user</li>
+        <li {{action 'changeSearchType' 'post'}}><span class="glyphicon glyphicon-search"></span> posts</li>
+      </ul> 
+      
+      <input placeholder="Search" type="text" class="form-control tt-query" autocomplete="off" spellcheck="false">
+  	
+      {{!-- <span type="button" class=" input-group-addon">
+    		<span class="glyphicon glyphicon-search"></span>
+    	</span> --}}
+
+    </div>
+  </div> 

@@ -1,0 +1,18 @@
+
+{{#if isForSaleOffsite }}
+	 
+	<button  {{action 'followLink'}} class="btn btn-see btn-external-link">
+		SEE THIS <i class="fa fa-external-link"></i>
+	</button> 
+
+{{else}}
+
+	{{#if isForSale}}
+		{{#link-to 'checkout' post.post_id}}
+		<button class="btn-buy">
+			BUY THIS
+		</button>
+		{{/link-to}}
+	{{/if}}
+
+{{/if}}

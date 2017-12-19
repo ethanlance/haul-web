@@ -1,0 +1,262 @@
+
+<div {{bind-attr class="show_loading:show:hide"}}>
+	{{partial '_spinner'}}
+</div>
+
+
+<div {{bind-attr class="show_seller:show:hide"}}>
+
+		<h1>
+			Your Contact Information
+			<button {{action 'showEdit'}} class='btn btn-default btn-xs'>edit</button>
+		</h1>
+
+		<label>Your name:</label> {{model.firstname}} {{model.lastname}}<br/>
+		<label>Email:</label> {{model.email}}<br/>
+		<label>Phone:</label> {{phone-helper model.phone}}<br/>
+		<label>Address:</label><br/>
+				{{model.address}}<br/>
+				{{model.city}}, {{model.state}} {{model.postal_code}}
+		<br/>
+		<br/>
+			
+
+		<h4>How we send you money.</h4>
+		
+		<label>Routing number:</label> {{model.routing_number}}<br/>
+		<label>Account number:</label> {{model.account_number}}<br/>
+			
+
+		{{#if business_tax_id}}
+
+			<h4>Business Details</h4>
+			
+			<label>Business legal name:</label> {{model.business_legal_name}}<br/>
+
+			<label>Busiess common name:</label> {{model.business_name}}<br/>
+
+			<label>Tax Id:</label> {{model.business_tax_id}}<br/>
+				
+			<label>Business address:</label><br/>
+				{{model.business_address}}<br/>
+				{{model.business_city}}, {{model.business_state}} {{model.business_postal_code}}
+			<br/>
+			
+		{{/if}}
+		
+
+		
+			
+</div>
+
+
+
+
+
+
+
+<div {{bind-attr class="show_form:show:hide"}}>
+
+
+	
+	<h3>Your Contact Info</h3>
+	
+
+
+	{{#form-for model}}
+
+		{{input-field model.firstname class="form-control" placeholder='first name'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field firstname}}</span>
+		{{/if}}
+
+		{{input-field model.lastname class="form-control" placeholder='last name'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field lastname}}</span>
+		{{/if}}
+
+		{{input-field model.email class="form-control" placeholder='email'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field email}}</span>
+		{{/if}}
+
+
+		{{input-mask class='form-control'
+			valueOut=model.phone
+			valueIn=model.phone
+			mask='999-999-9999'
+			placeholder='phone 555-555-5555'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field phone}}</span>
+		{{/if}}
+
+
+		{{input-field model.address class="form-control" placeholder="street address"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field address}}</span>
+		{{/if}}
+
+		{{input-field model.city class="form-control" placeholder="city"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field city}}</span>
+		{{/if}}
+		{{#if statesReady}}
+			{{view "select"
+		       content = state_options.states
+		       optionLabelPath = "content.name"
+		       optionValuePath = "content.abbreviation"
+		       selection = state_options.selectedState
+		       prompt="state"
+		       class = "form-control"
+		    }}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field state}}</span>
+			{{/if}}
+		{{/if}}
+
+		{{input-field model.postal_code class="form-control" placeholder="zip code"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field postal_code}}</span>
+		{{/if}}
+
+
+
+
+		<h3>How we send you money.</h3>
+
+		{{input-mask class='form-control'
+					value=model.routing_number
+					mask='999999999'
+					placeholder='9 digit routing number'}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field routing_number}}</span>
+		{{/if}}
+
+		{{input-field model.account_number class="form-control" placeholder="account number"}}
+		{{#if showErrors}}
+			<span class="has-error help-block">{{error-field account_number}}</span>
+		{{/if}}	
+
+
+
+		<h3>
+			<input data-toggle="collapse" 
+				data-parent="#accordion" 
+				href="#collapseOne" 
+				aria-expanded="false" 
+				aria-controls="collapseOne"
+
+				 type="checkbox">
+			Are you a business?
+		</h3>
+
+		<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+
+			{{input-field model.business_legal_name class="form-control" placeholder="legal name of business"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_legal_name}}</span>
+			{{/if}}
+
+			{{input-field model.business_name class="form-control" placeholder="business name you use"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_name}}</span>
+			{{/if}}
+
+			{{input-field model.business_tax_id class="form-control" placeholder="tax id"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_tax_id}}</span>
+			{{/if}}
+
+			{{input-field model.business_address class="form-control" placeholder="business street address"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_address}}</span>
+			{{/if}}
+
+			{{input-field model.business_city class="form-control" placeholder="city"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_city}}</span>
+			{{/if}}
+			{{#if statesReady}}
+					{{view "select"
+				       content = business_state_options.states
+				       optionLabelPath = "content.name"
+				       optionValuePath = "content.abbreviation"
+				       selection = business_state_options.selectedBusinessState
+				       prompt="state"
+				       class = "form-control"
+				    }}
+					{{#if showErrors}}
+						<span class="has-error help-block">{{error-field business_state}}</span>
+					{{/if}}
+			{{/if}}
+			{{input-field model.business_postal_code class="form-control" placeholder="zip code"}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field business_postal_code}}</span>
+			{{/if}}
+
+		</div>
+
+
+		
+
+		
+		<h3>For security</h3>
+
+ 		<div class="text-left">
+
+			<label>Date of Birth {{dateValue}}</label><br/>
+			{{input-mask class="form-control input-sm"
+	  			value=dob_formated
+	  			mask='mm/dd/yyyy'
+	  			placeholder='MM/DD/YYYY'}}
+
+
+			{{!-- {{input-field model.dob class="form-control" placeholder="date of birth"}} --}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field dob}}</span>
+			{{/if}}
+
+		
+			<label>Last 4 Digits of Social Security #</label><br/>
+			{{input-mask class='form-control input-sm'
+				value=model.ssn
+				mask='9999'
+				placeholder='5555'}}
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field ssn}}</span>
+			{{/if}} 
+
+
+		
+			{{input-field model.tos_accepted as="checkbox" }} 
+			<small>I accept the Haul.io Terms of Service</small>
+			{{#if showErrors}}
+				<span class="has-error help-block">{{error-field tos_accepted}}</span>
+			{{/if}}
+		</div>
+
+
+
+
+
+
+
+
+		{{partial "_server_error"}}
+
+		{{#if hasAddressList }}
+		<button {{action 'doCancelAddressForm' }} class="btn btn-default btn-right btn-cancel"><i class="fa fa-times"></i> Cancel</button>
+		{{/if}}
+
+		<div class="text-center">
+		{{ladda-btn
+			name='save & prosper'
+			class="display-inline"
+			btnClasses='btn btn-default ladda-button btn-positive'
+			btnClick='doSubmit'
+			spin=isProcessing
+		}}
+		</div>	
+
+	{{/form-for}}
+</div>

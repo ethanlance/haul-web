@@ -1,0 +1,479 @@
+html {
+	height: 100%;
+	width: 100%;
+
+
+}
+
+body {
+	margin:0px;
+	margin-bottom: 100px;
+	padding:0px;
+	padding-top:50px;
+	background-color: $primary-background-color;
+	background-image: none;
+	position: relative;
+	font-family: 'Open Sans', sans-serif;
+	overflow-x: hidden;
+}
+
+html, body { height: 100%; width: 100%}
+
+
+body.modal-open {
+    overflow: hidden;
+}
+
+
+.message-typer {
+	font-family: courier, times;
+}
+
+.haul-icon {
+	background-image: url('/assets/images/haul-icon.png');
+}
+
+
+#haul-dropzone-filebutton {
+	position: absolute;
+	top: -20px;
+	width: 100%; 
+	opacity:0;
+	cursor: pointer;
+
+	input { 
+		cursor: pointer;
+		width:300px;
+		height:100px;
+	}
+}
+
+a.no-decoration:hover{
+	text-decoration: none;
+}
+
+i.fa {
+	cursor: pointer;
+}
+
+#haul-dropzone-browse, .image-drop, a, button {
+	cursor: pointer;
+}
+
+.middle-page {
+	margin-top: 10%;
+}
+
+.show {
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+
+.visible {
+	visibility: visible;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+//Dev Helper:
+.border {
+	border: 1px solid pink;
+}
+
+
+
+p {
+	font-size: 1em;
+}
+
+.fa-spinner, .fa-circle-o-notch{
+	color: #ccc;
+	font-size: 100px;
+}
+.loading{
+	padding-top:150px;
+}
+
+.alert {
+	color: red;
+}
+
+.fade-slide-wrapper { 
+	position:relative;
+	width: 175px;
+	margin-right:auto;
+	margin-left:auto;
+	text-align: center;
+	min-height: 50px;
+}
+
+.fade-slide {
+	-webkit-transition: all .5s ease-in-out;
+       -o-transition: all .5s ease-in-out;
+          transition: all .5s ease-in-out;
+	position:absolute;
+	
+	opacity:0;
+	top:300px;	
+}
+
+.fade-slide.in {
+	opacity:1;
+	top:0px;
+}
+
+.imageRemove {
+	border: 1px solid red;
+}
+
+
+
+
+
+
+
+
+//GENERAL BUTTONS
+
+
+.btn-edit {
+	font-family: $primary-font;
+		font-size: 11px;
+		font-weight: 500;
+		color: #ccc;
+		border: 0px;
+		display: inline-block;
+		background-color: transparent;
+		text-transform: uppercase;
+		transition: all 0.2s ease;
+	}
+
+	.btn-edit:hover {
+		color: $primary-color;
+	}
+
+
+.btn {
+	border-radius: $radius;
+}
+
+
+.btn-primary {
+	padding: 8px 2px;
+	border: none;
+	background-color: $primary-color;
+}
+
+.btn-primary:hover{
+	background-color: $primary-color-hover;
+}
+
+ 
+
+
+.btn-left {
+	float: left !important;
+	margin-right: 10px;
+}
+
+.btn-right {
+	float: right !important;
+	margin-left: 10px;
+}
+
+.btn-facebook {
+	padding: 8px 2px;
+	font-size: 12px;
+	color: #fff;
+	background-color: #3b5998;
+	border: none;
+	max-width: 200px;
+	//text-transform: uppercase;
+	font-family: $primary-font;
+	font-weight: 400;
+	&:hover {
+		background-color: #324b7f;
+		border: none;
+		color: #fff;
+	}
+}
+ 
+.btn-xs.margin-top {
+	margin-top: 5px;
+}
+
+
+.btn-no-radius {
+	border-radius: 0;
+}
+
+.btn-list-grid{
+	float:right;
+	margin-right:15px;
+	margin-top:30px;
+	@media (max-width: 768px) {
+		margin-top: 29px;
+	}
+}
+.fixed {
+	.btn-list-grid{
+		margin-top:0px;
+	}
+}
+
+
+//Bootstrap
+.badge-success {
+	background-color: green;
+}
+
+.badge-danger {
+	background-color: red;
+}
+
+.alert-sm {
+	padding: 3px;
+	margin-top: 3px;
+}
+
+
+//FONTS & GENERAL TEXT MARKUP
+h1, h2, h3, h4, h5, label {
+	font-family: $primary-font;
+	color: #333;
+	font-weight: normal;
+	line-height: 1.4;
+
+	small {
+		display: block;
+		font-family: $primary-font;
+		color: #555;
+		font-size: 13px;
+		padding-top:10px;
+		padding-bottom: 4px;
+		line-height: 1.4;
+	}
+}
+
+h1 {
+	font-size: 26px;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 24px;
+	font-weight: 300;
+}
+
+h3 {
+	font-size: 18px;
+	font-weight: 300;
+}
+
+h4 {
+	font-size: 14px;
+	font-weight: 300;
+}
+
+a {
+	color: #444e55;
+	cursor: pointer;
+}
+
+a:hover{
+	color: $primary-color;
+}
+
+a.editorial {
+	color: $primary-color;
+	text-decoration: underline;
+}
+
+.prompt-text {
+	color:#666;
+	//padding-top: 10%;
+	margin-bottom: 0px;
+	background-color: transparent;
+}
+ 
+
+.font-weak {
+	font-weight: normal;
+}
+
+.strikethrough{ 
+    text-decoration: line-through;
+}
+
+.glyphicon.red {
+	color: red;
+}
+
+.fa.red {
+	color: red;
+}
+
+.sad-heart {
+	font-size: 200px;
+	color: #ededed;
+}
+
+.clearfix:after {
+	content: " ";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.display-inline {
+	display: inline;
+}
+
+.display-inline-block {
+	display: inline-block;
+}
+
+
+
+.box-rigid {
+	float: left;
+	position: relative;
+	padding-right:10px;
+}
+
+.box-vert-align {
+	margin-top: 25%;
+}
+
+
+
+
+//Padding and Margin Helpers
+.margin-top {
+	margin-top: 20px;
+}
+
+.margin-bottom {
+	margin-bottom: 20px;
+}
+
+.margin-left{
+	margin-left: 15px;
+}
+
+.margin-right{
+	margin-right: 15px;
+}
+
+.padding-right {
+	padding-right: 10px;
+}
+
+.padding-left {
+	padding-left: 10px;
+}
+
+.padding-top {
+	padding-top: 20px;
+}
+
+.padding-bottom {
+	padding-bottom: 20px;
+}
+
+.top-border {
+	border-top: 1px solid #e3e3e3;
+}
+
+.bottom-border {
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.left-border {
+	border-left: 1px solid #e3e3e3;
+}
+
+
+.dashed {
+	border: 2px dashed #cccccc;
+}
+
+.dashed:hover {
+	border: 2px dashed $primary-color;
+}
+
+
+
+.errorBar {
+	width: 100%;
+	background-color: pink;
+	color: red;
+	padding: 10px;
+	position: fixed;
+	top:50px;
+	z-index: 30000;
+}
+
+
+
+
+.haul-words {
+
+	a {
+		font-weight: 300;
+		color: $primary-color;
+		transition: all 0.2s ease;
+	}
+
+	a:hover {
+		border-bottom: 1px dashed;
+		text-decoration: none;
+	}	
+
+}
+
+
+/*ABOUT US PAGES */
+.about p {
+	font-size: 1.08em;
+	font-weight: 400;
+	line-height: 1.9em;
+	color:#555;
+
+}
+
+.about h1 {
+	font-family: 'Arvo';
+	font-size: 4.05em;
+	font-weight: 800;
+	color: #333;
+	line-height: 1.05em;
+	letter-spacing: -0.02em;
+
+}
+
+.about h2 {
+	font-family: 'Arvo';
+	font-size: 2.85em;
+	font-weight: 800;
+	color: #333;
+	line-height: 1.05em;
+	letter-spacing: -0.03em;
+	padding-top: 20px;
+}
+
+
+.settings-label {
+	font-family: $primary-font;
+	color:#555;
+	text-transform: uppercase;
+	font-weight: 800;
+	font-size: 14px;
+	margin-top: 20px;
+}

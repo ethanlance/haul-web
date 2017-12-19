@@ -1,0 +1,72 @@
+
+
+<header class="basic">
+<div class="container-fluid">	
+	<div class="header-basic">
+
+		<h2>Haul {{category}}</h2>
+		<span class="clearfix"></span>
+		<span class="blurb">Curated by haul staff member {{#link-to 'profile' user.username}}{{user.get_display_name}}{{/link-to}}.  The posts below are from Haul users.</span>
+		
+
+	</div>
+</div>
+</header>
+
+
+
+<div class="container-fluid">
+	<div class="haul-content">
+		<div class="col-content lg">
+			<div class="col-content-inner grid-spacing center-on-collapse">
+
+
+					<ul class="discover-categories">
+						<li class="featured">{{#link-to "discover"}}featured{{/link-to}}</li>
+					{{#each cat in categories}}
+						<li {{bind-attr class="cat"}}>{{#link-to cat}}{{cat}}{{/link-to}}</li>
+					{{/each}}
+					</ul>
+						
+
+					{{#unless sortedContent}}
+						{{loading-bar turnLoadingBarOn='true'}}
+					{{/unless}}
+
+			 
+					{{!-- //CONTENT --}}
+					{{#each like in sortedContent}}
+						{{#with like.post as post }}
+							
+							{{render '_grid_post' post}}
+						
+						{{/with}}
+					{{/each}}
+
+					
+					{{#infinite-scroll content=pagedContent hasMore=paginateHasMore }}
+						<i class="fa fa-circle-o-notch fa-spin"></i>
+					{{/infinite-scroll}}
+					
+			    
+			</div>    
+		</div>
+		<div class="col-rail sm hide-on-collapse">
+			<div class="haul-menu-content">
+
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{onboarding-userstofollow usernameFilter=usernameFilter}}
+
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{!-- ONBOARDING --}}
+					{{onboarding-tags goToRoute='goToRoute'}}
+
+			</div>
+		</div>
+	</div>
+</div>

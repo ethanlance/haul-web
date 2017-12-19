@@ -1,0 +1,160 @@
+<div class="feed-post">
+
+	<div {{bind-attr class=":post-owner noHeadlines:hide:show"}}>
+
+		{{#link-to 'profile' post.user.username }}{{make-icon icon=post.user.icon}}{{/link-to}}
+
+		<div class="post-owner-details">
+			<div class="moment">{{ format-moment post.created_at }}</div> 
+			<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
+			<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
+			
+		</div>
+	</div>
+
+
+
+	{{!-- POST --}}
+	{{!-- POST --}}
+	{{!-- POST --}}
+	{{!-- POST --}}
+	<h1 class="post-title">
+		{{#link-to 'profile.post' 
+			post.user.username post.post_id post.post_slug 
+			(query-params anchor="null" reply="null")}}{{ post.subject }}{{/link-to}}
+	</h1>
+
+
+
+	{{!-- //REPOST --}}
+	{{#if post.repost_id}}
+	<div class="repost-citations">
+		<i class="fa fa-retweet"></i>
+		{{make-icon icon=post.repost_user.icon}}
+		<span class="name">{{post.repost_user.get_display_name}}'s </span>
+		<span class="title"> original post
+			{{#link-to 'profile.post'
+				post.repost.user.username 
+				post.repost.post_id 
+				post.repost.post_slug}}{{post.repost.subject}}{{/link-to}}
+		</span>
+	</div>
+	{{/if}}
+
+
+
+
+	<div class="post-content">
+		<div class="post-image">
+		
+			{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
+				{{image-loader src=post.image.large width="100%" height="300px"}}
+				
+			{{/link-to}}
+
+			<span class="hide-on-small">
+				<div class="post-image-overlay">	
+					
+					{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
+					<div class="post-info">
+
+						<div class="product-status">
+							{{post.product_status_text}}
+							<div class="product-price">${{post.product_price}}</div> 
+						</div>
+
+							<div class="product-deets">
+								<div class="product-title">{{post.post.product_name}}</div>
+
+								{{!-- CURATED or SELLING --}}
+								{{!-- CURATED or SELLING --}}
+								{{!-- CURATED or SELLING --}}
+								{{!-- CURATED or SELLING --}}
+								
+								{{#if post.postOwnerIsSeller}}
+									<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+								{{else}}
+									<div class="product-owner"><span class="pre-text">Found by</span> {{post.product_user.get_display_name}}</div>
+								{{/if}}
+							</div>			
+						</div>
+					{{/link-to}}
+				</div>
+			</span>
+		</div>
+
+
+		<div class="post-bottom-cap">
+			<span class="show-on-small">
+				{{#link-to 'profile.post' post.user.username post.post_id post.post_slug (query-params anchor="null" reply="null")}}
+				<div class="post-info">
+
+					<div class="product-status">
+						{{post.product_status_text}}
+						<div class="product-price">${{post.product_price}}</div> 
+					</div>
+
+					<div class="product-deets">
+						<div class="product-title">{{post.post.product_name}}</div>
+
+						{{!-- CURATED or SELLING --}}
+						{{!-- CURATED or SELLING --}}
+						{{!-- CURATED or SELLING --}}
+						{{!-- CURATED or SELLING --}}
+						
+						{{#if post.postOwnerIsSeller}}
+							<div class="product-owner"><span class="pre-text">For sale by</span> {{post.product_user.get_display_name}}</div>
+						{{else}}
+							<div class="product-owner"><span class="pre-text">Found by</span> {{post.product_user.get_display_name}}</div>
+						{{/if}}
+					</div>			
+				</div>
+				{{/link-to}}
+			</span>
+		
+
+
+
+
+
+
+
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			{{!-- FIRST PARAGRAPH OF POST --}}
+			<div class="body">{{first-paragraph post.post.body ENV }}</div>
+
+
+
+
+			{{!-- CTA ACTIONS --}}
+			{{!-- CTA ACTIONS --}}
+			{{!-- CTA ACTIONS --}}
+			{{!-- CTA ACTIONS --}}
+			<div class="post-buttons">
+				<div class="counts">	
+					{{like-count post=post goToRoute='goToRoute' class="display-inline"}}
+					{{comment-count post=post gotolink='true' goToRoute='goToRoute' class="display-inline"}}
+				</div>
+
+				<div class="buttons">
+					{{like-btn post=post openModal='openModal' class="display-inline"}}		 
+					{{comment-btn post=post goToRoute='goToRoute' class="display-inline"}}
+					{{repost-btn post=post openModal='openModal' class="display-inline"}}
+				</div>
+			</div>
+
+
+
+			
+			{{!-- FIRST 3 COMMENTS --}}
+			{{!-- FIRST 3 COMMENTS --}}
+			{{!-- FIRST 3 COMMENTS --}}
+			{{!-- FIRST 3 COMMENTS --}}
+			{{comment-tease post=post limit="3" class="display-inline"}}
+
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,167 @@
+
+
+body.anon{
+	padding:0;
+	margin:0;
+
+	display:block;
+	background-attachment: scroll;
+	background-image: url(/assets/images/slide1.jpg);
+	background-position: center center;
+	background-attachment: scroll;
+	background-position: center center;
+	background-repeat: none;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	overflow-x: hidden;
+}
+
+.anon {
+	// nav {
+	// 	background-color: transparent;
+	// 	border: none;
+	// 	box-shadow: none;
+
+	// 	.btn {
+	// 		background-color: rgba(255,255,255,0.2);
+	// 		color: #fff;
+	// 		border: 1px solid #fff;
+	// 		&:hover{
+	// 			background-color: #fff;
+	// 			color: #000;
+	// 		}
+	// 	}
+	// }
+	header {
+
+		h1, h2, h3, h4, h5, a {
+			font-family: $primary-font;
+			color: #ffffff;
+		}
+
+		padding-top: 100px;
+		text-align: center;
+		color: #fff;
+		
+		min-height: 100%;
+		min-width: 100%;
+	}
+	.form-box	 {
+		background-color: rgba(0, 0, 0, 0.8);
+		border-radius: $radius;
+		padding-bottom: 10px;
+
+		.toc {
+			padding-top: 20px;
+			font-size: 10px;
+			a {
+				font-weight: normal;
+				text-decoration: underline;
+			}
+		}
+
+		.btn-primary{
+			border-color:#337ab7;
+			background-color:#2e6da4;
+		}
+	}
+	.alert, .error{
+		background: none;
+		color: red;
+		a {
+			text-decoration: underline;
+		}
+	}
+
+	.or-login{
+		//margin-top:50px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		border-top: 1px solid #333;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.haul-jargon{
+	margin-top:50px;
+
+	.nav-column-control {
+		&.in{
+			display:none;
+			visibility:hidden;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.nav-column-control {
+
+			&.collapse{
+				display: inline;
+				visibility: visible;
+			}
+
+			&.in { 
+				visibility: hidden;
+			}
+
+			&.out { 
+			
+			}
+		}
+
+		.nav-column {
+			top:90px;
+			padding-top:10px;
+			border: 1px solid #eee;
+			position:absolute;
+			height: 1000px;
+			z-index: 2000;
+			background: #fff;
+			width:300px;
+		    box-shadow: 6px 5px 20px 0px rgba(238,238,238,1);
+
+			.nav-column-control{
+				float:right;
+				visibility: visible;
+			}
+
+			&.in { 
+				left:0px;
+			}
+
+			&.out { 
+				left: -300px;
+			}
+
+			.list-group{
+				padding-top:40px;
+			}
+
+			-webkit-transition: left .5s ease-in-out;
+	       	-o-transition: left .5s ease-in-out;
+	          transition: left .5s ease-in-out;
+		}
+	}
+}

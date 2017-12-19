@@ -1,0 +1,65 @@
+<<span class="rail-header"><h2>NOTIFICATIONS</h2></span>
+
+	{{#if needsSellerAccount }} 
+	<div class="mention-owner mention-alert">
+		{{#link-to 'profile' post.user.username }}
+		<span class="profile-image haul-icon"></span>
+		{{/link-to}}
+
+		<div class="post-owner-details">
+			<span class="name">Haul</span>
+			<span class="username">@haul</span>
+			<div class="moment">now</div> 
+			<span class="comment">
+				{{#link-to 'settings.seller'}}
+					<strong><i class="fa fa-exclamation-circle"></i> Whoop, setup your seller account.</strong>  Your items can't be purchased until you do! 
+					
+				{{/link-to}}
+			</span>
+		</div>
+	</div>
+	{{/if}}
+
+
+{{#unless pagedContent}}
+	<h4 class="prompt-text padding-bottom">You have no notifications</h4>
+{{/unless}}
+
+
+{{#each post in sortedLimitedResults}}
+
+	<div class="mention-owner padding-bottom">
+		
+
+		<div class="post-owner-details">
+			<span class="name">{{#link-to 'profile' post.user.username }}{{post.user.get_display_name}}{{/link-to}}</span>
+
+			<span class="username">{{#link-to 'profile' post.user.username }}@{{post.user.username}}{{/link-to}}</span>
+			
+			<div class="moment">{{ format-moment post.created_at }}</div> 
+			
+			<span {{bind-attr class=":comment post.read:read:unread"}}>
+				
+				{{sanitizehtml-andtag post.comment "comment" ENV}}
+				
+				<div class="pull-right">
+					
+					<span class="reply" {{action "doDismiss" post}}>
+						DISMISS
+					</span>
+					
+					<span class="reply" {{action "doReply" post}}>
+						REPLY&nbsp;<i class="fa fa-angle-double-right"></i>
+					</span>
+
+				</div>
+
+			</span>
+		</div>
+	</div>
+
+{{/each}}
+
+{{#if sortedResults}}
+<span class="more">{{#link-to 'mentions'}}MORE{{/link-to}}</span>
+{{/if}}
